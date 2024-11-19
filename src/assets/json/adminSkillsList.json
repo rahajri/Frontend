@@ -1,0 +1,45 @@
+{
+    "data": [
+      {
+        "skills": "Graphics & Design",
+        "slug": "Design a Website Mockup"
+      },
+      {
+        "skills": ".Net Developemnt",
+        "slug": "Develope a mobile application development"
+      },
+      {
+        "skills": "Android",
+        "slug": "Design a Website Mockup"
+      },
+      {
+        "skills": "Angular Development",
+        "slug": "Design a Website using angular"
+      },
+      {
+        "skills": "Java",
+        "slug": "Application development"
+      },
+      {
+        "skills": "Laravel",
+        "slug": "Develop a web application development"
+      },
+      {
+        "skills": "React Developemnt",
+        "slug": "Router Implementation"
+      },
+      {
+        "skills": "Vuejs Development",
+        "slug": "Design a Webpage"
+      },
+      {
+        "skills": "Graphics & Design",
+        "slug": "Design a Website Mockup"
+      },
+      {
+        "skills": "Graphics & Design",
+        "slug": "Design a Website Mockup"
+      }
+    ],
+    "totalData": 10
+}

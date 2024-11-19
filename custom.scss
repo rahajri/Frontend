@@ -1,0 +1,626 @@
+app-admin label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+app-admin .header {
+    background: #fff;
+    border-bottom: 1px solid #eef1fe;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 3;
+    height: 60px;
+    border-radius: 0;
+}
+
+app-admin a {
+    color: #ff5b37;
+    text-decoration: none;
+}
+
+app-admin .input-group .form-control {
+    height: 40px;
+}
+
+app-admin .form-control {
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+    box-shadow: none;
+    color: #333;
+    padding: 0.54688rem 0.875rem;
+    font-size: 14px;
+    height: 46px;
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: "Titillium Web", sans-serif;
+}
+
+app-admin input,
+input:focus,
+button,
+button:focus {
+    outline: none;
+}
+
+app-admin input,
+button,
+a {
+    transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+}
+
+app-admin {
+    background-color: #fff;
+    color: #000;
+    font-family: "Titillium Web", sans-serif;
+    font-size: 16px;
+    height: 100%;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+app-admin h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Titillium Web', sans-serif;
+    margin-top: 0;
+    color: #2c3038;
+}
+
+app-admin a {
+    color: #ff5b37;
+    text-decoration: none;
+}
+
+app-admin p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+app-admin p:last-child {
+    margin-bottom: 0;
+}
+
+app-admin .feather {
+    width: 18px;
+    height: 18px;
+}
+
+app-admin .user-menu.nav>li>a {
+    color: #333;
+    font-size: 14px;
+    line-height: 58px;
+    padding: 0 15px;
+    height: 60px;
+}
+
+app-admin.sidebar-menu {
+    padding: 15px;
+}
+
+app-admin.settings-menu ul li a.active {
+    color: #FF5B37 !important;
+    border: 0;
+}
+
+app-admin.settings-menu ul li a:hover,
+.settings-menu ul li a:focus {
+    background-color: transparent !important;
+    border: 0 !important;
+    color: #FF5B37;
+}
+
+app-admin .sidebar-menu {
+    padding: 15px;
+}
+
+app-admin .settings-menu ul li a {
+    color: #455560;
+    padding: 0;
+    border: 0 !important;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+app-admin .settings-menu ul {
+    display: block;
+    padding: 0;
+}
+
+app-admin .sidebar-menu ul {
+    font-size: 15px;
+    list-style-type: none;
+    margin: 0;
+    padding: 15px 0;
+    position: relative;
+}
+
+app-admin .sidebar-menu>ul>li>a {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 15px;
+    position: relative;
+    transition: all 0.2s ease-in-out 0s;
+    border-radius: 5px;
+}
+
+app-admin .settings-menu ul li+li {
+    margin-top: 15px;
+}
+
+app-admin .sidebar-menu .menu-arrow {
+    -webkit-transition: -webkit-transform 0.15s;
+    -o-transition: -o-transform 0.15s;
+    transition: transform .15s;
+    position: absolute;
+    right: 15px;
+    display: inline-block;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    text-rendering: auto;
+    line-height: 40px;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transform: translate(0, 0);
+    -transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+    line-height: 18px;
+    top: 11px;
+}
+
+app-admin .sidebar-menu ul ul a {
+    display: block;
+    font-size: 15px;
+    padding: 7px 10px 7px 45px;
+    position: relative;
+}
+
+.app-admin-wrapper {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+}
+
+app-admin .card .card-header .card-title {
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 20px;
+    color: #000000;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+app-admin .card {
+    background: #FFFFFF;
+    border: 1px solid #E4E4E4;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+}
+
+app-admin .card-header:first-child {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+app-admin .card .card-header {
+    border-color: #E4E4E4;
+    background-color: #fff;
+    padding: 20px 0px;
+}
+
+app-admin .page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #131523;
+    margin-bottom: 5px;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+app-admin .withdraw-btn {
+    background: rgba(240, 20, 47, 0.08);
+    border-radius: 30px;
+    padding: 2px 15px;
+    font-weight: 600;
+    min-width: 116px;
+    font-size: 14px;
+}
+
+app-admin .table tbody tr:last-child {
+    border-color: transparent;
+}
+
+app-admin .sidebar {
+    background-color: #FFF8F7;
+    bottom: 0;
+    left: 0;
+    margin-top: 0;
+    position: fixed;
+    top: 60px;
+    transition: all 0.2s ease-in-out 0s;
+    width: 240px;
+    z-index: 1001;
+    overflow-y: hidden;
+}
+
+app-admin .withdraw-btn {
+    background: rgba(240, 20, 47, 0.08);
+    border-radius: 30px;
+    padding: 2px 15px;
+    font-weight: 600;
+    min-width: 116px;
+    font-size: 14px;
+}
+
+app-admin .table tbody tr:last-child {
+    border-color: transparent;
+}
+
+app-admin .sidebar {
+    background-color: #FFF8F7;
+    bottom: 0;
+    left: 0;
+    margin-top: 0;
+    position: fixed;
+    top: 60px;
+    transition: all 0.2s ease-in-out 0s;
+    width: 240px;
+    z-index: 1001;
+    overflow-y: hidden;
+}
+
+app-admin .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+}
+
+app-chats .settings-header p {
+    color: #949494;
+    font-size: 12px;
+}
+
+app-admin .toggle-password {
+    position: absolute;
+    right: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #757575;
+    cursor: pointer;
+}
+
+app-features-modules app-admin .btn-primary {
+    background-color: #FF5B37;
+    border: 1px solid #FF5B37;
+}
+app-admin .upload-images {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid #E4E4E4;
+    border-radius: 5px;
+    display: flex;
+    margin-top: 30px;
+    width: 196px;
+    height: 78px;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+app-admin .login-wrapper {
+    width: 100%;
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    padding-top: 1.875rem;
+}
+app-admin .attach-file {
+    color: #777;
+    font-size: 70px;
+    padding: 10px;
+    min-height: 138px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+app-admin .attach-file img {
+	height: auto;
+	max-width: 100%;
+}
+
+app-admin .page-wrapper > .content {
+	padding: 1.875rem 1.875rem 0;
+} 
+app-admin input[type=text],
+input[type=password] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+ app-features-modules app-admin .btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.active,
+.btn-primary:active,
+.open > .dropdown-toggle.btn-primary {
+	background-color: #FF5b33;
+	border: 1px solid #FF5b33;
+}
+app-admin .user-tabs  .nav-pills .nav-link.active, .user-tabs  .nav-pills .show>.nav-link {
+    color: #FF5B37;
+    background-color: #fff;
+	border: 1px solid #FF5B37;
+}
+app-admin .login-wrapper {
+    width: 100%;
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    padding-top: 1.875rem;
+}
+
+app-admin .btn-plan {
+	background: transparent;
+	border: 0;
+	min-width: 110px;
+	padding: 8px 15px;
+	font-weight: 700;
+	font-size: 14px;
+}
+
+app-admin .bg-success,
+app-admin .badge-success {
+	background-color: #22cc62 !important;
+}
+
+app-admin a.bg-success:focus,
+app-admin a.bg-success:hover,
+app-admin button.bg-success:focus,
+app-admin button.bg-success:hover {
+	background-color: #1eae55 !important;
+}
+
+app-features-modules .badge {
+	display: inline-flex;
+	padding: 6px 15px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 4px;
+	font-size: 12px;
+}
+app-features-modules .user-img>img {
+	height: 46px;
+	object-fit: cover;
+	width: 46px;
+	border-radius: 50%;
+}
+app-features-modules .page-header {
+	padding: 12px 15px;
+	align-items: center;
+	box-shadow: 0px 4px 4px #f5f8ff;
+	border-radius: 5px;
+	background: #FFFFFF;
+	border: 1px solid #F4EEFF;
+}
+app-features-modules {
+	background-color: #ffffff;
+	color: #1B1B1B;
+	font-family: "Lato", sans-serif;
+	font-size: 16px;
+	height: 100%;
+	overflow-x: hidden;
+}
+app-admin .form-control-sm {
+    height: calc(1.5em + 1rem);
+    padding: .4375rem .65625rem;
+    font-size: .8125rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+app-admin .form-control-lg {
+    height: calc(1.5em + 1.875rem);
+    padding: .875rem 1.09375rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .3125rem;
+}
+app-admin .main-wrapper {
+	width: 100%;
+	height: 100vh;
+	min-height: 100vh;
+}
+app-features-modules .login-or p::after {
+	content: "";
+	width: 100%;
+	height: 1px;
+	background: #D9D9D9;
+	position: absolute;
+	left: 0;
+	bottom: 11px;
+	z-index: -1;
+}
+app-features-modules .btn-block {
+	border: 1px solid #131135;
+	color: #131135;
+}
+app-features-modules .login-right .user-tabs ul li .nav-link.active {
+	background: #131135;
+	border-color: #131135;
+}
+app-features-modules .login-right .user-tabs ul li .nav-link {
+	padding: 7px 22px;
+	border-radius: 6px;
+	border: 1px solid #131135;
+	background: #FFF;
+	color: #131135;
+}
+
+app-features-modules .login-right .user-tabs ul li .nav-link:hover {
+	background: #131135;
+	border-color: #131135;
+	color: #fff;
+}
+app-features-modules .nav-link {
+	font-weight: bold;
+	font-size: 14px;
+	color: #6A1B9A;
+}
+app-features-modules .user-tabs .nav-pills .nav-link {
+	background: #fff;
+	border-radius: 3px;
+	color: var(--primary-color);
+	border: 1px solid var(--primary-color);
+	padding: 0.75rem 1rem;
+}
+app-admin .user-menu .dropdown-menu .dropdown-item {
+	display: flex;
+	align-items: center;
+	padding: 10px 15px;
+}
+app-admin .user-menu .dropdown-menu .dropdown-item:hover {
+	color: #FF5B37;
+	background-color: transparent;
+}
+app-admin .header .dropdown-toggle:after {
+	display: none;
+}
+app-admin .header .has-arrow .dropdown-toggle:after {
+	border: 0;
+	content: '';
+	
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 12px;
+	display: inline-block;
+	pointer-events: none;
+	-webkit-transform-origin: 66% 66%;
+	-transform-origin: 66% 66%;
+	transform-origin: 66% 66%;
+	-webkit-transform: rotate(0deg);
+	-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-transition: all 0.15s ease-in-out;
+	transition: all 0.15s ease-in-out;
+	width: 12px;
+	vertical-align: -2px;
+	display: none;
+}
+app-admin .header .has-arrow .dropdown-toggle[aria-expanded="true"]:after {
+	-webkit-transform: rotate(-180deg);
+	-transform: rotate(-180deg);
+	transform: rotate(-180deg);
+	vertical-align: 2px;
+}
+app-admin .user-menu .dropdown-menu {
+	min-width: 200px;
+	padding: 0;
+}
+app-admin .user-menu .dropdown-menu .dropdown-item {
+	display: flex;
+	align-items: center;
+	padding: 10px 15px;
+}
+app-admin .user-menu .dropdown-menu .dropdown-item:hover {
+	color: #FF5B37;
+	background-color: transparent;
+}
+
+@media (min-width: 992px) {
+app-admin .mini-sidebar .page-wrapper {
+    margin-left: 78px;
+}
+}
+app-features-modules .btn-primary {
+	color: #fff;
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
+}
+app-features-modules .btn-primary {
+	background-color: var(--primary-color);
+	border: 1px solid var(--primary-color);
+}
+app-admin .table>:not(caption)>*>* {
+	box-shadow: unset;
+	padding: 0.75rem;
+}
+app-features-modules .add-links {
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	height: 46px;
+	width: 46px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	background-color: var(--primary-color);
+	color: #fff;
+}
+app-admin .avatar > img {
+	width: 100%;
+	height: 100%;
+	-o-object-fit: cover;
+	object-fit: cover;
+}
+app-admin .page-wrapper {
+    margin-left: 240px;
+    padding-top: 60px;
+    position: relative;
+    transition: all 0.4s ease;
+}
+@media(max-width:991.98px){
+	.page-wrapper {
+		margin-left: 240px;
+		padding-left: 0;
+		padding-right: 0;
+		transition: all 0.4s ease;
+	}
+}
+@media (max-width: 575.98px){
+	.page-wrapper{
+		margin-left: 0px !important;
+	}
+}
+@media (max-width: 575.98px){
+.page-wrapper > .content {
+    padding: 0.9375rem 0.9375rem 0;
+}
+}
+@media (max-width: 767.98px){
+app-admin .nav {
+    display: block;
+}
+}
+app-admin .social-login  {
+	border-bottom: 1px solid #E9E9E9;
+    padding-bottom: 30px;
+}	
+app-admin .social-login .btn:hover, .social-login .btn:focus {
+	color: #fff;
+}
+app-admin .sidebar-menu ul ul a.active {
+    color: #FF5B37;
+}

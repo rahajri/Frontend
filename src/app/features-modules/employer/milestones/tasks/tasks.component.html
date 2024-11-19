@@ -1,0 +1,331 @@
+<nav class="user-tabs mb-4">
+  <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+    <li class="nav-item">
+      <a class="nav-link " [routerLink] = "routes.milestoneoverview">Overview & Discussions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink] = "routes.employee_milestone">Milestones</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink] = "routes.milestonetask">Tasks</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " [routerLink] = "routes.milestonefiles">Files</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink] = "routes.milestonepayment">Payments</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- project list -->
+<div class="my-projects-view">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="">
+        <div class="card">
+          <div class="card-header">
+            <div class="row justify-content-between align-items-center">
+              <div class="col">
+                <h5 class="card-title">Tasks</h5>
+              </div>
+              <div class="col-auto">
+                <a href="#add-milestone" class="login-btn btn-primary" data-bs-toggle="modal">Add Task</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+
+            <div class="table-responsive table-box">
+              <table  matSort
+                (matSortChange)="sortData($event)"
+                class="table table-center table-hover datatable">
+                <thead class="thead-pink">
+                  <tr>
+                    <th mat-sort-header="name">Task Name</th>
+                    <th mat-sort-header="milestone">Milestone</th>
+
+                    <th mat-sort-header=" para">Description</th>
+                    <th mat-sort-header="availability">Status</th>
+                    <th mat-sort-header="action">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (data of task; track data) {
+                    <tr>
+                      <td>{{data.name}}</td>
+                      <td>{{data.milestone}}</td>
+                      <td>
+                        {{data.para}}
+                      </td>
+                      <td><span [ngClass]="{'bg-success-light':data.availability === 'Completed','bg-warning-light':data.availability === 'Pending'}"class="badge badge-pill ">{{data.availability}}</span></td>
+                      <td>
+                        <div class="action-table-data">
+                          <div class="edit-delete-action m-0">
+                            <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i class="feather icon-edit-2"></i></a>
+                            <a href="javascript:void(0);"><i class="feather icon-trash-2"></i></a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  }
+
+                </tbody>
+              </table>
+
+            </div>
+            <div class="table_footer">
+              <div class="col-sm-12 col-md-5">
+                <div class="dataTables_info">
+                  Showing {{ serialNumberArray[0] }} to
+                  {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                  {{ totalData }} entries
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-7">
+                <div class="pagination_section">
+                  <ul class="pagination">
+                    <li
+                      class="page-item"
+                                    [ngClass]="{
+                                      disabled: currentPage === 1
+                                    }"
+                      >
+                      <a
+                        (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')"
+                        class="page-link"
+                        href="javascript:void(0);"
+                        tabindex="-1"
+                        >Previous</a
+                        >
+                      </li>
+
+                      @for (item of pageNumberArray; track item; let i = $index) {
+                        <li
+                          class="page-item"
+                          [class.active]="item === currentPage"
+                                      [ngClass]="
+                                        (pageNumberArray[currentPage - 2] > item &&
+                                          item !== 1 &&
+                                          pageNumberArray.length > 6) ||
+                                        (pageNumberArray[currentPage] < item &&
+                                          item !== 1 &&
+                                          pageNumberArray.length > 6 &&
+                                          pageNumberArray.length !== item)
+                                          ? 'hide-page-no'
+                                          : 'show-page-no'
+                                      "
+                          >
+                          <a
+                            (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)"
+                            class="page-link"
+                            href="javascript:void(0);"
+                            >
+                            {{ item }}
+                          </a>
+                        </li>
+                        @if (
+                          i === 0 &&
+                          pageNumberArray.length > 6 &&
+                          currentPage > 2
+                          ) {
+                          <li tabindex="0"
+                            class="page-item"
+                            [hidden]="currentPage === 1"
+                            (click)="moveToPage(currentPage - 2)" (keydown.enter)="moveToPage(currentPage - 2)"
+                            >
+                            <a class="page-link" href="javascript:void(0);" >
+                              ...
+                            </a>
+                          </li>
+                        }
+                        @if (
+                          i === pageNumberArray.length - 2 &&
+                          pageNumberArray.length > 6
+                          ) {
+                          <li tabindex="0"
+                                      [hidden]="
+                                        currentPage >=
+                                          pageNumberArray[pageNumberArray.length - 2] ||
+                                        totalData <
+                                          serialNumberArray[serialNumberArray.length - 1]
+                                      "
+                            class="page-item"
+                            (click)="moveToPage(currentPage + 2)" (keydown.enter)="moveToPage(currentPage + 2)"
+                            >
+                            <a class="page-link" href="javascript:void(0);" tabindex="0">
+                              ...
+                            </a>
+                          </li>
+                        }
+                      }
+
+                      <li
+                        class="page-item"
+                                    [ngClass]="{
+                                      disabled:
+                                        currentPage ===
+                                          pageNumberArray[pageNumberArray.length - 1] ||
+                                          task.length === 0
+                                    }"
+                        >
+                        <a
+                          (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')"
+                          class="page-link"
+                          href="javascript:void(0);"
+                          >Next
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- The Modal -->
+  <div class="modal fade edit-proposal-modal" id="add-milestone">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Task</h4>
+          <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather icon-x"></i></a></span>
+        </div>
+        <div class="modal-body">
+          <form action="#">
+            <div class="modal-info">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="task" class="form-label">Task Name</label>
+                    <input class="form-control" type="text">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-block">
+                    <label  for="Milestone" class="form-label">Milestone</label>
+                    <mat-select [(ngModel)]="selectedValue2" [ngModelOptions]="{standalone: true}"
+                      class="select mat-select arrow verify" placeholder="Basic">
+                      @for (data of selectedList2; track data) {
+                        <mat-option [value]="data.value">
+                          {{data.value}}
+                        </mat-option>
+                      }
+                    </mat-select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-block">
+                    <label for="Due" class="form-label">Due date</label>
+                    <div class="cal-icon">
+                      <input class="form-control datetimepicker" type="text" bsDatepicker>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="input-block">
+                    <label for="Description" class="form-label">Description</label>
+                    <textarea class="form-control summernote">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</textarea>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="Status" class="form-label">Status</label>
+                    <mat-select [(ngModel)]="selectedValue1" [ngModelOptions]="{standalone: true}"
+                      class="select mat-select arrow verify" placeholder="Basic">
+                      @for (data of selectedList1; track data) {
+                        <mat-option [value]="data.value">
+                          {{data.value}}
+                        </mat-option>
+                      }
+                    </mat-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="submit-section text-end">
+              <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
+              <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /The Modal -->
+  <!-- The Modal -->
+  <div class="modal fade edit-proposal-modal" id="edit-milestone">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Task</h4>
+          <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather icon-x"></i></a></span>
+        </div>
+        <div class="modal-body">
+          <form action="#">
+            <div class="modal-info">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="Task" class="form-label">Task Name</label>
+                    <input class="form-control" type="text" value="Adding New Logo Concept">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-block">
+                    <label for="Milestone" class="form-label">Milestone</label>
+
+                    <mat-select [(ngModel)]="selectedValue3" [ngModelOptions]="{standalone: true}"
+                      class="select mat-select arrow verify" placeholder="Basic">
+                      @for (data of selectedList3; track data) {
+                        <mat-option [value]="data.value">
+                          {{data.value}}
+                        </mat-option>
+                      }
+                    </mat-select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-block">
+                    <label for="Due" class="form-label">Due date</label>
+                    <div class="cal-icon">
+                      <input class="form-control datetimepicker" type="text" bsDatepicker>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="input-block">
+                    <label for="Description" class="form-label">Description</label>
+                    <textarea class="form-control summernote">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</textarea>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="Status" class="form-label">Status</label>
+
+                    <mat-select [(ngModel)]="selectedValue1" [ngModelOptions]="{standalone: true}"
+                      class="select mat-select arrow verify" placeholder="Basic">
+                      @for (data of selectedList1; track data) {
+                        <mat-option [value]="data.value">
+                          {{data.value}}
+                        </mat-option>
+                      }
+                    </mat-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="submit-section text-end">
+              <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
+              <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /The Modal -->

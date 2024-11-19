@@ -1,0 +1,93 @@
+<nav class="user-tabs mb-4">
+  <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink]="'/employer/favourites/markedfavourites'">Bookmarked Freelancers</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " [routerLink]="'/employer/favourites/invitedfavourites'">Invited Freelancers</a>
+    </li>
+  </ul>
+</nav>
+<!-- project list -->
+<div class="my-projects-view favourite-group">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header d-flex">
+          <h5 class="card-title">Bookmarked Freelancers</h5>
+          <ul class="list-grid d-flex align-items-center">
+            <li><a [routerLink]="'/employer/favourites/favourites-list'"class="favour-active"><i class="fas fa-list"></i></a></li>
+            <li><a [routerLink]="'/employer/favourites/markedfavourites'" ><i class="fas fa-th-large"></i></a></li>
+          </ul>
+        </div>
+        <div class="freelance-box list-book-mark book-mark favour-book">
+          <div class="row">
+            <div class="col-md-12 col-lg-12 col-xl-12">
+              <div class="relavance-result d-flex align-items-center">
+                <h4>Found 455 Results</h4>
+                <div class="relavance-rate d-flex justify-content-sm-end">
+                  <div class="sort-by">
+                    <label for="sort">Sort By: </label>
+                    <select class="custom-select form-select">
+                      <option>Relevance</option>
+                      <option>Rating</option>
+                      <option>Popular</option>
+                      <option>Latest</option>
+                      <option>Free</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              @for (lancer of freelancer; track lancer) {
+                <div class="card list-develop-group"  [hidden] = "freelancer.length === 0">
+                  <div class="about-author d-flex align-items-center">
+                    <div class="about-list-author d-flex align-items-center">
+                      <div class="about-author-img">
+                        <div class="author-img-wrap">
+                          <a [routerLink]="'/employer/company-profile'">
+                            <img class="img-fluid" [src]="lancer.image" alt="User Image">
+                            <span class="verified"><i class="fas fa-check-circle"></i></span>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="author-details">
+                        <div class="freelance-info">
+                          <h3><a [routerLink]="'/employer/company-profile'">{{lancer.name}}</a></h3>
+                          <div class="freelance-specific">{{lancer.role}}</div>
+                          <div class="freelance-location"><i class="fas fa-map-marker-alt me-1"></i>{{lancer.city}}</div>
+                          <div class="rating">
+                            <i class="fas fa-star filled"></i>
+                            <i class="fas fa-star filled"></i>
+                            <i class="fas fa-star filled"></i>
+                            <i class="fas fa-star "></i>
+                            <i class="fas fa-star"></i>
+                            <span class="average-rating"> {{(lancer.rating)}}</span>
+                          </div>
+                          <div class="freelance-tags">
+                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">{{lancer.role2}}</span></a>
+                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">{{lancer.role3}}</span></a>
+                            <a href="javascript:void(0);"><span class="badge badge-pill badge-design">{{lancer.role4}}</span></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="develop-list-pro">
+                      <a data-bs-toggle="modal" href="#rating" class="favourite "><i class="fas fa-star"></i></a>
+                      <div class="freelancers-price">$ {{lancer.price}}</div>
+                      <div class="cart-hover">
+                        <a [routerLink]="'/employer/company-profile'" class="btn-cart" tabindex="-1">View Profile</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- project list -->

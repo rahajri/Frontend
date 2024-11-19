@@ -1,0 +1,28 @@
+<app-employerheader></app-employerheader>
+@if (empolyee) {
+  <!-- Page Content -->
+  <div class="content content-page">
+    <div class="container">
+      <div class="row">
+        <!-- sidebar -->
+        @if (empolyee) {
+          <div class="col-xl-3 col-md-4 theiaStickySidebar">
+            <app-sidemenu></app-sidemenu>
+          </div>
+        }
+        <!-- /sidebar -->
+        @if (empolyee) {
+          <div class="col-xl-9 col-lg-8">
+            <router-outlet></router-outlet>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+  <!-- /Page Content -->
+}
+@if (empolyee === false) {
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+}

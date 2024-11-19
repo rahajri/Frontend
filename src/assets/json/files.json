@@ -1,0 +1,48 @@
+{
+    "data": [
+        {
+            "title": "Website Designer Required",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+            "type": "Png",
+            "size": "20 KB",
+            "img": "assets/img/icon/manage-file-icon-01.svg"
+        },
+        {
+            "title": "Create desktop applications",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+            "type": "Jpg",
+            "size": "2 MB",
+            "img": "assets/img/icon/manage-file-icon-02.svg"
+        },
+        {
+            "title": "PHP, Javascript Projects",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+            "type": "Jpg",
+            "size": "12 KB",
+            "img": "assets/img/icon/manage-file-icon-03.svg"
+        },
+        {
+            "title": "Website Designer Required",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+            "type": "Png",
+            "size": "25 KB",
+            "img": "assets/img/icon/manage-file-icon-04.svg"
+        },
+        {
+            "title": "Swift / SwiftUI Developer",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+            "type": "Jpg",
+            "size": "50 KB",
+            "img": "assets/img/icon/manage-file-icon-05.svg"
+        },
+        {
+            "title": "Full-stack Developer",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+            "type": "Png",
+            "size": "38 KB",
+            "img": "assets/img/icon/manage-file-icon-06.svg"
+        }
+    ],
+    "totalData": 6
+  }
+  

@@ -1,0 +1,173 @@
+<!-- Page Content -->
+<div class="page-title">
+  <h3>Manage Projects</h3>
+</div>
+<nav class="user-tabs mb-4">
+  <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink] = "routes.freelancerViewProjectDetail">Overview & Discussions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink] = "routes.freelancerMilestones">Milestones</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink] = "routes.freelancerTask">Tasks</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink] = "routes.freelancerFiles">Files</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink] = "routes.freelancerPayments">Payments</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- project list -->
+<div class="my-projects-view">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="title-head d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">Payments</h4>
+
+      </div>
+
+      <div class="table-responsive table-box manage-projects-table">
+        <table class="table table-center table-hover datatable no-sort">
+          <thead class="thead-pink">
+            <tr>
+              <th>Name</th>
+              <th>Type of Payment</th>
+              <th>Budget</th>
+              <th>Status</th>
+              <th>Date Paid</th>
+              <th>Invoice</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (data of freelancerPayments; track data) {
+              <tr>
+                <td>{{data.name}} </td>
+                <td>
+                  {{data.typeOfPayment}}
+                </td>
+                <td>{{data.budget}}</td>
+                <td><span class="badge badge-pill bg-success-light">{{data.status}}</span></td>
+                <td>{{data.datePaid}}</td>
+                <td>
+                  <div class="action-table-data">
+                    <div class="edit-delete-action m-0">
+                      <a href="#edit-milestone" class="download-icon" data-bs-toggle="modal"><i
+                      class="feather icon-download"></i></a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <div class="table_footer">
+          <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info">
+              Showing {{ serialNumberArray[0] }} to
+              {{ serialNumberArray[serialNumberArray.length - 1] }} of
+              {{ totalData }} entries
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-7">
+            <div class="pagination_section">
+              <ul class="pagination">
+                                <li class="page-item" [ngClass]="{
+                              disabled: currentPage === 1
+                            }">
+                  <a (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')"
+                  class="page-link" href="javascript:void(0);" tabindex="-1">Previous</a>
+                </li>
+
+                @for (item of pageNumberArray; track item; let i = $index) {
+                                    <li class="page-item" [class.active]="item === currentPage" [ngClass]="
+                                (pageNumberArray[currentPage - 2] > item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6) ||
+                                (pageNumberArray[currentPage] < item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6 &&
+                                  pageNumberArray.length !== item)
+                                  ? 'hide-page-no'
+                                  : 'show-page-no'
+                              ">
+                    <a (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)" class="page-link"
+                      href="javascript:void(0);">
+                      {{ item }}
+                    </a>
+                  </li>
+                  @if (
+                    i === 0 &&
+                    pageNumberArray.length > 6 &&
+                    currentPage > 2
+                    ) {
+                    <li class="page-item" [hidden]="currentPage === 1" (click)="moveToPage(currentPage - 2)" (keydown.enter)="moveToPage(currentPage - 2)" tabindex="0"
+                      (keydown.enter)="moveToPage(currentPage - 2)">
+                      <a class="page-link" href="javascript:void(0);">
+                        ...
+                      </a>
+                    </li>
+                  }
+                  @if (
+                    i === pageNumberArray.length - 2 &&
+                    pageNumberArray.length > 6
+                    ) {
+<li [hidden]="
+                                currentPage >=
+                                  pageNumberArray[pageNumberArray.length - 2] ||
+                                totalData <
+                                  serialNumberArray[serialNumberArray.length - 1]
+                              " class="page-item" (click)="moveToPage(currentPage + 2)"
+                      (keydown.enter)="moveToPage(currentPage + 2)" tabindex="0">
+                      <a class="page-link" href="javascript:void(0);">
+                        ...
+                      </a>
+                    </li>
+                  }
+                }
+
+                                <li class="page-item" [ngClass]="{
+                              disabled:
+                                currentPage ===
+                                  pageNumberArray[pageNumberArray.length - 1] ||
+                                  freelancerPayments.length === 0
+                            }">
+                  <a (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')" class="page-link"
+                    href="javascript:void(0);">Next
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- project list -->
+<!-- /Page Content -->
+<!-- The Modal -->
+<div class="modal fade edit-proposal-modal success-modal" id="edit-milestone">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header justify-content-end">
+        <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i
+        class="feather icon-x"></i></a></span>
+      </div>
+      <div class="modal-body">
+        <div class="success-msg-content text-center">
+          <h4>Payment Request Sent Successfully</h4>
+          <p>Your payment request for milestone ”Logo Design” has been successfully started</p>
+          <a [routerLink] = "routes.freelancer_dashboard" class="btn btn-primary mt-3">Go to Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /The Modal -->

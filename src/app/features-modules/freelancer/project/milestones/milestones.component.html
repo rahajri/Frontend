@@ -1,0 +1,340 @@
+mat-select
+
+
+
+
+
+
+
+
+
+<div class="page-title">
+  <h3>Manage Projects</h3>
+</div>
+<nav class="user-tabs mb-4">
+  <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.freelancerViewProjectDetail">Overview & Discussions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink]="routes.freelancerMilestones">Milestones</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.freelancerTask">Tasks</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.freelancerFiles">Files</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.freelancerPayments">Payments</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- project list -->
+<div class="my-projects-view">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="title-head d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">Milestones</h4>
+        <a href="#add-milestone" class="login-btn btn-primary" data-bs-toggle="modal">Add Milestone</a>
+      </div>
+
+      <div class="table-responsive table-box manage-projects-table">
+        <table class="table table-center table-hover datatable no-sort">
+          <thead class="thead-pink">
+            <tr>
+              <th>Name</th>
+              <th>Budget</th>
+              <th>Progress</th>
+              <th>Start date</th>
+              <th>Due date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (data of freelancerMilestones; track data) {
+              <tr>
+                <td>{{data.name}}</td>
+                <td>{{data.budget}}</td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div class="progress progress-md mb-0">
+                      <div class="progress-bar bg-success" role="progressbar"
+                        [style.width]="data.percent" [attr.aria-valuenow]="data.percent"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="mb-0 orange-text text-center ms-3">{{data.percent}}</p>
+                  </div>
+                </td>
+                <td>{{data.startDate}}</td>
+                <td>{{data.dueDate}}</td>
+                <td><span class="badge badge-pill"
+                [ngClass]="{'bg-success-light': data.status === 'Paid', 'bg-danger-light': data.status === 'Unpaid'}">{{data.status}}</span>
+              </td>
+              <td>
+                <div class="action-table-data">
+                  <a href="javascript:void(0);" class="btn btn-request"
+                  [ngClass]="{'disabled': data.action === 'Request Pay'}">{{data.action}}</a>
+                  <div>
+                    <mat-select placeholder="On Hold" class="select table-select-custom">
+                      <mat-option value="On Hold">On Hold</mat-option>
+                      <mat-option value="Approved">Completed
+                      </mat-option>
+                      <mat-option value="On Hold">Inprogress
+                      </mat-option>
+                      <mat-option value="Cancelled">Cancell
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="edit-delete-action">
+                    <a href="#edit-milestone" class="me-2" data-bs-toggle="modal"><i
+                    class="feather icon-edit-2"></i></a>
+                    <a href="javascript:void(0);"><i class="feather icon-trash-2"></i></a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="table_footer">
+      <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info">
+          Showing {{ serialNumberArray[0] }} to
+          {{ serialNumberArray[serialNumberArray.length - 1] }} of
+          {{ totalData }} entries
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-7">
+        <div class="pagination_section">
+          <ul class="pagination">
+                            <li class="page-item" [ngClass]="{
+                          disabled: currentPage === 1
+                        }">
+              <a (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')"
+              class="page-link" href="javascript:void(0);" tabindex="-1">Previous</a>
+            </li>
+
+            @for (item of pageNumberArray; track item; let i = $index) {
+                                <li class="page-item" [class.active]="item === currentPage" [ngClass]="
+                            (pageNumberArray[currentPage - 2] > item &&
+                              item !== 1 &&
+                              pageNumberArray.length > 6) ||
+                            (pageNumberArray[currentPage] < item &&
+                              item !== 1 &&
+                              pageNumberArray.length > 6 &&
+                              pageNumberArray.length !== item)
+                              ? 'hide-page-no'
+                              : 'show-page-no'
+                          ">
+                <a (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)" class="page-link"
+                  href="javascript:void(0);">
+                  {{ item }}
+                </a>
+              </li>
+              @if (
+                i === 0 &&
+                pageNumberArray.length > 6 &&
+                currentPage > 2
+                ) {
+                <li class="page-item" [hidden]="currentPage === 1" (click)="moveToPage(currentPage - 2)"
+                  (keydown.enter)="moveToPage(currentPage - 2)" tabindex="0">
+                  <a class="page-link" href="javascript:void(0);">
+                    ...
+                  </a>
+                </li>
+              }
+              @if (
+                i === pageNumberArray.length - 2 &&
+                pageNumberArray.length > 6
+                ) {
+<li [hidden]="
+                            currentPage >=
+                              pageNumberArray[pageNumberArray.length - 2] ||
+                            totalData <
+                              serialNumberArray[serialNumberArray.length - 1]
+                          " class="page-item" (click)="moveToPage(currentPage + 2)"
+                  (keydown.enter)="moveToPage(currentPage + 2)" tabindex="0">
+                  <a class="page-link" href="javascript:void(0);">
+                    ...
+                  </a>
+                </li>
+              }
+            }
+
+                            <li class="page-item" [ngClass]="{
+                          disabled:
+                            currentPage ===
+                              pageNumberArray[pageNumberArray.length - 1] ||
+                              freelancerMilestones.length === 0
+                        }">
+              <a (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')" class="page-link"
+                href="javascript:void(0);">Next
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<!-- project list -->
+
+<!-- The Modal -->
+<div class="modal fade edit-proposal-modal" id="add-milestone">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Milestone</h4>
+        <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i
+        class="feather icon-x"></i></a></span>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <div class="modal-info">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="input-block">
+                  <label for="Milestone " class="form-label">Milestone name</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="input-block">
+                  <label for="amount" class="form-label">Amount</label>
+                  <input type="text" class="form-control">
+                  <span class="input-group-text">$</span>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input-block">
+                  <label for="start" class="form-label">Start Date</label>
+                  <div class="cal-icon">
+                    <input class="form-control datetimepicker" bsDatepicker type="text">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input-block">
+                  <label for="end date" class="form-label">End Date</label>
+                  <div class="cal-icon">
+                    <input class="form-control datetimepicker" bsDatepicker type="text">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="input-block">
+                  <label for="description" class="form-label">Description</label>
+                  <ngx-editor [editor]="editor">
+                    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                    </ngx-editor-menu>
+                  </ngx-editor>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="submit-section text-end">
+            <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
+            <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /The Modal -->
+<!-- The Modal -->
+<div class="modal fade edit-proposal-modal" id="edit-milestone">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Milestone</h4>
+        <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i
+        class="feather icon-x"></i></a></span>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <div class="modal-info">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="input-block">
+                  <label for="Milestone " class="form-label">Milestone name</label>
+                  <input type="text" class="form-control" value="Creating Logo">
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="input-block">
+                  <label for="amount" class="form-label">Amount</label>
+                  <input type="text" class="form-control" value="200">
+                  <span class="input-group-text">$</span>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input-block">
+                  <label for="start" class="form-label">Start Date</label>
+                  <div class="cal-icon">
+                    <input class="form-control datetimepicker" bsDatepicker type="text">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="input-block">
+                  <label for="end date" class="form-label">End Date</label>
+                  <div class="cal-icon">
+                    <input class="form-control datetimepicker" bsDatepicker type="text">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="input-block">
+                  <label for="description" class="form-label">Description</label>
+                  <ngx-editor [editor]="editor">
+                    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                    </ngx-editor-menu>
+                  </ngx-editor>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-block">
+                  <label for="completion" class="form-label">Completion (%)</label>
+                  <mat-select [(ngModel)]="selectedValue8" [ngModelOptions]="{standalone: true}"
+                    class="select modal-select" placeholder="10">
+                    @for (data of selectedList8; track data) {
+                      <mat-option [value]="data.value">
+                        {{data.value}}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-block">
+                  <label for="status" class="form-label">Status</label>
+                  <mat-select [(ngModel)]="selectedValue7" [ngModelOptions]="{standalone: true}"
+                    class="select modal-select" placeholder="On Hold">
+                    @for (data of selectedList7; track data) {
+                      <mat-option [value]="data.value">
+                        {{data.value}}
+                      </mat-option>
+                    }
+                  </mat-select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="submit-section text-end">
+            <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
+            <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /The Modal -->

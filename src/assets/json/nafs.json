@@ -1,0 +1,6601 @@
+{
+    "data":  [
+        {
+            "NAF732": "0000Z",
+            "A129": "Z00Z",
+            "A88": "00",
+            "A38": "ZZ",
+            "A17": "ZZ",
+            "A4": "5",
+            "INTITULÉS": "Activité inconnue"
+        },
+        {
+            "NAF732": "0111Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture de céréales (à l'exception du riz), de légumineuses et de graines oléagineuses"
+        },
+        {
+            "NAF732": "0112Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture du riz"
+        },
+        {
+            "NAF732": "0113Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture de légumes, de melons, de racines et de tubercules"
+        },
+        {
+            "NAF732": "0114Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture de la canne à sucre"
+        },
+        {
+            "NAF732": "0115Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture du tabac"
+        },
+        {
+            "NAF732": "0116Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture de plantes à fibres"
+        },
+        {
+            "NAF732": "0119Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Autres cultures non permanentes"
+        },
+        {
+            "NAF732": "0121Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture de la vigne"
+        },
+        {
+            "NAF732": "0122Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture de fruits tropicaux et subtropicaux"
+        },
+        {
+            "NAF732": "0123Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture d'agrumes"
+        },
+        {
+            "NAF732": "0124Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture de fruits à pépins et à noyau"
+        },
+        {
+            "NAF732": "0125Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture d'autres fruits d'arbres ou d'arbustes et de fruits à coque"
+        },
+        {
+            "NAF732": "0126Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture de fruits oléagineux"
+        },
+        {
+            "NAF732": "0127Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture de plantes à boissons"
+        },
+        {
+            "NAF732": "0128Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture de plantes à épices, aromatiques, médicinales et pharmaceutiques"
+        },
+        {
+            "NAF732": "0129Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Autres cultures permanentes"
+        },
+        {
+            "NAF732": "0130Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Reproduction de plantes"
+        },
+        {
+            "NAF732": "0141Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Élevage de vaches laitières"
+        },
+        {
+            "NAF732": "0142Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Élevage d'autres bovins et de buffles"
+        },
+        {
+            "NAF732": "0143Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Élevage de chevaux et d'autres équidés"
+        },
+        {
+            "NAF732": "0144Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Élevage de chameaux et d'autres camélidés"
+        },
+        {
+            "NAF732": "0145Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Élevage d'ovins et de caprins"
+        },
+        {
+            "NAF732": "0146Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Élevage de porcins"
+        },
+        {
+            "NAF732": "0147Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Élevage de volailles"
+        },
+        {
+            "NAF732": "0149Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Élevage d'autres animaux"
+        },
+        {
+            "NAF732": "0150Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Culture et élevage associés"
+        },
+        {
+            "NAF732": "0161Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Activités de soutien aux cultures"
+        },
+        {
+            "NAF732": "0162Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Activités de soutien à la production animale"
+        },
+        {
+            "NAF732": "0163Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Traitement primaire des récoltes"
+        },
+        {
+            "NAF732": "0164Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Traitement des semences"
+        },
+        {
+            "NAF732": "0170Z",
+            "A129": "A01Z",
+            "A88": "01",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Chasse, piégeage et services annexes"
+        },
+        {
+            "NAF732": "0210Z",
+            "A129": "A02Z",
+            "A88": "02",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Sylviculture et autres activités forestières"
+        },
+        {
+            "NAF732": "0220Z",
+            "A129": "A02Z",
+            "A88": "02",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Exploitation forestière"
+        },
+        {
+            "NAF732": "0230Z",
+            "A129": "A02Z",
+            "A88": "02",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Récolte de produits forestiers non ligneux poussant à l'état sauvage"
+        },
+        {
+            "NAF732": "0240Z",
+            "A129": "A02Z",
+            "A88": "02",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Services de soutien à l'exploitation forestière"
+        },
+        {
+            "NAF732": "0311Z",
+            "A129": "A03Z",
+            "A88": "03",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Pêche en mer"
+        },
+        {
+            "NAF732": "0312Z",
+            "A129": "A03Z",
+            "A88": "03",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Pêche en eau douce"
+        },
+        {
+            "NAF732": "0321Z",
+            "A129": "A03Z",
+            "A88": "03",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Aquaculture en mer"
+        },
+        {
+            "NAF732": "0322Z",
+            "A129": "A03Z",
+            "A88": "03",
+            "A38": "AZ",
+            "A17": "AZ",
+            "A4": "1",
+            "INTITULÉS": "Aquaculture en eau douce"
+        },
+        {
+            "NAF732": "0510Z",
+            "A129": "B05Z",
+            "A88": "05",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Extraction de houille"
+        },
+        {
+            "NAF732": "0520Z",
+            "A129": "B05Z",
+            "A88": "05",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Extraction de lignite"
+        },
+        {
+            "NAF732": "0610Z",
+            "A129": "B06Z",
+            "A88": "06",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Extraction de pétrole brut"
+        },
+        {
+            "NAF732": "0620Z",
+            "A129": "B06Z",
+            "A88": "06",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Extraction de gaz naturel"
+        },
+        {
+            "NAF732": "0710Z",
+            "A129": "B07Z",
+            "A88": "07",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Extraction de minerais de fer"
+        },
+        {
+            "NAF732": "0721Z",
+            "A129": "B07Z",
+            "A88": "07",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Extraction de minerais d'uranium et de thorium"
+        },
+        {
+            "NAF732": "0729Z",
+            "A129": "B07Z",
+            "A88": "07",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Extraction d'autres minerais de métaux non ferreux"
+        },
+        {
+            "NAF732": "0811Z",
+            "A129": "B08Z",
+            "A88": "08",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Extraction de pierres ornementales et de construction, de calcaire industriel, de gypse, de craie et d'ardoise"
+        },
+        {
+            "NAF732": "0812Z",
+            "A129": "B08Z",
+            "A88": "08",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Exploitation de gravières et sablières, extraction d'argiles et de kaolin"
+        },
+        {
+            "NAF732": "0891Z",
+            "A129": "B08Z",
+            "A88": "08",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Extraction des minéraux chimiques et d'engrais minéraux"
+        },
+        {
+            "NAF732": "0892Z",
+            "A129": "B08Z",
+            "A88": "08",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Extraction de tourbe"
+        },
+        {
+            "NAF732": "0893Z",
+            "A129": "B08Z",
+            "A88": "08",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Production de sel"
+        },
+        {
+            "NAF732": "0899Z",
+            "A129": "B08Z",
+            "A88": "08",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Autres activités extractives n.c.a."
+        },
+        {
+            "NAF732": "0910Z",
+            "A129": "B09Z",
+            "A88": "09",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Activités de soutien à l'extraction d'hydrocarbures"
+        },
+        {
+            "NAF732": "0990Z",
+            "A129": "B09Z",
+            "A88": "09",
+            "A38": "BZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Activités de soutien aux autres industries extractives"
+        },
+        {
+            "NAF732": "1011Z",
+            "A129": "C10A",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Transformation et conservation de la viande de boucherie"
+        },
+        {
+            "NAF732": "1012Z",
+            "A129": "C10A",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Transformation et conservation de la viande de volaille"
+        },
+        {
+            "NAF732": "1013A",
+            "A129": "C10A",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Préparation industrielle de produits à base de viande"
+        },
+        {
+            "NAF732": "1013B",
+            "A129": "C10A",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Charcuterie"
+        },
+        {
+            "NAF732": "1020Z",
+            "A129": "C10B",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Transformation et conservation de poisson, de crustacés et de mollusques"
+        },
+        {
+            "NAF732": "1031Z",
+            "A129": "C10C",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Transformation et conservation de pommes de terre"
+        },
+        {
+            "NAF732": "1032Z",
+            "A129": "C10C",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Préparation de jus de fruits et légumes"
+        },
+        {
+            "NAF732": "1039A",
+            "A129": "C10C",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Autre transformation et conservation de légumes"
+        },
+        {
+            "NAF732": "1039B",
+            "A129": "C10C",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Transformation et conservation de fruits"
+        },
+        {
+            "NAF732": "1041A",
+            "A129": "C10D",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'huiles et graisses brutes"
+        },
+        {
+            "NAF732": "1041B",
+            "A129": "C10D",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'huiles et graisses raffinées"
+        },
+        {
+            "NAF732": "1042Z",
+            "A129": "C10D",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de margarine et graisses comestibles similaires"
+        },
+        {
+            "NAF732": "1051A",
+            "A129": "C10E",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de lait liquide et de produits frais"
+        },
+        {
+            "NAF732": "1051B",
+            "A129": "C10E",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de beurre"
+        },
+        {
+            "NAF732": "1051C",
+            "A129": "C10E",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de fromage"
+        },
+        {
+            "NAF732": "1051D",
+            "A129": "C10E",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres produits laitiers"
+        },
+        {
+            "NAF732": "1052Z",
+            "A129": "C10E",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de glaces et sorbets"
+        },
+        {
+            "NAF732": "1061A",
+            "A129": "C10F",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Meunerie"
+        },
+        {
+            "NAF732": "1061B",
+            "A129": "C10F",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Autres activités du travail des grains"
+        },
+        {
+            "NAF732": "1062Z",
+            "A129": "C10F",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de produits amylacés"
+        },
+        {
+            "NAF732": "1071A",
+            "A129": "C10G",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication industrielle de pain et de pâtisserie fraîche"
+        },
+        {
+            "NAF732": "1071B",
+            "A129": "C10G",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Cuisson de produits de boulangerie"
+        },
+        {
+            "NAF732": "1071C",
+            "A129": "C10G",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Boulangerie et boulangerie-pâtisserie"
+        },
+        {
+            "NAF732": "1071D",
+            "A129": "C10G",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Pâtisserie"
+        },
+        {
+            "NAF732": "1072Z",
+            "A129": "C10G",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de biscuits, biscottes et pâtisseries de conservation"
+        },
+        {
+            "NAF732": "1073Z",
+            "A129": "C10G",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de pâtes alimentaires"
+        },
+        {
+            "NAF732": "1081Z",
+            "A129": "C10H",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de sucre"
+        },
+        {
+            "NAF732": "1082Z",
+            "A129": "C10H",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de cacao, chocolat et de produits de confiserie"
+        },
+        {
+            "NAF732": "1083Z",
+            "A129": "C10H",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Transformation du thé et du café"
+        },
+        {
+            "NAF732": "1084Z",
+            "A129": "C10H",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de condiments et assaisonnements"
+        },
+        {
+            "NAF732": "1085Z",
+            "A129": "C10H",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de plats préparés"
+        },
+        {
+            "NAF732": "1086Z",
+            "A129": "C10H",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'aliments homogénéisés et diététiques"
+        },
+        {
+            "NAF732": "1089Z",
+            "A129": "C10H",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres produits alimentaires n.c.a."
+        },
+        {
+            "NAF732": "1091Z",
+            "A129": "C10K",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'aliments pour animaux de ferme"
+        },
+        {
+            "NAF732": "1092Z",
+            "A129": "C10K",
+            "A88": "10",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'aliments pour animaux de compagnie"
+        },
+        {
+            "NAF732": "1101Z",
+            "A129": "C11Z",
+            "A88": "11",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Production de boissons alcooliques distillées"
+        },
+        {
+            "NAF732": "1102A",
+            "A129": "C11Z",
+            "A88": "11",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de vins effervescents"
+        },
+        {
+            "NAF732": "1102B",
+            "A129": "C11Z",
+            "A88": "11",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Vinification"
+        },
+        {
+            "NAF732": "1103Z",
+            "A129": "C11Z",
+            "A88": "11",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de cidre et de vins de fruits"
+        },
+        {
+            "NAF732": "1104Z",
+            "A129": "C11Z",
+            "A88": "11",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Production d'autres boissons fermentées non distillées"
+        },
+        {
+            "NAF732": "1105Z",
+            "A129": "C11Z",
+            "A88": "11",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de bière"
+        },
+        {
+            "NAF732": "1106Z",
+            "A129": "C11Z",
+            "A88": "11",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de malt"
+        },
+        {
+            "NAF732": "1107A",
+            "A129": "C11Z",
+            "A88": "11",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Industrie des eaux de table"
+        },
+        {
+            "NAF732": "1107B",
+            "A129": "C11Z",
+            "A88": "11",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Production de boissons rafraîchissantes"
+        },
+        {
+            "NAF732": "1200Z",
+            "A129": "C12Z",
+            "A88": "12",
+            "A38": "CA",
+            "A17": "C1",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de produits à base de tabac"
+        },
+        {
+            "NAF732": "1310Z",
+            "A129": "C13Z",
+            "A88": "13",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Préparation de fibres textiles et filature"
+        },
+        {
+            "NAF732": "1320Z",
+            "A129": "C13Z",
+            "A88": "13",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Tissage"
+        },
+        {
+            "NAF732": "1330Z",
+            "A129": "C13Z",
+            "A88": "13",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Ennoblissement textile"
+        },
+        {
+            "NAF732": "1391Z",
+            "A129": "C13Z",
+            "A88": "13",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'étoffes à mailles"
+        },
+        {
+            "NAF732": "1392Z",
+            "A129": "C13Z",
+            "A88": "13",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles textiles, sauf habillement"
+        },
+        {
+            "NAF732": "1393Z",
+            "A129": "C13Z",
+            "A88": "13",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de tapis et moquettes"
+        },
+        {
+            "NAF732": "1394Z",
+            "A129": "C13Z",
+            "A88": "13",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de ficelles, cordes et filets"
+        },
+        {
+            "NAF732": "1395Z",
+            "A129": "C13Z",
+            "A88": "13",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de non-tissés, sauf habillement"
+        },
+        {
+            "NAF732": "1396Z",
+            "A129": "C13Z",
+            "A88": "13",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres textiles techniques et industriels"
+        },
+        {
+            "NAF732": "1399Z",
+            "A129": "C13Z",
+            "A88": "13",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres textiles n.c.a."
+        },
+        {
+            "NAF732": "1411Z",
+            "A129": "C14Z",
+            "A88": "14",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de vêtements en cuir"
+        },
+        {
+            "NAF732": "1412Z",
+            "A129": "C14Z",
+            "A88": "14",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de vêtements de travail"
+        },
+        {
+            "NAF732": "1413Z",
+            "A129": "C14Z",
+            "A88": "14",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de vêtements de dessus"
+        },
+        {
+            "NAF732": "1414Z",
+            "A129": "C14Z",
+            "A88": "14",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de vêtements de dessous"
+        },
+        {
+            "NAF732": "1419Z",
+            "A129": "C14Z",
+            "A88": "14",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres vêtements et accessoires"
+        },
+        {
+            "NAF732": "1420Z",
+            "A129": "C14Z",
+            "A88": "14",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles en fourrure"
+        },
+        {
+            "NAF732": "1431Z",
+            "A129": "C14Z",
+            "A88": "14",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles chaussants à mailles"
+        },
+        {
+            "NAF732": "1439Z",
+            "A129": "C14Z",
+            "A88": "14",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres articles à mailles"
+        },
+        {
+            "NAF732": "1511Z",
+            "A129": "C15Z",
+            "A88": "15",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Apprêt et tannage des cuirs - préparation et teinture des fourrures"
+        },
+        {
+            "NAF732": "1512Z",
+            "A129": "C15Z",
+            "A88": "15",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles de voyage, de maroquinerie et de sellerie"
+        },
+        {
+            "NAF732": "1520Z",
+            "A129": "C15Z",
+            "A88": "15",
+            "A38": "CB",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de chaussures"
+        },
+        {
+            "NAF732": "1610A",
+            "A129": "C16Z",
+            "A88": "16",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Sciage et rabotage du bois, hors imprégnation"
+        },
+        {
+            "NAF732": "1610B",
+            "A129": "C16Z",
+            "A88": "16",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Imprégnation du bois"
+        },
+        {
+            "NAF732": "1621Z",
+            "A129": "C16Z",
+            "A88": "16",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de placage et de panneaux de bois"
+        },
+        {
+            "NAF732": "1622Z",
+            "A129": "C16Z",
+            "A88": "16",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de parquets assemblés"
+        },
+        {
+            "NAF732": "1623Z",
+            "A129": "C16Z",
+            "A88": "16",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de charpentes et d'autres menuiseries"
+        },
+        {
+            "NAF732": "1624Z",
+            "A129": "C16Z",
+            "A88": "16",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'emballages en bois"
+        },
+        {
+            "NAF732": "1629Z",
+            "A129": "C16Z",
+            "A88": "16",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'objets divers en bois - fabrication d'objets en liège, vannerie et sparterie"
+        },
+        {
+            "NAF732": "1711Z",
+            "A129": "C17A",
+            "A88": "17",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de pâte à papier"
+        },
+        {
+            "NAF732": "1712Z",
+            "A129": "C17A",
+            "A88": "17",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de papier et de carton"
+        },
+        {
+            "NAF732": "1721A",
+            "A129": "C17B",
+            "A88": "17",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de carton ondulé"
+        },
+        {
+            "NAF732": "1721B",
+            "A129": "C17B",
+            "A88": "17",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de cartonnages"
+        },
+        {
+            "NAF732": "1721C",
+            "A129": "C17B",
+            "A88": "17",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'emballages en papier"
+        },
+        {
+            "NAF732": "1722Z",
+            "A129": "C17B",
+            "A88": "17",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles en papier à usage sanitaire ou domestique"
+        },
+        {
+            "NAF732": "1723Z",
+            "A129": "C17B",
+            "A88": "17",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles de papeterie"
+        },
+        {
+            "NAF732": "1724Z",
+            "A129": "C17B",
+            "A88": "17",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de papiers peints"
+        },
+        {
+            "NAF732": "1729Z",
+            "A129": "C17B",
+            "A88": "17",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres articles en papier ou en carton"
+        },
+        {
+            "NAF732": "1811Z",
+            "A129": "C18Z",
+            "A88": "18",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Imprimerie de journaux"
+        },
+        {
+            "NAF732": "1812Z",
+            "A129": "C18Z",
+            "A88": "18",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Autre imprimerie (labeur)"
+        },
+        {
+            "NAF732": "1813Z",
+            "A129": "C18Z",
+            "A88": "18",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Activités de pré-presse"
+        },
+        {
+            "NAF732": "1814Z",
+            "A129": "C18Z",
+            "A88": "18",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Reliure et activités connexes"
+        },
+        {
+            "NAF732": "1820Z",
+            "A129": "C18Z",
+            "A88": "18",
+            "A38": "CC",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Reproduction d'enregistrements"
+        },
+        {
+            "NAF732": "1910Z",
+            "A129": "C19Z",
+            "A88": "19",
+            "A38": "CD",
+            "A17": "C2",
+            "A4": "2",
+            "INTITULÉS": "Cokéfaction"
+        },
+        {
+            "NAF732": "1920Z",
+            "A129": "C19Z",
+            "A88": "19",
+            "A38": "CD",
+            "A17": "C2",
+            "A4": "2",
+            "INTITULÉS": "Raffinage du pétrole"
+        },
+        {
+            "NAF732": "2011Z",
+            "A129": "C20A",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de gaz industriels"
+        },
+        {
+            "NAF732": "2012Z",
+            "A129": "C20A",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de colorants et de pigments"
+        },
+        {
+            "NAF732": "2013A",
+            "A129": "C20A",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Enrichissement et retraitement de matières nucléaires"
+        },
+        {
+            "NAF732": "2013B",
+            "A129": "C20A",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres produits chimiques inorganiques de base n.c.a."
+        },
+        {
+            "NAF732": "2014Z",
+            "A129": "C20A",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres produits chimiques organiques de base"
+        },
+        {
+            "NAF732": "2015Z",
+            "A129": "C20A",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de produits azotés et d'engrais"
+        },
+        {
+            "NAF732": "2016Z",
+            "A129": "C20A",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de matières plastiques de base"
+        },
+        {
+            "NAF732": "2017Z",
+            "A129": "C20A",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de caoutchouc synthétique"
+        },
+        {
+            "NAF732": "2020Z",
+            "A129": "C20C",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de pesticides et d'autres produits agrochimiques"
+        },
+        {
+            "NAF732": "2030Z",
+            "A129": "C20C",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de peintures, vernis, encres et mastics"
+        },
+        {
+            "NAF732": "2041Z",
+            "A129": "C20B",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de savons, détergents et produits d'entretien"
+        },
+        {
+            "NAF732": "2042Z",
+            "A129": "C20B",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de parfums et de produits pour la toilette"
+        },
+        {
+            "NAF732": "2051Z",
+            "A129": "C20C",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de produits explosifs"
+        },
+        {
+            "NAF732": "2052Z",
+            "A129": "C20C",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de colles"
+        },
+        {
+            "NAF732": "2053Z",
+            "A129": "C20C",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'huiles essentielles"
+        },
+        {
+            "NAF732": "2059Z",
+            "A129": "C20C",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres produits chimiques n.c.a."
+        },
+        {
+            "NAF732": "2060Z",
+            "A129": "C20C",
+            "A88": "20",
+            "A38": "CE",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de fibres artificielles ou synthétiques"
+        },
+        {
+            "NAF732": "2110Z",
+            "A129": "C21Z",
+            "A88": "21",
+            "A38": "CF",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de produits pharmaceutiques de base"
+        },
+        {
+            "NAF732": "2120Z",
+            "A129": "C21Z",
+            "A88": "21",
+            "A38": "CF",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de préparations pharmaceutiques"
+        },
+        {
+            "NAF732": "2211Z",
+            "A129": "C22A",
+            "A88": "22",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication et rechapage de pneumatiques"
+        },
+        {
+            "NAF732": "2219Z",
+            "A129": "C22A",
+            "A88": "22",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres articles en caoutchouc"
+        },
+        {
+            "NAF732": "2221Z",
+            "A129": "C22B",
+            "A88": "22",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de plaques, feuilles, tubes et profilés en matières plastiques"
+        },
+        {
+            "NAF732": "2222Z",
+            "A129": "C22B",
+            "A88": "22",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'emballages en matières plastiques"
+        },
+        {
+            "NAF732": "2223Z",
+            "A129": "C22B",
+            "A88": "22",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'éléments en matières plastiques pour la construction"
+        },
+        {
+            "NAF732": "2229A",
+            "A129": "C22B",
+            "A88": "22",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de pièces techniques à base de matières plastiques"
+        },
+        {
+            "NAF732": "2229B",
+            "A129": "C22B",
+            "A88": "22",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de produits de consommation courante en matières plastiques"
+        },
+        {
+            "NAF732": "2311Z",
+            "A129": "C23A",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de verre plat"
+        },
+        {
+            "NAF732": "2312Z",
+            "A129": "C23A",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Façonnage et transformation du verre plat"
+        },
+        {
+            "NAF732": "2313Z",
+            "A129": "C23A",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de verre creux"
+        },
+        {
+            "NAF732": "2314Z",
+            "A129": "C23A",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de fibres de verre"
+        },
+        {
+            "NAF732": "2319Z",
+            "A129": "C23A",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication et façonnage d'autres articles en verre, y compris verre technique"
+        },
+        {
+            "NAF732": "2320Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de produits réfractaires"
+        },
+        {
+            "NAF732": "2331Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de carreaux en céramique"
+        },
+        {
+            "NAF732": "2332Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de briques, tuiles et produits de construction, en terre cuite"
+        },
+        {
+            "NAF732": "2341Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles céramiques à usage domestique ou ornemental"
+        },
+        {
+            "NAF732": "2342Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'appareils sanitaires en céramique"
+        },
+        {
+            "NAF732": "2343Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'isolateurs et pièces isolantes en céramique"
+        },
+        {
+            "NAF732": "2344Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres produits céramiques à usage technique"
+        },
+        {
+            "NAF732": "2349Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres produits céramiques"
+        },
+        {
+            "NAF732": "2351Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de ciment"
+        },
+        {
+            "NAF732": "2352Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de chaux et plâtre"
+        },
+        {
+            "NAF732": "2361Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'éléments en béton pour la construction"
+        },
+        {
+            "NAF732": "2362Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'éléments en plâtre pour la construction"
+        },
+        {
+            "NAF732": "2363Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de béton prêt à l'emploi"
+        },
+        {
+            "NAF732": "2364Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de mortiers et bétons secs"
+        },
+        {
+            "NAF732": "2365Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'ouvrages en fibre-ciment"
+        },
+        {
+            "NAF732": "2369Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres ouvrages en béton, en ciment ou en plâtre"
+        },
+        {
+            "NAF732": "2370Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Taille, façonnage et finissage de pierres"
+        },
+        {
+            "NAF732": "2391Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de produits abrasifs"
+        },
+        {
+            "NAF732": "2399Z",
+            "A129": "C23B",
+            "A88": "23",
+            "A38": "CG",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres produits minéraux non métalliques n.c.a."
+        },
+        {
+            "NAF732": "2410Z",
+            "A129": "C24A",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Sidérurgie"
+        },
+        {
+            "NAF732": "2420Z",
+            "A129": "C24A",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de tubes, tuyaux, profilés creux et accessoires correspondants en acier"
+        },
+        {
+            "NAF732": "2431Z",
+            "A129": "C24A",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Étirage à froid de barres"
+        },
+        {
+            "NAF732": "2432Z",
+            "A129": "C24A",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Laminage à froid de feuillards"
+        },
+        {
+            "NAF732": "2433Z",
+            "A129": "C24A",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Profilage à froid par formage ou pliage"
+        },
+        {
+            "NAF732": "2434Z",
+            "A129": "C24A",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Tréfilage à froid"
+        },
+        {
+            "NAF732": "2441Z",
+            "A129": "C24B",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Production de métaux précieux"
+        },
+        {
+            "NAF732": "2442Z",
+            "A129": "C24B",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Métallurgie de l'aluminium"
+        },
+        {
+            "NAF732": "2443Z",
+            "A129": "C24B",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Métallurgie du plomb, du zinc ou de l'étain"
+        },
+        {
+            "NAF732": "2444Z",
+            "A129": "C24B",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Métallurgie du cuivre"
+        },
+        {
+            "NAF732": "2445Z",
+            "A129": "C24B",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Métallurgie des autres métaux non ferreux"
+        },
+        {
+            "NAF732": "2446Z",
+            "A129": "C24B",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Élaboration et transformation de matières nucléaires"
+        },
+        {
+            "NAF732": "2451Z",
+            "A129": "C24C",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fonderie de fonte"
+        },
+        {
+            "NAF732": "2452Z",
+            "A129": "C24C",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fonderie d'acier"
+        },
+        {
+            "NAF732": "2453Z",
+            "A129": "C24C",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fonderie de métaux légers"
+        },
+        {
+            "NAF732": "2454Z",
+            "A129": "C24C",
+            "A88": "24",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fonderie d'autres métaux non ferreux"
+        },
+        {
+            "NAF732": "2511Z",
+            "A129": "C25A",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de structures métalliques et de parties de structures"
+        },
+        {
+            "NAF732": "2512Z",
+            "A129": "C25A",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de portes et fenêtres en métal"
+        },
+        {
+            "NAF732": "2521Z",
+            "A129": "C25B",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de radiateurs et de chaudières pour le chauffage central"
+        },
+        {
+            "NAF732": "2529Z",
+            "A129": "C25B",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres réservoirs, citernes et conteneurs métalliques"
+        },
+        {
+            "NAF732": "2530Z",
+            "A129": "C25B",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de générateurs de vapeur, à l'exception des chaudières pour le chauffage central"
+        },
+        {
+            "NAF732": "2540Z",
+            "A129": "C25C",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'armes et de munitions"
+        },
+        {
+            "NAF732": "2550A",
+            "A129": "C25D",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Forge, estampage, matriçage - métallurgie des poudres"
+        },
+        {
+            "NAF732": "2550B",
+            "A129": "C25D",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Découpage, emboutissage"
+        },
+        {
+            "NAF732": "2561Z",
+            "A129": "C25D",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Traitement et revêtement des métaux"
+        },
+        {
+            "NAF732": "2562A",
+            "A129": "C25D",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Décolletage"
+        },
+        {
+            "NAF732": "2562B",
+            "A129": "C25D",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Mécanique industrielle"
+        },
+        {
+            "NAF732": "2571Z",
+            "A129": "C25E",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de coutellerie"
+        },
+        {
+            "NAF732": "2572Z",
+            "A129": "C25E",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de serrures et de ferrures"
+        },
+        {
+            "NAF732": "2573A",
+            "A129": "C25E",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de moules et modèles"
+        },
+        {
+            "NAF732": "2573B",
+            "A129": "C25E",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres outillages"
+        },
+        {
+            "NAF732": "2591Z",
+            "A129": "C25E",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de fûts et emballages métalliques similaires"
+        },
+        {
+            "NAF732": "2592Z",
+            "A129": "C25E",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'emballages métalliques légers"
+        },
+        {
+            "NAF732": "2593Z",
+            "A129": "C25E",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles en fils métalliques, de chaînes et de ressorts"
+        },
+        {
+            "NAF732": "2594Z",
+            "A129": "C25E",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de vis et de boulons"
+        },
+        {
+            "NAF732": "2599A",
+            "A129": "C25E",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles métalliques ménagers"
+        },
+        {
+            "NAF732": "2599B",
+            "A129": "C25E",
+            "A88": "25",
+            "A38": "CH",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres articles métalliques"
+        },
+        {
+            "NAF732": "2611Z",
+            "A129": "C26A",
+            "A88": "26",
+            "A38": "CI",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de composants électroniques"
+        },
+        {
+            "NAF732": "2612Z",
+            "A129": "C26A",
+            "A88": "26",
+            "A38": "CI",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de cartes électroniques assemblées"
+        },
+        {
+            "NAF732": "2620Z",
+            "A129": "C26B",
+            "A88": "26",
+            "A38": "CI",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'ordinateurs et d'équipements périphériques"
+        },
+        {
+            "NAF732": "2630Z",
+            "A129": "C26C",
+            "A88": "26",
+            "A38": "CI",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'équipements de communication"
+        },
+        {
+            "NAF732": "2640Z",
+            "A129": "C26D",
+            "A88": "26",
+            "A38": "CI",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de produits électroniques grand public"
+        },
+        {
+            "NAF732": "2651A",
+            "A129": "C26E",
+            "A88": "26",
+            "A38": "CI",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'équipements d'aide à la navigation"
+        },
+        {
+            "NAF732": "2651B",
+            "A129": "C26E",
+            "A88": "26",
+            "A38": "CI",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'instrumentation scientifique et technique"
+        },
+        {
+            "NAF732": "2652Z",
+            "A129": "C26E",
+            "A88": "26",
+            "A38": "CI",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Horlogerie"
+        },
+        {
+            "NAF732": "2660Z",
+            "A129": "C26F",
+            "A88": "26",
+            "A38": "CI",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'équipements d'irradiation médicale, d'équipements électromédicaux et électrothérapeutiques"
+        },
+        {
+            "NAF732": "2670Z",
+            "A129": "C26G",
+            "A88": "26",
+            "A38": "CI",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de matériels optique et photographique"
+        },
+        {
+            "NAF732": "2680Z",
+            "A129": "C26G",
+            "A88": "26",
+            "A38": "CI",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de supports magnétiques et optiques"
+        },
+        {
+            "NAF732": "2711Z",
+            "A129": "C27B",
+            "A88": "27",
+            "A38": "CJ",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de moteurs, génératrices et transformateurs électriques"
+        },
+        {
+            "NAF732": "2712Z",
+            "A129": "C27B",
+            "A88": "27",
+            "A38": "CJ",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de matériel de distribution et de commande électrique"
+        },
+        {
+            "NAF732": "2720Z",
+            "A129": "C27B",
+            "A88": "27",
+            "A38": "CJ",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de piles et d'accumulateurs électriques"
+        },
+        {
+            "NAF732": "2731Z",
+            "A129": "C27B",
+            "A88": "27",
+            "A38": "CJ",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de câbles de fibres optiques"
+        },
+        {
+            "NAF732": "2732Z",
+            "A129": "C27B",
+            "A88": "27",
+            "A38": "CJ",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres fils et câbles électroniques ou électriques"
+        },
+        {
+            "NAF732": "2733Z",
+            "A129": "C27B",
+            "A88": "27",
+            "A38": "CJ",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de matériel d'installation électrique"
+        },
+        {
+            "NAF732": "2740Z",
+            "A129": "C27B",
+            "A88": "27",
+            "A38": "CJ",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'appareils d'éclairage électrique"
+        },
+        {
+            "NAF732": "2751Z",
+            "A129": "C27A",
+            "A88": "27",
+            "A38": "CJ",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'appareils électroménagers"
+        },
+        {
+            "NAF732": "2752Z",
+            "A129": "C27A",
+            "A88": "27",
+            "A38": "CJ",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'appareils ménagers non électriques"
+        },
+        {
+            "NAF732": "2790Z",
+            "A129": "C27B",
+            "A88": "27",
+            "A38": "CJ",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres matériels électriques"
+        },
+        {
+            "NAF732": "2811Z",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de moteurs et turbines, à l'exception des moteurs d'avions et de véhicules"
+        },
+        {
+            "NAF732": "2812Z",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'équipements hydrauliques et pneumatiques"
+        },
+        {
+            "NAF732": "2813Z",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres pompes et compresseurs"
+        },
+        {
+            "NAF732": "2814Z",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres articles de robinetterie"
+        },
+        {
+            "NAF732": "2815Z",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'engrenages et d'organes mécaniques de transmission"
+        },
+        {
+            "NAF732": "2821Z",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de fours et brûleurs"
+        },
+        {
+            "NAF732": "2822Z",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de matériel de levage et de manutention"
+        },
+        {
+            "NAF732": "2823Z",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de machines et d'équipements de bureau (à l'exception des ordinateurs et équipements périphériques)"
+        },
+        {
+            "NAF732": "2824Z",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'outillage portatif à moteur incorporé"
+        },
+        {
+            "NAF732": "2825Z",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'équipements aérauliques et frigorifiques industriels"
+        },
+        {
+            "NAF732": "2829A",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'équipements d'emballage, de conditionnement et de pesage"
+        },
+        {
+            "NAF732": "2829B",
+            "A129": "C28A",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres machines d'usage général"
+        },
+        {
+            "NAF732": "2830Z",
+            "A129": "C28B",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de machines agricoles et forestières"
+        },
+        {
+            "NAF732": "2841Z",
+            "A129": "C28C",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de machines-outils pour le travail des métaux"
+        },
+        {
+            "NAF732": "2849Z",
+            "A129": "C28C",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres machines-outils"
+        },
+        {
+            "NAF732": "2891Z",
+            "A129": "C28D",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de machines pour la métallurgie"
+        },
+        {
+            "NAF732": "2892Z",
+            "A129": "C28D",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de machines pour l'extraction ou la construction"
+        },
+        {
+            "NAF732": "2893Z",
+            "A129": "C28D",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de machines pour l'industrie agro-alimentaire"
+        },
+        {
+            "NAF732": "2894Z",
+            "A129": "C28D",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de machines pour les industries textiles"
+        },
+        {
+            "NAF732": "2895Z",
+            "A129": "C28D",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de machines pour les industries du papier et du carton"
+        },
+        {
+            "NAF732": "2896Z",
+            "A129": "C28D",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de machines pour le travail du caoutchouc ou des plastiques"
+        },
+        {
+            "NAF732": "2899A",
+            "A129": "C28D",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de machines d'imprimerie"
+        },
+        {
+            "NAF732": "2899B",
+            "A129": "C28D",
+            "A88": "28",
+            "A38": "CK",
+            "A17": "C3",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres machines spécialisées"
+        },
+        {
+            "NAF732": "2910Z",
+            "A129": "C29A",
+            "A88": "29",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Construction de véhicules automobiles"
+        },
+        {
+            "NAF732": "2920Z",
+            "A129": "C29A",
+            "A88": "29",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de carrosseries et remorques"
+        },
+        {
+            "NAF732": "2931Z",
+            "A129": "C29B",
+            "A88": "29",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'équipements électriques et électroniques automobiles"
+        },
+        {
+            "NAF732": "2932Z",
+            "A129": "C29B",
+            "A88": "29",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres équipements automobiles"
+        },
+        {
+            "NAF732": "3011Z",
+            "A129": "C30A",
+            "A88": "30",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Construction de navires et de structures flottantes"
+        },
+        {
+            "NAF732": "3012Z",
+            "A129": "C30A",
+            "A88": "30",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Construction de bateaux de plaisance"
+        },
+        {
+            "NAF732": "3020Z",
+            "A129": "C30B",
+            "A88": "30",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Construction de locomotives et d'autre matériel ferroviaire roulant"
+        },
+        {
+            "NAF732": "3030Z",
+            "A129": "C30C",
+            "A88": "30",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Construction aéronautique et spatiale"
+        },
+        {
+            "NAF732": "3040Z",
+            "A129": "C30D",
+            "A88": "30",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Construction de véhicules militaires de combat"
+        },
+        {
+            "NAF732": "3091Z",
+            "A129": "C30E",
+            "A88": "30",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de motocycles"
+        },
+        {
+            "NAF732": "3092Z",
+            "A129": "C30E",
+            "A88": "30",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de bicyclettes et de véhicules pour invalides"
+        },
+        {
+            "NAF732": "3099Z",
+            "A129": "C30E",
+            "A88": "30",
+            "A38": "CL",
+            "A17": "C4",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres équipements de transport n.c.a."
+        },
+        {
+            "NAF732": "3101Z",
+            "A129": "C31Z",
+            "A88": "31",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de meubles de bureau et de magasin"
+        },
+        {
+            "NAF732": "3102Z",
+            "A129": "C31Z",
+            "A88": "31",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de meubles de cuisine"
+        },
+        {
+            "NAF732": "3103Z",
+            "A129": "C31Z",
+            "A88": "31",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de matelas"
+        },
+        {
+            "NAF732": "3109A",
+            "A129": "C31Z",
+            "A88": "31",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de sièges d'ameublement d'intérieur"
+        },
+        {
+            "NAF732": "3109B",
+            "A129": "C31Z",
+            "A88": "31",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'autres meubles et industries connexes de l'ameublement"
+        },
+        {
+            "NAF732": "3211Z",
+            "A129": "C32A",
+            "A88": "32",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Frappe de monnaie"
+        },
+        {
+            "NAF732": "3212Z",
+            "A129": "C32A",
+            "A88": "32",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles de joaillerie et bijouterie"
+        },
+        {
+            "NAF732": "3213Z",
+            "A129": "C32A",
+            "A88": "32",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles de bijouterie fantaisie et articles similaires"
+        },
+        {
+            "NAF732": "3220Z",
+            "A129": "C32A",
+            "A88": "32",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'instruments de musique"
+        },
+        {
+            "NAF732": "3230Z",
+            "A129": "C32C",
+            "A88": "32",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles de sport"
+        },
+        {
+            "NAF732": "3240Z",
+            "A129": "C32C",
+            "A88": "32",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de jeux et jouets"
+        },
+        {
+            "NAF732": "3250A",
+            "A129": "C32B",
+            "A88": "32",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de matériel médico-chirurgical et dentaire"
+        },
+        {
+            "NAF732": "3250B",
+            "A129": "C32B",
+            "A88": "32",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication de lunettes"
+        },
+        {
+            "NAF732": "3291Z",
+            "A129": "C32C",
+            "A88": "32",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Fabrication d'articles de brosserie"
+        },
+        {
+            "NAF732": "3299Z",
+            "A129": "C32C",
+            "A88": "32",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Autres activités manufacturières n.c.a."
+        },
+        {
+            "NAF732": "3311Z",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Réparation d'ouvrages en métaux"
+        },
+        {
+            "NAF732": "3312Z",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Réparation de machines et équipements mécaniques"
+        },
+        {
+            "NAF732": "3313Z",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Réparation de matériels électroniques et optiques"
+        },
+        {
+            "NAF732": "3314Z",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Réparation d'équipements électriques"
+        },
+        {
+            "NAF732": "3315Z",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Réparation et maintenance navale"
+        },
+        {
+            "NAF732": "3316Z",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Réparation et maintenance d'aéronefs et d'engins spatiaux"
+        },
+        {
+            "NAF732": "3317Z",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Réparation et maintenance d'autres équipements de transport"
+        },
+        {
+            "NAF732": "3319Z",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Réparation d'autres équipements"
+        },
+        {
+            "NAF732": "3320A",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Installation de structures métalliques, chaudronnées et de tuyauterie"
+        },
+        {
+            "NAF732": "3320B",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Installation de machines et équipements mécaniques"
+        },
+        {
+            "NAF732": "3320C",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Conception d'ensemble et assemblage sur site industriel d'équipements de contrôle des processus industriels"
+        },
+        {
+            "NAF732": "3320D",
+            "A129": "C33Z",
+            "A88": "33",
+            "A38": "CM",
+            "A17": "C5",
+            "A4": "2",
+            "INTITULÉS": "Installation d'équipements électriques, de matériels électroniques et optiques ou d'autres matériels"
+        },
+        {
+            "NAF732": "3511Z",
+            "A129": "D35A",
+            "A88": "35",
+            "A38": "DZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Production d'électricité"
+        },
+        {
+            "NAF732": "3512Z",
+            "A129": "D35A",
+            "A88": "35",
+            "A38": "DZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Transport d'électricité"
+        },
+        {
+            "NAF732": "3513Z",
+            "A129": "D35A",
+            "A88": "35",
+            "A38": "DZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Distribution d'électricité"
+        },
+        {
+            "NAF732": "3514Z",
+            "A129": "D35A",
+            "A88": "35",
+            "A38": "DZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Commerce d'électricité"
+        },
+        {
+            "NAF732": "3521Z",
+            "A129": "D35B",
+            "A88": "35",
+            "A38": "DZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Production de combustibles gazeux"
+        },
+        {
+            "NAF732": "3522Z",
+            "A129": "D35B",
+            "A88": "35",
+            "A38": "DZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Distribution de combustibles gazeux par conduites"
+        },
+        {
+            "NAF732": "3523Z",
+            "A129": "D35B",
+            "A88": "35",
+            "A38": "DZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Commerce de combustibles gazeux par conduites"
+        },
+        {
+            "NAF732": "3530Z",
+            "A129": "D35B",
+            "A88": "35",
+            "A38": "DZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Production et distribution de vapeur et d'air conditionné"
+        },
+        {
+            "NAF732": "3600Z",
+            "A129": "E36Z",
+            "A88": "36",
+            "A38": "EZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Captage, traitement et distribution d'eau"
+        },
+        {
+            "NAF732": "3700Z",
+            "A129": "E37Z",
+            "A88": "37",
+            "A38": "EZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Collecte et traitement des eaux usées"
+        },
+        {
+            "NAF732": "3811Z",
+            "A129": "E38Z",
+            "A88": "38",
+            "A38": "EZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Collecte des déchets non dangereux"
+        },
+        {
+            "NAF732": "3812Z",
+            "A129": "E38Z",
+            "A88": "38",
+            "A38": "EZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Collecte des déchets dangereux"
+        },
+        {
+            "NAF732": "3821Z",
+            "A129": "E38Z",
+            "A88": "38",
+            "A38": "EZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Traitement et élimination des déchets non dangereux"
+        },
+        {
+            "NAF732": "3822Z",
+            "A129": "E38Z",
+            "A88": "38",
+            "A38": "EZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Traitement et élimination des déchets dangereux"
+        },
+        {
+            "NAF732": "3831Z",
+            "A129": "E38Z",
+            "A88": "38",
+            "A38": "EZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Démantèlement d'épaves"
+        },
+        {
+            "NAF732": "3832Z",
+            "A129": "E38Z",
+            "A88": "38",
+            "A38": "EZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Récupération de déchets triés"
+        },
+        {
+            "NAF732": "3900Z",
+            "A129": "E39Z",
+            "A88": "39",
+            "A38": "EZ",
+            "A17": "DE",
+            "A4": "2",
+            "INTITULÉS": "Dépollution et autres services de gestion des déchets"
+        },
+        {
+            "NAF732": "4110A",
+            "A129": "F41A",
+            "A88": "41",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Promotion immobilière de logements"
+        },
+        {
+            "NAF732": "4110B",
+            "A129": "F41A",
+            "A88": "41",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Promotion immobilière de bureaux"
+        },
+        {
+            "NAF732": "4110C",
+            "A129": "F41A",
+            "A88": "41",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Promotion immobilière d'autres bâtiments"
+        },
+        {
+            "NAF732": "4110D",
+            "A129": "F41A",
+            "A88": "41",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Supports juridiques de programmes"
+        },
+        {
+            "NAF732": "4120A",
+            "A129": "F41B",
+            "A88": "41",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Construction de maisons individuelles"
+        },
+        {
+            "NAF732": "4120B",
+            "A129": "F41B",
+            "A88": "41",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Construction d'autres bâtiments"
+        },
+        {
+            "NAF732": "4211Z",
+            "A129": "F42Z",
+            "A88": "42",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Construction de routes et autoroutes"
+        },
+        {
+            "NAF732": "4212Z",
+            "A129": "F42Z",
+            "A88": "42",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Construction de voies ferrées de surface et souterraines"
+        },
+        {
+            "NAF732": "4213A",
+            "A129": "F42Z",
+            "A88": "42",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Construction d'ouvrages d'art"
+        },
+        {
+            "NAF732": "4213B",
+            "A129": "F42Z",
+            "A88": "42",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Construction et entretien de tunnels"
+        },
+        {
+            "NAF732": "4221Z",
+            "A129": "F42Z",
+            "A88": "42",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Construction de réseaux pour fluides"
+        },
+        {
+            "NAF732": "4222Z",
+            "A129": "F42Z",
+            "A88": "42",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Construction de réseaux électriques et de télécommunications"
+        },
+        {
+            "NAF732": "4291Z",
+            "A129": "F42Z",
+            "A88": "42",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Construction d'ouvrages maritimes et fluviaux"
+        },
+        {
+            "NAF732": "4299Z",
+            "A129": "F42Z",
+            "A88": "42",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Construction d'autres ouvrages de génie civil n.c.a."
+        },
+        {
+            "NAF732": "4311Z",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de démolition"
+        },
+        {
+            "NAF732": "4312A",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de terrassement courants et travaux préparatoires"
+        },
+        {
+            "NAF732": "4312B",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de terrassement spécialisés ou de grande masse"
+        },
+        {
+            "NAF732": "4313Z",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Forages et sondages"
+        },
+        {
+            "NAF732": "4321A",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux d'installation électrique dans tous locaux"
+        },
+        {
+            "NAF732": "4321B",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux d'installation électrique sur la voie publique"
+        },
+        {
+            "NAF732": "4322A",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux d'installation d'eau et de gaz en tous locaux"
+        },
+        {
+            "NAF732": "4322B",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux d'installation d'équipements thermiques et de climatisation"
+        },
+        {
+            "NAF732": "4329A",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux d'isolation"
+        },
+        {
+            "NAF732": "4329B",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Autres travaux d'installation n.c.a."
+        },
+        {
+            "NAF732": "4331Z",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de plâtrerie"
+        },
+        {
+            "NAF732": "4332A",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de menuiserie bois et PVC"
+        },
+        {
+            "NAF732": "4332B",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de menuiserie métallique et serrurerie"
+        },
+        {
+            "NAF732": "4332C",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Agencement de lieux de vente"
+        },
+        {
+            "NAF732": "4333Z",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de revêtement des sols et des murs"
+        },
+        {
+            "NAF732": "4334Z",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de peinture et vitrerie"
+        },
+        {
+            "NAF732": "4339Z",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Autres travaux de finition"
+        },
+        {
+            "NAF732": "4391A",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de charpente"
+        },
+        {
+            "NAF732": "4391B",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de couverture par éléments"
+        },
+        {
+            "NAF732": "4399A",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux d'étanchéification"
+        },
+        {
+            "NAF732": "4399B",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de montage de structures métalliques"
+        },
+        {
+            "NAF732": "4399C",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Travaux de maçonnerie générale et gros œuvre de bâtiment"
+        },
+        {
+            "NAF732": "4399D",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Autres travaux spécialisés de construction"
+        },
+        {
+            "NAF732": "4399E",
+            "A129": "F43Z",
+            "A88": "43",
+            "A38": "FZ",
+            "A17": "FZ",
+            "A4": "3",
+            "INTITULÉS": "Location avec opérateur de matériel de construction"
+        },
+        {
+            "NAF732": "4511Z",
+            "A129": "G45Z",
+            "A88": "45",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de voitures et de véhicules automobiles légers"
+        },
+        {
+            "NAF732": "4519Z",
+            "A129": "G45Z",
+            "A88": "45",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce d'autres véhicules automobiles"
+        },
+        {
+            "NAF732": "4520A",
+            "A129": "G45Z",
+            "A88": "45",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Entretien et réparation de véhicules automobiles légers"
+        },
+        {
+            "NAF732": "4520B",
+            "A129": "G45Z",
+            "A88": "45",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Entretien et réparation d'autres véhicules automobiles"
+        },
+        {
+            "NAF732": "4531Z",
+            "A129": "G45Z",
+            "A88": "45",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros d'équipements automobiles"
+        },
+        {
+            "NAF732": "4532Z",
+            "A129": "G45Z",
+            "A88": "45",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail d'équipements automobiles"
+        },
+        {
+            "NAF732": "4540Z",
+            "A129": "G45Z",
+            "A88": "45",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce et réparation de motocycles"
+        },
+        {
+            "NAF732": "4611Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Intermédiaires du commerce en matières premières agricoles, animaux vivants, matières premières textiles et produits semi-finis"
+        },
+        {
+            "NAF732": "4612A",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Centrales d'achat de carburant"
+        },
+        {
+            "NAF732": "4612B",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Autres intermédiaires du commerce en combustibles, métaux, minéraux et produits chimiques"
+        },
+        {
+            "NAF732": "4613Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Intermédiaires du commerce en bois et matériaux de construction"
+        },
+        {
+            "NAF732": "4614Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Intermédiaires du commerce en machines, équipements industriels, navires et avions"
+        },
+        {
+            "NAF732": "4615Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Intermédiaires du commerce en meubles, articles de ménage et quincaillerie"
+        },
+        {
+            "NAF732": "4616Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Intermédiaires du commerce en textiles, habillement, fourrures, chaussures et articles en cuir"
+        },
+        {
+            "NAF732": "4617A",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Centrales d'achat alimentaires"
+        },
+        {
+            "NAF732": "4617B",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Autres intermédiaires du commerce en denrées, boissons et tabac"
+        },
+        {
+            "NAF732": "4618Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Intermédiaires spécialisés dans le commerce d'autres produits spécifiques"
+        },
+        {
+            "NAF732": "4619A",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Centrales d'achat non alimentaires"
+        },
+        {
+            "NAF732": "4619B",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Autres intermédiaires du commerce en produits divers"
+        },
+        {
+            "NAF732": "4621Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de céréales, de tabac non manufacturé, de semences et d'aliments pour le bétail"
+        },
+        {
+            "NAF732": "4622Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de fleurs et plantes"
+        },
+        {
+            "NAF732": "4623Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) d'animaux vivants"
+        },
+        {
+            "NAF732": "4624Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de cuirs et peaux"
+        },
+        {
+            "NAF732": "4631Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de fruits et légumes"
+        },
+        {
+            "NAF732": "4632A",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de viandes de boucherie"
+        },
+        {
+            "NAF732": "4632B",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de produits à base de viande"
+        },
+        {
+            "NAF732": "4632C",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de volailles et gibier"
+        },
+        {
+            "NAF732": "4633Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de produits laitiers, œufs, huiles et matières grasses comestibles"
+        },
+        {
+            "NAF732": "4634Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de boissons"
+        },
+        {
+            "NAF732": "4635Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de produits à base de tabac"
+        },
+        {
+            "NAF732": "4636Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de sucre, chocolat et confiserie"
+        },
+        {
+            "NAF732": "4637Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de café, thé, cacao et épices"
+        },
+        {
+            "NAF732": "4638A",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de poissons, crustacés et mollusques"
+        },
+        {
+            "NAF732": "4638B",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) alimentaire spécialisé divers"
+        },
+        {
+            "NAF732": "4639A",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de produits surgelés"
+        },
+        {
+            "NAF732": "4639B",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) alimentaire non spécialisé"
+        },
+        {
+            "NAF732": "4641Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de textiles"
+        },
+        {
+            "NAF732": "4642Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) d'habillement et de chaussures"
+        },
+        {
+            "NAF732": "4643Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) d'appareils électroménagers"
+        },
+        {
+            "NAF732": "4644Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de vaisselle, verrerie et produits d'entretien"
+        },
+        {
+            "NAF732": "4645Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de parfumerie et de produits de beauté"
+        },
+        {
+            "NAF732": "4646Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de produits pharmaceutiques"
+        },
+        {
+            "NAF732": "4647Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de meubles, de tapis et d'appareils d'éclairage"
+        },
+        {
+            "NAF732": "4648Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) d'articles d'horlogerie et de bijouterie"
+        },
+        {
+            "NAF732": "4649Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) d'autres biens domestiques"
+        },
+        {
+            "NAF732": "4651Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) d'ordinateurs, d'équipements informatiques périphériques et de logiciels"
+        },
+        {
+            "NAF732": "4652Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de composants et d'équipements électroniques et de télécommunication"
+        },
+        {
+            "NAF732": "4661Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de matériel agricole"
+        },
+        {
+            "NAF732": "4662Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de machines-outils"
+        },
+        {
+            "NAF732": "4663Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de machines pour l'extraction, la construction et le génie civil"
+        },
+        {
+            "NAF732": "4664Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de machines pour l'industrie textile et l'habillement"
+        },
+        {
+            "NAF732": "4665Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de mobilier de bureau"
+        },
+        {
+            "NAF732": "4666Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) d'autres machines et équipements de bureau"
+        },
+        {
+            "NAF732": "4669A",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de matériel électrique"
+        },
+        {
+            "NAF732": "4669B",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de fournitures et équipements industriels divers"
+        },
+        {
+            "NAF732": "4669C",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de fournitures et équipements divers pour le commerce et les services"
+        },
+        {
+            "NAF732": "4671Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de combustibles et de produits annexes"
+        },
+        {
+            "NAF732": "4672Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de minerais et métaux"
+        },
+        {
+            "NAF732": "4673A",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de bois et de matériaux de construction"
+        },
+        {
+            "NAF732": "4673B",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) d'appareils sanitaires et de produits de décoration"
+        },
+        {
+            "NAF732": "4674A",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de quincaillerie"
+        },
+        {
+            "NAF732": "4674B",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de fournitures pour la plomberie et le chauffage"
+        },
+        {
+            "NAF732": "4675Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de produits chimiques"
+        },
+        {
+            "NAF732": "4676Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) d'autres produits intermédiaires"
+        },
+        {
+            "NAF732": "4677Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) de déchets et débris"
+        },
+        {
+            "NAF732": "4690Z",
+            "A129": "G46Z",
+            "A88": "46",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de gros (commerce interentreprises) non spécialisé"
+        },
+        {
+            "NAF732": "4711A",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de produits surgelés"
+        },
+        {
+            "NAF732": "4711B",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce d'alimentation générale"
+        },
+        {
+            "NAF732": "4711C",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Supérettes"
+        },
+        {
+            "NAF732": "4711D",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Supermarchés"
+        },
+        {
+            "NAF732": "4711E",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Magasins multi-commerces"
+        },
+        {
+            "NAF732": "4711F",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Hypermarchés"
+        },
+        {
+            "NAF732": "4719A",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Grands magasins"
+        },
+        {
+            "NAF732": "4719B",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Autres commerces de détail en magasin non spécialisé"
+        },
+        {
+            "NAF732": "4721Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de fruits et légumes en magasin spécialisé"
+        },
+        {
+            "NAF732": "4722Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de viandes et de produits à base de viande en magasin spécialisé"
+        },
+        {
+            "NAF732": "4723Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de poissons, crustacés et mollusques en magasin spécialisé"
+        },
+        {
+            "NAF732": "4724Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de pain, pâtisserie et confiserie en magasin spécialisé"
+        },
+        {
+            "NAF732": "4725Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de boissons en magasin spécialisé"
+        },
+        {
+            "NAF732": "4726Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de produits à base de tabac en magasin spécialisé"
+        },
+        {
+            "NAF732": "4729Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Autres commerces de détail alimentaires en magasin spécialisé"
+        },
+        {
+            "NAF732": "4730Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de carburants en magasin spécialisé"
+        },
+        {
+            "NAF732": "4741Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail d'ordinateurs, d'unités périphériques et de logiciels en magasin spécialisé"
+        },
+        {
+            "NAF732": "4742Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de matériels de télécommunication en magasin spécialisé"
+        },
+        {
+            "NAF732": "4743Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de matériels audio et vidéo en magasin spécialisé"
+        },
+        {
+            "NAF732": "4751Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de textiles en magasin spécialisé"
+        },
+        {
+            "NAF732": "4752A",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de quincaillerie, peintures et verres en petites surfaces (moins de 400 m2)"
+        },
+        {
+            "NAF732": "4752B",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de quincaillerie, peintures et verres en grandes surfaces (400 m2 et plus)"
+        },
+        {
+            "NAF732": "4753Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de tapis, moquettes et revêtements de murs et de sols en magasin spécialisé"
+        },
+        {
+            "NAF732": "4754Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail d'appareils électroménagers en magasin spécialisé"
+        },
+        {
+            "NAF732": "4759A",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de meubles"
+        },
+        {
+            "NAF732": "4759B",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail d'autres équipements du foyer"
+        },
+        {
+            "NAF732": "4761Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de livres en magasin spécialisé"
+        },
+        {
+            "NAF732": "4762Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de journaux et papeterie en magasin spécialisé"
+        },
+        {
+            "NAF732": "4763Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail d'enregistrements musicaux et vidéo en magasin spécialisé"
+        },
+        {
+            "NAF732": "4764Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail d'articles de sport en magasin spécialisé"
+        },
+        {
+            "NAF732": "4765Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de jeux et jouets en magasin spécialisé"
+        },
+        {
+            "NAF732": "4771Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail d'habillement en magasin spécialisé"
+        },
+        {
+            "NAF732": "4772A",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de la chaussure"
+        },
+        {
+            "NAF732": "4772B",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de maroquinerie et d'articles de voyage"
+        },
+        {
+            "NAF732": "4773Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de produits pharmaceutiques en magasin spécialisé"
+        },
+        {
+            "NAF732": "4774Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail d'articles médicaux et orthopédiques en magasin spécialisé"
+        },
+        {
+            "NAF732": "4775Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de parfumerie et de produits de beauté en magasin spécialisé"
+        },
+        {
+            "NAF732": "4776Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de fleurs, plantes, graines, engrais, animaux de compagnie et aliments pour ces animaux en magasin spécialisé"
+        },
+        {
+            "NAF732": "4777Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail d'articles d'horlogerie et de bijouterie en magasin spécialisé"
+        },
+        {
+            "NAF732": "4778A",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerces de détail d'optique"
+        },
+        {
+            "NAF732": "4778B",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerces de détail de charbons et combustibles"
+        },
+        {
+            "NAF732": "4778C",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Autres commerces de détail spécialisés divers"
+        },
+        {
+            "NAF732": "4779Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de biens d'occasion en magasin"
+        },
+        {
+            "NAF732": "4781Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail alimentaire sur éventaires et marchés"
+        },
+        {
+            "NAF732": "4782Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Commerce de détail de textiles, d'habillement et de chaussures sur éventaires et marchés"
+        },
+        {
+            "NAF732": "4789Z",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Autres commerces de détail sur éventaires et marchés"
+        },
+        {
+            "NAF732": "4791A",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Vente à distance sur catalogue général"
+        },
+        {
+            "NAF732": "4791B",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Vente à distance sur catalogue spécialisé"
+        },
+        {
+            "NAF732": "4799A",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Vente à domicile"
+        },
+        {
+            "NAF732": "4799B",
+            "A129": "G47Z",
+            "A88": "47",
+            "A38": "GZ",
+            "A17": "GZ",
+            "A4": "4",
+            "INTITULÉS": "Vente par automates et autres commerces de détail hors magasin, éventaires ou marchés n.c.a."
+        },
+        {
+            "NAF732": "4910Z",
+            "A129": "H49A",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transport ferroviaire interurbain de voyageurs"
+        },
+        {
+            "NAF732": "4920Z",
+            "A129": "H49A",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports ferroviaires de fret"
+        },
+        {
+            "NAF732": "4931Z",
+            "A129": "H49B",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports urbains et suburbains de voyageurs"
+        },
+        {
+            "NAF732": "4932Z",
+            "A129": "H49B",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports de voyageurs par taxis"
+        },
+        {
+            "NAF732": "4939A",
+            "A129": "H49B",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports routiers réguliers de voyageurs"
+        },
+        {
+            "NAF732": "4939B",
+            "A129": "H49B",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Autres transports routiers de voyageurs"
+        },
+        {
+            "NAF732": "4939C",
+            "A129": "H49B",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Téléphériques et remontées mécaniques"
+        },
+        {
+            "NAF732": "4941A",
+            "A129": "H49C",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports routiers de fret interurbains"
+        },
+        {
+            "NAF732": "4941B",
+            "A129": "H49C",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports routiers de fret de proximité"
+        },
+        {
+            "NAF732": "4941C",
+            "A129": "H49C",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Location de camions avec chauffeur"
+        },
+        {
+            "NAF732": "4942Z",
+            "A129": "H49C",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Services de déménagement"
+        },
+        {
+            "NAF732": "4950Z",
+            "A129": "H49C",
+            "A88": "49",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports par conduites"
+        },
+        {
+            "NAF732": "5010Z",
+            "A129": "H50Z",
+            "A88": "50",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports maritimes et côtiers de passagers"
+        },
+        {
+            "NAF732": "5020Z",
+            "A129": "H50Z",
+            "A88": "50",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports maritimes et côtiers de fret"
+        },
+        {
+            "NAF732": "5030Z",
+            "A129": "H50Z",
+            "A88": "50",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports fluviaux de passagers"
+        },
+        {
+            "NAF732": "5040Z",
+            "A129": "H50Z",
+            "A88": "50",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports fluviaux de fret"
+        },
+        {
+            "NAF732": "5110Z",
+            "A129": "H51Z",
+            "A88": "51",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports aériens de passagers"
+        },
+        {
+            "NAF732": "5121Z",
+            "A129": "H51Z",
+            "A88": "51",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports aériens de fret"
+        },
+        {
+            "NAF732": "5122Z",
+            "A129": "H51Z",
+            "A88": "51",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Transports spatiaux"
+        },
+        {
+            "NAF732": "5210A",
+            "A129": "H52Z",
+            "A88": "52",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Entreposage et stockage frigorifique"
+        },
+        {
+            "NAF732": "5210B",
+            "A129": "H52Z",
+            "A88": "52",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Entreposage et stockage non frigorifique"
+        },
+        {
+            "NAF732": "5221Z",
+            "A129": "H52Z",
+            "A88": "52",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Services auxiliaires des transports terrestres"
+        },
+        {
+            "NAF732": "5222Z",
+            "A129": "H52Z",
+            "A88": "52",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Services auxiliaires des transports par eau"
+        },
+        {
+            "NAF732": "5223Z",
+            "A129": "H52Z",
+            "A88": "52",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Services auxiliaires des transports aériens"
+        },
+        {
+            "NAF732": "5224A",
+            "A129": "H52Z",
+            "A88": "52",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Manutention portuaire"
+        },
+        {
+            "NAF732": "5224B",
+            "A129": "H52Z",
+            "A88": "52",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Manutention non portuaire"
+        },
+        {
+            "NAF732": "5229A",
+            "A129": "H52Z",
+            "A88": "52",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Messagerie, fret express"
+        },
+        {
+            "NAF732": "5229B",
+            "A129": "H52Z",
+            "A88": "52",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Affrètement et organisation des transports"
+        },
+        {
+            "NAF732": "5310Z",
+            "A129": "H53Z",
+            "A88": "53",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Activités de poste dans le cadre d'une obligation de service universel"
+        },
+        {
+            "NAF732": "5320Z",
+            "A129": "H53Z",
+            "A88": "53",
+            "A38": "HZ",
+            "A17": "HZ",
+            "A4": "4",
+            "INTITULÉS": "Autres activités de poste et de courrier"
+        },
+        {
+            "NAF732": "5510Z",
+            "A129": "I55Z",
+            "A88": "55",
+            "A38": "IZ",
+            "A17": "IZ",
+            "A4": "4",
+            "INTITULÉS": "Hôtels et hébergement similaire"
+        },
+        {
+            "NAF732": "5520Z",
+            "A129": "I55Z",
+            "A88": "55",
+            "A38": "IZ",
+            "A17": "IZ",
+            "A4": "4",
+            "INTITULÉS": "Hébergement touristique et autre hébergement de courte durée"
+        },
+        {
+            "NAF732": "5530Z",
+            "A129": "I55Z",
+            "A88": "55",
+            "A38": "IZ",
+            "A17": "IZ",
+            "A4": "4",
+            "INTITULÉS": "Terrains de camping et parcs pour caravanes ou véhicules de loisirs"
+        },
+        {
+            "NAF732": "5590Z",
+            "A129": "I55Z",
+            "A88": "55",
+            "A38": "IZ",
+            "A17": "IZ",
+            "A4": "4",
+            "INTITULÉS": "Autres hébergements"
+        },
+        {
+            "NAF732": "5610A",
+            "A129": "I56Z",
+            "A88": "56",
+            "A38": "IZ",
+            "A17": "IZ",
+            "A4": "4",
+            "INTITULÉS": "Restauration traditionnelle"
+        },
+        {
+            "NAF732": "5610B",
+            "A129": "I56Z",
+            "A88": "56",
+            "A38": "IZ",
+            "A17": "IZ",
+            "A4": "4",
+            "INTITULÉS": "Cafétérias et autres libres-services"
+        },
+        {
+            "NAF732": "5610C",
+            "A129": "I56Z",
+            "A88": "56",
+            "A38": "IZ",
+            "A17": "IZ",
+            "A4": "4",
+            "INTITULÉS": "Restauration de type rapide"
+        },
+        {
+            "NAF732": "5621Z",
+            "A129": "I56Z",
+            "A88": "56",
+            "A38": "IZ",
+            "A17": "IZ",
+            "A4": "4",
+            "INTITULÉS": "Services des traiteurs"
+        },
+        {
+            "NAF732": "5629A",
+            "A129": "I56Z",
+            "A88": "56",
+            "A38": "IZ",
+            "A17": "IZ",
+            "A4": "4",
+            "INTITULÉS": "Restauration collective sous contrat"
+        },
+        {
+            "NAF732": "5629B",
+            "A129": "I56Z",
+            "A88": "56",
+            "A38": "IZ",
+            "A17": "IZ",
+            "A4": "4",
+            "INTITULÉS": "Autres services de restauration n.c.a."
+        },
+        {
+            "NAF732": "5630Z",
+            "A129": "I56Z",
+            "A88": "56",
+            "A38": "IZ",
+            "A17": "IZ",
+            "A4": "4",
+            "INTITULÉS": "Débits de boissons"
+        },
+        {
+            "NAF732": "5811Z",
+            "A129": "J58Z",
+            "A88": "58",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Édition de livres"
+        },
+        {
+            "NAF732": "5812Z",
+            "A129": "J58Z",
+            "A88": "58",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Édition de répertoires et de fichiers d'adresses"
+        },
+        {
+            "NAF732": "5813Z",
+            "A129": "J58Z",
+            "A88": "58",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Édition de journaux"
+        },
+        {
+            "NAF732": "5814Z",
+            "A129": "J58Z",
+            "A88": "58",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Édition de revues et périodiques"
+        },
+        {
+            "NAF732": "5819Z",
+            "A129": "J58Z",
+            "A88": "58",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Autres activités d'édition"
+        },
+        {
+            "NAF732": "5821Z",
+            "A129": "J58Z",
+            "A88": "58",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Édition de jeux électroniques"
+        },
+        {
+            "NAF732": "5829A",
+            "A129": "J58Z",
+            "A88": "58",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Édition de logiciels système et de réseau"
+        },
+        {
+            "NAF732": "5829B",
+            "A129": "J58Z",
+            "A88": "58",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Edition de logiciels outils de développement et de langages"
+        },
+        {
+            "NAF732": "5829C",
+            "A129": "J58Z",
+            "A88": "58",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Edition de logiciels applicatifs"
+        },
+        {
+            "NAF732": "5911A",
+            "A129": "J59Z",
+            "A88": "59",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Production de films et de programmes pour la télévision"
+        },
+        {
+            "NAF732": "5911B",
+            "A129": "J59Z",
+            "A88": "59",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Production de films institutionnels et publicitaires"
+        },
+        {
+            "NAF732": "5911C",
+            "A129": "J59Z",
+            "A88": "59",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Production de films pour le cinéma"
+        },
+        {
+            "NAF732": "5912Z",
+            "A129": "J59Z",
+            "A88": "59",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Post-production de films cinématographiques, de vidéo et de programmes de télévision"
+        },
+        {
+            "NAF732": "5913A",
+            "A129": "J59Z",
+            "A88": "59",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Distribution de films cinématographiques"
+        },
+        {
+            "NAF732": "5913B",
+            "A129": "J59Z",
+            "A88": "59",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Edition et distribution vidéo"
+        },
+        {
+            "NAF732": "5914Z",
+            "A129": "J59Z",
+            "A88": "59",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Projection de films cinématographiques"
+        },
+        {
+            "NAF732": "5920Z",
+            "A129": "J59Z",
+            "A88": "59",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Enregistrement sonore et édition musicale"
+        },
+        {
+            "NAF732": "6010Z",
+            "A129": "J60Z",
+            "A88": "60",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Édition et diffusion de programmes radio"
+        },
+        {
+            "NAF732": "6020A",
+            "A129": "J60Z",
+            "A88": "60",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Édition de chaînes généralistes"
+        },
+        {
+            "NAF732": "6020B",
+            "A129": "J60Z",
+            "A88": "60",
+            "A38": "JA",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Édition de chaînes thématiques"
+        },
+        {
+            "NAF732": "6110Z",
+            "A129": "J61Z",
+            "A88": "61",
+            "A38": "JB",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Télécommunications filaires"
+        },
+        {
+            "NAF732": "6120Z",
+            "A129": "J61Z",
+            "A88": "61",
+            "A38": "JB",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Télécommunications sans fil"
+        },
+        {
+            "NAF732": "6130Z",
+            "A129": "J61Z",
+            "A88": "61",
+            "A38": "JB",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Télécommunications par satellite"
+        },
+        {
+            "NAF732": "6190Z",
+            "A129": "J61Z",
+            "A88": "61",
+            "A38": "JB",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Autres activités de télécommunication"
+        },
+        {
+            "NAF732": "6201Z",
+            "A129": "J62Z",
+            "A88": "62",
+            "A38": "JC",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Programmation informatique"
+        },
+        {
+            "NAF732": "6202A",
+            "A129": "J62Z",
+            "A88": "62",
+            "A38": "JC",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Conseil en systèmes et logiciels informatiques"
+        },
+        {
+            "NAF732": "6202B",
+            "A129": "J62Z",
+            "A88": "62",
+            "A38": "JC",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Tierce maintenance de systèmes et d'applications informatiques"
+        },
+        {
+            "NAF732": "6203Z",
+            "A129": "J62Z",
+            "A88": "62",
+            "A38": "JC",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Gestion d'installations informatiques"
+        },
+        {
+            "NAF732": "6209Z",
+            "A129": "J62Z",
+            "A88": "62",
+            "A38": "JC",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Autres activités informatiques"
+        },
+        {
+            "NAF732": "6311Z",
+            "A129": "J63Z",
+            "A88": "63",
+            "A38": "JC",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Traitement de données, hébergement et activités connexes"
+        },
+        {
+            "NAF732": "6312Z",
+            "A129": "J63Z",
+            "A88": "63",
+            "A38": "JC",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Portails Internet"
+        },
+        {
+            "NAF732": "6391Z",
+            "A129": "J63Z",
+            "A88": "63",
+            "A38": "JC",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Activités des agences de presse"
+        },
+        {
+            "NAF732": "6399Z",
+            "A129": "J63Z",
+            "A88": "63",
+            "A38": "JC",
+            "A17": "JZ",
+            "A4": "4",
+            "INTITULÉS": "Autres services d'information n.c.a."
+        },
+        {
+            "NAF732": "6411Z",
+            "A129": "K64Z",
+            "A88": "64",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Activités de banque centrale"
+        },
+        {
+            "NAF732": "6419Z",
+            "A129": "K64Z",
+            "A88": "64",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Autres intermédiations monétaires"
+        },
+        {
+            "NAF732": "6420Z",
+            "A129": "K64Z",
+            "A88": "64",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Activités des sociétés holding"
+        },
+        {
+            "NAF732": "6430Z",
+            "A129": "K64Z",
+            "A88": "64",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Fonds de placement et entités financières similaires"
+        },
+        {
+            "NAF732": "6491Z",
+            "A129": "K64Z",
+            "A88": "64",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Crédit-bail"
+        },
+        {
+            "NAF732": "6492Z",
+            "A129": "K64Z",
+            "A88": "64",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Autre distribution de crédit"
+        },
+        {
+            "NAF732": "6499Z",
+            "A129": "K64Z",
+            "A88": "64",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Autres activités des services financiers, hors assurance et caisses de retraite, n.c.a."
+        },
+        {
+            "NAF732": "6511Z",
+            "A129": "K65Z",
+            "A88": "65",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Assurance vie"
+        },
+        {
+            "NAF732": "6512Z",
+            "A129": "K65Z",
+            "A88": "65",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Autres assurances"
+        },
+        {
+            "NAF732": "6520Z",
+            "A129": "K65Z",
+            "A88": "65",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Réassurance"
+        },
+        {
+            "NAF732": "6530Z",
+            "A129": "K65Z",
+            "A88": "65",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Caisses de retraite"
+        },
+        {
+            "NAF732": "6611Z",
+            "A129": "K66Z",
+            "A88": "66",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Administration de marchés financiers"
+        },
+        {
+            "NAF732": "6612Z",
+            "A129": "K66Z",
+            "A88": "66",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Courtage de valeurs mobilières et de marchandises"
+        },
+        {
+            "NAF732": "6619A",
+            "A129": "K66Z",
+            "A88": "66",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Supports juridiques de gestion de patrimoine mobilier"
+        },
+        {
+            "NAF732": "6619B",
+            "A129": "K66Z",
+            "A88": "66",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Autres activités auxiliaires de services financiers, hors assurance et caisses de retraite, n.c.a."
+        },
+        {
+            "NAF732": "6621Z",
+            "A129": "K66Z",
+            "A88": "66",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Évaluation des risques et dommages"
+        },
+        {
+            "NAF732": "6622Z",
+            "A129": "K66Z",
+            "A88": "66",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Activités des agents et courtiers d'assurances"
+        },
+        {
+            "NAF732": "6629Z",
+            "A129": "K66Z",
+            "A88": "66",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Autres activités auxiliaires d'assurance et de caisses de retraite"
+        },
+        {
+            "NAF732": "6630Z",
+            "A129": "K66Z",
+            "A88": "66",
+            "A38": "KZ",
+            "A17": "KZ",
+            "A4": "4",
+            "INTITULÉS": "Gestion de fonds"
+        },
+        {
+            "NAF732": "6810Z",
+            "A129": "L68A",
+            "A88": "68",
+            "A38": "LZ",
+            "A17": "LZ",
+            "A4": "4",
+            "INTITULÉS": "Activités des marchands de biens immobiliers"
+        },
+        {
+            "NAF732": "6820A",
+            "A129": "L68B",
+            "A88": "68",
+            "A38": "LZ",
+            "A17": "LZ",
+            "A4": "4",
+            "INTITULÉS": "Location de logements"
+        },
+        {
+            "NAF732": "6820B",
+            "A129": "L68B",
+            "A88": "68",
+            "A38": "LZ",
+            "A17": "LZ",
+            "A4": "4",
+            "INTITULÉS": "Location de terrains et d'autres biens immobiliers"
+        },
+        {
+            "NAF732": "6831Z",
+            "A129": "L68A",
+            "A88": "68",
+            "A38": "LZ",
+            "A17": "LZ",
+            "A4": "4",
+            "INTITULÉS": "Agences immobilières"
+        },
+        {
+            "NAF732": "6832A",
+            "A129": "L68A",
+            "A88": "68",
+            "A38": "LZ",
+            "A17": "LZ",
+            "A4": "4",
+            "INTITULÉS": "Administration d'immeubles et autres biens immobiliers"
+        },
+        {
+            "NAF732": "6832B",
+            "A129": "L68A",
+            "A88": "68",
+            "A38": "LZ",
+            "A17": "LZ",
+            "A4": "4",
+            "INTITULÉS": "Supports juridiques de gestion de patrimoine immobilier"
+        },
+        {
+            "NAF732": "6910Z",
+            "A129": "M69Z",
+            "A88": "69",
+            "A38": "MA",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités juridiques"
+        },
+        {
+            "NAF732": "6920Z",
+            "A129": "M69Z",
+            "A88": "69",
+            "A38": "MA",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités comptables"
+        },
+        {
+            "NAF732": "7010Z",
+            "A129": "M70Z",
+            "A88": "70",
+            "A38": "MA",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités des sièges sociaux"
+        },
+        {
+            "NAF732": "7021Z",
+            "A129": "M70Z",
+            "A88": "70",
+            "A38": "MA",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Conseil en relations publiques et communication"
+        },
+        {
+            "NAF732": "7022Z",
+            "A129": "M70Z",
+            "A88": "70",
+            "A38": "MA",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Conseil pour les affaires et autres conseils de gestion"
+        },
+        {
+            "NAF732": "7111Z",
+            "A129": "M71Z",
+            "A88": "71",
+            "A38": "MA",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités d'architecture"
+        },
+        {
+            "NAF732": "7112A",
+            "A129": "M71Z",
+            "A88": "71",
+            "A38": "MA",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activité des géomètres"
+        },
+        {
+            "NAF732": "7112B",
+            "A129": "M71Z",
+            "A88": "71",
+            "A38": "MA",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Ingénierie, études techniques"
+        },
+        {
+            "NAF732": "7120A",
+            "A129": "M71Z",
+            "A88": "71",
+            "A38": "MA",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Contrôle technique automobile"
+        },
+        {
+            "NAF732": "7120B",
+            "A129": "M71Z",
+            "A88": "71",
+            "A38": "MA",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Analyses, essais et inspections techniques"
+        },
+        {
+            "NAF732": "7211Z",
+            "A129": "M72Z",
+            "A88": "72",
+            "A38": "MB",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Recherche-développement en biotechnologie"
+        },
+        {
+            "NAF732": "7219Z",
+            "A129": "M72Z",
+            "A88": "72",
+            "A38": "MB",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Recherche-développement en autres sciences physiques et naturelles"
+        },
+        {
+            "NAF732": "7220Z",
+            "A129": "M72Z",
+            "A88": "72",
+            "A38": "MB",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Recherche-développement en sciences humaines et sociales"
+        },
+        {
+            "NAF732": "7311Z",
+            "A129": "M73Z",
+            "A88": "73",
+            "A38": "MC",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités des agences de publicité"
+        },
+        {
+            "NAF732": "7312Z",
+            "A129": "M73Z",
+            "A88": "73",
+            "A38": "MC",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Régie publicitaire de médias"
+        },
+        {
+            "NAF732": "7320Z",
+            "A129": "M73Z",
+            "A88": "73",
+            "A38": "MC",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Études de marché et sondages"
+        },
+        {
+            "NAF732": "7410Z",
+            "A129": "M74Z",
+            "A88": "74",
+            "A38": "MC",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités spécialisées de design"
+        },
+        {
+            "NAF732": "7420Z",
+            "A129": "M74Z",
+            "A88": "74",
+            "A38": "MC",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités photographiques"
+        },
+        {
+            "NAF732": "7430Z",
+            "A129": "M74Z",
+            "A88": "74",
+            "A38": "MC",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Traduction et interprétation"
+        },
+        {
+            "NAF732": "7490A",
+            "A129": "M74Z",
+            "A88": "74",
+            "A38": "MC",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activité des économistes de la construction"
+        },
+        {
+            "NAF732": "7490B",
+            "A129": "M74Z",
+            "A88": "74",
+            "A38": "MC",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités spécialisées, scientifiques et techniques diverses"
+        },
+        {
+            "NAF732": "7500Z",
+            "A129": "M75Z",
+            "A88": "75",
+            "A38": "MC",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités vétérinaires"
+        },
+        {
+            "NAF732": "7711A",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location de courte durée de voitures et de véhicules automobiles légers"
+        },
+        {
+            "NAF732": "7711B",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location de longue durée de voitures et de véhicules automobiles légers"
+        },
+        {
+            "NAF732": "7712Z",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location et location-bail de camions"
+        },
+        {
+            "NAF732": "7721Z",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location et location-bail d'articles de loisirs et de sport"
+        },
+        {
+            "NAF732": "7722Z",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location de vidéocassettes et disques vidéo"
+        },
+        {
+            "NAF732": "7729Z",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location et location-bail d'autres biens personnels et domestiques"
+        },
+        {
+            "NAF732": "7731Z",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location et location-bail de machines et équipements agricoles"
+        },
+        {
+            "NAF732": "7732Z",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location et location-bail de machines et équipements pour la construction"
+        },
+        {
+            "NAF732": "7733Z",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location et location-bail de machines de bureau et de matériel informatique"
+        },
+        {
+            "NAF732": "7734Z",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location et location-bail de matériels de transport par eau"
+        },
+        {
+            "NAF732": "7735Z",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location et location-bail de matériels de transport aérien"
+        },
+        {
+            "NAF732": "7739Z",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location et location-bail d'autres machines, équipements et biens matériels n.c.a."
+        },
+        {
+            "NAF732": "7740Z",
+            "A129": "N77Z",
+            "A88": "77",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Location-bail de propriété intellectuelle et de produits similaires, à l'exception des œuvres soumises à copyright"
+        },
+        {
+            "NAF732": "7810Z",
+            "A129": "N78Z",
+            "A88": "78",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités des agences de placement de main-d'œuvre"
+        },
+        {
+            "NAF732": "7820Z",
+            "A129": "N78Z",
+            "A88": "78",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités des agences de travail temporaire"
+        },
+        {
+            "NAF732": "7830Z",
+            "A129": "N78Z",
+            "A88": "78",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Autre mise à disposition de ressources humaines"
+        },
+        {
+            "NAF732": "7911Z",
+            "A129": "N79Z",
+            "A88": "79",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités des agences de voyage"
+        },
+        {
+            "NAF732": "7912Z",
+            "A129": "N79Z",
+            "A88": "79",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités des voyagistes"
+        },
+        {
+            "NAF732": "7990Z",
+            "A129": "N79Z",
+            "A88": "79",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Autres services de réservation et activités connexes"
+        },
+        {
+            "NAF732": "8010Z",
+            "A129": "N80Z",
+            "A88": "80",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités de sécurité privée"
+        },
+        {
+            "NAF732": "8020Z",
+            "A129": "N80Z",
+            "A88": "80",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités liées aux systèmes de sécurité"
+        },
+        {
+            "NAF732": "8030Z",
+            "A129": "N80Z",
+            "A88": "80",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités d'enquête"
+        },
+        {
+            "NAF732": "8110Z",
+            "A129": "N81Z",
+            "A88": "81",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités combinées de soutien lié aux bâtiments"
+        },
+        {
+            "NAF732": "8121Z",
+            "A129": "N81Z",
+            "A88": "81",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Nettoyage courant des bâtiments"
+        },
+        {
+            "NAF732": "8122Z",
+            "A129": "N81Z",
+            "A88": "81",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Autres activités de nettoyage des bâtiments et nettoyage industriel"
+        },
+        {
+            "NAF732": "8129A",
+            "A129": "N81Z",
+            "A88": "81",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Désinfection, désinsectisation, dératisation"
+        },
+        {
+            "NAF732": "8129B",
+            "A129": "N81Z",
+            "A88": "81",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Autres activités de nettoyage n.c.a."
+        },
+        {
+            "NAF732": "8130Z",
+            "A129": "N81Z",
+            "A88": "81",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Services d'aménagement paysager"
+        },
+        {
+            "NAF732": "8211Z",
+            "A129": "N82Z",
+            "A88": "82",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Services administratifs combinés de bureau"
+        },
+        {
+            "NAF732": "8219Z",
+            "A129": "N82Z",
+            "A88": "82",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Photocopie, préparation de documents et autres activités spécialisées de soutien de bureau"
+        },
+        {
+            "NAF732": "8220Z",
+            "A129": "N82Z",
+            "A88": "82",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités de centres d'appels"
+        },
+        {
+            "NAF732": "8230Z",
+            "A129": "N82Z",
+            "A88": "82",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Organisation de foires, salons professionnels et congrès"
+        },
+        {
+            "NAF732": "8291Z",
+            "A129": "N82Z",
+            "A88": "82",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités des agences de recouvrement de factures et des sociétés d'information financière sur la clientèle"
+        },
+        {
+            "NAF732": "8292Z",
+            "A129": "N82Z",
+            "A88": "82",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Activités de conditionnement"
+        },
+        {
+            "NAF732": "8299Z",
+            "A129": "N82Z",
+            "A88": "82",
+            "A38": "NZ",
+            "A17": "MN",
+            "A4": "4",
+            "INTITULÉS": "Autres activités de soutien aux entreprises n.c.a."
+        },
+        {
+            "NAF732": "8411Z",
+            "A129": "O84Z",
+            "A88": "84",
+            "A38": "OZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Administration publique générale"
+        },
+        {
+            "NAF732": "8412Z",
+            "A129": "O84Z",
+            "A88": "84",
+            "A38": "OZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Administration publique (tutelle) de la santé, de la formation, de la culture et des services sociaux, autre que sécurité sociale"
+        },
+        {
+            "NAF732": "8413Z",
+            "A129": "O84Z",
+            "A88": "84",
+            "A38": "OZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Administration publique (tutelle) des activités économiques"
+        },
+        {
+            "NAF732": "8421Z",
+            "A129": "O84Z",
+            "A88": "84",
+            "A38": "OZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Affaires étrangères"
+        },
+        {
+            "NAF732": "8422Z",
+            "A129": "O84Z",
+            "A88": "84",
+            "A38": "OZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Défense"
+        },
+        {
+            "NAF732": "8423Z",
+            "A129": "O84Z",
+            "A88": "84",
+            "A38": "OZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Justice"
+        },
+        {
+            "NAF732": "8424Z",
+            "A129": "O84Z",
+            "A88": "84",
+            "A38": "OZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Activités d'ordre public et de sécurité"
+        },
+        {
+            "NAF732": "8425Z",
+            "A129": "O84Z",
+            "A88": "84",
+            "A38": "OZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Services du feu et de secours"
+        },
+        {
+            "NAF732": "8430A",
+            "A129": "O84Z",
+            "A88": "84",
+            "A38": "OZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Activités générales de sécurité sociale"
+        },
+        {
+            "NAF732": "8430B",
+            "A129": "O84Z",
+            "A88": "84",
+            "A38": "OZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Gestion des retraites complémentaires"
+        },
+        {
+            "NAF732": "8430C",
+            "A129": "O84Z",
+            "A88": "84",
+            "A38": "OZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Distribution sociale de revenus"
+        },
+        {
+            "NAF732": "8510Z",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Enseignement pré-primaire"
+        },
+        {
+            "NAF732": "8520Z",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Enseignement primaire"
+        },
+        {
+            "NAF732": "8531Z",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Enseignement secondaire général"
+        },
+        {
+            "NAF732": "8532Z",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Enseignement secondaire technique ou professionnel"
+        },
+        {
+            "NAF732": "8541Z",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Enseignement post-secondaire non supérieur"
+        },
+        {
+            "NAF732": "8542Z",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Enseignement supérieur"
+        },
+        {
+            "NAF732": "8551Z",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Enseignement de disciplines sportives et d'activités de loisirs"
+        },
+        {
+            "NAF732": "8552Z",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Enseignement culturel"
+        },
+        {
+            "NAF732": "8553Z",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Enseignement de la conduite"
+        },
+        {
+            "NAF732": "8559A",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Formation continue d'adultes"
+        },
+        {
+            "NAF732": "8559B",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Autres enseignements"
+        },
+        {
+            "NAF732": "8560Z",
+            "A129": "P85Z",
+            "A88": "85",
+            "A38": "PZ",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Activités de soutien à l'enseignement"
+        },
+        {
+            "NAF732": "8610Z",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Activités hospitalières"
+        },
+        {
+            "NAF732": "8621Z",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Activité des médecins généralistes"
+        },
+        {
+            "NAF732": "8622A",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Activités de radiodiagnostic et de radiothérapie"
+        },
+        {
+            "NAF732": "8622B",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Activités chirurgicales"
+        },
+        {
+            "NAF732": "8622C",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Autres activités des médecins spécialistes"
+        },
+        {
+            "NAF732": "8623Z",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Pratique dentaire"
+        },
+        {
+            "NAF732": "8690A",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Ambulances"
+        },
+        {
+            "NAF732": "8690B",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Laboratoires d'analyses médicales"
+        },
+        {
+            "NAF732": "8690C",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Centres de collecte et banques d'organes"
+        },
+        {
+            "NAF732": "8690D",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Activités des infirmiers et des sages-femmes"
+        },
+        {
+            "NAF732": "8690E",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Activités des professionnels de la rééducation, de l'appareillage et des pédicures-podologues"
+        },
+        {
+            "NAF732": "8690F",
+            "A129": "Q86Z",
+            "A88": "86",
+            "A38": "QA",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Activités de santé humaine non classées ailleurs"
+        },
+        {
+            "NAF732": "8710A",
+            "A129": "Q87Z",
+            "A88": "87",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Hébergement médicalisé pour personnes âgées"
+        },
+        {
+            "NAF732": "8710B",
+            "A129": "Q87Z",
+            "A88": "87",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Hébergement médicalisé pour enfants handicapés"
+        },
+        {
+            "NAF732": "8710C",
+            "A129": "Q87Z",
+            "A88": "87",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Hébergement médicalisé pour adultes handicapés et autre hébergement médicalisé"
+        },
+        {
+            "NAF732": "8720A",
+            "A129": "Q87Z",
+            "A88": "87",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Hébergement social pour handicapés mentaux et malades mentaux"
+        },
+        {
+            "NAF732": "8720B",
+            "A129": "Q87Z",
+            "A88": "87",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Hébergement social pour toxicomanes"
+        },
+        {
+            "NAF732": "8730A",
+            "A129": "Q87Z",
+            "A88": "87",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Hébergement social pour personnes âgées"
+        },
+        {
+            "NAF732": "8730B",
+            "A129": "Q87Z",
+            "A88": "87",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Hébergement social pour handicapés  physiques"
+        },
+        {
+            "NAF732": "8790A",
+            "A129": "Q87Z",
+            "A88": "87",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Hébergement social pour enfants en difficultés"
+        },
+        {
+            "NAF732": "8790B",
+            "A129": "Q87Z",
+            "A88": "87",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Hébergement social pour adultes et familles en difficultés et autre hébergement social"
+        },
+        {
+            "NAF732": "8810A",
+            "A129": "Q88Z",
+            "A88": "88",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Aide à domicile"
+        },
+        {
+            "NAF732": "8810B",
+            "A129": "Q88Z",
+            "A88": "88",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Accueil ou accompagnement sans hébergement d'adultes handicapés ou de personnes âgées"
+        },
+        {
+            "NAF732": "8810C",
+            "A129": "Q88Z",
+            "A88": "88",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Aide par le travail"
+        },
+        {
+            "NAF732": "8891A",
+            "A129": "Q88Z",
+            "A88": "88",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Accueil de jeunes enfants"
+        },
+        {
+            "NAF732": "8891B",
+            "A129": "Q88Z",
+            "A88": "88",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Accueil ou accompagnement sans hébergement d'enfants handicapés"
+        },
+        {
+            "NAF732": "8899A",
+            "A129": "Q88Z",
+            "A88": "88",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Autre accueil ou accompagnement sans hébergement d'enfants et d'adolescents"
+        },
+        {
+            "NAF732": "8899B",
+            "A129": "Q88Z",
+            "A88": "88",
+            "A38": "QB",
+            "A17": "OQ",
+            "A4": "4",
+            "INTITULÉS": "Action sociale sans hébergement n.c.a."
+        },
+        {
+            "NAF732": "9001Z",
+            "A129": "R90Z",
+            "A88": "90",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Arts du spectacle vivant"
+        },
+        {
+            "NAF732": "9002Z",
+            "A129": "R90Z",
+            "A88": "90",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités de soutien au spectacle vivant"
+        },
+        {
+            "NAF732": "9003A",
+            "A129": "R90Z",
+            "A88": "90",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Création artistique relevant des arts plastiques"
+        },
+        {
+            "NAF732": "9003B",
+            "A129": "R90Z",
+            "A88": "90",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Autre création artistique"
+        },
+        {
+            "NAF732": "9004Z",
+            "A129": "R90Z",
+            "A88": "90",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Gestion de salles de spectacles"
+        },
+        {
+            "NAF732": "9101Z",
+            "A129": "R91Z",
+            "A88": "91",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Gestion des bibliothèques et des archives"
+        },
+        {
+            "NAF732": "9102Z",
+            "A129": "R91Z",
+            "A88": "91",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Gestion des musées"
+        },
+        {
+            "NAF732": "9103Z",
+            "A129": "R91Z",
+            "A88": "91",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Gestion des sites et monuments historiques et des attractions touristiques similaires"
+        },
+        {
+            "NAF732": "9104Z",
+            "A129": "R91Z",
+            "A88": "91",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Gestion des jardins botaniques et zoologiques et des réserves naturelles"
+        },
+        {
+            "NAF732": "9200Z",
+            "A129": "R92Z",
+            "A88": "92",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Organisation de jeux de hasard et d'argent"
+        },
+        {
+            "NAF732": "9311Z",
+            "A129": "R93Z",
+            "A88": "93",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Gestion d'installations sportives"
+        },
+        {
+            "NAF732": "9312Z",
+            "A129": "R93Z",
+            "A88": "93",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités de clubs de sports"
+        },
+        {
+            "NAF732": "9313Z",
+            "A129": "R93Z",
+            "A88": "93",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités des centres de culture physique"
+        },
+        {
+            "NAF732": "9319Z",
+            "A129": "R93Z",
+            "A88": "93",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Autres activités liées au sport"
+        },
+        {
+            "NAF732": "9321Z",
+            "A129": "R93Z",
+            "A88": "93",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités des parcs d'attractions et parcs à thèmes"
+        },
+        {
+            "NAF732": "9329Z",
+            "A129": "R93Z",
+            "A88": "93",
+            "A38": "RZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Autres activités récréatives et de loisirs"
+        },
+        {
+            "NAF732": "9411Z",
+            "A129": "S94Z",
+            "A88": "94",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités des organisations patronales et consulaires"
+        },
+        {
+            "NAF732": "9412Z",
+            "A129": "S94Z",
+            "A88": "94",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités des organisations professionnelles"
+        },
+        {
+            "NAF732": "9420Z",
+            "A129": "S94Z",
+            "A88": "94",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités des syndicats de salariés"
+        },
+        {
+            "NAF732": "9491Z",
+            "A129": "S94Z",
+            "A88": "94",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités des organisations religieuses"
+        },
+        {
+            "NAF732": "9492Z",
+            "A129": "S94Z",
+            "A88": "94",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités des organisations politiques"
+        },
+        {
+            "NAF732": "9499Z",
+            "A129": "S94Z",
+            "A88": "94",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Autres organisations fonctionnant par adhésion volontaire"
+        },
+        {
+            "NAF732": "9511Z",
+            "A129": "S95Z",
+            "A88": "95",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Réparation d'ordinateurs et d'équipements périphériques"
+        },
+        {
+            "NAF732": "9512Z",
+            "A129": "S95Z",
+            "A88": "95",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Réparation d'équipements de communication"
+        },
+        {
+            "NAF732": "9521Z",
+            "A129": "S95Z",
+            "A88": "95",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Réparation de produits électroniques grand public"
+        },
+        {
+            "NAF732": "9522Z",
+            "A129": "S95Z",
+            "A88": "95",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Réparation d'appareils électroménagers et d'équipements pour la maison et le jardin"
+        },
+        {
+            "NAF732": "9523Z",
+            "A129": "S95Z",
+            "A88": "95",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Réparation de chaussures et d'articles en cuir"
+        },
+        {
+            "NAF732": "9524Z",
+            "A129": "S95Z",
+            "A88": "95",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Réparation de meubles et d'équipements du foyer"
+        },
+        {
+            "NAF732": "9525Z",
+            "A129": "S95Z",
+            "A88": "95",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Réparation d'articles d'horlogerie et de bijouterie"
+        },
+        {
+            "NAF732": "9529Z",
+            "A129": "S95Z",
+            "A88": "95",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Réparation d'autres biens personnels et domestiques"
+        },
+        {
+            "NAF732": "9601A",
+            "A129": "S96Z",
+            "A88": "96",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Blanchisserie-teinturerie de gros"
+        },
+        {
+            "NAF732": "9601B",
+            "A129": "S96Z",
+            "A88": "96",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Blanchisserie-teinturerie de détail"
+        },
+        {
+            "NAF732": "9602A",
+            "A129": "S96Z",
+            "A88": "96",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Coiffure"
+        },
+        {
+            "NAF732": "9602B",
+            "A129": "S96Z",
+            "A88": "96",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Soins de beauté"
+        },
+        {
+            "NAF732": "9603Z",
+            "A129": "S96Z",
+            "A88": "96",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Services funéraires"
+        },
+        {
+            "NAF732": "9604Z",
+            "A129": "S96Z",
+            "A88": "96",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Entretien corporel"
+        },
+        {
+            "NAF732": "9609Z",
+            "A129": "S96Z",
+            "A88": "96",
+            "A38": "SZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Autres services personnels n.c.a."
+        },
+        {
+            "NAF732": "9700Z",
+            "A129": "T97Z",
+            "A88": "97",
+            "A38": "TZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités des ménages en tant qu'employeurs de personnel domestique"
+        },
+        {
+            "NAF732": "9810Z",
+            "A129": "T98Z",
+            "A88": "98",
+            "A38": "TZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités indifférenciées des ménages en tant que producteurs de biens pour usage propre"
+        },
+        {
+            "NAF732": "9820Z",
+            "A129": "T98Z",
+            "A88": "98",
+            "A38": "TZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités indifférenciées des ménages en tant que producteurs de services pour usage propre"
+        },
+        {
+            "NAF732": "9900Z",
+            "A129": "T99Z",
+            "A88": "99",
+            "A38": "UZ",
+            "A17": "RU",
+            "A4": "4",
+            "INTITULÉS": "Activités des organisations et organismes extraterritoriaux"
+        }
+    ]
+}

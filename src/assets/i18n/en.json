@@ -1,0 +1,43 @@
+{
+    "personalDetails": {
+        "lastName": "Last Name",
+        "firstName": "First Name",
+        "jobTitle": "Job Title",
+        "address": "Address",
+        "postalCode": "Postal Code",
+        "birthday": "Birthday",
+        "phoneNumber": "Phone Number",
+        "email": "Email Address",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "title": "Tell a bit about yourself.",
+        "description": "This information will appear on your public profile, so that potential buyers can get to know you better."
+        
+      },
+      "skills": {
+        "skillName": "Skill Name",
+        "level": "Level"
+      },
+      "login": {
+        "hello": "Bienvenue! Ravi de vous revoir",
+        "buttonText": "Se Connecter",
+        "or": "ou",
+        "forgotPassword": "forgot Password",
+        "error" : "Email or password is incorrect."
+      },
+      "register": {
+        "route": "Create Account",
+        "hello": "We love to see you joining our community",
+        "buttonText": "Se Connecter",
+        "or": "ou",
+        "confirmPassword":  "Confirm Mot de passe",
+        "forgotPassword": "forgot Password",
+        "term": "J'ai lu et j'accepte tous les  Termes et Conditions "
+      },
+      "registration": {
+        "successful": "Registration Successful",
+        "verifyEmail": "Please verify your email address: {{email}} to complete the registration process. Check your inbox for a verification email.",
+        "resendEmail": "If you didn't receive the email, you can request a new one."
+      }
+}
+  

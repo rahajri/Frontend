@@ -1,0 +1,126 @@
+
+<div class="page-title">
+  <h3>Manage Projects</h3>
+</div>
+<nav class="user-tabs mb-4">
+  <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink]="routes.completedviewproject">Overview & Discussions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.projectmilestone">Milestones</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.projecttask">Tasks</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.projectfiles">Files</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.paymentproject">Payments</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- project list -->
+<div class="my-projects-view">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="title-head d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">Files</h4>
+        <a href="#add-milestone" class="login-btn btn-primary" data-bs-toggle="modal">Add Files</a>
+      </div>
+
+      <div class="table-responsive table-box manage-projects-table">
+        <table  matSort
+          (matSortChange)="sortData($event)" class="table table-center table-hover datatable no-sort">
+          <thead class="thead-pink">
+            <tr>
+              <th  mat-sort-header="image">File Preview</th>
+              <th  mat-sort-header="title">Title</th>
+              <th  mat-sort-header="para">Description</th>
+              <th mat-sort-header="type">Type</th>
+              <th mat-sort-header="size">Size</th>
+              <th  mat-sort-header="action">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (data of files; track data) {
+              <tr>
+                <td><img  [src]="data.img" alt="Img"> </td>
+                <td>{{data.title}} </td>
+                <td>
+                  {{data.description}}
+                </td>
+                <td>{{data.type}}</td>
+                <td>{{data.size}}</td>
+                <td>
+                  <div class="action-table-data">
+                    <div class="edit-delete-action m-0">
+                      <a href="javascript:void(0);" class="download-icon me-2"><i class="feather icon-download"></i></a>
+                      <a href="javascript:void(0);" class="download-icon"><i class="feather icon-trash-2"></i></a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            }
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- project list -->
+<!-- The Modal -->
+<div class="modal fade edit-proposal-modal" id="add-milestone">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add New File</h4>
+        <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i class="feather icon-x"></i></a></span>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <div class="modal-info">
+            <div class="row">
+              <div class="col-md-12 col-lg-12">
+                <div class="pro-form-img">
+                  <div class="profile-pic">
+                    Profile Photo
+
+                  </div>
+                  <div class="upload-files">
+                    <label class="file-upload image-upbtn ">
+                      <i class="feather icon-upload me-1"></i>
+                      Upload Photo <input type="file">
+                    </label>
+                    <span>For better preview recommended size is 450px x 450px. Max size 5mb.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="input-block">
+                  <label for="Title" class="form-label">Title</label>
+                  <input class="form-control" type="text">
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="input-block">
+                  <label for="Description" class="form-label">Description</label>
+                  <textarea class="form-control summernote"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="submit-section text-end">
+            <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
+            <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /The Modal -->

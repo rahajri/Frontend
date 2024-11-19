@@ -1,0 +1,27 @@
+
+{
+    "data" : [
+        {
+            "name": "Research",
+            "typeOfPayment": "Milestone",
+            "budget": "$2222",
+            "status": "Completed",
+            "datePaid": "29 Sep 2023"
+        },
+        {
+            "name": "Design",
+            "typeOfPayment": "Milestone",
+            "budget": "$5762",
+            "status": "Completed",
+            "datePaid": "29 Sep 2023"
+        },
+        {
+            "name": "Development",
+            "typeOfPayment": "Milestone",
+            "budget": "$4879",
+            "status": "Completed",
+            "datePaid": "29 Sep 2023"
+        }
+     ],
+     "totalData":3
+}

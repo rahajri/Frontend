@@ -1,0 +1,85 @@
+{
+    "data" : [
+        {
+         "image": "assets/img/company/img-1.png",
+         "para": "Website Designer Required For Directory Theme",
+         "amount": "2222",
+         "width": "40",
+         "technology": "Angular",
+         "company": "AMAZE TECH",
+         "startdate": "22-02-2019 ",
+         "duedate": "22-05-2022"
+        },
+        {
+         "image": "assets/img/company/img-2.png",
+         "para": "It is a long established fact that a reader",
+         "amount": "5755",
+         "width": "30",
+         "technology": "Vue",
+         "company": "Tsch Zone",
+         "startdate": "22-05-2022 ",
+         "duedate": "19-08-2022"
+        },
+        {
+         "image": "assets/img/company/img-3.png",
+         "para": "Lorem Ipsum is simply dummy text of",
+         "amount": "2333",
+         "width": "20",
+         "technology": "Laravel",
+         "company": "Park INC",
+         "startdate": "07-11-2019 ",
+         "duedate": "22-05-2022"
+        },
+        {
+         "image": "assets/img/company/img-4.png",
+         "para": "There are many variations of passages of Lorem",
+         "amount": "9333",
+         "width": "10",
+         "technology": "Golang",
+         "company": "ABC Software",
+         "startdate": "19-06-2020 ",
+         "duedate": "17-08-2022"
+        },
+        {
+         "image": "assets/img/company/img-5.png",
+         "para": "combined with a handful of model sentence structures",
+         "amount": "1500",
+         "width": "15",
+         "technology": "Node js",
+         "company": "Host Technologies",
+         "startdate": "31-07-2019 ",
+         "duedate": "04-09-2022"
+        },
+        {
+         "image": "assets/img/company/img-6.png",
+         "para": "Designer Required For Directory",
+         "amount": "7789",
+         "width": "44",
+         "technology": "Python",
+         "company": "Particles INC",
+         "startdate": "22-02-2019 ",
+         "duedate": "22-05-2022"
+        },
+        {
+         "image": "assets/img/company/img-7.png",
+         "para": "Website Designer Required For Directory Theme",
+         "amount": "5688",
+         "width": "38",
+         "technology": ".Net",
+         "company": "SM Developer",
+         "startdate": "14-09-2020 ",
+         "duedate": "07-11-2022"
+        },
+        {
+         "image": "assets/img/company/img-8.png",
+         "para": "Lorem Ipsum is therefore always free content",
+         "amount": "7765",
+         "width": "9",
+         "technology": "Java",
+         "company": "Kind Software",
+         "startdate": "22-02-2019 ",
+         "duedate": "22-05-2022"
+        }
+     ],
+     "totalData":8
+}

@@ -1,0 +1,762 @@
+<div class="pro-pos">
+  <div class="setting-content employee-profile-new">
+    <form >
+      <div class="card">
+        <div class="pro-head">
+          <h3>Profile Setting</h3>
+        </div>
+        <div class="pro-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-row pro-pad pt-0 ps-0">
+                <div class="input-block col-md-6 pro-pic">
+                  <h4 class="mb-3">Personal Information</h4>
+                  <label for="profile-picture" class="form-label">Profile Picture</label>
+                  <div class="d-flex align-items-center">
+                    <div class="upload-images">
+                      <img src="assets/img/img-02.jpg" alt="Image" id="blah">
+                    </div>
+                    <div class="ms-3">
+                      <label class="file-upload image-upbtn ms-0">
+                        Upload Image <input type="file" id="imgInp">
+                      </label>
+                      <p>Max Image size 300*300</p>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="first-name" class="form-label">First Name</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="last-name" class="form-label">Last Name</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="phone-number" class="form-label">Phone Number</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="email-address" class="form-label">Email Address</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="pro-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-row pro-pad pt-0 ps-0">
+                <div class="input-block col-md-6 pro-pic">
+                  <h4 class="mb-3">Address</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="mb-3">
+                <label for="Address" class="form-label">Address</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="Country" class="form-label">Country</label>
+
+                <mat-select [(ngModel)]="selectedValue3" [ngModelOptions]="{standalone: true}"
+                  class="select mat-select arrow verify" placeholder="Basic">
+                  @for (data of selectedList3; track data) {
+                    <mat-option [value]="data.value">
+                      {{data.value}}
+                    </mat-option>
+                  }
+                </mat-select>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="State" class="form-label">State</label>
+                <mat-select [(ngModel)]="selectedValue2" [ngModelOptions]="{standalone: true}"
+                  class="select mat-select arrow verify" placeholder="Basic">
+                  @for (data of selectedList2; track data) {
+                    <mat-option [value]="data.value">
+                      {{data.value}}
+                    </mat-option>
+                  }
+                </mat-select>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <mat-select [(ngModel)]="selectedValue1" [ngModelOptions]="{standalone: true}"
+                  class="select mat-select arrow verify" placeholder="Basic">
+                  @for (data of selectedList1; track data) {
+                    <mat-option [value]="data.value">
+                      {{data.value}}
+                    </mat-option>
+                  }
+                </mat-select>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="zip code" class="form-label">Zipcode</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="pro-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-row pro-pad pt-0 ps-0">
+                <div class="input-block col-md-6 pro-pic">
+                  <h4 class="mb-3">Details</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <label for="Name" class="form-label">Company Name</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <label for="Tagline" class="form-label">Tagline</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="established" class="form-label">Established On</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="owner" class="form-label">Company Owner Name</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="Industry" class="form-label">Industry</label>
+                <mat-select [(ngModel)]="selectedValue1" [ngModelOptions]="{standalone: true}"
+                  class="select mat-select arrow verify" placeholder="Basic">
+                  @for (data of selectedList1; track data) {
+                    <mat-option [value]="data.value">
+                      {{data.value}}
+                    </mat-option>
+                  }
+                </mat-select>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="mb-3">
+                <label for="Website" class="form-label">Website</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="input-block">
+                <label for="Team" class="form-label">Team Size</label>
+                <div class="check-radio">
+                  <ul class="d-flex flex-wrap">
+                    <li>
+                      <label class="custom_radio me-4">
+                        <input type="radio" name="budget" value="Yes" checked="">
+                        <span class="checkmark"></span> It's just me
+                      </label>
+                    </li>
+                    <li>
+                      <label class="custom_radio me-4">
+                        <input type="radio" name="budget">
+                        <span class="checkmark"></span>2-9 employees
+                      </label>
+                    </li>
+                    <li>
+                      <label class="custom_radio me-4">
+                        <input type="radio" name="budget">
+                        <span class="checkmark"></span>10-99 employees
+                      </label>
+                    </li>
+
+                    <li>
+                      <label class="custom_radio me-4">
+                        <input type="radio" name="budget">
+                        <span class="checkmark"></span>More than 1000 employees
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-lg-12">
+              <label for="About" class="form-label">About</label>
+              <textarea rows="4" class="form-control"></textarea>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-12">
+        <h4 class="mb-3">Working Hours</h4>
+      </div>
+      <div class="col-md-6">
+        <div class="input-block d-flex">
+          <div class="form-check form-switch d-inline-block work-check position-relative">
+            <input type="checkbox" class="form-check-input" id="check_hour" checked=""
+              [(ngModel)]="isCheckboxChecked" [ngModelOptions]="{standalone: true}">
+            </div>
+            <label for="Every" class="form-label ms-2">Same Every Day</label>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="checkout-hour" [ngClass]="{'d-block': isCheckboxChecked, 'd-none': !isCheckboxChecked}">
+            <div class="other-info-list">
+              <ul>
+                <li class="active-hour">Mon</li>
+                <li class="active-hour">Tue</li>
+                <li class="active-hour">Wed</li>
+                <li class="active-hour">Thr</li>
+                <li class="active-hour">Fri</li>
+                <li>Sat</li>
+                <li>Sun</li>
+              </ul>
+            </div>
+          </div>
+          <div class="check-hour" [ngClass]="{'d-none': isCheckboxChecked, 'd-block': !isCheckboxChecked}">
+            <div class="col-md-12">
+              <h4>Select Days</h4>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row align-items-center">
+                  <div class="col-md-1">
+                    <div class="other-info-list">
+                      <ul>
+                        <li class="active-hour m-0">Mon</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="input-block">
+                      <label for="start-time" class="form-label"
+                        >Start Time
+                      </label>
+
+                      <input
+                        type="text"
+                        class="form-control timepicker"
+                        (click)="toggleTimePicker('startTime1')"
+                        [value]="formatTime(startTime1)"
+                        />
+                        <timepicker
+                                  [class.d-block]="
+                                    showTimePicker[0] === 'startTime1'
+                                  "
+                          class="custom-timepicker"
+                          [ngModelOptions]="{ standalone: true }"
+                          [(ngModel)]="startTime1"
+                        ></timepicker>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="input-block">
+                        <label for="End " class="form-label"
+                          >End Time
+                        </label>
+                        <input
+                          (click)="toggleTimePicker('endTime1')"
+                          [value]="formatTime(endTime1)"
+                          type="text"
+                          placeholder="Select Time"
+                          class="form-control timepicker"
+                          />
+                          <timepicker
+                            [class.d-block]="showTimePicker[0] === 'endTime1'"
+                            class="custom-timepicker"
+                            [ngModelOptions]="{ standalone: true }"
+                            [(ngModel)]="endTime1"
+                          ></timepicker>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="row align-items-center">
+                      <div class="col-md-1">
+                        <div class="other-info-list">
+                          <ul>
+                            <li class="active-hour m-0">Tue</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-md-5">
+                        <div class="input-block">
+                          <label for="start-time" class="form-label"
+                            >Start Time
+                          </label>
+                          <input
+                            (click)="toggleTimePicker('startTime2')"
+                            [value]="formatTime(startTime2)"
+                            type="text"
+                            placeholder="Select Time"
+                            class="form-control timepicker"
+                            />
+                            <timepicker
+                              [class.d-block]="showTimePicker[0] === 'startTime2'"
+                              class="custom-timepicker"
+                              [ngModelOptions]="{ standalone: true }"
+                              [(ngModel)]="startTime2"
+                            ></timepicker>
+                          </div>
+                        </div>
+                        <div class="col-md-5">
+                          <div class="input-block">
+                            <label for="End " class="form-label"
+                              >End Time
+                            </label>
+                            <input
+                              (click)="toggleTimePicker('endTime2')"
+                              [value]="formatTime(endTime2)"
+                              type="text"
+                              placeholder="Select Time"
+                              class="form-control timepicker"
+                              />
+                              <timepicker
+                                [class.d-block]="showTimePicker[0] === 'endTime2'"
+                                class="custom-timepicker"
+                                [ngModelOptions]="{ standalone: true }"
+                                [(ngModel)]="endTime2"
+                              ></timepicker>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="row align-items-center">
+                          <div class="col-md-1">
+                            <div class="other-info-list">
+                              <ul>
+                                <li class="active-hour m-0">Wed</li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div class="col-md-5">
+                            <div class="input-block">
+                              <label for="start-time" class="form-label"
+                                >Start Time
+                              </label>
+                              <input
+                                (click)="toggleTimePicker('startTime3')"
+                                [value]="formatTime(startTime3)"
+                                type="text"
+                                placeholder="Select Time"
+                                class="form-control timepicker"
+                                />
+                                <timepicker
+                                  [class.d-block]="showTimePicker[0] === 'startTime3'"
+                                  class="custom-timepicker"
+                                  [ngModelOptions]="{ standalone: true }"
+                                  [(ngModel)]="startTime3"
+                                ></timepicker>
+                              </div>
+                            </div>
+                            <div class="col-md-5">
+                              <div class="input-block">
+                                <label for="End " class="form-label"
+                                  >End Time
+                                </label>
+                                <input
+                                  (click)="toggleTimePicker('endTime3')"
+                                  [value]="formatTime(endTime3)"
+                                  type="text"
+                                  placeholder="Select Time"
+                                  class="form-control timepicker"
+                                  />
+                                  <timepicker
+                                    [class.d-block]="showTimePicker[0] === 'endTime3'"
+                                    class="custom-timepicker"
+                                    [ngModelOptions]="{ standalone: true }"
+                                    [(ngModel)]="endTime3"
+                                  ></timepicker>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="row align-items-center">
+                              <div class="col-md-1">
+                                <div class="other-info-list">
+                                  <ul>
+                                    <li class="active-hour m-0">Thur</li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="col-md-5">
+                                <div class="input-block">
+                                  <label for="start-time" class="form-label"
+                                    >Start Time
+                                  </label>
+                                  <input
+                                    (click)="toggleTimePicker('startTime4')"
+                                    [value]="formatTime(startTime4)"
+                                    type="text"
+                                    placeholder="Select Time"
+                                    class="form-control timepicker"
+                                    />
+                                    <timepicker
+                                      [class.d-block]="showTimePicker[0] === 'startTime4'"
+                                      class="custom-timepicker"
+                                      [ngModelOptions]="{ standalone: true }"
+                                      [(ngModel)]="startTime4"
+                                    ></timepicker>
+                                  </div>
+                                </div>
+                                <div class="col-md-5">
+                                  <div class="input-block">
+                                    <label for="End " class="form-label"
+                                      >End Time
+                                    </label>
+                                    <input
+                                      (click)="toggleTimePicker('endTime4')"
+                                      [value]="formatTime(endTime4)"
+                                      type="text"
+                                      placeholder="Select Time"
+                                      class="form-control timepicker"
+                                      />
+                                      <timepicker
+                                        [class.d-block]="showTimePicker[0] === 'endTime4'"
+                                        class="custom-timepicker"
+                                        [ngModelOptions]="{ standalone: true }"
+                                        [(ngModel)]="endTime4"
+                                      ></timepicker>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="row align-items-center">
+                                  <div class="col-md-1">
+                                    <div class="other-info-list">
+                                      <ul>
+                                        <li class="active-hour m-0">Fri</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-5">
+                                    <div class="input-block">
+                                      <label for="start-time" class="form-label"
+                                        >Start Time
+                                      </label>
+                                      <input
+                                        (click)="toggleTimePicker('startTime5')"
+                                        [value]="formatTime(startTime5)"
+                                        type="text"
+                                        placeholder="Select Time"
+                                        class="form-control timepicker"
+                                        />
+                                        <timepicker
+                                          [class.d-block]="showTimePicker[0] === 'startTime5'"
+                                          class="custom-timepicker"
+                                          [ngModelOptions]="{ standalone: true }"
+                                          [(ngModel)]="startTime5"
+                                        ></timepicker>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                      <div class="input-block">
+                                        <label for="End " class="form-label"
+                                          >End Time
+                                        </label>
+                                        <input
+                                          (click)="toggleTimePicker('endTime5')"
+                                          [value]="formatTime(endTime5)"
+                                          type="text"
+                                          placeholder="Select Time"
+                                          class="form-control timepicker"
+                                          />
+                                          <timepicker
+                                            [class.d-block]="showTimePicker[0] === 'endTime5'"
+                                            class="custom-timepicker"
+                                            [ngModelOptions]="{ standalone: true }"
+                                            [(ngModel)]="endTime5"
+                                          ></timepicker>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                    <div class="row align-items-center">
+                                      <div class="col-md-1">
+                                        <div class="other-info-list">
+                                          <ul>
+                                            <li class="m-0">Fri</li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-5">
+                                        <div class="input-block">
+                                          <label for="start-time" class="form-label"
+                                            >Start Time
+                                          </label>
+                                          <input
+                                            (click)="toggleTimePicker('startTime6')"
+                                            [value]="formatTime(startTime6)"
+                                            type="text"
+                                            placeholder="Select Time"
+                                            class="form-control timepicker"
+                                            />
+                                            <timepicker
+                                              [class.d-block]="showTimePicker[0] === 'startTime6'"
+                                              class="custom-timepicker"
+                                              [ngModelOptions]="{ standalone: true }"
+                                              [(ngModel)]="startTime6"
+                                            ></timepicker>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                          <div class="input-block">
+                                            <label for="End " class="form-label"
+                                              >End Time
+                                            </label>
+                                            <input
+                                              (click)="toggleTimePicker('endTime6')"
+                                              [value]="formatTime(endTime6)"
+                                              type="text"
+                                              placeholder="Select Time"
+                                              class="form-control timepicker"
+                                              />
+                                              <timepicker
+                                                [class.d-block]="showTimePicker[0] === 'endTime6'"
+                                                class="custom-timepicker"
+                                                [ngModelOptions]="{ standalone: true }"
+                                                [(ngModel)]="endTime6"
+                                              ></timepicker>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                        <div class="row align-items-center">
+                                          <div class="col-md-1">
+                                            <div class="other-info-list">
+                                              <ul>
+                                                <li class="m-0">Sun</li>
+                                              </ul>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-5">
+                                            <div class="input-block">
+                                              <label for="start-time" class="form-label"
+                                                >Start Time
+                                              </label>
+                                              <input
+                                                (click)="toggleTimePicker('startTime7')"
+                                                [value]="formatTime(startTime7)"
+                                                type="text"
+                                                placeholder="Select Time"
+                                                class="form-control timepicker"
+                                                />
+                                                <timepicker
+                                                  [class.d-block]="showTimePicker[0] === 'startTime7'"
+                                                  class="custom-timepicker"
+                                                  [ngModelOptions]="{ standalone: true }"
+                                                  [(ngModel)]="startTime7"
+                                                ></timepicker>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                              <div class="input-block">
+                                                <label for="End " class="form-label"
+                                                  >End Time
+                                                </label>
+                                                <input
+                                                  (click)="toggleTimePicker('endTime7')"
+                                                  [value]="formatTime(endTime7)"
+                                                  type="text"
+                                                  placeholder="Select Time"
+                                                  class="form-control timepicker"
+                                                  />
+                                                  <timepicker
+                                                    [class.d-block]="showTimePicker[0] === 'endTime7'"
+                                                    class="custom-timepicker"
+                                                    [ngModelOptions]="{ standalone: true }"
+                                                    [(ngModel)]="endTime7"
+                                                  ></timepicker>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="card">
+                                      <div class="pro-body">
+                                        <div class="row">
+                                          <div class="col-lg-12">
+                                            <div class="form-row pro-pad pt-0 ps-0">
+                                              <div class="input-block col-md-6 pro-pic">
+                                                <h4 class="mb-3">Social Media</h4>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-4">
+                                            <div class="mb-3">
+                                              <label for="Facebook" class="form-label">Facebook</label>
+                                              <input type="text" class="form-control">
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-4">
+                                            <div class="mb-3">
+                                              <label for="instagram" class="form-label">Instagram </label>
+                                              <input type="text" class="form-control">
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-4 col-md-12">
+                                            <div class="mb-3">
+                                              <label for="LinkedIn" class="form-label">LinkedIn</label>
+                                              <input type="text" class="form-control">
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-4 col-md-12">
+                                            <div class="mb-3">
+                                              <label for="Behance"class="form-label">Behance</label>
+                                              <input type="text" class="form-control">
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-4 col-md-12">
+                                            <div class="mb-3">
+                                              <label for="Pinterest" class="form-label">Pinterest </label>
+                                              <input type="text" class="form-control">
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-4 col-md-12">
+                                            <div class="mb-3">
+                                              <label for="twitter" class="form-label">Twitter</label>
+                                              <input type="text" class="form-control">
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>
+
+                                    <div class="card">
+                                      <div class="pro-body">
+                                        <div class="row">
+                                          <div class="col-lg-12">
+                                            <div class="form-row pro-pad pt-0 ps-0">
+                                              <div class="input-block col-md-6 pro-pic">
+                                                <h4 class="mb-3">Location</h4>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-12">
+                                            <div class="mb-3">
+                                              <label for="Address" class="form-label">Address</label>
+                                              <input type="text" class="form-control">
+                                            </div>
+                                          </div>
+                                          <div class="col-xl-3 col-md-6">
+                                            <div class="mb-3">
+                                              <label  for="city" class="form-label">City	</label>
+                                              <input type="text" class="form-control">
+                                            </div>
+                                          </div>
+                                          <div class="col-xl-3 col-md-6">
+                                            <div class="mb-3">
+                                              <label for="State" class="form-label">State / Province</label>
+                                              <input type="text" class="form-control">
+                                            </div>
+                                          </div>
+                                          <div class="col-xl-3 col-md-6">
+                                            <div class="mb-3">
+                                              <label for="ZIP" class="form-label">ZIP / Post Code </label>
+                                              <input type="text" class="form-control">
+                                            </div>
+                                          </div>
+                                          <div class="col-xl-3 col-md-6">
+                                            <div class="mb-3">
+                                              <label for="Country" class="form-label">Country</label>
+                                              <mat-select [(ngModel)]="selectedValue3" [ngModelOptions]="{standalone: true}"
+                                                class="select mat-select arrow verify" placeholder="Select">
+                                                @for (data of selectedList3; track data) {
+                                                  <mat-option [value]="data.value">
+                                                    {{data.value}}
+                                                  </mat-option>
+                                                }
+                                              </mat-select>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>
+
+                                    <div class="card  border-0">
+                                      <div class="pro-body">
+                                        <div class="row">
+                                          <div class="col-lg-12">
+                                            <div class="form-row pro-pad pt-0 ps-0">
+                                              <div class="input-block col-md-6 pro-pic">
+                                                <h4 class="mb-3">Language</h4>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6">
+                                            <div class="mb-3">
+                                              <label for="Language" class="form-label">Language</label>
+                                              <input type="text" class="form-control">
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6">
+                                            <div class="mb-3">
+                                              <label for="Fluency" class="form-label">Fluency</label>
+                                              <mat-select [(ngModel)]="selectedValue4" [ngModelOptions]="{standalone: true}"
+                                                class="select mat-select arrow verify" placeholder="Select">
+                                                @for (data of selectedList4; track data) {
+                                                  <mat-option [value]="data.value">
+                                                    {{data.value}}
+                                                  </mat-option>
+                                                }
+                                              </mat-select>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                      </div>
+                                    </div>
+
+                                    <div class="card text-end border-0">
+                                      <div class="pro-body">
+                                        <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
+                                        <button class="btn btn-primary click-btn btn-plan" type="submit">Update</button>
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>

@@ -1,0 +1,46 @@
+{
+    "personalDetails": {
+        "lastName": "Nom",
+        "firstName": "Prénom",
+        "jobTitle": "Titre du Poste",
+        "address": "Adresse",
+        "postalCode": "Code Postal",
+        "birthday": "Date de Naissance",
+        "phoneNumber": "Numéro de Téléphone",
+        "email": "Adresse Email",
+        "confirmPassword": "Confirm Mot de passe",
+        "password": "Mot de passe",
+        "title": "Dites-en un peu plus sur vous.",
+        "description": "Ces informations apparaîtront sur votre profil public, afin que les acheteurs potentiels puissent mieux vous connaître."
+
+
+      },
+      "skills": {
+        "skillName": "Nom de Compétence",
+        "level": "Niveau"
+      },
+      "login": {
+        "hello": "Bienvenue! Ravi de vous revoir",
+        "buttonText": "Se Connecter",
+        "or": "ou",
+        "forgotPassword": "forgot Password",
+        "error" : "L’e-mail ou le mot de passe est incorrect."
+      },
+      "register": {
+        "route": "Creer un Compte",
+        "hello": "Nous aimons vous voir rejoindre notre communauté",
+        "buttonText": "Sauvgarder",
+        "or": "ou",
+        "confirmPassword":  "Confirm Mot de passe",
+        "forgotPassword": "forgot Password",
+        "term": "J'ai lu et j'accepte tous les  Termes et Conditions "
+        
+      },
+        "registration": {
+          "successful": "Inscription réussie",
+          "verifyEmail": "Veuillez vérifier votre adresse e-mail : {{email}} pour compléter le processus d'inscription. Vérifiez votre boîte de réception pour un e-mail de vérification.",
+          "resendEmail": "Si vous n'avez pas reçu l'e-mail, vous pouvez en demander un nouveau."
+        }    
+
+}
+  

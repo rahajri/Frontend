@@ -1,0 +1,27 @@
+
+{
+    "data" : [
+        {
+            "name": "Research",
+            "type": "Milestone",
+            "price": "$2222",
+            "status": "Pending",
+            "date": "29 Sep 2023"
+        },
+        {
+            "name": "Design",
+            "type": "Milestone",
+            "price": "$5762",
+            "status": "Completed",
+            "date": "29 Sep 2023"
+        },
+        {
+            "name": "Development",
+            "type": "Milestone",
+            "price": "$4879",
+            "status": "Completed",
+            "date": "29 Sep 2023"
+        }
+     ],
+     "totalData":3
+}

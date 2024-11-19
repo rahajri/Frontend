@@ -1,0 +1,67 @@
+{
+    "data": [
+        {
+            "name": "Create desktop applications",
+            "price": "$5762",
+            "percentage": "50%",
+            "startdate": "25 Sep 2023",
+            "enddate": "25 Sep 2023",
+            "availability": "Paid",
+            "full":"Unpaid",
+            "action": "Initiate"
+        },
+        {
+            "name": "Full-stack Developer",
+            "price": "$7853",
+            "percentage": "100%",
+            "startdate": "01 Sep 2023",
+            "enddate": "01 Sep 2023",
+            "availability": "Paid",
+            "full":"Pay now",
+            "action": "Initiate"
+        },
+        {
+            "name": "Logo Design",
+            "price": "$2222",
+            "percentage": "45%",
+            "startdate": "29 Sep 2023",
+            "enddate": "29 Sep 2023",
+            "availability": "Unpaid",
+            "full":"Pay now",
+            "action": "Initiate"
+        },
+        {
+            "name": "PHP, Javascript Projects",
+            "price": "$4879",
+            "percentage": "100%",
+            "startdate": "17 Sep 2023",
+            "enddate": "17 Sep 2023",
+            "availability": "Paid",
+            "full":"Pay now",
+            "action": "Initiate"
+        },
+        {
+            "name": "Swift / SwiftUI Developer",
+            "price": "$2789",
+            "percentage": "100%",
+            "startdate": "05 Sep 2023",
+            "enddate": "05 Sep 2023",
+            "availability": "Paid",
+            "full":"Pay now",
+            "action": "Initiate"
+        },
+        {
+            "name": "Website Designer Required",
+            "price": "$3651",
+            "percentage": "50%",
+            "startdate": "11 Sep 2023",
+            "enddate": "11 Sep 2023",
+            "availability": "Paid",
+            "full":"Pay now",
+            "action": "Initiate"
+        }
+        
+    ],
+    "totalData": 6
+  }
+  

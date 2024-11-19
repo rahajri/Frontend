@@ -1,0 +1,264 @@
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+    <div class="content report-box container-fluid">
+    
+        <!-- Page Header -->
+        <div class="page-header subscribe-head">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Freelancer Profile</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="'/admin/dashboard'">Home</a></li>
+                        <li class="breadcrumb-item active">Freelancer Profile</li>
+                    </ul>
+                </div>
+                <div class="col-auto">
+                    <a class="btn  back-user" [routerLink]="'/admin/freelancers/all'" >
+                        <img src="assets/img/icon/icon-08.svg" alt=""> Back to list
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        
+        <!-- User Profile -->
+        <div class="profile-status">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="profile-user-box">
+                        <a [routerLink]="'/admin/profile'"><img class="avatar-img rounded-circle " src="assets/img/profiles/avatar-16.jpg" alt="User Image"></a>
+                        <div class="profile-name-box">
+                            <h2><a [routerLink]="'/admin/profile'">William Cooper</a></h2>
+                            <p>Date of Join: 22 May 2021 </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="additional-info">
+                        <p>Freelancer ID</p>
+                        <h5>UID00003</h5>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="additional-info">
+                        <p>Email </p>
+                        <h5 class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i> Verified </h5>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="additional-info">
+                        <p>Account Status</p>
+                        <h5 class="text-danger">Active</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /User Profile -->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card profile-home">
+                    <div class="subscribe-employe users-list transaction-list">
+                        <ul>
+                            <li ><a [routerLink]="'/admin/user-profile'"><img class="me-2" src="assets/img/icon/icon-12.svg" alt="">Personal </a></li>
+                            <li class="active"><a [routerLink]="'/admin/activities'"><img class="me-2" src="assets/img/icon/icon-10.svg" alt="">Transactions </a></li>
+                            <li><a [routerLink]="'/admin/user-transactions'"><img class="me-2" src="assets/img/icon/icon-11.svg" alt="">Activities</a></li>
+                        </ul>
+                        <div class="profile-icon-group">
+                            <div class="d-flex">
+                                <a href="javascript:void(0);" class="reset-icon me-1">
+                                    <img src="assets/img/icon/icon-03.svg" alt="">
+                                </a>
+                                <a class="suspend-icon" href="javascript:void(0);">
+                                    <img src="assets/img/icon/icon-04.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Active Profile Header -->
+                    <div class="page-header profile-information">
+                        <div class="row align-items-center">
+                            <div class="col-12">
+                                <h3 class="page-title">Login Activities </h3>
+                                <p> The activities of login for the user.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Active Profile Header -->
+                    
+                    <div class="card ">
+                    <div class="table-responsive">
+                        <table datatable class="table table-center table-hover mb-0 user-tables user-activities">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Event Info</th>	
+                                    <th>Detection IP</th>	
+                                    <th>Detection Time</th>	
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="name-user"><a href="javascript:void()">User Login</a></td>
+                                    <td>Login to “System/Administrator”</td>
+                                    <td>116.165.159.125</td>
+                                    <td>Apr 22, 2022 05:24 AM</td>
+                                </tr>
+                                <tr>
+                                    <td class="name-user"><a href="javascript:void()">Task Updation</a></td>
+                                    <td>Change task “Inprrogress” to “Completed”</td>
+                                    <td>104.165.159.125</td>
+                                    <td>May 26, 2022 05:14 AM</td>
+                                </tr>
+                                <tr>
+                                    <td class="name-user"><a href="javascript:void()">User Logoff</a></td>
+                                    <td>Logoff  “System/Administrator”</td>
+                                    <td>123.165.159.125</td>
+                                    <td>Jun 12, 2022 03:54 AM</td>
+                                </tr>
+                                <tr>
+                                    <td class="name-user"><a href="javascript:void()">Task Updation</a></td>
+                                    <td>Change task “Inprrogress” to “Completed”</td>
+                                    <td>104.165.159.125</td>
+                                    <td>Dec 16, 2022 02:24 AM</td>
+                                </tr>
+                                <tr>
+                                    <td class="name-user"><a href="javascript:void()">User Logoff</a></td>
+                                    <td>Logoff  “System/Administrator”</td>
+                                    <td>123.165.159.125</td>
+                                    <td>Feb 10, 2022 04:44 AM</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    
+                </div>			
+            </div>			
+        </div>
+    </div>			
+</div>
+<!-- /Page Wrapper -->
+<!-- Add Modal -->
+<div class="modal fade custom-modal" id="add-category">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header flex-wrap">
+                <div class="text-center w-100 mb-3">
+                    <img src="assets/img/logo-small.png" alt="">
+                </div>
+                <h4 class="modal-title">Add New User</h4>
+                <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-type">User Type</label>
+                        <select class="form-control form-select">
+                            <option>Select</option>
+                            <option>Frontend Developer</option>
+                            <option>Graphic Designer</option>
+                        </select>
+                    </div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add Modal -->
+
+<!-- Add Modal -->
+<div class="modal fade custom-modal" id="edit-category">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header flex-wrap">
+                <div class="text-center w-100 mb-3">
+                    <img src="assets/img/logo-small.png" alt="">
+                </div>
+                <h4 class="modal-title">Edit User</h4>
+                <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" class="form-control" value=" George Wells">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" value="georgewells@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" value="*******">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" class="form-control" value="********">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-type">User Type</label>
+                        <select class="form-control form-select">
+                            <option>Select</option>
+                            <option selected>Frontend Developer</option>
+                            <option>Graphic Designer</option>
+                        </select>
+                    </div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add Modal -->
+
+<!-- Delete Modal -->
+<div class="modal custom-modal fade" id="delete_category" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>Delete</h3>
+                    <p>Are you sure want to delete?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete Modal -->

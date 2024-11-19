@@ -1,0 +1,1117 @@
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Dashboard</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a [routerLink]="'/admin/dashboard'">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="row">
+      <div class="col-md-8">
+        <!--/Wizard-->
+        <div class="row">
+          <div class="col-md-4 d-flex">
+            <div class="card wizard-card flex-fill">
+              <div class="card-body">
+                <p class="text-primary mt-0 mb-2">Users</p>
+                <h5>1682</h5>
+                <p>
+                  <a [routerLink]="'/admin/freelancers/all'">view details</a>
+                </p>
+                <span class="dash-widget-icon bg-1">
+                  <i class="fas fa-users"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex">
+            <div class="card wizard-card flex-fill">
+              <div class="card-body">
+                <p class="text-primary mt-0 mb-2">Completed Projects</p>
+                <h5>15k</h5>
+                <p><a [routerLink]="'/admin/projects'">view details</a></p>
+
+                <span class="dash-widget-icon bg-1">
+                  <i class="fas fa-th-large"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex">
+            <div class="card wizard-card flex-fill">
+              <div class="card-body">
+                <p class="text-primary mt-0 mb-2">Active Projects</p>
+                <h5>1568</h5>
+                <p><a [routerLink]="'/admin/projects'">view details</a></p>
+
+                <span class="dash-widget-icon bg-1">
+                  <i class="fas fa-bezier-curve"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/Wizard-->
+        <div class="row">
+          <div class="col-lg-12 d-flex">
+            <div class="card w-100">
+              <div class="card-body pt-0 pb-2">
+                <div class="card-header">
+                  <h5 class="card-title">Over view</h5>
+                </div>
+                <div id="chart">
+                  <apx-chart
+                    [series]="chartOptions.series"
+                    [chart]="chartOptions.chart"
+                    [dataLabels]="chartOptions.dataLabels"
+                    [plotOptions]="chartOptions.plotOptions"
+                    [yaxis]="chartOptions.yaxis"
+                    [legend]="chartOptions.legend"
+                    [fill]="chartOptions.fill"
+                    [stroke]="chartOptions.stroke"
+                    [tooltip]="chartOptions.tooltip"
+                    [xaxis]="chartOptions.xaxis"
+                  ></apx-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex">
+        <div class="card w-100">
+          <div class="card-body pt-0">
+            <div class="card-header">
+              <div class="row">
+                <div class="col-7">
+                  <p>Welcome back,</p>
+                  <h6 class="text-primary">Super Admin</h6>
+                </div>
+                <div class="col-5 text-end">
+                  <span class="welcome-dash-icon bg-1">
+                    <i class="fas fa-user"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="account-balance">
+              <p>Account balance</p>
+              <h6>$50,000,00</h6>
+            </div>
+            <div class="mt-3">
+              <h6 class="text-primary">Payments</h6>
+              <div class="table-responsive">
+                <table class="table table-center table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-nowrap">Client or Freelancer</th>
+                      <th>Amount</th>
+                      <th class="text-end">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-nowrap">Sakib Khan</td>
+                      <td>$2222</td>
+                      <td class="text-end">Completed</td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap">Pixel Inc Ltd</td>
+                      <td>$750</td>
+                      <td class="text-end">
+                        <a
+                          href="javascript:void(0);"
+                          class="btn btn-sm btn-success me-2"
+                          ><i class="far fa-edit"></i
+                        ></a>
+                        <a
+                          href="javascript:void(0);"
+                          class="btn btn-sm btn-danger me-2"
+                          ><i class="far fa-trash-alt"></i
+                        ></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap">Jon M Mullins</td>
+                      <td>$3150</td>
+                      <td class="text-end text-nowrap">
+                        Money released to Freelancer
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap">Rose M Milewski</td>
+                      <td>$1455</td>
+                      <td class="text-end text-nowrap">
+                        Money returned to Client
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap">Gerald K Myers</td>
+                      <td>$3000</td>
+                      <td class="text-end">
+                        <a
+                          href="javascript:void(0);"
+                          class="btn btn-sm btn-success me-2"
+                          ><i class="far fa-edit"></i
+                        ></a>
+                        <a
+                          href="javascript:void(0);"
+                          class="btn btn-sm btn-danger me-2"
+                          ><i class="far fa-trash-alt"></i
+                        ></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-nowrap">Marcin Kowalski</td>
+                      <td>$895</td>
+                      <td class="text-end">
+                        <a
+                          href="javascript:void(0);"
+                          class="btn btn-sm btn-success me-2"
+                          ><i class="far fa-edit"></i
+                        ></a>
+                        <a
+                          href="javascript:void(0);"
+                          class="btn btn-sm btn-danger me-2"
+                          ><i class="far fa-trash-alt"></i
+                        ></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card bg-white projects-card">
+          <div class="card-body pt-0">
+            <div class="card-header">
+              <h5 class="card-title">Reviews</h5>
+            </div>
+            <div class="reviews-menu-links">
+              <ul
+                role="tablist"
+                class="nav nav-pills card-header-pills nav-justified"
+                >
+                <li class="nav-item">
+                  <a href="#tab-4" data-bs-toggle="tab" class="nav-link active"
+                    >All (272)</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a href="#tab-5" data-bs-toggle="tab" class="nav-link"
+                      >Active (218)</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a href="#tab-6" data-bs-toggle="tab" class="nav-link">
+                        Pending Approval (03)
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="#tab-7" data-bs-toggle="tab" class="nav-link"
+                        >Trash (0)</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="tab-content pt-0">
+                    <div role="tabpanel" id="tab-4" class="tab-pane fade active show">
+                      <div class="table-responsive">
+                        <div class="table_header">
+                          <div class="dataTables_length">
+                            <label for="entries"> Show </label>
+                            <select
+                              [(ngModel)]="pageSize"
+                              (ngModelChange)="changePageSize()"
+                              class="form-control form-control-sm"
+                              >
+                              <option value="10">10</option>
+                              <option value="25">25</option>
+                              <option value="50">50</option>
+                              <option value="100">100</option>
+                            </select>
+                            <label entries-data for="data-entries">Entries</label>
+                          </div>
+                          <div class="dataTables_filter">
+                            <label for="search"> Search: </label>
+                            <input
+                              [(ngModel)]="searchDataValue"
+                              (ngModelChange)="searchData(searchDataValue)"
+                              class="form-control form-control-sm"
+                              />
+                            </div>
+                          </div>
+                          <div class="table-scroll">
+                            <table
+                              matSort
+                              (matSortChange)="sortData($event)"
+                              class="table table-center table-hover mb-0 datatable"
+                              >
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th mat-sort-header="name">Profile</th>
+                                  <th mat-sort-header="designation">Designation</th>
+                                  <th mat-sort-header="para">comments</th>
+                                  <th>Stars</th>
+                                  <th mat-sort-header="category">Category</th>
+                                  <th class="text-end">Actions</th>
+                                </tr>
+                                @if (lstBoard.length === 0) {
+                                  <tr>
+                                    <td colspan="9">
+                                      <h5 style="text-align: center">No data found</h5>
+                                    </td>
+                                  </tr>
+                                }
+                              </thead>
+                              <tbody>
+                                @for (board of lstBoard; track board; let i = $index) {
+                                  <tr>
+                                    <td>
+                                      <div class="form-check custom-checkbox">
+                                        <input
+                                          type="checkbox"
+                                          class="form-check-input"
+                                          id="customCheck1"
+                                          />
+                                          <label
+                                            class="form-check-label"
+                                            for="customCheck1"
+                                          ></label>
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <h2 class="table-avatar">
+                                          <a [routerLink]="'/admin/profile'"
+                                            ><img
+                                            class="avatar-img rounded-circle me-2"
+                                            [src]="board.image"
+                                            alt="User Image"
+                                            />
+                                            {{ board.name }}
+                                          </a>
+                                        </h2>
+                                      </td>
+                                      <td>
+                                        {{ board.designation }}
+                                      </td>
+                                      <td>
+                                        <div class="desc-info">
+                                          {{ board.para }}
+                                        </div>
+                                      </td>
+                                      <td>
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-primary"></i>
+                                        <i class="fas fa-star text-muted"></i>
+                                      </td>
+                                      <td>
+                                        {{ board.category }}
+                                      </td>
+                                      <td class="text-end text-nowrap">
+                                        <a
+                                          href="javascript:void(0);"
+                                          class="btn btn-approve text-white me-2"
+                                          >Approve</a
+                                          >
+                                          <a
+                                            href="javascript:void(0);"
+                                            class="btn btn-disable"
+                                            >Enable</a
+                                            >
+                                          </td>
+                                        </tr>
+                                      }
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div class="table_footer">
+                                  <div class="col-sm-12 col-md-5">
+                                    <div class="dataTables_info">
+                                      Showing {{ serialNumberArray[0] }} to
+                                      {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                                      {{ totalData }} entries
+                                    </div>
+                                  </div>
+
+                                  <div class="col-sm-12 col-md-7">
+                                    <div class="pagination_section">
+                                      <ul class="pagination">
+                                        <li
+                                          class="page-item"
+                            [ngClass]="{
+                              disabled: currentPage === 1
+                            }"
+                                          >
+                                          <a
+                                            (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')"
+                                            class="page-link"
+                                            href="javascript:void(0);"
+                                            tabindex="-1"
+                                            >Previous</a
+                                            >
+                                          </li>
+
+                                          @for (item of pageNumberArray; track item; let i = $index) {
+                                            <li
+                                              class="page-item"
+                                              [class.active]="item === currentPage"
+                              [ngClass]="
+                                (pageNumberArray[currentPage - 2] > item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6) ||
+                                (pageNumberArray[currentPage] < item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6 &&
+                                  pageNumberArray.length !== item)
+                                  ? 'hide-page-no'
+                                  : 'show-page-no'
+                              "
+                                              >
+                                              <a
+                                                (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)"
+                                                class="page-link"
+                                                href="javascript:void(0);"
+                                                >
+                                                {{ item }}
+                                              </a>
+                                            </li>
+                                            @if (
+                                              i === 0 &&
+                                              pageNumberArray.length > 6 &&
+                                              currentPage > 2
+                                              ) {
+                                              <li
+                                                class="page-item"
+                                                [hidden]="currentPage === 1"
+                                                (click)="moveToPage(currentPage - 2)" (keydown.enter)="moveToPage(currentPage - 2)" tabindex="0"
+                                                >
+                                                <a class="page-link" href="javascript:void(0);">
+                                                  ...
+                                                </a>
+                                              </li>
+                                            }
+                                            @if (
+                                              i === pageNumberArray.length - 2 &&
+                                              pageNumberArray.length > 6
+                                              ) {
+                                              <li
+                              [hidden]="
+                                currentPage >=
+                                  pageNumberArray[pageNumberArray.length - 2] ||
+                                totalData <
+                                  serialNumberArray[
+                                    serialNumberArray.length - 1
+                                  ]
+                              "
+                                                class="page-item"
+                                                (click)="moveToPage(currentPage + 2)" (keydown.enter)="moveToPage(currentPage + 2)" tabindex="0"
+                                                >
+                                                <a class="page-link" href="javascript:void(0);">
+                                                  ...
+                                                </a>
+                                              </li>
+                                            }
+                                          }
+
+                                          <li
+                                            class="page-item"
+                            [ngClass]="{
+                              disabled:
+                                currentPage ===
+                                  pageNumberArray[pageNumberArray.length - 1] ||
+                                lstBoard.length === 0
+                            }"
+                                            >
+                                            <a
+                                              (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')"
+                                              class="page-link"
+                                              href="javascript:void(0);"
+                                              >Next
+                                            </a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div role="tabpanel" id="tab-5" class="tab-pane fade">
+                                <div class="table-responsive">
+                                  <div class="table_header">
+                                    <div class="dataTables_length">
+                                      <label for="entries"> Show </label>
+                                      <select
+                                        [(ngModel)]="pageSize"
+                                        (ngModelChange)="changePageSize()"
+                                        class="form-control form-control-sm"
+                                        >
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                      </select>
+                                      <label entries-data for="data-entries">Entries</label>
+                                    </div>
+                                    <div class="dataTables_filter">
+                                      <label for="search"> Search: </label>
+                                      <input
+                                        [(ngModel)]="searchDataValue"
+                                        (ngModelChange)="searchData(searchDataValue)"
+                                        class="form-control form-control-sm"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="table-scroll">
+                                      <table
+                                        matSort
+                                        (matSortChange)="sortData($event)"
+                                        class="table table-center table-hover mb-0 datatable"
+                                        >
+                                        <thead>
+                                          <tr>
+                                            <th></th>
+                                            <th mat-sort-header="name">Profile</th>
+                                            <th mat-sort-header="designation">Designation</th>
+                                            <th mat-sort-header="para">comments</th>
+                                            <th>Stars</th>
+                                            <th mat-sort-header="category">Category</th>
+                                            <th class="text-end">Actions</th>
+                                          </tr>
+                                          @if (lstBoard.length === 0) {
+                                            <tr>
+                                              <td colspan="9">
+                                                <h5 style="text-align: center">No data found</h5>
+                                              </td>
+                                            </tr>
+                                          }
+                                        </thead>
+                                        <tbody>
+                                          @for (board of lstBoard; track board; let i = $index) {
+                                            <tr>
+                                              <td>
+                                                <div class="form-check custom-checkbox">
+                                                  <input
+                                                    type="checkbox"
+                                                    class="form-check-input"
+                                                    id="customCheck1"
+                                                    />
+                                                    <label
+                                                      class="form-check-label"
+                                                      for="customCheck1"
+                                                    ></label>
+                                                  </div>
+                                                </td>
+                                                <td>
+                                                  <h2 class="table-avatar">
+                                                    <a [routerLink]="'/admin/profile'"
+                                                      ><img
+                                                      class="avatar-img rounded-circle me-2"
+                                                      [src]="board.image"
+                                                      alt="User Image"
+                                                      />
+                                                      {{ board.name }}
+                                                    </a>
+                                                  </h2>
+                                                </td>
+                                                <td>
+                                                  {{ board.designation }}
+                                                </td>
+                                                <td>
+                                                  <div class="desc-info">
+                                                    {{ board.para }}
+                                                  </div>
+                                                </td>
+                                                <td>
+                                                  <i class="fas fa-star text-primary"></i>
+                                                  <i class="fas fa-star text-primary"></i>
+                                                  <i class="fas fa-star text-primary"></i>
+                                                  <i class="fas fa-star text-primary"></i>
+                                                  <i class="fas fa-star text-muted"></i>
+                                                </td>
+                                                <td>
+                                                  {{ board.category }}
+                                                </td>
+                                                <td class="text-end text-nowrap">
+                                                  <a
+                                                    href="javascript:void(0);"
+                                                    class="btn btn-approve text-white me-2"
+                                                    >Approve</a
+                                                    >
+                                                    <a
+                                                      href="javascript:void(0);"
+                                                      class="btn btn-disable"
+                                                      >Enable</a
+                                                      >
+                                                    </td>
+                                                  </tr>
+                                                }
+                                              </tbody>
+                                            </table>
+                                          </div>
+                                          <div class="table_footer">
+                                            <div class="col-sm-12 col-md-5">
+                                              <div class="dataTables_info">
+                                                Showing {{ serialNumberArray[0] }} to
+                                                {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                                                {{ totalData }} entries
+                                              </div>
+                                            </div>
+
+                                            <div class="col-sm-12 col-md-7">
+                                              <div class="pagination_section">
+                                                <ul class="pagination">
+                                                  <li
+                                                    class="page-item"
+                            [ngClass]="{
+                              disabled: currentPage === 1
+                            }"
+                                                    >
+                                                    <a
+                                                      (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')"
+                                                      class="page-link"
+                                                      href="javascript:void(0);"
+                                                      tabindex="-1"
+                                                      >Previous</a
+                                                      >
+                                                    </li>
+
+                                                    @for (item of pageNumberArray; track item; let i = $index) {
+                                                      <li
+                                                        class="page-item"
+                                                        [class.active]="item === currentPage"
+                              [ngClass]="
+                                (pageNumberArray[currentPage - 2] > item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6) ||
+                                (pageNumberArray[currentPage] < item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6 &&
+                                  pageNumberArray.length !== item)
+                                  ? 'hide-page-no'
+                                  : 'show-page-no'
+                              "
+                                                        >
+                                                        <a
+                                                          (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)"
+                                                          class="page-link"
+                                                          href="javascript:void(0);"
+                                                          >
+                                                          {{ item }}
+                                                        </a>
+                                                      </li>
+                                                      @if (
+                                                        i === 0 &&
+                                                        pageNumberArray.length > 6 &&
+                                                        currentPage > 2
+                                                        ) {
+                                                        <li
+                                                          class="page-item"
+                                                          [hidden]="currentPage === 1"
+                                                          (click)="moveToPage(currentPage - 2)" (keydown.enter)="moveToPage(currentPage - 2)" tabindex="0"
+                                                          >
+                                                          <a class="page-link" href="javascript:void(0);">
+                                                            ...
+                                                          </a>
+                                                        </li>
+                                                      }
+                                                      @if (
+                                                        i === pageNumberArray.length - 2 &&
+                                                        pageNumberArray.length > 6
+                                                        ) {
+                                                        <li
+                              [hidden]="
+                                currentPage >=
+                                  pageNumberArray[pageNumberArray.length - 2] ||
+                                totalData <
+                                  serialNumberArray[
+                                    serialNumberArray.length - 1
+                                  ]
+                              "
+                                                          class="page-item"
+                                                          (click)="moveToPage(currentPage + 2)" (keydown.enter)="moveToPage(currentPage + 2)" tabindex="0"
+                                                          >
+                                                          <a class="page-link" href="javascript:void(0);">
+                                                            ...
+                                                          </a>
+                                                        </li>
+                                                      }
+                                                    }
+
+                                                    <li
+                                                      class="page-item"
+                            [ngClass]="{
+                              disabled:
+                                currentPage ===
+                                  pageNumberArray[pageNumberArray.length - 1] ||
+                                lstBoard.length === 0
+                            }"
+                                                      >
+                                                      <a
+                                                        (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')"
+                                                        class="page-link"
+                                                        href="javascript:void(0);"
+                                                        >Next
+                                                      </a>
+                                                    </li>
+                                                  </ul>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div role="tabpanel" id="tab-6" class="tab-pane fade">
+                                          <div class="table-responsive">
+                                            <div class="table_header">
+                                              <div class="dataTables_length">
+                                                <label for="entries"> Show </label>
+                                                <select
+                                                  [(ngModel)]="pageSize"
+                                                  (ngModelChange)="changePageSize()"
+                                                  class="form-control form-control-sm"
+                                                  >
+                                                  <option value="10">10</option>
+                                                  <option value="25">25</option>
+                                                  <option value="50">50</option>
+                                                  <option value="100">100</option>
+                                                </select>
+                                                <label entries-data for="data-entries">Entries</label>
+                                              </div>
+                                              <div class="dataTables_filter">
+                                                <label for="search"> Search: </label>
+                                                <input
+                                                  [(ngModel)]="searchDataValue"
+                                                  (ngModelChange)="searchData(searchDataValue)"
+                                                  class="form-control form-control-sm"
+                                                  />
+                                                </div>
+                                              </div>
+                                              <div class="table-scroll">
+                                                <table
+                                                  matSort
+                                                  (matSortChange)="sortData($event)"
+                                                  class="table table-center table-hover mb-0 datatable"
+                                                  >
+                                                  <thead>
+                                                    <tr>
+                                                      <th></th>
+                                                      <th mat-sort-header="name">Profile</th>
+                                                      <th mat-sort-header="designation">Designation</th>
+                                                      <th mat-sort-header="para">comments</th>
+                                                      <th>Stars</th>
+                                                      <th mat-sort-header="category">Category</th>
+                                                      <th class="text-end">Actions</th>
+                                                    </tr>
+                                                    @if (lstBoard.length === 0) {
+                                                      <tr>
+                                                        <td colspan="9">
+                                                          <h5 style="text-align: center">No data found</h5>
+                                                        </td>
+                                                      </tr>
+                                                    }
+                                                  </thead>
+                                                  <tbody>
+                                                    @for (board of lstBoard; track board; let i = $index) {
+                                                      <tr>
+                                                        <td>
+                                                          <div class="form-check custom-checkbox">
+                                                            <input
+                                                              type="checkbox"
+                                                              class="form-check-input"
+                                                              id="customCheck1"
+                                                              />
+                                                              <label
+                                                                class="form-check-label"
+                                                                for="customCheck1"
+                                                              ></label>
+                                                            </div>
+                                                          </td>
+                                                          <td>
+                                                            <h2 class="table-avatar">
+                                                              <a [routerLink]="'/admin/profile'"
+                                                                ><img
+                                                                class="avatar-img rounded-circle me-2"
+                                                                [src]="board.image"
+                                                                alt="User Image"
+                                                                />
+                                                                {{ board.name }}
+                                                              </a>
+                                                            </h2>
+                                                          </td>
+                                                          <td>
+                                                            {{ board.designation }}
+                                                          </td>
+                                                          <td>
+                                                            <div class="desc-info">
+                                                              {{ board.para }}
+                                                            </div>
+                                                          </td>
+                                                          <td>
+                                                            <i class="fas fa-star text-primary"></i>
+                                                            <i class="fas fa-star text-primary"></i>
+                                                            <i class="fas fa-star text-primary"></i>
+                                                            <i class="fas fa-star text-primary"></i>
+                                                            <i class="fas fa-star text-muted"></i>
+                                                          </td>
+                                                          <td>
+                                                            {{ board.category }}
+                                                          </td>
+                                                          <td class="text-end text-nowrap">
+                                                            <a
+                                                              href="javascript:void(0);"
+                                                              class="btn btn-approve text-white me-2"
+                                                              >Approve</a
+                                                              >
+                                                              <a
+                                                                href="javascript:void(0);"
+                                                                class="btn btn-disable"
+                                                                >Enable</a
+                                                                >
+                                                              </td>
+                                                            </tr>
+                                                          }
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                    <div class="table_footer">
+                                                      <div class="col-sm-12 col-md-5">
+                                                        <div class="dataTables_info">
+                                                          Showing {{ serialNumberArray[0] }} to
+                                                          {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                                                          {{ totalData }} entries
+                                                        </div>
+                                                      </div>
+
+                                                      <div class="col-sm-12 col-md-7">
+                                                        <div class="pagination_section">
+                                                          <ul class="pagination">
+                                                            <li
+                                                              class="page-item"
+                            [ngClass]="{
+                              disabled: currentPage === 1
+                            }"
+                                                              >
+                                                              <a
+                                                                (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')"
+                                                                class="page-link"
+                                                                href="javascript:void(0);"
+                                                                tabindex="-1"
+                                                                >Previous</a
+                                                                >
+                                                              </li>
+
+                                                              @for (item of pageNumberArray; track item; let i = $index) {
+                                                                <li
+                                                                  class="page-item"
+                                                                  [class.active]="item === currentPage"
+                              [ngClass]="
+                                (pageNumberArray[currentPage - 2] > item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6) ||
+                                (pageNumberArray[currentPage] < item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6 &&
+                                  pageNumberArray.length !== item)
+                                  ? 'hide-page-no'
+                                  : 'show-page-no'
+                              "
+                                                                  >
+                                                                  <a
+                                                                    (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)"
+                                                                    class="page-link"
+                                                                    href="javascript:void(0);"
+                                                                    >
+                                                                    {{ item }}
+                                                                  </a>
+                                                                </li>
+                                                                @if (
+                                                                  i === 0 &&
+                                                                  pageNumberArray.length > 6 &&
+                                                                  currentPage > 2
+                                                                  ) {
+                                                                  <li
+                                                                    class="page-item"
+                                                                    [hidden]="currentPage === 1"
+                                                                    (click)="moveToPage(currentPage - 2)" (keydown.enter)="moveToPage(currentPage - 2)" tabindex="0"
+                                                                    >
+                                                                    <a class="page-link" href="javascript:void(0);">
+                                                                      ...
+                                                                    </a>
+                                                                  </li>
+                                                                }
+                                                                @if (
+                                                                  i === pageNumberArray.length - 2 &&
+                                                                  pageNumberArray.length > 6
+                                                                  ) {
+                                                                  <li
+                              [hidden]="
+                                currentPage >=
+                                  pageNumberArray[pageNumberArray.length - 2] ||
+                                totalData <
+                                  serialNumberArray[
+                                    serialNumberArray.length - 1
+                                  ]
+                              "
+                                                                    class="page-item"
+                                                                    (click)="moveToPage(currentPage + 2)" (keydown.enter)="moveToPage(currentPage + 2)" tabindex="0"
+                                                                    >
+                                                                    <a class="page-link" href="javascript:void(0);">
+                                                                      ...
+                                                                    </a>
+                                                                  </li>
+                                                                }
+                                                              }
+
+                                                              <li
+                                                                class="page-item"
+                            [ngClass]="{
+                              disabled:
+                                currentPage ===
+                                  pageNumberArray[pageNumberArray.length - 1] ||
+                                lstBoard.length === 0
+                            }"
+                                                                >
+                                                                <a
+                                                                  (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')"
+                                                                  class="page-link"
+                                                                  href="javascript:void(0);"
+                                                                  >Next
+                                                                </a>
+                                                              </li>
+                                                            </ul>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div role="tabpanel" id="tab-7" class="tab-pane fade">
+                                                    <div class="table-responsive">
+                                                      <div class="table_header">
+                                                        <div class="dataTables_length">
+                                                          <label for="entries"> Show </label>
+                                                          <select
+                                                            [(ngModel)]="pageSize"
+                                                            (ngModelChange)="changePageSize()"
+                                                            class="form-control form-control-sm"
+                                                            >
+                                                            <option value="10">10</option>
+                                                            <option value="25">25</option>
+                                                            <option value="50">50</option>
+                                                            <option value="100">100</option>
+                                                          </select>
+                                                          <label entries-data for="data-entries">Entries</label>
+                                                        </div>
+                                                        <div class="dataTables_filter">
+                                                          <label for="search"> Search: </label>
+                                                          <input
+                                                            [(ngModel)]="searchDataValue"
+                                                            (ngModelChange)="searchData(searchDataValue)"
+                                                            class="form-control form-control-sm"
+                                                            />
+                                                          </div>
+                                                        </div>
+                                                        <div class="table-scroll">
+                                                          <table
+                                                            matSort
+                                                            (matSortChange)="sortData($event)"
+                                                            class="table table-center table-hover mb-0 datatable"
+                                                            >
+                                                            <thead>
+                                                              <tr>
+                                                                <th></th>
+                                                                <th mat-sort-header="name">Profile</th>
+                                                                <th mat-sort-header="designation">Designation</th>
+                                                                <th mat-sort-header="para">comments</th>
+                                                                <th>Stars</th>
+                                                                <th mat-sort-header="category">Category</th>
+                                                                <th class="text-end">Actions</th>
+                                                              </tr>
+                                                              @if (lstBoard.length === 8) {
+                                                                <tr>
+                                                                  <td colspan="9">
+                                                                    <h5 style="text-align: center">No data found</h5>
+                                                                  </td>
+                                                                </tr>
+                                                              }
+                                                            </thead>
+                                                            <!-- <tbody>
+                                                            <tr *ngFor="let board of lstBoard;let i = index">
+                                                              <td>
+                                                                <div class="form-check custom-checkbox">
+                                                                  <input type="checkbox" class="form-check-input" id="customCheck1">
+                                                                  <label class="form-check-label" for="customCheck1"></label>
+                                                                </div>
+                                                              </td>
+                                                              <td>
+                                                                <h2 class="table-avatar">
+                                                                  <a [routerLink]="'/admin/profile'"><img class="avatar-img rounded-circle me-2" [src]="board.image" alt="User Image">
+                                                                    {{board.name}}
+                                                                  </a>
+                                                                </h2>
+                                                              </td>
+                                                              <td>
+                                                                {{board.designation}}
+                                                              </td>
+                                                              <td>
+                                                                <div class="desc-info">
+                                                                  {{board.para}}
+                                                                </div>
+                                                              </td>
+                                                              <td>
+                                                                <i class="fas fa-star text-primary"></i>
+                                                                <i class="fas fa-star text-primary"></i>
+                                                                <i class="fas fa-star text-primary"></i>
+                                                                <i class="fas fa-star text-primary"></i>
+                                                                <i class="fas fa-star text-muted"></i>
+                                                              </td>
+                                                              <td>
+                                                                {{board.category}}
+                                                              </td>
+
+                                                              <td class="text-end text-nowrap">
+                                                                <a href="javascript:void(0);" class=" btn btn-approve text-white me-2">Approve</a>
+                                                                <a href="javascript:void(0);" class="btn btn-disable">Enable</a>
+                                                              </td>
+                                                            </tr>
+                                                          </tbody> -->
+                                                        </table>
+                                                      </div>
+                                                      <div class="table_footer">
+                                                        <div class="col-sm-12 col-md-5">
+                                                          <div class="dataTables_info">
+                                                            Showing {{ serialNumberArray[0] }} to
+                                                            {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                                                            {{ totalData }} entries
+                                                          </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 col-md-7">
+                                                          <div class="pagination_section">
+                                                            <ul class="pagination">
+                                                              <li
+                                                                class="page-item"
+                            [ngClass]="{
+                              disabled: currentPage === 1
+                            }"
+                                                                >
+                                                                <a
+                                                                  (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')"
+                                                                  class="page-link"
+                                                                  href="javascript:void(0);"
+                                                                  tabindex="-1"
+                                                                  >Previous</a
+                                                                  >
+                                                                </li>
+
+                                                                @for (item of pageNumberArray; track item; let i = $index) {
+                                                                  <li
+                                                                    class="page-item"
+                                                                    [class.active]="item === currentPage"
+                              [ngClass]="
+                                (pageNumberArray[currentPage - 2] > item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6) ||
+                                (pageNumberArray[currentPage] < item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6 &&
+                                  pageNumberArray.length !== item)
+                                  ? 'hide-page-no'
+                                  : 'show-page-no'
+                              "
+                                                                    >
+                                                                    <a
+                                                                      (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)"
+                                                                      class="page-link"
+                                                                      href="javascript:void(0);"
+                                                                      >
+                                                                      {{ item }}
+                                                                    </a>
+                                                                  </li>
+                                                                  @if (
+                                                                    i === 0 &&
+                                                                    pageNumberArray.length > 6 &&
+                                                                    currentPage > 2
+                                                                    ) {
+                                                                    <li
+                                                                      class="page-item"
+                                                                      [hidden]="currentPage === 1"
+                                                                      (click)="moveToPage(currentPage - 2)" (keydown.enter)="moveToPage(currentPage - 2)" tabindex="0"
+                                                                      >
+                                                                      <a class="page-link" href="javascript:void(0);">
+                                                                        ...
+                                                                      </a>
+                                                                    </li>
+                                                                  }
+                                                                  @if (
+                                                                    i === pageNumberArray.length - 2 &&
+                                                                    pageNumberArray.length > 6
+                                                                    ) {
+                                                                    <li
+                              [hidden]="
+                                currentPage >=
+                                  pageNumberArray[pageNumberArray.length - 2] ||
+                                totalData <
+                                  serialNumberArray[
+                                    serialNumberArray.length - 1
+                                  ]
+                              "
+                                                                      class="page-item"
+                                                                      (click)="moveToPage(currentPage + 2)" (keydown.enter)="moveToPage(currentPage + 2)" tabindex="0"
+                                                                      >
+                                                                      <a class="page-link" href="javascript:void(0);">
+                                                                        ...
+                                                                      </a>
+                                                                    </li>
+                                                                  }
+                                                                }
+
+                                                                <li
+                                                                  class="page-item"
+                            [ngClass]="{
+                              disabled:
+                                currentPage ===
+                                  pageNumberArray[pageNumberArray.length - 1] ||
+                                lstBoard.length === 0
+                            }"
+                                                                  >
+                                                                  <a
+                                                                    (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')"
+                                                                    class="page-link"
+                                                                    href="javascript:void(0);"
+                                                                    >Next
+                                                                  </a>
+                                                                </li>
+                                                              </ul>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!-- /Page Wrapper -->
+                                      </div>

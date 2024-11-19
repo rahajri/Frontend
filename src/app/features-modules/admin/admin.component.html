@@ -1,0 +1,11 @@
+<div class="main-wrapper" [ngClass]="{'login-body': page === 'auth','mini-sidebar':miniSidebar === true,'expand-menu': expandMenu === true && miniSidebar === true,'slide-nav': mobileSidebar === true,}">
+<app-sidemenu [ngClass]="{'d-none': page === 'auth'}"></app-sidemenu>
+<router-outlet></router-outlet>
+<!-- <div
+class="sidebar-overlay"
+[ngClass]="{
+  opened: mobileSidebar === true,
+ 
+}"
+></div> -->
+</div>

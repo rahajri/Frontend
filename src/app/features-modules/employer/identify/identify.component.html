@@ -1,0 +1,58 @@
+<div class="dashboard-sec payout-section freelancer-statements">
+    <div class="page-title portfolio-title">
+        <h3 class="mb-0">Verification Details</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <div class="mb-3">
+                <label for="document-type" class="focus-label">Document Type</label>
+                
+                <mat-select class="select mat-select"  [(value)]="option">
+                    <mat-option value="Select">Select</mat-option>
+                    <mat-option value="option">Option1</mat-option>
+                    <mat-option value="option2">Option2</mat-option>
+                  </mat-select>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="mb-3">
+                <label for="document-number" class="focus-label">Document Number</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="input-block">
+                <label for="Document" class="form-label">Document Number</label>
+                <div class="upload-sets">
+                    <label class="upload-filesview">
+                        Browse File
+                        <input type="file">
+                    </label>
+                    <h6>Or Drag &amp; Drop here</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="d-flex doc-btn">
+                <a href="#success-verified" class="btn btn-primary" data-bs-toggle="modal">Submit Verification</a>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<!-- The Modal -->
+<div class="modal fade success-modal hire-modal" id="success-verified">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-body pt-4">	
+                <div class="success-msg-content text-center">
+                    <h4>Verification Submitted Successfully </h4>
+                    <p>You will be verified once, admin approves
+                        your verification</p>
+                    <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary mt-3">Okay</a>
+                </div>	
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /The Modal -->

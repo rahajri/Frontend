@@ -1,0 +1,33 @@
+<div class="dashboard-sec payout-section freelancer-statements">
+    <div class="page-title portfolio-title">
+        <h3 class="mb-0">Delete Account</h3>
+    </div>
+    <div class="row">
+        
+        <div class="col-md-12">
+            <div class="input-block">
+                <label for="details"  class="focus-label">Please Explain Further <span class="label-star"> *</span></label>
+                <textarea class="form-control" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="input-block">
+                <label for="password" class="focus-label">Password <span class="label-star"> *</span></label>
+                <div class="position-relative">
+                    <input [type]="password[1] ? 'text' : 'password'" class="form-control floating pass-input">
+                    <div class="password-icon" (click)="togglePassword(1)" (keydown.enter)="togglePassword(1)" tabindex="0">
+                        <span class="fas toggle-password" [ngClass]="password[1] ? 'fa-eye' : 'fa-eye-slash'"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-12">
+            <div class="d-flex doc-btn">
+                <a href="javascript:void(0);" class="btn btn-gray">Cancel</a>
+                <a href="javascript:void(0);" class="btn btn-primary">Delete Account</a>
+            </div>
+        </div>
+    </div>
+    
+</div>	

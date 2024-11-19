@@ -1,0 +1,208 @@
+<!-- Header -->
+<div class="header">
+
+  <!-- Logo -->
+  <div class="header-left">
+    <a [routerLink]="'/admin/dashboard'" class="logo">
+      <img src="assets/admin/img/logo.png" alt="Logo">
+    </a>
+    <a [routerLink]="'/admin/dashboard'" class="logo logo-small" (mouseover)="miniSideBarMouseHover('over')"
+      (mouseout)="miniSideBarMouseHover('out')" (focus)="miniSideBarMouseHover('over')"
+      (blur)="miniSideBarMouseHover('out')">
+
+      <img src="assets/admin/img/logo-small.png" alt="Logo" width="30" height="30">
+    </a>
+    <!-- Sidebar Toggle -->
+    <a href="javascript:void(0);" (click)="toggleSideBar()" id="toggle_btn">
+      <i class="feather icon-chevrons-left"></i>
+    </a>
+    <!-- /Sidebar Toggle -->
+
+    <!-- Mobile Menu Toggle -->
+    <a class="mobile_btn" (click)="toggleMobileSideBar()" (keydown.enter)="toggleMobileSideBar()" tabindex="0"
+      id="mobile_btn">
+      <i class="feather icon-chevrons-left"></i>
+    </a>
+    <!-- /Mobile Menu Toggle -->
+  </div>
+  <!-- /Logo -->
+
+  <!-- Search -->
+  <div class="top-nav-search">
+    <form>
+      <input type="text" class="form-control" placeholder="Start typing your Search...">
+      <button class="btn" type="submit"><i class="feather icon-search"></i></button>
+    </form>
+  </div>
+  <!-- /Search -->
+
+  <!-- Header Menu -->
+  <ul class="nav user-menu">
+
+    <!-- Notifications -->
+    <li class="nav-item dropdown">
+      <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+        <i class="feather icon-bell"></i> <span class="badge badge-pill">5</span>
+      </a>
+      <div class="dropdown-menu notifications">
+        <div class="topnav-dropdown-header">
+          <span class="notification-title">Notifications</span>
+          <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
+        </div>
+        <div class="noti-content">
+          <ul class="notification-list">
+            <li class="notification-message">
+              <a href="javascript:">
+                <div class="media d-flex">
+                  <span class="avatar avatar-sm flex-shrink-0">
+                    <img class="avatar-img rounded-circle" alt=""
+                      src="assets/img/profiles/avatar-02.jpg">
+                    </span>
+                    <div class="media-body flex-grow-1">
+                      <p class="noti-details"><span class="noti-title">Brian Johnson</span> paid the
+                      invoice <span class="noti-title">#DF65485</span></p>
+                      <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="notification-message">
+                <a href="javascript:">
+                  <div class="media d-flex">
+                    <span class="avatar avatar-sm flex-shrink-0">
+                      <img class="avatar-img rounded-circle" alt=""
+                        src="assets/img/profiles/avatar-03.jpg">
+                      </span>
+                      <div class="media-body flex-grow-1">
+                        <p class="noti-details"><span class="noti-title">Marie Canales</span> has
+                        accepted your estimate <span class="noti-title">#GTR458789</span></p>
+                        <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="notification-message">
+                  <a href="javascript:">
+                    <div class="media d-flex">
+                      <div class="avatar avatar-sm flex-shrink-0">
+                        <span class="avatar-title rounded-circle bg-primary-light"><i
+                        class="far fa-user"></i></span>
+                      </div>
+                      <div class="media-body flex-grow-1">
+                        <p class="noti-details"><span class="noti-title">New user registered</span></p>
+                        <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="notification-message">
+                  <a href="javascript:">
+                    <div class="media d-flex">
+                      <span class="avatar avatar-sm flex-shrink-0">
+                        <img class="avatar-img rounded-circle" alt=""
+                          src="assets/img/profiles/avatar-04.jpg">
+                        </span>
+                        <div class="media-body flex-grow-1">
+                          <p class="noti-details"><span class="noti-title">Barbara Moore</span> declined
+                          the invoice <span class="noti-title">#RDW026896</span></p>
+                          <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="notification-message">
+                    <a href="javascript:">
+                      <div class="media d-flex">
+                        <div class="avatar avatar-sm flex-shrink-0">
+                          <span class="avatar-title rounded-circle bg-info-light"><i
+                          class="far fa-comment"></i></span>
+                        </div>
+                        <div class="media-body flex-grow-1">
+                          <p class="noti-details"><span class="noti-title">You have received a new
+                          message</span></p>
+                          <p class="noti-time"><span class="notification-time">2 days ago</span></p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="topnav-dropdown-footer">
+                <a href="javascript:">View all Notifications</a>
+              </div>
+            </div>
+          </li>
+          <!-- /Notifications -->
+
+          <!-- User Menu -->
+          <li class="nav-item dropdown has-arrow main-drop">
+            <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+              <span class="user-img">
+                <img src="assets/img/profiles/avatar-07.jpg" alt="">
+                <span class="status online"></span>
+              </span>
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" [routerLink]="'/admin/profile'"><i data-feather="user" class="me-1"></i>
+            Profile</a>
+            <a class="dropdown-item" [routerLink]="'/admin/settings/general'"><i data-feather="settings"
+            class="me-1"></i> Settings</a>
+            <a class="dropdown-item" [routerLink]="'/admin/auth/login'"><i data-feather="log-out" class="me-1"></i>
+          Logout</a>
+        </div>
+      </li>
+      <!-- /User Menu -->
+
+    </ul>
+    <!-- /Header Menu -->
+
+  </div>
+  <!-- /Header -->
+  <!-- Sidebar -->
+  <div class="sidebar" (mouseover)="miniSideBarMouseHover('over')" (mouseout)="miniSideBarMouseHover('out')"
+    (focus)="miniSideBarMouseHover('over')" (blur)="miniSideBarBlur('out')" id="sidebar">
+    <ng-scrollbar visibility="hover">
+      <div class="sidebar-inner slimScroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+          <ul>
+            @for (mainTittle of side_bar_data; track mainTittle) {
+              <li class="menu-title">
+                <span>{{ mainTittle.tittle }}</span>
+              </li>
+              @for (menu of mainTittle?.menu; track menu) {
+                @if (menu?.hasSubRoute === false) {
+                  <li [class.active]="page === menu.base ">
+                    <a [routerLink]="menu.route"><i [class]="'feather feather ' + menu.icon"></i>
+                    <span>{{ menu?.menuValue }}</span></a>
+                  </li>
+                }
+                @if (menu.hasSubRoute === true) {
+                  <li class="submenu" [class.active]="base === menu.base">
+                    <a (click)="expandSubMenus(menu)" href="javascript:void(0);"
+                      [ngClass]="{ subdrop: menu.showSubRoute === true }"><i
+                    [class]="'feather feather ' + menu.icon"></i>
+                    <span> {{ menu.menuValue }}</span>
+                    <span class="menu-arrow"></span></a>
+                                <ul [ngClass]="
+                    menu.showSubRoute === true
+                      ? 'd-block'
+                      : 'd-none'
+                  ">
+                      @for (subMenus of menu.subMenus; track subMenus) {
+                        <li>
+                          <a [routerLink]="subMenus.route"
+                            [class.active]="page === subMenus.base">{{
+                          subMenus.menuValue }}</a>
+                        </li>
+                      }
+                    </ul>
+                  </li>
+                }
+              }
+            }
+          </ul>
+        </div>
+      </div>
+    </ng-scrollbar>
+  </div>
+  <!-- /Sidebar -->

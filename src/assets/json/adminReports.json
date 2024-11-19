@@ -1,0 +1,50 @@
+{
+    "data" : [
+        {
+            "name": "Hendry",
+            "role": "Hendry",
+            "project": "Doccure",
+            "startdate": "20-02-2022",
+            "enddate": "16-02-2021",
+            "freelancer": "Mark",
+            "milestone": "05",
+            "status": "Completed",
+            "bidding":"$450.44",
+            "base":"$454.44",
+            "state":"Active",
+            "invoice":"#58854",
+            "paid":"Paid"
+          },
+          {
+            "name": "George",
+            "role": "George",
+            "project": "UI/UX Design",
+            "startdate": "26-09-2022",
+            "enddate": "15-03-2019",
+            "freelancer": "Mark",
+            "milestone": "04",
+            "status": "Inprogress",
+            "bidding":"$450.44",
+            "base":"$460.44",
+            "state":"Active",
+            "invoice":"#99454",
+            "paid":"Unpaid"
+          },
+          {
+            "name": "James",
+            "role": "James",
+            "project": "Smart HR",
+            "startdate": "28-02-2022",
+            "enddate": "21-02-2021",
+            "freelancer": "Anto",
+            "milestone": "09",
+            "status": "Incomplete",
+            "bidding":"$450.44",
+            "base":"$850.44",
+            "state":"Close",
+            "invoice":"#00454",
+            "paid":"Paid"
+          }
+     ],
+     "totalData":3
+}

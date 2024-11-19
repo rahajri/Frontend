@@ -1,0 +1,104 @@
+{
+    "data" : [
+        {
+            "name": "C1",
+            "image": "assets/img/company/img-1.png",
+            "company": "Focused Holistic Hardware",
+            "contact": "Emily Smith",
+            "website": "https://focusedhardware.de",
+            "projects": "120",
+            "status": "Enabled"
+          },
+          {
+            "name": "C2",
+            "image": "assets/img/company/img-2.png",
+            "company": "Phased Actuating Interface",
+            "contact": "Joshuah Runolfsdottir",
+            "website": "https://phasedactuating.com",
+            "projects": "132",
+            "status": "Disable"
+          },
+          {
+            "name": "C3",
+            "image": "assets/img/company/img-3.png",
+            "company": "Intuitive Global Encoding",
+            "contact": "Amy Wilkinson",
+            "website": "https://globalencoding.com",
+            "projects": "90",
+            "status": "Enabled"
+          },
+          {
+            "name": "C4",
+            "image": "assets/img/company/img-4.png",
+            "company": "Visionary Scalable Alliance",
+            "contact": "Jimmy Richardson",
+            "website": "https://visionaryscalable.com",
+            "projects": "110",
+            "status": "Disable"
+          },
+          {
+            "name": "C5",
+            "image": "assets/img/company/img-5.png",
+            "company": "Self-Enabling Neutral Matrix",
+            "contact": "Damon Cohn",
+            "website": "https://neutralmatrix.com",
+            "projects": "158",
+            "status": "Enabled"
+          },
+          {
+            "name": "C6",
+            "image": "assets/img/company/img-1.png",
+            "company": "Focused Holistic Hardware",
+            "contact": "Emily Smith",
+            "website": "https://focusedhardware.de",
+            "projects": "120",
+            "status": "Enabled"
+          },
+          {
+            "name": "C7",
+            "image": "assets/img/company/img-2.png",
+            "company": "Phased Actuating Interface",
+            "contact": "Joshuah Runolfsdottir",
+            "website": "https://phasedactuating.com",
+            "projects": "132",
+            "status": "Disable"
+          },
+          {
+            "name": "C8",
+            "image": "assets/img/company/img-3.png",
+            "company": "Intuitive Global Encoding",
+            "contact": "Amy Wilkinson",
+            "website": "https://globalencoding.com",
+            "projects": "90",
+            "status": "Enabled"
+          },
+          {
+            "name": "C9",
+            "image": "assets/img/company/img-4.png",
+            "company": "Visionary Scalable Alliance",
+            "contact": "Jimmy Richardson",
+            "website": "https://visionaryscalable.com",
+            "projects": "110",
+            "status": "Disable"
+          },
+          {
+            "name": "C10",
+            "image": "assets/img/company/img-5.png",
+            "company": "Self-Enabling Neutral Matrix",
+            "contact": "Damon Cohn",
+            "website": "https://neutralmatrix.com",
+            "projects": "158",
+            "status": "Enabled"
+          },
+          {
+            "name": "C11",
+            "image": "assets/img/company/img-5.png",
+            "company": "Self-Enabling Neutral Matrix",
+            "contact": "Damon Cohn",
+            "website": "https://neutralmatrix.com",
+            "projects": "158",
+            "status": "Enabled"
+          }
+     ],
+     "totalData":11
+}

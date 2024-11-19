@@ -1,0 +1,105 @@
+{
+    "data": [
+        {
+            "projects": "Show all projects",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show running projects",
+            "status": "checked"
+        },
+        {
+            "projects": "Show open projects",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show cancelled projects",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show all freelancers",
+            "status": "checked"
+        },
+        {
+            "projects": "Show freelancer packages",
+            "status": "checked"
+        },
+        {
+            "projects": "Show freelancer skills",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show freelancer badges",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show all clients",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show client packages",
+            "status": "checked"
+        },
+        {
+            "projects": "Show client badges",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show freelancers reviews",
+            "status": "checked"
+        },
+        {
+            "projects": "Show project cancel requests",
+            "status": "checked"
+        },
+        {
+            "projects": "Show project category",
+            "status": "checked"
+        },
+        {
+            "projects": "Show verification requests",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show user chats",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show client reviews",
+            "status": "checked"
+        },
+        {
+            "projects": "Show active tickets",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show project payments",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show package payments",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show freelancer withdraw requests",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show freelancer payouts",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show employee roles",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show general setting",
+            "status": "notchecked"
+        },
+        {
+            "projects": "Show freelancer payouts",
+            "status": "checked"
+        }
+    ],
+    "totalData": 25
+}

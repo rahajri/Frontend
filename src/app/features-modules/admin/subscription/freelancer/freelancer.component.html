@@ -1,0 +1,191 @@
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header subscribe-head">
+						<div class="row align-items-center">
+							<div class="col">
+								<h3 class="page-title">Subscriber List</h3>
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a [routerLink]="'/home'">Home</a></li>
+									
+									<li class="breadcrumb-item active">Subscriber List</li>
+								</ul>
+							</div>
+							<div class="col-auto">
+								<a [routerLink]="'/admin/views/price-employee'" class="btn add-button me-2">
+									View Pricing
+								</a>
+								<a class="btn filter-btn" href="javascript:void()" data-bs-toggle="modal" data-bs-target="#add-plan-freelance">
+									New Subscription
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="subscribe-employe">
+								<ul>
+									<li ><a  [routerLink]="'/admin/subscription/employer'">Employer </a></li>
+									<li class="active"><a  [routerLink]="'/admin/subscription/freelancer'">Freelancer</a></li>
+								</ul>
+							</div>
+							<div class="card">
+								<div class="card-body">
+									<div class="table-responsive">
+										<div class="table_header">
+											<div class="dataTables_length">
+												<label for="show">
+													Show
+												</label>
+												<select [(ngModel)]="pageSize" (ngModelChange)="changePageSize()"
+												class="form-control form-control-sm">
+												<option value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+											<label for="entries">Entries</label>
+											</div>
+											<div class="dataTables_filter">
+												<label for="search">
+													Search:
+												</label>
+												<input [(ngModel)]="searchDataValue"
+													(ngModelChange)="searchData(searchDataValue)"
+													class="form-control form-control-sm" />
+											</div>
+										</div>
+										<div class="table-scroll">
+											<table matSort (matSortChange)="sortData($event)"
+												class="table table-center table-hover mb-0 datatable">
+												<thead>
+													<tr>
+														<th>
+															<div class="form-check custom-checkbox">
+															  <input type="checkbox" class="form-check-input" id="select-all">
+															  <label class="form-check-label" for="customCheck1"></label>
+															</div>
+														</th>
+														<th mat-sort-header="name">Name</th>
+														<th mat-sort-header="plan">Plan Name</th>	
+														<th mat-sort-header="type">Plan Type</th>	
+														<th mat-sort-header="payment">Payment Method</th>	
+														<th mat-sort-header="start">Create Date</th>	
+														<th mat-sort-header="end">End Date</th>	
+														<th mat-sort-header="status">Status</th>	
+														<th class="text-end">Actions</th>
+													</tr>
+													<tr *ngIf="tableData.length === 0">
+														<td colspan="9">
+														  <h5 style="text-align: center">No data found</h5>
+														</td>
+													  </tr>
+												</thead>
+												<tbody>
+													<tr  *ngFor = "let data of tableData let i = index">
+														<td>
+															<div class="form-check custom-checkbox">
+															  <input type="checkbox" class="form-check-input" id="customCheck1">
+															  <label class="form-check-label" for="customCheck1"></label>
+															</div>
+														</td>
+														<td><a href="javascript:void()">{{data.name}}</a></td>
+														<td><a href="javascript:void()">{{data.plan}}</a></td>
+														<td>{{data.type}}</td>
+														<td>{{data.payment}}</td>
+														<td>{{data.start}}</td>
+														<td>{{data.end}}</td>
+														<td *ngIf = "data.status === 'Active'">
+															<button class="btn active-btn">{{data.status}}</button>
+														</td>
+														<td *ngIf = "data.status === 'Inactive'"> 
+															<button class="btn inactive-btn">{{data.status}}</button>
+														</td>
+														<td class="text-end subscription-end">
+															<a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#edit-category"><i class="far fa-edit"></i></a> 
+															<a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="table_footer">
+											<div class="col-sm-12 col-md-5">
+												<div class="dataTables_info">
+													Showing {{ serialNumberArray[0] }} to
+													{{ serialNumberArray[serialNumberArray.length - 1] }} of
+													{{ totalData }} entries
+												</div>
+											</div>
+									
+											<div class="col-sm-12 col-md-7">
+												<div class="pagination_section">
+													<ul class="pagination">
+														<li class="page-item" [ngClass]="{
+									disabled: currentPage === 1
+									}">
+															<a (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')" class="page-link"
+																href="javascript:void(0);" tabindex="-1">Previous</a>
+														</li>
+									
+														<ng-container *ngFor="let item of pageNumberArray; let i = index">
+															<li class="page-item" [class.active]="item === currentPage" [ngClass]="
+									  (pageNumberArray[currentPage - 2] > item &&
+										item !== 1 &&
+										pageNumberArray.length > 6) ||
+									  (pageNumberArray[currentPage] < item &&
+										item !== 1 &&
+										pageNumberArray.length > 6 &&
+										pageNumberArray.length !== item)
+										? 'hide-page-no'
+										: 'show-page-no'
+									">
+																<a (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)" class="page-link"
+																	href="javascript:void(0);">
+																	{{ item }}
+																</a>
+															</li>
+															<li class="page-item" *ngIf="
+									  i === 0 && pageNumberArray.length > 6 && currentPage > 2
+									" [hidden]="currentPage === 1" (click)="moveToPage(currentPage - 2)" (keydown.enter)="moveToPage(currentPage - 2)" tabindex="0">
+																<a class="page-link" href="javascript:void(0);"> ... </a>
+															</li>
+															<li *ngIf="
+									  i === pageNumberArray.length - 2 &&
+									  pageNumberArray.length > 6
+									" [hidden]="
+									  currentPage >=
+										pageNumberArray[pageNumberArray.length - 2] ||
+									  totalData < serialNumberArray[serialNumberArray.length - 1]
+									" class="page-item" (click)="moveToPage(currentPage + 2)" (keydown.enter)="moveToPage(currentPage + 2)" tabindex="0">
+																<a class="page-link" href="javascript:void(0);"> ... </a>
+															</li>
+														</ng-container>
+									
+														<li class="page-item" [ngClass]="{
+									disabled:
+									  currentPage ===
+										pageNumberArray[pageNumberArray.length - 1] ||
+										tableData.length === 0
+									}">
+															<a (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')"  class="page-link"
+																href="javascript:void(0);">Next
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>			
+					</div>
+					
+				</div>			
+			</div>
+			<!-- /Page Wrapper -->

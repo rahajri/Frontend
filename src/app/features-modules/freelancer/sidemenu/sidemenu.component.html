@@ -1,0 +1,51 @@
+<div class="settings-widget">
+  <div class="settings-header d-sm-flex flex-row flex-wrap text-center text-sm-start align-items-center">
+    <a [routerLink] = "routes.freelancer_portfolio"><img alt="profile image" src="assets/img/user/avatar-1.jpg"
+    class="avatar-lg rounded-circle"></a>
+    <div class="ms-sm-3 ms-md-0 ms-lg-3 mt-2 mt-sm-0 mt-md-2 mt-lg-0">
+      <h3 class="mb-0"><a [routerLink] = "routes.freelancer_portfolio">Bruce Bush</a><img
+    src="assets/img/icon/verified-badge.svg" class="ms-1" alt="Img"></h3>
+    <p class="mb-0">&#64;brucebush</p>
+  </div>
+</div>
+<div class="settings-menu">
+  <div id="sidebar-menu" class="sidebar-menu">
+    <ul>
+      @for (menuItem of menuItems; track menuItem) {
+        @if (menuItem.hasSubRoute === false) {
+          <li class="nav-item">
+            <a [routerLink]="menuItem.routes" routerLinkActive="active" class="nav-link"
+              [class.active]="page === menuItem.page">
+              <img [src]="menuItem.icon" alt="Img"> {{ menuItem.title }}
+            </a>
+          </li>
+        }
+        @if (menuItem.hasSubRoute === true) {
+          @if (menuItem.submenu) {
+            <li class="nav-item submenu">
+              <a href="javascript:void(0)"
+                [class.active]="page === menuItem.page1 || page === menuItem.page2 || page === menuItem.page3 || page === menuItem.page4 || page === menuItem.page5"
+                class="nav-link" (click)="toggleSubMenu(menuItem)"
+                [ngClass]="{'subdrop': menuItem.expanded}">
+                <img [src]="menuItem.icon" alt="Img"> {{ menuItem.title }}
+                @if (menuItem.submenu) {
+                  <span class="menu-arrow"></span>
+                }
+              </a>
+              <ul class="sub-menu-ul"
+                [ngClass]="{'d-block': menuItem.expanded, 'd-none': !menuItem.expanded}">
+                @for (subMenuItem of menuItem.submenu; track subMenuItem) {
+                  <li>
+                    <a [routerLink]="subMenuItem.routes" [class.active]="page === subMenuItem.page">{{
+                    subMenuItem.title }}</a>
+                  </li>
+                }
+              </ul>
+            </li>
+          }
+        }
+      }
+    </ul>
+  </div>
+</div>
+</div>

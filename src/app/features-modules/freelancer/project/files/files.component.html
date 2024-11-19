@@ -1,0 +1,153 @@
+<!-- Page Content -->
+<div class="page-title">
+  <h3>Manage Projects</h3>
+</div>
+<nav class="user-tabs mb-4">
+  <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.freelancerViewProjectDetail">Overview & Discussions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.freelancerMilestones">Milestones</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.freelancerTask">Tasks</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink]="routes.freelancerFiles">Files</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="routes.freelancerPayments">Payments</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- project list -->
+<div class="my-projects-view">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="title-head d-flex justify-content-between align-items-center mb-4">
+        <h4 class="mb-0">Files</h4>
+        <a href="#add-milestone" class="login-btn btn-primary" data-bs-toggle="modal">Add Files</a>
+      </div>
+
+      <div class="table-responsive table-box manage-projects-table">
+        <table class="table table-center table-hover datatable no-sort">
+          <thead class="thead-pink">
+            <tr>
+              <th>File Preview</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Type</th>
+              <th>Size</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (data of files; track data) {
+              <tr>
+                <td><img [src]="data.img" alt="Img"> </td>
+                <td>{{data.title}} </td>
+                <td>
+                  {{data.description}}
+                </td>
+                <td>{{data.type}}</td>
+                <td>{{data.size}}</td>
+                <td>
+                  <div class="action-table-data">
+                    <div class="edit-delete-action m-0">
+                      <a href="javascript:void(0);" class="download-icon"><i class="feather icon-download"></i></a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="table_footer">
+        <div class="col-sm-12 col-md-5">
+          <div class="dataTables_info">
+            Showing {{ serialNumberArray[0] }} to
+            {{ serialNumberArray[serialNumberArray.length - 1] }} of
+            {{ totalData }} entries
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-7">
+          <div class="pagination_section">
+            <ul class="pagination">
+              <li class="page-item" [ngClass]="{
+                        disabled: currentPage === 1
+                      }">
+                <a (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')" class="page-link"
+                href="javascript:void(0);" tabindex="-1">Previous</a>
+              </li>
+
+              @for (item of pageNumberArray; track item; let i = $index) {
+                <li class="page-item" [class.active]="item === currentPage" [ngClass]="
+                          (pageNumberArray[currentPage - 2] > item &&
+                            item !== 1 &&
+                            pageNumberArray.length > 6) ||
+                          (pageNumberArray[currentPage] < item &&
+                            item !== 1 &&
+                            pageNumberArray.length > 6 &&
+                            pageNumberArray.length !== item)
+                            ? 'hide-page-no'
+                            : 'show-page-no'
+                        ">
+                  <a (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)" class="page-link"
+                    href="javascript:void(0);">
+                    {{ item }}
+                  </a>
+                </li>
+                @if (
+                  i === 0 &&
+                  pageNumberArray.length > 6 &&
+                  currentPage > 2
+                  ) {
+                  <li  tabindex="0" class="page-item" [hidden]="currentPage === 1" (click)="moveToPage(currentPage - 2)"
+                    (keydown.enter)="moveToPage(currentPage - 2)">
+                    <a class="page-link" href="javascript:void(0);">
+                      ...
+                    </a>
+                  </li>
+                }
+                @if (
+                  i === pageNumberArray.length - 2 &&
+                  pageNumberArray.length > 6
+                  ) {
+<li tabindex="0" [hidden]="
+                          currentPage >=
+                            pageNumberArray[pageNumberArray.length - 2] ||
+                          totalData <
+                            serialNumberArray[serialNumberArray.length - 1]
+                        " class="page-item" (click)="moveToPage(currentPage + 2)"
+                    (keydown.enter)="moveToPage(currentPage + 2)">
+                    <a class="page-link" href="javascript:void(0);">
+                      ...
+                    </a>
+                  </li>
+                }
+              }
+
+              <li class="page-item" [ngClass]="{
+                        disabled:
+                          currentPage ===
+                            pageNumberArray[pageNumberArray.length - 1] ||
+                            files.length === 0
+                      }">
+                <a (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')" class="page-link"
+                  href="javascript:void(0);">Next
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- project list -->
+<!-- /Page Content -->

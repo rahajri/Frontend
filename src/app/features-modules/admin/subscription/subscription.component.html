@@ -1,0 +1,174 @@
+<router-outlet></router-outlet>
+            		<!-- Add Modal -->
+                    <div class="modal fade custom-modal" id="add-plan-freelance">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header flex-wrap add-plan-head">
+                                    <h4 class="modal-title">Add Plan</h4>
+                                    <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                                </div>
+                                <div class="modal-body add-plan">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="plan-name">Plan Name <span>*</span></label>
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="plan-type">Plan Type <span>*</span></label>
+                                                    <select class="form-control form-select">
+                                                        <option>Select</option>
+                                                        <option>Frontend Developer</option>
+                                                        <option>Graphic Designer</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="plan-amount">Plan Amount <span>*</span></label>
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="bidding-credits">Bidding Credits <span>*</span></label>
+                                                    <select class="form-control form-select">
+                                                        <option>Select</option>
+                                                        <option>Frontend Developer</option>
+                                                        <option>Graphic Designer</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="projects">No of Projects <span>*</span></label>
+                                                    <select class="form-control form-select">
+                                                        <option>Select</option>
+                                                        <option>Frontend Developer</option>
+                                                        <option>Graphic Designer</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="bidding-visibility">Bidding  visibility <span>*</span></label>
+                                                    <select class="form-control form-select">
+                                                        <option>Select</option>
+                                                        <option>Frontend Developer</option>
+                                                        <option>Graphic Designer</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="featured-service">Featured Service <span>*</span></label>
+                                                    <select class="form-control form-select">
+                                                        <option>Select</option>
+                                                        <option>Frontend Developer</option>
+                                                        <option>Graphic Designer</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="plan-description">Plan Description <span>*</span></label>
+                                                    <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="status">Status <span>*</span></label>
+                                                    <div class="status-toggle d-flex justify-content-between align-items-center">
+                                                        <input type="checkbox" id="status_1" class="check" checked>
+                                                        <label for="status_1" class="checktoggle"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="plan-btn text-center">
+                                            <button type="submit" class="btn btn-primary remove-form">Close</button>
+                                            <button type="submit" class="btn btn-primary save-form">Save Plan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Modal -->
+                    
+                    <!-- Add Modal -->
+                    <div class="modal fade custom-modal" id="edit-category">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+            
+                                <div class="modal-header flex-wrap">
+                                    <div class="text-center w-100 mb-3">
+                                        <img src="assets/admin/img/logo-small.png" alt="">
+                                    </div>
+                                    <h4 class="modal-title">Edit User</h4>
+                                    <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                                </div>
+            
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="full-name">Full Name</label>
+                                            <input type="text" class="form-control" value=" George Wells">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" value="georgewells@example.com">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" value="*******">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="confirm-password">Confirm Password</label>
+                                            <input type="password" class="form-control" value="********">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="user-type">User Type</label>
+                                            <select class="form-control form-select">
+                                                <option>Select</option>
+                                                <option selected>Frontend Developer</option>
+                                                <option>Graphic Designer</option>
+                                            </select>
+                                        </div>
+                                        <div class="mt-4">
+                                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Modal -->
+            
+                    <!-- Delete Modal -->
+                    <div class="modal custom-modal fade" id="delete_category" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="form-header">
+                                        <h3>Delete</h3>
+                                        <p>Are you sure want to delete?</p>
+                                    </div>
+                                    <div class="modal-btn delete-action">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>
+                                            </div>
+                                            <div class="col-6">
+                                                <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Delete Modal -->

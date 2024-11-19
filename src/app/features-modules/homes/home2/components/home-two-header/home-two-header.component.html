@@ -1,0 +1,198 @@
+<!-- Header -->
+<header class="header header-two" [ngClass]="{'sticky' : sticky === true}">
+  <div class="top-header">
+    <div class="container">
+      <div class="top-head-items">
+        <ul class="nav user-menu">
+          <!-- Flag -->
+          <li class="nav-item dropdown has-arrow flag-nav">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
+              <img src="assets/img/flags/us.png" class="me-1" alt="Flag" height="20"> <span>English</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="javascript:void(0);" class="dropdown-item">
+                <img src="assets/img/flags/us.png" alt="Flag" height="16"> English
+              </a>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <img src="assets/img/flags/fr.png" alt="Flag" height="16"> French
+              </a>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <img src="assets/img/flags/es.png" alt="Flag" height="16"> Spanish
+              </a>
+              <a href="javascript:void(0);" class="dropdown-item">
+                <img src="assets/img/flags/de.png" alt="Flag" height="16"> German
+              </a>
+            </div>
+          </li>
+          <!-- /Flag -->
+          <li class="nav-item dropdown has-arrow flag-nav">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
+              <span>USD</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="javascript:void(0);" class="dropdown-item">
+                USD
+              </a>
+              <a href="javascript:void(0);" class="dropdown-item">
+                French
+              </a>
+            </div>
+          </li>
+        </ul>
+        <ul class="top-header-links">
+          <li>
+            <ul>
+              <li>
+                <a href="javascript:void(0);">
+                  <i class="fa-brands fa-facebook-f"></i>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">
+                  <i class="fa-brands fa-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">
+                  <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0);">
+                  <i class="fa-regular fa-bell"></i>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a [routerLink] = "routes.register"><i class="feather icon-lock"></i>Register</a>
+          </li>
+          <li>
+            <a [routerLink] = "routes.login"><i class="feather icon-user"></i>Login</a>
+          </li>
+          <li>
+            <a [routerLink]="routes.admin" target="_blank"><i class="feather icon-user"></i>Admin</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg header-nav p-0"
+		[ngClass]="{
+			'header-bg': header_bg === true
+		  }">
+      <div class="navbar-header header-select">
+        <a id="mobile_btn" (click)="toggleSidebar()" href="javascript:void(0);">
+          <span class="bar-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </a>
+        <a [routerLink]="'/home'" class="navbar-brand logo">
+          <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+        </a>
+        <div class="input-group">
+          <div class="custom-header-cls">
+            <img src="assets/img/icon/dashboard-line.svg" alt="Img">
+            <mat-select [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}" class="select "
+              placeholder="Categories">
+              @for (data of selectedList; track data) {
+                <mat-option [value]="data.value">
+                  {{data.value}}
+                </mat-option>
+              }
+            </mat-select>
+          </div>
+        </div>
+      </div>
+      <div class="main-menu-wrapper">
+        <div class="menu-header">
+          <a [routerLink]="'/home'" class="menu-logo">
+            <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+          </a>
+          <a id="menu_close" (click)="hideSidebar()" class="menu-close" href="javascript:void(0);">
+            <i class="fas fa-times"></i>
+          </a>
+        </div>
+        <ul class="main-nav" >
+          @for (mainMenus of navbar; track mainMenus) {
+            @if (mainMenus.separateRoute === true) {
+              <li [class.active]="base === mainMenus.base" routerLinkActive="active">
+                <a [routerLink]="mainMenus.route">{{mainMenus.tittle}}</a>
+              </li>
+            }
+            @if (mainMenus.separateRoute === false) {
+              <li class="has-submenu" [class.active]="base === mainMenus.base" routerLinkActive="active">
+                <a
+                  href="javascript:void(0);"
+                  (click)="mainMenus.showAsTab = !mainMenus.showAsTab"
+                  >{{mainMenus.tittle}} <i class="fas fa-chevron-down"></i
+                ></a>
+                <ul
+                  class="submenu"
+							  [ngClass]="{
+								'd-block': mainMenus.showAsTab === true
+							  }"
+                  >
+                  @for (menu of mainMenus.menu; track menu) {
+                    @if (menu.hasSubRoute === false) {
+                      <li routerLinkActive="active"
+									[class.active]="
+									  base === menu.base && page === menu.page
+									"
+                        >
+                        <a [routerLink]="menu.route">{{menu.menuValue}}</a>
+                      </li>
+                    }
+                    @if (menu.hasSubRoute === true) {
+                      <li routerLinkActive="active"
+                        class="has-submenu"
+                        [class.active]="page === menu.page"
+                        >
+                        <a
+                          (click)="menu.showSubRoute = !menu.showSubRoute"
+                          [routerLink]="menu.route"
+                          >{{menu.menuValue}}</a
+                          >
+                          <ul
+                            class="submenu"
+									  [ngClass]="{
+										'd-block': menu.showSubRoute === true
+									  }"
+                            >
+                            @for (subMenu of menu.subMenus; track subMenu) {
+                              <li
+										  [class.active]="
+											base === subMenu.base &&
+											page === subMenu.page 
+											
+										  "
+                                >
+                                <a [routerLink]="subMenu.route">{{subMenu.menuValue}}</a>
+                              </li>
+                            }
+                          </ul>
+                        </li>
+                      }
+                    }
+                  </ul>
+                </li>
+              }
+            }
+          </ul>
+        </div>
+        <ul class="nav header-navbar-rht reg-head">
+          <li><a [routerLink]="'/employer/post-project'" class="login-btn"><i class="feather icon-plus me-1"></i>Post a Project </a></li>
+        </ul>
+      </nav>
+    </div>
+
+  </header>
+  <!-- /Header -->

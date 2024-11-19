@@ -1,0 +1,61 @@
+{
+    "data" : [
+        {
+            "image": "assets/img/profiles/avatar-14.jpg",
+            "name": "Janet Paden",
+            "designation": "CEO",
+            "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat",
+            "category": "Angular"
+          },
+          {
+            "image": "assets/img/profiles/avatar-15.jpg",
+            "name": "George Wells",
+            "designation": "Tech Lead",
+            "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat",
+            "category": "Node"
+          },
+          {
+            "image": "assets/img/profiles/avatar-01.jpg",
+            "name": "Timothy Smith",
+            "designation": "Technial Manager",
+            "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat",
+            "category": "Angular"
+          },
+          {
+            "image": "assets/img/profiles/avatar-02.jpg",
+            "name": "Lois Alexander",
+            "designation": "Developer",
+            "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat",
+            "category": "React"
+          },
+          {
+            "image": "assets/img/profiles/avatar-03.jpg",
+            "name": "Timothy Smith",
+            "designation": "Designer",
+            "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat",
+            "category": "Angular"
+          },
+          {
+            "image": "assets/img/profiles/avatar-05.jpg",
+            "name": "Deboarah",
+            "designation": "Associate Engineer",
+            "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat",
+            "category": "Python"
+          },
+          {
+            "image": "assets/img/profiles/avatar-04.jpg",
+            "name": "Sofia Briant",
+            "designation": "Technial Manager",
+            "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat",
+            "category": "Java"
+          },
+          {
+            "image": "assets/img/profiles/avatar-06.jpg",
+            "name": "Sarah Alexander",
+            "designation": "Designer",
+            "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean. Eget volutpat",
+            "category": "Golang"
+          }
+     ],
+     "totalData":8
+}

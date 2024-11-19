@@ -1,0 +1,107 @@
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+  <div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="page-title">Verification d'entreprise</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="'/admin/dashboard'">Dashbord</a></li>
+            <li class="breadcrumb-item active">Verification d'entreprise</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /Page Header -->
+
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card bg-white">
+          <div class="card-body pt-0">
+            <div class="card-header mb-4">
+               
+            </div>
+            <div class="tab-content pt-0">
+              <div role="tabpanel" id="employer" class="tab-pane fade show active">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <div class="table_header">
+                        <div class="dataTables_length">
+                          <label for="show">Show</label>
+                          <select [(ngModel)]="pageSize" (ngModelChange)="changePageSize()" class="form-control form-control-sm">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                          </select>
+                          <label for="entries">Entries</label>
+                        </div>
+                        <div class="dataTables_filter">
+                          <label for="search">Search:</label>
+                          <input [(ngModel)]="searchDataValue" (ngModelChange)="searchData(searchDataValue)" class="form-control form-control-sm" />
+                        </div>
+                      </div>
+                      <div class="table-scroll">
+                        <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover mb-0 datatable">
+                          <thead>
+                            <tr>
+                              <th mat-sort-header="name">Entreprise</th>
+                              <th mat-sort-header="siret">Siret</th>
+                               <th mat-sort-header="naf">Naf</th>
+                               <th mat-sort-header="workforce">Effectifs</th>
+                               <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let company of companies">
+                              <td>{{ company.name }}</td>
+                              <td>{{ company.siret }}</td>
+                               <td>{{ company.naf }}</td>
+                               <td>{{ company.workforce }}</td>
+                               <td>
+                                <button (click)="approve(company.id)" class="btn btn-success me-2">Approve</button>
+                                 <button (click)="reject(company.id)" class="btn btn-danger">Reject</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="table_footer">
+                        <div class="col-sm-12 col-md-5">
+                          <div class="dataTables_info">
+                            Showing {{ serialNumberArray[0] }} to {{ serialNumberArray[serialNumberArray.length - 1] }} of {{ totalData }} entries
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                          <div class="pagination_section">
+                            <ul class="pagination">
+                              <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
+                                <a (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')" class="page-link" href="javascript:void(0);" tabindex="-1">Previous</a>
+                              </li>
+                              <li *ngFor="let item of pageNumberArray" class="page-item" [class.active]="item === currentPage">
+                                <a (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)" class="page-link" href="javascript:void(0);">{{ item }}</a>
+                              </li>
+                              <li class="page-item" [ngClass]="{ disabled: currentPage === pageNumberArray[pageNumberArray.length - 1] || lstIdentity.length === 0 }">
+                                <a (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')" class="page-link" href="javascript:void(0);">Next</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    </div>
+                  </div>
+                </div>
+                 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Page Wrapper -->

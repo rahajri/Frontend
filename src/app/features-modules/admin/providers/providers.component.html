@@ -1,0 +1,302 @@
+		<!-- Page Wrapper -->
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+            
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="page-title">Providers</h3>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a [routerLink]="'/home'">Home</a></li>
+                                <li class="breadcrumb-item active">Providers</li>
+                            </ul>
+                        </div>
+                        <div class="col-auto">
+                            <a class="btn filter-btn" href="javascript:void(0);" id="filter_search" (click)="openFilter()" (keydown.enter)="openFilter()">
+                                <i class="fas fa-filter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Page Header -->
+
+                <!-- Search Filter -->
+                <div class="card filter-card" id="filter_inputs" [ngClass]="filter === true? 'filter-show' : ''">
+                    <div class="card-body pb-0">
+                        <form action="#" method="post">
+                            <div class="row filter-row">
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <label for="company-name">Company Name</label>
+                                        <input class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <div class="cal-icon">
+                                            <label for="from-date">From Date</label>
+                                            <input class="form-control datetimepicker" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <div class="cal-icon">
+                                            <label for="to-date">To Date</label>
+                                            <input class="form-control datetimepicker" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /Search Filter -->
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="table_header">
+                                        <div class="dataTables_length">
+                                            <label for="entries">
+                                                Show
+                                            </label>
+                                            <select [(ngModel)]="pageSize" (ngModelChange)="changePageSize()"
+                                            class="form-control form-control-sm">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+                                        <label for="entries">Entries</label>
+                                        </div>
+                                        <div class="dataTables_filter">
+                                            <label for="search">
+                                                Search:
+                                            </label>
+                                            <input [(ngModel)]="searchDataValue"
+                                                (ngModelChange)="searchData(searchDataValue)"
+                                                class="form-control form-control-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="table-scroll">
+                                        <table matSort (matSortChange)="sortData($event)"
+                                            class="table table-center table-hover mb-0 datatable">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th mat-sort-header="name">ID</th>
+                                                    <th mat-sort-header="image">Logo</th>
+                                                    <th mat-sort-header="company">Company name</th>
+                                                    <th mat-sort-header="contact">Primary contact</th>	
+                                                    <th mat-sort-header="website">website</th>	
+                                                    <th mat-sort-header="projects">Total Projects</th>	
+                                                    <th mat-sort-header="status">Status</th>	
+                                                    <th class="text-end">Actions</th>
+                                                </tr>
+                                                <tr *ngIf="lstProvider.length === 0">
+                                                    <td colspan="9">
+                                                      <h5 style="text-align: center">No data found</h5>
+                                                    </td>
+                                                  </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor = "let prov of lstProvider let i = index">
+                                                    <td>
+                                                        <div class="form-check custom-checkbox">
+                                                          <input type="checkbox" class="form-check-input" id="customCheck5">
+                                                          <label class="form-check-label" for="customCheck5"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{prov.name}}</td>
+                                                    <td>
+                                                        <h2 class="table-avatar">
+                                                            <a href="javascript:void(0);"><img class="me-2" [src]="prov.image" alt="User Image"></a>
+                                                        </h2>
+                                                    </td>
+                                                    <td>
+                                                        <h2 class="table-avatar">
+                                                            <a href="javascript:void(0);">{{prov.company}}</a>
+                                                        </h2>
+                                                    </td>
+                                                    <td>
+                                                        <h2 class="table-avatar">
+                                                            <a [routerLink] = "routes.admin_profile">
+                                                                {{prov.contact}}
+                                                            </a>
+                                                        </h2>			
+                                                    </td>
+                                                    <td>{{prov.website}}</td>
+                                                    <td>
+                                                        {{prov.projects}}
+                                                    </td>
+                                                    <td *ngIf = "prov.status === 'Enabled'">
+                                                        <a href="javascript:" class="btn btn-enable">{{prov.status}}</a>
+                                                    </td>
+                                                    <td *ngIf = "prov.status === 'Disable'">
+                                                        <a href="javascript:" class="btn btn-disable">{{prov.status}}</a>
+                                                    </td>
+                                                    
+                                                    <td class="text-end">
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#add-category"><i class="far fa-edit"></i></a> 
+                                                        <a href="javascript:void(0);" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_category"><i class="far fa-trash-alt"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="table_footer">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info">
+                                                Showing {{ serialNumberArray[0] }} to
+                                                {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                                                {{ totalData }} entries
+                                            </div>
+                                        </div>
+                                
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="pagination_section">
+                                                <ul class="pagination">
+                                                    <li class="page-item" [ngClass]="{
+                                disabled: currentPage === 1
+                                }">
+                                                        <a (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')" class="page-link"
+                                                            href="javascript:void(0);" tabindex="-1">Previous</a>
+                                                    </li>
+                                
+                                                    <ng-container *ngFor="let item of pageNumberArray; let i = index">
+                                                        <li class="page-item" [class.active]="item === currentPage" [ngClass]="
+                                  (pageNumberArray[currentPage - 2] > item &&
+                                    item !== 1 &&
+                                    pageNumberArray.length > 6) ||
+                                  (pageNumberArray[currentPage] < item &&
+                                    item !== 1 &&
+                                    pageNumberArray.length > 6 &&
+                                    pageNumberArray.length !== item)
+                                    ? 'hide-page-no'
+                                    : 'show-page-no'
+                                ">
+                                                            <a (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)" class="page-link"
+                                                                href="javascript:void(0);">
+                                                                {{ item }}
+                                                            </a>
+                                                        </li>
+                                                        <li class="page-item" *ngIf="
+                                  i === 0 && pageNumberArray.length > 6 && currentPage > 2
+                                " [hidden]="currentPage === 1" (click)="moveToPage(currentPage - 2)" (keydown.enter)="moveToPage(currentPage - 2)" tabindex="0">
+                                                            <a class="page-link" href="javascript:void(0);"> ... </a>
+                                                        </li>
+                                                        <li *ngIf="
+                                  i === pageNumberArray.length - 2 &&
+                                  pageNumberArray.length > 6
+                                " [hidden]="
+                                  currentPage >=
+                                    pageNumberArray[pageNumberArray.length - 2] ||
+                                  totalData < serialNumberArray[serialNumberArray.length - 1]
+                                " class="page-item" (click)="moveToPage(currentPage + 2)" (keydown.enter)="moveToPage(currentPage + 2)" tabindex="0">
+                                                            <a class="page-link" href="javascript:void(0);"> ... </a>
+                                                        </li>
+                                                    </ng-container>
+                                
+                                                    <li class="page-item" [ngClass]="{
+                                disabled:
+                                  currentPage ===
+                                    pageNumberArray[pageNumberArray.length - 1] ||
+                                    lstProvider.length === 0
+                                }">
+                                                        <a (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')"  class="page-link"
+                                                            href="javascript:void(0);">Next
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>			
+                    </div>
+                </div>			
+            </div>
+            <!-- /Page Wrapper -->
+        </div>
+        		<!-- Category Modal -->
+		<div class="modal fade custom-modal" id="add-category">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+  
+                <!-- Modal Header -->
+                <div class="modal-header flex-wrap">
+                  <h4 class="modal-title">Edit Provider</h4>
+                  <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+                </div>
+  
+                <!-- Modal body -->
+                <div class="modal-body">
+                   <form>
+                      <div class="form-group">
+                          <label for="company-name">Company Name</label>
+                          <input type="text" class="form-control" value="Focused Holistic Hardware">
+                      </div>
+                      <div class="form-group">
+                          <label for="primary-contact">Primary Contact</label>
+                          <input type="text" class="form-control" value="Emily Smith">
+                      </div>
+                      <div class="form-group">
+                          <label for="website">Website</label>
+                          <input type="text" class="form-control" value="https://focusedhardware.de">
+                      </div>
+                      <div class="form-group">
+                          <label for="total-projects">Total Projects</label>
+                          <input type="text" class="form-control" value="120">
+                      </div>
+                      <div class="form-group">
+                          <label for="status">Status</label>
+                          <select class="form-control form-select">
+                              <option selected>Enabled</option>
+                              <option>Disable</option>
+                          </select>
+                      </div>
+                      <div class="mt-4">
+                          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                      </div>
+                   </form>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+          <!-- /Category Modal -->
+  
+          <!-- Delete Modal -->
+          <div class="modal custom-modal fade" id="delete_category" role="dialog">
+              <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                      <div class="modal-body">
+                          <div class="form-header">
+                              <h3>Delete</h3>
+                              <p>Are you sure want to delete?</p>
+                          </div>
+                          <div class="modal-btn delete-action">
+                              <div class="row">
+                                  <div class="col-6">
+                                      <a href="javascript:void(0);" class="btn btn-primary continue-btn">Delete</a>
+                                  </div>
+                                  <div class="col-6">
+                                      <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- /Delete Modal -->

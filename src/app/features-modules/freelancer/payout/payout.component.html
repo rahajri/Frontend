@@ -1,0 +1,182 @@
+<div class="dashboard-sec payout-section">
+    <div class="page-title portfolio-title">
+        <h3 class="mb-0">Payout</h3>
+        <a class="btn btn-primary title-btn" data-bs-toggle="modal" href="#payout_modal"><i
+                class="feather icon-settings"></i> Payout Setting</a>
+    </div>
+    <div class="widget-section">
+        <div class="row row-gap">
+            <div class="col-md-6 col-xl-4 d-flex">
+                <div class="dash-widget flex-fill">
+                    <div class="dash-info">
+                        <div class="d-flex">
+                            <div class="dashboard-icon">
+                                <img src="assets/img/icon/wallet-icon.svg" alt="Img">
+                            </div>
+                            <div class="dash-widget-info"><span>Previous Payout</span>
+                                <h5>$5,231.00</h5>
+                            </div>
+                        </div>
+                        <div class="badge badge-paid"><span>Paid</span></div>
+                    </div>
+                    <div class="dash-widget-more d-flex align-items-center justify-content-between">
+                        <div class="dash-widget-date"><span>17 Aug 2023</span></div>
+                        <a [routerLink] = "routes.completedProjects" class="d-flex">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4 d-flex">
+                <div class="dash-widget flex-fill">
+                    <div class="dash-info">
+                        <div class="d-flex">
+                            <div class="dashboard-icon">
+                                <img src="assets/img/icon/wallet-icon.svg" alt="Img">
+                            </div>
+                            <div class="dash-widget-info"><span>Balance</span>
+                                <h5>$3,270.00</h5>
+                            </div>
+                        </div>
+                        <div class="badge badge-pending"><span>Pending</span></div>
+                    </div>
+                    <div class="dash-widget-more d-flex align-items-center justify-content-between">
+                        <div class="dash-widget-date"><a href="javascript:void(0);"> Payout Request</a></div>
+                        <a [routerLink] = "routes.completedProjects" class="d-flex">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-4 d-flex">
+                <div class="dash-widget flex-fill d-flex align-items-center">
+                    <div class="dash-info mb-0">
+                        <div class="d-flex">
+                            <div class="dashboard-icon">
+                                <img src="assets/img/icon/wallet-icon.svg" alt="Img">
+                            </div>
+                            <div class="dash-widget-info"><span>Total Projects</span>
+                                <h5>107</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-top-section">
+        <div class="table-header">
+            <h5 class="mb-0">Payout History</h5>
+        </div>
+
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Payout Date</th>
+                    <th>Payment Type</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Payout Processed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>29 Sep 2023, 11:26 PM</td>
+                    <td>PayPal</td>
+                    <td>$80.00</td>
+                    <td>
+                        <div class="badge badge-pending"><span>Pending</span></div>
+                    </td>
+                    <td>29 Sep 2023, 12:26 PM</td>
+                </tr>
+                <tr>
+                    <td>17 Sep 2023, 09:14 AM</td>
+                    <td>Stripe</td>
+                    <td>$20.50</td>
+                    <td>
+                        <div class="badge badge-paid"><span>Paid</span></div>
+                    </td>
+                    <td>17 Sep 2023, 010:14 AM</td>
+                </tr>
+                <tr>
+                    <td>13 Sep 2023, 11:15 AM</td>
+                    <td>Bank Transfer</td>
+                    <td>$35.70</td>
+                    <td>
+                        <div class="badge badge-paid"><span>Paid</span></div>
+                    </td>
+                    <td>13 Sep 2023, 12:15 AM</td>
+                </tr>
+                <tr>
+                    <td>07 Sep 2023, 05:37 PM</td>
+                    <td>PayPal</td>
+                    <td>$62.80</td>
+                    <td>
+                        <div class="badge badge-paid"><span>Paid</span></div>
+                    </td>
+                    <td>07 Sep 2023, 07:37 PM</td>
+                </tr>
+                <tr>
+                    <td>02 Sep 2023, 07:42 PM</td>
+                    <td>Stripe</td>
+                    <td>$73.30</td>
+                    <td>
+                        <div class="badge badge-paid"><span>Paid</span></div>
+                    </td>
+                    <td>02 Sep 2023, 08:42 PM</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- /Table -->
+
+</div>
+<div class="modal fade" id="payout_modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Payout Setting</h4>
+                <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i
+                            class="fa fa-times orange-text"></i></a></span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <h5>Payout Methods</h5>
+                    <div class="payout-method-option">
+                        <div class="d-flex align-items-center">
+                            <div class="payout-icon">
+                                <img src="assets/img/icon/bank-line.svg" alt="icon">
+                            </div>
+                            <div class="payout-method-content">
+                                <h5>Bank Transfer</h5>
+                                <p class="mb-0">Connect your bank account</p>
+                            </div>
+                        </div>
+                        <a class="badge badge-paid"><span>Connect</span></a>
+                    </div>
+                    <div class="payout-method-option">
+                        <div class="d-flex align-items-center">
+                            <div class="payout-icon">
+                                <img src="assets/img/icon/paypal-line.svg" alt="icon">
+                            </div>
+                            <div class="payout-method-content">
+                                <h5>Paypal</h5>
+                                <p class="mb-0">Connect your Paypal account</p>
+                            </div>
+                        </div>
+                        <a class="badge badge-paid"><span>Connect</span></a>
+                    </div>
+                </div>
+                <form>
+                    <div class="submit-section text-end">
+                        <a data-bs-dismiss="modal" class="btn btn-cancel submit-btn">Cancel</a>
+                        <button type="submit" data-bs-dismiss="modal" class="btn btn-primary submit-btn" (click)="navigation()" (keydown.enter)="navigation()" tabindex="0">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

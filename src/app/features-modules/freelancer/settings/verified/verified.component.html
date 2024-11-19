@@ -1,0 +1,88 @@
+<!-- Page Content -->
+<div class="dashboard-sec payout-section freelancer-statements">
+    <div class="page-title portfolio-title">
+        <h3 class="mb-0">Verification Details</h3>
+    </div>
+    <div class="row row-gap">
+        <div class="col-lg-12">
+            <div class="verified-details">
+                <div class="verified-details-content">
+                    <h5>Passport</h5>
+                    <p class="mb-0">421921******2121</p>
+                </div>
+                <div class="verifi-badge success">
+                    <span><i class="feather icon-check me-1"></i>Verified</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="verified-rejected">
+                <div class="verified-details ">
+                    <div class="verified-details-content">
+                        <h5>Passport</h5>
+                        <p class="mb-0">421921******2121</p>
+                    </div>
+                    <div class="verifi-badge rejected">
+                        <span><i class="fa-solid fa-circle-xmark me-1"></i>Rejected</span>
+                    </div>
+                </div>
+                <div class="reject-reason">
+                    <h5>Reason</h5>
+                    <p>Sometimes we're unable to verify your ID if the picture you submit isn't clear or is missing
+                        information.</p>
+                    <div class="d-flex doc-btn rejected-btn">
+                        <a href="javascript:void(0);" class="btn btn-black">Resend Verification</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /Page Content -->
+<div class="modal fade" id="payout_modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Payout Setting</h4>
+                <span class="modal-close"><a href="javascript:void(0);" data-bs-dismiss="modal" aria-label="Close"><i
+                            class="fa fa-times orange-text"></i></a></span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <h5>Payout Methods</h5>
+                    <div class="payout-method-option">
+                        <div class="d-flex align-items-center">
+                            <div class="payout-icon">
+                                <img src="assets/img/icon/bank-line.svg" alt="icon">
+                            </div>
+                            <div class="payout-method-content">
+                                <h5>Bank Transfer</h5>
+                                <p class="mb-0">Connect your bank account</p>
+                            </div>
+                        </div>
+                        <a class="badge badge-paid"><span>Connect</span></a>
+                    </div>
+                    <div class="payout-method-option">
+                        <div class="d-flex align-items-center">
+                            <div class="payout-icon">
+                                <img src="assets/img/icon/paypal-line.svg" alt="icon">
+                            </div>
+                            <div class="payout-method-content">
+                                <h5>Paypal</h5>
+                                <p class="mb-0">Connect your Paypal account</p>
+                            </div>
+                        </div>
+                        <a class="badge badge-paid"><span>Connect</span></a>
+                    </div>
+                </div>
+                <form>
+                    <div class="submit-section text-end">
+                        <a data-bs-dismiss="modal" class="btn btn-cancel submit-btn">Cancel</a>
+                        <button type="button" (click)="navigation()" (keydown.enter)="navigation()" tabindex="0" data-bs-dismiss="modal" class="btn btn-primary submit-btn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

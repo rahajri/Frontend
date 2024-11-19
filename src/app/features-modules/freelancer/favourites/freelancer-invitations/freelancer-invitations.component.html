@@ -1,0 +1,503 @@
+<div class="dashboard-sec freelance-favourites">
+	<div class="page-title">
+		<h3>Favourites</h3>
+	</div>
+	<div class="row row-gap">
+		<div class="col-md-6 col-lg-12 col-xl-4">
+
+			<div class="freelance-widget widget-author">
+				<div class="freelance-content">
+					<div class="freelance-top-content d-flex">
+						<span> <i class="feather icon-clock me-1"></i>Posted Just Now</span>
+						<a href="javascript:void(0);" class="favourite" [ngClass]="{'color-active': like[1]}" (click)="toggleLike(1)"><i class="feather icon-heart"></i></a>
+					</div>
+					<div class="author-heading">
+						<div class="profile-img">
+							<span class="project-verified"><i class="fas fa-check-circle"></i></span>
+							<a [routerLink] = "routes.freelancer_project_details">
+								<img src="assets/img/company/img-1.png" alt="author">
+							</a>
+						</div>
+						<div class="profile-name">
+							<div class="author-location"><a [routerLink] = "routes.freelancer_project_details">Amaze Tech </a></div>
+						</div>
+						<div class="freelance-info">
+							<h3><a href="javascript:void(0);">UI/UX Developer</a></h3>
+							<div class="freelance-location"><i class="feather icon-map-pin me-1"></i>Alabama, USA</div>
+						</div>
+						<div class="freelance-tags">
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Web
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">UI
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Node Js</span></a>
+						</div>
+						<div class="freelancers-price">$40-$500</div>
+					</div>
+					<div class="counter-stats">
+						<ul>
+							<li>
+								<h5>Expiry</h5>
+								<h3 class="counter-value">4 Days Left</h3>
+							</li>
+							<li>
+								<h5>Proposals</h5>
+								<h3 class="counter-value">15</h3>
+							</li>
+							<li>
+								<h5>Job Type</h5>
+								<h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cart-hover">
+					<a [routerLink] = "routes.freelancer_project_details" class="btn-cart" tabindex="-1">View Profile</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-lg-12 col-xl-4">
+
+			<div class="freelance-widget widget-author">
+				<div class="freelance-content">
+					<div class="freelance-top-content d-flex">
+						<span> <i class="feather icon-clock me-1"></i>1 min ago</span>
+						<a href="javascript:void(0);" class="favourite" [ngClass]="{'color-active': like[2]}"  (click)="toggleLike(2)"><i class="feather icon-heart"></i></a>
+					</div>
+					<div class="author-heading">
+						<div class="profile-img">
+							<span class="project-verified"><i class="fas fa-check-circle"></i></span>
+							<a [routerLink] = "routes.freelancer_project_details">
+								<img src="assets/img/company/img-2.png" alt="author">
+							</a>
+						</div>
+						<div class="profile-name">
+							<div class="author-location"><a [routerLink] = "routes.freelancer_project_details">Park INC </a></div>
+						</div>
+						<div class="freelance-info">
+							<h3><a href="javascript:void(0);">PHP Developer</a></h3>
+							<div class="freelance-location"><i class="feather icon-map-pin me-1"></i>California, USA</div>
+						</div>
+						<div class="freelance-tags">
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Web
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">UI
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Node Js</span></a>
+						</div>
+						<div class="freelancers-price">$30-$300</div>
+					</div>
+					<div class="counter-stats">
+						<ul>
+							<li>
+								<h5>Expiry</h5>
+								<h3 class="counter-value">5 Days Left</h3>
+							</li>
+							<li>
+								<h5>Proposals</h5>
+								<h3 class="counter-value">15</h3>
+							</li>
+							<li>
+								<h5>Job Type</h5>
+								<h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cart-hover">
+					<a [routerLink] = "routes.freelancer_project_details" class="btn-cart" tabindex="-1">View Profile</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-lg-12 col-xl-4">
+
+			<div class="freelance-widget widget-author">
+				<div class="freelance-content">
+					<div class="freelance-top-content d-flex">
+						<span> <i class="feather icon-clock me-1"></i>30 mins ago</span>
+						<a href="javascript:void(0);" class="favourite" [ngClass]="{'color-active': like[3]}"  (click)="toggleLike(3)"><i class="feather icon-heart"></i></a>
+					</div>
+					<div class="author-heading">
+						<div class="profile-img">
+							<span class="project-verified"><i class="fas fa-check-circle"></i></span>
+							<a [routerLink] = "routes.freelancer_project_details">
+								<img src="assets/img/company/img-3.png" alt="author">
+							</a>
+						</div>
+						<div class="profile-name">
+							<div class="author-location"><a [routerLink] = "routes.freelancer_project_details">Tech Zone</a> </div>
+						</div>
+						<div class="freelance-info">
+							<h3><a href="javascript:void(0);">Graphic Designer</a></h3>
+							<div class="freelance-location"><i class="feather icon-map-pin me-1"></i>New York, USA</div>
+						</div>
+						<div class="freelance-tags">
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Web
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">UI
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Node Js</span></a>
+						</div>
+						<div class="freelancers-price">$15-$500</div>
+					</div>
+					<div class="counter-stats">
+						<ul>
+							<li>
+								<h5>Expiry</h5>
+								<h3 class="counter-value">4 Days Left</h3>
+							</li>
+							<li>
+								<h5>Proposals</h5>
+								<h3 class="counter-value">15</h3>
+							</li>
+							<li>
+								<h5>Job Type</h5>
+								<h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cart-hover">
+					<a [routerLink] = "routes.freelancer_project_details" class="btn-cart" tabindex="-1">View Profile</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6 col-lg-12 col-xl-4">
+			<div class="freelance-widget widget-author">
+				<div class="freelance-content">
+					<div class="freelance-top-content d-flex">
+						<span> <i class="feather icon-clock me-1"></i>1 day ago</span>
+						<a href="javascript:void(0);" class="favourite" [ngClass]="{'color-active': like[4]}"  (click)="toggleLike(4)"><i class="feather icon-heart"></i></a>
+					</div>
+					<div class="author-heading">
+						<div class="profile-img">
+							<span class="project-verified"><i class="fas fa-check-circle"></i></span>
+							<a [routerLink] = "routes.freelancer_project_details">
+								<img src="assets/img/company/img-4.png" alt="author">
+							</a>
+						</div>
+						<div class="profile-name">
+							<div class="author-location"><a [routerLink] = "routes.freelancer_project_details">ABC Software</a> </div>
+						</div>
+						<div class="freelance-info">
+							<h3><a href="javascript:void(0);">iOS Developer</a></h3>
+							<div class="freelance-location"><i class="feather icon-map-pin me-1"></i>Florida, USA</div>
+						</div>
+						<div class="freelance-tags">
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Web
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">UI
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Node Js</span></a>
+						</div>
+						<div class="freelancers-price">$25-$250</div>
+					</div>
+					<div class="counter-stats">
+						<ul>
+							<li>
+								<h5>Expiry</h5>
+								<h3 class="counter-value">1 Days Left</h3>
+							</li>
+							<li>
+								<h5>Proposals</h5>
+								<h3 class="counter-value">13</h3>
+							</li>
+							<li>
+								<h5>Job Type</h5>
+								<h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cart-hover">
+					<a [routerLink] = "routes.freelancer_project_details" class="btn-cart" tabindex="-1">View Profile</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6 col-lg-12 col-xl-4">
+			<div class="freelance-widget widget-author">
+				<div class="freelance-content">
+					<div class="freelance-top-content d-flex">
+						<span> <i class="feather icon-clock me-1"></i>3 days ago</span>
+						<a href="javascript:void(0);" class="favourite" [ngClass]="{'color-active': like[5]}"  (click)="toggleLike(5)"><i class="feather icon-heart"></i></a>
+					</div>
+					<div class="author-heading">
+						<div class="profile-img">
+							<span class="project-verified"><i class="fas fa-check-circle"></i></span>
+							<a [routerLink] = "routes.freelancer_project_details">
+								<img src="assets/img/company/img-5.png" alt="author">
+							</a>
+						</div>
+						<div class="profile-name">
+							<div class="author-location"><a [routerLink] = "routes.freelancer_project_details">Host Technologies</a></div>
+						</div>
+						<div class="freelance-info">
+							<h3><a href="javascript:void(0);">SEO Developer</a></h3>
+							<div class="freelance-location"><i class="feather icon-map-pin me-1"></i>Texas, USA</div>
+						</div>
+						<div class="freelance-tags">
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Web
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">UI
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Node Js</span></a>
+						</div>
+						<div class="freelancers-price">$50-$700</div>
+					</div>
+					<div class="counter-stats">
+						<ul>
+							<li>
+								<h5>Expiry</h5>
+								<h3 class="counter-value">6 Days Left</h3>
+							</li>
+							<li>
+								<h5>Proposals</h5>
+								<h3 class="counter-value">18</h3>
+							</li>
+							<li>
+								<h5>Job Type</h5>
+								<h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cart-hover">
+					<a [routerLink] = "routes.freelancer_project_details" class="btn-cart" tabindex="-1">View Profile</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6 col-lg-12 col-xl-4">
+			<div class="freelance-widget widget-author">
+				<div class="freelance-content">
+					<div class="freelance-top-content d-flex">
+						<span> <i class="feather icon-clock me-1"></i>1 week ago</span>
+						<a href="javascript:void(0);" class="favourite" [ngClass]="{'color-active': like[6]}"  (click)="toggleLike(6)"><i class="feather icon-heart"></i></a>
+					</div>
+					<div class="author-heading">
+						<div class="profile-img">
+							<span class="project-verified"><i class="fas fa-check-circle"></i></span>
+							<a [routerLink] = "routes.freelancer_project_details">
+								<img src="assets/img/company/img-6.png" alt="author">
+							</a>
+						</div>
+						<div class="profile-name">
+							<div class="author-location"><a [routerLink] = "routes.freelancer_project_details">Alfred Tech</a> </div>
+						</div>
+						<div class="freelance-info">
+							<h3><a href="javascript:void(0);">SM Developer</a></h3>
+							<div class="freelance-location"><i class="feather icon-map-pin me-1"></i>Virginia, USA</div>
+						</div>
+						<div class="freelance-tags">
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Web
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">UI
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Node Js</span></a>
+						</div>
+						<div class="freelancers-price">$42-$100</div>
+					</div>
+					<div class="counter-stats">
+						<ul>
+							<li>
+								<h5>Expiry</h5>
+								<h3 class="counter-value">2 Days Left</h3>
+							</li>
+							<li>
+								<h5>Proposals</h5>
+								<h3 class="counter-value">15</h3>
+							</li>
+							<li>
+								<h5>Job Type</h5>
+								<h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cart-hover">
+					<a [routerLink] = "routes.freelancer_project_details" class="btn-cart" tabindex="-1">View Profile</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6 col-lg-12 col-xl-4">
+			<div class="freelance-widget widget-author">
+				<div class="freelance-content">
+					<div class="freelance-top-content d-flex">
+						<span> <i class="feather icon-clock me-1"></i>3 week ago</span>
+						<a href="javascript:void(0);" class="favourite" [ngClass]="{'color-active': like[7]}"  (click)="toggleLike(7)"><i class="feather icon-heart"></i></a>
+					</div>
+					<div class="author-heading">
+						<div class="profile-img">
+							<span class="project-verified"><i class="fas fa-check-circle"></i></span>
+							<a [routerLink] = "routes.freelancer_project_details">
+								<img src="assets/img/company/img-7.png" alt="author">
+							</a>
+						</div>
+						<div class="profile-name">
+							<div class="author-location"><a [routerLink] = "routes.freelancer_project_details">Kind Softwares</a> </div>
+						</div>
+						<div class="freelance-info">
+							<h3><a href="javascript:void(0);">Network Engineer</a></h3>
+							<div class="freelance-location"><i class="feather icon-map-pin me-1"></i>Delaware, USA</div>
+						</div>
+						<div class="freelance-tags">
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Web
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">UI
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Node Js</span></a>
+						</div>
+						<div class="freelancers-price">$12-$320</div>
+					</div>
+					<div class="counter-stats">
+						<ul>
+							<li>
+								<h5>Expiry</h5>
+								<h3 class="counter-value">5 Days Left</h3>
+							</li>
+							<li>
+								<h5>Proposals</h5>
+								<h3 class="counter-value">24</h3>
+							</li>
+							<li>
+								<h5>Job Type</h5>
+								<h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cart-hover">
+					<a [routerLink] = "routes.freelancer_project_details" class="btn-cart" tabindex="-1">View Profile</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6 col-lg-12 col-xl-4">
+			<div class="freelance-widget widget-author">
+				<div class="freelance-content">
+					<div class="freelance-top-content d-flex">
+						<span> <i class="feather icon-clock me-1"></i>1 month ago</span>
+						<a href="javascript:void(0);" class="favourite" [ngClass]="{'color-active': like[8]}"  (click)="toggleLike(8)"><i class="feather icon-heart"></i></a>
+					</div>
+					<div class="author-heading">
+						<div class="profile-img">
+							<span class="project-verified"><i class="fas fa-check-circle"></i></span>
+							<a [routerLink] = "routes.freelancer_project_details">
+								<img src="assets/img/company/img-8.png" alt="author">
+							</a>
+						</div>
+						<div class="profile-name">
+							<div class="author-location"><a [routerLink] = "routes.freelancer_project_details">Particles INC </a></div>
+						</div>
+						<div class="freelance-info">
+							<h3><a href="javascript:void(0);">Business Analyst</a></h3>
+							<div class="freelance-location"><i class="feather icon-map-pin me-1"></i>Kentucky, USA</div>
+						</div>
+						<div class="freelance-tags">
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Web
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">UI
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Node Js</span></a>
+						</div>
+						<div class="freelancers-price">$35-$520</div>
+					</div>
+					<div class="counter-stats">
+						<ul>
+							<li>
+								<h5>Expiry</h5>
+								<h3 class="counter-value">4 Days Left</h3>
+							</li>
+							<li>
+								<h5>Proposals</h5>
+								<h3 class="counter-value">15</h3>
+							</li>
+							<li>
+								<h5>Job Type</h5>
+								<h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cart-hover">
+					<a [routerLink] = "routes.freelancer_project_details" class="btn-cart" tabindex="-1">View Profile</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6 col-lg-12 col-xl-4">
+			<div class="freelance-widget widget-author">
+				<div class="freelance-content">
+					<div class="freelance-top-content d-flex">
+						<span> <i class="feather icon-clock me-1"></i>2 month ago</span>
+						<a href="javascript:void(0);" class="favourite" [ngClass]="{'color-active': like[9]}"  (click)="toggleLike(9)"><i class="feather icon-heart"></i></a>
+					</div>
+					<div class="author-heading">
+						<div class="profile-img">
+							<span class="project-verified"><i class="fas fa-check-circle"></i></span>
+							<a [routerLink] = "routes.freelancer_project_details">
+								<img src="assets/img/company/img-9.png" alt="author">
+							</a>
+						</div>
+						<div class="profile-name">
+							<div class="author-location"><a [routerLink] = "routes.freelancer_project_details">Soft Technologies</a> </div>
+						</div>
+						<div class="freelance-info">
+							<h3><a [routerLink] = "routes.freelancer_project_details">IT Project Manager</a></h3>
+							<div class="freelance-location"><i class="feather icon-map-pin me-1"></i>Kansas, USA</div>
+						</div>
+						<div class="freelance-tags">
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Web
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">UI
+									Design</span></a>
+							<a href="javascript:void(0);"><span class="badge badge-pill badge-design">Node Js</span></a>
+						</div>
+						<div class="freelancers-price">$10-$300</div>
+					</div>
+					<div class="counter-stats">
+						<ul>
+							<li>
+								<h5>Expiry</h5>
+								<h3 class="counter-value">1 Days Left</h3>
+							</li>
+							<li>
+								<h5>Proposals</h5>
+								<h3 class="counter-value">12</h3>
+							</li>
+							<li>
+								<h5>Job Type</h5>
+								<h3 class="counter-value"><span class="jobtype">Full Time</span></h3>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cart-hover">
+					<a [routerLink] = "routes.freelancer_project_details" class="btn-cart" tabindex="-1">View Profile</a>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="paginations list-pagination">
+				<li class="page-item"><a href="javascript:void(0);"><i class="feather icon-chevron-left"></i></a>
+				</li>
+				<li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>
+				<li class="page-item"><a href="javascript:void(0);">2</a></li>
+				<li class="page-item"><a href="javascript:void(0);">3</a></li>
+				<li class="page-item"><a href="javascript:void(0);">...</a></li>
+				<li class="page-item"><a href="javascript:void(0);">10</a></li>
+				<li class="page-item"><a href="javascript:void(0);"><i class="feather icon-chevron-right"></i></a></li>
+			</ul>
+		</div>
+	</div>
+
+
+</div>

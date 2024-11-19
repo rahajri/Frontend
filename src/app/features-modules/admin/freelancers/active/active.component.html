@@ -1,0 +1,262 @@
+
+			<div class="card ">
+				<div class="card-body">
+					<div class="table-responsive">
+						<div class="table_header">
+							<div class="dataTables_length">
+								<label for="show">
+									Show
+								</label>
+								<select [(ngModel)]="pageSize" (ngModelChange)="changePageSize()"
+								class="form-control form-control-sm">
+								<option value="10">10</option>
+								<option value="25">25</option>
+								<option value="50">50</option>
+								<option value="100">100</option>
+							</select>
+							<label for="entries">Entries</label>
+							</div>
+							<div class="dataTables_filter">
+								<label for="search">
+									Search:
+								</label>
+								<input [(ngModel)]="searchDataValue"
+									(ngModelChange)="searchData(searchDataValue)"
+									class="form-control form-control-sm" />
+							</div>
+						</div>
+						<div class="table-scroll">
+							<table matSort (matSortChange)="sortData($event)"
+								class="table table-center table-hover mb-0 datatable">
+								<thead>
+									<tr>
+										<th>
+											<div class="form-check custom-checkbox">
+											  <input type="checkbox" class="form-check-input" id="select-all">
+											  <label for="checklabel" class="form-check-label" ></label>
+											</div>
+										</th>
+										<th mat-sort-header="name">Freelancer</th>
+										<th mat-sort-header="expert">Expertise</th>	
+										<th mat-sort-header="verify">Verified</th>	
+										<th mat-sort-header="balance">Account Balance </th>	
+										<th mat-sort-header="joined">Joined Date</th>	
+										<th mat-sort-header="last">Last Login</th>	
+										<th mat-sort-header="id">Status</th>	
+										<th></th>	
+									</tr>
+									<tr *ngIf="lstAll.length === 0">
+										<td colspan="9">
+										  <h5 style="text-align: center">No data found</h5>
+										</td>
+									  </tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let alls of lstAll; let i = index">
+										<td>
+											<div class="form-check custom-checkbox">
+											  <input type="checkbox" class="form-check-input" >
+											  <label for="checklabel" class="form-check-label" ></label>
+											</div>
+										</td>
+										<td>
+											<div class="table-avatar user-profile">
+												<a [routerLink]="'/admin/profile'"><img class="avatar-img rounded-circle " [src]="alls.image" alt="User Image"></a>
+												<div>
+													<h5><a [routerLink]="'/admin/profile'">{{alls.name}}</a></h5>
+													<p>{{alls.mail}}</p>
+												</div>	
+											</div>
+										</td>
+										<td>{{alls.expert}}</td>
+										<td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>{{alls.verify}}</td>
+										<td>${{alls.balance}}</td>
+										<td>{{alls.joined}}</td>
+										<td>{{alls.last}}</td>
+										<td class="three-dots">
+											<a href="javascript:void()" class="dropdown-toggle nav-link user-active-btn" data-bs-toggle="dropdown">Active</a>
+											<div class="dropdown-menu user-menu-list">
+												<h4>Change Status</h4>
+												<form action="#">
+													<div class="form-check">
+														<input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+														<label class="form-check-label" for="radio1">Active</label>
+													</div>
+													<div class="form-check">
+														<input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+														<label class="form-check-label" for="radio2">Inactive</label>
+													</div>
+													<div class="form-check border-bottom-0">
+														<input type="radio" class="form-check-input" id="radio3" name="optradio" value="option2">
+														<label class="form-check-label" for="radio2">Suspend User</label>
+													</div>
+													<button type="submit" class="btn btn-primary apply-user mt-3">Apply</button>
+													<button type="submit" class="btn btn-primary reset-user mt-3">Reset</button>
+												</form>
+											</div>
+										</td>
+										<td class="text-end three-dots">
+											<a href="javascript:void()" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
+											<div class="dropdown-menu user-menu-list">
+												<a class="dropdown-item" href="javascript:void()" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="assets/img/icon/icon-01.svg" alt=""> View Details</a>
+												<a class="dropdown-item" href="javascript:"><img class="me-2 " src="assets/img/icon/icon-02.svg" alt=""> Transaction</a>
+												<a class="dropdown-item" href="javascript:"><img class="me-2 " src="assets/img/icon/icon-03.svg" alt=""> Reset Password</a>
+												<a class="dropdown-item" href="javascript:"><img class="me-2 " src="assets/img/icon/icon-04.svg" alt=""> Suspend user</a>
+												<a class="dropdown-item" href="javascript:" data-dismiss="modal"><i class="feather icon-edit dotss" ></i> Edit</a>
+												<a class="dropdown-item mb-0" href="javascript:" data-dismiss="modal"><i class="feather icon-trash dotss text-danger"></i> Delete</a>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="table_footer">
+							<div class="col-sm-12 col-md-5">
+								<div class="dataTables_info">
+									Showing {{ serialNumberArray[0] }} to
+									{{ serialNumberArray[serialNumberArray.length - 1] }} of
+									{{ totalData }} entries
+								</div>
+							</div>
+					
+							<div class="col-sm-12 col-md-7">
+								<div class="pagination_section">
+									<ul class="pagination">
+										<li class="page-item" [ngClass]="{
+					disabled: currentPage === 1
+					}">
+											<a (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')" class="page-link"
+												href="javascript:void(0);" tabindex="-1">Previous</a>
+										</li>
+					
+										<ng-container *ngFor="let item of pageNumberArray; let i = index">
+											<li class="page-item" [class.active]="item === currentPage" [ngClass]="
+					  (pageNumberArray[currentPage - 2] > item &&
+						item !== 1 &&
+						pageNumberArray.length > 6) ||
+					  (pageNumberArray[currentPage] < item &&
+						item !== 1 &&
+						pageNumberArray.length > 6 &&
+						pageNumberArray.length !== item)
+						? 'hide-page-no'
+						: 'show-page-no'
+					">
+												<a (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)" class="page-link"
+													href="javascript:void(0);">
+													{{ item }}
+												</a>
+											</li>
+											<li class="page-item" *ngIf="
+					  i === 0 && pageNumberArray.length > 6 && currentPage > 2
+					" [hidden]="currentPage === 1" (click)="moveToPage(currentPage - 2)" (keydown.enter)="moveToPage(currentPage - 2)" tabindex="0">
+												<a class="page-link" href="javascript:void(0);"> ... </a>
+											</li>
+											<li *ngIf="
+					  i === pageNumberArray.length - 2 &&
+					  pageNumberArray.length > 6
+					" [hidden]="
+					  currentPage >=
+						pageNumberArray[pageNumberArray.length - 2] ||
+					  totalData < serialNumberArray[serialNumberArray.length - 1]
+					" class="page-item" (click)="moveToPage(currentPage + 2)" (keydown.enter)="moveToPage(currentPage + 2)" tabindex="0">
+												<a class="page-link" href="javascript:void(0);"> ... </a>
+											</li>
+										</ng-container>
+					
+										<li class="page-item" [ngClass]="{
+					disabled:
+					  currentPage ===
+						pageNumberArray[pageNumberArray.length - 1] ||
+						lstAll.length === 0
+					}">
+											<a (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')"  class="page-link"
+												href="javascript:void(0);">Next
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="table-responsive">
+					<table class="table table-center table-hover mb-0 user-tables">
+						<thead>
+							<tr>
+								<th>
+									<div class="form-check custom-checkbox">
+									  <input type="checkbox" class="form-check-input" id="select-all">
+									  <label for="checklabel" class="form-check-label" ></label>
+									</div>
+								</th>
+								<th>Freelancer</th>
+								<th>Expertise</th>	
+								<th>Verified</th>	
+								<th>Account Balance </th>	
+								<th>Joined Date</th>	
+								<th>Last Login</th>	
+								<th>Status</th>	
+								<th></th>	
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let alls of lstAll; let i = index">
+								<td>
+									<div class="form-check custom-checkbox">
+									  <input type="checkbox" class="form-check-input" >
+									  <label for="checklabel" class="form-check-label" ></label>
+									</div>
+								</td>
+								<td>
+									<div class="table-avatar user-profile">
+										<a [routerLink]="'/admin/profile'"><img class="avatar-img rounded-circle " [src]="alls.image" alt="User Image"></a>
+										<div>
+											<h5><a [routerLink]="'/admin/profile'">{{alls.name}}</a></h5>
+											<p>{{alls.mail}}</p>
+										</div>	
+									</div>
+								</td>
+								<td>{{alls.expert}}</td>
+								<td class="verify-mail"><i data-feather="check-circle" class="me-1 text-success"></i>{{alls.verify}}</td>
+								<td>${{alls.balance}}</td>
+								<td>{{alls.joined}}</td>
+								<td>{{alls.last}}</td>
+								<td class="three-dots">
+									<a href="javascript:void()" class="dropdown-toggle nav-link user-active-btn" data-bs-toggle="dropdown">Active</a>
+									<div class="dropdown-menu user-menu-list">
+										<h4>Change Status</h4>
+										<form action="#">
+											<div class="form-check">
+												<input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>
+												<label class="form-check-label" for="radio1">Active</label>
+											</div>
+											<div class="form-check">
+												<input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">
+												<label class="form-check-label" for="radio2">Inactive</label>
+											</div>
+											<div class="form-check border-bottom-0">
+												<input type="radio" class="form-check-input" id="radio3" name="optradio" value="option2">
+												<label class="form-check-label" for="radio2">Suspend User</label>
+											</div>
+											<button type="submit" class="btn btn-primary apply-user mt-3">Apply</button>
+											<button type="submit" class="btn btn-primary reset-user mt-3">Reset</button>
+										</form>
+									</div>
+								</td>
+								<td class="text-end three-dots">
+									<a href="javascript:void()" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
+									<div class="dropdown-menu user-menu-list">
+										<a class="dropdown-item" href="javascript:void()" data-bs-toggle="modal" data-bs-target="#transaction-category"><img class="me-2 " src="assets/img/icon/icon-01.svg" alt=""> View Details</a>
+										<a class="dropdown-item" href="javascript:"><img class="me-2 " src="assets/img/icon/icon-02.svg" alt=""> Transaction</a>
+										<a class="dropdown-item" href="javascript:"><img class="me-2 " src="assets/img/icon/icon-03.svg" alt=""> Reset Password</a>
+										<a class="dropdown-item" href="javascript:"><img class="me-2 " src="assets/img/icon/icon-04.svg" alt=""> Suspend user</a>
+										<a class="dropdown-item" href="javascript:" data-dismiss="modal"><i class="feather icon-edit dotss" ></i> Edit</a>
+										<a class="dropdown-item mb-0" href="javascript:" data-dismiss="modal"><i class="feather icon-trash dotss text-danger"></i> Delete</a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div> -->
+
+			</div>

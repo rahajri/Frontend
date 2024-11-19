@@ -1,0 +1,294 @@
+<div class="dashboard-sec">
+    <div class="page-title">
+        <h3>Dashboard</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="dash-widget">
+                <div class="dash-info">
+                    <div class="dashboard-icon">
+                        <img src="assets/img/icon/freelancer-dashboard-icon-01.svg" alt="Img">
+                    </div>
+                    <div class="dash-widget-info">Completed Jobs</div>
+                </div>
+                <div class="dash-widget-more d-flex align-items-center justify-content-between">
+                    <div class="dash-widget-count">30</div>
+                    <a [routerLink] = "routes.completedProjects" class="d-flex">View Details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="dash-widget">
+                <div class="dash-info">
+                    <div class="dashboard-icon dashboard-icon-two">
+                        <img src="assets/img/icon/freelancer-dashboard-icon-02.svg" alt="Img">
+                    </div>
+                    <div class="dash-widget-info">Task Completed</div>
+                </div>
+                <div class="dash-widget-more d-flex align-items-center justify-content-between">
+                    <div class="dash-widget-count">5</div>
+                    <a [routerLink] = "routes.completedProjects" class="d-flex">View Details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="dash-widget">
+                <div class="dash-info">
+                    <div class="dashboard-icon dashboard-icon-three">
+                        <img src="assets/img/icon/freelancer-dashboard-icon-03.svg" alt="Img">
+                    </div>
+                    <div class="dash-widget-info">Reviews</div>
+                </div>
+                <div class="dash-widget-more d-flex align-items-center justify-content-between">
+                    <div class="dash-widget-count">25</div>
+                    <a [routerLink] = "routes.completedProjects" class="d-flex">View Details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="dash-widget">
+                <div class="dash-info">
+                    <div class="dashboard-icon dashboard-icon-four">
+                        <img src="assets/img/icon/freelancer-dashboard-icon-04.svg" alt="Img">
+                    </div>
+                    <div class="dash-widget-info">Earning</div>
+                </div>
+                <div class="dash-widget-more d-flex align-items-center justify-content-between">
+                    <div class="dash-widget-count">5962</div>
+                    <a [routerLink] = "routes.completedProjects" class="d-flex">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart Content -->
+    <div class="row">
+        <div class="col-xl-8 d-flex">
+            <div class="card flex-fill ongoing-project-card">
+                <div class="pro-head">
+                    <h5 class="card-title mb-0">Overview</h5>
+                    <div class="month-detail">
+                        <mat-select placeholder="Last 6 months" class="select mat-select arrow verify">
+                            <mat-option value="Last 6 months">Last 6 months
+                            </mat-option>
+                            <mat-option value="Last 2 months">Last 2 months
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+                <div class="pro-body p-0">
+                    <div id="chartprofile">
+                        <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                            [xaxis]="chartOptions.xaxis" [dataLabels]="chartOptions.dataLabels"
+                            [grid]="chartOptions.grid" [stroke]="chartOptions.stroke"
+                            [title]="chartOptions.title" [colors]="chartOptions.colors" [markers]="chartOptions.markers"></apx-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 d-flex">
+            <div class="flex-fill card ongoing-project-card">
+                <div class="pro-head b-0">
+                    <h5 class="card-title mb-0">Static Analytics</h5>
+                </div>
+                <div class="pro-body p-0">
+                    <div id="chartradial">
+                        <apx-chart [series]="radialchartOptions.series" [chart]="radialchartOptions.chart"
+                            [plotOptions]="radialchartOptions.plotOptions" [labels]="radialchartOptions.labels"
+                            [colors]="radialchartOptions.colors"></apx-chart>
+                    </div>
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <ul class="static-list">
+                            <li><span><i class="fas fa-circle text-violet me-1"></i>Jobs</span></li>
+                            <li><span><i class="fas fa-circle text-yellow me-1"></i>Proposals</span></li>
+                        </ul>
+                        <ul class="static-list">
+                            <li><span><i class="fas fa-circle text-pink me-1"></i> Applied Proposals</span></li>
+                            <li><span><i class="fas fa-circle text-blue me-1"></i>Bookmarked Projects</span></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Chart Content -->
+
+    <div class="row">
+        <!-- Ongoing Projects -->
+        <div class="col-xl-6 d-flex">
+            <div class="card flex-fill ongoing-project-card">
+                <div class="pro-head">
+                    <h2>Ongoing Projects</h2>
+                    <a [routerLink] = "routes.freelancerOngoingProjects" class="btn fund-btn">View All</a>
+                </div>
+                <div class="pro-body p-0">
+                    <div class="on-project">
+                        <span>A2Z Tech Information</span>
+                        <h5>Landing Page Redesign / Sales Page Redesign</h5>
+                        <div class="pro-info">
+                            <ul class="list-details">
+                                <li>
+                                    <div class="slot">
+                                        <p>Project type</p>
+                                        <h5>Hourly</h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="slot">
+                                        <p>Location</p>
+                                        <h5 class="d-flex align-items-center"><img src="assets/img/icon/flag-icon.svg"
+                                                class="me-2" alt="Icon">UK</h5>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="slot">
+                                        <p>Expiry</p>
+                                        <h5>5 Days Left</h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="slot">
+                                        <p>Price</p>
+                                        <h5>$280</h5>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="on-project">
+                        <span>Amaze Tech</span>
+                        <h5>Landing Page Redesign / Sales Page Redesign</h5>
+                        <div class="pro-info">
+                            <ul class="list-details">
+                                <li>
+                                    <div class="slot">
+                                        <p>Project type</p>
+                                        <h5>Hourly</h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="slot">
+                                        <p>Location</p>
+                                        <h5 class="d-flex align-items-center"><img src="assets/img/icon/flag-icon.svg"
+                                                class="me-2" alt="Icon">UK</h5>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="slot">
+                                        <p>Expiry</p>
+                                        <h5>5 Days Left</h5>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="slot">
+                                        <p>Price</p>
+                                        <h5>$280</h5>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Ongoing Projects -->
+        <!-- Past Earnings -->
+        <div class="col-xl-6">
+            <div class="card mb-4 ongoing-project-card">
+                <div class="pro-head">
+                    <h2>Recent Earnings</h2>
+                </div>
+                <div class="table-responsive recent-earnings flex-fill">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Client</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>29 Sep 2023</td>
+                                <td>
+                                    <h2 class="table-avatar table-user">
+                                        <a href="javascript:void(0);" class="avatar avatar-m me-2"><img
+                                                class="avatar-img" src="assets/img/user/avatar-1.jpg"
+                                                alt="User Image"></a>
+                                        <a href="javascript:void(0);">
+                                            Janet Paden
+                                        </a>
+                                    </h2>
+                                </td>
+                                <td class="action-bg">$80.00</td>
+                            </tr>
+                            <tr>
+                                <td>17 Sep 2023</td>
+                                <td>
+                                    <h2 class="table-avatar table-user">
+                                        <a href="javascript:void(0);" class="avatar avatar-m me-2"><img
+                                                class="avatar-img" src="assets/img/user/table-avatar-02.jpg"
+                                                alt="User Image"></a>
+                                        <a href="javascript:void(0);">
+                                            Mary Hawkins
+                                        </a>
+                                    </h2>
+                                </td>
+                                <td class="action-bg">$20.50</td>
+                            </tr>
+                            <tr>
+                                <td>13 Sep 2023</td>
+                                <td>
+                                    <h2 class="table-avatar table-user">
+                                        <a href="javascript:void(0);" class="avatar avatar-m me-2"><img
+                                                class="avatar-img" src="assets/img/user/table-avatar-03.jpg"
+                                                alt="User Image"></a>
+                                        <a href="javascript:void(0);">
+                                            Jerry Garica
+                                        </a>
+                                    </h2>
+                                </td>
+                                <td class="action-bg">$35.70</td>
+                            </tr>
+                            <tr>
+                                <td>07 Sep 2023</td>
+                                <td>
+                                    <h2 class="table-avatar table-user">
+                                        <a href="javascript:void(0);" class="avatar avatar-m me-2"><img
+                                                class="avatar-img" src="assets/img/user/table-avatar-04.jpg"
+                                                alt="User Image"></a>
+                                        <a href="javascript:void(0);">
+                                            Barton Taylor
+                                        </a>
+                                    </h2>
+                                </td>
+                                <td class="action-bg">$62.80</td>
+                            </tr>
+                            <tr>
+                                <td>02 Sep 2023</td>
+                                <td>
+                                    <h2 class="table-avatar table-user">
+                                        <a href="javascript:void(0);" class="avatar avatar-m me-2"><img
+                                                class="avatar-img" src="assets/img/user/table-avatar-05.jpg"
+                                                alt="User Image"></a>
+                                        <a href="javascript:void(0);">
+                                            Jeffrey Bovee
+                                        </a>
+                                    </h2>
+                                </td>
+                                <td class="action-bg">$73.30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /Past Earnings -->
+    </div>
+
+
+
+</div>

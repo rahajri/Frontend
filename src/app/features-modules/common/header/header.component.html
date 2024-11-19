@@ -1,0 +1,90 @@
+<!-- Header -->
+<header class="header">
+  <div class="container">
+		<nav class="navbar navbar-expand-lg header-nav p-0" [ngClass]="{
+			'header-bg': header_bg === true
+		  }">
+      <div class="navbar-header">
+        <a id="mobile_btn" (click)="toggleSidebar()" href="javascript:void(0);">
+          <span class="bar-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </a>
+        <a [routerLink]="'/home'" class="navbar-brand logo">
+          <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+        </a>
+      </div>
+      <div class="main-menu-wrapper">
+        <div class="menu-header">
+          <a [routerLink]="'/home'" class="menu-logo">
+            <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+          </a>
+          <a id="menu_close" (click)="hideSidebar()" class="menu-close" href="javascript:void(0);">
+            <i class="fas fa-times"></i>
+          </a>
+        </div>
+        <ul class="main-nav">
+          @for (mainMenus of navbar; track mainMenus) {
+            @if (mainMenus.separateRoute === true) {
+              <li [class.active]="base === mainMenus.base && base1 === mainMenus.base1"
+                routerLinkActive="active">
+                <a [routerLink]="mainMenus.route">{{mainMenus.tittle}}</a>
+              </li>
+            }
+            @if (mainMenus.separateRoute === false) {
+              <li class="has-submenu"
+                [class.active]="base === mainMenus.base  || base === mainMenus.base1">
+                <a href="javascript:void(0);"
+                  (click)="mainMenus.showAsTab = !mainMenus.showAsTab">{{mainMenus.tittle}} <i
+                class="fas fa-chevron-down"></i></a>
+								<ul class="submenu" [ngClass]="{
+								'd-block': mainMenus.showAsTab === true
+							  }">
+                  @for (menu of mainMenus.menu; track menu) {
+                    @if (menu.hasSubRoute === false) {
+                      <li routerLinkActive="active" [class.active]="page === menu.page">
+                        <a [routerLink]="menu.route">{{menu.menuValue}}</a>
+                      </li>
+                    }
+                    @if (menu.hasSubRoute === true) {
+                      <li routerLinkActive="active" class="has-submenu"
+                        [class.active]="page === menu.page">
+                        <a (click)="menu.showSubRoute = !menu.showSubRoute"
+                        [routerLink]="menu.route">{{menu.menuValue}}</a>
+												<ul class="submenu" [ngClass]="{
+										'd-block': menu.showSubRoute === true
+									  }">
+                          @for (subMenu of menu.subMenus; track subMenu) {
+														<li [class.active]="
+											base === subMenu.base &&
+											page === subMenu.page 
+											
+										  ">
+                              <a [routerLink]="subMenu.route">{{subMenu.menuValue}}</a>
+                            </li>
+                          }
+                        </ul>
+                      </li>
+                    }
+                  }
+                </ul>
+              </li>
+            }
+          }
+        </ul>
+      </div>
+      <ul class="nav header-navbar-rht reg-head">
+        <li><a [routerLink]="routes.register" class="reg-btn"><img src="assets/img/icon/reg-icon.svg"
+        class="me-1" alt="icon"> Register</a></li>
+        <li><a [routerLink]="routes.login" class="log-btn"><img src="assets/img/icon/lock-icon.svg" class="me-1"
+        alt="icon"> Login</a></li>
+        <li><a [routerLink]="'/employer/post-project'" class="login-btn"><i
+        class="feather icon-plus me-1"></i>Post a Project </a></li>
+      </ul>
+    </nav>
+  </div>
+
+</header>
+<!-- /Header -->

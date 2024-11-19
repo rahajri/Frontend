@@ -1,0 +1,42 @@
+
+{
+    "data" : [
+        {
+            "name": "Create desktop applications",
+             "milestone": "Research",
+             "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+             "availability": "Pending"
+         },
+        {
+            "name": "Full-stack Developer",
+             "milestone": "Research",
+             "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+             "availability": "Completed"
+        },
+        {
+            "name": "PHP, Javascript Projects",
+             "milestone": "Research",
+             "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+             "availability": "Completed"
+        },
+        {
+            "name": "Swift / SwiftUI Developer",
+             "milestone": "Research",
+             "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+             "availability": "Completed"
+        },
+        {
+            "name": "Website Designer Required",
+             "milestone": "Research",
+             "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+             "availability": "Completed"
+        },
+        {
+            "name": "Website Designer Required",
+             "milestone": "Research",
+             "para": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...",
+             "availability": "Completed"
+        }
+     ],
+     "totalData":3
+}
