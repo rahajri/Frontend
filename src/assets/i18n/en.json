@@ -21,6 +21,7 @@
       "login": {
         "hello": "Bienvenue! Ravi de vous revoir",
         "buttonText": "Se Connecter",
+        "demande": "Envoyer ma demande",
         "or": "ou",
         "forgotPassword": "forgot Password",
         "error" : "Email or password is incorrect."
