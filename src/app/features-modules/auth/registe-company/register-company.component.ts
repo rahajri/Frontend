@@ -391,7 +391,7 @@ export class RegisterCompanyComponent {
                 company: {
                   name: uniteLegale?.denominationUniteLegale || '',
                   category: uniteLegale?.categorieEntreprise || '',
-                  workforce: uniteLegale?.trancheEffectifsUniteLegale || '',
+                  workforce: uniteLegale?.trancheEffectifsUniteLegale || 0,
                   naf: naf || '',
                   location: {
                     address: `${adresse?.numeroVoieEtablissement || ''} ${adresse?.typeVoieEtablissement || ''} ${adresse?.libelleVoieEtablissement || ''}`.trim(),
