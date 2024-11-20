@@ -79,6 +79,16 @@ export class CompanyService {
     );
   }
 
+  getAllCompanies(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    
+    return this.http.get<any>(`${this.baseUrl}`, { headers });
+  }
+
   getUnvirifiedCompanies(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
@@ -86,7 +96,7 @@ export class CompanyService {
       'Content-Type': 'application/json'
     });
     
-    return this.http.get<any>(this.baseUrl, { headers });
+    return this.http.get<any>(`${this.baseUrl}/inactive`, { headers });
   }
 
   approveCompany(companyId: string): Observable<any> {
