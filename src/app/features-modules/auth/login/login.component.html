@@ -23,9 +23,9 @@
                             <div class="input-block">
                                 <label for="password" class="focus-label">{{ 'personalDetails.password' | translate }} <span class="label-star"> *</span></label>
                                 <div class="position-relative">
-                                    <input [type]="password ? 'password' : 'text'" formControlName="password" class="form-control floating pass-input" />
-                                    <div class="password-icon" (click)="togglePassword(1)" tabindex="0">
-                                        <span class="fas" [ngClass]="password ? 'fa-eye' : 'fa-eye-slash'"></span>
+                                    <input [type]="password[0]  ? 'password' : 'text'" formControlName="password" class="form-control floating pass-input" />
+                                    <div class="password-icon" (click)="togglePassword(0)" tabindex="0">
+                                        <span class="fas" [ngClass]="password[0]  ? 'fa-eye' : 'fa-eye-slash'"></span>
                                     </div>
                                 </div>
                             </div>

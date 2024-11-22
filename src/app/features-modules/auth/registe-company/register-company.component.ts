@@ -50,9 +50,14 @@ export class RegisterCompanyComponent {
 
     this.signupForm = this.fb.group({
       terms: [false],
+     
       user: this.fb.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
+        phone: ['', [
+          Validators.required, 
+          Validators.pattern(/^(?:(?:\+33|0)\d{9})$/)
+        ]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, this.passwordValidator()]],
         confirmPassword: ['', [Validators.required]],
@@ -65,6 +70,7 @@ export class RegisterCompanyComponent {
         naf: [''],
         category: [''],
         workforce: [''],
+        message: [''],
         location: this.fb.group({
           postalCode: [''],
           city: [''],

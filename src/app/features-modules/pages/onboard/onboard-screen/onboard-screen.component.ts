@@ -455,8 +455,8 @@ export class OnboardScreenComponent implements OnInit {
 
     if (selectedCity) {
       this.locationForm.patchValue({
-        department: selectedCity.department.name,
-        region: selectedCity.department.region.name
+        department: selectedCity?.department?.name,
+        region: selectedCity?.department?.region?.name
       });
     }
   }

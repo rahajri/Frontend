@@ -5,7 +5,7 @@
     <div class="page-header">
       <div class="row align-items-center">
         <div class="col">
-          <h3 class="page-title">Projects</h3>
+          <h3 class="page-title">Companies</h3>
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
               <a [routerLink]="'/admin/dashboard'">Home</a>
@@ -74,7 +74,7 @@
     <div class="card bg-white projects-card">
       <div class="card-body pt-0">
         <div class="card-header">
-          <h5 class="card-title">Projects views</h5>
+          <h5 class="card-title">Company views</h5>
         </div>
         <div class="reviews-menu-links">
           <ul
@@ -139,14 +139,12 @@
                   <thead>
                     <tr>
                       <th></th>
-                      <th mat-sort-header="image">Logo</th>
-                      <th mat-sort-header="para">Title</th>
-                      <th mat-sort-header="amount">Budget</th>
-                      <th>Progress</th>
-                      <th mat-sort-header="technology">Technology</th>
-                      <th mat-sort-header="company">Company</th>
-                      <th mat-sort-header="startdate">Start date</th>
-                      <th mat-sort-header="duedate">Due date</th>
+                      
+                      <th mat-sort-header="Siret">Siret</th>
+                      <th mat-sort-header="Entreprise">Entreprise</th>
+                      <th>Naf</th>
+                      <th mat-sort-header="Effictifs">Effictifs</th>
+        
                       <th class="text-end">Actions</th>
                     </tr>
                     <tr *ngIf="lstProject.length === 0">
@@ -156,51 +154,26 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let proj of lstProject; let i = index">
+                    <tr *ngFor="let company of lstProject; let i = index">
                       <td>
                         <div class="form-check form-checkbox">
                           <input
                             type="checkbox"
                             class="form-check-input"
-                            id="customCheck1"
+                            id="customCheck{{ i }}"
                           />
                           <label
                             class="form-check-label"
-                            for="customCheck1"
+                            for="customCheck{{ i }}"
                           ></label>
                         </div>
                       </td>
-                      <td>
-                        <h2 class="table-avatar">
-                          <a [routerLink]="'/admin/profile'"
-                            ><img
-                              class="me-2"
-                              [src]="proj.image"
-                              alt="User Image"
-                          /></a>
-                        </h2>
-                      </td>
-
-                      <td>{{ proj.para }}</td>
-                      <td>${{ proj.amount }}</td>
-                      <td>
-                        <div class="progress rounded-pill">
-                          <div
-                            class="progress-bar bg-primary"
-                            role="progressbar"
-                            aria-valuenow="30"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                            [style.width.px]="proj.width"
-                          ></div>
-                        </div>
-                      </td>
-                      <td>
-                        {{ proj.technology }}
-                      </td>
-                      <td>{{ proj.company }}</td>
-                      <td>{{ proj.startdate }}</td>
-                      <td>{{ proj.duedate }}</td>
+                  
+                      <td>{{ company.siret }}</td> <!-- Displaying the SIRET -->
+                      <td>{{ company.name }}</td> <!-- Displaying the company name -->
+                      <td>{{ company.naf }}</td> <!-- Displaying the NAF code -->
+                      <td>{{ company.workforce }}</td> <!-- Displaying the workforce -->
+                      
                       <td class="text-end">
                         <a
                           href="javascript:void(0);"
@@ -219,6 +192,7 @@
                       </td>
                     </tr>
                   </tbody>
+                  
                 </table>
               </div>
               <div class="table_footer">
@@ -365,7 +339,7 @@
                   <thead>
                     <tr>
                       <th></th>
-                      <th mat-sort-header="image">Logo</th>
+                      
                       <th mat-sort-header="para">Title</th>
                       <th mat-sort-header="amount">Budget</th>
                       <th>Progress</th>
@@ -396,19 +370,10 @@
                           ></label>
                         </div>
                       </td>
-                      <td>
-                        <h2 class="table-avatar">
-                          <a [routerLink]="'/admin/profile'"
-                            ><img
-                              class="me-2"
-                              [src]="proj.image"
-                              alt="User Image"
-                          /></a>
-                        </h2>
-                      </td>
+                      
 
-                      <td>{{ proj.para }}</td>
-                      <td>${{ proj.amount }}</td>
+                      <td>{{ proj.id }}</td>
+                      <td>${{ proj.id }}</td>
                       <td>
                         <div class="progress rounded-pill">
                           <div
@@ -422,11 +387,11 @@
                         </div>
                       </td>
                       <td>
-                        {{ proj.technology }}
+                        {{ proj.id }}
                       </td>
-                      <td>{{ proj.company }}</td>
-                      <td>{{ proj.startdate }}</td>
-                      <td>{{ proj.duedate }}</td>
+                      <td>{{ proj.id }}</td>
+                      <td>{{ proj.id }}</td>
+                      <td>{{ proj.id }}</td>
                       <td class="text-end">
                         <a
                           href="javascript:void(0);"
@@ -591,7 +556,7 @@
                   <thead>
                     <tr>
                       <th></th>
-                      <th mat-sort-header="image">Logo</th>
+                      
                       <th mat-sort-header="para">Title</th>
                       <th mat-sort-header="amount">Budget</th>
                       <th>Progress</th>
@@ -622,19 +587,10 @@
                           ></label>
                         </div>
                       </td>
-                      <td>
-                        <h2 class="table-avatar">
-                          <a [routerLink]="'/admin/profile'"
-                            ><img
-                              class="me-2"
-                              [src]="proj.image"
-                              alt="User Image"
-                          /></a>
-                        </h2>
-                      </td>
+                      
 
-                      <td>{{ proj.para }}</td>
-                      <td>${{ proj.amount }}</td>
+                      <td>{{ proj.id }}</td>
+                      <td>${{ proj.id }}</td>
                       <td>
                         <div class="progress rounded-pill">
                           <div
@@ -648,11 +604,11 @@
                         </div>
                       </td>
                       <td>
-                        {{ proj.technology }}
+                        {{ proj.id }}
                       </td>
-                      <td>{{ proj.company }}</td>
-                      <td>{{ proj.startdate }}</td>
-                      <td>{{ proj.duedate }}</td>
+                      <td>{{ proj.id }}</td>
+                      <td>{{ proj.id }}</td>
+                      <td>{{ proj.id }}</td>
                       <td class="text-end">
                         <a
                           href="javascript:void(0);"

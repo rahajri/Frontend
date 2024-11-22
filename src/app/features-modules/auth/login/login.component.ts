@@ -55,10 +55,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       const { email, password } = this.loginForm.value;
       this.userService.login(email, password).subscribe(
         (response) => {
+
           console.log('Login successful', response);
           localStorage.setItem('token', response.token);
+          localStorage.setItem('profil-email', response.email);
           if (response.role == 'candidate') {
-            localStorage.setItem('email-condidature', response.email);
+            
              this.candidateService.checkCondidate(response.email).subscribe(
               (condidate) => {
                 if (condidate == true) {
@@ -103,6 +105,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
   public togglePassword(index: number) {
+    console.log('toggle password): ' + this.password )
     this.password[index] = !this.password[index];
   }
 }

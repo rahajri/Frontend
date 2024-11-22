@@ -4,7 +4,8 @@ import { Component, OnInit} from '@angular/core';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
-import { apiResultFormat, project } from 'src/app/core/models/models';
+import { apiResultFormat, Company } from 'src/app/core/models/models';
+import { CompanyService } from 'src/app/core/services/company.service';
 
 @Component({
   selector: 'app-projects',
@@ -13,10 +14,10 @@ import { apiResultFormat, project } from 'src/app/core/models/models';
 })
 export class ProjectsComponent implements OnInit {
 
-  public lstProject!: Array<project>;
+  public lstProject!: Array<Company>;
   public url = "admin";
   public searchDataValue = '';
-  dataSource!: MatTableDataSource<project>;
+  dataSource!: MatTableDataSource<Company>;
 
   // pagination variables
   public lastIndex = 0;
@@ -31,11 +32,16 @@ export class ProjectsComponent implements OnInit {
   public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
   public filter = false;
+  companiesData: any[] = []; // To store companies data
+
   //** / pagination variables
-  constructor(private data: ShareDataService) { }
+  constructor(private data: ShareDataService,
+    private companyService: CompanyService
+    ) { }
 
   ngOnInit(): void {
     this.getTableData();
+    this.loadCompanies();
 
   }
   //Filter toggle
@@ -48,23 +54,29 @@ export class ProjectsComponent implements OnInit {
   private getTableData(): void {
     this.lstProject = [];
     this.serialNumberArray = [];
-
-    this.data.loadProject().subscribe((res: apiResultFormat) => {
-      this.totalData = res.totalData;
-      res.data.map((res: project, index: number) => {
-        const serialNumber = index + 1;
-        if (index >= this.skip && serialNumber <= this.limit) {
-          res.id = serialNumber;
-          this.lstProject.push(res);
-          this.serialNumberArray.push(serialNumber);
-        }
-      });
-         this.dataSource = new MatTableDataSource<project>(this.lstProject);
-    this.calculateTotalPages(this.totalData, this.pageSize);
-    });
-
- 
+  
+    this.companyService.getAllCompanies().subscribe(
+      (response) => {
+        console.log('API Response:', response); // Debugging
+        const companies = response.data || response; // Adjust based on response structure
+        
+        companies.map((res: Company, index: number) => {
+          const serialNumber = index + 1;
+          if (index >= this.skip && serialNumber <= this.limit) {
+            this.lstProject.push(res);
+            this.serialNumberArray.push(serialNumber);
+          }
+        });
+  
+        this.dataSource = new MatTableDataSource<Company>(this.lstProject);
+        this.calculateTotalPages(this.totalData, this.pageSize);
+      },
+      (error) => {
+        console.error('Error fetching companies:', error);
+      }
+    );
   }
+  
 
   public sortData(sort: Sort) {
     const data = this.lstProject.slice();
@@ -137,6 +149,21 @@ export class ProjectsComponent implements OnInit {
       this.pageSelection.push({ skip: skip, limit: limit });
     }
   }
+
+  
+
+  loadCompanies(): void {
+    this.companyService.getAllCompanies().subscribe(
+      (response) => {
+        this.companiesData = response; // Assign response data to companiesData
+        console.log('Companies:', this.companiesData);
+      },
+      (error) => {
+        console.error('Error fetching companies:', error);
+      }
+    );
+  }
+
 }
 export interface pageSelection {
   skip: number;

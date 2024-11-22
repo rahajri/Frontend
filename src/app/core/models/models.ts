@@ -62,6 +62,16 @@ export interface project {
   startdate: number;
   duedate: number;
 }
+export interface Company {
+  id: string;
+  name: string;
+  siret: string;
+  nafTitle: string;
+  naf: string;
+  category: string;
+  workforce: string;
+   
+}
 export interface category {
   id: number;
   category: string;

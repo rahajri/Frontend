@@ -181,7 +181,7 @@ export class ProfileSettingsComponent  implements OnInit{
   }
 
   getCondidature(): void {
-    const email = localStorage.getItem('email-condidature');
+    const email = localStorage.getItem('profil-email');
     
     if (!email) {
       console.error('No email found in local storage.');

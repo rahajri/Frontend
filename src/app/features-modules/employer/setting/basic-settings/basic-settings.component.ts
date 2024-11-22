@@ -85,4 +85,34 @@ export class BasicSettingsComponent  {
     const selectedDate: Date = new Date(date);
     return this.datePipe.transform(selectedDate, 'h:mm a');
   }
+
+  getCondidature(): void {
+    const email = localStorage.getItem('profil-email');
+    
+    if (!email) {
+      console.error('No email found in local storage.');
+      return;
+    }
+
+
+  /*
+
+
+    this.employerServcice.getCandidate(email).subscribe(
+      (response) => {
+        console.log('Candidate details:', response);
+        // Patch the response to the candidate form object
+        this.candidate = { 
+          ...response,
+          birthDate: response.birthDate || '', // Handle null or missing birthDate
+          profileTitle: response.profileTitle || '', 
+          role: response.role || ''
+        };
+      },
+      (error) => {
+        console.error('Error fetching candidate details:', error);
+      }
+    );*/
+  }
+  
 }
