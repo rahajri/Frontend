@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { AdminSidebar } from 'src/app/core/models/sidebar-model';
@@ -13,20 +13,22 @@ import { SideBarService } from 'src/app/core/services/side-bar/side-bar.service'
   templateUrl: './sidemenu.component.html',
   styleUrls: ['./sidemenu.component.scss'],
 })
-export class SidemenuComponent {
+export class SidemenuComponent implements OnInit{
   base = '';
   page = '';
   last = '';
   public miniSidebar = false;
   currentroute = '';
   side_bar_data: AdminSidebar[] = [];
+  notifications: any[] = [];
+
   constructor(
     public router: Router,
     private data: ShareDataService,
     private sideBar: SideBarService,
     private common: CommonService,
-    public auth: AuthService
-  ) {
+    public auth: AuthService,
+   ) {
     this.common.base.subscribe((res: string) => {
       this.base = res;
     });
@@ -36,6 +38,8 @@ export class SidemenuComponent {
     this.common.last.subscribe((res: string) => {
       this.last = res;
     });
+
+   
 
     // get sidebar data as observable because data is controlled for design to expand submenus
 
@@ -50,6 +54,10 @@ export class SidemenuComponent {
         this.miniSidebar = false;
       }
     });
+  }
+  ngOnInit(): void {
+    this.fetchNotifications();
+
   }
 
   public toggleSideBar(): void {
@@ -105,5 +113,28 @@ export class SidemenuComponent {
     } else {
       this.sideBar.expandSideBar.next(false);
     }
+  }
+
+  fetchNotifications(): void {
+    this.sideBar.getNotifications().subscribe(
+      (data) => {
+        console.log('Notifications:', data);
+        this.notifications = data?.notifications?.map((notification: any) => ({
+          title: notification.title,
+          timeAgo: this.calculateTimeAgo(notification.createdAt),
+        }));
+      },
+      (error) => {
+        console.error('Error fetching notifications:', error);
+      }
+    );
+  }
+
+  private calculateTimeAgo(createdAt: Date): string {
+    const diff = Math.floor((new Date().getTime() - new Date(createdAt).getTime()) / 1000);
+    if (diff < 60) return `${diff} seconds ago`;
+    if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)} hours ago`;
+    return `${Math.floor(diff / 86400)} days ago`;
   }
 }

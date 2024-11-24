@@ -77,6 +77,10 @@ export class ProjectsComponent implements OnInit {
     );
   }
   
+  getDate(isoDate: string): string {
+    const date = new Date(isoDate);
+    return new Intl.DateTimeFormat('en-GB').format(date); // Formats as DD/MM/YYYY
+  }
 
   public sortData(sort: Sort) {
     const data = this.lstProject.slice();

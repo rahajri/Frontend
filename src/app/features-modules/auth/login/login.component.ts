@@ -51,6 +51,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+
+    console.log('onSubmit);',this.loginForm.value);
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this.userService.login(email, password).subscribe(

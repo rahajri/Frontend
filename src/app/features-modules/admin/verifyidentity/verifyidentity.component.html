@@ -49,19 +49,35 @@
                         <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover mb-0 datatable">
                           <thead>
                             <tr>
-                              <th mat-sort-header="name">Entreprise</th>
-                              <th mat-sort-header="siret">Siret</th>
-                               <th mat-sort-header="naf">Naf</th>
-                               <th mat-sort-header="workforce">Effectifs</th>
+                              <th mat-sort-header="Siret">Siret</th>
+                              <th mat-sort-header="Nom">Nom</th>
+                              <th mat-sort-header="Date Creation">Date de création</th>
+                              <th mat-sort-header="Activite">Activité</th>
+                              <th mat-sort-header="Effectif">Effectif</th>
+                              <th mat-sort-header="Contact">Contact</th>
+                              <th mat-sort-header="Telephone">Téléphone</th>
+                              <th mat-sort-header="Adresse">Adresse</th>
+     
                                <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr *ngFor="let company of companies">
-                              <td>{{ company.name }}</td>
                               <td>{{ company.siret }}</td>
-                               <td>{{ company.naf }}</td>
-                               <td>{{ company.workforce }}</td>
+                              <td>{{ company.name }}</td>
+                              <td>{{ getDate(company.createdAt) }}</td>
+                              <td>{{ company.nafTitle }}</td>
+                              <td>{{ company.workforce }}</td>
+                              <td>
+                                {{ company.employees?.[0]?.firstName || '' }}
+                                {{ company.employees?.[0]?.lastName || '' }}
+                              </td>
+                              <td>{{ company.employees?.[0]?.phone || 'N/A' }}</td>
+                              <td>
+                                {{ company.location?.address }}
+                                {{ company.location?.addressLine2 || '' }}
+                              </td>
+                             
                                <td>
                                 <button (click)="approve(company.id)" class="btn btn-success me-2">Approve</button>
                                  <button (click)="reject(company.id)" class="btn btn-danger">Reject</button>

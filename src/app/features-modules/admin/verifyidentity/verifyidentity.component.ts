@@ -4,7 +4,7 @@ import { Component, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
-import { IdentityList, apiResultFormat } from 'src/app/core/models/models';
+import { Company, IdentityList, apiResultFormat } from 'src/app/core/models/models';
 import { CompanyService } from 'src/app/core/services/company.service';
 
 @Component({
@@ -159,29 +159,16 @@ export class VerifyidentityComponent implements OnInit {
       this.getCompanies(); // Reload the list
     });
   }
+
+  getDate(isoDate: string): string {
+    const date = new Date(isoDate);
+    return new Intl.DateTimeFormat('en-GB').format(date); // Formats as DD/MM/YYYY
+  }
 }
 export interface pageSelection {
   skip: number;
   limit: number;
 }
+ 
 
-// company.model.ts (or any name you prefer)
-export interface Location {
-  postalCode: string;
-  city: string;
-  department?: string;
-  region?: string;
-  address?: string;
-  addressLine2?: string;
-}
-
-export interface Company {
-  id: string;
-  name: string;
-  siret: string;
-  nafTitle: string;
-  naf: string;
-  category: string;
-  workforce: string;
-  location: Location;
-}
+ 

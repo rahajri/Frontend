@@ -1,6 +1,9 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+ import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
+import { environment } from 'src/environments/environment.prod';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 interface MainMenu {
   menu: MenuItem[];
 }
@@ -9,10 +12,15 @@ interface MenuItem {
   menuValue: string;
   showSubRoute: boolean;  
 }
+
 @Injectable({
   providedIn: 'root',
 })
 export class SideBarService {
+
+  private readonly baseUrl = `${environment.apiUrl}/notifications`; // Use the environment variable
+
+
   public toggleSideBar: BehaviorSubject<string> = new BehaviorSubject<string>(
     localStorage.getItem('isMiniSidebar') ||  "false"
   );
@@ -30,7 +38,9 @@ export class SideBarService {
     localStorage.getItem('layoutDirection')|| 'ltr'
   );
 
-  constructor(private data: ShareDataService) {
+  constructor(private data: ShareDataService,
+    private http: HttpClient
+    ) {
     if(localStorage.getItem('layoutDirection')){
       this.layoutDirection.next('rtl')
     }
@@ -72,6 +82,20 @@ export class SideBarService {
   public changeLayout(position: string): void {
     this.layoutPosition.next(position);
     localStorage.setItem('layoutPosition', position);
+  }
+
+  getNotifications(): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token not found!');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.get<any>(this.baseUrl, { headers });
   }
  
 }

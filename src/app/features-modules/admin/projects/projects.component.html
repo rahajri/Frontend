@@ -141,9 +141,14 @@
                       <th></th>
                       
                       <th mat-sort-header="Siret">Siret</th>
-                      <th mat-sort-header="Entreprise">Entreprise</th>
-                      <th>Naf</th>
-                      <th mat-sort-header="Effictifs">Effictifs</th>
+                      <th mat-sort-header="Nom">Nom</th>
+                      <th mat-sort-header="Date Creation">Date de création</th>
+                      <th mat-sort-header="Activite">Activité</th>
+                      <th mat-sort-header="Effectif">Effectif</th>
+                      <th mat-sort-header="Contact">Contact</th>
+                      <th mat-sort-header="Telephone">Téléphone</th>
+                      <th mat-sort-header="Adresse">Adresse</th>
+ 
         
                       <th class="text-end">Actions</th>
                     </tr>
@@ -169,11 +174,23 @@
                         </div>
                       </td>
                   
-                      <td>{{ company.siret }}</td> <!-- Displaying the SIRET -->
-                      <td>{{ company.name }}</td> <!-- Displaying the company name -->
-                      <td>{{ company.naf }}</td> <!-- Displaying the NAF code -->
-                      <td>{{ company.workforce }}</td> <!-- Displaying the workforce -->
+                      <td>{{ company.siret }}</td>
+                      <td>{{ company.name }}</td>
+                      <td>{{ getDate(company.createdAt) }}</td>
+                      <td>{{ company.nafTitle }}</td>
+                      <td>{{ company.workforce }}</td>
+                      <td>
+                        {{ company.employees?.[0]?.firstName || '' }}
+                        {{ company.employees?.[0]?.lastName || '' }}
+                      </td>
                       
+                      <td>{{ company.employees?.[0]?.phone || 'N/A' }}</td>
+                      <td>
+                        {{ company.location?.address }}
+                        {{ company.location?.addressLine2 || '' }}
+                      </td>
+                      
+                       
                       <td class="text-end">
                         <a
                           href="javascript:void(0);"

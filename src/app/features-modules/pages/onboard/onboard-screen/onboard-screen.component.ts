@@ -104,9 +104,12 @@ export class OnboardScreenComponent implements OnInit {
       location: this.locationForm, // Add location form group here
       activities: this.fb.array([this.createActivity()]), // Initialize with one activity form group
 
-      skills: this.fb.array([]),
-      experiences: this.fb.array([]),
-      education: this.fb.array([]), // initialize the education form array
+      skills: this.fb.array([this.createSkill()]), // Ensure skills are initialized
+
+      experiences: this.fb.array([this.createExperience()]),
+      education: this.fb.array([this.createEducation()]), // initialize the education form array
+      languages: this.fb.array([this.createLanguage()])  // Initialize with one language entry
+
     });
 
 
@@ -117,28 +120,51 @@ export class OnboardScreenComponent implements OnInit {
     this.getJobs();
   }
 
-  newSkill = this.fb.group({
-    skillName: [''],
-    level: ['']
-  });
 
+
+  createSkill(): FormGroup {
+    return this.fb.group({
+      skillName: [''],  // Default empty value
+      level: [''],      // Default empty value
+    });
+  }
+
+  createEducation(): FormGroup {
+    return this.fb.group({
+      degreeName: [''],      // Default value for degree name
+      universityName: [''],  // Default value for university name
+      startDate: [''],       // Default value for start date
+      endDate: [''],         // Default value for end date
+    });
+  }
+
+  // Create a new experience form group
+  createExperience(): FormGroup {
+    return this.fb.group({
+      companyName: ['', Validators.required],
+      position: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required]
+    });
+  }
+
+  // Create a new language form group
+  createLanguage(): FormGroup {
+    return this.fb.group({
+      language: ['', Validators.required],
+      level: ['', Validators.required]
+    });
+  }
 
   addSkillManually() {
-    if (this.newSkill.valid) {
-      // Push the new skill to skillsArray 12123dsfsGG$$
-      this.skillsArray.push(this.fb.group({
-        skillName: this.newSkill.get('skillName')?.value || '',
-        level: this.newSkill.get('level')?.value || ''
-      }));
-
-      // Reset the temporary newSkill form group after adding
-      this.newSkill.reset();
-    } else {
-      console.warn("Please fill out the skill and level before adding.");
-    }
+    const skillsArray = this.form.get('skills') as FormArray;
+    skillsArray.push(this.createSkill()); // Adds a new skill with skillName and level
   }
 
 
+  get languagesArray(): FormArray {
+    return this.form.get('languages') as FormArray;
+  }
 
   // Getter for accessing the skills form array
   get skillsArray(): FormArray {
@@ -232,31 +258,19 @@ export class OnboardScreenComponent implements OnInit {
 
     return this.datePipe.transform(formattedDate, 'dd/MM/yyyy'); // Format to "DD/MM/YYYY"
   }
-  newExperience = this.fb.group({
-    companyName: ['', Validators.required],
-    position: ['', Validators.required],
-    location: [''],
-    startDate: [''],
-    endDate: ['']
-  });
 
-  addExperience() {
-    if (this.newExperience.valid) {
-      this.experiencesArray.push(this.fb.group({
-        companyName: this.newExperience.get('companyName')?.value || '',
-        position: this.newExperience.get('position')?.value || '',
-        location: this.newExperience.get('location')?.value || '',
-        startDate: this.newExperience.get('startDate')?.value || '',
-        endDate: this.newExperience.get('endDate')?.value || ''
-      }));
-      this.newExperience.reset(); // Clear fields after adding
-    } else {
-      console.warn("Please fill out all required fields before adding.");
-    }
+
+  // Add a new experience to the array
+  addExperience(): void {
+    this.experiencesArray.push(this.createExperience());
   }
 
-  removeExperience(index: number) {
-    this.experiencesArray.removeAt(index);
+
+  // Remove an experience from the array
+  removeExperience(index: number): void {
+    if (this.experiencesArray.length > 1) {
+      this.experiencesArray.removeAt(index);
+    }
   }
   get experiencesArray(): FormArray {
     return this.form.get('experiences') as FormArray;
@@ -293,29 +307,16 @@ export class OnboardScreenComponent implements OnInit {
   get educationArray(): FormArray {
     return this.form.get('education') as FormArray;
   }
-  newEducation = this.fb.group({
-    degreeName: [''],
-    universityName: [''],
-    startDate: [''],
-    endDate: ['']
-  });
+
   addEducation() {
-    if (this.newEducation.valid) {
-      this.educationArray.push(this.fb.group({
-        degreeName: this.newEducation.get('degreeName')?.value || '',
-        universityName: this.newEducation.get('universityName')?.value || '',
-        startDate: this.newEducation.get('startDate')?.value || '',
-        endDate: this.newEducation.get('endDate')?.value || ''
-      }));
-      this.newEducation.reset();  // Clear the fields after adding
-    } else {
-      console.warn("Please fill out all fields before adding.");
-    }
+    const educationArray = this.form.get('education') as FormArray;
+    educationArray.push(this.createEducation());
   }
 
 
-  removeEducation(index: number) {
-    this.educationArray.removeAt(index);
+  removeEducation(i: number) {
+    const educationArray = this.form.get('education') as FormArray;
+    educationArray.removeAt(i);
   }
 
 
@@ -358,11 +359,16 @@ export class OnboardScreenComponent implements OnInit {
   }
 
 
-  addLanguage() {
-    this.language.push(1);
+  // Add a new language to the array
+  addLanguage(): void {
+    this.languagesArray.push(this.createLanguage());
   }
-  removeLanguage(index: number) {
-    this.language.splice(index, 1);
+
+  // Remove a language from the array
+  removeLanguage(index: number): void {
+    if (this.languagesArray.length > 1) {
+      this.languagesArray.removeAt(index);
+    }
   }
 
 
@@ -491,7 +497,7 @@ export class OnboardScreenComponent implements OnInit {
     const candidateData = new FormData();
     candidateData.append('userInformation', JSON.stringify(this.form.value));
     candidateData.append('cv', this.cvs[0]);
-
+    console.log('Candidate created successfully:', this.form.value);
     this.candidateService.createCandidate(candidateData).subscribe(
       (response) => {
 

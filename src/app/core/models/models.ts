@@ -1,3 +1,5 @@
+import { data } from "src/app/features-modules/employer/milestones/tasks/tasks.component";
+
 export interface pageSelection {
   skip: number;
   limit: number;
@@ -69,9 +71,41 @@ export interface Company {
   nafTitle: string;
   naf: string;
   category: string;
-  workforce: string;
-   
+  workforce: number; // Changed to a number since JSON shows it as numeric
+  createdAt: string; // ISO string format in JSON
+  updatedAt: string; // ISO string format in JSON
+  email?: string | null; // Optional and nullable
+  phone?: string | null; // Optional and nullable
+  message?: string | null; // Optional and nullable
+  location?: {
+    id: string;
+    address: string;
+    addressLine2?: string | null; // Optional and nullable
+  };
+  status?: {
+    id: string;
+    description: string;
+    type: string;
+  };
+  employees?: Array<{
+    id: string;
+    lastName: string;
+    firstName: string;
+    email: string;
+    password: string;
+    phone?: string | null;
+    birthDate?: string | null; // Optional and nullable
+    age?: number | null; // Optional and nullable
+    role: string;
+    emailVerifiedAt?: string | null; // Optional and nullable
+    profileTitle?: string | null; // Optional and nullable
+    aiId?: string | null; // Optional and nullable
+    createdAt: string;
+    updatedAt: string;
+    position?: string | null; // Optional and nullable
+  }>;
 }
+
 export interface category {
   id: number;
   category: string;
