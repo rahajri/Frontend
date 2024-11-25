@@ -21,6 +21,7 @@ export class SidemenuComponent implements OnInit{
   currentroute = '';
   side_bar_data: AdminSidebar[] = [];
   notifications: any[] = [];
+  unreadCount : number = 0;
 
   constructor(
     public router: Router,
@@ -118,11 +119,13 @@ export class SidemenuComponent implements OnInit{
   fetchNotifications(): void {
     this.sideBar.getNotifications().subscribe(
       (data) => {
-        console.log('Notifications:', data);
-        this.notifications = data?.notifications?.map((notification: any) => ({
+        this.unreadCount = data.unreadCount;
+        console.log(data.unreadCount)
+         this.notifications = data?.notifications?.map((notification: any) => ({
           title: notification.title,
           timeAgo: this.calculateTimeAgo(notification.createdAt),
         }));
+        
       },
       (error) => {
         console.error('Error fetching notifications:', error);

@@ -57,8 +57,7 @@ export class ProjectsComponent implements OnInit {
   
     this.companyService.getAllCompanies().subscribe(
       (response) => {
-        console.log('API Response:', response); // Debugging
-        const companies = response.data || response; // Adjust based on response structure
+         const companies = response.data || response; // Adjust based on response structure
         
         companies.map((res: Company, index: number) => {
           const serialNumber = index + 1;
@@ -160,8 +159,7 @@ export class ProjectsComponent implements OnInit {
     this.companyService.getAllCompanies().subscribe(
       (response) => {
         this.companiesData = response; // Assign response data to companiesData
-        console.log('Companies:', this.companiesData);
-      },
+       },
       (error) => {
         console.error('Error fetching companies:', error);
       }

@@ -133,8 +133,7 @@ export class RegisterCompanyComponent {
       //  console.log(this.signupForm.value , this.form.value);
       this.userService.createCompany(data).subscribe(
         (response) => {
-          console.log('User created successfully:', response);
-          // Store the email in the service
+           // Store the email in the service
           this.emailStorageService.setEmail(formValues.email);
           // Redirect to the VerifyEmailComponent
           this.Router.navigate(['/auth/verify-email']);
@@ -150,8 +149,7 @@ export class RegisterCompanyComponent {
   verifyOtp(userId: string) {
     this.userService.verifyOtp(userId).subscribe(
       response => {
-        console.log('OTP verified successfully', response);
-      },
+       },
       error => {
         console.error('Verification failed', error);
       }
@@ -188,8 +186,7 @@ export class RegisterCompanyComponent {
       (data) => {
         this.companiesData = data?.data;
         // Store the data in the component's variable
-        console.log('Companies Data:', this.companiesData);  // Log to check the result
-      },
+       },
       (error) => {
         console.error('Error loading companies data:', error);  // Handle error
       }
@@ -279,84 +276,7 @@ export class RegisterCompanyComponent {
     );
   }
 
-  /*getsiretDetails(event: Event) {
-    const siret = (event.target as HTMLInputElement).value;
-  
-    if (!siret) {
-      console.error('SIRET is empty');
-      return;
-    }
-  
-    let naf: string ; // Declare naf in the parent scope
-  
-    this.inseeApiService.getSiretDetails(siret).subscribe(
-      (data) => {
-        console.log('API Response:', data);
-  
-        const etablissement = data?.etablissement || {};
-        const uniteLegale = etablissement.uniteLegale || {};
-        const adresse = etablissement.adresseEtablissement || {}; // Verify if this exists
-  
-        console.log(
-          'API Response: adresse=',
-          adresse.libelleCommuneEtablissement,
-          adresse.codeCommuneEtablissement,
-          adresse.codePostalEtablissement
-        );
-  
-        this.getDepartmentRegion(adresse.libelleCommuneEtablissement);
-  
-        // Assign naf from the response
-        naf = etablissement?.periodesEtablissement?.[0]?.activitePrincipaleEtablissement.replace('.', '');
-   
-        // Patch the form
-        this.signupForm.patchValue({
-          company: {
-            name: uniteLegale?.denominationUniteLegale || '',
-            category: uniteLegale?.categorieEntreprise || '',
-            workforce: uniteLegale?.trancheEffectifsUniteLegale || '',
-            naf: naf || '',
-            location: {
-              address: `${adresse?.numeroVoieEtablissement || ''} ${adresse?.typeVoieEtablissement || ''} ${adresse?.libelleVoieEtablissement || ''}`.trim(),
-              addressLine2: adresse?.complementAdresseEtablissement || '',
-              postalCode: adresse?.codePostalEtablissement || '',
-              city: adresse?.libelleCommuneEtablissement || '',
-            },
-          },
-        });
-  
-        // Fetch NAF details using the company service
-        if (naf) {
-          this.companyService.getNafByCompany(naf).subscribe(
-            (nafvalue) => {
-              if (nafvalue) {
-                console.log("No matching NAF found for the company's activity" , nafvalue);
-                 this.signupForm.patchValue({
-                  company: {
-                    nafTitle: nafvalue.INTITULÉS,
-                  },
-                });
-              } else {
-                console.log("No matching NAF found for the company's activity");
-              }
-            },
-            (error) => {
-              console.error('Error fetching NAF details:', error);
-            }
-          );
-        } else {
-          console.warn('No NAF code found in the response.');
-        }
-      },
-      (error) => {
-        console.error('Error fetching SIRET details:', error);
-      }
-    );
-    
-  }*/
-  
-  
-
+ 
   getSiretDetails(event: Event): void {
     const siret = (event.target as HTMLInputElement).value;
   
@@ -419,16 +339,13 @@ export class RegisterCompanyComponent {
             }
           },
           error: (error) => {
-            console.log( error.errorContext);
-            this.siretErrorMessage = error?.message ;
-            console.error('Error fetching SIRET details:', error.errorContext);
-          },
+             this.siretErrorMessage = error?.message ;
+           },
         });
       },
       error: (error) => {
         this.siretErrorMessage = 'Error checking SIRET existence.';
-        console.error('Error checking SIRET existence:', error);
-      },
+       },
     });
   }
   

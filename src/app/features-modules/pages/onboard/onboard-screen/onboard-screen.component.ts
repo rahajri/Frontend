@@ -288,8 +288,7 @@ export class OnboardScreenComponent implements OnInit {
           (response) => {
             const cleanedResponse = response.Result.replace(/json|/g, '').trim();
             const jsonObject = JSON.parse(cleanedResponse);
-            console.log('jsonObject:', jsonObject);
-            // Call the patch function to populate the form
+             // Call the patch function to populate the form
             this.patchFormData(jsonObject);
             this.spinner = false
           },
@@ -427,7 +426,6 @@ export class OnboardScreenComponent implements OnInit {
     this.locationService.getZipCodes().subscribe(
       (data) => {
         this.zipCodes = data;
-        console.log('ZIP Codes:', this.zipCodes);
       },
       (error) => {
         console.error('Error fetching ZIP codes:', error);
@@ -505,12 +503,10 @@ export class OnboardScreenComponent implements OnInit {
     const candidateData = new FormData();
     candidateData.append('userInformation', JSON.stringify(this.form.value));
     candidateData.append('cv', this.cvs[0]);
-    console.log('Candidate created successfully:', this.form.value);
-    this.candidateService.createCandidate(candidateData).subscribe(
+     this.candidateService.createCandidate(candidateData).subscribe(
       (response) => {
 
-        console.log('Candidate created successfully:', response);
-        this.router.navigate(['/freelancer/dashboards']);
+         this.router.navigate(['/freelancer/dashboards']);
       },
       (error) => {
         console.error('Error creating candidate:', error);
