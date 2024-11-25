@@ -29,26 +29,27 @@
                        
                                
                             <div role="tabpanel active" id="company" class="tab-pane fade active show">
-                              <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                              <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" >
                                 <div formGroupName="company">
                                   <div class="company-title">
                                     <h4>company</h4>
                                    </div>
-                                  <div class="row">
+                                   <div class="row">
                                     <div class="col-md-12">
                                       <div class="input-block">
                                         <label for="company-name" class="form-label">Siret</label>
                                         <input 
-                                            type="text" 
-                                            class="form-control" 
-                                            formControlName="siret" 
-                                            (change)="getSiretDetails($event)"  
-                                            placeholder="Enter Siret" 
-                                          />
+                                        type="text" 
+                                        class="form-control" 
+                                        formControlName="siret" 
+                                        (change)="getSiretDetails($event)"  
+                                        placeholder="Enter Siret" 
+                                         
+                                      />
                                       </div>
                                     </div>
-                                   
-                                
+                                   </div>
+                                  <div class="row" [class.disabled]="siretErrorMessage">
                                     <div class="col-md-12">
                                       <div class="input-block">
                                         <label for="company-name" class="form-label">Company Name</label>
@@ -87,7 +88,7 @@
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="row" formGroupName="location">
+                                  <div class="row" formGroupName="location" [class.disabled]="siretErrorMessage">
                                  
                                     <div class="col-md-12">
                                       <h4>Location</h4>
@@ -140,7 +141,7 @@
                                 
 
                                 <hr>
-                                <div formGroupName="user">
+                                <div formGroupName="user" [class.disabled]="siretErrorMessage">
                                   <div class="company-title">
                                     <h4>Contact</h4>
                                    </div>
@@ -194,7 +195,7 @@
                                             <span class="fas" [ngClass]="password[1] ? 'fa-eye' : 'fa-eye-slash'"></span>
                                           </div>
                                         </div>
-                                        <div *ngIf="signupForm.errors && signupForm.get('user.confirmPassword')?.touched" class="text-danger">
+                                        <div *ngIf="signupForm.errors && signupForm.get('user.confirmPassword')?.touched " class="text-danger">
                                           {{ 'register.confirmPassword' | translate }}  
                                         </div>
                                       </div>
@@ -230,7 +231,7 @@
                                 </div>
                                 
                                 <hr>
-                                <div class="row">
+                                <div class="row" [class.disabled]="siretErrorMessage">
                                   <div class="col-md-12">
                                     <h4>Message</h4>
                                   </div>
@@ -246,7 +247,7 @@
                                   </label>
                                 </div>
                                 
-                                <button type="submit" class="btn btn-primary w-100" [disabled]="!signupForm.valid">{{ 'register.demande' | translate }}</button>
+                                <button type="submit" class="btn btn-primary w-100" [disabled]="!signupForm.valid || siretErrorMessage">{{ 'register.demande' | translate }}</button>
                               </form>
                           </div>
                         </div>		

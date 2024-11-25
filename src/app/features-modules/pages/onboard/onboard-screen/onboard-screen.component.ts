@@ -151,7 +151,7 @@ export class OnboardScreenComponent implements OnInit {
   // Create a new language form group
   createLanguage(): FormGroup {
     return this.fb.group({
-      language: ['', Validators.required],
+      name: ['', Validators.required],
       level: ['', Validators.required]
     });
   }
@@ -457,14 +457,22 @@ export class OnboardScreenComponent implements OnInit {
 
   onCityChange(event: Event): void {
     const selectedCityId = (event.target as HTMLSelectElement).value;
-    const selectedCity = this.cities.find(city => city.id === selectedCityId);
-
-    if (selectedCity) {
-      this.locationForm.patchValue({
-        department: selectedCity?.department?.name,
-        region: selectedCity?.department?.region?.name
-      });
-    }
+     this.locationService.getcityInfo(selectedCityId).subscribe(
+      (city) => {
+       // this.cities = data.cities; // Update the cities list
+         if (city) {
+          this.locationForm.patchValue({
+            department: city?.department?.name,
+            region: city?.department?.region?.name
+          });
+        }
+        
+      },
+      (error) => {
+        console.error('Error fetching ZIP code info:', error);
+      }
+    );
+    
   }
 
 

@@ -86,10 +86,11 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.loginError = null; // Clear any previous errors
         },
         (error) => {
-          // Handle login error
+          this.loginError = error.error.message || 'Login failed. Please try again.';
+
           console.error('Login failed', error);
           this.translate.get('login.error').subscribe((translatedText) => {
-            this.loginError = translatedText; // Set the translated error message
+          //  this.loginError = translatedText; // Set the translated error message
           });
         }
       );

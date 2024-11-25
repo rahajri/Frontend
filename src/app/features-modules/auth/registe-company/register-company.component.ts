@@ -129,7 +129,7 @@ export class RegisterCompanyComponent {
       const username = `${formValues.firstName}${randomSixDigitNumber}`;
       let data = this.signupForm.value;
 
-      console.log('daaata', data);
+      //console.log('daaata', data);
       //  console.log(this.signupForm.value , this.form.value);
       this.userService.createCompany(data).subscribe(
         (response) => {
@@ -355,95 +355,83 @@ export class RegisterCompanyComponent {
     
   }*/
   
-  getSiretDetails(event: Event) {
+  
+
+  getSiretDetails(event: Event): void {
     const siret = (event.target as HTMLInputElement).value;
   
     if (!siret) {
       console.error('SIRET is empty');
+      this.siretErrorMessage = 'SIRET cannot be empty.';
       return;
     }
   
     // Check if SIRET exists before proceeding
-    this.companyService.checkSiretExists(siret).subscribe(
-      (data) => {
-        if (data.exists == true) {
-          this.siretErrorMessage = data?.message;
+    this.companyService.checkSiretExists(siret).subscribe({
+      next: (data) => {
+        if (data.exists) {
+          this.siretErrorMessage = data.message;
           return;
         }
-        else if (!data.exists) {
-          
-          this.siretErrorMessage = null;
-          this.inseeApiService.getSiretDetails(siret).subscribe(
-            (data) => {
-              console.log('API Response:', data);
   
-              const etablissement = data?.etablissement || {};
-              const uniteLegale = etablissement.uniteLegale || {};
-              const adresse = etablissement.adresseEtablissement || {};
+        this.inseeApiService.getSiretDetails(siret).subscribe({
+          next: (data) => {
+            this.siretErrorMessage = null; // Clear previous error
   
-              console.log(
-                'API Response: adresse=',
-                adresse.libelleCommuneEtablissement,
-                adresse.codeCommuneEtablissement,
-                adresse.codePostalEtablissement
-              );
+            const etablissement = data?.etablissement || {};
+            const uniteLegale = etablissement.uniteLegale || {};
+            const adresse = etablissement.adresseEtablissement || {};
   
-              this.getDepartmentRegion(adresse.libelleCommuneEtablissement);
+            this.getDepartmentRegion(adresse.libelleCommuneEtablissement);
   
-              const naf = etablissement?.periodesEtablissement?.[0]?.activitePrincipaleEtablissement?.replace('.', '');
+            const naf = etablissement?.periodesEtablissement?.[0]?.activitePrincipaleEtablissement?.replace('.', '');
   
-              // Patch the form
-              this.signupForm.patchValue({
-                company: {
-                  name: uniteLegale?.denominationUniteLegale || '',
-                  category: uniteLegale?.categorieEntreprise || '',
-                  workforce: uniteLegale?.trancheEffectifsUniteLegale || 0,
-                  naf: naf || '',
-                  location: {
-                    address: `${adresse?.numeroVoieEtablissement || ''} ${adresse?.typeVoieEtablissement || ''} ${adresse?.libelleVoieEtablissement || ''}`.trim(),
-                    addressLine2: adresse?.complementAdresseEtablissement || '',
-                    postalCode: adresse?.codePostalEtablissement || '',
-                    city: adresse?.libelleCommuneEtablissement || '',
-                  },
+            this.signupForm.patchValue({
+              company: {
+                name: uniteLegale?.denominationUniteLegale || '',
+                category: uniteLegale?.categorieEntreprise || '',
+                workforce: uniteLegale?.trancheEffectifsUniteLegale || 0,
+                naf: naf || '',
+                location: {
+                  address: `${adresse?.numeroVoieEtablissement || ''} ${adresse?.typeVoieEtablissement || ''} ${adresse?.libelleVoieEtablissement || ''}`.trim(),
+                  addressLine2: adresse?.complementAdresseEtablissement || '',
+                  postalCode: adresse?.codePostalEtablissement || '',
+                  city: adresse?.libelleCommuneEtablissement || '',
+                },
+              },
+            });
+  
+            if (naf) {
+              this.companyService.getNafByCompany(naf).subscribe({
+                next: (nafValue) => {
+                  if (nafValue) {
+                    this.signupForm.patchValue({
+                      company: {
+                        nafTitle: nafValue.INTITULÉS,
+                      },
+                    });
+                  }
+                },
+                error: (error) => {
+                  console.error('Error fetching NAF details:', error);
                 },
               });
-  
-              // Fetch NAF details if available
-              if (naf) {
-                this.companyService.getNafByCompany(naf).subscribe(
-                  (nafvalue) => {
-                    if (nafvalue) {
-                      console.log("Matching NAF details found:", nafvalue);
-                      this.signupForm.patchValue({
-                        company: {
-                          nafTitle: nafvalue.INTITULÉS,
-                        },
-                      });
-                    } else {
-                      console.log("No matching NAF details found.");
-                    }
-                  },
-                  (error) => {
-                    console.error('Error fetching NAF details:', error);
-                  }
-                );
-              } else {
-                console.warn('No NAF code found in the response.');
-              }
-            },
-            (error) => {
-              console.error('Error fetching SIRET details:', error);
             }
-          );
-        } else {
-          console.warn('SIRET does not exist.');
-        }
+          },
+          error: (error) => {
+            console.log( error.errorContext);
+            this.siretErrorMessage = error?.message ;
+            console.error('Error fetching SIRET details:', error.errorContext);
+          },
+        });
       },
-      (error) => {
+      error: (error) => {
+        this.siretErrorMessage = 'Error checking SIRET existence.';
         console.error('Error checking SIRET existence:', error);
-      }
-    );
+      },
+    });
   }
+  
   
 
 

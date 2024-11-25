@@ -222,19 +222,14 @@
                             <label for="post-code" class="form-label"
                               >ZIP / Post Code</label
                             >
-                            <select
-                              class="form-control form-select"
+                            <input
+                              type="text"
+                              class="form-control  "
                               formControlName="postalCode"
                               (change)="onZipCodeChange($event)"
-                              [disabled]="!zipCodes.length"
+                               
                             >
-                              <option
-                                *ngFor="let zip of zipCodes"
-                                [value]="zip.id"
-                              >
-                                {{ zip.code }}
-                              </option>
-                            </select>
+                             
                           </div>
                         </div>
 
@@ -247,7 +242,7 @@
                               (change)="onCityChange($event)"
                               [disabled]="!cities.length"
                             >
-                              <option *ngFor="let city of cities" [value]="city.id">
+                              <option *ngFor="let city of cities" [value]="city.name">
                                 {{ city.name }}
                               </option>
                             </select>
@@ -634,7 +629,7 @@
                       <div class="col-md-6" *ngFor="let language of languagesArray.controls; let i = index" [formGroupName]="i">
                         <div class="input-block">
                           <label for="language" class="form-label">Language</label>
-                          <input type="text" class="form-control" formControlName="language" />
+                          <input type="text" class="form-control" formControlName="name" />
                         </div>
                       </div>
                       <div class="col-md-6" *ngFor="let language of languagesArray.controls; let i = index" [formGroupName]="i">
