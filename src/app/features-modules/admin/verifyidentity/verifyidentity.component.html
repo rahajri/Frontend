@@ -173,6 +173,11 @@
 
         <h5>Location</h5>
         <div class="form-group">
+          <label for="address">Ville</label>
+          <input type="text" id="address" class="form-control" [value]="selectedCompany?.location?.city?.name" readonly />
+        </div>
+         
+        <div class="form-group">
           <label for="address">Address</label>
           <input type="text" id="address" class="form-control" [value]="selectedCompany?.location?.address" readonly />
         </div>
@@ -180,6 +185,7 @@
           <label for="addressLine2">Address Line 2</label>
           <input type="text" id="addressLine2" class="form-control" [value]="selectedCompany?.location?.addressLine2 || 'N/A'" readonly />
         </div>
+
 
         <h5>Status</h5>
         <div class="form-group">
