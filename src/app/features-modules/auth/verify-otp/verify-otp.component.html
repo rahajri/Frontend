@@ -4,7 +4,59 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="account-onborad complte-board back-home pb- text-center">
-                        <h1> Your acccc </h1>
+                    <div style="text-align: center; margin-top: 50px;" *ngIf="verificationStatus === 'success'">
+                        <ng-container *ngIf="userType === 'candidate'; else entrepriseTemplate">
+                          <h1>Activation réussie !</h1>
+                          <p>
+                            Félicitations <strong>{{ profil.firstName }}</strong>, votre compte a été activé avec succès. <br />
+                            Vous pouvez maintenant vous connecter à votre espace personnel pour profiter de nos services.
+                          </p>
+                          <div class="btn-item">
+                           
+                            <a href="/auth/login"  >
+                                Aller à la page de connexion
+                              </a>
+                            
+                        </div>
+                        </ng-container>
+                        <ng-template #entrepriseTemplate>
+                          <h1>Activation en cours</h1>
+                          <p>
+                            Félicitations <strong>{{ profil.firstName  }}</strong>, votre compte a été activé avec succès. <br />
+                            Cependant, votre demande est actuellement en attente de validation par notre administrateur. <br />
+                            Vous recevrez un email de confirmation dès que votre compte sera validé.
+                          </p>
+                          <p>
+                            Pour toute question, n’hésitez pas à contacter notre équipe au <strong>01 40 34 10 45</strong>.
+                          </p>
+                          <div class="btn-item">
+                           
+                            <a href="/auth/login"  >
+                                Aller à la page de connexion
+                              </a>
+                            
+                        </div>
+                        </ng-template>
+                      </div>
+                      
+                      <div style="text-align: center; margin-top: 50px;" *ngIf="verificationStatus === 'failure'">
+                        <h1>Échec de l'activation</h1>
+                        <p>Le lien de vérification est invalide ou a expiré.</p>
+                      </div>
+                      <div style="text-align: center; margin-top: 50px;" *ngIf="verificationStatus === 'active'">
+                        <div style="text-align: center; margin-top: 50px;">
+                            <h1>Compte déjà activé</h1>
+                            <p>
+                              Ce compte a déjà été activé. <br />
+                              Vous pouvez directement vous connecter à votre espace personnel.
+                            </p>
+                            <a href="/auth/login"  class="mt-3">
+                              Aller à la page de connexion
+                            </a>
+                          </div>
+                      </div>
+                      
+                      
                 </div>
             </div>
         </div>

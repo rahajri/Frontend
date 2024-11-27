@@ -1,0 +1,9 @@
+.card.filter-card {
+    display: none; /* Hidden by default */
+    transition: all 0.3s ease;
+  }
+  
+  .card.filter-card.filter-show {
+    display: block; /* Visible when filter-show is added */
+  }
+  

@@ -1,36 +1,64 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { routes } from 'src/app/core/helpers/routes/routes';
-import { EmailStorageService } from '../service/email-storage.service';
-import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../service/user.service';
-
+ 
 @Component({
   selector: 'app-verify-otp',
   templateUrl: './verify-otp.component.html',
-  styleUrls: ['./verify-otp.component.scss']
+  styleUrls: ['./verify-otp.component.scss'],
 })
 export class VerifyOtpComponent implements OnInit {
- otp: any ;
-  user: any ;
-  
-  constructor(private userService: UserService,
-    private route: ActivatedRoute
-    ) {}
+  otp: string = '';
+  user: string = '';
+  userType: string = '';
+  message: string = '';
+  messageType: 'success' | 'error' | 'info' = 'info';
+  verificationStatus: string = '';;
+  profil : any ;
 
-    ngOnInit(): void {
-      // Try using snapshot for the initial values
-      this.otp = this.route.snapshot.queryParamMap.get('otp');
-      this.user = this.route.snapshot.queryParamMap.get('user');
-  
-      console.log('OTP (snapshot):', this.otp);
-      console.log('User (snapshot):', this.user);
-      if (this.otp && this.user) {
-        // Call the verifyEmail function
-        this.userService.verifyEmail(this.otp, this.user).subscribe();
-      } else {
-        alert('Invalid verification link.');
-      }
+  constructor(private userService: UserService, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    // Get OTP and user from query parameters
+    this.otp = this.route.snapshot.queryParamMap.get('otp') || '';
+    this.user = this.route.snapshot.queryParamMap.get('user') || '';
+
+    if (this.otp &&  this.user) {
+      // Call service to verify OTP
+      this.userService.verifyEmail(this.otp,  this.user).subscribe({
+        next: (response) => {
+          if (response.status === 'success') {
+            this.verificationStatus = 'success';
+            
+          } else {
+            this.verificationStatus = 'failure';
+          }
+        },
+        error: (error) => {
+          if (error.status === 422) {
+            // Account already verified   this.displayMessage('Votre compte est déjà activé.', 'info');
+            this.fetchUserProfile(); // Fetch user profile even if already verified
+          } 
+          this.verificationStatus = 'active';
+        },
+      });
+    } else {
+      this.verificationStatus = 'failure';
     }
+    this.fetchUserProfile();
+  }
 
+  
+  fetchUserProfile(): void {
+    this.userService.getUserProfile(this.user).subscribe({
+      next: (profile) => {
+        this.userType = profile.role; // Assuming API returns a 'type' field
+        this.profil = profile; // Assuming API returns a 'type' field
+       },
+      error: () => {
+       },
+    });
+  }
+
+  
 }

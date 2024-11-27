@@ -9,6 +9,7 @@ import { EmailStorageService } from '../service/email-storage.service';
 import { environment } from 'src/environments/environment.prod';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { LocationService } from 'src/app/core/services/location.service';
+import { AlertService } from 'src/app/core/services/alert/alert.service';
 
 @Component({
   selector: 'app-register',
@@ -41,6 +42,8 @@ export class RegisterComponent {
     private emailStorageService: EmailStorageService,
     private companyService: CompanyService,
     private locationService: LocationService,
+    private alertService: AlertService,
+    
 
   ) {
     this.translate.setDefaultLang(environment.defaultLanguage);
@@ -107,6 +110,8 @@ export class RegisterComponent {
           console.log('User created successfully:', response);
           // Store the email in the service
           this.emailStorageService.setEmail(formValues.email);
+          this.alertService.showAlert('Candidature created successfully!', 'success');
+
           // Redirect to the VerifyEmailComponent
           this.Router.navigate(['/auth/verify-email']);
           this.verifyOtp(response?.id);

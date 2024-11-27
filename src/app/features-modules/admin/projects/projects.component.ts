@@ -31,8 +31,9 @@ export class ProjectsComponent implements OnInit {
   public pageNumberArray: Array<number> = [];
   public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
-  public filter = false;
+  filter: boolean = false;
   companiesData: any[] = []; // To store companies data
+  selectedCompany: any = null;
 
   //** / pagination variables
   constructor(private data: ShareDataService,
@@ -47,6 +48,7 @@ export class ProjectsComponent implements OnInit {
   //Filter toggle
   openFilter(){
     this.filter = !this.filter
+  console.log(this.filter)  
   }
   // Get hostel List  Api Call
 
@@ -164,6 +166,11 @@ export class ProjectsComponent implements OnInit {
         console.error('Error fetching companies:', error);
       }
     );
+  }
+
+
+  setSelectedCompany(company: any): void {
+    this.selectedCompany = company;
   }
 
 }

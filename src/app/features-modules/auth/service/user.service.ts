@@ -13,6 +13,7 @@ export class UserService {
   private baseUrl = `${environment.apiUrl}/auth`;
   constructor(private http: HttpClient,
     private router: Router) { }
+    private apiUrl = 'http://localhost:3000/users';
 
   // Register new user
   createUser(userData: any): Observable<any> {
@@ -46,28 +47,15 @@ export class UserService {
 
     return this.http.post<any>(url, body, { headers });
   }
+ 
 
-   // Assuming you have a service to handle the verification request
-verifyEmail(otp: string, user: string) {
-  return this.http.get(`http://localhost:3000/users/verify/${otp}?user=${user}`).pipe(
-    catchError((error) => {
-       // Handle error
-      console.error('Verification failed', error);
-      return of(error); // Return an observable with the error if needed
-    }),
-    map((response: any) => {
-      console.log('response ', response.status);
-      if (response.status === 'success') {
-        // Redirect to login page after successful verification
-       this.router.navigate(['/auth/login']);
-      } else {
-        // Handle failed verification
-     //  alert('Verification failed');
-      }
-    })
-  );
-}
+   verifyEmail(otp: string, user: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/verify/${otp}?user=${user}`);
+  }
 
+  getUserProfile(user: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profile/${user}`);
+  }
 
  private baseUrlCop = `${environment.apiUrl}/companies`;
   createCompany(userData: any): Observable<any> {

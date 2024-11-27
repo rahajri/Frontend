@@ -49,34 +49,32 @@
                         <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover mb-0 datatable">
                           <thead>
                             <tr>
-                              <th mat-sort-header="Siret">Siret</th>
-                              <th mat-sort-header="Nom">Nom</th>
                               <th mat-sort-header="Date Creation">Date de création</th>
-                              <th mat-sort-header="Activite">Activité</th>
-                              <th mat-sort-header="Effectif">Effectif</th>
-                              <th mat-sort-header="Contact">Contact</th>
+                              <th mat-sort-header="Nom">Nom</th>
+                               <th mat-sort-header="Activite">Activité</th>
+                               <th mat-sort-header="Contact">Contact</th>
                               <th mat-sort-header="Telephone">Téléphone</th>
-                              <th mat-sort-header="Adresse">Adresse</th>
+                              <th mat-sort-header="Ville">Ville</th>
      
                                <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr *ngFor="let company of companies">
-                              <td>{{ company.siret }}</td>
-                              <td>{{ company.name }}</td>
+                            <tr *ngFor="let company of companies" (click)="setSelectedCompany(company)">
                               <td>{{ getDate(company.createdAt) }}</td>
+                               <td data-bs-toggle="modal"
+                               data-bs-target="#show-details">{{ company.name }}
+                             
+                              </td>
                               <td>{{ company.nafTitle }}</td>
-                              <td>{{ company.workforce }}</td>
-                              <td>
+                               <td>
                                 {{ company.employees?.[0]?.firstName || '' }}
                                 {{ company.employees?.[0]?.lastName || '' }}
                               </td>
                               <td>{{ company.employees?.[0]?.phone || 'N/A' }}</td>
                               <td>
-                                {{ company.location?.address }}
-                                {{ company.location?.addressLine2 || '' }}
-                              </td>
+                                {{   company.location?.city?.name  }}
+                               </td>
                              
                                <td>
                                 <button (click)="approve(company.id)" class="btn btn-success me-2">Approve</button>
@@ -121,3 +119,76 @@
       </div>
     </div>
     <!-- /Page Wrapper -->
+
+
+ 
+  <!-- Modal -->
+<div class="modal fade" id="show-details">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{ selectedCompany?.name }}</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <h5>Company Details</h5>
+        <div class="form-group">
+          <label for="siret">date </label>
+          <input type="text" id="date" class="form-control" [value]="getDate(selectedCompany?.createdAt)" readonly />
+        </div>
+        <div class="form-group">
+          <label for="siret">SIRET</label>
+          <input type="text" id="siret" class="form-control" [value]="selectedCompany?.siret" readonly />
+        </div>
+        <div class="form-group">
+          <label for="email">Contact</label>
+          <input type="text" id="email" class="form-control" [value]="selectedCompany?.employees?.[0]?.firstName - selectedCompany?.employees?.[0]?.lastName" readonly />
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" id="email" class="form-control" [value]="selectedCompany?.employees?.[0]?.email || 'N/A'" readonly />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" class="form-control" [value]="selectedCompany?.employees?.[0]?.phone || 'N/A'" readonly />
+        </div>
+        <div class="form-group">
+          <label for="naf">NAF</label>
+          <input type="text" id="naf" class="form-control" [value]="selectedCompany?.naf" readonly />
+        </div>
+        <div class="form-group">
+          <label for="nafTitle">Activite</label>
+          <input type="text" id="nafTitle" class="form-control" [value]="selectedCompany?.nafTitle" readonly />
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input type="text" id="category" class="form-control" [value]="selectedCompany?.category" readonly />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <input type="text" id="message" class="form-control" [value]="selectedCompany?.message" readonly />
+        </div>
+
+        <h5>Location</h5>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" class="form-control" [value]="selectedCompany?.location?.address" readonly />
+        </div>
+        <div class="form-group">
+          <label for="addressLine2">Address Line 2</label>
+          <input type="text" id="addressLine2" class="form-control" [value]="selectedCompany?.location?.addressLine2 || 'N/A'" readonly />
+        </div>
+
+        <h5>Status</h5>
+        <div class="form-group">
+          <label for="status">Description</label>
+          <input type="text" id="status" class="form-control" [value]="selectedCompany?.status?.description" readonly />
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+</div>

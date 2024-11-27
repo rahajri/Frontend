@@ -42,6 +42,12 @@ export class VerifyidentityComponent implements OnInit {
     this.getCompanies()
 
   }
+
+  selectedCompany: any = null;
+
+  setSelectedCompany(company: any): void {
+    this.selectedCompany = company;
+  }
     //Filter toggle
     openFilter(){
       this.filter = !this.filter

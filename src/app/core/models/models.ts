@@ -80,7 +80,19 @@ export interface Company {
   location?: {
     id: string;
     address: string;
-    addressLine2?: string | null; // Optional and nullable
+    addressLine2?: string | null; // Optional and nullable secondary address line
+    city?: {
+      id: string;
+      name: string;
+      department?: {
+        id: string;
+        name: string;
+        region?: {
+          id: string;
+          name: string;
+        };
+      };
+    };
   };
   status?: {
     id: string;

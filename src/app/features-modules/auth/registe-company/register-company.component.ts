@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment.prod';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { LocationService } from 'src/app/core/services/location.service';
 import { InseeApiService } from 'src/app/core/services/insee-api.service';
+import { AlertService } from 'src/app/core/services/alert/alert.service';
 
 @Component({
   selector: 'app-register-company',
@@ -43,7 +44,8 @@ export class RegisterCompanyComponent {
     private emailStorageService: EmailStorageService,
     private companyService: CompanyService,
     private locationService: LocationService,
-    private inseeApiService: InseeApiService
+    private inseeApiService: InseeApiService,
+    private alertService: AlertService,
 
   ) {
     this.translate.setDefaultLang(environment.defaultLanguage);
@@ -134,7 +136,9 @@ export class RegisterCompanyComponent {
       this.userService.createCompany(data).subscribe(
         (response) => {
            // Store the email in the service
-          this.emailStorageService.setEmail(formValues.email);
+          this.emailStorageService.setEmail(response?.user.email);
+          this.alertService.showAlert('company created successfully!', 'success');
+
           // Redirect to the VerifyEmailComponent
           this.Router.navigate(['/auth/verify-email']);
           this.verifyOtp(response?.user.id);
