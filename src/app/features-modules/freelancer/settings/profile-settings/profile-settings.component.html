@@ -11,74 +11,117 @@
             <div class="col-lg-12">
               <div class="form-row pro-pad pt-0 ps-0">
                 <div class="input-block col-md-6 pro-pic">
-                  <label for="profile-picture" class="form-label">Profile Picture</label>
+                  <label for="profile-picture" class="form-label"
+                    >Profile Picture</label
+                  >
                   <div class="d-flex align-items-center">
                     <div class="upload-images freelancer-pic-box">
-                      <img src="assets/img/icon/user-img.svg" alt="" id="blah">
+                      <img
+                        src="assets/img/icon/user-img.svg"
+                        alt=""
+                        id="blah"
+                      />
                     </div>
                     <div class="ms-3 freelancer-pic-upload">
                       <label class="file-upload image-upbtn">
-                        Upload Image <input type="file" id="imgInp">
+                        Upload Image <input type="file" id="imgInp" />
                       </label>
                       <p>Max Image size 300*300</p>
                     </div>
-
                   </div>
-
                 </div>
               </div>
             </div>
             <div class="col-lg-6 col-md-12">
               <div class="mb-3">
                 <label for="first-name" class="form-label">First Name</label>
-                <input type="text" class="form-control" [(ngModel)]="candidate.firstName" name="firstName">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="candidate.firstName"
+                  name="firstName"
+                />
               </div>
             </div>
-            
+
             <div class="col-lg-6 col-md-12">
               <div class="mb-3">
                 <label for="last-name" class="form-label">Last Name</label>
-                <input type="text" class="form-control" [(ngModel)]="candidate.lastName" name="lastName">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="candidate.lastName"
+                  name="lastName"
+                />
               </div>
             </div>
-            
+
             <div class="col-lg-6 col-md-12">
               <div class="mb-3">
-                <label for="phone-number" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" [(ngModel)]="candidate.phone" name="phone">
+                <label for="phone-number" class="form-label"
+                  >Phone Number</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="candidate.phone"
+                  name="phone"
+                />
               </div>
             </div>
-            
+
             <div class="col-lg-6 col-md-12">
               <div class="mb-3">
-                <label for="email-address" class="form-label">Email Address</label>
-                <input type="text" class="form-control" [(ngModel)]="candidate.email" name="email">
+                <label for="email-address" class="form-label"
+                  >Email Address</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="candidate.email"
+                  name="email"
+                />
               </div>
             </div>
-            
+
             <div class="col-lg-4 col-md-12">
               <div class="mb-3">
-                <label for="date-of-birth" class="form-label">Date of Birth</label>
-                <input type="text" class="form-control" [(ngModel)]="candidate.birthDate" name="birthDate">
+                <label for="date-of-birth" class="form-label"
+                  >Date of Birth</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="candidate.birthDate"
+                  name="birthDate"
+                />
               </div>
             </div>
-            
+
             <div class="col-lg-4 col-md-12">
               <div class="mb-3">
                 <label for="job-title" class="form-label">Your Job Title</label>
-                <input type="text" class="form-control" [(ngModel)]="candidate.profileTitle" name="profileTitle">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="candidate.profileTitle"
+                  name="profileTitle"
+                />
               </div>
             </div>
-            
+
             <div class="col-lg-4 col-md-12">
               <div class="mb-3">
                 <label for="jobs" class="form-label">Type of Job</label>
-                <input type="text" class="form-control" [(ngModel)]="candidate.role" name="role">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="candidate.role"
+                  name="role"
+                />
               </div>
             </div>
-            
           </div>
-
         </div>
       </div>
 
@@ -99,923 +142,286 @@
       <div class="form-row">
         <div class="col-lg-12 w-100">
           <div class="card flex-fill mb-3">
-            <div class="pro-head">
-              <h4 class="pro-titles mb-0">Skills</h4>
-            </div>
-            <div class="pro-body  skill-info">
-              <div class="form-row align-items-center skill-cont" [ngClass]="{'d-none': datas[1]}">
-                <div class="input-block col-md-6">
-                  <input type="text" class="form-control" value="Front End Developer">
+            
+            <form [formGroup]="form">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>Skills</h4>
                 </div>
-                <div class="input-block col-md-5">
-                  <mat-select [(ngModel)]="selectedValue1" [ngModelOptions]="{standalone: true}"
-                    class="select mat-select arrow verify" placeholder="Basic">
-                    @for (data of selectedList1; track data) {
-                      <mat-option [value]="data.value">
-                        {{data.value}}
-                      </mat-option>
-                    }
-                  </mat-select>
-                </div>
-                <div class="input-block col-md-1">
-                  <a href="javascript:void(0);" class="btn trash-icon" (click)="removeDatas(1)"><i
-                  class="far fa-trash-alt"></i></a>
-                </div>
-              </div>
-              <div class="form-row align-items-center skill-cont" [ngClass]="{'d-none': datas[2]}">
-                <div class="input-block col-md-6">
-                  <input type="text" class="form-control" value="UI UX Designer">
-                </div>
-                <div class="input-block col-md-5">
-                  <mat-select [(ngModel)]="selectedValue2" [ngModelOptions]="{standalone: true}"
-                    class="select mat-select arrow verify" placeholder="Advanced">
-                    @for (data of selectedList2; track data) {
-                      <mat-option [value]="data.value">
-                        {{data.value}}
-                      </mat-option>
-                    }
-                  </mat-select>
-                </div>
-                <div class="input-block col-md-1">
-                  <a href="javascript:void(0);" class="btn trash-icon" (click)="removeDatas(2)"><i
-                  class="far fa-trash-alt"></i></a>
-                </div>
-              </div>
-              <div class="form-row align-items-center skill-cont" [ngClass]="{'d-none': datas[3]}">
-                <div class="input-block col-md-6">
-                  <input type="text" class="form-control" value="React Developer">
-                </div>
-                <div class="input-block col-md-5">
-                  <mat-select [(ngModel)]="selectedValue3" [ngModelOptions]="{standalone: true}"
-                    class="select mat-select arrow verify" placeholder="Intermediate">
-                    @for (data of selectedList3; track data) {
-                      <mat-option [value]="data.value">
-                        {{data.value}}
-                      </mat-option>
-                    }
-                  </mat-select>
-                </div>
-                <div class="input-block col-md-1">
-                  <a href="javascript:void(0);" class="btn trash-icon" (click)="removeDatas(3)"><i
-                  class="far fa-trash-alt"></i></a>
-                </div>
-              </div>
-              <div class="form-row align-items-center skill-cont">
-                <div class="input-block col-md-6">
-                  <input type="text" class="form-control" value="React Developer">
-                </div>
-                <div class="input-block col-md-5">
-                  <mat-select [(ngModel)]="selectedValue4" [ngModelOptions]="{standalone: true}"
-                    class="select mat-select arrow verify" placeholder="Intermediate">
-                    @for (data of selectedList4; track data) {
-                      <mat-option [value]="data.value">
-                        {{data.value}}
-                      </mat-option>
-                    }
-                  </mat-select>
-                </div>
-                <div class="input-block col-md-1">
-                  <a href="javascript:void(0);" (click)="addSkills()" (keydown.enter)="addSkills()" tabindex="0"
-                    class="btn fund-btn skill-add add-btn-profile"><i
-                  class="feather icon-plus"></i></a>
-                </div>
-
-              </div>
-              @if (skills.length > 0) {
-                @for (item of skills; track item; let i = $index) {
-                  <div class="form-row align-items-center skill-cont"
-                    >
-                    <div class="input-block col-md-6">
-                      <input type="text" class="form-control" value="">
-                    </div>
-                    <div class="input-block col-md-5">
-                      <mat-select placeholder="Select" class="select mat-select arrow verify">
-                        <mat-option value="Basic">Basic</mat-option>
-                        <mat-option value="Intermediate">Intermediate
-                        </mat-option>
-                        <mat-option value="Expert">Expert
-                        </mat-option>
-                      </mat-select>
-                    </div>
-                    <div class="input-block col-md-1">
-                      <a href="javascript:void(0);" class="btn trash-icon"
-                        (click)="removeSkills(i)" (keydown.enter)="removeSkills(i)" tabindex="0"><i class="far fa-trash-alt"></i></a>
+                <div class="row" formArrayName="skills">
+                  <!-- Existing Skills List -->
+                  <ng-container *ngFor="let skill of skillsArray.controls; let i = index" [formGroupName]="i">
+                    <div class="col-md-6">
+                      <div class="input-block">
+                        <label for="skillName-{{ i }}" class="form-label">Skill</label>
+                        <input
+                          id="skillName-{{ i }}"
+                          formControlName="skillName"
+                          class="form-control"
+                          placeholder="Enter a skill"
+                        />
                       </div>
                     </div>
-                  }
-                }
+            
+                    <div class="col-md-6">
+                      <div class="input-block">
+                        <label for="level-{{ i }}" class="focus-label">Level</label>
+                        <select
+                          formControlName="level"
+                          class="form-control form-select"
+                          placeholder="Choose Level"
+                        >
+                          <option *ngFor="let level of skillLevels" [value]="level">{{ level }}</option>
+                        </select>
+                        <div class="new-addd">
+                          <!-- Remove button visible except for the first skill -->
+                          <a class="remove_row" (click)="removeSkills(i)" tabindex="0" *ngIf="skillsArray.controls.length > 1">
+                            Remove
+                          </a>
+            
+                          <!-- Add New Skill button visible only for the last skill -->
+                          <a
+                            class="add-new"
+                            (click)="addSkillManually()"
+                            *ngIf="i === skillsArray.controls.length - 1"
+                            tabindex="0"
+                          >
+                            <i class="feather icon-plus-circle me-1"></i>
+                            Add New Skill
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </form>
+            
+          </div>
+        </div>
+
+       
+
+        <form [formGroup]="form">
+          <div class="row" formArrayName="education">
+            <div class="col-md-12">
+              <h4>Education</h4>
+            </div>
+            <div class="row" *ngFor="let education of educationArray.controls; let i = index" [formGroupName]="i">
+              <div class="col-md-6 col-lg-3">
+                <div class="input-block">
+                  <label for="degree-name" class="focus-label">Degree Name</label>
+                  <input type="text" formControlName="degreeName" class="form-control" />
+                </div>
+              </div>
+          
+              <div class="col-md-6 col-lg-3">
+                <div class="input-block">
+                  <label for="university-name" class="focus-label">University Name</label>
+                  <input type="text" formControlName="universityName" class="form-control" />
+                </div>
+              </div>
+          
+              <div class="col-md-6 col-lg-3">
+                <div class="input-block">
+                  <label for="start-date" class="focus-label">Start Date</label>
+                  <div class="cal-icon">
+                    <input
+                      type="text"
+                      formControlName="startDate"
+                      class="form-control datetimepicker"
+                      placeholder="Choose"
+                      bsDatepicker
+                      [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                    />
+                  </div>
+                </div>
+              </div>
+          
+              <div class="col-md-6 col-lg-3">
+                <div class="input-block">
+                  <label for="end-date" class="focus-label">End Date</label>
+                  <div class="cal-icon">
+                    <input
+                      type="text"
+                      formControlName="endDate"
+                      class="form-control datetimepicker"
+                      placeholder="Choose"
+                      bsDatepicker
+                      [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                    />
+                  </div>
+          
+                  <!-- Add or Remove Button -->
+                  <div class="new-addd">
+                    <!-- Show 'Add New' button for all except the last entry -->
+                    <a
+                      *ngIf="i === educationArray.length - 1"
+                      class="add-new"
+                      (click)="addEducation()"
+                      tabindex="0"
+                    >
+                      <i class="feather icon-plus-circle me-1"></i> Add New
+                    </a>
+          
+                    <!-- Show 'Remove' button only if there are more than one education entry -->
+                    <a
+                      *ngIf="educationArray.length > 1"
+                      class="remove_row"
+                      (click)="removeEducation(i)"
+                      tabindex="0"
+                    >
+                      Remove
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          
 
-          <div class="col-lg-12 w-100">
-            <div class="card flex-fill mb-3">
-              <div class="pro-head">
-                <h4 class="pro-titles without-border mb-0">Education</h4>
+          <div class="row" formArrayName="experiences">
+            <div class="col-md-12">
+              <h4>Experience</h4>
+            </div>
+             
+          
+            <!-- Existing Experience Form Fields (Looping through experiencesArray) -->
+            <div
+              class="row"
+              *ngFor="let experience of experiencesArray.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="col-md-6 col-lg-3">
+                <div class="input-block">
+                  <label for="company-name" class="focus-label">Company Name</label>
+                  <input
+                    type="text"
+                    formControlName="companyName"
+                    class="form-control"
+                  />
+                </div>
               </div>
-              <div class="pro-body  ">
-                <div class="form-row align-items-center skill-cont" [ngClass]="{'d-none': datas[4]}">
-                  <div class="input-block col-lg-3">
-                    <label for="degree-name" class="form-label">Degree Name</label>
-                    <input type="text" class="form-control" value="BE CSE">
+          
+              <div class="col-md-6 col-lg-3">
+                <div class="input-block">
+                  <label for="position" class="focus-label">Position</label>
+                  <select
+                    formControlName="position"
+                    placeholder="Select"
+                    class="form-control form-select"
+                  >
+                    <option *ngFor="let level of skillLevels" [value]="level">
+                      {{ level }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+          
+              <div class="col-md-6 col-lg-3">
+                <div class="input-block">
+                  <label for="start-date" class="focus-label">Start Date</label>
+                  <div class="cal-icon">
+                    <input
+                      type="text"
+                      formControlName="startDate"
+                      class="form-control datetimepicker"
+                      bsDatepicker
+                      placeholder="Choose"
+                      [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                    />
                   </div>
-                  <div class="input-block col-lg-3">
-                    <label for="university-name" class="form-label">University Name</label>
-                    <input type="text" class="form-control" value="Brington">
+                </div>
+              </div>
+          
+              <div class="col-md-6 col-lg-3">
+                <div class="input-block">
+                  <label for="end-date" class="focus-label">End Date</label>
+                  <div class="cal-icon">
+                    <input
+                      type="text"
+                      formControlName="endDate"
+                      class="form-control datetimepicker"
+                      bsDatepicker
+                      placeholder="Choose"
+                      [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                    />
                   </div>
-                  <div class="col-md-3 input-block floating-icon">
-                    <label for="start" class="form-label">Start Date</label>
-                    <input type="text" class="form-control datetimepicker" bsDatepicker
-                      placeholder="Choose">
-                      <span><i class="feather icon-calendar"></i></span>
-                    </div>
-                    <div class="col-md-2 input-block floating-icon">
-                      <label for="end date" class="form-label">End Date</label>
-                      <input type="text" class="form-control datetimepicker" bsDatepicker
-                        placeholder="Choose">
-                        <span><i class="feather icon-calendar"></i></span>
+                  <div class="new-addd">
+                    <a
+                      *ngIf="i === experiencesArray.length - 1"
+                      class="add-new"
+                      (click)="addExperience()"
+                      tabindex="0"
+                      ><i class="feather icon-plus-circle me-1"></i> Add New</a
+                    >
+                    <a
+                      *ngIf="experiencesArray.length > 1"
+                      class="remove_row"
+                      (click)="removeExperience(i)"
+                      >Remove</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
 
-                      </div>
-                      <div class="input-block col-lg-1 mb-0">
-                        <a href="javascript:void(0);" class="btn trash-icon" (click)="removeDatas(4)"><i
-                        class="far fa-trash-alt"></i></a>
-                      </div>
-                    </div>
-                    @if (education.length > 0) {
-                      @for (item of education; track item; let i = $index) {
-                        <div class="form-row align-items-center skill-cont"
-                          >
-                          <div class="input-block col-lg-3">
-                            <label for="degree-name" class="form-label">Degree Name</label>
-                            <input type="text" class="form-control" value="BE CSE">
-                          </div>
-                          <div class="input-block col-lg-3">
-                            <label for="university-name" class="form-label">University Name</label>
-                            <input type="text" class="form-control" value="Brington">
-                          </div>
-                          <div class="col-md-3 input-block floating-icon">
-                            <label for="start" class="form-label">Start Date</label>
-                            <input type="text" class="form-control datetimepicker" bsDatepicker
-                              placeholder="Choose">
-                              <span><i class="feather icon-calendar"></i></span>
-                            </div>
-                            <div class="col-md-2 input-block floating-icon">
-                              <label for="end date" class="form-label">End Date</label>
-                              <input type="text" class="form-control datetimepicker" bsDatepicker
-                                placeholder="Choose">
-                                <span><i class="feather icon-calendar"></i></span>
-                              </div>
-                              <div class="input-block col-lg-1 mb-0">
-                                <a href="javascript:void(0);" class="btn trash-icon"
-                                  (click)="removeEducation(i)" (keydown.enter)="removeEducation(i)" tabindex="0"><i class="far fa-trash-alt"></i></a>
-                                </div>
-                              </div>
-                            }
-                          }
-                          <div id="education_add_row" class="w-100"></div>
-                          <a href="javascript:void(0)" (click)="addEducation()" (keydown.enter)="addEducation()" tabindex="0"
-                            class="add-btn-form custom-add-btn-form add-edu w-100 d-block text-end"><i
-                          class="feather icon-plus-circle me-2"></i>Add New</a>
-                        </div>
-                      </div>
-                    </div>
+          <div class="row" formArrayName="languages">
+            <div class="col-md-12">
+              <h4>Language</h4>
+            </div>
+            <div class="row" *ngFor="let language of languagesArray.controls; let i = index" [formGroupName]="i">
+              <div class="col-md-6" >
+                <div class="input-block">
+                  <label for="language" class="form-label">Language</label>
+                  <input type="text" class="form-control" formControlName="name" />
+                </div>
+              </div>
+              <div class="col-md-6" >
+                <div class="input-block">
+                  <label for="level" class="focus-label">Level</label>
+                  <select formControlName="level" class="form-control form-select">
+                    <option *ngFor="let level of selectedList6" [value]="level.value">
+                      {{ level.value }}
+                    </option>
+                  </select>
+                  <div class="new-addd">
+                    <a *ngIf="i === languagesArray.length - 1" class="add-new" (click)="addLanguage()" tabindex="0">
+                      <i class="feather icon-plus-circle me-1"></i> Add New
+                    </a>
+                    <a *ngIf="languagesArray.length > 1" class="remove_row" (click)="removeLanguage(i)">
+                      Remove
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+          
+      </form>
+      </div>
 
-                    <div class="col-lg-12 w-100">
-                      <div class="card flex-fill mb-3">
-                        <div class="pro-head">
-                          <h4 class="pro-titles without-border mb-0">Certification</h4>
-                        </div>
-                        <div class="pro-body  ">
-                          <div class="form-row align-items-center skill-cont" [ngClass]="{'d-none': datas[5]}">
-                            <div class="input-block col-lg-4">
-                              <label for="certification" class="form-label">Certification or Award</label>
-                              <input type="text" class="form-control" value="Feast of UI">
-                            </div>
-                            <div class="input-block col-lg-4">
-                              <label for="certified-from" class="form-label">Certified from</label>
-                              <input type="text" class="form-control" value="PSD Technologies">
-                            </div>
-                            <div class="col-lg-3 input-block floating-icon">
-                              <label for="year" class="form-label">Year</label>
-                              <input type="text" class="form-control datetimepicker" bsDatepicker
-                                placeholder="Choose">
-                                <span><i class="feather icon-calendar"></i></span>
-                              </div>
-                              <div class="input-block col-lg-1 mb-0">
-                                <a href="javascript:void(0);" (click)="removeDatas(5)" class="btn trash-icon"><i
-                                class="far fa-trash-alt"></i></a>
-                              </div>
-                            </div>
-                            @if (certification.length > 0) {
-                              @for (item of certification; track item; let i = $index) {
-                                <div class="form-row align-items-center skill-cont"
-                                  >
-                                  <div class="input-block col-lg-4">
-                                    <label for="certification" class="form-label">Certification or Award</label>
-                                    <input type="text" class="form-control" value="Feast of UI">
-                                  </div>
-                                  <div class="input-block col-lg-4">
-                                    <label for="certified-from" class="form-label">Certified from</label>
-                                    <input type="text" class="form-control" value="PSD Technologies">
-                                  </div>
-                                  <div class="col-lg-3 input-block floating-icon">
-                                    <label for="year" class="form-label">Year</label>
-                                    <input type="text" class="form-control datetimepicker" bsDatepicker
-                                      placeholder="Choose">
-                                      <span><i class="feather icon-calendar"></i></span>
-                                    </div>
-                                    <div class="input-block col-lg-1 mb-0">
-                                      <a href="javascript:void(0);" (click)="removeCertification(i)" (keydown.enter)="removeCertification(i)" tabindex="0"
-                                        class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                      </div>
-                                    </div>
-                                  }
-                                }
-                                <div id="certi_add_row" class=" w-100"></div>
-                                <a href="javascript:void(0)" (click)="addCertification()"  (keydown.enter)="addCertification()" tabindex="0"
-                                  class="add-btn-form add-certi w-100 d-block text-end"><i
-                                class="feather icon-plus-circle me-2"></i>Add New</a>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-lg-12 w-100">
-                            <div class="card flex-fill mb-3">
-                              <div class="pro-head">
-                                <h4 class="pro-titles without-border mb-0">Experience</h4>
-                              </div>
-                              <div class="pro-body  ">
-                                <div class="form-row align-items-center skill-cont" [ngClass]="{'d-none': datas[6]}">
-                                  <div class="input-block col-lg-3">
-                                    <label for="company-name" class="form-label">Company Name</label>
-                                    <input type="text" class="form-control">
-                                  </div>
-                                  <div class="input-block col-lg-3">
-                                    <label for="position" class="form-label">Position</label>
-                                    <input type="text" class="form-control">
-                                  </div>
-                                  <div class="col-md-3 input-block floating-icon">
-                                    <label for="start" class="form-label">Start Date</label>
-                                    <input type="text" class="form-control datetimepicker" bsDatepicker
-                                      placeholder="Choose">
-                                      <span><i class="feather icon-calendar"></i></span>
-                                    </div>
-                                    <div class="col-md-2 input-block floating-icon">
-                                      <label for="end date" class="form-label">End Date</label>
-                                      <input type="text" class="form-control datetimepicker" bsDatepicker
-                                        placeholder="Choose">
-                                        <span><i class="feather icon-calendar"></i></span>
-                                      </div>
-                                      <div class="input-block col-lg-1 mb-0">
-                                        <a href="javascript:void(0);" (click)="removeDatas(6)" class="btn trash-icon"><i
-                                        class="far fa-trash-alt"></i></a>
-                                      </div>
-                                    </div>
-                                    @for (item of experience; track item; let i = $index) {
-                                      <div class="form-row align-items-center skill-cont">
-                                        <div class="input-block col-lg-3">
-                                          <label for="company-name" class="form-label">Company Name</label>
-                                          <input type="text" class="form-control">
-                                        </div>
-                                        <div class="input-block col-lg-3">
-                                          <label for="position" class="form-label">Position</label>
-                                          <input type="text" class="form-control">
-                                        </div>
-                                        <div class="col-md-3 input-block floating-icon">
-                                          <label for="start" class="form-label">Start Date</label>
-                                          <input type="text" class="form-control datetimepicker" bsDatepicker
-                                            placeholder="Choose">
-                                            <span><i class="feather icon-calendar"></i></span>
-                                          </div>
-                                          <div class="col-md-2 input-block floating-icon">
-                                            <label for="end date" class="form-label">End Date</label>
-                                            <input type="text" class="form-control datetimepicker" bsDatepicker
-                                              placeholder="Choose">
-                                              <span><i class="feather icon-calendar"></i></span>
-                                            </div>
-                                            <div class="input-block col-lg-1 mb-0">
-                                              <a href="javascript:void(0);" (click)="removeExperience(i)"
-                                                class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                              </div>
-                                            </div>
-                                          }
-                                          <div id="exp_add_row" class=" w-100"></div>
-                                          <a href="javascript:void(0)" (click)="addExperience()" (keydown.enter)="addExperience()" tabindex="0"
-                                            class="add-btn-form add-exp w-100 d-block text-end"><i
-                                          class="feather icon-plus-circle me-2"></i>Add New</a>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    <div class="col-lg-12 w-100">
-                                      <div class="card flex-fill mb-3">
-                                        <div class="pro-head">
-                                          <h4 class="pro-titles mb-0">Language</h4>
-
-                                        </div>
-                                        <div class="pro-body  ">
-                                          <div class="form-row align-items-center skill-cont" [ngClass]="{'d-none': datas[7]}">
-                                            <div class="input-block col-md-6">
-                                              <label for="language" class="form-label">Language</label>
-                                              <input type="text" class="form-control">
-                                            </div>
-                                            <div class="input-block col-md-5">
-                                              <label for="language-fluency" class="form-label">Language Fluency</label>
-                                              <mat-select [(ngModel)]="selectedValue5" [ngModelOptions]="{standalone: true}"
-                                                class="select mat-select arrow verify" placeholder="Select">
-                                                @for (data of selectedList5; track data) {
-                                                  <mat-option [value]="data.value">
-                                                    {{data.value}}
-                                                  </mat-option>
-                                                }
-                                              </mat-select>
-                                            </div>
-                                            <div class="input-block col-md-1 mb-0">
-                                              <a href="javascript:void(0);" class="btn trash-icon" (click)="removeDatas(7)"><i
-                                              class="far fa-trash-alt"></i></a>
-                                            </div>
-                                          </div>
-                                          <div class="form-row align-items-center skill-cont" [ngClass]="{'d-none': datas[8]}">
-                                            <div class="input-block col-md-6">
-                                              <label for="language" class="form-label">Language</label>
-                                              <input type="text" class="form-control">
-                                            </div>
-                                            <div class="input-block col-md-5">
-                                              <label for="language-fluency" class="form-label">Language Fluency</label>
-                                              <mat-select [(ngModel)]="selectedValue6" [ngModelOptions]="{standalone: true}"
-                                                class="select mat-select arrow verify" placeholder="Select">
-                                                @for (data of selectedList6; track data) {
-                                                  <mat-option [value]="data.value">
-                                                    {{data.value}}
-                                                  </mat-option>
-                                                }
-                                              </mat-select>
-                                            </div>
-                                            <div class="input-block col-md-1 mb-0">
-                                              <a href="javascript:void(0);" (click)="removeDatas(8)" class="btn trash-icon"><i
-                                              class="far fa-trash-alt"></i></a>
-                                            </div>
-                                          </div>
-                                          <div class="form-row align-items-center skill-cont" [ngClass]="{'d-none': datas[9]}">
-                                            <div class="input-block col-md-6">
-                                              <label for="language" class="form-label">Language</label>
-                                              <input type="text" class="form-control">
-                                            </div>
-                                            <div class="input-block col-md-5">
-                                              <label for="language-fluency" class="form-label">Language Fluency</label>
-                                              <mat-select [(ngModel)]="selectedValue7" [ngModelOptions]="{standalone: true}"
-                                                class="select mat-select arrow verify" placeholder="Select">
-                                                @for (data of selectedList7; track data) {
-                                                  <mat-option [value]="data.value">
-                                                    {{data.value}}
-                                                  </mat-option>
-                                                }
-                                              </mat-select>
-                                            </div>
-                                            <div class="input-block col-md-1 mb-0">
-                                              <a href="javascript:void(0);" (click)="removeDatas(9)" class="btn trash-icon"><i
-                                              class="far fa-trash-alt"></i></a>
-                                            </div>
-                                          </div>
-                                          <div class="form-row align-items-center skill-cont">
-                                            <div class="input-block col-md-6">
-                                              <label for="language" class="form-label">Language</label>
-                                              <input type="text" class="form-control">
-                                            </div>
-                                            <div class="input-block col-md-5">
-                                              <label for="language-fluency" class="form-label">Language Fluency</label>
-                                              <mat-select [(ngModel)]="selectedValue8" [ngModelOptions]="{standalone: true}"
-                                                class="select mat-select arrow verify" placeholder="Select">
-                                                @for (data of selectedList8; track data) {
-                                                  <mat-option [value]="data.value">
-                                                    {{data.value}}
-                                                  </mat-option>
-                                                }
-                                              </mat-select>
-                                            </div>
-                                            <div class="input-block col-md-1 mb-0">
-                                              <a href="javascript:void(0)" (click)="addLanguage()" (keydown.enter)="addLanguage()" tabindex="0"
-                                                class="btn fund-btn lang-add add-btn-profile mb-0"><i
-                                              class="feather icon-plus"></i></a>
-                                            </div>
-                                            <div id="lang_add_row" class=" w-100"></div>
-                                          </div>
-                                          @if (language.length > 0) {
-                                            @for (item of language; track item; let i = $index) {
-                                              <div class="form-row align-items-center skill-cont"
-                                                >
-                                                <div class="input-block col-md-6">
-                                                  <label for="language" class="form-label">Language</label>
-                                                  <input type="text" class="form-control">
-                                                </div>
-                                                <div class="input-block col-md-5">
-                                                  <label for="language-fluency" class="form-label">Language Fluency</label>
-                                                  <mat-select placeholder="Select" class="select mat-select arrow verify">
-                                                    <mat-option value="Basic">Basic</mat-option>
-                                                    <mat-option value="Intermediate">Intermediate
-                                                    </mat-option>
-                                                    <mat-option value="Expert">Expert
-                                                    </mat-option>
-                                                  </mat-select>
-                                                </div>
-                                                <div class="input-block col-md-1 mb-0">
-                                                  <a href="javascript:void(0);" (click)="removeLanguage(i)" (keydown.enter)="removeLanguage(i)" tabindex="0"
-                                                    class="btn trash-icon"><i class="far fa-trash-alt"></i></a>
-                                                  </div>
-                                                </div>
-                                              }
-                                            }
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                      <div class="col-lg-12 w-100">
-                                        <div class="card flex-fill mb-3">
-                                          <div class="pro-head">
-                                            <h4 class="pro-titles mb-0">Social Media</h4>
-
-                                          </div>
-                                          <div class="pro-body  ">
-                                            <div class="form-row align-items-center skill-cont">
-                                              <div class="input-block col-lg-4">
-                                                <label for="Facebook" class="form-label">Facebook</label>
-                                                <input type="text" class="form-control">
-                                              </div>
-                                              <div class="input-block col-lg-4">
-                                                <label for="instagram" class="form-label">Instagram </label>
-                                                <input type="text" class="form-control">
-                                              </div>
-                                              <div class="input-block col-lg-4">
-                                                <label for="LinkedIn" class="form-label">LinkedIn</label>
-                                                <input type="text" class="form-control">
-                                              </div>
-                                              <div class="input-block col-lg-4">
-                                                <label for="Behance"class="form-label">Behance</label>
-                                                <input type="text" class="form-control">
-                                              </div>
-                                              <div class="input-block col-lg-4">
-                                                <label for="Pinterest" class="form-label">Pinterest </label>
-                                                <input type="text" class="form-control">
-                                              </div>
-                                              <div class="input-block col-lg-4">
-                                                <label for="twitter" class="form-label">Twitter</label>
-                                                <input type="text" class="form-control">
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                      <div class="col-lg-12">
-                                        <div class="card flex-fill mb-3">
-                                          <div class="pro-head">
-                                            <h4 class="pro-titles mb-0">Personal Website</h4>
-
-                                          </div>
-                                          <div class="pro-body  ">
-                                            <div class="form-row align-items-center skill-cont">
-                                              <div class="input-block col-lg-12">
-                                                <label for="website-url" class="form-label">Website Url</label>
-                                                <input type="text" class="form-control">
-                                              </div>
-                                              <div class="input-block col-lg-3">
-                                                <label for="city" class="form-label">City</label>
-                                                <input type="text" class="form-control">
-                                              </div>
-                                              <div class="input-block col-lg-3">
-                                                <label for="state" class="form-label">State / Province</label>
-                                                <input type="text" class="form-control">
-                                              </div>
-                                              <div class="input-block col-lg-3">
-                                                <label for="post-code" class="form-label">ZIP / Post Code</label>
-                                                <input type="text" class="form-control">
-                                              </div>
-                                              <div class="input-block col-md-3">
-                                                <label for="country" class="form-label">Country</label>
-                                                <mat-select [(ngModel)]="selectedValue9" [ngModelOptions]="{standalone: true}"
-                                                  class="select mat-select arrow verify" placeholder="Select">
-                                                  @for (data of selectedList9; track data) {
-                                                    <mat-option [value]="data.value">
-                                                      {{data.value}}
-                                                    </mat-option>
-                                                  }
-                                                </mat-select>
-                                              </div>
-
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                      <h4 class="mb-3">Working Hours</h4>
-                                    </div>
-                                    <div class="col-md-6">
-                                      <div class="input-block d-flex">
-                                        <div class="form-check form-switch d-inline-block work-check position-relative">
-                                          <input type="checkbox" class="form-check-input" id="check_hour" checked=""
-                                            [(ngModel)]="isCheckboxChecked" [ngModelOptions]="{standalone: true}">
-                                          </div>
-                                          <label for="every-day" class="form-label ms-2">Same Every Day</label>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-12">
-                                        <div class="checkout-hour" [ngClass]="{'d-block': isCheckboxChecked, 'd-none': !isCheckboxChecked}">
-                                          <div class="other-info-list">
-                                            <ul>
-                                              <li class="active-hour">Mon</li>
-                                              <li class="active-hour">Tue</li>
-                                              <li class="active-hour">Wed</li>
-                                              <li class="active-hour">Thr</li>
-                                              <li class="active-hour">Fri</li>
-                                              <li>Sat</li>
-                                              <li>Sun</li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                        <div class="check-hour" [ngClass]="{'d-none': isCheckboxChecked, 'd-block': !isCheckboxChecked}">
-                                          <div class="col-md-12">
-                                            <h4>Select Days</h4>
-                                          </div>
-                                          <div class="row">
-                                            <div class="col-md-12">
-                                              <div class="row align-items-center">
-                                                <div class="col-md-1">
-                                                  <div class="other-info-list">
-                                                    <ul>
-                                                      <li class="active-hour m-0">Mon</li>
-                                                    </ul>
-                                                  </div>
-                                                </div>
-                                                <div class="col-md-5">
-                                                  <div class="input-block">
-                                                    <label for="start-time" class="form-label"
-                                                      >Start Time
-                                                    </label>
-
-                                                    <input
-                                                      type="text"
-                                                      class="form-control timepicker"
-                                                      (click)="toggleTimePicker('startTime1')"
-                                                      [value]="formatTime(startTime1)"
-                                                      />
-                                                      <timepicker
-                                  [class.d-block]="
-                                    showTimePicker[0] === 'startTime1'
-                                  "
-                                                        class="custom-timepicker"
-                                                        [ngModelOptions]="{ standalone: true }"
-                                                        [(ngModel)]="startTime1"
-                                                      ></timepicker>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-md-5">
-                                                    <div class="input-block">
-                                                      <label for="End " class="form-label"
-                                                        >End Time
-                                                      </label>
-                                                      <input
-                                                        (click)="toggleTimePicker('endTime1')"
-                                                        [value]="formatTime(endTime1)"
-                                                        type="text"
-                                                        placeholder="Select Time"
-                                                        class="form-control timepicker"
-                                                        />
-                                                        <timepicker
-                                                          [class.d-block]="showTimePicker[0] === 'endTime1'"
-                                                          class="custom-timepicker"
-                                                          [ngModelOptions]="{ standalone: true }"
-                                                          [(ngModel)]="endTime1"
-                                                        ></timepicker>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                  <div class="row align-items-center">
-                                                    <div class="col-md-1">
-                                                      <div class="other-info-list">
-                                                        <ul>
-                                                          <li class="active-hour m-0">Tue</li>
-                                                        </ul>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                      <div class="input-block">
-                                                        <label for="start-time" class="form-label"
-                                                          >Start Time
-                                                        </label>
-                                                        <input
-                                                          (click)="toggleTimePicker('startTime2')"
-                                                          [value]="formatTime(startTime2)"
-                                                          type="text"
-                                                          placeholder="Select Time"
-                                                          class="form-control timepicker"
-                                                          />
-                                                          <timepicker
-                                                            [class.d-block]="showTimePicker[0] === 'startTime2'"
-                                                            class="custom-timepicker"
-                                                            [ngModelOptions]="{ standalone: true }"
-                                                            [(ngModel)]="startTime2"
-                                                          ></timepicker>
-                                                        </div>
-                                                      </div>
-                                                      <div class="col-md-5">
-                                                        <div class="input-block">
-                                                          <label for="End " class="form-label"
-                                                            >End Time
-                                                          </label>
-                                                          <input
-                                                            (click)="toggleTimePicker('endTime2')"
-                                                            [value]="formatTime(endTime2)"
-                                                            type="text"
-                                                            placeholder="Select Time"
-                                                            class="form-control timepicker"
-                                                            />
-                                                            <timepicker
-                                                              [class.d-block]="showTimePicker[0] === 'endTime2'"
-                                                              class="custom-timepicker"
-                                                              [ngModelOptions]="{ standalone: true }"
-                                                              [(ngModel)]="endTime2"
-                                                            ></timepicker>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                      <div class="row align-items-center">
-                                                        <div class="col-md-1">
-                                                          <div class="other-info-list">
-                                                            <ul>
-                                                              <li class="active-hour m-0">Wed</li>
-                                                            </ul>
-                                                          </div>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                          <div class="input-block">
-                                                            <label for="start-time" class="form-label"
-                                                              >Start Time
-                                                            </label>
-                                                            <input
-                                                              (click)="toggleTimePicker('startTime3')"
-                                                              [value]="formatTime(startTime3)"
-                                                              type="text"
-                                                              placeholder="Select Time"
-                                                              class="form-control timepicker"
-                                                              />
-                                                              <timepicker
-                                                                [class.d-block]="showTimePicker[0] === 'startTime3'"
-                                                                class="custom-timepicker"
-                                                                [ngModelOptions]="{ standalone: true }"
-                                                                [(ngModel)]="startTime3"
-                                                              ></timepicker>
-                                                            </div>
-                                                          </div>
-                                                          <div class="col-md-5">
-                                                            <div class="input-block">
-                                                              <label for="End " class="form-label"
-                                                                >End Time
-                                                              </label>
-                                                              <input
-                                                                (click)="toggleTimePicker('endTime3')"
-                                                                [value]="formatTime(endTime3)"
-                                                                type="text"
-                                                                placeholder="Select Time"
-                                                                class="form-control timepicker"
-                                                                />
-                                                                <timepicker
-                                                                  [class.d-block]="showTimePicker[0] === 'endTime3'"
-                                                                  class="custom-timepicker"
-                                                                  [ngModelOptions]="{ standalone: true }"
-                                                                  [(ngModel)]="endTime3"
-                                                                ></timepicker>
-                                                              </div>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                          <div class="row align-items-center">
-                                                            <div class="col-md-1">
-                                                              <div class="other-info-list">
-                                                                <ul>
-                                                                  <li class="active-hour m-0">Thur</li>
-                                                                </ul>
-                                                              </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                              <div class="input-block">
-                                                                <label for="start-time" class="form-label"
-                                                                  >Start Time
-                                                                </label>
-                                                                <input
-                                                                  (click)="toggleTimePicker('startTime4')"
-                                                                  [value]="formatTime(startTime4)"
-                                                                  type="text"
-                                                                  placeholder="Select Time"
-                                                                  class="form-control timepicker"
-                                                                  />
-                                                                  <timepicker
-                                                                    [class.d-block]="showTimePicker[0] === 'startTime4'"
-                                                                    class="custom-timepicker"
-                                                                    [ngModelOptions]="{ standalone: true }"
-                                                                    [(ngModel)]="startTime4"
-                                                                  ></timepicker>
-                                                                </div>
-                                                              </div>
-                                                              <div class="col-md-5">
-                                                                <div class="input-block">
-                                                                  <label for="End " class="form-label"
-                                                                    >End Time
-                                                                  </label>
-                                                                  <input
-                                                                    (click)="toggleTimePicker('endTime4')"
-                                                                    [value]="formatTime(endTime4)"
-                                                                    type="text"
-                                                                    placeholder="Select Time"
-                                                                    class="form-control timepicker"
-                                                                    />
-                                                                    <timepicker
-                                                                      [class.d-block]="showTimePicker[0] === 'endTime4'"
-                                                                      class="custom-timepicker"
-                                                                      [ngModelOptions]="{ standalone: true }"
-                                                                      [(ngModel)]="endTime4"
-                                                                    ></timepicker>
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                              <div class="row align-items-center">
-                                                                <div class="col-md-1">
-                                                                  <div class="other-info-list">
-                                                                    <ul>
-                                                                      <li class="active-hour m-0">Fri</li>
-                                                                    </ul>
-                                                                  </div>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                  <div class="input-block">
-                                                                    <label for="start-time" class="form-label"
-                                                                      >Start Time
-                                                                    </label>
-                                                                    <input
-                                                                      (click)="toggleTimePicker('startTime5')"
-                                                                      [value]="formatTime(startTime5)"
-                                                                      type="text"
-                                                                      placeholder="Select Time"
-                                                                      class="form-control timepicker"
-                                                                      />
-                                                                      <timepicker
-                                                                        [class.d-block]="showTimePicker[0] === 'startTime5'"
-                                                                        class="custom-timepicker"
-                                                                        [ngModelOptions]="{ standalone: true }"
-                                                                        [(ngModel)]="startTime5"
-                                                                      ></timepicker>
-                                                                    </div>
-                                                                  </div>
-                                                                  <div class="col-md-5">
-                                                                    <div class="input-block">
-                                                                      <label for="End " class="form-label"
-                                                                        >End Time
-                                                                      </label>
-                                                                      <input
-                                                                        (click)="toggleTimePicker('endTime5')"
-                                                                        [value]="formatTime(endTime5)"
-                                                                        type="text"
-                                                                        placeholder="Select Time"
-                                                                        class="form-control timepicker"
-                                                                        />
-                                                                        <timepicker
-                                                                          [class.d-block]="showTimePicker[0] === 'endTime5'"
-                                                                          class="custom-timepicker"
-                                                                          [ngModelOptions]="{ standalone: true }"
-                                                                          [(ngModel)]="endTime5"
-                                                                        ></timepicker>
-                                                                      </div>
-                                                                    </div>
-                                                                  </div>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                  <div class="row align-items-center">
-                                                                    <div class="col-md-1">
-                                                                      <div class="other-info-list">
-                                                                        <ul>
-                                                                          <li class="m-0">Fri</li>
-                                                                        </ul>
-                                                                      </div>
-                                                                    </div>
-                                                                    <div class="col-md-5">
-                                                                      <div class="input-block">
-                                                                        <label for="start-time" class="form-label"
-                                                                          >Start Time
-                                                                        </label>
-                                                                        <input
-                                                                          (click)="toggleTimePicker('startTime6')"
-                                                                          [value]="formatTime(startTime6)"
-                                                                          type="text"
-                                                                          placeholder="Select Time"
-                                                                          class="form-control timepicker"
-                                                                          />
-                                                                          <timepicker
-                                                                            [class.d-block]="showTimePicker[0] === 'startTime6'"
-                                                                            class="custom-timepicker"
-                                                                            [ngModelOptions]="{ standalone: true }"
-                                                                            [(ngModel)]="startTime6"
-                                                                          ></timepicker>
-                                                                        </div>
-                                                                      </div>
-                                                                      <div class="col-md-5">
-                                                                        <div class="input-block">
-                                                                          <label for="End " class="form-label"
-                                                                            >End Time
-                                                                          </label>
-                                                                          <input
-                                                                            (click)="toggleTimePicker('endTime6')"
-                                                                            [value]="formatTime(endTime6)"
-                                                                            type="text"
-                                                                            placeholder="Select Time"
-                                                                            class="form-control timepicker"
-                                                                            />
-                                                                            <timepicker
-                                                                              [class.d-block]="showTimePicker[0] === 'endTime6'"
-                                                                              class="custom-timepicker"
-                                                                              [ngModelOptions]="{ standalone: true }"
-                                                                              [(ngModel)]="endTime6"
-                                                                            ></timepicker>
-                                                                          </div>
-                                                                        </div>
-                                                                      </div>
-                                                                    </div>
-                                                                    <div class="col-md-12">
-                                                                      <div class="row align-items-center">
-                                                                        <div class="col-md-1">
-                                                                          <div class="other-info-list">
-                                                                            <ul>
-                                                                              <li class="m-0">Sun</li>
-                                                                            </ul>
-                                                                          </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                          <div class="input-block">
-                                                                            <label for="start-time" class="form-label"
-                                                                              >Start Time
-                                                                            </label>
-                                                                            <input
-                                                                              (click)="toggleTimePicker('startTime7')"
-                                                                              [value]="formatTime(startTime7)"
-                                                                              type="text"
-                                                                              placeholder="Select Time"
-                                                                              class="form-control timepicker"
-                                                                              />
-                                                                              <timepicker
-                                                                                [class.d-block]="showTimePicker[0] === 'startTime7'"
-                                                                                class="custom-timepicker"
-                                                                                [ngModelOptions]="{ standalone: true }"
-                                                                                [(ngModel)]="startTime7"
-                                                                              ></timepicker>
-                                                                            </div>
-                                                                          </div>
-                                                                          <div class="col-md-5">
-                                                                            <div class="input-block">
-                                                                              <label for="End " class="form-label"
-                                                                                >End Time
-                                                                              </label>
-                                                                              <input
-                                                                                (click)="toggleTimePicker('endTime7')"
-                                                                                [value]="formatTime(endTime7)"
-                                                                                type="text"
-                                                                                placeholder="Select Time"
-                                                                                class="form-control timepicker"
-                                                                                />
-                                                                                <timepicker
-                                                                                  [class.d-block]="showTimePicker[0] === 'endTime7'"
-                                                                                  class="custom-timepicker"
-                                                                                  [ngModelOptions]="{ standalone: true }"
-                                                                                  [(ngModel)]="endTime7"
-                                                                                ></timepicker>
-                                                                              </div>
-                                                                            </div>
-                                                                          </div>
-                                                                        </div>
-                                                                      </div>
-                                                                    </div>
-                                                                  </div>
-
-                                                                  <div class="card text-end border-0">
-                                                                    <div class="pro-body">
-                                                                      <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
-                                                                      <button class="btn btn-primary click-btn btn-plan" type="button"
-                                                                      (click)="navigation()" (keydown.enter)="navigation()" tabindex="0">Update</button>
-                                                                    </div>
-                                                                  </div>
-                                                                </form>
-                                                              </div>
-                                                            </div>
-                                                            <!-- /Page Content -->
-                                                            <div class="1">
-
-                                                            </div>
-                                                            <div>
-
-                                                            </div>
+      
+      
+      <div class="card text-end border-0">
+        <div class="pro-body">
+          <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
+          <button
+            class="btn btn-primary click-btn btn-plan"
+            type="button"
+            (click)="navigation()"
+            (keydown.enter)="navigation()"
+            tabindex="0"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- /Page Content -->
+ 
