@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Editor, Toolbar } from 'ngx-editor';
 import { routes } from 'src/app/core/helpers/routes/routes';
+import { JobService } from 'src/app/core/services/job.service';
+import { LocationService } from 'src/app/core/services/location.service';
 interface data {
   value: string;
 }
@@ -29,8 +32,35 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
+  jobForm: FormGroup;
+ 
+  jobs:any =  [];
+  departments = ['01', '02', '75'];
+  regions = ['Île-de-France', 'Provence-Alpes-Côte d\'Azur', 'Bretagne'];
+
+  constructor(private fb: FormBuilder,
+    private locationService: LocationService,
+    private jobService: JobService,
+    private router: Router) {
+    this.jobForm = this.fb.group({
+      jobTitle: [''],
+      activity: [''],
+      subActivity: [''],
+      job: [''],
+      city: [''],
+      department: [''],
+      region: [''],
+      duration: [''],
+      timeUnit: [''],
+      startDate: [''],
+      contractType: [''],
+      skills: [''],
+      description: [''],
+    });
+  }
   ngOnInit(): void {
     this.editor = new Editor();
+    this.getJobs();
   }
   ngOnDestroy(): void {
     if (this.editor) {
@@ -84,8 +114,47 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   hideFilename(index: number) {
     this.isFilenameVisible[index] = false;
   }
-  constructor(private router: Router) {}
-  ngsubmit(){
-    this.router.navigate([routes.projectconfirmation])
+
+  // Handle city selection change
+  onCityChange(event: Event): void {
+    const selectedCityId = (event.target as HTMLSelectElement).value;
+    this.locationService.getcityInfo(selectedCityId).subscribe(
+      (city) => {
+        if (city) {
+          this.jobForm.patchValue({
+            department: city.department?.name,
+            region: city.department?.region?.name
+          });
+        }
+      },
+      (error) => {
+        console.error('Error fetching city info:', error);
+      }
+    );
+  }
+
+  getJobs() {
+    // Fetch the list of jobs (Métier) on component initialization
+    this.jobService.getJobs().subscribe(data => {
+      this.jobs = data;
+    });
+  }
+  onJobChange(event: any) {
+    const jobId = event.target.value;
+    if (jobId) {
+      // Fetch sous-activités and activités based on the selected job
+      this.jobService.getJobDetails(jobId).subscribe(data => {
+        this.jobForm.patchValue({
+          subActivity: data?.subActivity?.name,
+          activity: data?.subActivity?.activity?.name,
+        });
+      });
+    }
+  }
+  
+ 
+  onSubmit(){
+    console.log(this.jobForm.value);
+    //this.router.navigate([routes.projectconfirmation])
   }
 }

@@ -4,11 +4,15 @@
     <div class="row align-items-center inner-banner">
       <div class="col-md-12 col-12 text-center">
         <div class="breadcrumb-list">
-          <h3>Post a Project</h3>
+          <h3> Publier une Offre</h3>
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a [routerLink] = "routes.home">Home</a></li>
-              <li class="breadcrumb-item" aria-current="page">Post a Project</li>
+              <li class="breadcrumb-item">
+                <a [routerLink]="routes.home">Home</a>
+              </li>
+              <li class="breadcrumb-item" aria-current="page">
+                Publier une Offre
+              </li>
             </ol>
           </nav>
         </div>
@@ -24,222 +28,182 @@
     <div class="row">
       <div class="col-md-12">
         <div class="select-project mb-4">
-          <form >
-            <div class="title-box widget-box">
-              <div class="row">
-                <div class="col-lg-12">
-                  <h4>Basic Details</h4>
-                </div>
-                <div class="col-lg-12 col-md-12">
-                  <div class="mb-3">
-                    <label for="project-title" class="focus-label">Project Title</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                  <div class="mb-3">
-                    <label for="project-category" class="focus-label">Project Category</label>
+          <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+            <div class="container">
 
-                    <mat-select [(ngModel)]="selectedValue1" [ngModelOptions]="{standalone: true}" class="select mat-select  "  placeholder="Select">
-                      @for (data of selectedList1; track data) {
-                        <mat-option [value]="data.value">
-                          {{data.value}}
-                        </mat-option>
-                      }
-                    </mat-select>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                  <div class="mb-3">
-                    <label for="project-duration" class="focus-label">Project Duration</label>
-
-                    <mat-select [(ngModel)]="selectedValue2" [ngModelOptions]="{standalone: true}" class="select mat-select"  placeholder="Select">
-                      @for (data of selectedList2; track data) {
-                        <mat-option [value]="data.value">
-                          {{data.value}}
-                        </mat-option>
-                      }
-                    </mat-select>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-6 ">
-                  <div class="mb-3">
-                    <label for="deadline-date" class="focus-label">Deadline Date</label>
-                    <div class="cal-icon">
-                      <input type="text" class="form-control datetimepicker" placeholder="Choose" bsDatepicker>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                  <div class="mb-3">
-                    <label for="freelancer-type" class="focus-label">Freelancer Type</label>
-
-                    <mat-select [(ngModel)]="selectedValue3" [ngModelOptions]="{standalone: true}" class="select mat-select "  placeholder="Select">
-                      @for (data of selectedList3; track data) {
-                        <mat-option [value]="data.value">
-                          {{data.value}}
-                        </mat-option>
-                      }
-                    </mat-select>
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                  <div class="mb-3">
-                    <label class="focus-label" for="freelancer-level">Freelancer Level</label>
-                    <mat-select [(ngModel)]="selectedValue4" [ngModelOptions]="{standalone: true}" class="select mat-select select "  placeholder="Select">
-                      @for (data of selectedList4; track data) {
-                        <mat-option [value]="data.value">
-                          {{data.value}}
-                        </mat-option>
-                      }
-                    </mat-select>
-                  </div>
-                </div>
-                <div class="col-lg-12 col-md-12">
-                  <div class="mb-3">
-                    <label for="tags" class="focus-label">Tags</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-lg-12 my-3">
-                  <h4>Skills</h4>
-                </div>
-                <!-- Skills Content -->
-                <div class="col-lg-12 col-md-12">
-                  <div class="title-content p-0">
-                    <div class="title-detail">
-                      <h3>Skill Set</h3>
-                      <div class="mb-3">
-                        <input type="text" data-role="tagsinput" class="input-tags form-control" name="services" value="Web Design" id="services" placeholder="UX, UI, App Design, Wireframing, Branding">
-                        <p class="text-muted mb-0">Enter skills for needed for project, for best result add 5 or more Skills</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-12 my-3">
-                  <h4>Budget</h4>
-                </div>
-                <div class="buget-img">
-                  <ul>
-                    <li (click)="toggleHourly()" (keydown.enter)="toggleHourly()" tabindex="0" [class.active]="activeRate === 'hourly'">
-                      <div class="hours-rate ">
-                        <div class="hours-rate-img">
-                          <label class="customize-radio">
-                            <input type="radio" name="fixed" class="hoursradio" checked>
-                            <img src="assets/img/icon/check-success.svg" alt="img" class="success-check">
-                            <img src="assets/img/icon/hourly.svg" alt="img">
-                            <span class="d-block">Hourly Rate</span>
-                          </label>
-                        </div>
-                      </div>
-                    </li>
-                    <li (click)="toggleFixed()" (keydown.enter)="toggleFixed()" tabindex="0" [class.active]="activeRate === 'fixed'">
-                      <div class="fixed-rate">
-                        <div class="hours-rate-img">
-                          <label class="customize-radio">
-                            <input type="radio" name="fixed" class="fixedradio" >
-                            <img src="assets/img/icon/check-success.svg" alt="img" class="success-check">
-                            <img src="assets/img/icon/fixed.svg" alt="img">
-                            <span class="d-block">Fixed budget</span>
-                          </label>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div class="hours-rates" [ngClass]="{'d-block': activeRate === 'hourly', 'd-none': activeRate === 'fixed'}">
-                  <div class="row">
-                    <div class="col-lg-3 col-md-12">
-                      <div class="mb-3">
-                        <label for="from" class="focus-label">From ($)</label>
-                        <input type="text" class="form-control " placeholder="15">
-                      </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 ">
-                      <div class="mb-3">
-                        <label for="to" class="focus-label">To ($)</label>
-                        <input type="text" class="form-control " placeholder="250">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="fixed-rates " [ngClass]="{'d-block': activeRate === 'fixed', 'd-none': activeRate === 'hourly'}" >
-                  <div class="row">
-                    <div class="col-lg-6 col-md-12">
-                      <div class="mb-3">
-                        <label for="price" class="focus-label">Enter Price ($)</label>
-                        <input type="text" class="form-control " placeholder="15">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-12 my-3">
-                  <h4>Attachment</h4>
-                  <p>You can attach more than 1 files to 10 files, Size of the Document should be Below 2MB </p>
-                </div>
-                <div class="col-lg-12">
-                  <div class="attach-file">
-                    <i class="fa fa-pdf"></i>
-                    Attach file
-                    <input type="file">
-                  </div>
-                  <div class="filename">
-                    <ul>
-                      @for (visible of isFilenameVisible; track visible; let i = $index) {
-                        <li>
-                          @if (visible) {
-                            <h6>Filename {{ i + 1 }} <a href="javascript:void(0);" class="file-close" (click)="hideFilename(i)"><i class="fa fa-close"></i></a></h6>
-                          }
-                        </li>
-                      }
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-12 my-3">
-                  <h4>Other Requirement</h4>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                  <div class="mb-3">
-                    <label for="languages" class="focus-label">Languages</label>
-                    <input type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                  <div class="mb-3">
-                    <label class="focus-label" for="language-fluency">Language Fluency</label>
-                    <mat-select [(ngModel)]="selectedValue4" [ngModelOptions]="{standalone: true}" class="select mat-select "  placeholder="Select">
-                      @for (data of selectedList4; track data) {
-                        <mat-option [value]="data.value">
-                          {{data.value}}
-                        </mat-option>
-                      }
-                    </mat-select>
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="mb-3">
-                    <label for="description" class="focus-label">Write Description of Projects</label>
-                    <textarea class="form-control"></textarea>
-                  </div>
-                </div>
-                <!-- /Skills Content -->
+              <!-- General Information -->
+              <h3 class="mt-4">Généralités</h3>
+              <div class="form-group">
+                <label for="jobTitle">Titre du poste recherché</label>
+                <input
+                  id="jobTitle"
+                  formControlName="jobTitle"
+                  class="form-control"
+                  type="text"
+                  placeholder="Exemple : Développeur Full Stack"
+                />
               </div>
 
               <div class="row">
-                <div class="col-md-12 text-end">
-                  <div class="btn-item">
-                    <button type="submit" class="btn reset-btn">Reset</button>
-                    <button (click)="ngsubmit()" (keydown.enter)="ngsubmit()" tabindex="0" [routerLink]="routes.projectconfirmation" type="button" class="btn next-btn">Post a Job</button>
+                <!-- Job -->
+                <div class="col-md-4">
+                  <label for="job">Métier</label>
+                  <select
+                    id="job"
+                    formControlName="job"
+                    class="form-control"
+                    (change)="onJobChange($event)"
+                  >
+                    <option *ngFor="let job of jobs" [value]="job.id">
+                      {{ job?.name }}
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Sub Activity -->
+                <div class="col-md-4">
+                  <div class="input-block">
+                    <label for="sous-activite" class="focus-label">Sous Activité</label>
+                    <input
+                      formControlName="subActivity"
+                      type="text"
+                      class="form-control"
+                      placeholder="Sous Activité"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <!-- Activity -->
+                <div class="col-md-4">
+                  <div class="input-block">
+                    <label for="activite" class="focus-label">Activité</label>
+                    <input
+                      formControlName="activity"
+                      type="text"
+                      class="form-control"
+                      placeholder="Activité"
+                      readonly
+                    />
                   </div>
                 </div>
               </div>
 
+              <!-- Location -->
+              <h3 class="mt-4">Localisation</h3>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <label for="city">Ville</label>
+                  <input
+                    id="city"
+                    formControlName="city"
+                    class="form-control"
+                    type="text"
+                    (change)="onCityChange($event)"
+                    placeholder="Saisir une ville"
+                  />
+                </div>
+
+                <!-- Department (Read-only field) -->
+                <div class="col-md-3">
+                  <label for="department">Département</label>
+                  <input
+                    id="department"
+                    type="text"
+                    class="form-control"
+                    formControlName="department"
+                    readonly
+                  />
+                </div>
+
+                <!-- Region (Read-only field) -->
+                <div class="col-md-3">
+                  <label for="region">Région</label>
+                  <input
+                    id="region"
+                    type="text"
+                    class="form-control"
+                    formControlName="region"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <!-- Contract Type -->
+              <div class="row mt-3">
+                <div class="col-md-4">
+                  <label for="duration">Durée prévue</label>
+                  <input
+                    id="duration"
+                    formControlName="duration"
+                    class="form-control"
+                    type="number"
+                    placeholder="Entrez un nombre"
+                  />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="timeUnit">Unité de temps</label>
+                  <select
+                    id="timeUnit"
+                    formControlName="timeUnit"
+                    class="form-control"
+                  >
+                    <option value="Semaine">Semaine</option>
+                    <option value="Mois">Mois</option>
+                    <option value="Année">Année</option>
+                  </select>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="startDate">Date de début prévue</label>
+                  <input
+                    id="startDate"
+                    formControlName="startDate"
+                    class="form-control"
+                    type="date"
+                  />
+                </div>
+              </div>
+
+              <!-- Competencies -->
+              <h3 class="mt-4">Compétences</h3>
+              <div class="form-group">
+                <label for="skills">Compétences requises</label>
+                <input
+                  id="skills"
+                  formControlName="skills"
+                  class="form-control"
+                  type="text"
+                  placeholder="Ajoutez des compétences séparées par des virgules"
+                />
+              </div>
+
+              <!-- Description -->
+              <div class="form-group mt-3">
+                <label for="description">Description détaillée</label>
+                <textarea
+                  id="description"
+                  formControlName="description"
+                  class="form-control"
+                  rows="15"
+                  style="height: 300px;"
+                  placeholder="Rédigez une description du projet"
+                ></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="text-end mt-3">
+                <button type="reset" class="btn btn-secondary mr-4">Annuler</button>
+                <button type="submit" class="btn btn-primary">Publier</button>
+              </div>
             </div>
-            <!-- Project Title -->
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
 <!-- /Page Content -->
