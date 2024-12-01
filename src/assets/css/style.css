@@ -8802,7 +8802,7 @@ div#global-loader {
 .projecthead ul {
 	display: flex;
 	align-items: center;
-	justify-content: end;
+	justify-content: flex-end;
 	list-style: none;
 	margin: 0;
 }
@@ -13754,8 +13754,8 @@ label.file-upload input[type="file"] {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	justify-content: end;
-	-webkit-justify-content: end;
+	justify-content: flex-end;
+	-webkit-justify-content: flex-end;
 	-ms-flex-pack: end;
 }
 
@@ -15821,8 +15821,8 @@ label.file-upload input[type="file"] {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	justify-content: end;
-	-webkit-justify-content: end;
+	justify-content: flex-end;
+	-webkit-justify-content: flex-end;
 	-ms-flex-pack: end;
 }
 
@@ -19027,8 +19027,8 @@ h2.footer-title:after {
 }
 
 .footer-bottom-nav {
-	justify-content: end;
-	-webkit-justify-content: end;
+	justify-content: flex-end;
+	-webkit-justify-content: flex-end;
 	-ms-flex-pack: end;
 	margin-bottom: 5px;
 }
@@ -19168,8 +19168,8 @@ h2.footer-title:after {
 }
 
 .footer-social-group .social-icon {
-	justify-content: end;
-	-webkit-justify-content: end;
+	justify-content: flex-end;
+	-webkit-justify-content: flex-end;
 	-ms-flex-pack: end;
 }
 
@@ -22872,7 +22872,7 @@ label.upload-filesview input {
 	align-items: center;
 	-webkit-box-pack: end;
 	-ms-flex-pack: end;
-	justify-content: end;
+	justify-content: flex-end;
 	margin-top: 10px;
 }
 
@@ -25466,7 +25466,7 @@ td.action-bg {
 
 .doc-btn {
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 	gap: 14px;
 }
 

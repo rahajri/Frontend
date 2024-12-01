@@ -4786,7 +4786,7 @@ table.table-inbox tbody tr.checked {
     align-items: center;
     -webkit-box-pack: end;
     -ms-flex-pack: end;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .project-report .active-project {
 	background: #000000;
