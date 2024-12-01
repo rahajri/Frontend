@@ -50,11 +50,12 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       city: [''],
       department: [''],
       region: [''],
+      renewable: [''],
+      contractType: [''],
       duration: [''],
       timeUnit: [''],
       startDate: [''],
-      contractType: [''],
-      skills: [''],
+       skills: [''],
       description: [''],
     });
   }
