@@ -4,7 +4,7 @@
     <div class="row align-items-center inner-banner">
       <div class="col-md-12 col-12 text-center">
         <div class="breadcrumb-list">
-          <h3> Publier une Offre</h3>
+          <h3>Publier une Offre</h3>
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -24,36 +24,52 @@
 
 <!-- Page Content -->
 <div class="content">
-  <div class="container">
+  <div class="container shadow-lg">
     <div class="row">
       <div class="col-md-12">
         <div class="select-project mb-4">
           <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
             <div class="container">
-
               <!-- General Information -->
               <h3 class="mt-4">Généralités</h3>
               <div class="form-group">
-                <label for="jobTitle">Titre du poste recherché</label>
+                <label for="title" class="focus-label"
+                  >Titre du poste recherché</label
+                >
                 <input
-                  id="jobTitle"
-                  formControlName="jobTitle"
+                  id="title"
+                  formControlName="title"
                   class="form-control"
                   type="text"
                   placeholder="Exemple : Développeur Full Stack"
                 />
+                <!-- Message d'erreur -->
+                <div
+                  *ngIf="title?.touched && title?.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="title?.errors?.['required']">
+                    Le titre du poste est obligatoire.
+                  </div>
+                  <div *ngIf="title?.errors?.['minlength']">
+                    Le titre du poste doit contenir au moins 30 caractères.
+                  </div>
+                </div>
               </div>
 
               <div class="row">
                 <!-- Job -->
                 <div class="col-md-4">
-                  <label for="job">Métier</label>
+                  <label for="job" class="focus-label">Métier</label>
                   <select
                     id="job"
                     formControlName="job"
                     class="form-control"
                     (change)="onJobChange($event)"
                   >
+                    <option value="" disabled selected>
+                      Selectionner un métier
+                    </option>
                     <option *ngFor="let job of jobs" [value]="job.id">
                       {{ job?.name }}
                     </option>
@@ -63,7 +79,9 @@
                 <!-- Sub Activity -->
                 <div class="col-md-4">
                   <div class="input-block">
-                    <label for="sous-activite" class="focus-label">Sous Activité</label>
+                    <label for="sous-activite" class="focus-label"
+                      >Sous Activité</label
+                    >
                     <input
                       formControlName="subActivity"
                       type="text"
@@ -93,20 +111,36 @@
               <h3 class="mt-4">Localisation</h3>
               <div class="row mt-3">
                 <div class="col-md-6">
-                  <label for="city">Ville</label>
+                  <label for="city" class="focus-label">Ville</label>
                   <input
                     id="city"
                     formControlName="city"
                     class="form-control"
                     type="text"
-                    (change)="onCityChange($event)"
                     placeholder="Saisir une ville"
+                    (input)="onCityInput($event)"
+                    [attr.autocomplete]="'off'"
                   />
+                  <!-- Autocomplete suggestions -->
+                  <ul
+                    class="autocomplete-list"
+                    *ngIf="filteredCities.length >= 2"
+                  >
+                    <li
+                      *ngFor="let city of filteredCities"
+                      (click)="selectCity(city)"
+                      class="autocomplete-item"
+                    >
+                      {{ city.name }}
+                    </li>
+                  </ul>
                 </div>
 
                 <!-- Department (Read-only field) -->
                 <div class="col-md-3">
-                  <label for="department">Département</label>
+                  <label for="department" class="focus-label"
+                    >Département</label
+                  >
                   <input
                     id="department"
                     type="text"
@@ -118,7 +152,7 @@
 
                 <!-- Region (Read-only field) -->
                 <div class="col-md-3">
-                  <label for="region">Région</label>
+                  <label for="region" class="focus-label">Région</label>
                   <input
                     id="region"
                     type="text"
@@ -131,29 +165,32 @@
 
               <!-- Contract Type -->
 
-            
               <h3 class="mt-4">Détails</h3>
               <div class="row mt-3">
+                <div class="col-md-4">
+                  <label for="duration" class="focus-label">Durée prévue</label>
 
-                <div class="col-md-4 ">
-                  <label for="duration">Durée prévue</label>
-                   
                   <input
                     id="duration"
                     formControlName="duration"
-                    class="form-control "
+                    class="form-control"
                     type="number"
-                    placeholder="Entrez un nombre"
+                    placeholder="Entrez un nombre (ex:3)"
                   />
                 </div>
 
                 <div class="col-md-4">
-                  <label for="timeUnit">Unité de temps</label>
+                  <label for="timeUnit" class="focus-label"
+                    >Unité de temps</label
+                  >
                   <select
                     id="timeUnit"
                     formControlName="timeUnit"
                     class="form-control"
                   >
+                    <option value="" disabled selected>
+                      Selectionner un unité(Semaine,Mois,Année)
+                    </option>
                     <option value="Semaine">Semaine</option>
                     <option value="Mois">Mois</option>
                     <option value="Année">Année</option>
@@ -161,44 +198,48 @@
                 </div>
 
                 <div class="col-md-4">
-                  <label for="startDate">Date de début prévue</label>
+                  <label for="startDate" class="focus-label"
+                    >Date de début prévue</label
+                  >
                   <input
                     id="startDate"
                     formControlName="startDate"
                     class="form-control"
                     type="date"
+                    placeholder="Choisissez une date"
                   />
                 </div>
               </div>
 
               <div class="row mt-3">
                 <div class="col-md-6">
-                  <label for="contractType">Type de contrat</label>
-                  <select id="contractType" formControlName="contractType" class="form-control">
-                    <option value="CDI">CDI</option>
-                    <option value="CDD">CDD</option>
-                    <option value="Freelance">Freelance</option>
-                    <option value="Stage">Stage</option>
+                  <label for="contractType" class="focus-label"
+                    >Type de contrat</label
+                  >
+                  <select
+                    formControlName="contractType"
+                    class="form-control"
+                    (change)="onContractTypeChange($event)"
+                  >
+                    <option value="" disabled selected>
+                      Selectionner un type de contrat
+                    </option>
+                    <option
+                      *ngFor="let type of contractTypes"
+                      [value]="type.id"
+                    >
+                      {{ type?.description }}
+                    </option>
                   </select>
-                </div>
-
-                <div class="col-md-6 d-flex align-items-center mt-4">
-                  <div class="form-check">
-                    <input
-                      type="checkbox"
-                      id="renewable"
-                      formControlName="renewable"
-                      class="form-check-input"
-                    />
-                    <label for="renewable" class="form-check-label">Renouvelable</label>
-                  </div>
                 </div>
               </div>
 
               <!-- Competencies -->
               <h3 class="mt-4">Compétences</h3>
               <div class="form-group">
-                <label for="skills">Compétences requises</label>
+                <label for="skills" class="focus-label"
+                  >Compétences requises</label
+                >
                 <input
                   id="skills"
                   formControlName="skills"
@@ -210,21 +251,32 @@
 
               <!-- Description -->
               <div class="form-group mt-3">
-                <label for="description">Description détaillée</label>
+                <h3 class="mt-4">Description détaillée</h3>
+                <label for="description" class="focus-label"
+                  >Rédigez une description du projet</label
+                >
                 <textarea
                   id="description"
                   formControlName="description"
                   class="form-control"
                   rows="15"
-                  style="height: 300px;"
-                  placeholder="Rédigez une description du projet"
+                  style="height: 300px"
+                  placeholder=""
                 ></textarea>
               </div>
 
               <!-- Submit Button -->
               <div class="text-end mt-3">
-                <button type="reset" class="btn btn-secondary mr-4">Annuler</button>
-                <button type="submit" class="btn btn-primary">Publier</button>
+                <button type="reset" class="btn btn-secondary mr-4 me-2">
+                  Annuler
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="jobForm.invalid"
+                >
+                  Publier
+                </button>
               </div>
             </div>
           </form>
@@ -233,6 +285,5 @@
     </div>
   </div>
 </div>
-
 
 <!-- /Page Content -->

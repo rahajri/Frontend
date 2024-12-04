@@ -4,7 +4,13 @@ import { routes } from 'src/app/core/helpers/routes/routes';
 import * as pdfjsLib from 'pdfjs-dist'; // Use the legacy build for better compatibility
 import * as Tesseract from 'tesseract.js';
 import { OcrService } from 'src/app/core/services/ocr.service';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { SpinnerService } from 'src/app/core/services/spinner/spinner.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment.prod';
@@ -42,10 +48,10 @@ export class OnboardScreenComponent implements OnInit {
 
   public experience: number[] = [];
   public language: number[] = [];
-  public datas: boolean[] = [true]
+  public datas: boolean[] = [true];
   public isCheckboxChecked = true;
   extractedText = '';
-  spinner: boolean = false
+  spinner: boolean = false;
   locationForm: FormGroup;
 
   username: string = 'aicha';
@@ -57,23 +63,22 @@ export class OnboardScreenComponent implements OnInit {
   selectedListActivities = [
     { value: 'Activity 1' },
     { value: 'Activity 2' },
-    { value: 'Activity 3' }
+    { value: 'Activity 3' },
   ];
 
   selectedListSousActivite = [
     { value: 'Sous Activité 1' },
-    { value: 'Sous Activité 2' }
+    { value: 'Sous Activité 2' },
   ];
 
-  selectedListMetiers = [
-    { value: 'Métier 1' },
-    { value: 'Métier 2' }
-  ]
+  selectedListMetiers = [{ value: 'Métier 1' }, { value: 'Métier 2' }];
   zipCodes: any[] = [];
   cities: any[] = [];
   jobs: any[] = [];
 
-  constructor(private datePipe: DatePipe, private ocrService: OcrService,
+  constructor(
+    private datePipe: DatePipe,
+    private ocrService: OcrService,
     private translate: TranslateService,
     private fb: FormBuilder,
     private locationService: LocationService,
@@ -81,7 +86,6 @@ export class OnboardScreenComponent implements OnInit {
     private candidateService: CandidateService,
     private router: Router
   ) {
-
     this.translate.setDefaultLang(environment.defaultLanguage);
     this.locationForm = new FormGroup({
       postalCode: new FormControl(''),
@@ -90,7 +94,6 @@ export class OnboardScreenComponent implements OnInit {
       region: new FormControl(''),
       adresse: new FormControl(''),
     });
-
 
     this.form = this.fb.group({
       personalDetails: this.fb.group({
@@ -108,33 +111,27 @@ export class OnboardScreenComponent implements OnInit {
 
       experiences: this.fb.array([this.createExperience()]),
       education: this.fb.array([this.createEducation()]), // initialize the education form array
-      languages: this.fb.array([this.createLanguage()])  // Initialize with one language entry
-
+      languages: this.fb.array([this.createLanguage()]), // Initialize with one language entry
     });
-
-
-
   }
   ngOnInit(): void {
     this.getCodeZipes();
     this.getJobs();
   }
 
-
-
   createSkill(): FormGroup {
     return this.fb.group({
-      skillName: [''],  // Default empty value
-      level: [''],      // Default empty value
+      skillName: [''], // Default empty value
+      level: [''], // Default empty value
     });
   }
 
   createEducation(): FormGroup {
     return this.fb.group({
-      degreeName: [''],      // Default value for degree name
-      universityName: [''],  // Default value for university name
-      startDate: [''],       // Default value for start date
-      endDate: [''],         // Default value for end date
+      degreeName: [''], // Default value for degree name
+      universityName: [''], // Default value for university name
+      startDate: [''], // Default value for start date
+      endDate: [''], // Default value for end date
     });
   }
 
@@ -144,7 +141,7 @@ export class OnboardScreenComponent implements OnInit {
       companyName: ['', Validators.required],
       position: ['', Validators.required],
       startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      endDate: ['', Validators.required],
     });
   }
 
@@ -152,7 +149,7 @@ export class OnboardScreenComponent implements OnInit {
   createLanguage(): FormGroup {
     return this.fb.group({
       name: ['', Validators.required],
-      level: ['', Validators.required]
+      level: ['', Validators.required],
     });
   }
 
@@ -160,7 +157,6 @@ export class OnboardScreenComponent implements OnInit {
     const skillsArray = this.form.get('skills') as FormArray;
     skillsArray.push(this.createSkill()); // Adds a new skill with skillName and level
   }
-
 
   get languagesArray(): FormArray {
     return this.form.get('languages') as FormArray;
@@ -176,51 +172,77 @@ export class OnboardScreenComponent implements OnInit {
     this.skillsArray.removeAt(index); // Use removeAt method to remove from FormArray
   }
   patchFormData(response: any) {
-    const personal = response["Informations Personnelles"] || response["informations_personnelles"] || response['coordonnees_personnelles'];
-
+    const personal =
+      response['Informations Personnelles'] ||
+      response['informations_personnelles'] ||
+      response['coordonnees_personnelles'];
 
     // Patch personal details
     this.form.get('personalDetails')?.patchValue({
-      lastName: personal["Nom"] || personal["nom"] || '',
-      firstName: personal["Prenom"] || personal["prenom"] || '',
-      jobTitle: personal["Titre du poste ou de la mission"] || personal["titre_poste"] || '',
-      birthday: personal["Date de naissance"] || personal["Date de naissance"] || '',
-      phoneNumber: personal["Téléphone"] || personal["telephone"] || '',
-      emailAddress: personal["E-mail"] || personal["email"] || ''
+      lastName: personal['Nom'] || personal['nom'] || '',
+      firstName: personal['Prenom'] || personal['prenom'] || '',
+      jobTitle:
+        personal['Titre du poste ou de la mission'] ||
+        personal['titre_poste'] ||
+        '',
+      birthday:
+        personal['Date de naissance'] || personal['Date de naissance'] || '',
+      phoneNumber: personal['Téléphone'] || personal['telephone'] || '',
+      emailAddress: localStorage.getItem('profil-email'),
     });
 
     // Patch skills
-    const skills: string[] = response["competences"]; // Extract skills array
+    const skills: string[] = response['competences']; // Extract skills array
     this.skillsArray.clear(); // Clear existing skills
 
     // Iterate through the skills and create a form group for each skill
     skills?.forEach((skillName: string) => {
-      this.skillsArray.push(this.fb.group({
-        skillName: [skillName || ''], // Add skill name to form control
-        level: [''] // Initialize level as empty or provide a default value
-      }));
+      this.skillsArray.push(
+        this.fb.group({
+          skillName: [skillName || ''], // Add skill name to form control
+          level: [''], // Initialize level as empty or provide a default value
+        })
+      );
     });
 
-
-
-    const educationData = response["diplomes_certifications"] || [];
+    const educationData = response['diplomes_certifications'] || [];
     this.educationArray.clear();
 
     educationData.forEach((education: any) => {
-      this.educationArray.push(this.fb.group({
-        degreeName: [education["Diplôme"] || education["Certification"] || education["Formation"] || education["nom"] || ''],
-        universityName: [education["etablissement"] || education["Délivrée par"] || ''],
-        startDate: [this.formatDateString(education["Date début"] || education["date_debut"])],
-        endDate: [this.formatDateString(education["Date fin"] || education["date_fin"])],
-      }));
+      this.educationArray.push(
+        this.fb.group({
+          degreeName: [
+            education['Diplôme'] ||
+              education['Certification'] ||
+              education['Formation'] ||
+              education['nom'] ||
+              '',
+          ],
+          universityName: [
+            education['etablissement'] || education['Délivrée par'] || '',
+          ],
+          startDate: [
+            this.formatDateString(
+              education['Date début'] || education['date_debut']
+            ),
+          ],
+          endDate: [
+            this.formatDateString(
+              education['Date fin'] || education['date_fin']
+            ),
+          ],
+        })
+      );
     });
 
     // Patch experiences
-    const experiences = response["experiences_professionnelles"] || response["Expériences professionnelles"];
+    const experiences =
+      response['experiences_professionnelles'] ||
+      response['Expériences professionnelles'];
     this.experiencesArray.clear();
 
     experiences.forEach((exp: any) => {
-      let endDate = exp["date_fin"] || exp["Date fin"] || '';
+      let endDate = exp['date_fin'] || exp['Date fin'] || '';
 
       // Check if endDate is defined and if the day is 31
       if (endDate) {
@@ -232,15 +254,18 @@ export class OnboardScreenComponent implements OnInit {
         }
       }
 
-      this.experiencesArray.push(this.fb.group({
-        companyName: [exp["Entreprise"] || exp["entreprise"] || ''],
-        position: [exp["Poste"] || ''],
-        location: [exp["Lieu"] || ''],
-        startDate: [this.formatDateString(exp["Date début"] || exp["date_debut"])],
-        endDate: [this.formatDateString(exp["Date fin"] || exp["date_fin"])],
-      }));
+      this.experiencesArray.push(
+        this.fb.group({
+          companyName: [exp['Entreprise'] || exp['entreprise'] || ''],
+          position: [exp['Poste'] || ''],
+          location: [exp['Lieu'] || ''],
+          startDate: [
+            this.formatDateString(exp['Date début'] || exp['date_debut']),
+          ],
+          endDate: [this.formatDateString(exp['Date fin'] || exp['date_fin'])],
+        })
+      );
     });
-
   }
 
   formatDateString(dateStr: string | undefined): string | null {
@@ -259,12 +284,10 @@ export class OnboardScreenComponent implements OnInit {
     return this.datePipe.transform(formattedDate, 'dd/MM/yyyy'); // Format to "DD/MM/YYYY"
   }
 
-
   // Add a new experience to the array
   addExperience(): void {
     this.experiencesArray.push(this.createExperience());
   }
-
 
   // Remove an experience from the array
   removeExperience(index: number): void {
@@ -279,18 +302,21 @@ export class OnboardScreenComponent implements OnInit {
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files) {
-      this.spinner = true
+      this.spinner = true;
       this.cvs = Array.from(input.files);
 
       // Call the API and patch form with the response
       if (this.cvs.length > 0) {
         this.ocrService.runPipeline(this.username, this.cvs).subscribe(
           (response) => {
-            const cleanedResponse = response.Result.replace(/json|/g, '').trim();
+            const cleanedResponse = response.Result.replace(
+              /json|/g,
+              ''
+            ).trim();
             const jsonObject = JSON.parse(cleanedResponse);
-             // Call the patch function to populate the form
+            // Call the patch function to populate the form
             this.patchFormData(jsonObject);
-            this.spinner = false
+            this.spinner = false;
           },
           (error) => {
             console.error('Error:', error);
@@ -302,7 +328,6 @@ export class OnboardScreenComponent implements OnInit {
     }
   }
 
-
   get educationArray(): FormArray {
     return this.form.get('education') as FormArray;
   }
@@ -312,12 +337,10 @@ export class OnboardScreenComponent implements OnInit {
     educationArray.push(this.createEducation());
   }
 
-
   removeEducation(i: number) {
     const educationArray = this.form.get('education') as FormArray;
     educationArray.removeAt(i);
   }
-
 
   block() {
     this.displayBlock = !this.displayBlock;
@@ -330,16 +353,12 @@ export class OnboardScreenComponent implements OnInit {
     this.skills.push(1);
   }
 
-
-
-
   addCertification() {
     this.certification.push(1);
   }
   removeCertification(index: number) {
     this.certification.splice(index, 1);
   }
-
 
   createActivity(): FormGroup {
     return this.fb.group({
@@ -350,13 +369,12 @@ export class OnboardScreenComponent implements OnInit {
   }
 
   addActivity() {
-    this.activities.insert(0, this.createActivity());  // Insert at the first position (index 0)
+    this.activities.insert(0, this.createActivity()); // Insert at the first position (index 0)
   }
 
   removeActivity(index: number) {
     this.activities.removeAt(index);
   }
-
 
   // Add a new language to the array
   addLanguage(): void {
@@ -369,9 +387,6 @@ export class OnboardScreenComponent implements OnInit {
       this.languagesArray.removeAt(index);
     }
   }
-
-
-
 
   removeDatas(index: number) {
     this.datas[index] = !this.datas[index];
@@ -409,7 +424,6 @@ export class OnboardScreenComponent implements OnInit {
   endTime6 = new Date();
   endTime7 = new Date();
 
-
   toggleTimePicker(value: string): void {
     if (this.showTimePicker[0] !== value) {
       this.showTimePicker[0] = value;
@@ -443,7 +457,7 @@ export class OnboardScreenComponent implements OnInit {
           this.locationForm.patchValue({
             city: '',
             department: '',
-            region: ''
+            region: '',
           });
         },
         (error) => {
@@ -455,24 +469,21 @@ export class OnboardScreenComponent implements OnInit {
 
   onCityChange(event: Event): void {
     const selectedCityId = (event.target as HTMLSelectElement).value;
-     this.locationService.getcityInfo(selectedCityId).subscribe(
+    this.locationService.getcityInfo(selectedCityId).subscribe(
       (city) => {
-       // this.cities = data.cities; // Update the cities list
-         if (city) {
+        // this.cities = data.cities; // Update the cities list
+        if (city) {
           this.locationForm.patchValue({
             department: city?.department?.name,
-            region: city?.department?.region?.name
+            region: city?.department?.region?.name,
           });
         }
-        
       },
       (error) => {
         console.error('Error fetching ZIP code info:', error);
       }
     );
-    
   }
-
 
   get activities(): FormArray {
     return this.form.get('activities') as FormArray;
@@ -480,7 +491,7 @@ export class OnboardScreenComponent implements OnInit {
 
   getJobs() {
     // Fetch the list of jobs (Métier) on component initialization
-    this.jobService.getJobs().subscribe(data => {
+    this.jobService.getJobs().subscribe((data) => {
       this.jobs = data;
     });
   }
@@ -488,7 +499,7 @@ export class OnboardScreenComponent implements OnInit {
     const jobId = event.target.value;
     if (jobId) {
       // Fetch sous-activités and activités based on the selected job
-      this.jobService.getJobDetails(jobId).subscribe(data => {
+      this.jobService.getJobDetails(jobId).subscribe((data) => {
         const activityGroup = this.activities.at(index);
         activityGroup.patchValue({
           sousActivite: data?.subActivity?.name,
@@ -498,21 +509,17 @@ export class OnboardScreenComponent implements OnInit {
     }
   }
 
-
   create(event: any) {
     const candidateData = new FormData();
     candidateData.append('userInformation', JSON.stringify(this.form.value));
     candidateData.append('cv', this.cvs[0]);
-     this.candidateService.createCandidate(candidateData).subscribe(
+    this.candidateService.createCandidate(candidateData).subscribe(
       (response) => {
-
-         this.router.navigate(['/freelancer/dashboards']);
+        this.router.navigate(['/freelancer/dashboards']);
       },
       (error) => {
         console.error('Error creating candidate:', error);
       }
     );
-
-
   }
 }

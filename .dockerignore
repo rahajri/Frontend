@@ -1,0 +1,31 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies
+node_modules
+npm-debug.log
+
+# IDE specific files
+.idea
+.vscode
+*.swp
+*.swo
+
+# Build output
+/dist
+/tmp
+/out-tsc
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Docker files
+Dockerfile
+.dockerignore

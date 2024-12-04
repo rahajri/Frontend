@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Editor, Toolbar } from 'ngx-editor';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { JobService } from 'src/app/core/services/job.service';
 import { LocationService } from 'src/app/core/services/location.service';
+import { debounceTime, of, Subscription, switchMap } from 'rxjs';
+import { ContractService } from 'src/app/core/services/contract.service';
+import { ProjectService } from 'src/app/core/services/project.service';
 interface data {
   value: string;
 }
@@ -18,6 +21,7 @@ interface data {
 export class PostprojectComponent implements OnInit, OnDestroy {
   public routes = routes;
   public isChecked = true;
+
   selected = 'select';
   selected1 = 'select';
   editor?: Editor;
@@ -33,35 +37,59 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   ];
 
   jobForm: FormGroup;
- 
-  jobs:any =  [];
-  departments = ['01', '02', '75'];
-  regions = ['Île-de-France', 'Provence-Alpes-Côte d\'Azur', 'Bretagne'];
+  filteredCities: any[] = [];
+  cityInputSub: Subscription | undefined;
 
-  constructor(private fb: FormBuilder,
+  jobs: any = [];
+  contractTypes: any = [];
+  departments = ['01', '02', '75'];
+  regions = ['Île-de-France', "Provence-Alpes-Côte d'Azur", 'Bretagne'];
+
+  constructor(
+    private fb: FormBuilder,
     private locationService: LocationService,
     private jobService: JobService,
-    private router: Router) {
+    private contractService: ContractService,
+    private projectService: ProjectService,
+    private router: Router
+  ) {
     this.jobForm = this.fb.group({
-      jobTitle: [''],
+      title: [
+        '',
+        [
+          Validators.required, // Validation obligatoire
+          Validators.minLength(30), // Minimum de 30 caractères
+        ],
+      ],
       activity: [''],
       subActivity: [''],
       job: [''],
       city: [''],
       department: [''],
       region: [''],
-      renewable: [''],
-      contractType: [''],
+      contractType: ['', Validators.required],
       duration: [''],
       timeUnit: [''],
       startDate: [''],
-       skills: [''],
+      skills: [''],
       description: [''],
     });
   }
   ngOnInit(): void {
     this.editor = new Editor();
     this.getJobs();
+    this.getContractTypes();
+    this.cityInputSub = this.jobForm
+      .get('city')
+      ?.valueChanges.pipe(
+        debounceTime(300), // Wait 300ms for user to stop typing
+        switchMap((query) =>
+          query ? this.locationService.searchCities(query) : of([])
+        )
+      )
+      .subscribe((cities) => {
+        this.filteredCities = cities;
+      });
   }
   ngOnDestroy(): void {
     if (this.editor) {
@@ -102,6 +130,10 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     { value: 'Professional' },
   ];
 
+  get title() {
+    return this.jobForm.get('title');
+  }
+
   activeRate = 'hourly';
   toggleHourly() {
     this.activeRate = 'hourly';
@@ -117,45 +149,75 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   }
 
   // Handle city selection change
-  onCityChange(event: Event): void {
-    const selectedCityId = (event.target as HTMLSelectElement).value;
-    this.locationService.getcityInfo(selectedCityId).subscribe(
-      (city) => {
-        if (city) {
-          this.jobForm.patchValue({
-            department: city.department?.name,
-            region: city.department?.region?.name
-          });
-        }
-      },
-      (error) => {
-        console.error('Error fetching city info:', error);
-      }
-    );
+
+  onCityInput(event: Event): void {
+    // Additional logic if needed, such as cleaning input
+    const input = (event.target as HTMLInputElement).value.trim();
+    if (!input) {
+      this.filteredCities = [];
+    }
+  }
+
+  selectCity(city: any): void {
+    this.jobForm.patchValue({
+      city: city.name,
+      department: city.department?.name || '',
+      region: city.department?.region?.name || '',
+    });
+    this.filteredCities = [];
   }
 
   getJobs() {
     // Fetch the list of jobs (Métier) on component initialization
-    this.jobService.getJobs().subscribe(data => {
+    this.jobService.getJobs().subscribe((data) => {
       this.jobs = data;
+      // if (this.jobs.length > 0) {
+      //   // Automatically select the first job
+      //   this.jobForm.patchValue({ job: this.jobs[0].id });
+      // }
     });
   }
+
+  getContractTypes() {
+    this.contractService.getContractTypes().subscribe((data) => {
+      this.contractTypes = data;
+    });
+  }
+
+  previousJobId: string | null = null;
+
   onJobChange(event: any) {
     const jobId = event.target.value;
-    if (jobId) {
-      // Fetch sous-activités and activités based on the selected job
-      this.jobService.getJobDetails(jobId).subscribe(data => {
+    if (jobId && jobId !== this.previousJobId) {
+      this.previousJobId = jobId;
+      this.jobService.getJobDetails(jobId).subscribe((data) => {
         this.jobForm.patchValue({
-          subActivity: data?.subActivity?.name,
-          activity: data?.subActivity?.activity?.name,
+          subActivity: data?.subActivity?.name || '',
+          activity: data?.subActivity?.activity?.name || '',
         });
       });
     }
   }
-  
- 
-  onSubmit(){
-    console.log(this.jobForm.value);
+
+  onContractTypeChange(event: any) {
+    const typeId = event.target.value;
+    if (typeId && typeId !== this.previousJobId) {
+      this.previousJobId = typeId;
+      this.contractService.getTypeDetails(typeId).subscribe((data) => {
+        this.jobForm.patchValue({});
+      });
+    }
+  }
+
+  onSubmit() {
+    this.projectService.createProject(this.jobForm.value).subscribe(
+      (response) => {
+        console.log('Project created successfully:', response);
+      },
+      (error) => {
+        console.error('Error creating project:', error);
+      }
+    );
     //this.router.navigate([routes.projectconfirmation])
   }
 }

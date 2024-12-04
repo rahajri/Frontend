@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocationService {
   private baseUrlcity = `${environment.apiUrl}/cities`; // URL to get zip codes
@@ -19,33 +19,35 @@ export class LocationService {
 
     // Set up headers with the Bearer token
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     });
 
     return this.http.get<any>(this.baseUrlzip, { headers });
   }
-  
+
   getZipCodeInfo(zipId: string): Observable<any> {
     const token = localStorage.getItem('token'); // Replace with a service if needed
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     });
-  
+
     // Concatenate the base URL and the zipId
     return this.http.get<any>(`${this.baseUrlzip}/${zipId}`, { headers });
   }
 
   getcityInfo(city: string): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer `,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer `,
+      'Content-Type': 'application/json',
     });
-  
+
     // Concatenate the base URL and the zipId
     return this.http.get<any>(`${this.baseUrlcity}/${city}`, { headers });
   }
-  
-  
+
+  searchCities(query: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrlcity}/search?name=${query}`);
+  }
 }
