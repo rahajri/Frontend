@@ -408,9 +408,7 @@
                 <div
                   class="selected-skills"
                   [ngClass]="{
-                    'is-invalid':
-                      selectedSkills.length < 1 &&
-                      (skills?.touched || skills?.dirty)
+                    'is-invalid': selectedSkills.length < 1
                   }"
                 >
                   <span *ngFor="let skill of selectedSkills" class="skill-chip">
@@ -441,13 +439,7 @@
                   </li>
                 </ul>
                 <!-- Message d'erreur -->
-                <div
-                  *ngIf="
-                    selectedSkills.length < 1 &&
-                    (skills?.touched || skills?.dirty)
-                  "
-                  class="text-danger"
-                >
+                <div *ngIf="selectedSkills.length < 1" class="text-danger">
                   <div *ngIf="skills?.errors?.['required']">
                     Les compétences sont obligatoires.
                   </div>

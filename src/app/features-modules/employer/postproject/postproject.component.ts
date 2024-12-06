@@ -99,7 +99,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       duration: ['', [Validators.required]],
       timeUnit: ['', [Validators.required]],
       startDate: [null, [Validators.required]],
-      endDate: [null, [Validators.required]],
+      endDate: [null],
       skills: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(30)]],
     });
@@ -229,7 +229,6 @@ export class PostprojectComponent implements OnInit, OnDestroy {
 
   filterSkills(e: any) {
     let query = e.value;
-    console.log(query, this.savedSkills);
     if (!query) {
       // If no query, show all skills
       this.filteredSkills = this.savedSkills;
@@ -274,10 +273,10 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       this.previousId = typeId;
       this.contractService.getTypeDetails(typeId).subscribe((data) => {
         if (data.description === 'CDI (Contrat à Durée Indéterminée)') {
-          this.isCdiSelected = true;
           this.jobForm.get('endDate')?.clearValidators();
           this.jobForm.get('endDate')?.setValue(null);
           this.jobForm.get('endDate')?.updateValueAndValidity();
+          this.isCdiSelected = true;
         } else {
           this.isCdiSelected = false;
           this.jobForm.get('endDate')?.setValidators([Validators.required]);
