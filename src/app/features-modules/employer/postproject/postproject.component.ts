@@ -22,9 +22,7 @@ interface data {
 export class PostprojectComponent implements OnInit, OnDestroy {
   public routes = routes;
   public isChecked = true;
-
-  selected = 'select';
-  selected1 = 'select';
+  
   editor?: Editor;
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -40,7 +38,6 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   jobForm: FormGroup;
   filteredCities: any[] = [];
   cityInputSub: Subscription | undefined;
-
   jobs: any[] = [];
   subActivities: any[] = [];
   // savedSkills: any[] = [];
@@ -99,8 +96,8 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       duration: ['', [Validators.required]],
       timeUnit: ['', [Validators.required]],
       startDate: [null, [Validators.required]],
-      endDate: [null],
-      skills: ['', [Validators.required]],
+      endDate: [null, [Validators.required]],
+      skills: [''],
       description: ['', [Validators.required, Validators.minLength(30)]],
     });
   }
@@ -258,12 +255,13 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     const subActivityId = event.target.value;
     if (subActivityId && subActivityId !== this.previousId) {
       this.previousId = subActivityId;
-      this.jobService.getSubActivitiesDetails(subActivityId).subscribe((data) => {
-        console.log(data);
-        this.jobForm.patchValue({
-          activity: data?.activity?.name || '',
+      this.jobService
+        .getSubActivitiesDetails(subActivityId)
+        .subscribe((data) => {
+          this.jobForm.patchValue({
+            activity: data?.activity?.name || '',
+          });
         });
-      });
     }
   }
 
@@ -306,15 +304,16 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     this.markFormGroupTouched(this.jobForm);
 
     if (this.jobForm.valid) {
+      this.jobForm.get('skills')?.setValue(this.selectedSkills);
       console.log(this.jobForm.value);
-      // this.projectService.createProject(this.jobForm.value).subscribe(
-      //   (response) => {
-      //     // this.router.navigate([routes.projectconfirmation])
-      //   },
-      //   (error) => {
-      //     console.error('Error creating project:', error);
-      //   }
-      // );
+      this.projectService.createProject(this.jobForm.value).subscribe(
+        (response) => {
+          this.router.navigate([routes.projectconfirmation]);
+        },
+        (error) => {
+          console.error('Error creating project:', error);
+        }
+      );
     } else {
       console.log('Form is invalid');
     }
