@@ -1,6 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { CandidateService } from 'src/app/core/services/condidate.service';
@@ -10,9 +16,9 @@ interface data {
 @Component({
   selector: 'app-profile-settings',
   templateUrl: './profile-settings.component.html',
-  styleUrls: ['./profile-settings.component.scss']
+  styleUrls: ['./profile-settings.component.scss'],
 })
-export class ProfileSettingsComponent  implements OnInit{
+export class ProfileSettingsComponent implements OnInit {
   public routes = routes;
   public selectedValue1 = '';
   public selectedValue2 = '';
@@ -31,11 +37,10 @@ export class ProfileSettingsComponent  implements OnInit{
   public experience: number[] = [];
   public language: number[] = [];
 
-  public datas : boolean[] = [true]
+  public datas: boolean[] = [true];
   public isCheckboxChecked = true;
   skillLevels = ['Beginner', 'Intermediate', 'Advanced'];
 
-   
   selectedList1: data[] = [
     { value: 'Basic' },
     { value: 'Intermediate' },
@@ -86,14 +91,15 @@ export class ProfileSettingsComponent  implements OnInit{
     { value: 'Intermediate' },
     { value: 'Expert' },
   ];
-  candidate: any = { // Define the candidate object to hold form data
+  candidate: any = {
+    // Define the candidate object to hold form data
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
     birthDate: '',
     profileTitle: '',
-    role: ''
+    role: '',
   };
   form: FormGroup;
   locationForm: FormGroup;
@@ -101,44 +107,45 @@ export class ProfileSettingsComponent  implements OnInit{
   removeDatas(index: number) {
     this.datas[index] = !this.datas[index];
   }
-  constructor(private router: Router,private datePipe: DatePipe,
+  constructor(
+    private router: Router,
+    private datePipe: DatePipe,
     private fb: FormBuilder,
 
-    private candidateService: CandidateService) {
-      this.locationForm = new FormGroup({
-        postalCode: new FormControl(''),
-        city: new FormControl(''),
-        department: new FormControl(''),
-        region: new FormControl(''),
-        adresse: new FormControl(''),
-      });
-      this.form = this.fb.group({
-        personalDetails: this.fb.group({
-          lastName: [''],
-          firstName: [''],
-          jobTitle: [''],
-          birthday: [''],
-          phoneNumber: [''],
-          emailAddress: [''],
-        }),
-        location: this.locationForm, // Add location form group here
-        activities: this.fb.array([this.createActivity()]), // Initialize with one activity form group
-  
-        skills: this.fb.array([this.createSkill()]), // Ensure skills are initialized
-  
-        experiences: this.fb.array([this.createExperience()]),
-        education: this.fb.array([this.createEducation()]), // initialize the education form array
-        languages: this.fb.array([this.createLanguage()])  // Initialize with one language entry
-  
-      });
-      
-    }
+    private candidateService: CandidateService
+  ) {
+    this.locationForm = new FormGroup({
+      postalCode: new FormControl(''),
+      city: new FormControl(''),
+      department: new FormControl(''),
+      region: new FormControl(''),
+      adresse: new FormControl(''),
+    });
+    this.form = this.fb.group({
+      personalDetails: this.fb.group({
+        lastName: [''],
+        firstName: [''],
+        jobTitle: [''],
+        birthday: [''],
+        phoneNumber: [''],
+        emailAddress: [''],
+      }),
+      location: this.locationForm, // Add location form group here
+      activities: this.fb.array([this.createActivity()]), // Initialize with one activity form group
+
+      skills: this.fb.array([this.createSkill()]), // Ensure skills are initialized
+
+      experiences: this.fb.array([this.createExperience()]),
+      education: this.fb.array([this.createEducation()]), // initialize the education form array
+      languages: this.fb.array([this.createLanguage()]), // Initialize with one language entry
+    });
+  }
   ngOnInit(): void {
-     this.getCondidature();
+    this.getCondidature();
   }
 
   navigation() {
-    this.router.navigate([routes.freelancerprofile])
+    this.router.navigate([routes.freelancerprofile]);
   }
   showTimePicker: Array<string> = [];
 
@@ -164,8 +171,6 @@ export class ProfileSettingsComponent  implements OnInit{
   endTime5 = new Date();
   endTime6 = new Date();
   endTime7 = new Date();
- 
-
 
   toggleTimePicker(value: string): void {
     if (this.showTimePicker[0] !== value) {
@@ -180,24 +185,24 @@ export class ProfileSettingsComponent  implements OnInit{
   }
 
   getCondidature(): void {
-    const email = localStorage.getItem('profil-email');
-    
+    const email = localStorage.getItem('email');
+
     if (!email) {
       console.error('No email found in local storage.');
       return;
     }
-  
+
     this.candidateService.getCandidate(email).subscribe(
       (response) => {
         console.log('Candidate details:', response);
 
         this.patchFormData(response);
         // Patch the response to the candidate form object
-        this.candidate = { 
+        this.candidate = {
           ...response,
           birthDate: response.birthDate || '', // Handle null or missing birthDate
-          profileTitle: response.profileTitle || '', 
-          role: response.role || ''
+          profileTitle: response.profileTitle || '',
+          role: response.role || '',
         };
       },
       (error) => {
@@ -205,21 +210,20 @@ export class ProfileSettingsComponent  implements OnInit{
       }
     );
   }
-  
 
   createSkill(): FormGroup {
     return this.fb.group({
-      skillName: [''],  // Default empty value
-      level: [''],      // Default empty value
+      skillName: [''], // Default empty value
+      level: [''], // Default empty value
     });
   }
 
   createEducation(): FormGroup {
     return this.fb.group({
-      degreeName: [''],      // Default value for degree name
-      universityName: [''],  // Default value for university name
-      startDate: [''],       // Default value for start date
-      endDate: [''],         // Default value for end date
+      degreeName: [''], // Default value for degree name
+      universityName: [''], // Default value for university name
+      startDate: [''], // Default value for start date
+      endDate: [''], // Default value for end date
     });
   }
 
@@ -229,7 +233,7 @@ export class ProfileSettingsComponent  implements OnInit{
       companyName: ['', Validators.required],
       position: ['', Validators.required],
       startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      endDate: ['', Validators.required],
     });
   }
 
@@ -237,7 +241,7 @@ export class ProfileSettingsComponent  implements OnInit{
   createLanguage(): FormGroup {
     return this.fb.group({
       name: ['', Validators.required],
-      level: ['', Validators.required]
+      level: ['', Validators.required],
     });
   }
 
@@ -245,7 +249,6 @@ export class ProfileSettingsComponent  implements OnInit{
     const skillsArray = this.form.get('skills') as FormArray;
     skillsArray.push(this.createSkill()); // Adds a new skill with skillName and level
   }
-
 
   get languagesArray(): FormArray {
     return this.form.get('languages') as FormArray;
@@ -261,63 +264,89 @@ export class ProfileSettingsComponent  implements OnInit{
     this.skillsArray.removeAt(index); // Use removeAt method to remove from FormArray
   }
   patchFormData(response: any) {
-    const responsepersonal = response["Informations Personnelles"] || response["informations_personnelles"] || response['coordonnees_personnelles'];
-
+    const responsepersonal =
+      response['Informations Personnelles'] ||
+      response['informations_personnelles'] ||
+      response['coordonnees_personnelles'];
 
     // Patch personal details
     this.form.get('personalDetails')?.patchValue({
-      lastName: response["Nom"] || response["nom"] || '',
-      firstName: response["Prenom"] || response["prenom"] || '',
-      jobTitle: response["Titre du poste ou de la mission"] || response["titre_poste"] || '',
-      birthday: response["Date de naissance"] || response["Date de naissance"] || '',
-      phoneNumber: response["Téléphone"] || response["telephone"] || '',
-      emailAddress: response["E-mail"] || response["email"] || ''
+      lastName: response['Nom'] || response['nom'] || '',
+      firstName: response['Prenom'] || response['prenom'] || '',
+      jobTitle:
+        response['Titre du poste ou de la mission'] ||
+        response['titre_poste'] ||
+        '',
+      birthday:
+        response['Date de naissance'] || response['Date de naissance'] || '',
+      phoneNumber: response['Téléphone'] || response['telephone'] || '',
+      emailAddress: response['E-mail'] || response['email'] || '',
     });
 
     // Patch skills
-    const skills: string[] = response["skills"]; // Extract skills array
+    const skills: string[] = response['skills']; // Extract skills array
     this.skillsArray.clear(); // Clear existing skills
 
     // Iterate through the skills and create a form group for each skill
-    skills?.forEach((skillName : any) => {
-      this.skillsArray.push(this.fb.group({
-        skillName: [skillName?.name || ''], // Add skill name to form control
-        level: [''] // Initialize level as empty or provide a default value
-      }));
+    skills?.forEach((skillName: any) => {
+      this.skillsArray.push(
+        this.fb.group({
+          skillName: [skillName?.name || ''], // Add skill name to form control
+          level: [''], // Initialize level as empty or provide a default value
+        })
+      );
     });
 
-
-
-    const educationData = response["formations"] || [];
+    const educationData = response['formations'] || [];
     this.educationArray.clear();
 
     educationData.forEach((education: any) => {
-      this.educationArray.push(this.fb.group({
-        degreeName: [education["title"] || education["Certification"] || education["Formation"] || education["nom"] || ''],
-        universityName: [education["institution"] || education["Délivrée par"] || ''],
-        startDate: [this.formatDateString(education["Date début"] || education["startDate"])],
-        endDate: [this.formatDateString(education["Date fin"] || education["endDate"])],
-      }));
+      this.educationArray.push(
+        this.fb.group({
+          degreeName: [
+            education['title'] ||
+              education['Certification'] ||
+              education['Formation'] ||
+              education['nom'] ||
+              '',
+          ],
+          universityName: [
+            education['institution'] || education['Délivrée par'] || '',
+          ],
+          startDate: [
+            this.formatDateString(
+              education['Date début'] || education['startDate']
+            ),
+          ],
+          endDate: [
+            this.formatDateString(
+              education['Date fin'] || education['endDate']
+            ),
+          ],
+        })
+      );
     });
 
-    const languageData = response["languages"] || [];
+    const languageData = response['languages'] || [];
     this.languageArray.clear();
 
     languageData.forEach((language: any) => {
-      this.languageArray.push(this.fb.group({
-        name: [language["name"] || ''],
-        level: [language["level"] || ''],
-        certificateUrl: [language["certificateUrl"] || ''],
-      }));
+      this.languageArray.push(
+        this.fb.group({
+          name: [language['name'] || ''],
+          level: [language['level'] || ''],
+          certificateUrl: [language['certificateUrl'] || ''],
+        })
+      );
     });
 
-
     // Patch experiences
-    const experiences = response["experiences"] || response["Expériences professionnelles"];
+    const experiences =
+      response['experiences'] || response['Expériences professionnelles'];
     this.experiencesArray.clear();
 
     experiences.forEach((exp: any) => {
-      let endDate = exp["endDate"] || exp["Date fin"] || '';
+      let endDate = exp['endDate'] || exp['Date fin'] || '';
 
       // Check if endDate is defined and if the day is 31
       if (endDate) {
@@ -329,15 +358,18 @@ export class ProfileSettingsComponent  implements OnInit{
         }
       }
 
-      this.experiencesArray.push(this.fb.group({
-        companyName: [exp["companyName"] || exp["entreprise"] || ''],
-        position: [exp["jobTitle"] || ''],
-        location: [exp["Lieu"] || ''],
-        startDate: [this.formatDateString(exp["Date début"] || exp["startDate"])],
-        endDate: [this.formatDateString(exp["Date fin"] || exp["endDate"])],
-      }));
+      this.experiencesArray.push(
+        this.fb.group({
+          companyName: [exp['companyName'] || exp['entreprise'] || ''],
+          position: [exp['jobTitle'] || ''],
+          location: [exp['Lieu'] || ''],
+          startDate: [
+            this.formatDateString(exp['Date début'] || exp['startDate']),
+          ],
+          endDate: [this.formatDateString(exp['Date fin'] || exp['endDate'])],
+        })
+      );
     });
-
   }
 
   formatDateString(dateStr: string | undefined): string | null {
@@ -356,12 +388,10 @@ export class ProfileSettingsComponent  implements OnInit{
     return this.datePipe.transform(formattedDate, 'dd/MM/yyyy'); // Format to "DD/MM/YYYY"
   }
 
-
   // Add a new experience to the array
   addExperience(): void {
     this.experiencesArray.push(this.createExperience());
   }
-
 
   // Remove an experience from the array
   removeExperience(index: number): void {
@@ -385,20 +415,14 @@ export class ProfileSettingsComponent  implements OnInit{
     educationArray.push(this.createEducation());
   }
 
-
   removeEducation(i: number) {
     const educationArray = this.form.get('education') as FormArray;
     educationArray.removeAt(i);
   }
 
- 
-
   addSkills() {
     this.skills.push(1);
   }
-
-
-
 
   addCertification() {
     this.certification.push(1);
@@ -406,7 +430,6 @@ export class ProfileSettingsComponent  implements OnInit{
   removeCertification(index: number) {
     this.certification.splice(index, 1);
   }
-
 
   createActivity(): FormGroup {
     return this.fb.group({
@@ -417,13 +440,12 @@ export class ProfileSettingsComponent  implements OnInit{
   }
 
   addActivity() {
-    this.activities.insert(0, this.createActivity());  // Insert at the first position (index 0)
+    this.activities.insert(0, this.createActivity()); // Insert at the first position (index 0)
   }
 
   removeActivity(index: number) {
     this.activities.removeAt(index);
   }
-
 
   // Add a new language to the array
   addLanguage(): void {
@@ -439,6 +461,4 @@ export class ProfileSettingsComponent  implements OnInit{
   get activities(): FormArray {
     return this.form.get('activities') as FormArray;
   }
-
-
 }

@@ -8,6 +8,7 @@ import { LocationService } from 'src/app/core/services/location.service';
 import { debounceTime, of, Subscription, switchMap } from 'rxjs';
 import { ContractService } from 'src/app/core/services/contract.service';
 import { ProjectService } from 'src/app/core/services/project.service';
+import { SkillService } from 'src/app/core/services/skill.service';
 interface data {
   value: string;
 }
@@ -40,10 +41,36 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   filteredCities: any[] = [];
   cityInputSub: Subscription | undefined;
 
-  jobs: any = [];
-  contractTypes: any = [];
-  departments = ['01', '02', '75'];
-  regions = ['Île-de-France', "Provence-Alpes-Côte d'Azur", 'Bretagne'];
+  jobs: any[] = [];
+  subActivities: any[] = [];
+  // savedSkills: any[] = [];
+  savedSkills: any[] = [
+    { id: '1', name: 'JavaScript', level: 'Expert' },
+    { id: '2', name: 'Python', level: 'Advanced' },
+    { id: '3', name: 'Java', level: 'Intermediate' },
+    { id: '4', name: 'C#', level: 'Beginner' },
+    { id: '5', name: 'HTML', level: 'Expert' },
+    { id: '6', name: 'CSS', level: 'Advanced' },
+    { id: '7', name: 'Angular', level: 'Intermediate' },
+    { id: '8', name: 'React', level: 'Advanced' },
+    { id: '9', name: 'Node.js', level: 'Advanced' },
+    { id: '10', name: 'SQL', level: 'Intermediate' },
+    { id: '11', name: 'MongoDB', level: 'Intermediate' },
+    { id: '12', name: 'TypeScript', level: 'Advanced' },
+    { id: '13', name: 'PHP', level: 'Beginner' },
+    { id: '14', name: 'Ruby', level: 'Beginner' },
+    { id: '15', name: 'Kotlin', level: 'Intermediate' },
+    { id: '16', name: 'Swift', level: 'Intermediate' },
+    { id: '17', name: 'Go', level: 'Beginner' },
+    { id: '18', name: 'C++', level: 'Advanced' },
+    { id: '19', name: 'Scala', level: 'Beginner' },
+    { id: '20', name: 'Rust', level: 'Intermediate' },
+  ];
+  filteredSkills: any[] = [];
+  contractTypes: any[] = [];
+  isCdiSelected = false;
+  cityIsCdiSelected = false;
+  selectedSkills: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +78,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     private jobService: JobService,
     private contractService: ContractService,
     private projectService: ProjectService,
+    private skillService: SkillService,
     private router: Router
   ) {
     this.jobForm = this.fb.group({
@@ -58,37 +86,40 @@ export class PostprojectComponent implements OnInit, OnDestroy {
         '',
         [
           Validators.required, // Validation obligatoire
-          Validators.minLength(30), // Minimum de 30 caractères
+          Validators.minLength(5), // Minimum de 30 caractères
         ],
       ],
-      activity: [''],
-      subActivity: [''],
-      job: [''],
-      city: [''],
-      department: [''],
-      region: [''],
-      contractType: ['', Validators.required],
-      duration: [''],
-      timeUnit: [''],
-      startDate: [''],
-      skills: [''],
-      description: [''],
+      activity: ['', [Validators.required]],
+      subActivity: ['', [Validators.required]],
+      job: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      department: ['', [Validators.required]],
+      region: ['', [Validators.required]],
+      contractType: ['', [Validators.required]],
+      duration: ['', [Validators.required]],
+      timeUnit: ['', [Validators.required]],
+      startDate: [null, [Validators.required]],
+      endDate: [null, [Validators.required]],
+      skills: ['', [Validators.required]],
+      description: ['', [Validators.required, Validators.minLength(30)]],
     });
   }
   ngOnInit(): void {
     this.editor = new Editor();
     this.getJobs();
+    this.getSubActivities();
+    this.getSkills();
     this.getContractTypes();
     this.cityInputSub = this.jobForm
       .get('city')
       ?.valueChanges.pipe(
-        debounceTime(300), // Wait 300ms for user to stop typing
+        debounceTime(100), // Wait 300ms for user to stop typing
         switchMap((query) =>
           query ? this.locationService.searchCities(query) : of([])
         )
       )
       .subscribe((cities) => {
-        this.filteredCities = cities;
+        if (!this.cityIsCdiSelected) this.filteredCities = cities;
       });
   }
   ngOnDestroy(): void {
@@ -96,42 +127,48 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       this.editor.destroy();
     }
   }
-  tag = ['Valve profit'];
-  public selectedValue1 = '';
-  public selectedValue2 = '';
-  public selectedValue3 = '';
-  public selectedValue4 = '';
-  public selectedValue5 = '';
-  selectedList1: data[] = [
-    { value: 'Select' },
-    { value: 'Category' },
-    { value: 'Project' },
-  ];
-  selectedList2: data[] = [
-    { value: '1-3 Week' },
-    { value: '1 Month' },
-    { value: 'Less then a month' },
-    { value: 'More then a month' },
-  ];
-  selectedList3: data[] = [
-    { value: 'Select' },
-    { value: 'Full Time' },
-    { value: 'Part Time' },
-    { value: 'Project Based' },
-  ];
-  selectedList4: data[] = [
-    { value: 'Basic' },
-    { value: 'Intermediate' },
-    { value: 'Professional' },
-  ];
-  selectedList5: data[] = [
-    { value: 'Basic' },
-    { value: 'Intermediate' },
-    { value: 'Professional' },
-  ];
 
   get title() {
     return this.jobForm.get('title');
+  }
+  get activity() {
+    return this.jobForm.get('activity');
+  }
+  get subActivity() {
+    return this.jobForm.get('subActivity');
+  }
+  get job() {
+    return this.jobForm.get('job');
+  }
+  get city() {
+    return this.jobForm.get('city');
+  }
+  get department() {
+    return this.jobForm.get('department');
+  }
+  get region() {
+    return this.jobForm.get('region');
+  }
+  get contractType() {
+    return this.jobForm.get('contractType');
+  }
+  get duration() {
+    return this.jobForm.get('duration');
+  }
+  get skills() {
+    return this.jobForm.get('skills');
+  }
+  get description() {
+    return this.jobForm.get('description');
+  }
+  get startDate() {
+    return this.jobForm.get('startDate');
+  }
+  get endDate() {
+    return this.jobForm.get('endDate');
+  }
+  get timeUnit() {
+    return this.jobForm.get('timeUnit');
   }
 
   activeRate = 'hourly';
@@ -154,28 +191,54 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     // Additional logic if needed, such as cleaning input
     const input = (event.target as HTMLInputElement).value.trim();
     if (!input) {
+      this.cityIsCdiSelected = false;
       this.filteredCities = [];
     }
   }
 
   selectCity(city: any): void {
+    this.filteredCities = [];
+    this.cityIsCdiSelected = true;
     this.jobForm.patchValue({
       city: city.name,
       department: city.department?.name || '',
       region: city.department?.region?.name || '',
     });
-    this.filteredCities = [];
   }
 
   getJobs() {
     // Fetch the list of jobs (Métier) on component initialization
     this.jobService.getJobs().subscribe((data) => {
       this.jobs = data;
-      // if (this.jobs.length > 0) {
-      //   // Automatically select the first job
-      //   this.jobForm.patchValue({ job: this.jobs[0].id });
-      // }
     });
+  }
+
+  getSubActivities() {
+    this.jobService.getSubActivities().subscribe((data) => {
+      this.subActivities = data;
+    });
+  }
+
+  getSkills() {
+    // Fetch the list of jobs (Métier) on component initialization
+    // this.skillService.getSkills().subscribe((data) => {
+    //   this.savedSkills = data;
+    //   console.log('skills: ', data);
+    // });
+  }
+
+  filterSkills(e: any) {
+    let query = e.value;
+    console.log(query, this.savedSkills);
+    if (!query) {
+      // If no query, show all skills
+      this.filteredSkills = this.savedSkills;
+    } else {
+      // Filter the skills array based on the query (case-insensitive search)
+      this.filteredSkills = this.savedSkills.filter((skill) =>
+        skill.name.toLowerCase().includes(query.toLowerCase())
+      );
+    }
   }
 
   getContractTypes() {
@@ -184,16 +247,22 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     });
   }
 
-  previousJobId: string | null = null;
+  previousId: string | null = null;
 
-  onJobChange(event: any) {
-    const jobId = event.target.value;
-    if (jobId && jobId !== this.previousJobId) {
-      this.previousJobId = jobId;
-      this.jobService.getJobDetails(jobId).subscribe((data) => {
+  jobSelect(job: any) {
+    this.jobForm.patchValue({
+      job: job.id,
+    });
+  }
+
+  onSubActivityChange(event: any) {
+    const subActivityId = event.target.value;
+    if (subActivityId && subActivityId !== this.previousId) {
+      this.previousId = subActivityId;
+      this.jobService.getSubActivitiesDetails(subActivityId).subscribe((data) => {
+        console.log(data);
         this.jobForm.patchValue({
-          subActivity: data?.subActivity?.name || '',
-          activity: data?.subActivity?.activity?.name || '',
+          activity: data?.activity?.name || '',
         });
       });
     }
@@ -201,23 +270,63 @@ export class PostprojectComponent implements OnInit, OnDestroy {
 
   onContractTypeChange(event: any) {
     const typeId = event.target.value;
-    if (typeId && typeId !== this.previousJobId) {
-      this.previousJobId = typeId;
+    if (typeId && typeId !== this.previousId) {
+      this.previousId = typeId;
       this.contractService.getTypeDetails(typeId).subscribe((data) => {
-        this.jobForm.patchValue({});
+        if (data.description === 'CDI (Contrat à Durée Indéterminée)') {
+          this.isCdiSelected = true;
+          this.jobForm.get('endDate')?.clearValidators();
+          this.jobForm.get('endDate')?.setValue(null);
+          this.jobForm.get('endDate')?.updateValueAndValidity();
+        } else {
+          this.isCdiSelected = false;
+          this.jobForm.get('endDate')?.setValidators([Validators.required]);
+          this.jobForm.get('endDate')?.updateValueAndValidity();
+        }
       });
     }
   }
+  selectSkill(skill: any) {
+    // Add the selected skill if not already added
+    if (!this.selectedSkills.some((s) => s.id === skill.id)) {
+      this.selectedSkills.push(skill);
+      this.jobForm.get('skills')?.setValue('');
+    }
+
+    // Clear the input field and suggestions
+    this.filteredSkills = [];
+  }
+
+  removeSkill(skill: any) {
+    // Remove skill from selectedSkills
+    this.selectedSkills = this.selectedSkills.filter((s) => s.id !== skill.id);
+  }
 
   onSubmit() {
-    this.projectService.createProject(this.jobForm.value).subscribe(
-      (response) => {
-        console.log('Project created successfully:', response);
-      },
-      (error) => {
-        console.error('Error creating project:', error);
+    // Mark all controls as touched to trigger validation
+    this.markFormGroupTouched(this.jobForm);
+
+    if (this.jobForm.valid) {
+      console.log(this.jobForm.value);
+      // this.projectService.createProject(this.jobForm.value).subscribe(
+      //   (response) => {
+      //     // this.router.navigate([routes.projectconfirmation])
+      //   },
+      //   (error) => {
+      //     console.error('Error creating project:', error);
+      //   }
+      // );
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+
+  markFormGroupTouched(formGroup: FormGroup): void {
+    Object.values(formGroup.controls).forEach((control) => {
+      control.markAsTouched();
+      if ((control as FormGroup).controls) {
+        this.markFormGroupTouched(control as FormGroup); // Recursive for nested form groups
       }
-    );
-    //this.router.navigate([routes.projectconfirmation])
+    });
   }
 }

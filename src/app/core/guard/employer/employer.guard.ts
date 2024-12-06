@@ -1,21 +1,33 @@
 import { Injectable } from '@angular/core';
-import {  Router} from '@angular/router';
-// import { Observable } from 'rxjs';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
+import { Observable } from 'rxjs';
+import { SpinnerService } from '../../services/spinner/spinner.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class EmployerGuard  {
-  constructor( private route: Router) {}
-  // canActivate(
-  //   route: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-  //     if (localStorage.getItem('employer')) {
-  //       return true;
-  //     } else {
-  //       this.route.navigate(['/home']);
-  //       return false;
-  //     }
-  // }
-  
+export class EmployerGuard {
+  constructor(private route: Router, private spinner: SpinnerService) {}
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    const role = localStorage.getItem('role');
+    if (role === 'company-employee') {
+      return true;
+    } else {
+      this.route.navigate(['/home']);
+      this.spinner.hide();
+      return false;
+    }
+  }
 }

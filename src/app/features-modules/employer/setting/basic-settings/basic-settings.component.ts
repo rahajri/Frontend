@@ -8,9 +8,9 @@ interface data {
 @Component({
   selector: 'app-basic-settings',
   templateUrl: './basic-settings.component.html',
-  styleUrls: ['./basic-settings.component.scss']
+  styleUrls: ['./basic-settings.component.scss'],
 })
-export class BasicSettingsComponent  {
+export class BasicSettingsComponent {
   public selectedValue1 = '';
   public selectedValue2 = '';
   public selectedValue3 = '';
@@ -37,15 +37,15 @@ export class BasicSettingsComponent  {
     { value: 'Intermediate' },
     { value: 'Export' },
   ];
-  showCheckoutHour = true; 
+  showCheckoutHour = true;
 
   toggleCheckoutHour() {
     this.showCheckoutHour = !this.showCheckoutHour;
   }
   public isCheckboxChecked = true;
-  constructor(private router: Router,private datePipe: DatePipe) {}
-  ngsubmit(){
-    this.router.navigate([routes.projectconfirmation])
+  constructor(private router: Router, private datePipe: DatePipe) {}
+  ngsubmit() {
+    this.router.navigate([routes.projectconfirmation]);
   }
   showTimePicker: Array<string> = [];
 
@@ -71,8 +71,6 @@ export class BasicSettingsComponent  {
   endTime5 = new Date();
   endTime6 = new Date();
   endTime7 = new Date();
-  
-
 
   toggleTimePicker(value: string): void {
     if (this.showTimePicker[0] !== value) {
@@ -87,15 +85,14 @@ export class BasicSettingsComponent  {
   }
 
   getCondidature(): void {
-    const email = localStorage.getItem('profil-email');
-    
+    const email = localStorage.getItem('email');
+
     if (!email) {
       console.error('No email found in local storage.');
       return;
     }
 
-
-  /*
+    /*
 
 
     this.employerServcice.getCandidate(email).subscribe(
@@ -114,5 +111,4 @@ export class BasicSettingsComponent  {
       }
     );*/
   }
-  
 }

@@ -188,7 +188,7 @@ export class OnboardScreenComponent implements OnInit {
       birthday:
         personal['Date de naissance'] || personal['Date de naissance'] || '',
       phoneNumber: personal['Téléphone'] || personal['telephone'] || '',
-      emailAddress: localStorage.getItem('profil-email'),
+      emailAddress: localStorage.getItem('email'),
     });
 
     // Patch skills

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // import { ErrorfoundComponent } from '../auth/errorfound/errorfound.component';
-import { FeaturesModulesComponent } from './features-modules.component';
+import { FeaturesModulesComponent } from './features-modules.component'
+import { EmployerGuard } from '../core/guard/employer/employer.guard';
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
       }, 
       { 
         path: 'employer', 
-        // canActivate: [EmployerGuard],
+        canActivate: [EmployerGuard],
         loadChildren: () => import('./employer/employer.module').then((m) => m.EmployerModule) 
       },
       { 

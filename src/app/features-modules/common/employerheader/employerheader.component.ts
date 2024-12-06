@@ -5,6 +5,7 @@ import { routes } from 'src/app/core/helpers/routes/routes';
 import { header } from 'src/app/core/models/sidebar-model';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { NavbarService } from 'src/app/core/services/navbar.service';
+import { UserService } from '../../auth/service/user.service';
 
 @Component({
   selector: 'app-employerheader',
@@ -16,12 +17,14 @@ export class EmployerheaderComponent {
   base = '';
   page = '';
   last = '';
+  profileName = '';
 
   navbar: Array<header> = [];
   constructor(
     private Router: Router,
     private data: ShareDataService,
     private navservices: NavbarService,
+    private userService: UserService,
     private common: CommonService
   ) {
     this.common.base.subscribe((res: string) => {
@@ -34,6 +37,21 @@ export class EmployerheaderComponent {
       this.last = res;
     });
     this.navbar = this.data.sideBar;
+  }
+
+  ngOnInit(): void {
+    this.getUser();
+  }
+
+  getUser() {
+    this.userService.getProfile().subscribe((profile) => {
+      this.profileName = `${profile?.lastName?.toUpperCase() || ''} ${
+        profile?.firstName
+          ? profile.firstName.charAt(0).toUpperCase() +
+            profile.firstName.slice(1).toLowerCase()
+          : ''
+      }`;
+    });
   }
 
   employer() {

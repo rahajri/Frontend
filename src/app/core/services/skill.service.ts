@@ -11,13 +11,21 @@ export class SkillService {
 
   constructor(private http: HttpClient) {}
 
+  createSkill(skill: any) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.post<any>(`${this.baseUrl}/create`, skill, { headers });
+  }
+
   getSkills(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
-
     return this.http.get<any>(this.baseUrl, { headers });
   }
 }
