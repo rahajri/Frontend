@@ -1,4 +1,3 @@
-
 <!-- Page Wrapper -->
 <div class="page-wrapper">
   <div class="content container-fluid">
@@ -7,8 +6,12 @@
         <div class="col-sm-6">
           <h3 class="page-title">Settings</h3>
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a [routerLink]="'/home'">Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink] = "routes.admin_setting">Settings</a></li>
+            <li class="breadcrumb-item">
+              <a [routerLink]="'/home'">Accueil</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a [routerLink]="routes.admin_setting">Settings</a>
+            </li>
             <li class="breadcrumb-item active">Social Links</li>
           </ul>
         </div>
@@ -17,33 +20,50 @@
 
     <div class="row">
       <div class="col-lg-12">
-
         <!-- Settings Menu -->
         <div class="settings-menu-links">
           <ul class="nav nav-tabs menu-tabs">
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="'/admin/settings/general'">General Settings</a>
+              <a class="nav-link" [routerLink]="'/admin/settings/general'"
+                >General Settings</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="'/admin/settings/localization'">Localization</a>
+              <a class="nav-link" [routerLink]="'/admin/settings/localization'"
+                >Localization</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="'/admin/settings/payment'">Payment Settings</a>
+              <a class="nav-link" [routerLink]="'/admin/settings/payment'"
+                >Payment Settings</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="'/admin/settings/email'">Email Settings</a>
+              <a class="nav-link" [routerLink]="'/admin/settings/email'"
+                >Email Settings</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="'/admin/settings/socialmedia-login'">Social Media Login</a>
+              <a
+                class="nav-link"
+                [routerLink]="'/admin/settings/socialmedia-login'"
+                >Social Media Login</a
+              >
             </li>
             <li class="nav-item active">
-              <a class="nav-link" [routerLink]="'/admin/settings/sociallinks'">Social Links</a>
+              <a class="nav-link" [routerLink]="'/admin/settings/sociallinks'"
+                >Social Links</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="'/admin/settings/seo'">SEO Settings</a>
+              <a class="nav-link" [routerLink]="'/admin/settings/seo'"
+                >SEO Settings</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="'/admin/settings/others'">Others</a>
+              <a class="nav-link" [routerLink]="'/admin/settings/others'"
+                >Others</a
+              >
             </li>
           </ul>
         </div>
@@ -58,93 +78,151 @@
                 </div>
                 <form>
                   <div class="settings-form">
-
-                    <div class="links-info" [ngClass]="{'d-none': removeIcon === false}" >
+                    <div
+                      class="links-info"
+                      [ngClass]="{ 'd-none': removeIcon === false }"
+                    >
                       <div class="row form-row links-cont">
                         <div class="form-group form-placeholder d-flex">
                           <button class="btn social-icon">
                             <i class="feather icon-facebook"></i>
                           </button>
-                          <input type="text" class="form-control" placeholder="https://www.facebook.com">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="https://www.facebook.com"
+                          />
                           <div>
-                            <a href="javascript:void(0)" class="btn trash" (click)="this.removeIcon = !this.removeIcon;" >
+                            <a
+                              href="javascript:void(0)"
+                              class="btn trash"
+                              (click)="this.removeIcon = !this.removeIcon"
+                            >
                               <i class="feather icon-trash-2"></i>
                             </a>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="links-info" [ngClass]="{'d-none': removeIcon2 === false}" >
+                    <div
+                      class="links-info"
+                      [ngClass]="{ 'd-none': removeIcon2 === false }"
+                    >
                       <div class="row form-row links-cont">
                         <div class="form-group form-placeholder d-flex">
                           <button class="btn social-icon">
                             <i class="feather icon-twitter"></i>
                           </button>
-                          <input type="text" class="form-control" placeholder="https://www.twitter.com">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="https://www.twitter.com"
+                          />
                           <div>
-                            <a href="javascript:void(0)" class="btn trash"(click)="this.removeIcon2 = !this.removeIcon2;"  >
+                            <a
+                              href="javascript:void(0)"
+                              class="btn trash"
+                              (click)="this.removeIcon2 = !this.removeIcon2"
+                            >
                               <i class="feather icon-trash-2"></i>
                             </a>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="links-info" [ngClass]="{'d-none': removeIcon3 === false}">
+                    <div
+                      class="links-info"
+                      [ngClass]="{ 'd-none': removeIcon3 === false }"
+                    >
                       <div class="row form-row links-cont">
                         <div class="form-group form-placeholder d-flex">
                           <button class="btn social-icon">
                             <i class="feather icon-youtube"></i>
                           </button>
-                          <input type="text" class="form-control" placeholder="https://www.youtube.com">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="https://www.youtube.com"
+                          />
                           <div>
-                            <a href="javascript:void(0)" class="btn trash"(click)="this.removeIcon3 = !this.removeIcon3;" >
+                            <a
+                              href="javascript:void(0)"
+                              class="btn trash"
+                              (click)="this.removeIcon3 = !this.removeIcon3"
+                            >
                               <i class="feather icon-trash-2"></i>
                             </a>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="links-info" [ngClass]="{'d-none': removeIcon4 === false}">
+                    <div
+                      class="links-info"
+                      [ngClass]="{ 'd-none': removeIcon4 === false }"
+                    >
                       <div class="row form-row links-cont">
                         <div class="form-group form-placeholder d-flex">
                           <button class="btn social-icon">
                             <i class="feather icon-linkedin"></i>
                           </button>
-                          <input type="text" class="form-control" placeholder="https://www.linkedin.com">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="https://www.linkedin.com"
+                          />
                           <div>
-                            <a href="javascript:void(0)" class="btn trash" (click)="this.removeIcon4 = !this.removeIcon4;" >
+                            <a
+                              href="javascript:void(0)"
+                              class="btn trash"
+                              (click)="this.removeIcon4 = !this.removeIcon4"
+                            >
                               <i class="feather icon-trash-2"></i>
                             </a>
                           </div>
                         </div>
                       </div>
                     </div>
-                    @for (charge of serviceArray; track charge; let i = $index) {
-                      <div class="links-info" >
-                        <div class="row form-row links-cont">
-                          <div class="form-group form-placeholder d-flex">
-                            <button class="btn social-icon">
-                              <i class="feather icon-github"></i>
-                            </button>
-                            <input type="text" class="form-control" placeholder="https://www.github.com">
-                            <div>
-                              <a href="javascript:void(0)" class="btn trash" (click)="deleteService(i)" >
-                                <i class="feather icon-trash-2"></i>
-                              </a>
-                            </div>
+                    @for (charge of serviceArray; track charge; let i = $index)
+                    {
+                    <div class="links-info">
+                      <div class="row form-row links-cont">
+                        <div class="form-group form-placeholder d-flex">
+                          <button class="btn social-icon">
+                            <i class="feather icon-github"></i>
+                          </button>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="https://www.github.com"
+                          />
+                          <div>
+                            <a
+                              href="javascript:void(0)"
+                              class="btn trash"
+                              (click)="deleteService(i)"
+                            >
+                              <i class="feather icon-trash-2"></i>
+                            </a>
                           </div>
                         </div>
                       </div>
+                    </div>
                     }
                   </div>
                   <div class="form-group">
-                    <a href="javascript:void(0);" class="btn add-links" (click)="addService()">
+                    <a
+                      href="javascript:void(0);"
+                      class="btn add-links"
+                      (click)="addService()"
+                    >
                       <i class="fas fa-plus me-1"></i> Add More
                     </a>
                   </div>
                   <div class="form-group mb-0">
                     <div class="settings-btns">
-                      <button type="submit" class="btn btn-orange">Submit</button>
+                      <button type="submit" class="btn btn-orange">
+                        Submit
+                      </button>
                       <button type="submit" class="btn btn-grey">Cancel</button>
                     </div>
                   </div>
@@ -153,7 +231,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

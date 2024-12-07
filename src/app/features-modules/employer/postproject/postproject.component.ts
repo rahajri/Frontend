@@ -22,7 +22,8 @@ interface data {
 export class PostprojectComponent implements OnInit, OnDestroy {
   public routes = routes;
   public isChecked = true;
-  
+  public errorMessage: string | null = null;
+
   editor?: Editor;
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -40,33 +41,13 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   cityInputSub: Subscription | undefined;
   jobs: any[] = [];
   subActivities: any[] = [];
-  // savedSkills: any[] = [];
-  savedSkills: any[] = [
-    { id: '1', name: 'JavaScript', level: 'Expert' },
-    { id: '2', name: 'Python', level: 'Advanced' },
-    { id: '3', name: 'Java', level: 'Intermediate' },
-    { id: '4', name: 'C#', level: 'Beginner' },
-    { id: '5', name: 'HTML', level: 'Expert' },
-    { id: '6', name: 'CSS', level: 'Advanced' },
-    { id: '7', name: 'Angular', level: 'Intermediate' },
-    { id: '8', name: 'React', level: 'Advanced' },
-    { id: '9', name: 'Node.js', level: 'Advanced' },
-    { id: '10', name: 'SQL', level: 'Intermediate' },
-    { id: '11', name: 'MongoDB', level: 'Intermediate' },
-    { id: '12', name: 'TypeScript', level: 'Advanced' },
-    { id: '13', name: 'PHP', level: 'Beginner' },
-    { id: '14', name: 'Ruby', level: 'Beginner' },
-    { id: '15', name: 'Kotlin', level: 'Intermediate' },
-    { id: '16', name: 'Swift', level: 'Intermediate' },
-    { id: '17', name: 'Go', level: 'Beginner' },
-    { id: '18', name: 'C++', level: 'Advanced' },
-    { id: '19', name: 'Scala', level: 'Beginner' },
-    { id: '20', name: 'Rust', level: 'Intermediate' },
-  ];
+  savedSkills: any[] = [];
   filteredSkills: any[] = [];
+  filteredJobs: any[] = [];
   contractTypes: any[] = [];
   isCdiSelected = false;
-  cityIsCdiSelected = false;
+  jobNotExist = true;
+  cityIsSelected = false;
   selectedSkills: any[] = [];
 
   constructor(
@@ -93,8 +74,8 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       department: ['', [Validators.required]],
       region: ['', [Validators.required]],
       contractType: ['', [Validators.required]],
-      duration: ['', [Validators.required]],
-      timeUnit: ['', [Validators.required]],
+      duration: [0, [Validators.required]],
+      timeUnit: [null, [Validators.required]],
       startDate: [null, [Validators.required]],
       endDate: [null, [Validators.required]],
       skills: [''],
@@ -116,7 +97,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe((cities) => {
-        if (!this.cityIsCdiSelected) this.filteredCities = cities;
+        if (!this.cityIsSelected) this.filteredCities = cities;
       });
   }
   ngOnDestroy(): void {
@@ -168,34 +149,9 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     return this.jobForm.get('timeUnit');
   }
 
-  activeRate = 'hourly';
-  toggleHourly() {
-    this.activeRate = 'hourly';
-  }
-
-  toggleFixed() {
-    this.activeRate = 'fixed';
-  }
-  isFilenameVisible: boolean[] = [true, true, true];
-
-  hideFilename(index: number) {
-    this.isFilenameVisible[index] = false;
-  }
-
-  // Handle city selection change
-
-  onCityInput(event: Event): void {
-    // Additional logic if needed, such as cleaning input
-    const input = (event.target as HTMLInputElement).value.trim();
-    if (!input) {
-      this.cityIsCdiSelected = false;
-      this.filteredCities = [];
-    }
-  }
-
   selectCity(city: any): void {
     this.filteredCities = [];
-    this.cityIsCdiSelected = true;
+    this.cityIsSelected = true;
     this.jobForm.patchValue({
       city: city.name,
       department: city.department?.name || '',
@@ -204,10 +160,57 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   }
 
   getJobs() {
-    // Fetch the list of jobs (Métier) on component initialization
     this.jobService.getJobs().subscribe((data) => {
       this.jobs = data;
     });
+  }
+
+  filterJobs(e: any) {
+    let query = e.value;
+    if (!query) {
+      this.filteredJobs = this.jobs;
+      this.jobNotExist = false;
+    } else {
+      this.filteredJobs = this.jobs.filter((job) =>
+        job.name.toLowerCase().includes(query.toLowerCase())
+      );
+      this.jobNotExist = this.filteredJobs.length === 0;
+    }
+  }
+
+  selectJob(job: any): void {
+    this.filteredJobs = [];
+    this.jobNotExist = false;
+    this.jobForm.patchValue({
+      job: job?.name || '',
+      subActivity: job?.subActivity?.name || '',
+      activity: job?.subActivity?.activity?.name || '',
+    });
+  }
+
+  addJob(): void {
+    const jobName = this.jobForm.get('job')?.value?.trim(); // Get and trim the job name
+    if (!jobName) {
+      return; // Do nothing if the job name is empty
+    }
+
+    // Check if the job already exists in the filtered list
+    const existingJob = this.filteredJobs.find(
+      (job) => job.name.toLowerCase() === jobName.toLowerCase()
+    );
+
+    if (existingJob) {
+      // Job already exists, no need to add
+      return;
+    }
+
+    this.filteredJobs.push({ name: jobName });
+
+    this.jobForm.patchValue({
+      job: jobName,
+    });
+    this.filteredJobs = [];
+    this.jobNotExist = true;
   }
 
   getSubActivities() {
@@ -217,24 +220,51 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   }
 
   getSkills() {
-    // Fetch the list of jobs (Métier) on component initialization
-    // this.skillService.getSkills().subscribe((data) => {
-    //   this.savedSkills = data;
-    //   console.log('skills: ', data);
-    // });
+    this.skillService.getSkills().subscribe((data) => {
+      this.savedSkills = data;
+    });
   }
 
   filterSkills(e: any) {
     let query = e.value;
     if (!query) {
-      // If no query, show all skills
       this.filteredSkills = this.savedSkills;
     } else {
-      // Filter the skills array based on the query (case-insensitive search)
       this.filteredSkills = this.savedSkills.filter((skill) =>
         skill.name.toLowerCase().includes(query.toLowerCase())
       );
     }
+  }
+
+  selectSkill(skill: any) {
+    if (!this.selectedSkills.some((s) => s.id === skill.id)) {
+      this.selectedSkills.push(skill);
+      this.jobForm.get('skills')?.setValue('');
+    }
+    this.filteredSkills = [];
+  }
+
+  addSkill(): void {
+    const skillName = this.jobForm.get('skills')?.value?.trim(); // Get and trim the job name
+    if (!skillName) {
+      return;
+    }
+    const existingSkill = this.filteredSkills.find(
+      (skill) => skill.name.toLowerCase() === skillName.toLowerCase()
+    );
+    if (existingSkill) {
+      return;
+    }
+
+    this.selectedSkills.push({ name: skillName });
+    this.jobForm.patchValue({
+      skills: '',
+    });
+    this.filteredSkills = [];
+  }
+
+  removeSkill(skill: any) {
+    this.selectedSkills = this.selectedSkills.filter((s) => s.id !== skill.id);
   }
 
   getContractTypes() {
@@ -243,21 +273,15 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     });
   }
 
-  previousId: string | null = null;
-
-  jobSelect(job: any) {
-    this.jobForm.patchValue({
-      job: job.id,
-    });
-  }
-
+  previous: string | null = null;
   onSubActivityChange(event: any) {
-    const subActivityId = event.target.value;
-    if (subActivityId && subActivityId !== this.previousId) {
-      this.previousId = subActivityId;
+    const subActivitySName = event.target.value;
+    if (subActivitySName && subActivitySName !== this.previous) {
+      this.previous = subActivitySName;
       this.jobService
-        .getSubActivitiesDetails(subActivityId)
+        .getSubActivitiesDetails(subActivitySName)
         .subscribe((data) => {
+          console.log(data);
           this.jobForm.patchValue({
             activity: data?.activity?.name || '',
           });
@@ -267,56 +291,59 @@ export class PostprojectComponent implements OnInit, OnDestroy {
 
   onContractTypeChange(event: any) {
     const typeId = event.target.value;
-    if (typeId && typeId !== this.previousId) {
-      this.previousId = typeId;
+    if (typeId && typeId !== this.previous) {
+      this.previous = typeId;
       this.contractService.getTypeDetails(typeId).subscribe((data) => {
         if (data.description === 'CDI (Contrat à Durée Indéterminée)') {
-          this.jobForm.get('endDate')?.clearValidators();
-          this.jobForm.get('endDate')?.setValue(null);
-          this.jobForm.get('endDate')?.updateValueAndValidity();
           this.isCdiSelected = true;
+          this.removeValidation();
         } else {
           this.isCdiSelected = false;
-          this.jobForm.get('endDate')?.setValidators([Validators.required]);
-          this.jobForm.get('endDate')?.updateValueAndValidity();
+          this.setValidation();
         }
       });
     }
   }
-  selectSkill(skill: any) {
-    // Add the selected skill if not already added
-    if (!this.selectedSkills.some((s) => s.id === skill.id)) {
-      this.selectedSkills.push(skill);
-      this.jobForm.get('skills')?.setValue('');
-    }
-
-    // Clear the input field and suggestions
-    this.filteredSkills = [];
-  }
-
-  removeSkill(skill: any) {
-    // Remove skill from selectedSkills
-    this.selectedSkills = this.selectedSkills.filter((s) => s.id !== skill.id);
-  }
 
   onSubmit() {
-    // Mark all controls as touched to trigger validation
     this.markFormGroupTouched(this.jobForm);
+    this.errorMessage = null; // Reset the error message before each submission
 
     if (this.jobForm.valid) {
       this.jobForm.get('skills')?.setValue(this.selectedSkills);
       console.log(this.jobForm.value);
       this.projectService.createProject(this.jobForm.value).subscribe(
         (response) => {
-          this.router.navigate([routes.projectconfirmation]);
+          console.log('new Project : ', response);
+          this.router.navigate([routes.getProjectConfirmation(response.id)]);
         },
         (error) => {
           console.error('Error creating project:', error);
+          this.errorMessage =
+            'Une erreur est survenue lors de la création du projet. Veuillez réessayer.';
         }
       );
     } else {
       console.log('Form is invalid');
     }
+  }
+
+  setValidation() {
+    this.jobForm.get('endDate')?.setValidators([Validators.required]);
+    this.jobForm.get('duration')?.setValidators([Validators.required]);
+    this.jobForm.get('timeUnit')?.setValidators([Validators.required]);
+    this.jobForm.get('endDate')?.updateValueAndValidity();
+    this.jobForm.get('duration')?.updateValueAndValidity();
+    this.jobForm.get('timeUnit')?.updateValueAndValidity();
+  }
+
+  removeValidation() {
+    this.jobForm.get('endDate')?.clearValidators();
+    this.jobForm.get('duration')?.clearValidators();
+    this.jobForm.get('timeUnit')?.clearValidators();
+    this.jobForm.get('endDate')?.updateValueAndValidity();
+    this.jobForm.get('duration')?.updateValueAndValidity();
+    this.jobForm.get('timeUnit')?.updateValueAndValidity();
   }
 
   markFormGroupTouched(formGroup: FormGroup): void {
@@ -326,5 +353,11 @@ export class PostprojectComponent implements OnInit, OnDestroy {
         this.markFormGroupTouched(control as FormGroup); // Recursive for nested form groups
       }
     });
+  }
+
+  onFormKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
   }
 }

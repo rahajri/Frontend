@@ -312,7 +312,10 @@
               />
               Profile Settings</a
             >
-            <a class="dropdown-item" [routerLink]="routes.login"
+            <a
+              class="dropdown-item"
+              [routerLink]="routes.login"
+              (click)="logout()"
               ><img
                 src="assets/img/icon/user-dropdown-icon--07.svg"
                 alt="Img"

@@ -61,7 +61,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./identify/identify.module').then((m) => m.IdentifyModule),
       },
-      
+
       {
         path: 'developer',
         loadChildren: () =>
@@ -125,20 +125,35 @@ const routes: Routes = [
             (m) => m.FreelancerProfileModule
           ),
       },
-       
-      { 
-        path: 'change-password', 
-        loadChildren: () => import('./setting/change-password/change-password.module').then(m => m.ChangePasswordModule) 
-      }, 
-      { 
-        path: 'delete-account', 
-        loadChildren: () => import('./setting/delete-account/delete-account.module').then(m => m.DeleteAccountModule) 
+
+      {
+        path: 'change-password',
+        loadChildren: () =>
+          import('./setting/change-password/change-password.module').then(
+            (m) => m.ChangePasswordModule
+          ),
       },
-      { 
-        path: 'basic-settings', 
-        loadChildren: () => import('./setting/basic-settings/basic-settings.module').then(m => m.BasicSettingsModule) 
-      }, 
-      { path: 'project-confirmation', loadChildren: () => import('./project-confirmation/project-confirmation.module').then(m => m.ProjectConfirmationModule) },
+      {
+        path: 'delete-account',
+        loadChildren: () =>
+          import('./setting/delete-account/delete-account.module').then(
+            (m) => m.DeleteAccountModule
+          ),
+      },
+      {
+        path: 'basic-settings',
+        loadChildren: () =>
+          import('./setting/basic-settings/basic-settings.module').then(
+            (m) => m.BasicSettingsModule
+          ),
+      },
+      {
+        path: 'project-confirmation/:id',
+        loadChildren: () =>
+          import('./project-confirmation/project-confirmation.module').then(
+            (m) => m.ProjectConfirmationModule
+          ),
+      },
       {
         path: 'all-projects',
         loadChildren: () =>
@@ -181,7 +196,7 @@ const routes: Routes = [
             (m) => m.ExpiredProjectModule
           ),
       },
-      
+
       {
         path: 'project-milestone',
         loadChildren: () =>
@@ -206,9 +221,9 @@ const routes: Routes = [
       {
         path: 'view-project-details',
         loadChildren: () =>
-          import('./project/view-project-details/view-project-details.module').then(
-            (m) => m.ViewProjectDetailsModule
-          ),
+          import(
+            './project/view-project-details/view-project-details.module'
+          ).then((m) => m.ViewProjectDetailsModule),
       },
       {
         path: 'completed-project-view-details',
@@ -224,16 +239,41 @@ const routes: Routes = [
             './project/project-employer-view-proposal/project-employer-view-proposal.module'
           ).then((m) => m.ProjectEmployerViewProposalModule),
       },
-      { path: 'files', loadChildren: () => import('./project/files/files.module').then(m => m.FilesModule) },
-      { path: 'completed-project-files', loadChildren: () => import('./project/completed-project-files/completed-project-files.module').then(m => m.CompletedProjectFilesModule) },
-      { path: 'invitedfavourites', loadChildren: () => import('./favourite/invitedfavourites/invitedfavourites.module').then(m => m.InvitedfavouritesModule) },
-      { path: 'markedfavourites', loadChildren: () => import('./favourite/markedfavourites/markedfavourites.module').then(m => m.MarkedfavouritesModule) },
-      { path: 'favourites-list', loadChildren: () => import('./favourite/favourites-list/favourites-list.module').then(m => m.FavouritesListModule) },
-      
-      
+      {
+        path: 'files',
+        loadChildren: () =>
+          import('./project/files/files.module').then((m) => m.FilesModule),
+      },
+      {
+        path: 'completed-project-files',
+        loadChildren: () =>
+          import(
+            './project/completed-project-files/completed-project-files.module'
+          ).then((m) => m.CompletedProjectFilesModule),
+      },
+      {
+        path: 'invitedfavourites',
+        loadChildren: () =>
+          import('./favourite/invitedfavourites/invitedfavourites.module').then(
+            (m) => m.InvitedfavouritesModule
+          ),
+      },
+      {
+        path: 'markedfavourites',
+        loadChildren: () =>
+          import('./favourite/markedfavourites/markedfavourites.module').then(
+            (m) => m.MarkedfavouritesModule
+          ),
+      },
+      {
+        path: 'favourites-list',
+        loadChildren: () =>
+          import('./favourite/favourites-list/favourites-list.module').then(
+            (m) => m.FavouritesListModule
+          ),
+      },
     ],
   },
-  
 ];
 
 @NgModule({

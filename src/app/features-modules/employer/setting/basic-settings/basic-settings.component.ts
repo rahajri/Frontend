@@ -45,7 +45,7 @@ export class BasicSettingsComponent {
   public isCheckboxChecked = true;
   constructor(private router: Router, private datePipe: DatePipe) {}
   ngsubmit() {
-    this.router.navigate([routes.projectconfirmation]);
+    // this.router.navigate([routes.projectconfirmation]);
   }
   showTimePicker: Array<string> = [];
 

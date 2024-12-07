@@ -6,6 +6,7 @@ import { header } from 'src/app/core/models/sidebar-model';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { NavbarService } from 'src/app/core/services/navbar.service';
 import { UserService } from '../../auth/service/user.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-employerheader',
@@ -25,6 +26,7 @@ export class EmployerheaderComponent {
     private data: ShareDataService,
     private navservices: NavbarService,
     private userService: UserService,
+    private authService: AuthService,
     private common: CommonService
   ) {
     this.common.base.subscribe((res: string) => {
@@ -41,6 +43,10 @@ export class EmployerheaderComponent {
 
   ngOnInit(): void {
     this.getUser();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   getUser() {

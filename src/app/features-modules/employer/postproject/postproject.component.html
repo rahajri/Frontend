@@ -8,7 +8,7 @@
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a [routerLink]="routes.home">Home</a>
+                <a [routerLink]="routes.home">Accueil</a>
               </li>
               <li class="breadcrumb-item" aria-current="page">
                 Publier une Offre
@@ -28,7 +28,11 @@
     <div class="row">
       <div class="col-md-12">
         <div class="select-project mb-4">
-          <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+          <form
+            [formGroup]="jobForm"
+            (ngSubmit)="onSubmit()"
+            (keydown)="onFormKeyDown($event)"
+          >
             <div class="container">
               <!-- General Information -->
               <h3 class="mt-4">Généralités</h3>
@@ -65,21 +69,29 @@
                 <!-- Job -->
                 <div class="col-md-4">
                   <label for="job" class="focus-label">Métier</label>
-                  <select
+                  <input
                     id="job"
                     formControlName="job"
-                    class="form-select"
+                    class="form-control"
+                    type="text"
+                    placeholder="Saisir une métier"
+                    (input)="filterJobs($event.target)"
+                    (keydown.enter)="addJob()"
+                    [attr.autocomplete]="'off'"
                     [ngClass]="{
                       'is-invalid': job?.invalid && (job?.touched || job?.dirty)
                     }"
-                  >
-                    <option value="" disabled selected>
-                      Selectionner un métier
-                    </option>
-                    <option *ngFor="let job of jobs" [value]="job.id">
-                      {{ job?.name }}
-                    </option>
-                  </select>
+                  />
+                  <!-- Autocomplete suggestions -->
+                  <ul class="autocomplete-list" *ngIf="filteredJobs.length">
+                    <li
+                      *ngFor="let job of filteredJobs"
+                      (click)="selectJob(job)"
+                      class="autocomplete-item"
+                    >
+                      {{ job.name }}
+                    </li>
+                  </ul>
                   <!-- Message d'erreur -->
                   <div *ngIf="job?.touched && job?.invalid" class="text-danger">
                     <div *ngIf="job?.errors?.['required']">
@@ -104,17 +116,27 @@
                           subActivity?.invalid &&
                           (subActivity?.touched || subActivity?.dirty)
                       }"
+                      *ngIf="jobNotExist"
                     >
                       <option value="" disabled selected>
                         Selectionner une Sous Activité
                       </option>
                       <option
                         *ngFor="let subActivity of subActivities"
-                        [value]="subActivity.id"
+                        [value]="subActivity.name"
                       >
                         {{ subActivity?.name }}
                       </option>
                     </select>
+                    <!-- show this if Job already in the database -->
+                    <input
+                      formControlName="subActivity"
+                      type="text"
+                      class="form-control"
+                      placeholder="Sous Activité"
+                      *ngIf="!jobNotExist"
+                      readonly
+                    />
                     <!-- Message d'erreur -->
                     <div
                       *ngIf="subActivity?.touched && subActivity?.invalid"
@@ -167,7 +189,6 @@
                     class="form-control"
                     type="text"
                     placeholder="Saisir une ville"
-                    (input)="onCityInput($event)"
                     [attr.autocomplete]="'off'"
                     [ngClass]="{
                       'is-invalid':
@@ -252,66 +273,6 @@
               <!-- Contract Type -->
               <h3 class="mt-4">Détails</h3>
 
-              <div class="row mt-2">
-                <div class="col-md-6">
-                  <label for="duration" class="focus-label">Durée prévue</label>
-
-                  <input
-                    id="duration"
-                    formControlName="duration"
-                    class="form-control"
-                    type="number"
-                    placeholder="Entrez un nombre (ex:3)"
-                    [ngClass]="{
-                      'is-invalid':
-                        duration?.invalid &&
-                        (duration?.touched || duration?.dirty)
-                    }"
-                  />
-                  <!-- Message d'erreur -->
-                  <div
-                    *ngIf="duration?.touched && duration?.invalid"
-                    class="text-danger"
-                  >
-                    <div *ngIf="duration?.errors?.['required']">
-                      Durée prévue est obligatoire.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <label for="timeUnit" class="focus-label"
-                    >Unité de temps</label
-                  >
-                  <select
-                    id="timeUnit"
-                    formControlName="timeUnit"
-                    class="form-control"
-                    [ngClass]="{
-                      'is-invalid':
-                        timeUnit?.invalid &&
-                        (timeUnit?.touched || timeUnit?.dirty)
-                    }"
-                  >
-                    <option value="" disabled selected>
-                      Selectionner un unité(Semaine,Mois,Année)
-                    </option>
-                    <option value="Semaine">Semaine</option>
-                    <option value="Mois">Mois</option>
-                    <option value="Année">Année</option>
-                  </select>
-                  <!-- Message d'erreur -->
-                  <div
-                    *ngIf="timeUnit?.touched && timeUnit?.invalid"
-                    class="text-danger"
-                  >
-                    <div *ngIf="timeUnit?.errors?.['required']">
-                      Unité de temps est obligatoire.
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div class="row mt-3">
                 <div class="col-md-4">
                   <label for="contractType" class="focus-label"
@@ -319,7 +280,7 @@
                   >
                   <select
                     formControlName="contractType"
-                    class="form-control"
+                    class="form-select"
                     (change)="onContractTypeChange($event)"
                     [ngClass]="{
                       'is-invalid':
@@ -398,6 +359,66 @@
                 </div>
               </div>
 
+              <div class="row mt-2" *ngIf="!isCdiSelected">
+                <div class="col-md-6">
+                  <label for="duration" class="focus-label">Durée prévue</label>
+
+                  <input
+                    id="duration"
+                    formControlName="duration"
+                    class="form-control"
+                    type="number"
+                    placeholder="Entrez un nombre (ex:3)"
+                    [ngClass]="{
+                      'is-invalid':
+                        duration?.invalid &&
+                        (duration?.touched || duration?.dirty)
+                    }"
+                  />
+                  <!-- Message d'erreur -->
+                  <div
+                    *ngIf="duration?.touched && duration?.invalid"
+                    class="text-danger"
+                  >
+                    <div *ngIf="duration?.errors?.['required']">
+                      Durée prévue est obligatoire.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="timeUnit" class="focus-label"
+                    >Unité de temps</label
+                  >
+                  <select
+                    id="timeUnit"
+                    formControlName="timeUnit"
+                    class="form-select"
+                    [ngClass]="{
+                      'is-invalid':
+                        timeUnit?.invalid &&
+                        (timeUnit?.touched || timeUnit?.dirty)
+                    }"
+                  >
+                    <option value="" disabled selected>
+                      Selectionner un unité(Semaine,Mois,Année)
+                    </option>
+                    <option value="Semaine">Semaine</option>
+                    <option value="Mois">Mois</option>
+                    <option value="Année">Année</option>
+                  </select>
+                  <!-- Message d'erreur -->
+                  <div
+                    *ngIf="timeUnit?.touched && timeUnit?.invalid"
+                    class="text-danger"
+                  >
+                    <div *ngIf="timeUnit?.errors?.['required']">
+                      Unité de temps est obligatoire.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <!-- Competencies -->
               <h3 class="mt-4">Compétences</h3>
               <div class="form-group">
@@ -424,6 +445,7 @@
                     type="text"
                     class="border-0"
                     (input)="filterSkills($event.target)"
+                    (keydown.enter)="addSkill()"
                     placeholder="Ajoutez des compétences"
                     autocomplete="off"
                   />

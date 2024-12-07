@@ -20,4 +20,13 @@ export class ProjectService {
 
     return this.http.post<any>(`${this.baseUrl}/create`, project, { headers });
   }
+
+  getProjectDetails(id: string | null) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.get<any>(`${this.baseUrl}/${id}`, { headers });
+  }
 }

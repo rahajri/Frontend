@@ -88,9 +88,9 @@ export class routes {
     return this.freelance + '/project';
   }
   public static get freelancerdetail(): string {
-    return this.employer+ '/developer-details';
+    return this.employer + '/developer-details';
   }
-  
+
   public static get freelancer_project_details(): string {
     return this.freelance + '/project-details';
   }
@@ -254,10 +254,10 @@ export class routes {
     return this.admin + '/settings/general';
   }
   public static get notification(): string {
-    return this.employer+ '/notification';
+    return this.employer + '/notification';
   }
   public static get developerlist(): string {
-    return this.employer+ '/developer-list';
+    return this.employer + '/developer-list';
   }
   public static get invitedfavourites(): string {
     return this.employer + '/invitedfavourites';
@@ -355,8 +355,8 @@ export class routes {
   public static get userdetails(): string {
     return this.pages + '/user-account-details';
   }
-  public static get projectconfirmation(): string {
-    return this.employer + '/project-confirmation';
+  public static getProjectConfirmation(id: string): string {
+    return `${this.employer}/project-confirmation/${id}`;
   }
   public static get changepasswords(): string {
     return this.auth + '/change-password';
@@ -394,5 +394,4 @@ export class routes {
   public static get milestoneoverview(): string {
     return this.employer + '/milestones/overviews';
   }
-  
 }

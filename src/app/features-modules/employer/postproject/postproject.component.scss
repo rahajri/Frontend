@@ -85,3 +85,8 @@
 .is-invalid {
   border-color: red !important;
 }
+
+select.disabled {
+  pointer-events: none; /* Prevent any interaction */
+  opacity: 0.5; /* Make it look disabled */
+}
