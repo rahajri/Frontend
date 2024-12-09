@@ -502,6 +502,19 @@
                   </div>
                 </div>
               </div>
+              <div
+                *ngIf="errorMessage"
+                class="alert alert-danger alert-dismissible fade show"
+                role="alert"
+              >
+                <strong>Une erreur est survenue lors de l’enregistrement de votre offre. Veuillez réessayer plus tard.</strong> 
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
 
               <!-- Submit Button -->
               <div class="text-end mt-3">
@@ -519,3 +532,24 @@
 </div>
 
 <!-- /Page Content -->
+<div
+  class="modal fade"
+  id="post-error"
+  tabindex="-1"
+  aria-labelledby="errorModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="error-popup">
+          <img src="assets/img/icon/error.svg" alt="error-icon" />
+          <h4>Erreur lors de la publication</h4>
+          <h5>
+            Une erreur est survenue. Veuillez réessayer plus tard.
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

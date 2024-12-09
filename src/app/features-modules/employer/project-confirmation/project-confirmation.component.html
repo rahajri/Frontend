@@ -4,14 +4,14 @@
     <div class="row align-items-center inner-banner">
       <div class="col-md-12 col-12 text-center">
         <div class="breadcrumb-list">
-          <h3>Post a Project</h3>
+          <h3>Publier un projet</h3>
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
                 <a [routerLink]="routes.home">Accueil</a>
               </li>
               <li class="breadcrumb-item" aria-current="page">
-                Post a Project
+                Publier un projet
               </li>
             </ol>
           </nav>
@@ -45,6 +45,7 @@
                         class="btn btn-primary"
                         data-bs-toggle="modal"
                         data-bs-target="#post-sucess"
+                        (click)="publishProject()"
                         >Publier</a
                       >
                     </li>
@@ -109,11 +110,12 @@
                   <div class="freelance-tags">
                     <a
                       href="javascript:void(0);"
-                      *ngFor="let jobOfferSkill of project.jobOfferSkills"
-                      ><span class="badge badge-pill badge-design">
-                        {{ jobOfferSkill.skill.name }}</span
-                      ></a
+                      *ngFor="let skill of project?.skills"
                     >
+                      <span class="badge badge-pill badge-design">
+                        {{ skill?.name }}
+                      </span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -180,16 +182,21 @@
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
+  (keydown.esc)="closeModal()"
 >
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body">
         <div class="scuess-popup">
           <img src="assets/img/icon/check1.svg" alt="check1" />
-          <h4>Project Posted Successfully</h4>
-          <h5>You can now access your project on your dashboard</h5>
-          <a [routerLink]="routes.home"
-            ><i class="feather icon-arrow-left me-2"></i>Back to Dashboard</a
+          <h4>Projet publié avec succès</h4>
+          <h5>
+            Vous pouvez maintenant accéder à votre projet sur votre tableau de
+            bord
+          </h5>
+          <a [routerLink]="routes.employee_dashboard"
+            ><i class="feather icon-arrow-left me-2"></i>Retour au tableau de
+            bord</a
           >
         </div>
       </div>

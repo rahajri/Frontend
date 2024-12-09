@@ -22,7 +22,7 @@ interface data {
 export class PostprojectComponent implements OnInit, OnDestroy {
   public routes = routes;
   public isChecked = true;
-  public errorMessage: string | null = null;
+  public errorMessage: boolean | null = false;
 
   editor?: Editor;
   toolbar: Toolbar = [
@@ -160,8 +160,14 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   }
 
   getJobs() {
-    this.jobService.getJobs().subscribe((data) => {
-      this.jobs = data;
+    this.jobService.getJobs().subscribe({
+      next: (data) => {
+        this.jobs = data;
+      },
+      error: (error) => {
+        console.error(error);
+        this.errorMessage = true;
+      },
     });
   }
 
@@ -214,14 +220,26 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   }
 
   getSubActivities() {
-    this.jobService.getSubActivities().subscribe((data) => {
-      this.subActivities = data;
+    this.jobService.getSubActivities().subscribe({
+      next: (data) => {
+        this.subActivities = data;
+      },
+      error: (error) => {
+        console.error(error);
+        this.errorMessage = true;
+      },
     });
   }
 
   getSkills() {
-    this.skillService.getSkills().subscribe((data) => {
-      this.savedSkills = data;
+    this.skillService.getSkills().subscribe({
+      next: (data) => {
+        this.savedSkills = data;
+      },
+      error: (error) => {
+        console.error(error);
+        this.errorMessage = true;
+      },
     });
   }
 
@@ -252,6 +270,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     const existingSkill = this.filteredSkills.find(
       (skill) => skill.name.toLowerCase() === skillName.toLowerCase()
     );
+
     if (existingSkill) {
       return;
     }
@@ -268,8 +287,14 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   }
 
   getContractTypes() {
-    this.contractService.getContractTypes().subscribe((data) => {
-      this.contractTypes = data;
+    this.contractService.getContractTypes().subscribe({
+      next: (data) => {
+        this.contractTypes = data;
+      },
+      error: (error) => {
+        console.error(error);
+        this.errorMessage = true;
+      },
     });
   }
 
@@ -281,7 +306,6 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       this.jobService
         .getSubActivitiesDetails(subActivitySName)
         .subscribe((data) => {
-          console.log(data);
           this.jobForm.patchValue({
             activity: data?.activity?.name || '',
           });
@@ -307,22 +331,19 @@ export class PostprojectComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.markFormGroupTouched(this.jobForm);
-    this.errorMessage = null; // Reset the error message before each submission
+    this.errorMessage = false; // Reset the error message before each submission
 
     if (this.jobForm.valid) {
       this.jobForm.get('skills')?.setValue(this.selectedSkills);
-      console.log(this.jobForm.value);
-      this.projectService.createProject(this.jobForm.value).subscribe(
-        (response) => {
-          console.log('new Project : ', response);
+      this.projectService.createProject(this.jobForm.value).subscribe({
+        next: (response) => {
           this.router.navigate([routes.getProjectConfirmation(response.id)]);
         },
-        (error) => {
+        error: (error) => {
           console.error('Error creating project:', error);
-          this.errorMessage =
-            'Une erreur est survenue lors de la création du projet. Veuillez réessayer.';
-        }
-      );
+          this.errorMessage = true;
+        },
+      });
     } else {
       console.log('Form is invalid');
     }
@@ -360,4 +381,12 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       event.preventDefault();
     }
   }
+
+  // showErrorModal(): void {
+  //   const modalElement = document.getElementById('post-error') as HTMLElement;
+  //   if (modalElement) {
+  //     const modal = new Bootstrap.Modal(modalElement); // Correctly reference Bootstrap.Modal
+  //     modal.show();
+  //   }
+  // }
 }

@@ -28,21 +28,18 @@ export class ProjectConfirmationComponent {
 
   getProjectDetails() {
     if (this.projectId !== '') {
-      this.projectService
-        .getProjectDetails(this.projectId)
-        .pipe(
-          catchError((error) => {
-            console.error('Error fetching project details:', error);
-            return of(null); // You can return any default value, like null or an empty object, depending on your use case
-          })
-        )
-        .subscribe((data) => {
+      this.projectService.getProjectDetails(this.projectId).subscribe({
+        next: (data) => {
           if (data) {
             this.project = data;
             console.log('Project : ', data);
           }
           this.checkIfContractIsCDI(data?.contractType);
-        });
+        },
+        error(err) {
+          console.error(err);
+        },
+      });
     }
   }
 
@@ -63,5 +60,24 @@ export class ProjectConfirmationComponent {
     };
 
     return new Date(date).toLocaleDateString('fr-FR', options);
+  }
+
+  publishProject() {
+    this.projectService.publishProject(this.projectId).subscribe({
+      next: (res) => {
+        console.log('published');
+      },
+      error(err) {
+        console.error(err);
+      },
+    });
+  }
+
+  closeModal(): void {
+    const modalElement = document.getElementById('post-success');
+    if (modalElement) {
+      modalElement.classList.remove('show');
+      modalElement.setAttribute('aria-hidden', 'true');
+    }
   }
 }

@@ -15,7 +15,6 @@ import {
 import { routes } from 'src/app/core/helpers/routes/routes';
 
 export type ChartOptions = {
-   
   series: ApexAxisChartSeries | any;
   chart: ApexChart | any;
   xaxis: ApexXAxis | any;
@@ -28,7 +27,6 @@ export type ChartOptions = {
   yaxis: any;
 };
 export type radialChartOptions = {
-   
   series: ApexNonAxisChartSeries | any;
   chart: ApexChart | any;
   labels: string[] | any;
