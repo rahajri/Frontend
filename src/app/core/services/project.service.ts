@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -61,5 +62,20 @@ export class ProjectService {
         headers: this.createHeaders(),
       }
     );
+  }
+  getJobOffers(
+    offset: number,
+    limit: number,
+    companyId: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('offset', offset.toString())
+      .set('limit', limit.toString())
+      .set('company_id', companyId);
+
+    return this.http.get<any>(this.baseUrl, {
+      headers: this.createHeaders(),
+      params,
+    });
   }
 }

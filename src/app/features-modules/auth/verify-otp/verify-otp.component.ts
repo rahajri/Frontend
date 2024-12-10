@@ -50,7 +50,7 @@ export class VerifyOtpComponent implements OnInit {
 
   
   fetchUserProfile(): void {
-    this.userService.getUserProfile(this.user).subscribe({
+    this.userService.getProfile().subscribe({
       next: (profile) => {
         this.userType = profile.role; // Assuming API returns a 'type' field
         this.profil = profile; // Assuming API returns a 'type' field

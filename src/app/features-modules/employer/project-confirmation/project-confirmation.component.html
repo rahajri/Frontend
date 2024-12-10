@@ -119,44 +119,23 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="col-lg-12">
-                <h4 class="detailshead">Budget</h4>
-              </div>
-              <div class="col-lg-12 col-md-12">
-                <div class="catergyset">
-                  <ul class="m-0">
-                    <li>
-                      <h5>Type : <span>Fixed </span></h5>
-                    </li>
-                    <li>
-                      <h5>Amount : <span> $200</span></h5>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <h4 class="detailshead">Attachment</h4>
-              </div>
-              <div class="col-lg-12 col-md-12">
-                <div class="catergyset">
-                  <ul class="m-0">
-                    <li>
-                      <h5>No of Files : <span>5 </span></h5>
-                    </li>
-                  </ul>
-                </div>
-              </div> -->
               <div class="col-lg-12">
                 <h4 class="detailshead">Description détaillée</h4>
               </div>
               <div class="col-lg-12 col-md-12">
                 <div class="catergyset border-0 p-0 m-0">
-                  <ul class="m-0">
+                  <ul
+                    class="m-0"
+                    *ngFor="let lang of project?.jobOfferLanguages"
+                  >
                     <li>
-                      <h5>Langues : <span>Francais </span></h5>
-                    </li>
-                    <li>
-                      <h5>Niveau : <span>Profisionnel </span></h5>
+                      <h5>
+                        Langue :
+                        <span
+                          >{{ lang.language.name }} level :
+                          {{ lang.level }}</span
+                        >
+                      </h5>
                     </li>
                   </ul>
                 </div>
@@ -194,9 +173,8 @@
             Vous pouvez maintenant accéder à votre projet sur votre tableau de
             bord
           </h5>
-          <a [routerLink]="routes.employee_dashboard"
-            ><i class="feather icon-arrow-left me-2"></i>Retour au tableau de
-            bord</a
+          <a [routerLink]="routes.employee_all_projects"
+            ><i class="feather icon-arrow-left me-2"></i>Tous les projets</a
           >
         </div>
       </div>

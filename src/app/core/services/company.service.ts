@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment.prod';
 // Define the Company interface within the service file
 export interface Company {
   siret: string;
-  denominationUniteLegale: string;  // Company name
+  denominationUniteLegale: string; // Company name
   activitePrincipaleUniteLegale: string;
   trancheEffectifsUniteLegale: number;
   categorieEntreprise: string;
@@ -33,23 +33,25 @@ interface NafApiResultFormat {
   data: NAF[];
 }
 
-
 export interface apiResultFormat {
-  data: Company[];  // Array of Company objects
+  data: Company[]; // Array of Company objects
   totalData: number;
 }
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
-
 export class CompanyService {
-
-
   private baseUrl = `${environment.apiUrl}/companies`; // URL to get zip codes
 
- 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token') || '';
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+  }
 
   // Method to load all companies data
   public loadCompaniesData(): Observable<apiResultFormat> {
@@ -60,10 +62,11 @@ export class CompanyService {
   public getCompanyBySiret(siret: string): Observable<Company | undefined> {
     return this.http.get<ApiResultFormat>('assets/json/companies.json').pipe(
       map((data: ApiResultFormat) => {
-        const company = data.data.find(company => company.siret == siret);
+        const company = data.data.find((company) => company.siret == siret);
         if (company) {
           // Remove '.' from activitePrincipaleUniteLegale
-          company.activitePrincipaleUniteLegale = company.activitePrincipaleUniteLegale.replace('.', '');
+          company.activitePrincipaleUniteLegale =
+            company.activitePrincipaleUniteLegale.replace('.', '');
         }
         return company;
       })
@@ -71,61 +74,49 @@ export class CompanyService {
   }
 
   // Second function to get the NAF details based on the company's activitePrincipaleUniteLegale
-  public getNafByCompany(steSiret : any): Observable<NAF | undefined> {
+  public getNafByCompany(steSiret: any): Observable<NAF | undefined> {
     return this.http.get<NafApiResultFormat>('assets/json/nafs.json').pipe(
       map((nafData: NafApiResultFormat) => {
-        return nafData.data.find(naf => naf.NAF732 == steSiret);
+        return nafData.data.find((naf) => naf.NAF732 == steSiret);
       })
     );
   }
 
   getAllCompanies(): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+    return this.http.get<any>(`${this.baseUrl}`, {
+      headers: this.getAuthHeaders(),
     });
-    
-    return this.http.get<any>(`${this.baseUrl}`, { headers });
   }
 
   getUnvirifiedCompanies(): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+    return this.http.get<any>(`${this.baseUrl}/inactive`, {
+      headers: this.getAuthHeaders(),
     });
-    
-    return this.http.get<any>(`${this.baseUrl}/inactive`, { headers });
+  }
+
+  getCompanyByUserId(userId: string) {
+    return this.http.get<any>(`${this.baseUrl}/user/${userId}/company`, {
+      headers: this.getAuthHeaders(),
+    });
   }
 
   approveCompany(companyId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-    return this.http.patch<any>(`${this.baseUrl}/${companyId}/approve`, {}, { headers });
+    return this.http.patch<any>(
+      `${this.baseUrl}/${companyId}/approve`,
+      {},
+      { headers: this.getAuthHeaders() }
+    );
   }
 
   rejectCompany(companyId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-    return this.http.patch<any>(`${this.baseUrl}/${companyId}/reject`, {}, { headers });
+    return this.http.patch<any>(
+      `${this.baseUrl}/${companyId}/reject`,
+      {},
+      { headers: this.getAuthHeaders() }
+    );
   }
 
   checkSiretExists(siret: string): Observable<any> {
-     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-  
-    const url = `${this.baseUrl}/siret/${siret}`;
-    
-    return this.http.get<any>(url, { headers });
+    return this.http.get<any>(`${this.baseUrl}/siret/${siret}`, { headers: this.getAuthHeaders() });
   }
-  
-
 }

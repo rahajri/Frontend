@@ -51,6 +51,7 @@ export class EmployerheaderComponent {
 
   getUser() {
     this.userService.getProfile().subscribe((profile) => {
+      this.authService.setUser(profile);
       this.profileName = `${profile?.lastName?.toUpperCase() || ''} ${
         profile?.firstName
           ? profile.firstName.charAt(0).toUpperCase() +

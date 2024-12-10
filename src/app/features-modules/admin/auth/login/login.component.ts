@@ -67,9 +67,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           console.log('Login successful', response);
           localStorage.setItem('token', response.token);
           this.router.navigate(['/admin/dashboard']);
-
-          //
-          
         },
         (error) => {
           // Handle login error

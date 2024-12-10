@@ -469,6 +469,75 @@
                 </div>
               </div>
 
+              <div class="row" formArrayName="languages">
+                <div class="col-md-12">
+                  <h4>Language</h4>
+                </div>
+                <div
+                  class="col-md-12"
+                  *ngFor="
+                    let language of languagesArray.controls;
+                    let i = index
+                  "
+                  [formGroupName]="i"
+                >
+                  <div class="row align-items-center">
+                    <!-- Language Input -->
+                    <div class="col-md-6">
+                      <div class="input-block">
+                        <label for="language" class="form-label"
+                          >Language</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="name"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Level Select -->
+                    <div class="col-md-6">
+                      <div class="input-block">
+                        <label for="level" class="focus-label">Level</label>
+                        <select
+                          formControlName="level"
+                          class="form-control form-select"
+                        >
+                          <option
+                            *ngFor="let level of selectedLanguageList"
+                            [value]="level.value"
+                          >
+                            {{ level.value }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Add/Remove Buttons -->
+                  <div class="row mt-2">
+                    <div class="col-md-12 text-end">
+                      <a
+                        *ngIf="i === languagesArray.length - 1"
+                        class="add-new me-2"
+                        (click)="addLanguage()"
+                        tabindex="0"
+                      >
+                        <i class="feather icon-plus-circle me-1"></i> Add New
+                      </a>
+                      <a
+                        *ngIf="languagesArray.length > 1"
+                        class="remove_row text-danger"
+                        (click)="removeLanguage(i)"
+                      >
+                        Remove
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <!-- Description -->
               <div class="form-group mt-3">
                 <h3 class="mt-4">Description détaillée</h3>
@@ -503,11 +572,14 @@
                 </div>
               </div>
               <div
-                *ngIf="errorMessage"
+                *ngIf="globalErrorMessage"
                 class="alert alert-danger alert-dismissible fade show"
                 role="alert"
               >
-                <strong>Une erreur est survenue lors de l’enregistrement de votre offre. Veuillez réessayer plus tard.</strong> 
+                <strong
+                  >Une erreur est survenue lors de l’enregistrement de votre
+                  offre. Veuillez réessayer plus tard.</strong
+                >
                 <button
                   type="button"
                   class="btn-close"
@@ -542,12 +614,9 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body">
-        <div class="error-popup">
-          <img src="assets/img/icon/error.svg" alt="error-icon" />
+        <div class="error-popup">         
           <h4>Erreur lors de la publication</h4>
-          <h5>
-            Une erreur est survenue. Veuillez réessayer plus tard.
-          </h5>
+          <h5>Une erreur est survenue. Veuillez réessayer plus tard.</h5>
         </div>
       </div>
     </div>

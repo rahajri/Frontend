@@ -1,11 +1,17 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Editor, Toolbar } from 'ngx-editor';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { JobService } from 'src/app/core/services/job.service';
 import { LocationService } from 'src/app/core/services/location.service';
-import { debounceTime, of, Subscription, switchMap } from 'rxjs';
+import {
+  debounceTime,
+  of,
+  Subscription,
+  switchMap,
+  distinctUntilChanged,
+} from 'rxjs';
 import { ContractService } from 'src/app/core/services/contract.service';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { SkillService } from 'src/app/core/services/skill.service';
@@ -22,7 +28,8 @@ interface data {
 export class PostprojectComponent implements OnInit, OnDestroy {
   public routes = routes;
   public isChecked = true;
-  public errorMessage: boolean | null = false;
+  public globalErrorMessage: boolean | null = false;
+  public language: number[] = [];
 
   editor?: Editor;
   toolbar: Toolbar = [
@@ -49,6 +56,13 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   jobNotExist = true;
   cityIsSelected = false;
   selectedSkills: any[] = [];
+  languages: any[] = [];
+  selectedLanguageList: data[] = [
+    { value: 'Choose Level' },
+    { value: 'Basic' },
+    { value: 'Intermediate' },
+    { value: 'Proficient' },
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -80,6 +94,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       endDate: [null, [Validators.required]],
       skills: [''],
       description: ['', [Validators.required, Validators.minLength(30)]],
+      languages: this.fb.array([this.createLanguage()]),
     });
   }
   ngOnInit(): void {
@@ -91,7 +106,8 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     this.cityInputSub = this.jobForm
       .get('city')
       ?.valueChanges.pipe(
-        debounceTime(100), // Wait 300ms for user to stop typing
+        debounceTime(150), // Wait 300ms for user to stop typing
+        distinctUntilChanged(),
         switchMap((query) =>
           query ? this.locationService.searchCities(query) : of([])
         )
@@ -100,6 +116,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
         if (!this.cityIsSelected) this.filteredCities = cities;
       });
   }
+
   ngOnDestroy(): void {
     if (this.editor) {
       this.editor.destroy();
@@ -149,6 +166,30 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     return this.jobForm.get('timeUnit');
   }
 
+  get languagesArray(): FormArray {
+    return this.jobForm.get('languages') as FormArray;
+  }
+
+  // Create a new language form group
+  createLanguage(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      level: ['', Validators.required],
+    });
+  }
+
+  // Add a new language to the array
+  addLanguage(): void {
+    this.languagesArray.push(this.createLanguage());
+  }
+
+  // Remove a language from the array
+  removeLanguage(index: number): void {
+    if (this.languagesArray.length > 1) {
+      this.languagesArray.removeAt(index);
+    }
+  }
+
   selectCity(city: any): void {
     this.filteredCities = [];
     this.cityIsSelected = true;
@@ -166,7 +207,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error(error);
-        this.errorMessage = true;
+        this.globalErrorMessage = true;
       },
     });
   }
@@ -226,7 +267,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error(error);
-        this.errorMessage = true;
+        this.globalErrorMessage = true;
       },
     });
   }
@@ -238,7 +279,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error(error);
-        this.errorMessage = true;
+        this.globalErrorMessage = true;
       },
     });
   }
@@ -293,7 +334,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error(error);
-        this.errorMessage = true;
+        this.globalErrorMessage = true;
       },
     });
   }
@@ -331,7 +372,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.markFormGroupTouched(this.jobForm);
-    this.errorMessage = false; // Reset the error message before each submission
+    this.globalErrorMessage = false; // Reset the error message before each submission
 
     if (this.jobForm.valid) {
       this.jobForm.get('skills')?.setValue(this.selectedSkills);
@@ -341,7 +382,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           console.error('Error creating project:', error);
-          this.errorMessage = true;
+          this.globalErrorMessage = true;
         },
       });
     } else {

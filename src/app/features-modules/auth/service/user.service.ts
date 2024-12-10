@@ -50,10 +50,6 @@ export class UserService {
     return this.http.get(`${this.apiUrl}/verify/${otp}?user=${user}`);
   }
 
-  getUserProfile(user: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/profile/${user}`);
-  }
-
   getProfile(): Observable<any> {
     const token = localStorage.getItem('token');
 
