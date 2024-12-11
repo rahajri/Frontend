@@ -55,26 +55,27 @@ export class AllProjectsComponent {
   loadJobOffers(companyId: string): void {
     const offset = (this.currentPage - 1) * this.itemsPerPage;
     this.projectService
-      .getJobOffers(offset, this.itemsPerPage, companyId)
+      .getJobOffers(this.currentPage, this.itemsPerPage, companyId)
       .subscribe((data) => {
-        console.log('res', data);
-
         // Destructure the response
         const [items, totalCount] = data;
-
         // Assign job offers and total item count
         this.jobOffers = items;
         this.totalItems = totalCount;
-
         // Calculate total pages using totalCount
         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-
-        // Debugging logs
-        console.log('totalPages', this.totalPages);
-        console.log('itemsPerPage', this.itemsPerPage);
-        console.log('totalItems', this.totalItems);
-        console.log('items', items);
       });
+  }
+
+  formatDate(date: any): string {
+    if (!date) return '';
+    const options: Intl.DateTimeFormatOptions = {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    };
+
+    return new Date(date).toLocaleDateString('fr-FR', options);
   }
 
   changePage(page: number): void {
@@ -90,6 +91,7 @@ interface JobOffer {
   expectedDuration: number;
   timeUnit: string | null;
   createdAt: Date;
+  publicationDate: Date;
   job: {
     name: string;
   };

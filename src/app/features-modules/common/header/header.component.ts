@@ -51,7 +51,7 @@ public routes = routes
     this.navbar = this.data.sideBar;
   }
 
- 
+
  
   employer() {
     localStorage.setItem('employer', 'employer');

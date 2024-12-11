@@ -499,7 +499,7 @@
                     <!-- Level Select -->
                     <div class="col-md-6">
                       <div class="input-block">
-                        <label for="level" class="focus-label">Level</label>
+                        <label for="level" class="focus-label">Niveau</label>
                         <select
                           formControlName="level"
                           class="form-control form-select"
@@ -524,14 +524,14 @@
                         (click)="addLanguage()"
                         tabindex="0"
                       >
-                        <i class="feather icon-plus-circle me-1"></i> Add New
+                        <i class="feather icon-plus-circle me-1"></i> Ajouter
                       </a>
                       <a
                         *ngIf="languagesArray.length > 1"
                         class="remove_row text-danger"
                         (click)="removeLanguage(i)"
                       >
-                        Remove
+                        Supprimer
                       </a>
                     </div>
                   </div>
@@ -614,7 +614,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body">
-        <div class="error-popup">         
+        <div class="error-popup">
           <h4>Erreur lors de la publication</h4>
           <h5>Une erreur est survenue. Veuillez réessayer plus tard.</h5>
         </div>

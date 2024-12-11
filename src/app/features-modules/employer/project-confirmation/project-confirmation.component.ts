@@ -64,9 +64,7 @@ export class ProjectConfirmationComponent {
 
   publishProject() {
     this.projectService.publishProject(this.projectId).subscribe({
-      next: (res) => {
-        console.log('published');
-      },
+      next: (res) => {},
       error(err) {
         console.error(err);
       },
@@ -75,9 +73,28 @@ export class ProjectConfirmationComponent {
 
   closeModal(): void {
     const modalElement = document.getElementById('post-success');
+
+    // Remove modal attributes and hide it
     if (modalElement) {
       modalElement.classList.remove('show');
       modalElement.setAttribute('aria-hidden', 'true');
+      modalElement.style.display = 'none';
     }
+
+    // Remove the backdrop
+    const backdrop = document.querySelector('.modal-backdrop');
+    if (backdrop) {
+      backdrop.remove();
+    }
+
+    // Ensure the body scroll is restored
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = ''; // Reset overflow style
+    document.body.style.paddingRight = ''; // Reset padding style, if any
+  }
+
+  public navigateToProjects(): void {
+    this.closeModal();
+    this.router.navigate([this.routes.employee_all_projects]);
   }
 }

@@ -58,10 +58,10 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   selectedSkills: any[] = [];
   languages: any[] = [];
   selectedLanguageList: data[] = [
-    { value: 'Choose Level' },
-    { value: 'Basic' },
-    { value: 'Intermediate' },
-    { value: 'Proficient' },
+    { value: 'Sélectionner un niveau' },
+    { value: 'Basique' },
+    { value: 'Professionnel' },
+    { value: 'Avancé' },
   ];
 
   constructor(

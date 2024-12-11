@@ -168,46 +168,58 @@ export class ShareDataService {
     );
   }
   public getFreelancerMilestones() {
-    return this.http.get<apiResultFormat>('assets/json/freelancer-milestones.json').pipe(
-      map((res: apiResultFormat) => {
-        return res;
-      })
-    );
+    return this.http
+      .get<apiResultFormat>('assets/json/freelancer-milestones.json')
+      .pipe(
+        map((res: apiResultFormat) => {
+          return res;
+        })
+      );
   }
   public getFreelancerPayment() {
-    return this.http.get<apiResultFormat>('assets/json/freelancer-payment.json').pipe(
-      map((res: apiResultFormat) => {
-        return res;
-      })
-    );
+    return this.http
+      .get<apiResultFormat>('assets/json/freelancer-payment.json')
+      .pipe(
+        map((res: apiResultFormat) => {
+          return res;
+        })
+      );
   }
   public getEmployerPayment() {
-    return this.http.get<apiResultFormat>('assets/json/employer-payment.json').pipe(
-      map((res: apiResultFormat) => {
-        return res;
-      })
-    );
+    return this.http
+      .get<apiResultFormat>('assets/json/employer-payment.json')
+      .pipe(
+        map((res: apiResultFormat) => {
+          return res;
+        })
+      );
   }
   public getTask() {
-    return this.http.get<apiResultFormat>('assets/json/employer-task.json').pipe(
-      map((res: apiResultFormat) => {
-        return res;
-      })
-    );
+    return this.http
+      .get<apiResultFormat>('assets/json/employer-task.json')
+      .pipe(
+        map((res: apiResultFormat) => {
+          return res;
+        })
+      );
   }
   public getEmployerMilestone() {
-    return this.http.get<apiResultFormat>('assets/json/employer-milestone.json').pipe(
-      map((res: apiResultFormat) => {
-        return res;
-      })
-    );
+    return this.http
+      .get<apiResultFormat>('assets/json/employer-milestone.json')
+      .pipe(
+        map((res: apiResultFormat) => {
+          return res;
+        })
+      );
   }
   public getFreelancertask() {
-    return this.http.get<apiResultFormat>('assets/json/freelancer-task.json').pipe(
-      map((res: apiResultFormat) => {
-        return res;
-      })
-    );
+    return this.http
+      .get<apiResultFormat>('assets/json/freelancer-task.json')
+      .pipe(
+        map((res: apiResultFormat) => {
+          return res;
+        })
+      );
   }
 
   empprojects = [
@@ -912,8 +924,7 @@ export class ShareDataService {
       enddate: '25 Sep 2023',
       availability: 'Paid',
       full: 'Unpaid',
-      action:'Initiate'
-      
+      action: 'Initiate',
     },
     {
       name: 'Full-stack Developer',
@@ -923,7 +934,7 @@ export class ShareDataService {
       enddate: '01 Sep 2023',
       availability: 'Paid',
       full: 'Pay now',
-      action:'Initiate'
+      action: 'Initiate',
     },
     {
       name: 'Logo Design',
@@ -933,7 +944,7 @@ export class ShareDataService {
       enddate: '29 Sep 2023',
       availability: 'Unpaid',
       full: 'Pay now',
-      action:'Initiate'
+      action: 'Initiate',
     },
     {
       name: 'PHP, Javascript Projects',
@@ -943,7 +954,7 @@ export class ShareDataService {
       enddate: '17 Sep 2023',
       availability: 'Paid',
       full: 'Pay now',
-      action:'Initiate'
+      action: 'Initiate',
     },
     {
       name: 'Swift / SwiftUI Developer',
@@ -953,7 +964,7 @@ export class ShareDataService {
       enddate: '05 Sep 2023',
       availability: 'Paid',
       full: 'Pay now',
-      action:'Initiate'
+      action: 'Initiate',
     },
     {
       name: 'Website Designer Required',
@@ -963,7 +974,7 @@ export class ShareDataService {
       enddate: '11 Sep 2023',
       availability: 'Paid',
       full: 'Pay now',
-      action:'Initiate'
+      action: 'Initiate',
     },
   ];
 
@@ -1033,7 +1044,7 @@ export class ShareDataService {
     },
   ];
 
-  public sideBar : header[] = [
+  public sideBar: header[] = [
     {
       tittle: 'Home',
       base: 'home',
@@ -1452,8 +1463,7 @@ export class ShareDataService {
           page: 'register',
           last: '',
           subMenus: [],
-        }
-         ,
+        },
         {
           menuValue: 'Onboard Screen',
           route: routes.freelancer_onboard,
@@ -1547,7 +1557,10 @@ export class ShareDataService {
       icon: 'assets/img/icon/sidebar-icon-02.svg',
       routes: routes.freelancer_dashboard,
       submenu: [
-        { title: 'All Projects', routes: routes.freelancer_projects_proposals },
+        {
+          title: 'Toutes les offres',
+          routes: routes.freelancer_projects_proposals,
+        },
         {
           title: 'Ongoing Projects',
           routes: 'freelancer-ongoing-projects.html',
@@ -1634,7 +1647,7 @@ export class ShareDataService {
           base: 'dashboard',
           subMenus: [],
         },
-       /* {
+        /* {
           menuValue: 'Categories',
           route: routes.admin_categories,
           hasSubRoute: false,
@@ -1771,13 +1784,12 @@ export class ShareDataService {
         },*/
       ],
     },
-    
   ];
   public getAdminSideBarData: BehaviorSubject<Array<string>> =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     new BehaviorSubject<Array<any>>(this.Admin_sideBar);
 
-  public freelancer_sidebar : FreelancerSidebarItem[] = [
+  public freelancer_sidebar: FreelancerSidebarItem[] = [
     {
       title: 'Dashboard',
       icon: 'assets/img/icon/sidebar-icon-01.svg',
@@ -1940,34 +1952,38 @@ export class ShareDataService {
       page3: 'completed-projects',
       page4: 'pending-projects',
       page5: 'expired-project',
-      page6:'cancelled-projects',
-      
+      page6: 'cancelled-projects',
+
       submenu: [
-        { title: 'All Projects', routes: routes.employee_all_projects,page:'all-projects' },
+        {
+          title: 'Toutes les offres',
+          routes: routes.employee_all_projects,
+          page: 'all-projects',
+        },
         {
           title: 'Ongoing Projects',
           routes: routes.ongoingproject,
-          page: 'ongoing-projects'
+          page: 'ongoing-projects',
         },
         {
           title: 'Completed Projects',
           routes: routes.completedproject,
-          page: 'completed-projects'
+          page: 'completed-projects',
         },
         {
           title: 'Pending Projects',
           routes: routes.pendingproject,
-          page:'pending-projects'
+          page: 'pending-projects',
         },
         {
           title: 'Cancelled Projects',
           routes: routes.cancelledproject,
-          page:'cancelled-projects'
+          page: 'cancelled-projects',
         },
         {
           title: 'Expired Projects',
           routes: routes.expiredproject,
-          page:'expired-project'
+          page: 'expired-project',
         },
       ],
     },
@@ -1976,15 +1992,19 @@ export class ShareDataService {
       icon: 'assets/img/icon/sidebar-icon-03.svg',
       routes: 'javascript:void(0);',
       hasSubRoute: true,
-      page1:'markedfavourites',
-      page2:'invitedfavourites',
+      page1: 'markedfavourites',
+      page2: 'invitedfavourites',
       submenu: [
         {
           title: 'Bookmarked Projects',
           routes: routes.employee_markedfavourites,
           page: 'markedfavourites',
         },
-        { title: 'Invitations', routes: routes.employee_invitedfavourites , page: 'invitedfavourites',},
+        {
+          title: 'Invitations',
+          routes: routes.employee_invitedfavourites,
+          page: 'invitedfavourites',
+        },
       ],
     },
     {
@@ -2006,20 +2026,44 @@ export class ShareDataService {
       icon: 'assets/img/icon/sidebar-icon-07.svg',
       routes: routes.employee_deposit_funds,
       hasSubRoute: false,
-      page: 'deposit-funds'
+      page: 'deposit-funds',
     },
     {
       title: 'Settings',
       icon: 'assets/img/icon/sidebar-icon-10.svg',
       routes: 'javascript:void(0);',
       hasSubRoute: true,
-      page1: 'basic-settings' ,page2:'membership-plans',page3:'verify-identity',page4:'change-password',page5:'delete-account',
+      page1: 'basic-settings',
+      page2: 'membership-plans',
+      page3: 'verify-identity',
+      page4: 'change-password',
+      page5: 'delete-account',
       submenu: [
-        { title: 'Profile', routes: routes.employee_basic_settings,page:'basic-settings' },
-        { title: 'Plan & Billing', routes: routes.employee_membership_plans ,page:'membership-plans'},
-        { title: 'Verify Identity', routes: routes.employee_verify_identity,page: 'verify-identity' },
-        { title: 'Changes Password', routes: routes.changepassword ,page: 'change-password'},
-        { title: 'Delete Account', routes: routes.deleteaccount ,page:'delete-account'},
+        {
+          title: 'Profile',
+          routes: routes.employee_basic_settings,
+          page: 'basic-settings',
+        },
+        {
+          title: 'Plan & Billing',
+          routes: routes.employee_membership_plans,
+          page: 'membership-plans',
+        },
+        {
+          title: 'Verify Identity',
+          routes: routes.employee_verify_identity,
+          page: 'verify-identity',
+        },
+        {
+          title: 'Changes Password',
+          routes: routes.changepassword,
+          page: 'change-password',
+        },
+        {
+          title: 'Delete Account',
+          routes: routes.deleteaccount,
+          page: 'delete-account',
+        },
       ],
     },
     {

@@ -129,13 +129,12 @@
                     *ngFor="let lang of project?.jobOfferLanguages"
                   >
                     <li>
-                      <h5>
-                        Langue :
-                        <span
-                          >{{ lang.language.name }} level :
-                          {{ lang.level }}</span
-                        >
-                      </h5>
+                      <h5>Langue :</h5>
+                      {{ lang.language.name }}
+                      <span class="ms-3">
+                        Niveau :
+                        {{ lang.level }}</span
+                      >
                     </li>
                   </ul>
                 </div>
@@ -160,7 +159,7 @@
   id="post-sucess"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
+  aria-hidden="false"
   (keydown.esc)="closeModal()"
 >
   <div class="modal-dialog modal-dialog-centered">
@@ -173,7 +172,7 @@
             Vous pouvez maintenant accéder à votre projet sur votre tableau de
             bord
           </h5>
-          <a [routerLink]="routes.employee_all_projects"
+          <a [routerLink]="routes.employee_all_projects" (click)="closeModal()"
             ><i class="feather icon-arrow-left me-2"></i>Tous les projets</a
           >
         </div>
