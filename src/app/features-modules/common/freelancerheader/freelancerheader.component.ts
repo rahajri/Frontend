@@ -65,9 +65,6 @@ export class FreelancerheaderComponent {
     this.common.base.next(splitVal[1]);
     this.common.page.next(splitVal[2]);
     this.common.last.next(splitVal[3]);
-    console.log('base', this.base);
-    console.log('page', this.page);
-    console.log('last', this.last);
     if (
       events.url.split('/')[2] === 'project' ||
       events.url.split('/')[2] === 'project-details' ||

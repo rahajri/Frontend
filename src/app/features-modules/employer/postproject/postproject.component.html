@@ -548,17 +548,23 @@
                 <label for="cober-letter" class="form-label"
                   >Description détaillée</label
                 >
-                <ngx-editor [editor]="editor" formControlName="description">
-                  <ngx-editor-menu
-                    [ngClass]="{
-                      'is-invalid':
-                        description?.invalid &&
-                        (description?.touched || description?.dirty)
-                    }"
+                <ngx-editor-menu
+                  [ngClass]="{
+                    'is-invalid':
+                      description?.invalid &&
+                      (description?.touched || description?.dirty)
+                  }"
+                  [editor]="editor"
+                  [toolbar]="toolbar"
+                ></ngx-editor-menu>
+                <div class="editor-wrapper">
+                  <ngx-editor
                     [editor]="editor"
-                    [toolbar]="toolbar"
-                  ></ngx-editor-menu>
-                </ngx-editor>
+                    formControlName="description"
+                    style="max-height: 400px; overflow-y: scroll"
+                  >
+                  </ngx-editor>
+                </div>
                 <!-- Message d'erreur -->
                 <div
                   *ngIf="description?.touched && description?.invalid"

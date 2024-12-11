@@ -6,16 +6,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
- import { TranslateHttpLoader } from './translate-loader'; // Import the loader 
+import { TranslateHttpLoader } from './translate-loader'; // Import the loader
 import { SharedModule } from './shared/shared.module';
 import { OcrService } from './core/services/ocr.service';
-
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,13 +22,14 @@ import { OcrService } from './core/services/ocr.service';
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (http: HttpClient) => new TranslateHttpLoader(http, '/assets/i18n/', '.json'),
-        deps: [HttpClient]
-      }
+        useFactory: (http: HttpClient) =>
+          new TranslateHttpLoader(http, '/assets/i18n/', '.json'),
+        deps: [HttpClient],
+      },
     }),
-    
+    NgxEditorModule,
   ],
   providers: [OcrService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
