@@ -58,8 +58,6 @@ export class AllProjectsComponent {
       .subscribe((response) => {
         // Destructure the response
         const { data, total, page, lastPage } = response;
-        console.log(data);
-
         // Assign job offers and total item count
         this.jobOffers = data;
         this.totalItems = total;
