@@ -71,7 +71,7 @@ export class ProjectService {
     const params = new HttpParams()
       .set('offset', offset.toString())
       .set('limit', limit.toString())
-      .set('company_id', companyId);
+      .set('company', companyId);
 
     return this.http.get<any>(this.baseUrl, {
       headers: this.createHeaders(),

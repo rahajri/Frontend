@@ -53,17 +53,16 @@ export class AllProjectsComponent {
   }
 
   loadJobOffers(companyId: string): void {
-    const offset = (this.currentPage - 1) * this.itemsPerPage;
     this.projectService
       .getJobOffers(this.currentPage, this.itemsPerPage, companyId)
-      .subscribe((data) => {
+      .subscribe((response) => {
         // Destructure the response
-        const [items, totalCount] = data;
+        const { data, total, page, lastPage } = response;
+
         // Assign job offers and total item count
-        this.jobOffers = items;
-        this.totalItems = totalCount;
-        // Calculate total pages using totalCount
-        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+        this.jobOffers = data;
+        this.totalItems = total;
+        this.totalPages = lastPage;
       });
   }
 

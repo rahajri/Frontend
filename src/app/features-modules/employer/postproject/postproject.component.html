@@ -383,6 +383,9 @@
                     <div *ngIf="duration?.errors?.['required']">
                       Durée prévue est obligatoire.
                     </div>
+                    <div *ngIf="duration?.errors?.['min']">
+                      La durée doit être supérieure à 0.
+                    </div>
                   </div>
                 </div>
 
@@ -504,6 +507,9 @@
                           formControlName="level"
                           class="form-control form-select"
                         >
+                          <option value="" disabled selected>
+                            Sélectionner un niveau
+                          </option>
                           <option
                             *ngFor="let level of selectedLanguageList"
                             [value]="level.value"
@@ -538,35 +544,31 @@
                 </div>
               </div>
 
-              <!-- Description -->
-              <div class="form-group mt-3">
-                <h3 class="mt-4">Description détaillée</h3>
-                <label for="description" class="focus-label"
-                  >Rédigez une description du projet</label
+              <div class="col-md-12 input-block">
+                <label for="cober-letter" class="form-label"
+                  >Description détaillée</label
                 >
-                <textarea
-                  id="description"
-                  formControlName="description"
-                  class="form-control"
-                  rows="15"
-                  style="height: 300px"
-                  placeholder=""
-                  [ngClass]="{
-                    'is-invalid':
-                      description?.invalid &&
-                      (description?.touched || description?.dirty)
-                  }"
-                ></textarea>
+                <ngx-editor [editor]="editor" formControlName="description">
+                  <ngx-editor-menu
+                    [ngClass]="{
+                      'is-invalid':
+                        description?.invalid &&
+                        (description?.touched || description?.dirty)
+                    }"
+                    [editor]="editor"
+                    [toolbar]="toolbar"
+                  ></ngx-editor-menu>
+                </ngx-editor>
                 <!-- Message d'erreur -->
                 <div
                   *ngIf="description?.touched && description?.invalid"
                   class="text-danger"
                 >
                   <div *ngIf="description?.errors?.['required']">
-                    Le description du poste est obligatoire.
+                    La description du poste est obligatoire.
                   </div>
                   <div *ngIf="description?.errors?.['minlength']">
-                    Le description du poste doit contenir au moins 30
+                    La description du poste doit contenir au moins 30
                     caractères.
                   </div>
                 </div>

@@ -31,7 +31,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   public globalErrorMessage: boolean | null = false;
   public language: number[] = [];
 
-  editor?: Editor;
+  editor: Editor = new Editor();
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -58,7 +58,6 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   selectedSkills: any[] = [];
   languages: any[] = [];
   selectedLanguageList: data[] = [
-    { value: 'Sélectionner un niveau' },
     { value: 'Basique' },
     { value: 'Professionnel' },
     { value: 'Avancé' },
@@ -88,7 +87,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       department: ['', [Validators.required]],
       region: ['', [Validators.required]],
       contractType: ['', [Validators.required]],
-      duration: [0, [Validators.required]],
+      duration: [0, [Validators.required, Validators.min(1)]],
       timeUnit: [null, [Validators.required]],
       startDate: [null, [Validators.required]],
       endDate: [null, [Validators.required]],
