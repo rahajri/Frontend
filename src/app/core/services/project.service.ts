@@ -69,7 +69,7 @@ export class ProjectService {
     companyId: string
   ): Observable<any> {
     const params = new HttpParams()
-      .set('offset', offset.toString())
+      .set('page', offset.toString())
       .set('limit', limit.toString())
       .set('company', companyId);
 
