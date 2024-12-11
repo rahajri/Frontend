@@ -123,23 +123,25 @@
                 <h4 class="detailshead">Description détaillée</h4>
               </div>
               <div class="col-lg-12 col-md-12">
-                <div class="catergyset border-0 p-0 m-0">
+                <div class="catergyset border-0 p-0 m-0 mb-2">
+                  <div class="m-0">
+                    <span class="h5">Langue : </span>
+                    <span class="h5 ms-4">Niveau : </span>
+                  </div>
                   <ul
                     class="m-0"
                     *ngFor="let lang of project?.jobOfferLanguages"
                   >
-                    <li>
-                      <h5>Langue :</h5>
-                      {{ lang.language.name }}
-                      <span class="ms-3">
-                        Niveau :
-                        {{ lang.level }}</span
-                      >
+                    <li class="m-0">
+                      <span>{{ lang.language.name }}</span>
+                      <span class="ms-4"> {{ lang.level }}</span>
                     </li>
                   </ul>
                 </div>
-                <div class="category-para" [innerHTML]="project?.description">
-                </div>
+                <div
+                  class="category-para"
+                  [innerHTML]="project?.description"
+                ></div>
               </div>
               <!-- /Skills Content -->
             </div>
