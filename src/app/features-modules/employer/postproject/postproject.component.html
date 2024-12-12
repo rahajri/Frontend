@@ -472,6 +472,57 @@
                 </div>
               </div>
 
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>Conditions</h4>
+                </div>
+                <div class="row align-items-center">
+                  <!-- Salaire Input -->
+                  <div class="col-md-6">
+                    <div class="input-block">
+                      <label for="salaire" class="form-label">Salaire</label>
+                      <input
+                        id="salaire"
+                        formControlName="salary"
+                        type="number"
+                        class="form-control"
+                      />
+
+                      <div
+                        *ngIf="salary?.touched && salary?.invalid"
+                        class="text-danger"
+                      >
+                        <div *ngIf="salary?.errors?.['min']">
+                          La Salaire doit être supérieure à 0.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Type Select -->
+                  <div class="col-md-6">
+                    <div class="input-block">
+                      <label for="typologie" class="focus-label">type</label>
+                      <select
+                        id="typologie"
+                        formControlName="typologie"
+                        class="form-select"
+                      >
+                        <option value="" disabled selected>
+                          Sélectionner une typologie
+                        </option>
+                        <option
+                          *ngFor="let level of selectedSalaryTypeList"
+                          [value]="level.value"
+                        >
+                          {{ level.value }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div class="row" formArrayName="languages">
                 <div class="col-md-12">
                   <h4>Language</h4>
@@ -557,14 +608,8 @@
                   [editor]="editor"
                   [toolbar]="toolbar"
                 ></ngx-editor-menu>
-                <div class="editor-wrapper">
-                  <ngx-editor
-                    [editor]="editor"
-                    formControlName="description"
-                    style="max-height: 400px; overflow-y: scroll"
-                  >
-                  </ngx-editor>
-                </div>
+                <ngx-editor [editor]="editor" formControlName="description">
+                </ngx-editor>
                 <!-- Message d'erreur -->
                 <div
                   *ngIf="description?.touched && description?.invalid"

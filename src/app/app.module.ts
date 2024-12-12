@@ -9,7 +9,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from './translate-loader'; // Import the loader
 import { SharedModule } from './shared/shared.module';
 import { OcrService } from './core/services/ocr.service';
-import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +26,6 @@ import { NgxEditorModule } from 'ngx-editor';
         deps: [HttpClient],
       },
     }),
-    NgxEditorModule,
   ],
   providers: [OcrService],
   bootstrap: [AppComponent],

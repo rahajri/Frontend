@@ -61,6 +61,11 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     { value: 'Professionnel' },
     { value: 'Avancé' },
   ];
+  selectedSalaryTypeList: data[] = [
+    { value: 'Mensuel' },
+    { value: 'Annuel' },
+    { value: 'JTM' },
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -91,6 +96,8 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       startDate: [null, [Validators.required]],
       endDate: [null, [Validators.required]],
       skills: [''],
+      salary: [0, Validators.min(0)],
+      typologie: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(30)]],
       languages: this.fb.array([this.createLanguage()]),
     });
@@ -135,6 +142,9 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   }
   get city() {
     return this.jobForm.get('city');
+  }
+  get salary() {
+    return this.jobForm.get('salary');
   }
   get department() {
     return this.jobForm.get('department');

@@ -26,28 +26,6 @@
   color: #007bff; /* Change text color to blue on hover */
 }
 
-// .selected-skills {
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 8px;
-//   margin-top: 10px;
-// }
-
-// .skill-chip {
-//   display: flex;
-//   align-items: center;
-//   background-color: #e0e0e0;
-//   border-radius: 16px;
-//   padding: 5px 10px;
-// }
-
-// .skill-chip .remove-btn {
-//   background: none;
-//   border: none;
-//   font-size: 12px;
-//   margin-left: 5px;
-//   cursor: pointer;
-// }
 
 .selected-skills {
   display: flex; /* Makes child elements appear next to each other */
@@ -89,9 +67,4 @@
 select.disabled {
   pointer-events: none; /* Prevent any interaction */
   opacity: 0.5; /* Make it look disabled */
-}
-
-.editor-wrapper {
-  max-height: 400px;
-  overflow-y: auto;
 }
