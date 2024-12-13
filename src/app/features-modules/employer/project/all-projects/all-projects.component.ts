@@ -4,8 +4,8 @@ import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { empprojects } from 'src/app/core/models/models';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { CompanyService } from 'src/app/core/services/company.service';
 import { ProjectService } from 'src/app/core/services/project.service';
+import { UserService } from 'src/app/features-modules/auth/service/user.service';
 
 @Component({
   selector: 'app-all-projects',
@@ -28,7 +28,7 @@ export class AllProjectsComponent {
     private dataservice: ShareDataService,
     private projectService: ProjectService,
     private authService: AuthService,
-    private companyService: CompanyService
+    private userService: UserService
   ) {
     this.dataservice.ManageUsers.subscribe((data: Array<empprojects>) => {
       this.empprojects = data;
@@ -36,19 +36,13 @@ export class AllProjectsComponent {
   }
 
   ngOnInit(): void {
-    this.user = this.authService.getUser();
-    this.getCompany(this.user?.id);
-  }
-
-  getCompany(userId: string) {
-    this.companyService.getCompanyByUserId(userId).subscribe({
-      next: (company) => {
-        this.company = company;
-        this.loadJobOffers(company?.id);
+    this.userService.getProfile().subscribe({
+      next: (profile) => {
+        this.user = profile;
+        this.company = profile.company;
+        this.loadJobOffers(profile?.company?.id);
       },
-      error(err) {
-        console.error(err);
-      },
+      error: (err) => console.error(err),
     });
   }
 

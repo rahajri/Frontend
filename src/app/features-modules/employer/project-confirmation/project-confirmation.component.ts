@@ -32,7 +32,6 @@ export class ProjectConfirmationComponent {
         next: (data) => {
           if (data) {
             this.project = data;
-            console.log('Project : ', data);
           }
           this.checkIfContractIsCDI(data?.contractType);
         },

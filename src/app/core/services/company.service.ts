@@ -94,12 +94,6 @@ export class CompanyService {
     });
   }
 
-  getCompanyByUserId(userId: string) {
-    return this.http.get<any>(`${this.baseUrl}/user/${userId}/company`, {
-      headers: this.getAuthHeaders(),
-    });
-  }
-
   approveCompany(companyId: string): Observable<any> {
     return this.http.patch<any>(
       `${this.baseUrl}/${companyId}/approve`,

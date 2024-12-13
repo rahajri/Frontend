@@ -199,8 +199,8 @@
                         src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
                         <a class="dropdown-item" [routerLink] = "routes.freelancer_profiles_settings"><img
                         src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                        <a class="dropdown-item" [routerLink] = "routes.login"><img src="assets/img/icon/user-dropdown-icon--07.svg"
-                        alt="Img"> Logout</a>
+                        <a class="dropdown-item" (click)="logout()"><img src="assets/img/icon/user-dropdown-icon--07.svg"
+                        alt="Img"> Logout HQ</a>
                       </div>
                     </li>
                   </ul>

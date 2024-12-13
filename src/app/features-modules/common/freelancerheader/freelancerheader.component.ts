@@ -6,6 +6,7 @@ import { url } from 'src/app/core/models/models';
 import { header } from 'src/app/core/models/sidebar-model';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { NavbarService } from 'src/app/core/services/navbar.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-freelancerheader',
@@ -24,7 +25,8 @@ export class FreelancerheaderComponent {
     private router: Router,
     private data: ShareDataService,
     private navservices: NavbarService,
-    private common: CommonService
+    private common: CommonService,
+    private authService: AuthService
   ) {
     this.common.base.subscribe((res: string) => {
       this.base = res;
@@ -74,5 +76,10 @@ export class FreelancerheaderComponent {
     } else {
       this.anotherMenu = false;
     }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate([this.routes.login]);
   }
 }

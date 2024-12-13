@@ -73,6 +73,7 @@ export class EmployerheaderComponent {
   otherPages(val: string) {
     localStorage.setItem(val, val);
   }
+
   public toggleSidebar(): void {
     this.navservices.openSidebar();
   }

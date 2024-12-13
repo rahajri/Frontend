@@ -22,7 +22,7 @@ export class AuthService {
     this.currentUserSubject.next(user);
   }
 
-  getUser(): any | null {
+  getUser(): any {
     return this.currentUserSubject.value;
   }
   public login(): void {
