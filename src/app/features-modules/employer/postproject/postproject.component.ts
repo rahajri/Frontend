@@ -15,8 +15,14 @@ import {
 import { ContractService } from 'src/app/core/services/contract.service';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { SkillService } from 'src/app/core/services/skill.service';
+import { LanguageService } from 'src/app/core/services/language.service';
 interface data {
   value: string;
+}
+
+interface Language {
+  id: string;
+  name: string;
 }
 
 @Component({
@@ -44,6 +50,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
 
   jobForm: FormGroup;
   filteredCities: any[] = [];
+  filteredLanguages: Language[] = [];
   cityInputSub: Subscription | undefined;
   jobs: any[] = [];
   subActivities: any[] = [];
@@ -53,9 +60,11 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   contractTypes: any[] = [];
   isCdiSelected = false;
   jobNotExist = true;
+  activeIndex: number = 0;
   cityIsSelected = false;
   selectedSkills: any[] = [];
   languages: any[] = [];
+  dbLanguages: any[] = [];
   selectedLanguageList: data[] = [
     { value: 'Basique' },
     { value: 'Professionnel' },
@@ -74,6 +83,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     private contractService: ContractService,
     private projectService: ProjectService,
     private skillService: SkillService,
+    private languageService: LanguageService,
     private router: Router
   ) {
     this.jobForm = this.fb.group({
@@ -107,6 +117,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     this.getJobs();
     this.getSubActivities();
     this.getSkills();
+    this.getLanguagesFromDb();
     this.getContractTypes();
     this.cityInputSub = this.jobForm
       .get('city')
@@ -178,6 +189,21 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     return this.jobForm.get('languages') as FormArray;
   }
 
+  initForm() {
+    this.jobForm = this.fb.group({
+      languages: this.fb.array([this.createLanguage()]),
+    });
+  }
+
+  getLanguagesFromDb() {
+    this.languageService.getLanguages().subscribe({
+      next: (res) => {
+        this.dbLanguages = res;
+      },
+      error: (err) => {},
+    });
+  }
+
   // Create a new language form group
   createLanguage(): FormGroup {
     return this.fb.group({
@@ -208,6 +234,28 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     });
   }
 
+  filterLanguages(e: any, i: number) {
+    this.activeIndex = i;
+    let query = e.value;
+    if (!query) {
+      this.filteredLanguages = this.dbLanguages;
+    } else {
+      this.filteredLanguages = this.dbLanguages.filter((lang) =>
+        lang.name.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+  }
+
+  selectLanguage(lang: any, index: number) {
+    const languagesArray = this.jobForm.get('languages') as FormArray;
+    const languageForm = languagesArray.at(index) as FormGroup;
+
+    if (languageForm) {
+      languageForm.patchValue({ name: lang.name });
+    }
+
+    this.filteredLanguages = [];
+  }
   getJobs() {
     this.jobService.getJobs().subscribe({
       next: (data) => {
@@ -384,15 +432,16 @@ export class PostprojectComponent implements OnInit, OnDestroy {
 
     if (this.jobForm.valid) {
       this.jobForm.get('skills')?.setValue(this.selectedSkills);
-      this.projectService.createProject(this.jobForm.value).subscribe({
-        next: (response) => {
-          this.router.navigate([routes.getProjectConfirmation(response.id)]);
-        },
-        error: (error) => {
-          console.error('Error creating project:', error);
-          this.globalErrorMessage = true;
-        },
-      });
+      console.log(this.jobForm.value);
+      // this.projectService.createProject(this.jobForm.value).subscribe({
+      //   next: (response) => {
+      //     this.router.navigate([routes.getProjectConfirmation(response.id)]);
+      //   },
+      //   error: (error) => {
+      //     console.error('Error creating project:', error);
+      //     this.globalErrorMessage = true;
+      //   },
+      // });
     } else {
       console.log('Form is invalid');
     }

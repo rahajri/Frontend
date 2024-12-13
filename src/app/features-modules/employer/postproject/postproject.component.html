@@ -545,8 +545,24 @@
                         <input
                           type="text"
                           class="form-control"
+                          placeholder="Saisir une langue"
+                          [attr.autocomplete]="'off'"
                           formControlName="name"
+                          (input)="filterLanguages($event.target, i)"
                         />
+                        <!-- Autocomplete suggestions -->
+                        <ul
+                          class="autocomplete-list"
+                          *ngIf="filteredLanguages.length && activeIndex === i"
+                        >
+                          <li
+                            *ngFor="let language of filteredLanguages"
+                            (click)="selectLanguage(language, i)"
+                            class="autocomplete-item"
+                          >
+                            {{ language.name }}
+                          </li>
+                        </ul>
                       </div>
                     </div>
 

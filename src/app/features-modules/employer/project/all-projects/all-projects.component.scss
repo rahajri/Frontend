@@ -1,0 +1,13 @@
+.page-item.disabled {
+  pointer-events: none; /* Désactive les clics */
+  opacity: 0.5; /* Ajoute un effet visuel pour indiquer l'état désactivé */
+  cursor: not-allowed; /* Change le curseur pour refléter l'état désactivé */
+}
+
+.no-project-message {
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
