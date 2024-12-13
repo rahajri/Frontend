@@ -432,16 +432,15 @@ export class PostprojectComponent implements OnInit, OnDestroy {
 
     if (this.jobForm.valid) {
       this.jobForm.get('skills')?.setValue(this.selectedSkills);
-      console.log(this.jobForm.value);
-      // this.projectService.createProject(this.jobForm.value).subscribe({
-      //   next: (response) => {
-      //     this.router.navigate([routes.getProjectConfirmation(response.id)]);
-      //   },
-      //   error: (error) => {
-      //     console.error('Error creating project:', error);
-      //     this.globalErrorMessage = true;
-      //   },
-      // });
+      this.projectService.createProject(this.jobForm.value).subscribe({
+        next: (response) => {
+          this.router.navigate([routes.getProjectConfirmation(response.id)]);
+        },
+        error: (error) => {
+          console.error('Error creating project:', error);
+          this.globalErrorMessage = true;
+        },
+      });
     } else {
       console.log('Form is invalid');
     }
