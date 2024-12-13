@@ -71,6 +71,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     { value: 'Avancé' },
   ];
   selectedSalaryTypeList: data[] = [
+    { value: 'Heure' },
     { value: 'Mensuel' },
     { value: 'Annuel' },
     { value: 'JTM' },
