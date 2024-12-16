@@ -1,6 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/features-modules/auth/service/user.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CompanyService } from 'src/app/core/services/company.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
 interface data {
   value: string;
@@ -11,104 +14,171 @@ interface data {
   styleUrls: ['./basic-settings.component.scss'],
 })
 export class BasicSettingsComponent {
-  public selectedValue1 = '';
-  public selectedValue2 = '';
-  public selectedValue3 = '';
-  public selectedValue4 = '';
-  selectedList1: data[] = [
-    { value: 'Select' },
-    { value: 'UK' },
-    { value: 'USA' },
-  ];
-  selectedList3: data[] = [
-    { value: 'France' },
-    { value: 'USA' },
-    { value: 'India' },
-    { value: 'London' },
-  ];
-  selectedList2: data[] = [
-    { value: 'California' },
-    { value: 'Tasmania' },
-    { value: 'Auckland' },
-    { value: 'Marlborough' },
-  ];
-  selectedList4: data[] = [
-    { value: 'Select' },
-    { value: 'Intermediate' },
-    { value: 'Export' },
-  ];
+  public routes = routes;
+  profile: Profile | null = null;
+  companyId: string | null = null;
+  basicForm: FormGroup;
   showCheckoutHour = true;
+  initialFormValues: any;
+
+  public isCheckboxChecked = true;
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private datePipe: DatePipe,
+    private userService: UserService,
+    private companyService: CompanyService
+  ) {
+    this.basicForm = this.fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern(/^\+?\d{10,15}$/)]],
+      facebook: [
+        '',
+        [
+          Validators.pattern(
+            /^(https?:\/\/)?((www|m|web)\.)?facebook\.com\/(profile\.php\?id=\d+|[A-Za-z0-9_.-]+)\/?$/i
+          ),
+        ],
+      ],
+      instagram: [
+        '',
+        [
+          Validators.pattern(
+            /^(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9._]+\/?$/i
+          ),
+        ],
+      ],
+      linkedIn: [
+        '',
+        [
+          Validators.pattern(
+            /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9-]+\/?$/i
+          ),
+        ],
+      ],
+      userId: [''],
+    });
+  }
+  get firstName() {
+    return this.basicForm.get('firstName');
+  }
+  get lastName() {
+    return this.basicForm.get('lastName');
+  }
+  get phone() {
+    return this.basicForm.get('phone');
+  }
+  get facebook() {
+    return this.basicForm.get('facebook');
+  }
+  get instagram() {
+    return this.basicForm.get('instagram');
+  }
+  get linkedIn() {
+    return this.basicForm.get('linkedIn');
+  }
+
+  ngOnInit(): void {
+    this.userService.getProfile().subscribe({
+      next: (profile) => {
+        this.profile = profile;
+        this.companyId = profile?.company?.id;
+        this.initialFormValues = {
+          firstName: profile?.firstName,
+          lastName: profile?.lastName,
+          phone: profile?.phone,
+          userId: profile?.id,
+          facebook: profile?.company?.socialMedia?.facebook,
+          instagram: profile?.company?.socialMedia?.instagram,
+          linkedIn: profile?.company?.socialMedia?.linkedIn,
+        };
+        this.basicForm.patchValue(this.initialFormValues);
+      },
+      error: (err) => console.error(err),
+    });
+  }
 
   toggleCheckoutHour() {
     this.showCheckoutHour = !this.showCheckoutHour;
   }
-  public isCheckboxChecked = true;
-  constructor(private router: Router, private datePipe: DatePipe) {}
-  ngsubmit() {
-    // this.router.navigate([routes.projectconfirmation]);
-  }
-  showTimePicker: Array<string> = [];
 
-  public hoursArray1 = [0];
-  public hoursArray2 = [0];
-  public hoursArray3 = [0];
-  public hoursArray4 = [0];
-  public hoursArray5 = [0];
-  public hoursArray6 = [0];
-  public hoursArray7 = [0];
-
-  startTime1 = new Date();
-  startTime2 = new Date();
-  startTime3 = new Date();
-  startTime4 = new Date();
-  startTime5 = new Date();
-  startTime6 = new Date();
-  startTime7 = new Date();
-  endTime1 = new Date();
-  endTime2 = new Date();
-  endTime3 = new Date();
-  endTime4 = new Date();
-  endTime5 = new Date();
-  endTime6 = new Date();
-  endTime7 = new Date();
-
-  toggleTimePicker(value: string): void {
-    if (this.showTimePicker[0] !== value) {
-      this.showTimePicker[0] = value;
-    } else {
-      this.showTimePicker = [];
+  onSubmit() {
+    this.markFormGroupTouched(this.basicForm);
+    if (this.basicForm.valid && this.companyId) {
+      this.companyService
+        .updateCompany(this.companyId, this.basicForm.value)
+        .subscribe({
+          next: (res) => {},
+          error: (err) => console.error(err),
+        });
     }
   }
-  formatTime(date: Date) {
-    const selectedDate: Date = new Date(date);
-    return this.datePipe.transform(selectedDate, 'h:mm a');
+
+  onCancel() {
+    // Reset the form to initial values
+    if (this.initialFormValues) {
+      this.basicForm.patchValue(this.initialFormValues);
+    }
   }
 
-  getCondidature(): void {
-    const email = localStorage.getItem('email');
-
-    if (!email) {
-      console.error('No email found in local storage.');
-      return;
-    }
-
-    /*
-
-
-    this.employerServcice.getCandidate(email).subscribe(
-      (response) => {
-        console.log('Candidate details:', response);
-        // Patch the response to the candidate form object
-        this.candidate = { 
-          ...response,
-          birthDate: response.birthDate || '', // Handle null or missing birthDate
-          profileTitle: response.profileTitle || '', 
-          role: response.role || ''
-        };
-      },
-      (error) => {
-        console.error('Error fetching candidate details:', error);
+  markFormGroupTouched(formGroup: FormGroup): void {
+    Object.values(formGroup.controls).forEach((control) => {
+      control.markAsTouched();
+      if ((control as FormGroup).controls) {
+        this.markFormGroupTouched(control as FormGroup);
       }
-    );*/
+    });
   }
+}
+
+interface Profile {
+  age: string;
+  startDate: string;
+  expectedDuration: number;
+  email: string | null;
+  phone: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  position: string | null;
+  role: string | null;
+  profileTitle: string | null;
+  birthDate: Date | null;
+  updatedAt: Date;
+  createdAt: Date;
+  company: {
+    name: string;
+    siret: string;
+    email: string | null;
+    phone: string | null;
+    naf: string;
+    nafTitle: string;
+    category: string;
+    workforce: number;
+    message: string;
+    establishedDate: Date | null;
+    createdAt: Date;
+    updatedAt: Date;
+    location: {
+      postalCode: {
+        code: string;
+      };
+      city: {
+        name: string;
+        department: {
+          name: string;
+          region: {
+            name: string;
+          };
+        };
+      };
+      address: string;
+      addressLine2: string;
+    };
+  };
+  status: {
+    name: string;
+    description: string;
+    context: string;
+  };
 }

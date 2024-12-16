@@ -111,6 +111,14 @@ export class CompanyService {
   }
 
   checkSiretExists(siret: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/siret/${siret}`, { headers: this.getAuthHeaders() });
+    return this.http.get<any>(`${this.baseUrl}/siret/${siret}`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
+  updateCompany(companyId: string, data: any) {
+    return this.http.patch<any>(`${this.baseUrl}/${companyId}/update`, data, {
+      headers: this.getAuthHeaders(),
+    });
   }
 }

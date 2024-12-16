@@ -26,7 +26,6 @@
   color: #007bff; /* Change text color to blue on hover */
 }
 
-
 .selected-skills {
   display: flex; /* Makes child elements appear next to each other */
   flex-wrap: wrap; /* Allows elements to wrap to the next line if they don't fit */
@@ -49,7 +48,7 @@
 .remove-btn {
   background: none; /* Removes default button styling */
   border: none; /* Removes border */
-  color: #931621; /* Red color for remove button */
+  color: white; /* Red color for remove button */
   font-size: 16px;
   margin-left: 5px; /* Adds spacing between text and button */
   font-weight: bold;
