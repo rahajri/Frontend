@@ -5,6 +5,7 @@ import { UserService } from 'src/app/features-modules/auth/service/user.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
+import { Profile } from 'src/app/core/models/models';
 interface data {
   value: string;
 }
@@ -105,14 +106,26 @@ export class BasicSettingsComponent {
 
   onSubmit() {
     this.markFormGroupTouched(this.basicForm);
+    const trimmedValues = this.trimFormValues(this.basicForm.value);
     if (this.basicForm.valid && this.companyId) {
       this.companyService
-        .updateCompany(this.companyId, this.basicForm.value)
+        .updateCompany(this.companyId, trimmedValues)
         .subscribe({
-          next: (res) => {},
+          next: (res) => {
+            window.location.reload();
+          },
           error: (err) => console.error(err),
         });
     }
+  }
+
+  trimFormValues(values: any): any {
+    const trimmedValues: any = {};
+    Object.keys(values).forEach((key) => {
+      const value = values[key];
+      trimmedValues[key] = typeof value === 'string' ? value.trim() : value; // Trim if it's a string
+    });
+    return trimmedValues;
   }
 
   onCancel() {
@@ -130,55 +143,4 @@ export class BasicSettingsComponent {
       }
     });
   }
-}
-
-interface Profile {
-  age: string;
-  startDate: string;
-  expectedDuration: number;
-  email: string | null;
-  phone: string | null;
-  firstName: string | null;
-  lastName: string | null;
-  position: string | null;
-  role: string | null;
-  profileTitle: string | null;
-  birthDate: Date | null;
-  updatedAt: Date;
-  createdAt: Date;
-  company: {
-    name: string;
-    siret: string;
-    email: string | null;
-    phone: string | null;
-    naf: string;
-    nafTitle: string;
-    category: string;
-    workforce: number;
-    message: string;
-    establishedDate: Date | null;
-    createdAt: Date;
-    updatedAt: Date;
-    location: {
-      postalCode: {
-        code: string;
-      };
-      city: {
-        name: string;
-        department: {
-          name: string;
-          region: {
-            name: string;
-          };
-        };
-      };
-      address: string;
-      addressLine2: string;
-    };
-  };
-  status: {
-    name: string;
-    description: string;
-    context: string;
-  };
 }

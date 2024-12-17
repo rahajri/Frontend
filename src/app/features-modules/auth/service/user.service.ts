@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 import { Router } from '@angular/router';
+import { Profile } from 'src/app/core/models/models';
 
 @Injectable({
   providedIn: 'root',
@@ -64,5 +65,30 @@ export class UserService {
   createCompany(userData: any): Observable<any> {
     const url = `${this.baseUrlCop}`;
     return this.http.post<any>(url, userData);
+  }
+
+  getProfileDetails(profile: Profile | null) {
+    let fullName = '';
+    let initials = '';
+
+    if (profile) {
+      const firstName = profile.firstName?.trim() || '';
+      const lastName = profile.lastName?.trim() || '';
+
+      // Generate initials (first letter of first and last names, capitalized)
+      const firstInitial = firstName.charAt(0).toUpperCase();
+      const lastInitial = lastName.charAt(0).toUpperCase();
+      initials = `${firstInitial}${lastInitial}`.trim();
+
+      // Generate formatted fullName (e.g., "John DOE")
+      fullName = [
+        firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase(),
+        lastName.toUpperCase(),
+      ]
+        .filter(Boolean) // Ensure no extra spaces when either name is missing
+        .join(' ');
+    }
+
+    return { fullName, initials };
   }
 }

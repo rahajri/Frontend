@@ -186,40 +186,41 @@
     <!-- /Notifications -->
 
     <!-- Notifications -->
-<li class="nav-item dropdown">
-  <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-    <i class="feather icon-bell"></i>
-    <span class="badge badge-pill">{{ unreadCount }}</span>
-  </a>
-  <div class="dropdown-menu notifications">
-    <div class="topnav-dropdown-header">
-      <span class="notification-title">Notifications</span>
-      <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
-    </div>
-    <div class="noti-content">
-      <ul class="notification-list">
-        <li
-          *ngFor="let notification of notifications"
-          class="notification-message"
-        >
-          <a href="javascript:">
-            <p class="noti-details">
-              <span class="noti-title">{{ notification.title }}</span>
-            </p>
-            <p class="noti-time">
-              <span class="notification-time">{{ notification.timeAgo }}</span>
-            </p>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="topnav-dropdown-footer">
-      <a href="javascript:">View all Notifications</a>
-    </div>
-  </div>
-</li>
-<!-- /Notifications -->
-
+    <li class="nav-item dropdown">
+      <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+        <i class="feather icon-bell"></i>
+        <span class="badge badge-pill">{{ unreadCount }}</span>
+      </a>
+      <div class="dropdown-menu notifications">
+        <div class="topnav-dropdown-header">
+          <span class="notification-title">Notifications</span>
+          <a href="javascript:void(0)" class="clear-noti"> Clear All</a>
+        </div>
+        <div class="noti-content">
+          <ul class="notification-list">
+            <li
+              *ngFor="let notification of notifications"
+              class="notification-message"
+            >
+              <a href="javascript:">
+                <p class="noti-details">
+                  <span class="noti-title">{{ notification.title }}</span>
+                </p>
+                <p class="noti-time">
+                  <span class="notification-time">{{
+                    notification.timeAgo
+                  }}</span>
+                </p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="topnav-dropdown-footer">
+          <a href="javascript:">View all Notifications</a>
+        </div>
+      </div>
+    </li>
+    <!-- /Notifications -->
 
     <!-- User Menu -->
     <li class="nav-item dropdown has-arrow main-drop">
@@ -234,7 +235,7 @@
           ><i data-feather="user" class="me-1"></i> Profile</a
         >
         <a class="dropdown-item" [routerLink]="'/admin/settings/general'"
-          ><i data-feather="settings" class="me-1"></i> paramètres</a
+          ><i data-feather="settings" class="me-1"></i> Paramètres</a
         >
         <a class="dropdown-item" [routerLink]="'/admin/auth/login'"
           ><i data-feather="log-out" class="me-1"></i> Logout</a

@@ -10,210 +10,339 @@
             <span></span>
           </span>
         </a>
-        <a [routerLink] = "routes.home" class="navbar-brand logo">
-          <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+        <a [routerLink]="routes.home" class="navbar-brand logo">
+          <img src="assets/img/logo.svg" class="img-fluid" alt="Logo" />
         </a>
       </div>
       <div class="main-menu-wrapper">
         <div class="menu-header">
-          <a [routerLink] = "routes.home" class="menu-logo">
-            <img src="assets/img/logo.svg" class="img-fluid" alt="Logo">
+          <a [routerLink]="routes.home" class="menu-logo">
+            <img src="assets/img/logo.svg" class="img-fluid" alt="Logo" />
           </a>
-          <a id="menu_close" (click)="hideSidebar()" class="menu-close" href="javascript:void(0);">
+          <a
+            id="menu_close"
+            (click)="hideSidebar()"
+            class="menu-close"
+            href="javascript:void(0);"
+          >
             <i class="fas fa-times"></i>
           </a>
         </div>
         <ul class="main-nav">
-          @for (mainMenus of navbar; track mainMenus) {
-            @if (mainMenus.separateRoute === true) {
-              <li routerLinkActive="active" [class.active]="base === mainMenus.base">
-                <a [routerLink]="mainMenus.route">{{ mainMenus.tittle }}</a>
+          @for (mainMenus of navbar; track mainMenus) { @if
+          (mainMenus.separateRoute === true) {
+          <li
+            routerLinkActive="active"
+            [class.active]="base === mainMenus.base"
+          >
+            <a [routerLink]="mainMenus.route">{{ mainMenus.tittle }}</a>
+          </li>
+          } @if (mainMenus.separateRoute === false) {
+          <li
+            class="has-submenu"
+            [class.active]="base === mainMenus.base"
+            routerLinkActive="active"
+          >
+            <a
+              href="javascript:void(0);"
+              (click)="mainMenus.showAsTab = !mainMenus.showAsTab"
+              >{{ mainMenus.tittle }} <i class="fas fa-chevron-down"></i
+            ></a>
+            <ul
+              class="submenu"
+              [ngClass]="{
+                'd-block': mainMenus.showAsTab === true
+              }"
+            >
+              @for (menu of mainMenus.menu; track menu) { @if (menu.hasSubRoute
+              === false) {
+              <li
+                routerLinkActive="active"
+                [class.active]="base === menu.base && page === menu.page"
+              >
+                <a [routerLink]="menu.route">{{ menu.menuValue }}</a>
               </li>
-            }
-            @if (mainMenus.separateRoute === false) {
-              <li class="has-submenu" [class.active]="base === mainMenus.base" routerLinkActive="active">
-                <a href="javascript:void(0);" (click)="mainMenus.showAsTab = !mainMenus.showAsTab">{{
-                  mainMenus.tittle }} <i class="fas fa-chevron-down"></i></a>
-								<ul class="submenu" [ngClass]="{
-											'd-block': mainMenus.showAsTab === true
-										  }">
-                    @for (menu of mainMenus.menu; track menu) {
-                      @if (menu.hasSubRoute === false) {
-											<li routerLinkActive="active" [class.active]="
-												  base === menu.base && page === menu.page
-												">
-                          <a [routerLink]="menu.route">{{ menu.menuValue }}</a>
-                        </li>
-                      }
-                      @if (menu.hasSubRoute === true) {
-                        <li routerLinkActive="active" class="has-submenu" [class.active]="page === menu.page">
-                          <a (click)="menu.showSubRoute = !menu.showSubRoute"
-                          [routerLink]="menu.route">{{ menu.menuValue }}</a>
-												<ul class="submenu" [ngClass]="{
-													'd-block': menu.showSubRoute === true
-												  }">
-                            @for (subMenu of menu.subMenus; track subMenu) {
-														<li routerLinkActive="active" [class.active]="
-														base === subMenu.base &&
-														page === subMenu.page 
-														
-													  ">
-                                <a [routerLink]="subMenu.route">{{
-                                  subMenu.menuValue
-                                }}</a>
-                              </li>
-                            }
-                          </ul>
-                        </li>
-                      }
-                    }
-                  </ul>
-                </li>
-              }
-            }
-          </ul>
-        </div>
-        @if (anotherMenu === false) {
-          <ul class="nav header-navbar-rht">
-            <li><a [routerLink] = "routes.freelancer_message"><img src="assets/img/icon/message-chat-icon.svg" alt="Img"></a></li>
-            <li class="dropdown">
-              <a data-bs-toggle="dropdown" href="javascript:void(0);"><img
-              src="assets/img/icon/notification-bell-icon.svg" alt="Img"></a>
-              <div class="dropdown-menu notifications">
-                <div class="topnav-dropdown-header">
-                  <div class="notification-title">Notifications<span class="msg-count-badge">2</span></div>
-                  <a href="javascript:void(0)" class="clear-noti d-flex align-items-center">Mark all as read
-                    <i class="fe fe-check-circle"></i></a>
-                  </div>
-                  <div class="noti-content">
-                    <ul class="notification-list">
-                      <li class="notification-message">
-                        <a [routerLink] = "routes.notification">
-                          <div class="d-flex">
-                            <span class="avatar avatar-md active">
-                              <img class="avatar-img rounded-circle" alt="avatar-img"
-                                src="assets/img/avatar/avatar-2.jpg">
-                              </span>
-                              <div class="media-body">
-                                <span class="noti-title">Edward Curr</span>
-                                <p class="noti-details">Notifications inform you when someone likes,
-                                reacts</p>
-                                <p class="noti-time"><span class="notification-time">Yesterday at 11:42
-                                PM</span></p>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="notification-message">
-                          <a [routerLink] = "routes.notification">
-                            <div class="d-flex">
-                              <span class="avatar avatar-md active">
-                                <img class="avatar-img rounded-circle" alt="avatar-img"
-                                  src="assets/img/avatar/avatar-1.jpg">
-                                </span>
-                                <div class="media-body">
-                                  <span class="noti-title">Maria Hill</span>
-                                  <p class="noti-details"> Notifications alert you to new messages in your
-                                  Kofejob inbox.</p>
-                                  <div class="notification-btn">
-                                    <span class="btn btn-primary">Accept</span>
-                                    <span class="btn btn-outline-primary">Reject</span>
-                                  </div>
-                                  <p class="noti-time"><span class="notification-time">Today at 9:42
-                                  AM</span></p>
-                                </div>
-                              </div>
-                            </a>
-                          </li>
-                          <li class="notification-message">
-                            <a [routerLink] = "routes.notification">
-                              <div class="d-flex">
-                                <span class="avatar avatar-md">
-                                  <img class="avatar-img rounded-circle" alt="avatar-img"
-                                    src="assets/img/avatar/avatar-3.jpg">
-                                  </span>
-                                  <div class="media-body">
-                                    <span class="noti-title">Maria Hill</span>
-                                    <p class="noti-details"> Notifications alert you to new messages in your
-                                    Kofejob inbox.</p>
-                                    <p class="noti-time"><span class="notification-time">Yesterday at 5:42
-                                    PM</span></p>
-                                  </div>
-                                </div>
-                              </a>
-                            </li>
-                            <li class="notification-message">
-                              <a [routerLink] = "routes.notification">
-                                <div class="d-flex">
-                                  <span class="avatar avatar-md">
-                                    <img class="avatar-img rounded-circle" alt="avatar-img"
-                                      src="assets/img/avatar/avatar-4.jpg">
-                                    </span>
-                                    <div class="media-body">
-                                      <span class="noti-title">Edward Curr</span>
-                                      <p class="noti-details">Notifications inform you when someone likes,
-                                      reacts</p>
-                                      <p class="noti-time"><span class="notification-time">Last Wednesday at
-                                      11:15 AM</span></p>
-                                    </div>
-                                  </div>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="topnav-dropdown-footer text-center">
-                            <a [routerLink] = "routes.notification">View All Notification</a>
-                          </div>
-                        </div>
-                      </li>
-                      <li><a [routerLink] = "routes.employee_post_project" class="login-btn">Post a Project <i class="feather icon-plus ms-1"></i></a>
-                    </li>
-                    <li class="nav-item dropdown account-item">
-                      <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                        <span class="user-img">
-                          <img src="assets/img/user/avatar-1.jpg" alt="Img">
-                        </span>
-                        <span>Bruce Bush</span>
-                      </a>
-                      <div class="dropdown-menu emp">
-                        <div class="drop-head">
-                          <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                            <span class="user-img">
-                              <img src="assets/img/user/avatar-1.jpg" alt="Img">
-                            </span>
-                            <div>
-                              <span>Bruce Bush</span>
-                              <p>info&#64;brucebush.com</p>
-                            </div>
-                          </a>
-                        </div>
-                        <a class="dropdown-item" [routerLink] = "routes.freelancer_developer_profile"><img
-                        src="assets/img/icon/user-dropdown-icon--01.svg" alt="Img"> My Profile</a>
-                        <a class="dropdown-item" [routerLink] = "routes.freelancer_projects_proposals"><img
-                        src="assets/img/icon/user-dropdown-icon--02.svg" alt="Img"> My Projects</a>
-                        <a class="dropdown-item" [routerLink] = "routes.freelancer_favourite"><img
-                        src="assets/img/icon/user-dropdown-icon--03.svg" alt="Img">My Subscription</a>
-                        <a class="dropdown-item" [routerLink] = "routes.statement"><img
-                        src="assets/img/icon/user-dropdown-icon--04.svg" alt="Img">My Statement</a>
-                        <a class="dropdown-item" [routerLink] = "routes.freelancer_message"><img
-                        src="assets/img/icon/user-dropdown-icon--05.svg" alt="Img"> Message</a>
-                        <a class="dropdown-item" [routerLink] = "routes.freelancer_profiles_settings"><img
-                        src="assets/img/icon/user-dropdown-icon--06.svg" alt="Img"> Profile Settings</a>
-                        <a class="dropdown-item" (click)="logout()"><img src="assets/img/icon/user-dropdown-icon--07.svg"
-                        alt="Img"> Logout HQ</a>
-                      </div>
-                    </li>
-                  </ul>
-                }
-                @if (anotherMenu === true) {
-                  <ul class="nav header-navbar-rht reg-head">
-                    <li><a [routerLink] = "routes.register" class="reg-btn"><img src="assets/img/icon/users.svg" class="me-1" alt="img">Register</a></li>
-                    <li><a [routerLink] = "routes.login" class="log-btn"><img src="assets/img/icon/lock.svg" class="me-1" alt="img"> Login</a></li>
-                    <li><a [routerLink] = "routes.employee_post_project" class="login-btn"><i class="feather icon-plus me-1"></i>Post a Project </a></li>
-                  </ul>
-                }
-              </nav>
+              } @if (menu.hasSubRoute === true) {
+              <li
+                routerLinkActive="active"
+                class="has-submenu"
+                [class.active]="page === menu.page"
+              >
+                <a
+                  (click)="menu.showSubRoute = !menu.showSubRoute"
+                  [routerLink]="menu.route"
+                  >{{ menu.menuValue }}</a
+                >
+                <ul
+                  class="submenu"
+                  [ngClass]="{
+                    'd-block': menu.showSubRoute === true
+                  }"
+                >
+                  @for (subMenu of menu.subMenus; track subMenu) {
+                  <li
+                    routerLinkActive="active"
+                    [class.active]="
+                      base === subMenu.base && page === subMenu.page
+                    "
+                  >
+                    <a [routerLink]="subMenu.route">{{ subMenu.menuValue }}</a>
+                  </li>
+                  }
+                </ul>
+              </li>
+              } }
+            </ul>
+          </li>
+          } }
+        </ul>
+      </div>
+      @if (anotherMenu === false) {
+      <ul class="nav header-navbar-rht">
+        <li>
+          <a [routerLink]="routes.freelancer_message"
+            ><img src="assets/img/icon/message-chat-icon.svg" alt="Img"
+          /></a>
+        </li>
+        <li class="dropdown">
+          <a data-bs-toggle="dropdown" href="javascript:void(0);"
+            ><img src="assets/img/icon/notification-bell-icon.svg" alt="Img"
+          /></a>
+          <div class="dropdown-menu notifications">
+            <div class="topnav-dropdown-header">
+              <div class="notification-title">
+                Notifications<span class="msg-count-badge">2</span>
+              </div>
+              <a
+                href="javascript:void(0)"
+                class="clear-noti d-flex align-items-center"
+                >Mark all as read <i class="fe fe-check-circle"></i
+              ></a>
             </div>
-
-          </header>
-          <!-- /Header -->
+            <div class="noti-content">
+              <ul class="notification-list">
+                <li class="notification-message">
+                  <a [routerLink]="routes.notification">
+                    <div class="d-flex">
+                      <span class="avatar avatar-md active">
+                        <img
+                          class="avatar-img rounded-circle"
+                          alt="avatar-img"
+                          src="assets/img/avatar/avatar-2.jpg"
+                        />
+                      </span>
+                      <div class="media-body">
+                        <span class="noti-title">Edward Curr</span>
+                        <p class="noti-details">
+                          Notifications inform you when someone likes, reacts
+                        </p>
+                        <p class="noti-time">
+                          <span class="notification-time"
+                            >Yesterday at 11:42 PM</span
+                          >
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="notification-message">
+                  <a [routerLink]="routes.notification">
+                    <div class="d-flex">
+                      <span class="avatar avatar-md active">
+                        <img
+                          class="avatar-img rounded-circle"
+                          alt="avatar-img"
+                          src="assets/img/avatar/avatar-1.jpg"
+                        />
+                      </span>
+                      <div class="media-body">
+                        <span class="noti-title">Maria Hill</span>
+                        <p class="noti-details">
+                          Notifications alert you to new messages in your
+                          Kofejob inbox.
+                        </p>
+                        <div class="notification-btn">
+                          <span class="btn btn-primary">Accept</span>
+                          <span class="btn btn-outline-primary">Reject</span>
+                        </div>
+                        <p class="noti-time">
+                          <span class="notification-time"
+                            >Today at 9:42 AM</span
+                          >
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="notification-message">
+                  <a [routerLink]="routes.notification">
+                    <div class="d-flex">
+                      <span class="avatar avatar-md">
+                        <img
+                          class="avatar-img rounded-circle"
+                          alt="avatar-img"
+                          src="assets/img/avatar/avatar-3.jpg"
+                        />
+                      </span>
+                      <div class="media-body">
+                        <span class="noti-title">Maria Hill</span>
+                        <p class="noti-details">
+                          Notifications alert you to new messages in your
+                          Kofejob inbox.
+                        </p>
+                        <p class="noti-time">
+                          <span class="notification-time"
+                            >Yesterday at 5:42 PM</span
+                          >
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="notification-message">
+                  <a [routerLink]="routes.notification">
+                    <div class="d-flex">
+                      <span class="avatar avatar-md">
+                        <img
+                          class="avatar-img rounded-circle"
+                          alt="avatar-img"
+                          src="assets/img/avatar/avatar-4.jpg"
+                        />
+                      </span>
+                      <div class="media-body">
+                        <span class="noti-title">Edward Curr</span>
+                        <p class="noti-details">
+                          Notifications inform you when someone likes, reacts
+                        </p>
+                        <p class="noti-time">
+                          <span class="notification-time"
+                            >Last Wednesday at 11:15 AM</span
+                          >
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="topnav-dropdown-footer text-center">
+              <a [routerLink]="routes.notification">View All Notification</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a [routerLink]="routes.employee_post_project" class="login-btn"
+            >Créer Offre <i class="feather icon-plus ms-1"></i
+          ></a>
+        </li>
+        <li class="nav-item dropdown account-item">
+          <a
+            href="javascript:void(0);"
+            class="dropdown-toggle nav-link"
+            data-bs-toggle="dropdown"
+          >
+            <span class="user-img">
+              <img src="assets/img/user/avatar-1.jpg" alt="Img" />
+            </span>
+            <span>Bruce Bush</span>
+          </a>
+          <div class="dropdown-menu emp">
+            <div class="drop-head">
+              <a
+                href="javascript:void(0);"
+                class="dropdown-toggle nav-link"
+                data-bs-toggle="dropdown"
+              >
+                <span class="user-img">
+                  <img src="assets/img/user/avatar-1.jpg" alt="Img" />
+                </span>
+                <div>
+                  <span>Bruce Bush</span>
+                  <p>info&#64;brucebush.com</p>
+                </div>
+              </a>
+            </div>
+            <a
+              class="dropdown-item"
+              [routerLink]="routes.freelancer_developer_profile"
+              ><img
+                src="assets/img/icon/user-dropdown-icon--01.svg"
+                alt="Img"
+              />
+              My Profile</a
+            >
+            <a
+              class="dropdown-item"
+              [routerLink]="routes.freelancer_projects_proposals"
+              ><img
+                src="assets/img/icon/user-dropdown-icon--02.svg"
+                alt="Img"
+              />
+              My Projects</a
+            >
+            <a class="dropdown-item" [routerLink]="routes.freelancer_favourite"
+              ><img
+                src="assets/img/icon/user-dropdown-icon--03.svg"
+                alt="Img"
+              />My Subscription</a
+            >
+            <a class="dropdown-item" [routerLink]="routes.statement"
+              ><img
+                src="assets/img/icon/user-dropdown-icon--04.svg"
+                alt="Img"
+              />My Statement</a
+            >
+            <a class="dropdown-item" [routerLink]="routes.freelancer_message"
+              ><img
+                src="assets/img/icon/user-dropdown-icon--05.svg"
+                alt="Img"
+              />
+              Message</a
+            >
+            <a
+              class="dropdown-item"
+              [routerLink]="routes.freelancer_profiles_settings"
+              ><img
+                src="assets/img/icon/user-dropdown-icon--06.svg"
+                alt="Img"
+              />
+              Profile Settings</a
+            >
+            <a class="dropdown-item" (click)="logout()"
+              ><img
+                src="assets/img/icon/user-dropdown-icon--07.svg"
+                alt="Img"
+              />
+              Logout HQ</a
+            >
+          </div>
+        </li>
+      </ul>
+      } @if (anotherMenu === true) {
+      <ul class="nav header-navbar-rht reg-head">
+        <li>
+          <a [routerLink]="routes.register" class="reg-btn"
+            ><img
+              src="assets/img/icon/users.svg"
+              class="me-1"
+              alt="img"
+            />Register</a
+          >
+        </li>
+        <li>
+          <a [routerLink]="routes.login" class="log-btn"
+            ><img src="assets/img/icon/lock.svg" class="me-1" alt="img" />
+            Login</a
+          >
+        </li>
+        <li>
+          <a [routerLink]="routes.employee_post_project" class="login-btn"
+            ><i class="feather icon-plus me-1"></i>Créer Offre
+          </a>
+        </li>
+      </ul>
+      }
+    </nav>
+  </div>
+</header>
+<!-- /Header -->

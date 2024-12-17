@@ -232,7 +232,7 @@
         </li>
         <li>
           <a [routerLink]="routes.employee_post_project" class="login-btn"
-            >Post a Project <i class="feather icon-plus ms-1"></i
+            >Créer Offre <i class="feather icon-plus ms-1"></i
           ></a>
         </li>
         <li class="nav-item dropdown account-item">
@@ -242,11 +242,9 @@
             data-bs-toggle="dropdown"
           >
             <span class="user-img">
-              <img
-                src="assets/img/user/table-avatar-03.jpg
-							"
-                alt="Img"
-              />
+              <div class="profile-initials" *ngIf="initials">
+                {{ initials }}
+              </div>
             </span>
             <span>{{ profileName }}</span>
           </a>
@@ -258,11 +256,12 @@
                 data-bs-toggle="dropdown"
               >
                 <span class="user-img">
-                  <img src="assets/img/user/table-avatar-03.jpg" alt="Img" />
+                  <div class="profile-initials" *ngIf="initials">
+                    {{ initials }}
+                  </div>
                 </span>
                 <div>
-                  <span>Walter Griffin22</span>
-                  <p>info&#64;brucebush.com</p>
+                  <span>{{ profileName }}</span>
                 </div>
               </a>
             </div>
@@ -344,7 +343,7 @@
         </li>
         <li>
           <a [routerLink]="routes.employee_post_project" class="login-btn"
-            ><i class="feather icon-plus me-1"></i>Post a Project
+            ><i class="feather icon-plus me-1"></i>Créer Offre
           </a>
         </li>
       </ul>

@@ -14,6 +14,7 @@ import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
 import { CandidateService } from 'src/app/core/services/condidate.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
+    private authService: AuthService,
     private candidateService: CandidateService
   ) {
     this.translate.setDefaultLang(environment.defaultLanguage);

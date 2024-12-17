@@ -1610,7 +1610,7 @@ export class ShareDataService {
       routes: routes.freelancer_dashboard,
     },
     {
-      title: 'paramètres',
+      title: 'Paramètres',
       icon: 'assets/img/icon/sidebar-icon-10.svg',
       routes: 'javascript:void(0);',
       submenu: [
@@ -1891,7 +1891,7 @@ export class ShareDataService {
       page: 'statement',
     },
     {
-      title: 'paramètres',
+      title: 'Paramètres',
       hasSubRoute: true,
       icon: 'assets/img/icon/sidebar-icon-10.svg',
       page1: 'profile-settings',
@@ -2029,7 +2029,7 @@ export class ShareDataService {
       page: 'deposit-funds',
     },
     {
-      title: 'paramètres',
+      title: 'Paramètres',
       icon: 'assets/img/icon/sidebar-icon-10.svg',
       routes: 'javascript:void(0);',
       hasSubRoute: true,

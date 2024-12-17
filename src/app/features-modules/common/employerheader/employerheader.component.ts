@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/core/services/common/common.service';
 import { NavbarService } from 'src/app/core/services/navbar.service';
 import { UserService } from '../../auth/service/user.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { Profile } from 'src/app/core/models/models';
 
 @Component({
   selector: 'app-employerheader',
@@ -19,6 +20,8 @@ export class EmployerheaderComponent {
   page = '';
   last = '';
   profileName = '';
+  profile: Profile | null = null;
+  initials: string = '';
 
   navbar: Array<header> = [];
   constructor(
@@ -49,15 +52,17 @@ export class EmployerheaderComponent {
     this.authService.logout();
   }
 
-  getUser() {
-    this.userService.getProfile().subscribe((profile) => {
-      this.authService.setUser(profile);
-      this.profileName = `${profile?.lastName?.toUpperCase() || ''} ${
-        profile?.firstName
-          ? profile.firstName.charAt(0).toUpperCase() +
-            profile.firstName.slice(1).toLowerCase()
-          : ''
-      }`;
+  getUser(): void {
+    this.userService.getProfile().subscribe({
+      next: (profile) => {
+        this.profile = profile;
+        // Safely call getProfileDetails after retrieving the profile
+        const { fullName, initials } =
+          this.userService.getProfileDetails(profile);
+        this.profileName = fullName;
+        this.initials = initials;
+      },
+      error: (err) => console.error('Error fetching profile:', err),
     });
   }
 
