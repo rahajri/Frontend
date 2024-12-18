@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
   public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
   public filter = false;
-  public lstBoard : adminDashboard[] = []
+  public lstBoard: adminDashboard[] = [];
   public url = 'admin';
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit {
           color: '#ffb8a8',
         },
         {
-          name: 'Completed Projects',
+          name: 'Offres Terminées',
           data: [12, 36, 42, 30, 39, 58, 40],
           color: '#feb019',
         },

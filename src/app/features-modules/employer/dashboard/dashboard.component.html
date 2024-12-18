@@ -2,7 +2,7 @@
 <div>
   <div class="dashboard-sec">
     <div class="page-title">
-      <h3>Dashboard</h3>
+      <h3>Tableau de Bord</h3>
     </div>
     <div class="row">
       <div class="col-md-6 col-lg-4 col-xl-3">
@@ -20,7 +20,7 @@
             class="dash-widget-more d-flex align-items-center justify-content-between"
           >
             <div class="dash-widget-count">30</div>
-            <a [routerLink] = "routes.completedProjects" class="d-flex"
+            <a [routerLink]="routes.completedProjects" class="d-flex"
               >View Details</a
             >
           </div>
@@ -41,7 +41,7 @@
             class="dash-widget-more d-flex align-items-center justify-content-between"
           >
             <div class="dash-widget-count">5</div>
-            <a [routerLink] = "routes.completedProjects" class="d-flex"
+            <a [routerLink]="routes.completedProjects" class="d-flex"
               >View Details</a
             >
           </div>
@@ -62,7 +62,7 @@
             class="dash-widget-more d-flex align-items-center justify-content-between"
           >
             <div class="dash-widget-count">25</div>
-            <a [routerLink] = "routes.completedProjects" class="d-flex"
+            <a [routerLink]="routes.completedProjects" class="d-flex"
               >View Details</a
             >
           </div>
@@ -83,7 +83,7 @@
             class="dash-widget-more d-flex align-items-center justify-content-between"
           >
             <div class="dash-widget-count">5962</div>
-            <a [routerLink] = "routes.completedProjects" class="d-flex"
+            <a [routerLink]="routes.completedProjects" class="d-flex"
               >View Details</a
             >
           </div>
@@ -180,7 +180,9 @@
         <div class="card mb-4 ongoing-project-card">
           <div class="pro-head">
             <h2>Recent Earnings</h2>
-            <a [routerLink]="routes.viewproject" class="btn fund-btn">View All</a>
+            <a [routerLink]="routes.viewproject" class="btn fund-btn"
+              >View All</a
+            >
           </div>
           <div class="table-responsive recent-earnings flex-fill">
             <table class="table mb-0">

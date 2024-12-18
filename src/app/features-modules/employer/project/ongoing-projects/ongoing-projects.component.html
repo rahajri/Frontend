@@ -1,90 +1,105 @@
-
 <div class="page-title">
-  <h3>Ongoing Projects</h3>
+  <h3>Offres Actives</h3>
 </div>
 <!-- project list -->
 @for (emp of empprojects; track emp) {
-  <div class="my-projects-list ongoing-projects">
-    <div class="row">
-      <div class="col-xl-9 flex-wrap">
-        <div class="freelancer-proposals proposal-ongoing mb-0">
-          <div class="project-proposals align-items-center freelancer">
-            <div class="proposal-info">
-              <div class="proposals-details">
-                <span class="tech-name-badge">{{emp.company}}</span>
-                <div class="d-flex justify-content-between align-items-start">
-                  <div class="employee-project-card">
-                    <h3 class="proposals-title">{{emp.content}}</h3>
-                    <ul>
-                      <li>
-                        <div class="proposal-job-type">
-                          <h4 class="title-info">{{emp.type}}</h4>
-                          <h3>{{emp.worktime}}</h3>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="proposal-job-type">
-                          <h4 class="title-info">Location</h4>
-                          <h3 class="flag-icon"><img src="assets/img/icon/flag-icon.svg" height="13" alt="Lang"> UK</h3>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="proposal-job-type">
-                          <h4 class="title-info">Expiry</h4>
-                          <h3>{{emp.workingday}}</h3>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="proposal-job-type">
-                          <h4 class="title-info">{{emp.price}}</h4>
-                          <h3>{{emp.day}}</h3>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <ul class="employee-project">
+<div class="my-projects-list ongoing-projects">
+  <div class="row">
+    <div class="col-xl-9 flex-wrap">
+      <div class="freelancer-proposals proposal-ongoing mb-0">
+        <div class="project-proposals align-items-center freelancer">
+          <div class="proposal-info">
+            <div class="proposals-details">
+              <span class="tech-name-badge">{{ emp.company }}</span>
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="employee-project-card">
+                  <h3 class="proposals-title">{{ emp.content }}</h3>
+                  <ul>
                     <li>
-                      <div class="project-action text-center">
-                        <a [routerLink]="routes.viewproject" class="projects-btn">View Details</a>
-                        <span>{{emp.date}}</span>
+                      <div class="proposal-job-type">
+                        <h4 class="title-info">{{ emp.type }}</h4>
+                        <h3>{{ emp.worktime }}</h3>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="proposal-job-type">
+                        <h4 class="title-info">Location</h4>
+                        <h3 class="flag-icon">
+                          <img
+                            src="assets/img/icon/flag-icon.svg"
+                            height="13"
+                            alt="Lang"
+                          />
+                          UK
+                        </h3>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="proposal-job-type">
+                        <h4 class="title-info">Expiry</h4>
+                        <h3>{{ emp.workingday }}</h3>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="proposal-job-type">
+                        <h4 class="title-info">{{ emp.price }}</h4>
+                        <h3>{{ emp.day }}</h3>
                       </div>
                     </li>
                   </ul>
                 </div>
+                <ul class="employee-project">
+                  <li>
+                    <div class="project-action text-center">
+                      <a [routerLink]="routes.viewproject" class="projects-btn"
+                        >View Details</a
+                      >
+                      <span>{{ emp.date }}</span>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-xl-3 d-flex flex-wrap">
-        <div class="projects-card flex-fill">
-          <div class="card-body p-2">
-            <div class="prj-proposal-count text-center hired">
-              <h3>Hired</h3>
-              <img [src]="emp.image" alt="Img" class="img-fluid">
-              <p class="mb-0">{{emp.employeename}}</p>
-            </div>
+    </div>
+    <div class="col-xl-3 d-flex flex-wrap">
+      <div class="projects-card flex-fill">
+        <div class="card-body p-2">
+          <div class="prj-proposal-count text-center hired">
+            <h3>Hired</h3>
+            <img [src]="emp.image" alt="Img" class="img-fluid" />
+            <p class="mb-0">{{ emp.employeename }}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 }
 <!-- /project list -->
-
 
 <div class="row">
   <div class="col-md-12">
     <ul class="paginations list-pagination">
-      <li class="page-item"><a href="javascript:void(0);"><i class="feather icon-chevron-left"></i></a>
-    </li>
-    <li class="page-item"><a href="javascript:void(0);" class="active">1</a></li>
-    <li class="page-item"><a href="javascript:void(0);">2</a></li>
-    <li class="page-item"><a href="javascript:void(0);">3</a></li>
-    <li class="page-item"><a href="javascript:void(0);">...</a></li>
-    <li class="page-item"><a href="javascript:void(0);">10</a></li>
-    <li class="page-item"><a href="javascript:void(0);"><i class="feather icon-chevron-right"></i></a></li>
-  </ul>
+      <li class="page-item">
+        <a href="javascript:void(0);"
+          ><i class="feather icon-chevron-left"></i
+        ></a>
+      </li>
+      <li class="page-item">
+        <a href="javascript:void(0);" class="active">1</a>
+      </li>
+      <li class="page-item"><a href="javascript:void(0);">2</a></li>
+      <li class="page-item"><a href="javascript:void(0);">3</a></li>
+      <li class="page-item"><a href="javascript:void(0);">...</a></li>
+      <li class="page-item"><a href="javascript:void(0);">10</a></li>
+      <li class="page-item">
+        <a href="javascript:void(0);"
+          ><i class="feather icon-chevron-right"></i
+        ></a>
+      </li>
+    </ul>
+  </div>
 </div>
-</div>
-

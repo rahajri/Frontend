@@ -26,7 +26,7 @@ Version      : 1.0
 17. Content
 18. Login
 19. Notifications
-20. Dashboard
+20. Tableau de Bord
 21. Invoices
 22. Settings
 23. Switch Buttons
@@ -3773,7 +3773,7 @@ table.table-inbox tbody tr.checked {
 }
 
 /*-----------------
-	20. Dashboard
+	20. Tableau de Bord
 -----------------------*/
 
 .dash-title {

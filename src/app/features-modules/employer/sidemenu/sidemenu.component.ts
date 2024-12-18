@@ -5,6 +5,7 @@ import { Profile, SidebarData } from 'src/app/core/models/models';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { FreelancerSidebarItem } from 'src/app/core/models/sidebar-model';
 import { UserService } from '../../auth/service/user.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 export interface SidemenuItem {
   page: string;
@@ -37,7 +38,8 @@ export class SidemenuComponent {
   constructor(
     private data: ShareDataService,
     private common: CommonService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) {
     this.common.base.subscribe((res: string) => {
       this.base = res;
@@ -58,7 +60,6 @@ export class SidemenuComponent {
     this.userService.getProfile().subscribe({
       next: (profile) => {
         this.profile = profile;
-        // Safely call getProfileDetails after retrieving the profile
         const { fullName, initials } =
           this.userService.getProfileDetails(profile);
         this.profileName = fullName;
@@ -66,6 +67,10 @@ export class SidemenuComponent {
       },
       error: (err) => console.error('Error fetching profile:', err),
     });
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
   public menuItem: Array<FreelancerSidebarItem> = [];

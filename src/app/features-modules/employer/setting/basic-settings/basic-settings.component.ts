@@ -35,7 +35,7 @@ export class BasicSettingsComponent {
       lastName: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.pattern(/^\+?\d{10,15}$/)]],
       facebook: [
-        '',
+        null,
         [
           Validators.pattern(
             /^(https?:\/\/)?((www|m|web)\.)?facebook\.com\/(profile\.php\?id=\d+|[A-Za-z0-9_.-]+)\/?$/i
@@ -43,7 +43,7 @@ export class BasicSettingsComponent {
         ],
       ],
       instagram: [
-        '',
+        null,
         [
           Validators.pattern(
             /^(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9._]+\/?$/i
@@ -51,7 +51,7 @@ export class BasicSettingsComponent {
         ],
       ],
       linkedIn: [
-        '',
+        null,
         [
           Validators.pattern(
             /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9-]+\/?$/i

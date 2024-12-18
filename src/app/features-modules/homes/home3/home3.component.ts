@@ -591,7 +591,7 @@ export class Home3Component implements OnInit {
   }
   public selectedValue = '';
 
-  selectedList: data[] = [{ value: 'Projects' }, { value: 'Freelancers' }];
+  selectedList: data[] = [{ value: 'Projets' }, { value: 'Freelancers' }];
   navigation() {
     this.router.navigate([routes.freelancer_project]);
   }

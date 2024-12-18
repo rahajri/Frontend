@@ -13,20 +13,20 @@ interface data {
 @Component({
   selector: 'app-home2',
   templateUrl: './home2.component.html',
-  styleUrls: ['./home2.component.scss']
+  styleUrls: ['./home2.component.scss'],
 })
 export class Home2Component implements OnInit {
-  public routes = routes
+  public routes = routes;
   selected = 'freelancers';
-  getLink = "project"
-  constructor(private router: Router) { }
+  getLink = 'project';
+  constructor(private router: Router) {}
   ngOnInit(): void {
     AOS.init({
       duration: 1200,
       once: true,
     });
   }
-  toggleClass(slide:Slide){
+  toggleClass(slide: Slide) {
     slide.favourite = !slide.favourite;
   }
   customsOptions: OwlOptions = {
@@ -39,51 +39,51 @@ export class Home2Component implements OnInit {
     navSpeed: 700,
     navText: [
       '<i class="fas fa-chevron-left"></i>',
-      '<i class="fas fa-chevron-right"></i>'
+      '<i class="fas fa-chevron-right"></i>',
     ],
     responsive: {
       0: {
-        items: 1
+        items: 1,
       },
-      768 : {
-        items: 1
+      768: {
+        items: 1,
       },
-      991 : {
-        items: 1
+      991: {
+        items: 1,
       },
       1170: {
-        items: 1
-      }
-  },
-    nav: true
-  }
+        items: 1,
+      },
+    },
+    nav: true,
+  };
 
   reviewsslides = [
     {
       profileimg: 'assets/img/review/review-01.jpg',
       name: 'Durso Raeen',
       para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean.',
-      date: 'May 8, 2020'
+      date: 'May 8, 2020',
     },
     {
       profileimg: 'assets/img/review/review-02.jpg',
       name: 'Camelia Rennesa',
       para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean.',
-      date: 'Apr 8, 2021'
+      date: 'Apr 8, 2021',
     },
     {
       profileimg: 'assets/img/review/review-01.jpg',
       name: 'Brayan',
       para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean.',
-      date: 'May 8, 2020'
+      date: 'May 8, 2020',
     },
     {
       profileimg: 'assets/img/review/review-03.jpg',
       name: 'Camelia Rennesa',
       para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean.',
-      date: 'May 8, 2020'
+      date: 'May 8, 2020',
     },
-  ]
+  ];
   reviewsslidesOptions: OwlOptions = {
     loop: true,
     margin: 30,
@@ -92,21 +92,23 @@ export class Home2Component implements OnInit {
     pullDrag: true,
     dots: false,
     navSpeed: 700,
-    navText: ['<i class="fas fa-arrow-left"></i>',
-    '<i class="fas fa-arrow-right"></i>'],
+    navText: [
+      '<i class="fas fa-arrow-left"></i>',
+      '<i class="fas fa-arrow-right"></i>',
+    ],
     responsive: {
       0: {
-        items: 1
+        items: 1,
       },
-      768 : {
-        items: 3
+      768: {
+        items: 3,
       },
       1170: {
-        items: 3
-      }
+        items: 3,
+      },
     },
-    nav: true
-  }
+    nav: true,
+  };
   companyOptions: OwlOptions = {
     loop: true,
     margin: 30,
@@ -115,43 +117,44 @@ export class Home2Component implements OnInit {
     pullDrag: true,
     dots: false,
     navSpeed: 700,
-    navText: ['<i class="fas fa-chevron-left"></i>',
-    '<i class="fas fa-chevron-right"></i>'],
+    navText: [
+      '<i class="fas fa-chevron-left"></i>',
+      '<i class="fas fa-chevron-right"></i>',
+    ],
     responsive: {
       0: {
-        items: 1
+        items: 1,
       },
-      768 : {
-        items: 6
+      768: {
+        items: 6,
       },
       1170: {
-        items: 6
-      }
+        items: 6,
+      },
     },
-    nav: true
-  }
+    nav: true,
+  };
 
-  companyslides=[
+  companyslides = [
     {
-      img:"assets/img/company-logo-01.svg"
+      img: 'assets/img/company-logo-01.svg',
     },
     {
-      img:"assets/img/company-logo-02.svg"
+      img: 'assets/img/company-logo-02.svg',
     },
     {
-      img:"assets/img/company-logo-03.svg"
+      img: 'assets/img/company-logo-03.svg',
     },
     {
-      img:"assets/img/company-logo-04.svg"
+      img: 'assets/img/company-logo-04.svg',
     },
     {
-      img:"assets/img/company-logo-05.svg",
+      img: 'assets/img/company-logo-05.svg',
     },
     {
-      img:"assets/img/company-logo-06.svg",
-    }
-
-  ]
+      img: 'assets/img/company-logo-06.svg',
+    },
+  ];
   bloggridslidesOptions: OwlOptions = {
     loop: true,
     margin: 30,
@@ -160,50 +163,52 @@ export class Home2Component implements OnInit {
     pullDrag: true,
     dots: false,
     navSpeed: 700,
-    navText: ['<i class="fas fa-arrow-left"></i>',
-    '<i class="fas fa-arrow-right"></i>'],
+    navText: [
+      '<i class="fas fa-arrow-left"></i>',
+      '<i class="fas fa-arrow-right"></i>',
+    ],
     responsive: {
       0: {
-        items: 1
+        items: 1,
       },
-      768 : {
-        items: 3
+      768: {
+        items: 3,
       },
       1170: {
-        items: 3
-      }
+        items: 3,
+      },
     },
-    nav: true
-  }
-  bloggridslides=[
+    nav: true,
+  };
+  bloggridslides = [
     {
-      blogimg:"assets/img/blog/blog-12.jpg",
-      para:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet.",
-      date:" 4 Oct 2021",
-    },
-    {
-      blogimg:"assets/img/blog/blog-13.jpg",
-      para:"Your next job starts right here",
-      date:"10 Oct 2021",
+      blogimg: 'assets/img/blog/blog-12.jpg',
+      para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet.',
+      date: ' 4 Oct 2021',
     },
     {
-      blogimg:"assets/img/blog/blog-14.jpg",
-      para:"consectetur adipiscing elit. Amet.Lorem ipsum dolor sit amet",
-      date:"3 Jan 2021"
+      blogimg: 'assets/img/blog/blog-13.jpg',
+      para: 'Your next job starts right here',
+      date: '10 Oct 2021',
     },
     {
-      blogimg:"assets/img/blog/blog-13.jpg",
-      para:"Your next job starts right here",
-      date:"7 Oct 2023"
+      blogimg: 'assets/img/blog/blog-14.jpg',
+      para: 'consectetur adipiscing elit. Amet.Lorem ipsum dolor sit amet',
+      date: '3 Jan 2021',
+    },
+    {
+      blogimg: 'assets/img/blog/blog-13.jpg',
+      para: 'Your next job starts right here',
+      date: '7 Oct 2023',
+    },
+  ];
+  search() {
+    if (this.selected === 'projects') {
+      this.router.navigateByUrl('/freelancer/project');
+    } else if (this.selected === 'freelancers') {
+      this.router.navigateByUrl('/employer/developer');
     }
-  ]
-  search(){
-    if(this.selected === 'projects'){
-      this.router.navigateByUrl('/freelancer/project')
-    }else if(this.selected === 'freelancers'){
-      this.router.navigateByUrl('/employer/developer')
-    }
   }
-  selectedList: data[] = [{ value: 'Projects' }, { value: 'Freelancers' }];
+  selectedList: data[] = [{ value: 'Projets' }, { value: 'Freelancers' }];
   public selectedValue = '';
 }

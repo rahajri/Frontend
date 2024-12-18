@@ -310,7 +310,7 @@ export class Home4Component implements OnInit {
   }
   public selectedValue = '';
 
-  selectedList: data[] = [{ value: 'Projects' }, { value: 'Freelancers' }];
+  selectedList: data[] = [{ value: 'Projets' }, { value: 'Freelancers' }];
 
   popularSlider: OwlOptions = {
     items: 6,

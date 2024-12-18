@@ -252,7 +252,7 @@ export class Home5Component implements OnInit {
     this.like[index] = !this.like[index];
   }
 
-  selectedList: data[] = [{ value: 'Projects' }, { value: 'Freelancers' }];
+  selectedList: data[] = [{ value: 'Projets' }, { value: 'Freelancers' }];
   navigation() {
     this.router.navigate([routes.freelancer_project]);
   }
