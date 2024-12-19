@@ -1737,7 +1737,7 @@ export class ShareDataService {
           icon: 'icon-award',
           base: 'skills',
           subMenus: [],
-        },
+        },*/
         {
           menuValue: 'Verifications',
           route: routes.admin_verifyidentity,
@@ -1745,6 +1745,15 @@ export class ShareDataService {
           showSubRoute: false,
           icon: 'icon-check-square',
           base: 'verifyidentity',
+          subMenus: [],
+        },
+        {
+          menuValue: 'Partenaires',
+          route: routes.admin_projects,
+          hasSubRoute: false,
+          showSubRoute: false,
+          icon: 'icon-user-check',
+          base: 'projects',
           subMenus: [],
         },
         /*{
@@ -1755,15 +1764,6 @@ export class ShareDataService {
           icon: 'icon-user-check',
           base: 'providers',
           subMenus: [],
-        },*/
-        {
-          menuValue: 'Partenaires',
-          route: routes.admin_projects,
-          hasSubRoute: false,
-          showSubRoute: false,
-          icon: 'icon-user-check',
-          base: 'projects',
-          subMenus: [],
         },
         {
           menuValue: 'Settings',
@@ -1773,7 +1773,7 @@ export class ShareDataService {
           icon: 'icon-user-check',
           base: 'settings',
           subMenus: [],
-        },
+        },*/
       ],
     },
   ];
