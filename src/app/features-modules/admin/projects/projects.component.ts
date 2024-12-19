@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // import { Subject } from "rxjs";
 import { ShareDataService } from 'src/app/core/data/share-data.service';
@@ -6,16 +6,17 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
 import { apiResultFormat, Company } from 'src/app/core/models/models';
 import { CompanyService } from 'src/app/core/services/company.service';
+import { routes } from 'src/app/core/helpers/routes/routes';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+  styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
-
+  public routes = routes;
   public lstProject!: Array<Company>;
-  public url = "admin";
+  public url = 'admin';
   public searchDataValue = '';
   dataSource!: MatTableDataSource<Company>;
 
@@ -36,31 +37,30 @@ export class ProjectsComponent implements OnInit {
   selectedCompany: any = null;
 
   //** / pagination variables
-  constructor(private data: ShareDataService,
+  constructor(
+    private data: ShareDataService,
     private companyService: CompanyService
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getTableData();
     this.loadCompanies();
-
   }
   //Filter toggle
-  openFilter(){
-    this.filter = !this.filter
-  console.log(this.filter)  
+  openFilter() {
+    this.filter = !this.filter;
+    console.log(this.filter);
   }
   // Get hostel List  Api Call
-
 
   private getTableData(): void {
     this.lstProject = [];
     this.serialNumberArray = [];
-  
+
     this.companyService.getAllCompanies().subscribe(
       (response) => {
-         const companies = response.data || response; // Adjust based on response structure
-        
+        const companies = response.data || response; // Adjust based on response structure
+
         companies.map((res: Company, index: number) => {
           const serialNumber = index + 1;
           if (index >= this.skip && serialNumber <= this.limit) {
@@ -68,7 +68,7 @@ export class ProjectsComponent implements OnInit {
             this.serialNumberArray.push(serialNumber);
           }
         });
-  
+
         this.dataSource = new MatTableDataSource<Company>(this.lstProject);
         this.calculateTotalPages(this.totalData, this.pageSize);
       },
@@ -77,7 +77,7 @@ export class ProjectsComponent implements OnInit {
       }
     );
   }
-  
+
   getDate(isoDate: string): string {
     const date = new Date(isoDate);
     return new Intl.DateTimeFormat('en-GB').format(date); // Formats as DD/MM/YYYY
@@ -89,17 +89,15 @@ export class ProjectsComponent implements OnInit {
     if (!sort.active || sort.direction === '') {
       this.lstProject = data;
     } else {
-       
       this.lstProject = data.sort((a, b) => {
-         
         const aValue = (a as never)[sort.active];
-         
+
         const bValue = (b as never)[sort.active];
         return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
       });
     }
   }
- 
+
   public searchData(value: string): void {
     this.dataSource.filter = value.trim().toLowerCase();
     this.lstProject = this.dataSource.filteredData;
@@ -155,24 +153,20 @@ export class ProjectsComponent implements OnInit {
     }
   }
 
-  
-
   loadCompanies(): void {
     this.companyService.getAllCompanies().subscribe(
       (response) => {
         this.companiesData = response; // Assign response data to companiesData
-       },
+      },
       (error) => {
         console.error('Error fetching companies:', error);
       }
     );
   }
 
-
   setSelectedCompany(company: any): void {
     this.selectedCompany = company;
   }
-
 }
 export interface pageSelection {
   skip: number;

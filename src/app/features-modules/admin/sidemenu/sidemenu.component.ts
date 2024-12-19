@@ -6,14 +6,15 @@ import { AdminSidebar } from 'src/app/core/models/sidebar-model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { SideBarService } from 'src/app/core/services/side-bar/side-bar.service';
-
+import { Profile } from 'src/app/core/models/models';
+import { UserService } from '../../auth/service/user.service';
 
 @Component({
   selector: 'app-sidemenu',
   templateUrl: './sidemenu.component.html',
   styleUrls: ['./sidemenu.component.scss'],
 })
-export class SidemenuComponent implements OnInit{
+export class SidemenuComponent implements OnInit {
   base = '';
   page = '';
   last = '';
@@ -21,15 +22,19 @@ export class SidemenuComponent implements OnInit{
   currentroute = '';
   side_bar_data: AdminSidebar[] = [];
   notifications: any[] = [];
-  unreadCount : number = 0;
+  unreadCount: number = 0;
+  profileName = '';
+  profile: Profile | null = null;
+  initials: string = '';
 
   constructor(
     public router: Router,
     private data: ShareDataService,
     private sideBar: SideBarService,
     private common: CommonService,
-    public auth: AuthService,
-   ) {
+    private userService: UserService,
+    public auth: AuthService
+  ) {
     this.common.base.subscribe((res: string) => {
       this.base = res;
     });
@@ -39,8 +44,6 @@ export class SidemenuComponent implements OnInit{
     this.common.last.subscribe((res: string) => {
       this.last = res;
     });
-
-   
 
     // get sidebar data as observable because data is controlled for design to expand submenus
 
@@ -58,7 +61,7 @@ export class SidemenuComponent implements OnInit{
   }
   ngOnInit(): void {
     this.fetchNotifications();
-
+    this.getUser();
   }
 
   public toggleSideBar(): void {
@@ -80,20 +83,38 @@ export class SidemenuComponent implements OnInit{
     }
   }
 
-  public expandSubMenus(menu: { menuValue: string; showSubRoute: boolean; }): void {
+  public expandSubMenus(menu: {
+    menuValue: string;
+    showSubRoute: boolean;
+  }): void {
     sessionStorage.setItem('menuValue', menu.menuValue);
     this.side_bar_data.map((mainMenus) => {
-      mainMenus.menu.map((resMenu: { menuValue: string; showSubRoute: boolean; }) => {
-        // collapse other submenus which are open
-        if (resMenu.menuValue == menu.menuValue) {
-          menu.showSubRoute = !menu.showSubRoute;
-          if (menu.showSubRoute == false) {
-            sessionStorage.removeItem('menuValue');
+      mainMenus.menu.map(
+        (resMenu: { menuValue: string; showSubRoute: boolean }) => {
+          // collapse other submenus which are open
+          if (resMenu.menuValue == menu.menuValue) {
+            menu.showSubRoute = !menu.showSubRoute;
+            if (menu.showSubRoute == false) {
+              sessionStorage.removeItem('menuValue');
+            }
+          } else {
+            resMenu.showSubRoute = false;
           }
-        } else {
-          resMenu.showSubRoute = false;
         }
-      });
+      );
+    });
+  }
+
+  getUser(): void {
+    this.userService.getProfile().subscribe({
+      next: (profile) => {
+        this.profile = profile;
+        const { fullName, initials } =
+          this.userService.getProfileDetails(profile);
+        this.profileName = fullName;
+        this.initials = initials;
+      },
+      error: (err) => console.error('Error fetching profile:', err),
     });
   }
 
@@ -120,12 +141,10 @@ export class SidemenuComponent implements OnInit{
     this.sideBar.getNotifications().subscribe(
       (data) => {
         this.unreadCount = data.unreadCount;
-        console.log(data.unreadCount)
-         this.notifications = data?.notifications?.map((notification: any) => ({
+        this.notifications = data?.notifications?.map((notification: any) => ({
           title: notification.title,
           timeAgo: this.calculateTimeAgo(notification.createdAt),
         }));
-        
       },
       (error) => {
         console.error('Error fetching notifications:', error);
@@ -134,7 +153,9 @@ export class SidemenuComponent implements OnInit{
   }
 
   private calculateTimeAgo(createdAt: Date): string {
-    const diff = Math.floor((new Date().getTime() - new Date(createdAt).getTime()) / 1000);
+    const diff = Math.floor(
+      (new Date().getTime() - new Date(createdAt).getTime()) / 1000
+    );
     if (diff < 60) return `${diff} seconds ago`;
     if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`;
     if (diff < 86400) return `${Math.floor(diff / 3600)} hours ago`;

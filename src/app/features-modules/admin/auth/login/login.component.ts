@@ -64,7 +64,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       const { email, password } = this.loginForm.value;
       this.userService.login(email, password).subscribe(
         (response) => {
-          console.log('Login successful', response);
           localStorage.setItem('token', response.token);
           this.router.navigate(['/admin/dashboard']);
         },

@@ -81,6 +81,10 @@ export interface Company {
     id: string;
     address: string;
     addressLine2?: string | null; // Optional and nullable secondary address line
+    postalCode: {
+      code: string;
+      id: string;
+    };
     city?: {
       id: string;
       name: string;
@@ -116,6 +120,12 @@ export interface Company {
     updatedAt: string;
     position?: string | null; // Optional and nullable
   }>;
+  socialMedia: {
+    id: string;
+    instagram: string | null;
+    facebook: string | null;
+    linkedIn: string | null;
+  };
 }
 
 export interface Profile {

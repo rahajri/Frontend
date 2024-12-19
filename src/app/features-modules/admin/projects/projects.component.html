@@ -5,12 +5,12 @@
     <div class="page-header">
       <div class="row align-items-center">
         <div class="col">
-          <h3 class="page-title">Companies</h3>
+          <h3 class="page-title">Partenaires</h3>
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
               <a [routerLink]="'/admin/dashboard'">Accueil</a>
             </li>
-            <li class="breadcrumb-item active">Projets</li>
+            <li class="breadcrumb-item active">Partenaires</li>
           </ul>
         </div>
         <div class="col-auto">
@@ -173,7 +173,7 @@
                       </td>
 
                       <td>{{ getDate(company.createdAt) }}</td>
-                      <td data-bs-toggle="modal" data-bs-target="#show-details">
+                      <td [routerLink]="routes.get_admin_company(company.id)">
                         {{ company.name }}
                       </td>
                       <td>{{ company.nafTitle }}</td>
@@ -189,10 +189,8 @@
 
                       <td class="text-end">
                         <a
-                          href="javascript:void(0);"
                           class="btn btn-sm btn-secondary me-2"
-                          data-bs-toggle="modal"
-                          data-bs-target="#show-details"
+                          [routerLink]="routes.get_admin_company(company.id)"
                           ><i class="far fa-edit"></i
                         ></a>
                         <a

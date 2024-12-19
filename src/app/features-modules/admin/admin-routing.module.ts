@@ -116,6 +116,11 @@ const routes: Routes = [
           import('./profile/profile.module').then((m) => m.ProfileModule),
       },
       {
+        path: 'company/:id',
+        loadChildren: () =>
+          import('./company/company.module').then((m) => m.CompanyModule),
+      },
+      {
         path: 'views',
         loadChildren: () =>
           import('./views/views.module').then((m) => m.ViewsModule),

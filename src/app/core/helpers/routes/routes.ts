@@ -250,6 +250,9 @@ export class routes {
   public static get admin_profile(): string {
     return this.admin + '/profile';
   }
+  public static get_admin_company(id: string): string {
+    return this.admin + `/company/${id}`;
+  }
   public static get admin_setting(): string {
     return this.admin + '/settings/general';
   }

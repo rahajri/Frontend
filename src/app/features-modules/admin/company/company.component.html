@@ -1,0 +1,418 @@
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row">
+        <div class="col">
+          <h3 class="page-title">Partenaire Profile</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a [routerLink]="'/admin/dashboard'">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Partenaire Profile</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="profile-cover">
+      <div class="profile-cover-wrap">
+        <!-- <img
+          class="profile-cover-img"
+          src="assets/img/avatar/avatar-07.jpg"
+          alt="Profile Cover"
+        /> -->
+
+        <!-- Custom File Cover -->
+        <div class="cover-content">
+          <div class="custom-file-btn">
+            <input
+              type="file"
+              class="custom-file-btn-input"
+              id="cover_upload"
+            />
+            <label
+              class="custom-file-btn-label btn btn-sm btn-white"
+              for="cover_upload"
+            >
+              <i class="fas fa-camera"></i>
+              <span class="d-none d-sm-inline-block ms-1">Update Cover</span>
+            </label>
+          </div>
+        </div>
+        <!-- /Custom File Cover -->
+      </div>
+    </div>
+
+    <div class="text-center mb-5">
+      <label class="avatar avatar-xxl profile-cover-avatar" for="avatar_upload">
+        <!-- <img
+          class="avatar-img"
+          src="assets/img/avatar/avatar-07.jpg"
+          alt="Profile Image"
+        /> -->
+        <input type="file" id="avatar_upload" />
+        <span class="avatar-edit">
+          <i class="feather icon-edit avatar-uploader-icon shadow-soft"></i>
+        </span>
+      </label>
+      <h2>
+        {{ company?.name }}
+        <i
+          class="fas fa-certificate text-primary small"
+          data-bs-toggle="tooltip"
+          data-placement="top"
+          title=""
+          data-original-title="Verified"
+        ></i>
+      </h2>
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <i class="far fa-calendar-alt"></i>
+          <span>Inscrit le {{ formatDate(company?.createdAt) }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="pro-pos">
+      <div class="setting-content employee-profile-new">
+        <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+          <div class="card">
+            <div class="pro-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-row pro-pad pt-0 ps-0">
+                    <div class="input-block col-md-6 pro-pic">
+                      <h4 class="mb-3">Information Contact</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="first-name" class="form-label">Prénom</label>
+                    <input
+                      formControlName="firstName"
+                      type="text"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid':
+                          firstName?.invalid &&
+                          (firstName?.touched || firstName?.dirty)
+                      }"
+                    />
+                    <!-- Message d'erreur -->
+                    <div
+                      *ngIf="firstName?.touched && firstName?.invalid"
+                      class="text-danger"
+                    >
+                      <div *ngIf="firstName?.errors?.['required']">
+                        Le champ Prénom est obligatoire.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="last-name" class="form-label">Nom</label>
+                    <input
+                      formControlName="lastName"
+                      type="text"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid':
+                          lastName?.invalid &&
+                          (lastName?.touched || lastName?.dirty)
+                      }"
+                    />
+                    <!-- Message d'erreur -->
+                    <div
+                      *ngIf="lastName?.touched && lastName?.invalid"
+                      class="text-danger"
+                    >
+                      <div *ngIf="lastName?.errors?.['required']">
+                        Le champ Nom est obligatoire.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="phone-number" class="form-label"
+                      >Téléphone</label
+                    >
+                    <input
+                      formControlName="phone"
+                      type="text"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid':
+                          phone?.invalid && (phone?.touched || phone?.dirty)
+                      }"
+                    />
+                    <!-- Message d'erreur -->
+                    <div
+                      *ngIf="phone?.touched && phone?.invalid"
+                      class="text-danger"
+                    >
+                      <div *ngIf="phone?.errors?.['required']">
+                        Le champ Téléphone est obligatoire.
+                      </div>
+                      <div *ngIf="phone?.errors?.['pattern']">
+                        Veuillez entrer un numéro de téléphone valide.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="email-address" class="form-label">E-mail</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="company?.employees?.[0]?.email "
+                      disabled
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <input formControlName="userId" type="hidden" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="pro-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-row pro-pad pt-0 ps-0">
+                    <div class="input-block col-md-6 pro-pic">
+                      <h4 class="mb-3">Informations Générales</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="mb-3">
+                        <label for="Name" class="form-label"
+                          >Raison sociale</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          [value]="company?.name"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="mb-3">
+                        <label for="Tagline" class="form-label">Siret</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          [value]="company?.siret"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="Address" class="form-label">Activité </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="company?.nafTitle"
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="pro-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-row pro-pad pt-0 ps-0">
+                    <div class="input-block col-md-6 pro-pic">
+                      <h4 class="mb-3">Localisation</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="Address" class="form-label">Addresse</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [value]="
+                      company?.location?.address +
+                      ' ' +
+                      company?.location?.addressLine2
+                    "
+                    disabled
+                  />
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="zip code" class="form-label">Code postal</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="company?.location?.postalCode?.code"
+                      disabled
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="city" class="form-label">Ville </label>
+                    <select class="form-select" disabled>
+                      <option [value]="company?.location?.city?.name" selected>
+                        {{ company?.location?.city?.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="Country" class="form-label">Département </label>
+
+                    <select class="form-select" disabled>
+                      <option
+                        [value]="company?.location?.city?.department?.name"
+                        selected
+                      >
+                        {{ company?.location?.city?.department?.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="region" class="form-label">Région </label>
+                    <select class="form-select" disabled>
+                      <option
+                        [value]="
+                          company?.location?.city?.department?.region?.name
+                        "
+                        selected
+                      >
+                        {{ company?.location?.city?.department?.region?.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="pro-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-row pro-pad pt-0 ps-0">
+                    <div class="input-block col-md-6 pro-pic">
+                      <h4 class="mb-3">Médias Sociaux</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="mb-3">
+                    <label for="Facebook" class="form-label">Facebook</label>
+                    <input
+                      id="Facebook"
+                      type="text"
+                      class="form-control"
+                      formControlName="facebook"
+                    />
+                    <!-- Message d'erreur -->
+                    <div
+                      *ngIf="facebook?.touched && facebook?.invalid"
+                      class="text-danger"
+                    >
+                      <div *ngIf="facebook?.errors?.['pattern']">
+                        Veuillez entrer une URL valide pour Facebook.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="mb-3">
+                    <label for="instagram" class="form-label">Instagram </label>
+                    <input
+                      id="instagram"
+                      type="text"
+                      class="form-control"
+                      formControlName="instagram"
+                    />
+                    <!-- Message d'erreur -->
+                    <div
+                      *ngIf="instagram?.touched && instagram?.invalid"
+                      class="text-danger"
+                    >
+                      <div *ngIf="instagram?.errors?.['pattern']">
+                        Veuillez entrer une URL valide pour Instagram.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                  <div class="mb-3">
+                    <label for="LinkedIn" class="form-label">LinkedIn</label>
+                    <input
+                      id="LinkedIn"
+                      type="text"
+                      class="form-control"
+                      formControlName="linkedIn"
+                    />
+                    <!-- Message d'erreur -->
+                    <div
+                      *ngIf="linkedIn?.touched && linkedIn?.invalid"
+                      class="text-danger"
+                    >
+                      <div *ngIf="linkedIn?.errors?.['pattern']">
+                        Veuillez entrer une URL valide pour LinkedIn.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-12">
+            <label for="message" class="form-label">Besoin de base</label>
+            <textarea
+              rows="4"
+              class="form-control"
+              [value]="company?.message"
+              disabled
+            ></textarea>
+          </div>
+          <div class="card text-end border-0">
+            <div class="pro-body mb-3">
+              <button
+                class="btn btn-secondary click-btn btn-plan"
+                (click)="onCancel()"
+              >
+                Annuler
+              </button>
+              <button
+                class="btn btn-secondary click-btn btn-plan"
+                type="submit"
+              >
+                Mettre à jour
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Page Wrapper -->

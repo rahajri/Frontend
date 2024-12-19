@@ -72,6 +72,15 @@ export class CompanyService {
       })
     );
   }
+  // First function to get the company by id
+  getCompanyDetails(id: string | null) {
+    if (!id) {
+      throw new Error('Company ID cannot be null');
+    }
+    return this.http.get<any>(`${this.baseUrl}/${id}`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
 
   // Second function to get the NAF details based on the company's activitePrincipaleUniteLegale
   public getNafByCompany(steSiret: any): Observable<NAF | undefined> {

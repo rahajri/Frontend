@@ -6,9 +6,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { Profile } from 'src/app/core/models/models';
-interface data {
-  value: string;
-}
 @Component({
   selector: 'app-basic-settings',
   templateUrl: './basic-settings.component.html',
@@ -112,7 +109,7 @@ export class BasicSettingsComponent {
         .updateCompany(this.companyId, trimmedValues)
         .subscribe({
           next: (res) => {
-            window.location.reload();
+            console.log('Updated Successfully');
           },
           error: (err) => console.error(err),
         });
