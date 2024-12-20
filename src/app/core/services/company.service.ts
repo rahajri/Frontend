@@ -130,4 +130,16 @@ export class CompanyService {
       headers: this.getAuthHeaders(),
     });
   }
+
+  updateCompanyStatus(companyId: string, statusId: string): Observable<any> {
+    return this.http.patch(
+      `${this.baseUrl}/${companyId}/status`,
+      {
+        statusId,
+      },
+      {
+        headers: this.getAuthHeaders(),
+      }
+    );
+  }
 }

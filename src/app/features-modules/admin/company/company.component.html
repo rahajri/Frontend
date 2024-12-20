@@ -74,6 +74,18 @@
           <span>Inscrit le {{ formatDate(company?.createdAt) }}</span>
         </li>
       </ul>
+      <div>
+        <label for="status">Status</label>
+        <select
+          id="status"
+          class="form-select w-auto m-auto"
+          [(ngModel)]="selectedStatusId"
+        >
+          <option *ngFor="let status of allCompanyStatus" [value]="status.id">
+            {{ status.name }}
+          </option>
+        </select>
+      </div>
     </div>
 
     <div class="pro-pos">
@@ -171,9 +183,27 @@
                     <input
                       type="text"
                       class="form-control"
-                      [value]="company?.employees?.[0]?.email "
-                      disabled
+                      formControlName="email"
+                      [ngClass]="{
+                        'is-invalid':
+                          email?.invalid && (email?.touched || email?.dirty)
+                      }"
                     />
+                    <!-- Email Validation -->
+                    <div
+                      *ngIf="
+                        companyForm.get('email')?.touched &&
+                        companyForm.get('email')?.invalid
+                      "
+                      class="text-danger"
+                    >
+                      <div *ngIf="email?.errors?.['required']">
+                        Le champ Email est obligatoire.
+                      </div>
+                      <div *ngIf="email?.errors?.['email']">
+                        Veuillez entrer un email valide.
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
@@ -416,3 +446,24 @@
   </div>
 </div>
 <!-- /Page Wrapper -->
+
+<!-- The Modal -->
+<div class="modal fade success-modal hire-modal" id="data-changed">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body pt-4">
+        <div class="success-msg-content text-center">
+          <h4>Données Modifiées</h4>
+          <p>Vos données ont été modifiées avec succès.</p>
+          <a
+            href="javascript:void(0);"
+            data-bs-dismiss="modal"
+            class="btn btn-primary mt-3"
+            >D'accord</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /The Modal -->

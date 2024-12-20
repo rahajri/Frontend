@@ -100,8 +100,9 @@ export interface Company {
   };
   status?: {
     id: string;
-    description: string;
-    type: string;
+    name: string;
+    description?: string;
+    context: string;
   };
   employees?: Array<{
     id: string;

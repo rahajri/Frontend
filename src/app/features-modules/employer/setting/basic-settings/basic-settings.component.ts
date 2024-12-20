@@ -6,6 +6,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { Profile } from 'src/app/core/models/models';
+import * as lodash from 'lodash';
+
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-basic-settings',
   templateUrl: './basic-settings.component.html',
@@ -104,15 +108,30 @@ export class BasicSettingsComponent {
   onSubmit() {
     this.markFormGroupTouched(this.basicForm);
     const trimmedValues = this.trimFormValues(this.basicForm.value);
+
+    if (lodash.isEqual(trimmedValues, this.initialFormValues)) {
+      return;
+    }
+
     if (this.basicForm.valid && this.companyId) {
       this.companyService
         .updateCompany(this.companyId, trimmedValues)
         .subscribe({
           next: (res) => {
-            console.log('Updated Successfully');
+            this.showSuccessModal();
           },
-          error: (err) => console.error(err),
+          error: (err) => {
+            console.error(err);
+          },
         });
+    }
+  }
+
+  showSuccessModal() {
+    const modalElement = document.getElementById('data-changed');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
     }
   }
 
