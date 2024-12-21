@@ -138,6 +138,10 @@ export class CompanyComponent {
     this.markFormGroupTouched(this.companyForm);
     const trimmedValues = this.trimFormValues(this.companyForm.value);
 
+    if (trimmedValues.email !== this.initialFormValues.email) {
+      trimmedValues.emailHasChanged = true;
+    }
+
     if (this.initialStatusId !== this.selectedStatusId) {
       this.initialStatusId = this.selectedStatusId;
       this.ChangeStatus();
@@ -157,13 +161,12 @@ export class CompanyComponent {
     const trimmedValues: any = {};
     Object.keys(values).forEach((key) => {
       const value = values[key];
-      trimmedValues[key] = typeof value === 'string' ? value.trim() : value; // Trim if it's a string
+      trimmedValues[key] = typeof value === 'string' ? value.trim() : value;
     });
     return trimmedValues;
   }
 
   onCancel() {
-    // Reset the form to initial values
     if (this.initialFormValues) {
       this.companyForm.patchValue(this.initialFormValues);
     }
@@ -184,8 +187,20 @@ export class CompanyComponent {
 
   private updateCompany(companyId: string, values: any) {
     this.companyService.updateCompany(companyId, values).subscribe({
-      next: () => this.showSuccessModal(),
-      error: (err) => console.error(err),
+      next: () => {
+        this.showSuccessModal();
+        this.initialFormValues = values;
+      },
+      error: (err) => {
+        if (
+          err?.status === 409 &&
+          err?.error?.message === "L'email existe déjà dans la base de données."
+        ) {
+          this.companyForm.get('email')?.setErrors({ emailExists: true });
+        } else {
+          console.error(err);
+        }
+      },
     });
   }
 

@@ -197,6 +197,9 @@
                       "
                       class="text-danger"
                     >
+                      <div *ngIf="email?.hasError('emailExists')">
+                        L'email existe déjà dans la base de données.
+                      </div>
                       <div *ngIf="email?.errors?.['required']">
                         Le champ Email est obligatoire.
                       </div>

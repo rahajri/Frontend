@@ -21,6 +21,12 @@ export class EmployerGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    // Check if the route is 'change-password'
+    if (state.url.includes('change-password')) {
+      // Allow access to change-password route without checking role
+      return true;
+    }
+
     const role = localStorage.getItem('role');
     if (role === 'company-employee') {
       return true;

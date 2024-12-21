@@ -4,23 +4,31 @@ import { RouterModule, Routes } from '@angular/router';
 //   AuthenticateGuard
 //   } from './core/guard/guard.index';
 
-
 const routes: Routes = [
-  { 
-    path: '', 
-    loadChildren: () => import('./features-modules/features-modules.module').then( (m) => m.FeaturesModulesModule) 
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features-modules/features-modules.module').then(
+        (m) => m.FeaturesModulesModule
+      ),
   },
- 
+  {
+    path: 'reset-password',
+    loadChildren: () =>
+      import(
+        './features-modules/pages/reset-password/reset-password.module'
+      ).then((m) => m.ResetPasswordModule),
+  },
+
   {
     path: '**',
     redirectTo: '404',
     pathMatch: 'full',
   },
-
-  ];
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

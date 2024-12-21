@@ -161,7 +161,6 @@ export class RegisterCompanyComponent {
   passwordValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const password = control.value;
-
       if (!password) return null;
 
       const minLength = password.length >= 8;
