@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { Validators } from '@angular/forms';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 declare var bootstrap: any;
 
@@ -18,7 +19,9 @@ declare var bootstrap: any;
 })
 export class ResetPasswordComponent {
   password: boolean[] = [false, false];
+  isTokenValid: boolean | null = null;
   resetForm!: FormGroup;
+  routes: any = routes;
   passwordValidations = {
     minLength: false,
     hasLowercase: false,
@@ -35,7 +38,8 @@ export class ResetPasswordComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService
   ) {
     this.resetForm = this.fb.group(
       {
@@ -48,10 +52,22 @@ export class ResetPasswordComponent {
 
   ngOnInit(): void {
     this.token = this.route.snapshot.queryParamMap.get('token') || '';
-    console.log('Token', this.token);
+    this.checkTokenValidation(this.token);
 
     this.resetForm.get('password')?.valueChanges.subscribe((password) => {
       this.updatePasswordValidations(password);
+    });
+  }
+
+  checkTokenValidation(token: string) {
+    this.authService.checkPasswordToken(token).subscribe({
+      next: (res) => {
+        this.isTokenValid = true;
+        console.log(res);
+      },
+      error: (err) => {
+        this.isTokenValid = false;
+      },
     });
   }
 
@@ -61,7 +77,8 @@ export class ResetPasswordComponent {
 
     // Optionally, you can check the validity here and take further actions
     if (this.resetForm.valid) {
-      // Submit the form data if valid
+      const pass = this.resetForm.get('password')?.value;
+      this.updatePassword(this.token, pass);
       console.log('Form submitted:', this.resetForm.value);
     } else {
       console.log('Form is invalid');
@@ -110,11 +127,28 @@ export class ResetPasswordComponent {
     };
   }
 
+  updatePassword(token: string | null, password: string) {
+    if (token && password) {
+      this.authService.resetPassword(token, password).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.showSuccessModal();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+    }
+  }
+
   showSuccessModal() {
     const modalElement = document.getElementById('data-changed');
     if (modalElement) {
+      modalElement.setAttribute('aria-hidden', 'false');
+      modalElement.style.display = 'block';
       const modal = new bootstrap.Modal(modalElement);
       modal.show();
+      modalElement.focus();
     }
   }
 

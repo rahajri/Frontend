@@ -67,7 +67,7 @@ Version      : 1.0
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
 
 :root {
-  --primary-color: #{environment.primaryColor};
+  --primary-color: #E65425;
 }
 
 html {

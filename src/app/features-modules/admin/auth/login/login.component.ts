@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { WebStorage } from '../../../../core/storage/web.storage';
 import { UserService } from 'src/app/features-modules/auth/service/user.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 interface CustomControlerType {
   status: string;
   message: string;
@@ -18,7 +19,7 @@ interface CustomControlerType {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public Toggledata = true;
@@ -26,13 +27,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public CustomControler: CustomControlerType | undefined;
   public subscription: Subscription;
-   
-   
 
-
-  constructor(private storage: WebStorage,
-    private userService: UserService,
-    private fb: FormBuilder, private router: Router,
+  constructor(
+    private storage: WebStorage,
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.subscription = this.storage.Loginvalue.subscribe((data) => {
       if (data !== '0') {
@@ -42,16 +42,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    })
-
+      password: ['', Validators.required],
+    });
   }
   ngOnInit() {
     this.storage.Checkuser();
     localStorage.removeItem('LoginData');
   }
 
- 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
@@ -62,18 +60,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.userService.login(email, password).subscribe(
-        (response) => {
+      this.authService.login(email, password).subscribe({
+        next: (response) => {
           localStorage.setItem('token', response.token);
           this.router.navigate(['/admin/dashboard']);
         },
-        (error) => {
+        error: (error) => {
           // Handle login error
           console.error('Login failed', error);
-          
-        }
-      );
+        },
+      });
     }
   }
-
 }

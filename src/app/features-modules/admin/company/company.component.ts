@@ -207,8 +207,11 @@ export class CompanyComponent {
   showSuccessModal() {
     const modalElement = document.getElementById('data-changed');
     if (modalElement) {
+      modalElement.setAttribute('aria-hidden', 'false');
+      modalElement.style.display = 'block';
       const modal = new bootstrap.Modal(modalElement);
       modal.show();
+      modalElement.focus();
     }
   }
 }

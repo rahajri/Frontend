@@ -8,9 +8,9 @@ export const environment = {
   secondaryColor: '#75e6da',
   backgroundColor: 'blue',
   warningyColor: '#05445e',
-  defaultLanguage: 'fr' ,
-  apiUrl: 'http://localhost:3000'
-}
+  defaultLanguage: 'fr',
+  apiUrl: 'http://localhost:3000',
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

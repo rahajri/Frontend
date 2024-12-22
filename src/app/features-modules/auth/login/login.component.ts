@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService,
     private authService: AuthService,
     private candidateService: CandidateService
   ) {
@@ -59,23 +58,23 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.userService.login(email, password).subscribe(
+      this.authService.login(email, password).subscribe(
         (response) => {
           localStorage.clear();
           localStorage.setItem('token', response.token);
           localStorage.setItem('email', response.email);
           localStorage.setItem('role', response.role);
           if (response.role == 'candidate') {
-            this.candidateService.checkCondidate(response.email).subscribe(
-              (condidate) => {
+            this.candidateService.checkCondidate(response.email).subscribe({
+              next: (condidate) => {
                 if (condidate == true) {
                   this.router.navigate(['/freelancer/dashboards']);
                 } else this.router.navigate(['/pages/onboard-screen']);
               },
-              (error) => {
+              error: (error) => {
                 console.error('Error fetching candidate:', error);
-              }
-            );
+              },
+            });
           } else if (response.role == 'admin') {
             this.router.navigate(['/admin/dashboard']);
           } else if (response.role == 'company-employee') {

@@ -1,4 +1,7 @@
-import { HttpClientModule } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -39,17 +42,14 @@ import {
   BsDatepickerConfig,
 } from 'ngx-bootstrap/datepicker';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { LightgalleryModule } from 'lightgallery/angular'; 
+import { LightgalleryModule } from 'lightgallery/angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
-
 @NgModule({
-  
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     CommonModule,
     MaterialModule,
     NgApexchartsModule,
@@ -83,12 +83,11 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     BsDatepickerModule.forRoot(),
     CarouselModule,
     LightgalleryModule,
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     CommonModule,
     MaterialModule,
     NgApexchartsModule,
@@ -121,14 +120,15 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     BsDatepickerModule,
     CarouselModule,
     LightgalleryModule,
-    TimepickerModule
+    TimepickerModule,
   ],
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { showError: true },
     },
-    BsDatepickerConfig
+    BsDatepickerConfig,
+    provideHttpClient(withInterceptorsFromDi()),
   ],
 })
 export class SharedModule {}
