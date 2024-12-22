@@ -2,15 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  UntypedFormControl,
-  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { WebStorage } from 'src/app/core/storage/web.storage';
-import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
 import { CandidateService } from 'src/app/core/services/condidate.service';

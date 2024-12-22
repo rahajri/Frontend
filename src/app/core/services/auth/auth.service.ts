@@ -10,13 +10,10 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class AuthService {
   private readonly baseUrl = `${environment.apiUrl}/auth`;
-  private currentUserSubject: BehaviorSubject<any | null> = new BehaviorSubject(
-    null
-  );
-  public currentUser$: Observable<any | null> =
-    this.currentUserSubject.asObservable();
-  public checkAuth: BehaviorSubject<string> = new BehaviorSubject<string>(
-    localStorage.getItem('authenticated') || 'false'
+  private currentUserSubject = new BehaviorSubject<any | null>(null);
+  public currentUser$ = this.currentUserSubject.asObservable();
+  public checkAuth = new BehaviorSubject<boolean>(
+    JSON.parse(localStorage.getItem('authenticated') || 'false')
   );
 
   constructor(private router: Router, private http: HttpClient) {}
@@ -30,15 +27,21 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http
-      .post<any>(`${this.baseUrl}/login`, { email, password }, { headers })
+      .post<any>(
+        `${this.baseUrl}/login`,
+        { email, password },
+        {
+          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+        }
+      )
       .pipe(
         map((user) => {
-          if (user && user.accessToken && user.refreshToken) {
+          if (user?.accessToken && user?.refreshToken) {
             localStorage.setItem('currentUser', JSON.stringify(user));
+            localStorage.setItem('token', user.accessToken);
             this.currentUserSubject.next(user);
-            this.checkAuth.next('true');
+            this.checkAuth.next(true);
           }
           return user;
         })
@@ -50,27 +53,11 @@ export class AuthService {
   }
 
   public logout(): void {
-    this.currentUserSubject.next(null);
-    localStorage.removeItem('token'); // Remove the token
-    localStorage.removeItem('currentUser');
-    this.checkAuth.next('false');
-    localStorage.clear();
-    sessionStorage.clear();
+    this.clearSession();
     this.router.navigate([routes.home]);
   }
 
-  /**
-   * Creates an authorization header
-   */
-  private createHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token');
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-  }
-
-  checkPasswordToken(token: string) {
+  checkPasswordToken(token: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/check-password-token`, {
       token,
     });
@@ -81,5 +68,14 @@ export class AuthService {
       token,
       password,
     });
+  }
+
+  private clearSession(): void {
+    this.currentUserSubject.next(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
+    localStorage.setItem('authenticated', 'false');
+    this.checkAuth.next(false);
+    sessionStorage.clear();
   }
 }
