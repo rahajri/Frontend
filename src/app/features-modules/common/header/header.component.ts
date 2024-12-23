@@ -48,7 +48,6 @@ export class HeaderComponent {
 
   ngOnInit(): void {
     this.isLogged = this.authService.isLoggedIn();
-    console.log(this.isLogged);
   }
   employer() {
     localStorage.setItem('employer', 'employer');
