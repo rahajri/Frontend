@@ -179,6 +179,56 @@ export interface Profile {
     context: string;
   };
 }
+export interface User {
+  age: string;
+  startDate: string;
+  expectedDuration: number;
+  email: string | null;
+  phone: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  position: string | null;
+  role: string | null;
+  profileTitle: string | null;
+  birthDate: Date | null;
+  updatedAt: Date;
+  createdAt: Date;
+  company: {
+    name: string;
+    siret: string;
+    email: string | null;
+    phone: string | null;
+    naf: string;
+    nafTitle: string;
+    category: string;
+    workforce: number;
+    message: string;
+    establishedDate: Date | null;
+    createdAt: Date;
+    updatedAt: Date;
+    location: {
+      postalCode: {
+        code: string;
+      };
+      city: {
+        name: string;
+        department: {
+          name: string;
+          region: {
+            name: string;
+          };
+        };
+      };
+      address: string;
+      addressLine2: string;
+    };
+  };
+  status: {
+    name: string;
+    description: string;
+    context: string;
+  };
+}
 
 export interface category {
   id: number;

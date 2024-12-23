@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Validators } from '@angular/forms';
@@ -14,57 +19,53 @@ import { AlertService } from 'src/app/core/services/alert/alert.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
-
-
 export class RegisterComponent {
   public routes = routes;
-  password: boolean[] = [false, false]; 
-  companiesData: any
+  password: boolean[] = [false, false];
+  companiesData: any;
   signupForm!: FormGroup;
   passwordValidations = {
     minLength: false,
     hasLowercase: false,
     hasUppercase: false,
     hasNumber: false,
-    hasSpecialChar: false
+    hasSpecialChar: false,
   };
   selectedNaf: any;
   selectedCompany: any;
 
   form!: FormGroup;
   location!: FormGroup;
-  constructor(private translate: TranslateService,
+  constructor(
+    private translate: TranslateService,
     public Router: Router,
     private fb: FormBuilder,
     private userService: UserService,
     private emailStorageService: EmailStorageService,
-    private companyService: CompanyService,
-    private locationService: LocationService,
-    private alertService: AlertService,
-    
-
+    private alertService: AlertService
   ) {
     this.translate.setDefaultLang(environment.defaultLanguage);
 
-    this.signupForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, this.passwordValidator()]],
-      confirmPassword: ['', [Validators.required]],
-      terms: [false, Validators.requiredTrue],
-    }, { validators: this.passwordMatchValidator() });
+    this.signupForm = this.fb.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, this.passwordValidator()]],
+        confirmPassword: ['', [Validators.required]],
+        terms: [false, Validators.requiredTrue],
+      },
+      { validators: this.passwordMatchValidator() }
+    );
 
-    this.signupForm.get('password')?.valueChanges.subscribe(password => {
+    this.signupForm.get('password')?.valueChanges.subscribe((password) => {
       this.updatePasswordValidations(password);
     });
-    
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   // Method to check the current password's validation status
   updatePasswordValidations(password: string): void {
@@ -91,26 +92,27 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
-
     if (this.signupForm.valid) {
       const formValues = this.signupForm.value;
       const randomSixDigitNumber = Math.floor(100000 + Math.random() * 900000); // Generates a random 6-digit number
       const username = `${formValues.firstName}${randomSixDigitNumber}`;
 
       const data = {
-
         firstName: formValues.firstName,
         lastName: formValues.lastName,
         email: formValues.email,
         password: formValues.password,
       };
       console.log('daaata', data);
-       this.userService.createUser(data).subscribe(
+      this.userService.createUser(data).subscribe(
         (response) => {
           console.log('User created successfully:', response);
           // Store the email in the service
           this.emailStorageService.setEmail(formValues.email);
-          this.alertService.showAlert('Candidature created successfully!', 'success');
+          this.alertService.showAlert(
+            'Candidature created successfully!',
+            'success'
+          );
 
           // Redirect to the VerifyEmailComponent
           this.Router.navigate(['/auth/verify-email']);
@@ -125,10 +127,10 @@ export class RegisterComponent {
 
   verifyOtp(userId: string) {
     this.userService.verifyOtp(userId).subscribe(
-      response => {
+      (response) => {
         console.log('OTP verified successfully', response);
       },
-      error => {
+      (error) => {
         console.error('Verification failed', error);
       }
     );
@@ -157,7 +159,4 @@ export class RegisterComponent {
       return Object.keys(errors).length ? errors : null;
     };
   }
-
-
-
 }
