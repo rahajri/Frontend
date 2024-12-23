@@ -22,6 +22,7 @@ export class ResetPasswordComponent {
   isTokenValid: boolean | null = null;
   resetForm!: FormGroup;
   routes: any = routes;
+  emailResended = false;
   passwordValidations = {
     minLength: false,
     hasLowercase: false,
@@ -79,7 +80,6 @@ export class ResetPasswordComponent {
     if (this.resetForm.valid) {
       const pass = this.resetForm.get('password')?.value;
       this.updatePassword(this.token, pass);
-      console.log('Form submitted:', this.resetForm.value);
     } else {
       console.log('Form is invalid');
     }
@@ -102,6 +102,20 @@ export class ResetPasswordComponent {
         ? { passwordsMismatch: true }
         : null;
     };
+  }
+
+  resendResetPasswordEmail() {
+    if (this.token) {
+      this.authService.resendResetPasswordEmail(this.token).subscribe({
+        next: (res) => {
+          this.emailResended = true;
+          console.log('Email ', res);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+    }
   }
 
   passwordValidator(): ValidatorFn {
@@ -149,6 +163,11 @@ export class ResetPasswordComponent {
       const modal = new bootstrap.Modal(modalElement);
       modal.show();
       modalElement.focus();
+
+      setTimeout(() => {
+        modal.hide();
+        this.router.navigate([this.routes.login]);
+      }, 3000);
     }
   }
 

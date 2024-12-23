@@ -26,6 +26,8 @@ export class CompanyComponent {
   initialStatusId: string | null = '';
   selectedStatusName: string = '';
   initialStatusName: string = '';
+  emailHasChanged = false;
+  isRequestInProgress = false;
 
   constructor(
     private fb: FormBuilder,
@@ -139,18 +141,19 @@ export class CompanyComponent {
   }
 
   onSubmit() {
+    this.isRequestInProgress = true;
     this.markFormGroupTouched(this.companyForm);
     const trimmedValues = this.trimFormValues(this.companyForm.value);
-
+    trimmedValues.emailHasChanged = false;
     if (trimmedValues.email !== this.initialFormValues.email) {
       trimmedValues.emailHasChanged = true;
+      this.emailHasChanged = true;
     }
 
     if (this.initialStatusId !== this.selectedStatusId) {
       this.initialStatusId = this.selectedStatusId;
       this.ChangeStatus();
-      this.showSuccessModal();
-      console.log(333);
+      this.isRequestInProgress = false;
     }
 
     if (lodash.isEqual(trimmedValues, this.initialFormValues)) {
@@ -197,9 +200,9 @@ export class CompanyComponent {
   }
 
   private updateCompany(companyId: string, values: any) {
+    this.isRequestInProgress = true;
     this.companyService.updateCompany(companyId, values).subscribe({
       next: () => {
-        console.log(111);
         this.showSuccessModal();
         this.initialFormValues = values;
       },
@@ -210,8 +213,12 @@ export class CompanyComponent {
         ) {
           this.companyForm.get('email')?.setErrors({ emailExists: true });
         } else {
+          this.showErrorModal();
           console.error(err);
         }
+      },
+      complete: () => {
+        this.isRequestInProgress = false;
       },
     });
   }
@@ -227,6 +234,22 @@ export class CompanyComponent {
 
       setTimeout(() => {
         modal.hide();
+      }, 3000);
+    }
+  }
+
+  showErrorModal() {
+    const errorModalElement = document.getElementById('error');
+    if (errorModalElement) {
+      errorModalElement.setAttribute('aria-hidden', 'false');
+      errorModalElement.style.display = 'block';
+      const modal = new bootstrap.Modal(errorModalElement);
+      modal.show();
+      errorModalElement.focus();
+
+      setTimeout(() => {
+        modal.hide();
+        errorModalElement.style.display = 'none';
       }, 3000);
     }
   }

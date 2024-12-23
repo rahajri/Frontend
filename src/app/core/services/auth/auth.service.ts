@@ -72,6 +72,12 @@ export class AuthService {
     });
   }
 
+  resendResetPasswordEmail(token: string) {
+    return this.http.post<any>(`${this.baseUrl}/resend-reset-password-email`, {
+      token,
+    });
+  }
+
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token'); // Or sessionStorage.getItem()
     if (!token) {

@@ -441,17 +441,18 @@
             ></textarea>
           </div>
           <div class="card text-end border-0">
-            <div class="pro-body mb-3">
+            <div class="d-flex justify-content-end gap-2 m-2">
               <button
-                class="btn btn-secondary click-btn btn-plan"
-                type="button" 
+                class="btn btn-primary btn-lg login-btn d-flex align-items-center justify-content-center"
+                type="button"
                 (click)="onCancel()"
               >
                 Annuler
               </button>
               <button
-                class="btn btn-secondary click-btn btn-plan"
+                class="btn btn-primary btn-lg login-btn d-flex align-items-center justify-content-center"
                 type="submit"
+                [disabled]="isRequestInProgress"
               >
                 Mettre à jour
               </button>
@@ -464,16 +465,33 @@
 </div>
 <!-- /Page Wrapper -->
 
-<!-- The Modal -->
+<!-- Success Modal -->
 <div class="modal fade success-modal hire-modal" id="data-changed">
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content" style="background-color: #a3cfbb">
       <div class="modal-body pt-4">
         <div class="success-msg-content text-center">
-          <strong>Succès ! </strong> Mise à jour réalisée avec succès.
+          <strong>Succès ! </strong> Mise à jour réalisée avec succès
+          <span *ngIf="emailHasChanged"
+            >et un e-mail d'activation a bien été envoyé</span
+          >.
         </div>
       </div>
     </div>
   </div>
 </div>
-<!-- /The Modal -->
+<!-- /Success Modal -->
+<!-- Error Modal -->
+<div class="modal fade error-modal hire-modal" id="error">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content bg-danger">
+      <div class="modal-body pt-4">
+        <div class="error-msg-content text-center">
+          <strong>Error! </strong> Une erreur s'est produite côté serveur.
+          Veuillez réessayer plus tard.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Error Modal -->
