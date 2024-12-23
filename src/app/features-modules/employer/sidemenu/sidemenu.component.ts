@@ -59,16 +59,12 @@ export class SidemenuComponent {
   }
 
   getUser(): void {
-    this.userService.getProfile().subscribe({
-      next: (profile) => {
-        this.profile = profile;
-        const { fullName, initials } =
-          this.userService.getProfileDetails(profile);
-        this.profileName = fullName;
-        this.initials = initials;
-      },
-      error: (err) => console.error('Error fetching profile:', err),
-    });
+    const profile = this.authService.getUser();
+    this.profile = profile;
+    console.log('response', profile);
+    const { fullName, initials } = this.userService.getProfileDetails(profile);
+    this.profileName = fullName;
+    this.initials = initials;
   }
 
   logout(): void {

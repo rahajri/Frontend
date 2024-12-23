@@ -4,17 +4,14 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { routes } from '../../helpers/routes/routes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
-import { User } from '../../models/models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private readonly baseUrl = `${environment.apiUrl}/auth`;
-  public currentUserSig = signal<User | undefined | null>(undefined);
-  
   private currentUserSubject = new BehaviorSubject<any | null>(null);
-  public currentUser$ = this.currentUserSubject.asObservable();
+  public currentUser = this.currentUserSubject.asObservable();
   public checkAuth = new BehaviorSubject<boolean>(
     JSON.parse(localStorage.getItem('authenticated') || 'false')
   );

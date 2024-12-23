@@ -24,6 +24,8 @@ export class CompanyComponent {
   allCompanyStatus: any;
   selectedStatusId: string | null = null;
   initialStatusId: string | null = '';
+  selectedStatusName: string = '';
+  initialStatusName: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -118,6 +120,8 @@ export class CompanyComponent {
         this.company = res;
         this.selectedStatusId = res?.status?.id;
         this.initialStatusId = res?.status?.id;
+        this.selectedStatusName = res?.status?.name;
+        this.initialStatusName = res?.status?.name;
         this.initialFormValues = {
           firstName: res?.employees?.[0]?.firstName,
           lastName: res?.employees?.[0]?.lastName,
@@ -146,6 +150,7 @@ export class CompanyComponent {
       this.initialStatusId = this.selectedStatusId;
       this.ChangeStatus();
       this.showSuccessModal();
+      console.log(333);
     }
 
     if (lodash.isEqual(trimmedValues, this.initialFormValues)) {
@@ -170,6 +175,12 @@ export class CompanyComponent {
     if (this.initialFormValues) {
       this.companyForm.patchValue(this.initialFormValues);
     }
+    this.selectedStatusName = this.initialStatusName;
+  }
+
+  onStatusSelect(status: { id: string; name: string }): void {
+    this.selectedStatusId = status.id;
+    this.selectedStatusName = status.name;
   }
 
   markFormGroupTouched(formGroup: FormGroup): void {
@@ -188,6 +199,7 @@ export class CompanyComponent {
   private updateCompany(companyId: string, values: any) {
     this.companyService.updateCompany(companyId, values).subscribe({
       next: () => {
+        console.log(111);
         this.showSuccessModal();
         this.initialFormValues = values;
       },
@@ -212,6 +224,10 @@ export class CompanyComponent {
       const modal = new bootstrap.Modal(modalElement);
       modal.show();
       modalElement.focus();
+
+      setTimeout(() => {
+        modal.hide();
+      }, 3000);
     }
   }
 }

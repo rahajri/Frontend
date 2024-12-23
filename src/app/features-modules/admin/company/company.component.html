@@ -71,20 +71,33 @@
       <ul class="list-inline">
         <li class="list-inline-item">
           <i class="far fa-calendar-alt"></i>
-          <span>Inscrit le {{ formatDate(company?.createdAt) }}</span>
+          <span> Inscrit le {{ formatDate(company?.createdAt) }}</span>
         </li>
       </ul>
       <div>
-        <label for="status">Status</label>
-        <select
-          id="status"
-          class="form-select w-auto m-auto"
-          [(ngModel)]="selectedStatusId"
-        >
-          <option *ngFor="let status of allCompanyStatus" [value]="status.id">
-            {{ status.name }}
-          </option>
-        </select>
+        <div class="btn-group mt-2">
+          <button
+            type="button"
+            class="btn dropdown-toggle rounded-2"
+            [ngClass]="
+              selectedStatusName === 'Active' ? 'btn-success' : 'btn-danger'
+            "
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            {{ selectedStatusName === "Active" ? "Actif" : "Inactif" }}
+          </button>
+          <div class="dropdown-menu">
+            <a
+              *ngFor="let status of allCompanyStatus"
+              class="dropdown-item"
+              href="javascript:void(0);"
+              (click)="onStatusSelect(status)"
+              >{{ status.name === "Active" ? "Actif" : "Inactif" }}</a
+            >
+          </div>
+        </div>
       </div>
     </div>
 
@@ -431,6 +444,7 @@
             <div class="pro-body mb-3">
               <button
                 class="btn btn-secondary click-btn btn-plan"
+                type="button" 
                 (click)="onCancel()"
               >
                 Annuler
@@ -453,17 +467,10 @@
 <!-- The Modal -->
 <div class="modal fade success-modal hire-modal" id="data-changed">
   <div class="modal-dialog modal-dialog-centered modal-md">
-    <div class="modal-content">
+    <div class="modal-content" style="background-color: #a3cfbb">
       <div class="modal-body pt-4">
         <div class="success-msg-content text-center">
-          <h4>Données Modifiées</h4>
-          <p>Vos données ont été modifiées avec succès.</p>
-          <a
-            href="javascript:void(0);"
-            data-bs-dismiss="modal"
-            class="btn btn-primary mt-3"
-            >D'accord</a
-          >
+          <strong>Succès ! </strong> Mise à jour réalisée avec succès.
         </div>
       </div>
     </div>

@@ -54,17 +54,12 @@ export class EmployerheaderComponent {
   }
 
   getUser(): void {
-    this.userService.getProfile().subscribe({
-      next: (profile) => {
-        this.profile = profile;
-        // Safely call getProfileDetails after retrieving the profile
-        const { fullName, initials } =
-          this.userService.getProfileDetails(profile);
-        this.profileName = fullName;
-        this.initials = initials;
-      },
-      error: (err) => console.error('Error fetching profile:', err),
-    });
+    const profile = this.authService.getUser();
+    console.log('response', profile);
+    this.profile = profile;
+    const { fullName, initials } = this.userService.getProfileDetails(profile);
+    this.profileName = fullName;
+    this.initials = initials;
   }
 
   employer() {

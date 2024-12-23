@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           localStorage.setItem('refreshToken', response.refreshToken);
           localStorage.setItem('email', response.email);
           localStorage.setItem('role', response.role);
-          this.authService.currentUserSig.set(response.user);
+          this.authService.setUser(response.user);
 
           if (response.role == 'candidate') {
             this.candidateService.checkCondidate(response.email).subscribe({
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
           console.error('Login failed', error);
           this.translate.get('login.error').subscribe((translatedText) => {
-             this.loginError = translatedText; // Set the translated error message
+            this.loginError = translatedText; // Set the translated error message
           });
         }
       );
