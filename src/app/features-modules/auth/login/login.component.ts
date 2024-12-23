@@ -1,9 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { routes } from 'src/app/core/helpers/routes/routes';
@@ -47,10 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: ['', Validators.required],
     });
   }
-  ngOnInit() {
-    this.storage.Checkuser();
-    localStorage.removeItem('LoginData');
-  }
+  ngOnInit() {}
 
   onSubmit() {
     if (this.loginForm.valid) {

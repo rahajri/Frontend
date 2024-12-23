@@ -53,8 +53,10 @@ export class AuthService {
   }
 
   public logout(): void {
-    this.clearSession();
-    this.router.navigate([routes.home]);
+    localStorage.clear();
+    this.currentUserSubject.next(null);
+    this.checkAuth.next(false);
+    sessionStorage.clear();
   }
 
   checkPasswordToken(token: string): Observable<any> {
@@ -70,12 +72,19 @@ export class AuthService {
     });
   }
 
-  private clearSession(): void {
-    this.currentUserSubject.next(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('currentUser');
-    localStorage.setItem('authenticated', 'false');
-    this.checkAuth.next(false);
-    sessionStorage.clear();
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token'); // Or sessionStorage.getItem()
+    if (!token) {
+      return false; // No token means not authenticated
+    }
+
+    // Optionally, validate the token expiration
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload
+      const isExpired = Date.now() >= payload.exp * 1000; // Check expiration
+      return !isExpired;
+    } catch (e) {
+      return false; // If token is invalid or cannot be parsed
+    }
   }
 }

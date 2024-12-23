@@ -1449,7 +1449,7 @@ export class ShareDataService {
           subMenus: [],
         },
         {
-          menuValue: 'Login',
+          menuValue: 'Se connecter',
           route: routes.login,
           hasSubRoute: false,
           showSubRoute: false,
@@ -1459,7 +1459,7 @@ export class ShareDataService {
           subMenus: [],
         },
         {
-          menuValue: 'Register',
+          menuValue: "S'inscrire ",
           route: routes.register,
           hasSubRoute: false,
           showSubRoute: false,
@@ -1614,7 +1614,7 @@ export class ShareDataService {
       ],
     },
     {
-      title: 'Logout',
+      title: 'Se déconnecter',
       icon: 'assets/img/icon/sidebar-icon-11.svg',
       routes: routes.freelancer_dashboard,
     },

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import { AuthenticateGuard } from 'src/app/core/guard/guard.index';
 
 const routes: Routes = [
   {
@@ -10,6 +11,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       {
         path: 'dashboard',
+        canActivate: [AuthenticateGuard],
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
@@ -34,6 +36,7 @@ const routes: Routes = [
       },
       {
         path: 'projects',
+        canActivate: [AuthenticateGuard],
         loadChildren: () =>
           import('./projects/projects.module').then((m) => m.ProjectsModule),
       },
@@ -78,6 +81,7 @@ const routes: Routes = [
       },
       {
         path: 'verifyidentity',
+        canActivate: [AuthenticateGuard],
         loadChildren: () =>
           import('./verifyidentity/verifyidentity.module').then(
             (m) => m.VerifyidentityModule
@@ -117,6 +121,7 @@ const routes: Routes = [
       },
       {
         path: 'company/:id',
+        canActivate: [AuthenticateGuard],
         loadChildren: () =>
           import('./company/company.module').then((m) => m.CompanyModule),
       },

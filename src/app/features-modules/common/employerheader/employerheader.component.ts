@@ -25,7 +25,7 @@ export class EmployerheaderComponent {
 
   navbar: Array<header> = [];
   constructor(
-    private Router: Router,
+    private router: Router,
     private data: ShareDataService,
     private navservices: NavbarService,
     private userService: UserService,
@@ -50,6 +50,7 @@ export class EmployerheaderComponent {
 
   logout() {
     this.authService.logout();
+    this.router.navigate([routes.login]);
   }
 
   getUser(): void {

@@ -10,7 +10,7 @@ export class AdminGuard  {
   canActivate():boolean 
     {
       if (!localStorage.getItem('LoginData')) {
-        this.route.navigate(['/admin/auth/login']);
+        this.route.navigate(['/auth/login']);
         return false;
       } else {
         return true;

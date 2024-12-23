@@ -2,7 +2,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -45,6 +45,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { LightgalleryModule } from 'lightgallery/angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { ErrorHandlerService } from '../core/services/error-handler.service';
 
 @NgModule({
   imports: [
@@ -126,6 +127,10 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     {
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { showError: true },
+    },
+    {
+      provide: ErrorHandler,
+      useClass: ErrorHandlerService,
     },
     BsDatepickerConfig,
     provideHttpClient(withInterceptorsFromDi()),

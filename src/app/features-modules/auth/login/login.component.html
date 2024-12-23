@@ -94,17 +94,17 @@
               </div>
 
               <div class="row">
-                <div class="col-sm-8 dont-have d-flex align-items-center">
-                  <a [routerLink]="routes.register" class="ms-2">
-                    {{ "register.route" | translate }}</a
-                  >
+                <div class="col-sm-8 d-flex align-items-center">
+                  <a [routerLink]="routes.register" class="ms-2 mt-3">
+                    {{ "register.route" | translate }}
+                  </a>
                 </div>
-                <div class="col-sm-4 text-sm-end">
-                  <a
-                    class="forgot-link"
-                    [routerLink]="routes.forgot_password"
-                    >{{ "login.forgotPassword" | translate }}</a
-                  >
+                <div
+                  class="col-sm-4 d-flex justify-content-end align-items-center"
+                >
+                  <a class="forgot-link" [routerLink]="routes.forgot_password">
+                    {{ "login.forgotPassword" | translate }}
+                  </a>
                 </div>
               </div>
             </form>

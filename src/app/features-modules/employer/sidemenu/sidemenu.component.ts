@@ -6,6 +6,7 @@ import { routes } from 'src/app/core/helpers/routes/routes';
 import { FreelancerSidebarItem } from 'src/app/core/models/sidebar-model';
 import { UserService } from '../../auth/service/user.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 export interface SidemenuItem {
   page: string;
@@ -36,6 +37,7 @@ export class SidemenuComponent {
   currentroute = '';
   sidebar: SidebarData[] = [];
   constructor(
+    private router: Router,
     private data: ShareDataService,
     private common: CommonService,
     private userService: UserService,
@@ -71,6 +73,7 @@ export class SidemenuComponent {
 
   logout(): void {
     this.authService.logout();
+    this.router.navigate([routes.home]);
   }
 
   public menuItem: Array<FreelancerSidebarItem> = [];

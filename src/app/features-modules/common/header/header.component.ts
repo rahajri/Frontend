@@ -1,58 +1,55 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { header } from 'src/app/core/models/sidebar-model';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { NavbarService } from 'src/app/core/services/navbar.service';
-
-
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent  {
+export class HeaderComponent {
   @ViewChild('stickyMenu')
   menuElement!: ElementRef;
-public routes = routes
+  public routes = routes;
   sticky = false;
   elementPosition: number | undefined;
-  base="";
-  base1="";
-  page="";
+  base = '';
+  base1 = '';
+  page = '';
   last = '';
-   
+
   navbar: Array<header> = [];
   public header_bg = false;
+  isLogged: boolean = false;
   constructor(
     private Router: Router,
-    private data :ShareDataService,
-    private navservices : NavbarService,
-    private common : CommonService
-     ) {
-      this.common.base.subscribe((res:string)=>{
-        this.base =res;
-        this.base1 =res;
-      })
-      this.common.page.subscribe((res:string)=>{
-        this.page =res;
-      })
-      this.common.last.subscribe((res:string)=>{
-        this.last =res;
-      })
+    private data: ShareDataService,
+    private navservices: NavbarService,
+    private authService: AuthService,
+    private common: CommonService
+  ) {
+    this.common.base.subscribe((res: string) => {
+      this.base = res;
+      this.base1 = res;
+    });
+    this.common.page.subscribe((res: string) => {
+      this.page = res;
+    });
+    this.common.last.subscribe((res: string) => {
+      this.last = res;
+    });
     this.navbar = this.data.sideBar;
   }
 
-
- 
+  ngOnInit(): void {
+    this.isLogged = this.authService.isLoggedIn();
+    console.log(this.isLogged);
+  }
   employer() {
     localStorage.setItem('employer', 'employer');
   }
@@ -71,7 +68,7 @@ public routes = routes
   public hideSidebar(): void {
     this.navservices.closeSidebar();
   }
-  
+
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
     const windowScroll = window.pageYOffset;
@@ -86,5 +83,4 @@ public routes = routes
       this.header_bg = true;
     }
   }
-
 }

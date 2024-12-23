@@ -71,9 +71,9 @@ export class SidemenuComponent implements OnInit {
     this.sideBar.switchMobileSideBarPosition();
   }
 
-  public Logout(): void {
-    localStorage.removeItem('LoginData');
-    this.router.navigate(['/admin/auth/login']);
+  Logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/auth/login']);
   }
   public miniSideBarMouseHover(position: string): void {
     if (position == 'over') {
