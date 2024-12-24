@@ -154,9 +154,11 @@ export class CompanyComponent {
       this.initialStatusId = this.selectedStatusId;
       this.ChangeStatus();
       this.isRequestInProgress = false;
+      this.showSuccessModal();
     }
 
     if (lodash.isEqual(trimmedValues, this.initialFormValues)) {
+      this.isRequestInProgress = false;
       return;
     }
 
