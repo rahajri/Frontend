@@ -1639,7 +1639,7 @@ export class ShareDataService {
           base: 'dashboard',
           subMenus: [],
         },
-        /* {
+        /*{
           menuValue: 'Categories',
           route: routes.admin_categories,
           hasSubRoute: false,
@@ -1748,11 +1748,11 @@ export class ShareDataService {
           subMenus: [],
         },
         {
-          menuValue: 'Partenaires',
+          menuValue: 'Client',
           route: routes.admin_projects,
           hasSubRoute: false,
           showSubRoute: false,
-          icon: 'icon-user-check',
+          icon: 'icon-users',
           base: 'projects',
           subMenus: [],
         },

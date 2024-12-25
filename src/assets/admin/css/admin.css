@@ -3150,7 +3150,7 @@ table.table-inbox tbody tr.checked {
   justify-content: center;
   align-items: center;
   color: #fff;
-  background: #ff5b37;
+  background: #179ab5;
   border: 1px solid #ff431a;
   border-radius: 5px;
 }
@@ -5201,17 +5201,23 @@ table.table-inbox tbody tr.checked {
 .three-dots .nav-link {
   padding: 0;
 }
+.hide-shave .dropdown-toggle::after {
+  display: none;
+}
 .user-menu-list {
   background: #ffffff;
   border: 1px solid #f9f9f9;
   border-radius: 6px;
   padding: 20px;
-  min-width: 247px;
+  min-width: 235px;
 }
 .user-menu-list .dropdown-item {
   padding: 0px;
-  margin-bottom: 25px;
+  margin-bottom: 8px;
   color: #1b2559;
+}
+.cursor-pointer{
+  cursor: pointer;
 }
 .user-menu-list .dropdown-item:hover,
 .user-menu-list .dropdown-item:focus {

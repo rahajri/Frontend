@@ -36,15 +36,10 @@ export class UserService {
     // Retrieve the token from storage or service
     const token = localStorage.getItem('token'); // or use a service to manage tokens
 
-    // Set up headers with the Bearer token
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
 
     const body = { userId: userId };
 
-    return this.http.post<any>(url, body, { headers });
+    return this.http.post<any>(url, body);
   }
 
   verifyEmail(otp: string, user: string): Observable<any> {
@@ -54,11 +49,7 @@ export class UserService {
   getProfile(): Observable<any> {
     const token = localStorage.getItem('token');
 
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-    return this.http.get(`${this.apiUrl}/profile`, { headers });
+    return this.http.get(`${this.apiUrl}/profile`,);
   }
 
   private baseUrlCop = `${environment.apiUrl}/companies`;

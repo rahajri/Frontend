@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
 
@@ -12,24 +12,11 @@ export class ProjectService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Creates an authorization header
-   */
-  private createHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token');
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-  }
-
-  /**
    * Creates a new project
    * @param project The project data
    */
   createProject(project: any) {
-    return this.http.post<any>(`${this.baseUrl}/create`, project, {
-      headers: this.createHeaders(),
-    });
+    return this.http.post<any>(`${this.baseUrl}/create`, project);
   }
 
   /**
@@ -41,9 +28,7 @@ export class ProjectService {
       throw new Error('Project ID cannot be null');
     }
 
-    return this.http.get<any>(`${this.baseUrl}/${id}`, {
-      headers: this.createHeaders(),
-    });
+    return this.http.get<any>(`${this.baseUrl}/${id}`);
   }
 
   /**
@@ -55,13 +40,7 @@ export class ProjectService {
       throw new Error('Project ID cannot be null');
     }
 
-    return this.http.post<any>(
-      `${this.baseUrl}/${id}/publish`,
-      {},
-      {
-        headers: this.createHeaders(),
-      }
-    );
+    return this.http.post<any>(`${this.baseUrl}/${id}/publish`, {});
   }
   getJobOffers(
     offset: number,
@@ -74,7 +53,6 @@ export class ProjectService {
       .set('company', companyId);
 
     return this.http.get<any>(this.baseUrl, {
-      headers: this.createHeaders(),
       params,
     });
   }

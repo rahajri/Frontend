@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, of, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
@@ -44,15 +44,6 @@ export class CompanyService {
   private baseUrl = `${environment.apiUrl}/companies`; // URL to get zip codes
 
   constructor(private http: HttpClient) {}
-
-  private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token') || '';
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-  }
-
   // Method to load all companies data
   public loadCompaniesData(): Observable<apiResultFormat> {
     return this.http.get<apiResultFormat>('assets/json/companies.json');
@@ -77,9 +68,7 @@ export class CompanyService {
     if (!id) {
       throw new Error('Company ID cannot be null');
     }
-    return this.http.get<any>(`${this.baseUrl}/${id}`, {
-      headers: this.getAuthHeaders(),
-    });
+    return this.http.get<any>(`${this.baseUrl}/${id}`);
   }
 
   // Second function to get the NAF details based on the company's activitePrincipaleUniteLegale
@@ -92,54 +81,32 @@ export class CompanyService {
   }
 
   getAllCompanies(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}`, {
-      headers: this.getAuthHeaders(),
-    });
+    return this.http.get<any>(`${this.baseUrl}`);
   }
 
   getUnvirifiedCompanies(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/inactive`, {
-      headers: this.getAuthHeaders(),
-    });
+    return this.http.get<any>(`${this.baseUrl}/inactive`);
   }
 
   approveCompany(companyId: string): Observable<any> {
-    return this.http.patch<any>(
-      `${this.baseUrl}/${companyId}/approve`,
-      {},
-      { headers: this.getAuthHeaders() }
-    );
+    return this.http.patch<any>(`${this.baseUrl}/${companyId}/approve`, {});
   }
 
   rejectCompany(companyId: string): Observable<any> {
-    return this.http.patch<any>(
-      `${this.baseUrl}/${companyId}/reject`,
-      {},
-      { headers: this.getAuthHeaders() }
-    );
+    return this.http.patch<any>(`${this.baseUrl}/${companyId}/reject`, {});
   }
 
   checkSiretExists(siret: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/siret/${siret}`, {
-      headers: this.getAuthHeaders(),
-    });
+    return this.http.get<any>(`${this.baseUrl}/siret/${siret}`);
   }
 
   updateCompany(companyId: string, data: any) {
-    return this.http.patch<any>(`${this.baseUrl}/${companyId}/update`, data, {
-      headers: this.getAuthHeaders(),
-    });
+    return this.http.patch<any>(`${this.baseUrl}/${companyId}/update`, data);
   }
 
   updateCompanyStatus(companyId: string, statusId: string): Observable<any> {
-    return this.http.patch(
-      `${this.baseUrl}/${companyId}/status`,
-      {
-        statusId,
-      },
-      {
-        headers: this.getAuthHeaders(),
-      }
-    );
+    return this.http.patch(`${this.baseUrl}/${companyId}/status`, {
+      statusId,
+    });
   }
 }

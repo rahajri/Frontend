@@ -49,18 +49,23 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.isLogged = this.authService.isLoggedIn();
   }
+
   employer() {
     localStorage.setItem('employer', 'employer');
   }
+
   freelancer() {
     localStorage.setItem('freelancer', 'freelancer');
   }
+
   otherPages(val: string) {
     localStorage.setItem(val, val);
   }
+
   home() {
     this.Router.navigate(['/home']);
   }
+  
   public toggleSidebar(): void {
     this.navservices.openSidebar();
   }

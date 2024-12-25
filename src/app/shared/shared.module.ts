@@ -1,5 +1,6 @@
 import {
   provideHttpClient,
+  withInterceptors,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -46,6 +47,7 @@ import { LightgalleryModule } from 'lightgallery/angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ErrorHandlerService } from '../core/services/error-handler.service';
+import { authInterceptor } from '../interceptors/auth.interceptor';
 
 @NgModule({
   imports: [
@@ -132,6 +134,7 @@ import { ErrorHandlerService } from '../core/services/error-handler.service';
       provide: ErrorHandler,
       useClass: ErrorHandlerService,
     },
+    provideHttpClient(withInterceptors([authInterceptor])),
     BsDatepickerConfig,
     provideHttpClient(withInterceptorsFromDi()),
   ],

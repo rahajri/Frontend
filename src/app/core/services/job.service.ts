@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
@@ -14,45 +14,19 @@ export class JobService {
 
   // Get list of jobs (Métier)
   getJobs(): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-
-    return this.http.get<any>(this.baseUrl, { headers });
+    return this.http.get<any>(this.baseUrl);
   }
 
   // Get sous-activité and activité by job id
   getJobDetails(jobId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-
-    return this.http.get<any>(`${this.baseUrl}/${jobId}`, { headers });
+    return this.http.get<any>(`${this.baseUrl}/${jobId}`);
   }
 
   getSubActivities(): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-
-    return this.http.get<any>(this.subActivitiesbaseUrl, { headers });
+    return this.http.get<any>(this.subActivitiesbaseUrl);
   }
 
   getSubActivitiesDetails(subActivity: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-
-    return this.http.get<any>(`${this.subActivitiesbaseUrl}/${subActivity}`, {
-      headers,
-    });
+    return this.http.get<any>(`${this.subActivitiesbaseUrl}/${subActivity}`);
   }
 }

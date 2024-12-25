@@ -13,6 +13,7 @@ export class FreelancersComponent {
   base = '';
   page = '';
   last = '';
+  selectedHederTitle = 'Tous';
   public str2!: string;
   public str!: string;
   public filter = false;
@@ -26,11 +27,22 @@ export class FreelancersComponent {
     this.common.last.subscribe((res: string) => {
       this.last = res;
       this.str = this.last;
-      this.str2 = this.str.charAt(0).toUpperCase() + this.str.slice(1);
+      this.str2 = this.getTranslation(
+        this.str.charAt(0).toUpperCase() + this.str.slice(1)
+      );
     });
   }
 
   openFilter() {
     this.filter = !this.filter;
+  }
+
+  getTranslation(key: string): string {
+    const translations: { [key: string]: string } = {
+      All: 'Tous les',
+      Active: 'Actifs',
+      Inactive: 'Inactifs',
+    };
+    return translations[key] || key;
   }
 }

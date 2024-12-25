@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -17,13 +22,13 @@ export class AuthenticateGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const isLoggedIn = this.authService.isAuthenticated(); // Replace with your actual logic
+    const isLoggedIn = localStorage.getItem('token'); // Replace with your actual logic
     if (!isLoggedIn) {
       return this.router.createUrlTree(['/auth/login']);
     }
     return true;
   }
-  
+
   // constructor(private router: Router) {}
   // canActivate(): boolean {
   //   const isAuthenticated = !!localStorage.getItem('token');

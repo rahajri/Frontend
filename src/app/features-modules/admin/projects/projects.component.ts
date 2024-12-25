@@ -7,7 +7,8 @@ import { Sort } from '@angular/material/sort';
 import { apiResultFormat, Company } from 'src/app/core/models/models';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
-
+import { CommonService } from 'src/app/core/services/common/common.service';
+declare var bootstrap: any;
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -19,8 +20,6 @@ export class ProjectsComponent implements OnInit {
   public url = 'admin';
   public searchDataValue = '';
   dataSource!: MatTableDataSource<Company>;
-
-  // pagination variables
   public lastIndex = 0;
   public pageSize = 10;
   public totalData = 0;
@@ -33,8 +32,12 @@ export class ProjectsComponent implements OnInit {
   public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
   filter: boolean = false;
-  companiesData: any[] = []; // To store companies data
+  companiesData: any[] = [];
   selectedCompany: any = null;
+  filteredCompanies: any[] = [];
+
+  companyToDelete = '';
+  selectedHederTitle = 'Tous les';
 
   //** / pagination variables
   constructor(
@@ -46,12 +49,41 @@ export class ProjectsComponent implements OnInit {
     this.getTableData();
     this.loadCompanies();
   }
+
   //Filter toggle
   openFilter() {
     this.filter = !this.filter;
     console.log(this.filter);
   }
-  // Get hostel List  Api Call
+
+  loadCompanies(): void {
+    this.companyService.getAllCompanies().subscribe(
+      (response) => {
+        console.log(response);
+        this.companiesData = response;
+        this.filteredCompanies = response;
+      },
+      (error) => {
+        console.error('Error fetching companies:', error);
+      }
+    );
+  }
+
+  filterCompaniesByStatus(status: string | null): void {
+    if (!status) {
+      // If no status is provided, return all companies
+      this.filteredCompanies = this.companiesData;
+    } else {
+      // Filter companies based on the status name
+      this.filteredCompanies = this.companiesData.filter(
+        (company: any) => company.status?.name === status
+      );
+    }
+  }
+
+  setSelectedCompany(company: any): void {
+    this.selectedCompany = company;
+  }
 
   private getTableData(): void {
     this.lstProject = [];
@@ -153,19 +185,27 @@ export class ProjectsComponent implements OnInit {
     }
   }
 
-  loadCompanies(): void {
-    this.companyService.getAllCompanies().subscribe(
-      (response) => {
-        this.companiesData = response; // Assign response data to companiesData
-      },
-      (error) => {
-        console.error('Error fetching companies:', error);
-      }
-    );
+  getTranslation(key: string): string {
+    const translations: { [key: string]: string } = {
+      projects: 'Tous les',
+      Active: 'Actifs',
+      Inactive: 'Inactifs',
+    };
+    return translations[key] || key;
   }
 
-  setSelectedCompany(company: any): void {
-    this.selectedCompany = company;
+  deleteCompany(company: any) {
+    this.companyToDelete = company.name;
+    this.showDeleteCategoryModal();
+  }
+
+  showDeleteCategoryModal() {
+    const modalElement = document.getElementById('delete_client');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+      modalElement.focus();
+    }
   }
 }
 export interface pageSelection {

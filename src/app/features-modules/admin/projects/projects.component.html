@@ -2,361 +2,494 @@
 <div class="page-wrapper">
   <div class="content container-fluid">
     <!-- Page Header -->
-    <div class="page-header">
+    <div class="page-header subscribe-head">
       <div class="row align-items-center">
         <div class="col">
-          <h3 class="page-title">Partenaires</h3>
+          <h3 class="page-title">Clients</h3>
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
               <a [routerLink]="'/admin/dashboard'">Accueil</a>
             </li>
-            <li class="breadcrumb-item active">Partenaires</li>
+
+            <li class="breadcrumb-item active">Clients</li>
           </ul>
         </div>
         <div class="col-auto">
-          <a
-            class="btn filter-btn"
-            href="javascript:void(0);"
-            (click)="openFilter()"
-            (keydown.enter)="openFilter()"
-          >
-            <i class="fas fa-filter"></i>
-          </a>
+          <ng-container>
+            <a
+              class="btn add-user"
+              href="javascript:void()"
+              data-bs-toggle="modal"
+              data-bs-target="#add-company"
+            >
+              <i class="fas fa-plus"></i> Ajouter un Client
+            </a>
+          </ng-container>
         </div>
       </div>
     </div>
-    <!-- /Page Header -->
 
-    <!-- Search Filter -->
-    <div class="card filter-card" [class.filter-show]="filter">
-      <div class="card-body pb-0">
-        <form action="#" method="post">
-          <div class="row filter-row">
-            <div class="col-sm-6 col-md-3">
-              <div class="form-group">
-                <label for="company-name">Company Name</label>
-                <input class="form-control" type="text" />
-              </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="subscribe-employe users-list">
+          <ul>
+            <li>
+              <a (click)="filterCompaniesByStatus('null')">Tous les Clients</a>
+            </li>
+            <li>
+              <a (click)="filterCompaniesByStatus('Active')">Clients Actifs</a>
+            </li>
+            <li>
+              <a (click)="filterCompaniesByStatus('Inactive')"
+                >Clients Inactifs</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Active User Header -->
+        <div class="page-header user-active">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="page-title">{{ selectedHederTitle }} Clients</h3>
+              <p>Total <span>57</span> clients</p>
             </div>
-            <div class="col-sm-6 col-md-3">
-              <div class="form-group">
-                <div class="cal-icon">
-                  <label for="from-date">From Date</label>
-                  <input class="form-control datetimepicker" type="date" />
+            <div class="col-auto">
+              <a href="javascript:" class="btn export-btn me-1">
+                <img src="assets/admin/img/export.svg" alt="" /> Exporter
+              </a>
+              <a
+                class="btn fil filter-btn"
+                href="javascript:void(0);"
+                id="filter_search"
+                (click)="openFilter()"
+                (keydown.enter)="openFilter()"
+              >
+                <i class="fas fa-filter"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- /Active User Header -->
+
+        <!-- Search Filter -->
+        <div class="card filter-card" [class.filter-show]="filter">
+          <div class="card-body pb-0">
+            <form action="#" method="post">
+              <div class="row filter-row">
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <label for="company-name">Nom Entreprise</label>
+                    <input class="form-control" type="text" />
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <label for="from-date">Nom Contact</label>
+                    <input class="form-control" type="text" />
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <label for="to-date">Prénom Contact</label>
+                    <input class="form-control" type="text" />
+                  </div>
+                </div>
+              </div>
+              <div class="row filter-row">
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <label for="city">Ville</label>
+                    <input class="form-control" type="text" />
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <label for="department">Département</label>
+                    <input class="form-control" type="text" />
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <label for="region">Région</label>
+                    <input class="form-control" type="text" />
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <button
+                      class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center"
+                      type="submit"
+                    >
+                      Rechercher
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /Search Filter -->
+
+        <div class="card bg-white projects-card">
+          <div class="card-body pt-0">
+            <div class="tab-content pt-0">
+              <div role="tabpanel" id="tab-4" class="tab-pane fade active show">
+                <div class="table-responsive">
+                  <div class="table_header mt-2">
+                    <div class="dataTables_length">
+                      <select
+                        [(ngModel)]="pageSize"
+                        (ngModelChange)="changePageSize()"
+                        class="form-select w-auto"
+                      >
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                      <label entries-data for="data-entries"
+                        >Entrées par page</label
+                      >
+                    </div>
+                    <div class="dataTables_filter">
+                      <label for="search"> Recherche: </label>
+                      <input
+                        [(ngModel)]="searchDataValue"
+                        (ngModelChange)="searchData(searchDataValue)"
+                        class="form-control form-control-sm"
+                      />
+                    </div>
+                  </div>
+                  <div class="table-scroll">
+                    <table
+                      matSort
+                      (matSortChange)="sortData($event)"
+                      class="table table-center table-hover mb-0 datatable"
+                    >
+                      <thead>
+                        <tr>
+                          <th></th>
+
+                          <th mat-sort-header="createdAt">Date de création</th>
+                          <th mat-sort-header="lastName">Nom</th>
+                          <th mat-sort-header="job">Activité</th>
+                          <th mat-sort-header="employee">Contact</th>
+                          <th mat-sort-header="phone">Téléphone</th>
+                          <th mat-sort-header="city">Status</th>
+
+                          <th></th>
+                        </tr>
+                        <tr *ngIf="lstProject.length === 0">
+                          <td colspan="9">
+                            <h5 style="text-align: center">No data found</h5>
+                          </td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          *ngFor="let company of lstProject; let i = index"
+                          (click)="setSelectedCompany(company)"
+                        >
+                          <td>
+                            <div class="form-check form-checkbox">
+                              <input
+                                type="checkbox"
+                                class="form-check-input"
+                                id="customCheck{{ i }}"
+                              />
+                              <label
+                                class="form-check-label"
+                                for="customCheck{{ i }}"
+                              ></label>
+                            </div>
+                          </td>
+
+                          <td
+                            [routerLink]="routes.get_admin_company(company.id)"
+                            class="cursor-pointer btn-link"
+                          >
+                            {{ getDate(company.createdAt) }}
+                          </td>
+                          <td
+                            [routerLink]="routes.get_admin_company(company.id)"
+                            class="cursor-pointer btn-link"
+                          >
+                            {{ company.name }}
+                          </td>
+                          <td
+                            [routerLink]="routes.get_admin_company(company.id)"
+                            class="cursor-pointer btn-link"
+                          >
+                            {{ company.nafTitle }}
+                          </td>
+                          <td
+                            [routerLink]="routes.get_admin_company(company.id)"
+                            class="cursor-pointer btn-link"
+                          >
+                            {{ company.employees?.[0]?.firstName || '' }}
+                            {{ company.employees?.[0]?.lastName || '' }}
+                          </td>
+                          <td
+                            [routerLink]="routes.get_admin_company(company.id)"
+                            class="cursor-pointer btn-link"
+                          >
+                            {{ company.employees?.[0]?.phone || 'N/A' }}
+                          </td>
+
+                          <td
+                            [ngClass]="{
+                              'text-success': company.status?.name === 'Active',
+                              'text-danger': company.status?.name !== 'Active'
+                            }"
+                            [routerLink]="routes.get_admin_company(company.id)"
+                            class="cursor-pointer btn-link"
+                          >
+                            {{ company.status?.name }}
+                          </td>
+
+                          <td class="text-end hide-shave">
+                            <a
+                              href="javascript:void()"
+                              class="dropdown-toggle nav-link"
+                              data-bs-toggle="dropdown"
+                              ><i class="fas fa-ellipsis-v"></i
+                            ></a>
+                            <div class="dropdown-menu user-menu-list">
+                              <a
+                                class="dropdown-item"
+                                [routerLink]="
+                                  routes.get_admin_company(company.id)
+                                "
+                                data-dismiss="modal"
+                                ><i class="feather icon-edit"></i> Editer</a
+                              >
+                              <a
+                                class="dropdown-item"
+                                href="javascript:void()"
+                                (click)="deleteCompany(company)"
+                                data-dismiss="modal"
+                                ><i class="feather icon-trash text-danger"></i>
+                                Supprimer</a
+                              >
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="table_footer">
+                    <div class="col-sm-12 col-md-5">
+                      <div class="dataTables_info">
+                        Showing {{ serialNumberArray[0] }} to
+                        {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                        {{ totalData }} entries
+                      </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-7">
+                      <div class="pagination_section">
+                        <ul class="pagination">
+                          <li
+                            class="page-item"
+                            [ngClass]="{
+                              disabled: currentPage === 1
+                            }"
+                          >
+                            <a
+                              (click)="getMoreData('previous')"
+                              (keydown.enter)="getMoreData('previous')"
+                              class="page-link"
+                              href="javascript:void(0);"
+                              tabindex="-1"
+                              >Previous</a
+                            >
+                          </li>
+
+                          <ng-container
+                            *ngFor="let item of pageNumberArray; let i = index"
+                          >
+                            <li
+                              class="page-item"
+                              [class.active]="item === currentPage"
+                              [ngClass]="
+                                (pageNumberArray[currentPage - 2] > item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6) ||
+                                (pageNumberArray[currentPage] < item &&
+                                  item !== 1 &&
+                                  pageNumberArray.length > 6 &&
+                                  pageNumberArray.length !== item)
+                                  ? 'hide-page-no'
+                                  : 'show-page-no'
+                              "
+                            >
+                              <a
+                                (click)="moveToPage(item)"
+                                (keydown.enter)="moveToPage(item)"
+                                class="page-link"
+                                href="javascript:void(0);"
+                              >
+                                {{ item }}
+                              </a>
+                            </li>
+                            <li
+                              class="page-item"
+                              *ngIf="
+                                i === 0 &&
+                                pageNumberArray.length > 6 &&
+                                currentPage > 2
+                              "
+                              [hidden]="currentPage === 1"
+                              (click)="moveToPage(currentPage - 2)"
+                              (keydown.enter)="moveToPage(currentPage - 2)"
+                              tabindex="0"
+                            >
+                              <a class="page-link" href="javascript:void(0);">
+                                ...
+                              </a>
+                            </li>
+                            <li
+                              *ngIf="
+                                i === pageNumberArray.length - 2 &&
+                                pageNumberArray.length > 6
+                              "
+                              [hidden]="
+                                currentPage >=
+                                  pageNumberArray[pageNumberArray.length - 2] ||
+                                totalData <
+                                  serialNumberArray[
+                                    serialNumberArray.length - 1
+                                  ]
+                              "
+                              class="page-item"
+                              (click)="moveToPage(currentPage + 2)"
+                              (keydown.enter)="moveToPage(currentPage + 2)"
+                              tabindex="0"
+                            >
+                              <a class="page-link" href="javascript:void(0);">
+                                ...
+                              </a>
+                            </li>
+                          </ng-container>
+
+                          <li
+                            class="page-item"
+                            [ngClass]="{
+                              disabled:
+                                currentPage ===
+                                  pageNumberArray[pageNumberArray.length - 1] ||
+                                lstProject.length === 0
+                            }"
+                          >
+                            <a
+                              (click)="getMoreData('next')"
+                              (keydown.enter)="getMoreData('next')"
+                              class="page-link"
+                              href="javascript:void(0);"
+                              >Next
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-3">
-              <div class="form-group">
-                <div class="cal-icon">
-                  <label for="to-date">To Date</label>
-                  <input class="form-control datetimepicker" type="date" />
+          </div>
+        </div>
+      </div>
+      <!-- /Page Wrapper -->
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal custom-modal fade" id="delete_client" role="dialog">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="form-header">
+              <h3>Supprimer</h3>
+              <p>Êtes-vous sur de vouloir supprimer</p>
+              <p>
+                <strong class="text-danger">{{ companyToDelete }} ?</strong>
+              </p>
+            </div>
+            <div class="modal-btn delete-action">
+              <div class="row">
+                <div class="col-6">
+                  <a
+                    href="javascript:void(0);"
+                    class="btn btn-primary continue-btn"
+                    >Supprimer</a
+                  >
+                </div>
+                <div class="col-6">
+                  <a
+                    href="javascript:void(0);"
+                    data-bs-dismiss="modal"
+                    class="btn btn-primary cancel-btn"
+                    >Annuler</a
+                  >
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-3">
-              <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit">
-                  Submit
-                </button>
-              </div>
-            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Delete Modal -->
+  </div>
+</div>
+
+<!-- Add Modal -->
+<div class="modal fade custom-modal" id="add-company">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header flex-wrap">
+        <div class="text-center w-100 mb-3">
+          <img src="assets/admin/img/logo-small.png" alt="" />
+        </div>
+        <h4 class="modal-title">Ajouter un Client</h4>
+        <button type="button" class="close" data-bs-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="full-name">Full Name</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="freelancer-type">Freelancer Type</label>
+            <select class="form-control form-select">
+              <option>Select</option>
+              <option>Frontend Developer</option>
+              <option>Graphic Designer</option>
+            </select>
+          </div>
+          <div class="mt-4">
+            <button type="submit" class="btn btn-primary btn-block">
+              Submit
+            </button>
           </div>
         </form>
       </div>
     </div>
-    <!-- /Search Filter -->
-
-    <div class="card bg-white projects-card">
-      <div class="card-body pt-0">
-        <div class="card-header">
-          <h5 class="card-title">Company views</h5>
-        </div>
-        <!-- 
-        <div class="reviews-menu-links">
-          <ul
-            role="tablist"
-            class="nav nav-pills card-header-pills nav-justified"
-          >
-            <li class="nav-item">
-              <a href="#tab-4" data-bs-toggle="tab" class="nav-link active"
-                >All (272)</a
-              >
-            </li>
-            <li class="nav-item">
-              <a href="#tab-5" data-bs-toggle="tab" class="nav-link"
-                >Active (218)</a
-              >
-            </li>
-            <li class="nav-item">
-              <a href="#tab-6" data-bs-toggle="tab" class="nav-link">
-                In Active (03)
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#tab-7" data-bs-toggle="tab" class="nav-link"
-                >Trash (0)</a
-              >
-            </li>
-          </ul>
-        </div>
-        /Search Filter -->
-        <div class="tab-content pt-0">
-          <div role="tabpanel" id="tab-4" class="tab-pane fade active show">
-            <div class="table-responsive">
-              <div class="table_header">
-                <div class="dataTables_length">
-                  <label for="entries"> Show </label>
-                  <select
-                    [(ngModel)]="pageSize"
-                    (ngModelChange)="changePageSize()"
-                    class="form-control form-control-sm"
-                  >
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                  </select>
-                  <label entries-data for="data-entries">Entries</label>
-                </div>
-                <div class="dataTables_filter">
-                  <label for="search"> Search: </label>
-                  <input
-                    [(ngModel)]="searchDataValue"
-                    (ngModelChange)="searchData(searchDataValue)"
-                    class="form-control form-control-sm"
-                  />
-                </div>
-              </div>
-              <div class="table-scroll">
-                <table
-                  matSort
-                  (matSortChange)="sortData($event)"
-                  class="table table-center table-hover mb-0 datatable"
-                >
-                  <thead>
-                    <tr>
-                      <th></th>
-
-                      <th mat-sort-header="Date Creation">Date de création</th>
-                      <th mat-sort-header="Nom">Nom</th>
-                      <th mat-sort-header="Activite">Activité</th>
-                      <th mat-sort-header="Contact">Contact</th>
-                      <th mat-sort-header="Telephone">Téléphone</th>
-                      <th mat-sort-header="Ville">Ville</th>
-
-                      <th class="text-end">Actions</th>
-                    </tr>
-                    <tr *ngIf="lstProject.length === 0">
-                      <td colspan="9">
-                        <h5 style="text-align: center">No data found</h5>
-                      </td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr
-                      *ngFor="let company of lstProject; let i = index"
-                      (click)="setSelectedCompany(company)"
-                    >
-                      <td>
-                        <div class="form-check form-checkbox">
-                          <input
-                            type="checkbox"
-                            class="form-check-input"
-                            id="customCheck{{ i }}"
-                          />
-                          <label
-                            class="form-check-label"
-                            for="customCheck{{ i }}"
-                          ></label>
-                        </div>
-                      </td>
-
-                      <td>{{ getDate(company.createdAt) }}</td>
-                      <td [routerLink]="routes.get_admin_company(company.id)">
-                        {{ company.name }}
-                      </td>
-                      <td>{{ company.nafTitle }}</td>
-                      <td>
-                        {{ company.employees?.[0]?.firstName || '' }}
-                        {{ company.employees?.[0]?.lastName || '' }}
-                      </td>
-                      <td>{{ company.employees?.[0]?.phone || 'N/A' }}</td>
-
-                      <td>
-                        {{ company.location?.city?.name }}
-                      </td>
-
-                      <td class="text-end">
-                        <a
-                          class="btn btn-sm btn-secondary me-2"
-                          [routerLink]="routes.get_admin_company(company.id)"
-                          ><i class="far fa-edit"></i
-                        ></a>
-                        <a
-                          href="javascript:void(0);"
-                          class="btn btn-sm btn-danger"
-                          data-bs-toggle="modal"
-                          data-bs-target="#delete_category"
-                          ><i class="far fa-trash-alt"></i
-                        ></a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="table_footer">
-                <div class="col-sm-12 col-md-5">
-                  <div class="dataTables_info">
-                    Showing {{ serialNumberArray[0] }} to
-                    {{ serialNumberArray[serialNumberArray.length - 1] }} of
-                    {{ totalData }} entries
-                  </div>
-                </div>
-
-                <div class="col-sm-12 col-md-7">
-                  <div class="pagination_section">
-                    <ul class="pagination">
-                      <li
-                        class="page-item"
-                        [ngClass]="{
-                          disabled: currentPage === 1
-                        }"
-                      >
-                        <a
-                          (click)="getMoreData('previous')"
-                          (keydown.enter)="getMoreData('previous')"
-                          class="page-link"
-                          href="javascript:void(0);"
-                          tabindex="-1"
-                          >Previous</a
-                        >
-                      </li>
-
-                      <ng-container
-                        *ngFor="let item of pageNumberArray; let i = index"
-                      >
-                        <li
-                          class="page-item"
-                          [class.active]="item === currentPage"
-                          [ngClass]="
-                            (pageNumberArray[currentPage - 2] > item &&
-                              item !== 1 &&
-                              pageNumberArray.length > 6) ||
-                            (pageNumberArray[currentPage] < item &&
-                              item !== 1 &&
-                              pageNumberArray.length > 6 &&
-                              pageNumberArray.length !== item)
-                              ? 'hide-page-no'
-                              : 'show-page-no'
-                          "
-                        >
-                          <a
-                            (click)="moveToPage(item)"
-                            (keydown.enter)="moveToPage(item)"
-                            class="page-link"
-                            href="javascript:void(0);"
-                          >
-                            {{ item }}
-                          </a>
-                        </li>
-                        <li
-                          class="page-item"
-                          *ngIf="
-                            i === 0 &&
-                            pageNumberArray.length > 6 &&
-                            currentPage > 2
-                          "
-                          [hidden]="currentPage === 1"
-                          (click)="moveToPage(currentPage - 2)"
-                          (keydown.enter)="moveToPage(currentPage - 2)"
-                          tabindex="0"
-                        >
-                          <a class="page-link" href="javascript:void(0);">
-                            ...
-                          </a>
-                        </li>
-                        <li
-                          *ngIf="
-                            i === pageNumberArray.length - 2 &&
-                            pageNumberArray.length > 6
-                          "
-                          [hidden]="
-                            currentPage >=
-                              pageNumberArray[pageNumberArray.length - 2] ||
-                            totalData <
-                              serialNumberArray[serialNumberArray.length - 1]
-                          "
-                          class="page-item"
-                          (click)="moveToPage(currentPage + 2)"
-                          (keydown.enter)="moveToPage(currentPage + 2)"
-                          tabindex="0"
-                        >
-                          <a class="page-link" href="javascript:void(0);">
-                            ...
-                          </a>
-                        </li>
-                      </ng-container>
-
-                      <li
-                        class="page-item"
-                        [ngClass]="{
-                          disabled:
-                            currentPage ===
-                              pageNumberArray[pageNumberArray.length - 1] ||
-                            lstProject.length === 0
-                        }"
-                      >
-                        <a
-                          (click)="getMoreData('next')"
-                          (keydown.enter)="getMoreData('next')"
-                          class="page-link"
-                          href="javascript:void(0);"
-                          >Next
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- /Page Wrapper -->
-</div>
-
-
-<!-- Delete Modal -->
-<div class="modal custom-modal fade" id="delete_category" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="form-header">
-          <h3>Delete</h3>
-          <p>Are you sure want to delete?</p>
-        </div>
-        <div class="modal-btn delete-action">
-          <div class="row">
-            <div class="col-6">
-              <a href="javascript:void(0);" class="btn btn-primary continue-btn"
-                >Delete</a
-              >
-            </div>
-            <div class="col-6">
-              <a
-                href="javascript:void(0);"
-                data-bs-dismiss="modal"
-                class="btn btn-primary cancel-btn"
-                >Cancel</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
-<!-- /Delete Modal -->
+<!-- Add Modal -->
