@@ -104,6 +104,10 @@ export class CompanyService {
     return this.http.patch<any>(`${this.baseUrl}/${companyId}/update`, data);
   }
 
+  deleteCompany(companyId: string) {
+    return this.http.delete<any>(`${this.baseUrl}/${companyId}`);
+  }
+
   updateCompanyStatus(companyId: string, statusId: string): Observable<any> {
     return this.http.patch(`${this.baseUrl}/${companyId}/status`, {
       statusId,

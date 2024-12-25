@@ -18,7 +18,7 @@
           <ng-container>
             <a
               class="btn add-user"
-              href="javascript:void()"
+              href="javascript:void(0)"
               data-bs-toggle="modal"
               data-bs-target="#add-company"
             >
@@ -32,15 +32,25 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="subscribe-employe users-list">
-          <ul>
+          <ul class="client-filter">
             <li>
-              <a (click)="filterCompaniesByStatus('null')">Tous les Clients</a>
+              <a
+                (click)="filterCompaniesByStatus(null)"
+                [ngClass]="{ selected: selectedStatus === null }"
+                >Tous les Clients</a
+              >
             </li>
             <li>
-              <a (click)="filterCompaniesByStatus('Active')">Clients Actifs</a>
+              <a
+                (click)="filterCompaniesByStatus('Active')"
+                [ngClass]="{ selected: selectedStatus === 'Active' }"
+                >Clients Actifs</a
+              >
             </li>
             <li>
-              <a (click)="filterCompaniesByStatus('Inactive')"
+              <a
+                (click)="filterCompaniesByStatus('Inactive')"
+                [ngClass]="{ selected: selectedStatus === 'Inactive' }"
                 >Clients Inactifs</a
               >
             </li>
@@ -52,7 +62,9 @@
           <div class="row align-items-center">
             <div class="col">
               <h3 class="page-title">{{ selectedHederTitle }} Clients</h3>
-              <p>Total <span>57</span> clients</p>
+              <p>
+                Total <span>{{ countClient }}</span> clients
+              </p>
             </div>
             <div class="col-auto">
               <a href="javascript:" class="btn export-btn me-1">
@@ -180,7 +192,7 @@
 
                           <th></th>
                         </tr>
-                        <tr *ngIf="lstProject.length === 0">
+                        <tr *ngIf="filteredCompanies.length === 0">
                           <td colspan="9">
                             <h5 style="text-align: center">No data found</h5>
                           </td>
@@ -188,7 +200,10 @@
                       </thead>
                       <tbody>
                         <tr
-                          *ngFor="let company of lstProject; let i = index"
+                          *ngFor="
+                            let company of filteredCompanies;
+                            let i = index
+                          "
                           (click)="setSelectedCompany(company)"
                         >
                           <td>
@@ -250,7 +265,7 @@
 
                           <td class="text-end hide-shave">
                             <a
-                              href="javascript:void()"
+                              href="javascript:void(0)"
                               class="dropdown-toggle nav-link"
                               data-bs-toggle="dropdown"
                               ><i class="fas fa-ellipsis-v"></i
@@ -266,8 +281,8 @@
                               >
                               <a
                                 class="dropdown-item"
-                                href="javascript:void()"
-                                (click)="deleteCompany(company)"
+                                href="javascript:void(0)"
+                                (click)="this.showDeleteCategoryModal(company)"
                                 data-dismiss="modal"
                                 ><i class="feather icon-trash text-danger"></i>
                                 Supprimer</a
@@ -281,9 +296,7 @@
                   <div class="table_footer">
                     <div class="col-sm-12 col-md-5">
                       <div class="dataTables_info">
-                        Showing {{ serialNumberArray[0] }} to
-                        {{ serialNumberArray[serialNumberArray.length - 1] }} of
-                        {{ totalData }} entries
+                        Affichage de 1 à 7 sur 7 entrées
                       </div>
                     </div>
 
@@ -357,10 +370,7 @@
                               [hidden]="
                                 currentPage >=
                                   pageNumberArray[pageNumberArray.length - 2] ||
-                                totalData <
-                                  serialNumberArray[
-                                    serialNumberArray.length - 1
-                                  ]
+                                totalData < 7
                               "
                               class="page-item"
                               (click)="moveToPage(currentPage + 2)"
@@ -379,7 +389,7 @@
                               disabled:
                                 currentPage ===
                                   pageNumberArray[pageNumberArray.length - 1] ||
-                                lstProject.length === 0
+                                filteredCompanies.length === 0
                             }"
                           >
                             <a
@@ -412,7 +422,9 @@
               <h3>Supprimer</h3>
               <p>Êtes-vous sur de vouloir supprimer</p>
               <p>
-                <strong class="text-danger">{{ companyToDelete }} ?</strong>
+                <strong class="text-danger"
+                  >{{ companyToDelete?.name }} ?</strong
+                >
               </p>
             </div>
             <div class="modal-btn delete-action">
@@ -421,6 +433,7 @@
                   <a
                     href="javascript:void(0);"
                     class="btn btn-primary continue-btn"
+                    (click)="deleteCompany(companyToDelete)"
                     >Supprimer</a
                   >
                 </div>

@@ -26,7 +26,6 @@ export class ProjectsComponent implements OnInit {
   public skip = 0;
   public limit: number = this.pageSize;
   public pageIndex = 0;
-  public serialNumberArray: Array<number> = [];
   public currentPage = 1;
   public pageNumberArray: Array<number> = [];
   public pageSelection: Array<pageSelection> = [];
@@ -35,8 +34,10 @@ export class ProjectsComponent implements OnInit {
   companiesData: any[] = [];
   selectedCompany: any = null;
   filteredCompanies: any[] = [];
+  selectedStatus: string | null = null;
+  countClient: number = 0;
 
-  companyToDelete = '';
+  companyToDelete: any;
   selectedHederTitle = 'Tous les';
 
   //** / pagination variables
@@ -47,7 +48,6 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTableData();
-    this.loadCompanies();
   }
 
   //Filter toggle
@@ -56,20 +56,9 @@ export class ProjectsComponent implements OnInit {
     console.log(this.filter);
   }
 
-  loadCompanies(): void {
-    this.companyService.getAllCompanies().subscribe(
-      (response) => {
-        console.log(response);
-        this.companiesData = response;
-        this.filteredCompanies = response;
-      },
-      (error) => {
-        console.error('Error fetching companies:', error);
-      }
-    );
-  }
-
   filterCompaniesByStatus(status: string | null): void {
+    this.selectedHederTitle = this.getTranslation(status);
+    this.selectedStatus = status;
     if (!status) {
       // If no status is provided, return all companies
       this.filteredCompanies = this.companiesData;
@@ -79,6 +68,7 @@ export class ProjectsComponent implements OnInit {
         (company: any) => company.status?.name === status
       );
     }
+    this.countClient = this.filteredCompanies.length;
   }
 
   setSelectedCompany(company: any): void {
@@ -86,23 +76,11 @@ export class ProjectsComponent implements OnInit {
   }
 
   private getTableData(): void {
-    this.lstProject = [];
-    this.serialNumberArray = [];
-
     this.companyService.getAllCompanies().subscribe(
       (response) => {
-        const companies = response.data || response; // Adjust based on response structure
-
-        companies.map((res: Company, index: number) => {
-          const serialNumber = index + 1;
-          if (index >= this.skip && serialNumber <= this.limit) {
-            this.lstProject.push(res);
-            this.serialNumberArray.push(serialNumber);
-          }
-        });
-
-        this.dataSource = new MatTableDataSource<Company>(this.lstProject);
-        this.calculateTotalPages(this.totalData, this.pageSize);
+        this.companiesData = response;
+        this.filteredCompanies = response;
+        this.countClient = response.length;
       },
       (error) => {
         console.error('Error fetching companies:', error);
@@ -185,26 +163,49 @@ export class ProjectsComponent implements OnInit {
     }
   }
 
-  getTranslation(key: string): string {
-    const translations: { [key: string]: string } = {
-      projects: 'Tous les',
-      Active: 'Actifs',
-      Inactive: 'Inactifs',
-    };
-    return translations[key] || key;
+  getTranslation(key: string | null): string {
+    if (key === null) {
+      return 'Tous les';
+    } else {
+      const translations: { [key: string]: string } = {
+        Active: 'Actifs',
+        Inactive: 'Inactifs',
+      };
+      return translations[key] || key;
+    }
   }
 
   deleteCompany(company: any) {
-    this.companyToDelete = company.name;
-    this.showDeleteCategoryModal();
+    console.log(company);
+    this.companyService.deleteCompany(company?.id).subscribe({
+      next: (res) => {
+        this.hideDeleteCategoryModal();
+        this.getTableData();
+        console.log(res);
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
-  showDeleteCategoryModal() {
+  showDeleteCategoryModal(company: any) {
+    this.companyToDelete = company;
     const modalElement = document.getElementById('delete_client');
     if (modalElement) {
       const modal = new bootstrap.Modal(modalElement);
       modal.show();
       modalElement.focus();
+    }
+  }
+
+  hideDeleteCategoryModal() {
+    const modalElement = document.getElementById('delete_client');
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide();
+      }
     }
   }
 }
