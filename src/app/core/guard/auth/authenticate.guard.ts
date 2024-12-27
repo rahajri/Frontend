@@ -22,20 +22,10 @@ export class AuthenticateGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const isLoggedIn = localStorage.getItem('token'); // Replace with your actual logic
+    const isLoggedIn = this.authService.isLogged(); // Replace with your actual logic
     if (!isLoggedIn) {
       return this.router.createUrlTree(['/auth/login']);
     }
     return true;
   }
-
-  // constructor(private router: Router) {}
-  // canActivate(): boolean {
-  //   const isAuthenticated = !!localStorage.getItem('token');
-  //   if (!isAuthenticated) {
-  //     this.router.navigate(['/auth/login']);
-  //     return false;
-  //   }
-  //   return true;
-  // }
 }

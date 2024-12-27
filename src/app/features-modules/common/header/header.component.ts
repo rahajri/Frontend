@@ -47,7 +47,7 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-    this.isLogged = this.authService.isLoggedIn();
+    this.isLogged = this.authService.isLogged();
   }
 
   employer() {

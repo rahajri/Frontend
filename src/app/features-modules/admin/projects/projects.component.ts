@@ -53,7 +53,6 @@ export class ProjectsComponent implements OnInit {
   //Filter toggle
   openFilter() {
     this.filter = !this.filter;
-    console.log(this.filter);
   }
 
   filterCompaniesByStatus(status: string | null): void {

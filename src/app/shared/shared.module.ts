@@ -48,6 +48,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ErrorHandlerService } from '../core/services/error-handler.service';
 import { authInterceptor } from '../interceptors/auth.interceptor';
+import { tokenInterceptor } from '../interceptors/token.interceptor';
 
 @NgModule({
   imports: [
@@ -134,7 +135,7 @@ import { authInterceptor } from '../interceptors/auth.interceptor';
       provide: ErrorHandler,
       useClass: ErrorHandlerService,
     },
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, tokenInterceptor])),
     BsDatepickerConfig,
     provideHttpClient(withInterceptorsFromDi()),
   ],
