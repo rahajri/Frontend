@@ -17,6 +17,7 @@ export class FreelancerheaderComponent {
   base = '';
   page = '';
   last = '';
+  isLogged = false;
   public routes = routes;
 
   navbar: Array<header> = [];
@@ -43,6 +44,10 @@ export class FreelancerheaderComponent {
       }
     });
     this.navbar = this.data.sideBar;
+  }
+
+  ngOnInit(): void {
+    this.isLogged = this.authService.isLogged();
   }
 
   employer() {

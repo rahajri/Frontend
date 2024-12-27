@@ -311,9 +311,7 @@
               />
               Profile Paramètres</a
             >
-            <a
-              class="dropdown-item"
-              (click)="logout()"
+            <a class="dropdown-item" (click)="logout()"
               ><img
                 src="assets/img/icon/user-dropdown-icon--07.svg"
                 alt="Img"
@@ -325,22 +323,22 @@
       </ul>
       } @if (anotherMenu === true) {
       <ul class="nav header-navbar-rht reg-head">
-        <li>
+        <li *ngIf="!isLogged">
           <a [routerLink]="routes.register" class="reg-btn"
             ><img
               src="assets/img/icon/users.svg"
               class="me-1"
               alt="img"
-            />S'inscrire </a
-          >
+            />S'inscrire
+          </a>
         </li>
-        <li>
+        <li *ngIf="!isLogged">
           <a [routerLink]="routes.login" class="log-btn"
-            ><img src="assets/img/icon/lock.svg" class="me-1" alt="img" />
-            Se connecter</a
+            ><img src="assets/img/icon/lock.svg" class="me-1" alt="img" /> Se
+            connecter</a
           >
         </li>
-        <li>
+        <li *ngIf="isLogged">
           <a [routerLink]="routes.employee_post_project" class="login-btn"
             ><i class="feather icon-plus me-1"></i>Créer Offre
           </a>

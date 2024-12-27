@@ -320,7 +320,7 @@
       </ul>
       } @if (anotherMenu === true) {
       <ul class="nav header-navbar-rht reg-head">
-        <li>
+        <li *ngIf="!isLogged">
           <a [routerLink]="routes.register" class="reg-btn"
             ><img
               src="assets/img/icon/users.svg"
@@ -329,13 +329,13 @@
             />S'inscrire </a
           >
         </li>
-        <li>
+        <li *ngIf="!isLogged">
           <a [routerLink]="routes.login" class="log-btn"
             ><img src="assets/img/icon/lock.svg" class="me-1" alt="img" />
             Se connecter</a
           >
         </li>
-        <li>
+        <li *ngIf="isLogged">
           <a [routerLink]="routes.employee_post_project" class="login-btn"
             ><i class="feather icon-plus me-1"></i>Créer Offre
           </a>

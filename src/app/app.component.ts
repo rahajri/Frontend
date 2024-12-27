@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
+import { AuthService } from './core/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +10,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class AppComponent {
   title = 'kofejob_angular';
+  constructor(private authService: AuthService, private route: Router) {}
   ngOnInit(): void {
     // Set the primary color dynamically
     document.documentElement.style.setProperty(
@@ -26,5 +29,14 @@ export class AppComponent {
       '--warning-color',
       environment.warningyColor
     );
+  }
+  validateToken() {
+    this.authService.validateToken().subscribe({
+      next: (response) => {},
+      error: (error) => {
+        this.authService.logout();
+        this.route.navigate(['/auth/login']);
+      },
+    });
   }
 }

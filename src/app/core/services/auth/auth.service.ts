@@ -90,6 +90,9 @@ export class AuthService {
       password,
     });
   }
+  validateToken() {
+    return this.http.post<any>(`${this.baseUrl}/validate-token`, {});
+  }
 
   resendResetPasswordEmail(token: string) {
     return this.http.post<any>(`${this.baseUrl}/resend-reset-password-email`, {

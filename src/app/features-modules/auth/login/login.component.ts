@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
 import { CandidateService } from 'src/app/core/services/condidate.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private candidateService: CandidateService
+    private candidateService: CandidateService,
+    private location: Location
   ) {
     this.translate.setDefaultLang(environment.defaultLanguage);
     this.subscription = this.storage.Loginvalue.subscribe((data) => {
@@ -43,7 +45,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: ['', Validators.required],
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    if (!!localStorage.getItem('token')) {
+      this.location.back();
+    }
+  }
 
   onSubmit() {
     if (this.loginForm.valid) {
