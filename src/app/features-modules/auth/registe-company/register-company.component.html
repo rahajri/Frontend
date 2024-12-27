@@ -22,7 +22,7 @@
               <a [routerLink]="routes.home"
                 ><img src="assets/img/onterim.png" alt="logo" class="img-fluid"
               /></a>
-              <h3>{{ "register.hello" | translate }}</h3>
+              <h3>Ravis de vous accueillir sur notre plateforme</h3>
             </div>
             <nav class="user-tabs mb-4">
               <ul role="tablist" class="nav nav-pills nav-justified">
@@ -31,7 +31,7 @@
                     [routerLink]="routes.register"
                     data-bs-toggle="tab"
                     class="nav-link"
-                    >Candidate</a
+                    >Candidat</a
                   >
                 </li>
                 <li class="nav-item">
@@ -39,7 +39,7 @@
                     [routerLink]="routes.registerCompany"
                     data-bs-toggle="tab"
                     class="nav-link active"
-                    >Company</a
+                    >Entreprise</a
                   >
                 </li>
               </ul>
@@ -53,7 +53,7 @@
                 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                   <div formGroupName="company">
                     <div class="company-title">
-                      <h4>company</h4>
+                      <h4>Informations Générales</h4>
                     </div>
                     <div class="row">
                       <div class="col-md-12">
@@ -66,7 +66,7 @@
                             class="form-control"
                             formControlName="siret"
                             (change)="getSiretDetails($event)"
-                            placeholder="Enter Siret"
+                            placeholder="Saisir votre siret"
                           />
                         </div>
                       </div>
@@ -75,12 +75,13 @@
                       <div class="col-md-12">
                         <div class="input-block">
                           <label for="company-name" class="form-label"
-                            >Company Name</label
+                            >Nom de l'entreprise</label
                           >
                           <input
                             type="text"
                             class="form-control"
                             formControlName="name"
+                            readonly
                           />
                         </div>
                       </div>
@@ -88,12 +89,13 @@
                       <div class="col-md-12">
                         <div class="input-block">
                           <label for="naf-title" class="form-label"
-                            >INTITULÉS</label
+                            >Activité</label
                           >
                           <input
                             type="text"
                             class="form-control"
                             formControlName="nafTitle"
+                            readonly
                           />
                         </div>
                       </div>
@@ -105,6 +107,7 @@
                             type="text"
                             class="form-control"
                             formControlName="naf"
+                            readonly
                           />
                         </div>
                       </div>
@@ -112,12 +115,13 @@
                       <div class="col-md-12">
                         <div class="input-block">
                           <label for="tagline" class="form-label"
-                            >category</label
+                            >Forme juridique</label
                           >
                           <input
                             type="text"
                             class="form-control"
                             formControlName="category"
+                            readonly
                           />
                         </div>
                       </div>
@@ -125,12 +129,13 @@
                       <div class="col-md-12">
                         <div class="input-block">
                           <label for="team-size" class="form-label"
-                            >Team size</label
+                            >Taille de l'entreprise</label
                           >
                           <input
                             type="text"
                             class="form-control"
                             formControlName="workforce"
+                            readonly
                           />
                         </div>
                       </div>
@@ -147,7 +152,7 @@
                       <div class="col-md-6">
                         <div class="input-block">
                           <label for="post-code" class="form-label"
-                            >ZIP / Post Code</label
+                            >Code Postal</label
                           >
                           <input
                             type="text"
@@ -159,7 +164,7 @@
 
                       <div class="col-md-6">
                         <div class="input-block">
-                          <label for="city" class="form-label">City</label>
+                          <label for="city" class="form-label">Ville</label>
                           <input
                             type="text"
                             class="form-control"
@@ -171,7 +176,7 @@
                       <div class="col-md-6">
                         <div class="input-block">
                           <label for="state" class="form-label"
-                            >Departement</label
+                            >Département</label
                           >
                           <input
                             type="text"
@@ -183,7 +188,7 @@
 
                       <div class="col-md-6">
                         <div class="input-block">
-                          <label for="region" class="form-label">Region</label>
+                          <label for="region" class="form-label">Région</label>
                           <input
                             type="text"
                             class="form-control"
@@ -195,7 +200,7 @@
                       <div class="col-md-12">
                         <div class="input-block">
                           <label for="address" class="form-label"
-                            >Address</label
+                            >Adresse</label
                           >
                           <input
                             type="text"
@@ -208,7 +213,7 @@
                       <div class="col-md-12">
                         <div class="input-block">
                           <label for="address2" class="form-label"
-                            >Address Complementaire</label
+                            >Adresse Complémentaire</label
                           >
                           <input
                             type="text"
@@ -231,8 +236,7 @@
                     <div class="row">
                       <div class="input-block">
                         <label for="firstName"
-                          >{{ "personalDetails.firstName" | translate }}
-                          <span class="label-star"> *</span></label
+                          >Prénom <span class="label-star"> *</span></label
                         >
                         <input
                           type="text"
@@ -243,8 +247,7 @@
 
                       <div class="input-block">
                         <label for="lastName"
-                          >{{ "personalDetails.lastName" | translate }}
-                          <span class="label-star"> *</span></label
+                          >Nom <span class="label-star"> *</span></label
                         >
                         <input
                           type="text"
@@ -255,7 +258,7 @@
 
                       <div class="input-block">
                         <label for="phone"
-                          >{{ "personalDetails.phone" | translate }}
+                          >Numéro de Téléphone
                           <span class="label-star"> *</span></label
                         >
                         <input
@@ -291,7 +294,7 @@
 
                       <div class="input-block">
                         <label for="email"
-                          >{{ "personalDetails.email" | translate }}
+                          >Adresse Email
                           <span class="label-star"> *</span></label
                         >
                         <input
@@ -304,7 +307,7 @@
 
                       <div class="input-block">
                         <label for="password"
-                          >{{ "personalDetails.password" | translate }}
+                          >Mot de passe
                           <span class="label-star"> *</span></label
                         >
                         <div class="position-relative">
@@ -329,8 +332,9 @@
 
                       <div class="input-block">
                         <label for="confirmPassword"
-                          >{{ "personalDetails.confirmPassword" | translate
-                          }}<span class="label-star"> *</span></label
+                          >Confirmer mot de passe<span class="label-star">
+                            *</span
+                          ></label
                         >
                         <div class="position-relative">
                           <input
@@ -437,9 +441,9 @@
                   <div class="dont-have">
                     <label>
                       <input type="checkbox" formControlName="terms" />
-                      {{ "register.term" | translate }}
+                      J'ai lu et j'accepte tous les
                       <a [routerLink]="routes.privacypolicy"
-                        >Terms &amp; Conditions</a
+                        >Termes et Conditions</a
                       >
                     </label>
                   </div>
@@ -449,7 +453,7 @@
                     class="btn btn-primary w-100"
                     [disabled]="!signupForm.valid || siretErrorMessage"
                   >
-                    {{ "register.demande" | translate }}
+                    Envoyer ma demande
                   </button>
                 </form>
               </div>

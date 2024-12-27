@@ -1,130 +1,251 @@
-
 <div class="main-wrapper account-page">
-    <div class="login-wrapper">
-        <div class="content w-100">
-            <!-- Login Content -->
-            <div class="account-content">
-                <div class="align-items-center justify-content-center">
-                    <div class="login-right">
-                        <div class="login-header text-center">
-                            <a [routerLink] = "routes.home"><img src="assets/img/onterim.png" alt="logo" class="img-fluid"></a>
-                            <h3>We love to see you joining our community</h3>
-                        </div>
-                        <nav class="user-tabs mb-4">
-                            <ul role="tablist" class="nav nav-pills nav-justified">
-                                <li class="nav-item">
-                                    <a [routerLink]="routes.register" data-bs-toggle="tab" class="nav-link active">Candidate</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a [routerLink]="routes.registerCompany" data-bs-toggle="tab" class="nav-link " >Company</a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="tab-content pt-0">
-                            <div role="tabpanel" id="developer" class="tab-pane fade active show">
-                                <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-                                    <div class="input-block">
-                                      <label for="firstName" class="focus-label">First Name <span class="label-star"> *</span></label>
-                                      <input id="firstName" formControlName="firstName" type="text" class="form-control floating" />
-                                    </div>
-                                  
-                                    <div class="input-block">
-                                      <label for="lastName" class="focus-label">Last Name <span class="label-star"> *</span></label>
-                                      <input id="lastName" formControlName="lastName" type="text" class="form-control floating" />
-                                    </div>
-                                  
-                                    <div class="input-block">
-                                      <label for="email" class="focus-label">Email Address <span class="label-star"> *</span></label>
-                                      <input id="email" formControlName="email" type="email" class="form-control floating" />
-                                    </div>
-                                  
-                                    <div class="input-block">
-                                      <label for="password" class="focus-label">Password <span class="label-star"> *</span></label>
-                                      <div class="position-relative">
-                                        <input id="password" [type]="password[0] ? 'text' : 'password'" formControlName="password" class="form-control floating pass-input" />
-                                        <div class="password-icon" (click)="togglePassword(0)" (keydown.enter)="togglePassword(0)" tabindex="0">
-                                          <span class="fas toggle-password" [ngClass]="password[0] ? 'fa-eye' : 'fa-eye-slash'"></span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  
-                                    <div class="input-block mb-0">
-                                      <label for="confirmPassword" class="focus-label">Confirm Password <span class="label-star"> *</span></label>
-                                      <div class="position-relative">
-                                        <input id="confirmPassword" [type]="password[1] ? 'text' : 'password'" formControlName="confirmPassword" class="form-control floating pass-input1" />
-                                        <div class="password-icon" (click)="togglePassword(1)" (keydown.enter)="togglePassword(1)" tabindex="0">
-                                          <span class="fas toggle-password1" [ngClass]="password[1] ? 'fa-eye' : 'fa-eye-slash'"></span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                      <!-- Password validation error messages -->
-                                      <div >
-                                        <!-- Min Length -->
-                                        <div [ngClass]="{ 'text-success': passwordValidations.minLength, 'text-danger': !passwordValidations.minLength }">
-                                          <small>Au moins 8 caractères</small>
-                                        </div>
-    
-                                        <!-- Lowercase Letter -->
-                                        <div [ngClass]="{ 'text-success': passwordValidations.hasLowercase, 'text-danger': !passwordValidations.hasLowercase }">
-                                          <small>Une lettre minuscule</small>
-                                        </div>
-    
-                                        <!-- Uppercase Letter -->
-                                        <div [ngClass]="{ 'text-success': passwordValidations.hasUppercase, 'text-danger': !passwordValidations.hasUppercase }">
-                                          <small>Une lettre majuscule</small>
-                                        </div>
-    
-                                        <!-- Number -->
-                                        <div [ngClass]="{ 'text-success': passwordValidations.hasNumber, 'text-danger': !passwordValidations.hasNumber }">
-                                          <small>Un chiffre</small>
-                                        </div>
-    
-                                        <!-- Special Character -->
-                                        <div [ngClass]="{ 'text-success': passwordValidations.hasSpecialChar, 'text-danger': !passwordValidations.hasSpecialChar }">
-                                          <small>Un caractère spécial (!&#64;#$%^&amp;*)</small> <!-- Escaped special characters -->
-                                        </div>
-                                      </div>
-                                  
-                                    <div class="dont-have">
-                                      <label class="custom_check">
-                                        <input type="checkbox" formControlName="terms" />
-                                        <span class="checkmark"></span> I have read and agree to all <a [routerLink]="routes.privacypolicy">Terms & Conditions</a>
-                                      </label>
-                                    </div>
-                                  
-                                    <button class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center" type="submit" [disabled]="signupForm.invalid">
-                                      Sign Up Now <i class="feather icon-arrow-right ms-2"></i>
-                                    </button>
-                                  
-                                    <div class="login-or">
-                                      <p><span>Or</span></p>
-                                    </div>
-                                  
-                                    <div class="row social-login">
-                                      <div class="col-sm-4">
-                                        <a href="javascript:void(0);" class="btn btn-block"><img src="assets/img/icon/google-icon.svg" alt="Google">Google</a>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <a href="javascript:void(0);" class="btn btn-block"><img src="assets/img/icon/fb-icon.svg" alt="Fb">Facebook</a>
-                                      </div>
-                                      <div class="col-sm-4">
-                                        <a href="javascript:void(0);" class="btn btn-block"><img src="assets/img/icon/ios-icon.svg" alt="Apple">Apple</a>
-                                      </div>
-                                    </div>
-                                  
-                                    <div class="row">
-                                      <div class="col-sm-8 dont-have d-flex align-items-center">Already have an account? <a [routerLink]="routes.login" class="ms-2">Sign in?</a></div>
-                                    </div>
-                                  </form>
-                                  
-                            </div>
-                             
-                        </div>		
-                    </div>
-                </div>
+  <div class="login-wrapper">
+    <div class="content w-100">
+      <!-- Login Content -->
+      <div class="account-content">
+        <div class="align-items-center justify-content-center">
+          <div class="login-right">
+            <div class="login-header text-center">
+              <a [routerLink]="routes.home"
+                ><img src="assets/img/onterim.png" alt="logo" class="img-fluid"
+              /></a>
+              <h3>Ravis de vous accueillir sur notre plateforme</h3>
             </div>
-            <!-- /Login Content -->
-        </div>	
-    </div>
-</div>
+            <nav class="user-tabs mb-4">
+              <ul role="tablist" class="nav nav-pills nav-justified">
+                <li class="nav-item">
+                  <a
+                    [routerLink]="routes.register"
+                    data-bs-toggle="tab"
+                    class="nav-link active"
+                    >Candidat</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    [routerLink]="routes.registerCompany"
+                    data-bs-toggle="tab"
+                    class="nav-link"
+                    >Entreprise</a
+                  >
+                </li>
+              </ul>
+            </nav>
+            <div class="tab-content pt-0">
+              <div
+                role="tabpanel"
+                id="developer"
+                class="tab-pane fade active show"
+              >
+                <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                  <div class="input-block">
+                    <label for="firstName" class="focus-label"
+                      >Prénom <span class="label-star"> *</span></label
+                    >
+                    <input
+                      id="firstName"
+                      formControlName="firstName"
+                      type="text"
+                      class="form-control floating"
+                    />
+                  </div>
 
+                  <div class="input-block">
+                    <label for="lastName" class="focus-label"
+                      >Nom <span class="label-star"> *</span></label
+                    >
+                    <input
+                      id="lastName"
+                      formControlName="lastName"
+                      type="text"
+                      class="form-control floating"
+                    />
+                  </div>
+
+                  <div class="input-block">
+                    <label for="email" class="focus-label"
+                      >Email <span class="label-star"> *</span></label
+                    >
+                    <input
+                      id="email"
+                      formControlName="email"
+                      type="email"
+                      class="form-control floating"
+                    />
+                  </div>
+
+                  <div class="input-block">
+                    <label for="password" class="focus-label"
+                      >Mot de passe <span class="label-star"> *</span></label
+                    >
+                    <div class="position-relative">
+                      <input
+                        id="password"
+                        [type]="password[0] ? 'text' : 'password'"
+                        formControlName="password"
+                        class="form-control floating pass-input"
+                      />
+                      <div
+                        class="password-icon"
+                        (click)="togglePassword(0)"
+                        (keydown.enter)="togglePassword(0)"
+                        tabindex="0"
+                      >
+                        <span
+                          class="fas toggle-password"
+                          [ngClass]="password[0] ? 'fa-eye' : 'fa-eye-slash'"
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="input-block mb-0">
+                    <label for="confirmPassword" class="focus-label"
+                      >Confirmer mot de passe
+                      <span class="label-star"> *</span></label
+                    >
+                    <div class="position-relative">
+                      <input
+                        id="confirmPassword"
+                        [type]="password[1] ? 'text' : 'password'"
+                        formControlName="confirmPassword"
+                        class="form-control floating pass-input1"
+                      />
+                      <div
+                        class="password-icon"
+                        (click)="togglePassword(1)"
+                        (keydown.enter)="togglePassword(1)"
+                        tabindex="0"
+                      >
+                        <span
+                          class="fas toggle-password1"
+                          [ngClass]="password[1] ? 'fa-eye' : 'fa-eye-slash'"
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password validation error messages -->
+                  <div>
+                    <!-- Min Length -->
+                    <div
+                      [ngClass]="{
+                        'text-success': passwordValidations.minLength,
+                        'text-danger': !passwordValidations.minLength
+                      }"
+                    >
+                      <small>Au moins 8 caractères</small>
+                    </div>
+
+                    <!-- Lowercase Letter -->
+                    <div
+                      [ngClass]="{
+                        'text-success': passwordValidations.hasLowercase,
+                        'text-danger': !passwordValidations.hasLowercase
+                      }"
+                    >
+                      <small>Une lettre minuscule</small>
+                    </div>
+
+                    <!-- Uppercase Letter -->
+                    <div
+                      [ngClass]="{
+                        'text-success': passwordValidations.hasUppercase,
+                        'text-danger': !passwordValidations.hasUppercase
+                      }"
+                    >
+                      <small>Une lettre majuscule</small>
+                    </div>
+
+                    <!-- Number -->
+                    <div
+                      [ngClass]="{
+                        'text-success': passwordValidations.hasNumber,
+                        'text-danger': !passwordValidations.hasNumber
+                      }"
+                    >
+                      <small>Un chiffre</small>
+                    </div>
+
+                    <!-- Special Character -->
+                    <div
+                      [ngClass]="{
+                        'text-success': passwordValidations.hasSpecialChar,
+                        'text-danger': !passwordValidations.hasSpecialChar
+                      }"
+                    >
+                      <small>Un caractère spécial (!&#64;#$%^&amp;*)</small>
+                      <!-- Escaped special characters -->
+                    </div>
+                  </div>
+
+                  <div class="dont-have">
+                    <label class="custom_check">
+                      <input type="checkbox" formControlName="terms" />
+                      <span class="checkmark"></span> J'ai lu et j'accepte tous
+                      les
+                      <a [routerLink]="routes.privacypolicy"
+                        >Termes et Conditions</a
+                      >
+                    </label>
+                  </div>
+
+                  <button
+                    class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center"
+                    type="submit"
+                    [disabled]="signupForm.invalid"
+                  >
+                    Rejoignez-nous !
+                    <i class="feather icon-arrow-right ms-2"></i>
+                  </button>
+
+                  <div class="login-or">
+                    <p><span>Ou</span></p>
+                  </div>
+
+                  <div class="row social-login">
+                    <div class="col-sm-4">
+                      <a href="javascript:void(0);" class="btn btn-block"
+                        ><img
+                          src="assets/img/icon/google-icon.svg"
+                          alt="Google"
+                        />Google</a
+                      >
+                    </div>
+                    <div class="col-sm-4">
+                      <a href="javascript:void(0);" class="btn btn-block"
+                        ><img
+                          src="assets/img/icon/fb-icon.svg"
+                          alt="Fb"
+                        />Facebook</a
+                      >
+                    </div>
+                    <div class="col-sm-4">
+                      <a href="javascript:void(0);" class="btn btn-block"
+                        ><img
+                          width="20px"
+                          height="20px"
+                          src="assets/img/icon/linkedin-icon.svg"
+                          alt="linkedIn"
+                        />LinkedIn</a
+                      >
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-8 dont-have d-flex align-items-center">
+                      J'ai déjà un compte ?
+                      <a [routerLink]="routes.login" class="ms-2"
+                        >Connectez-vous?</a
+                      >
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Login Content -->
+    </div>
+  </div>
+</div>

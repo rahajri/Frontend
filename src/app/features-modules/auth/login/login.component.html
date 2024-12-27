@@ -10,7 +10,7 @@
               <a [routerLink]="routes.home"
                 ><img src="assets/img/onterim.png" alt="logo" class="img-fluid"
               /></a>
-              <h3>{{ "login.hello" | translate }}</h3>
+              <h3>Connectez-vous</h3>
             </div>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
               <div *ngIf="loginError" class="alert alert-danger">
@@ -18,8 +18,7 @@
               </div>
               <div class="input-block">
                 <label for="email-address" class="focus-label"
-                  >{{ "personalDetails.email" | translate }}
-                  <span class="label-star"> *</span></label
+                  >Email <span class="label-star"> *</span></label
                 >
                 <input
                   type="text"
@@ -29,8 +28,7 @@
               </div>
               <div class="input-block">
                 <label for="password" class="focus-label"
-                  >{{ "personalDetails.password" | translate }}
-                  <span class="label-star"> *</span></label
+                  >Mot de passe <span class="label-star"> *</span></label
                 >
                 <div class="position-relative">
                   <input
@@ -54,7 +52,7 @@
                 class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center"
                 type="submit"
               >
-                {{ "login.buttonText" | translate }}
+                Se connecter
                 <i class="feather icon-arrow-right ms-2"></i>
               </button>
 
@@ -94,16 +92,22 @@
               </div>
 
               <div class="row">
-                <div class="col-sm-8 d-flex align-items-center">
+                <div
+                  class="col-sm-8 d-flex align-items-center justify-content-start"
+                >
                   <a [routerLink]="routes.register" class="ms-2 mt-3">
-                    {{ "register.route" | translate }}
+                    Créer un Compte
                   </a>
                 </div>
                 <div
                   class="col-sm-4 d-flex justify-content-end align-items-center"
                 >
-                  <a class="forgot-link" [routerLink]="routes.forgot_password">
-                    {{ "login.forgotPassword" | translate }}
+                  <a
+                    class="forgot-link"
+                    style="white-space: nowrap"
+                    [routerLink]="routes.forgot_password"
+                  >
+                    Mot de passe oublié ?
                   </a>
                 </div>
               </div>

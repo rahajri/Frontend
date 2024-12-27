@@ -73,7 +73,7 @@ export class RegisterComponent {
     this.passwordValidations.hasLowercase = /[a-z]/.test(password);
     this.passwordValidations.hasUppercase = /[A-Z]/.test(password);
     this.passwordValidations.hasNumber = /[0-9]/.test(password);
-    this.passwordValidations.hasSpecialChar = /[!@#$%^&*]/.test(password);
+    this.passwordValidations.hasSpecialChar = /[!@#$%^&*+]/.test(password);
   }
 
   passwordMatchValidator(): ValidatorFn {
@@ -146,7 +146,7 @@ export class RegisterComponent {
       const hasLowercase = /[a-z]/.test(password);
       const hasUppercase = /[A-Z]/.test(password);
       const hasNumber = /[0-9]/.test(password);
-      const hasSpecialChar = /[!@#$%^&*]/.test(password);
+      const hasSpecialChar = /[!@#$%^&*+]/.test(password);
 
       const errors: { [key: string]: boolean } = {};
 
