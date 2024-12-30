@@ -150,12 +150,12 @@ export class RegisterCompanyComponent {
   }
 
   verifyOtp(userId: string) {
-    this.userService.verifyOtp(userId).subscribe(
-      (response) => {},
-      (error) => {
+    this.userService.verifyOtp(userId).subscribe({
+      next: (response) => {},
+      error: (error) => {
         console.error('Verification failed', error);
-      }
-    );
+      },
+    });
   }
 
   passwordValidator(): ValidatorFn {
@@ -280,7 +280,7 @@ export class RegisterCompanyComponent {
 
     if (!siret) {
       console.error('SIRET is empty');
-      this.siretErrorMessage = 'SIRET cannot be empty.';
+      this.siretErrorMessage = 'Le SIRET ne peut pas être vide.';
       return;
     }
 

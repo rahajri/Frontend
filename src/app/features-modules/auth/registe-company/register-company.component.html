@@ -78,6 +78,7 @@
                             >Nom de l'entreprise</label
                           >
                           <input
+                            id="company-name"
                             type="text"
                             class="form-control"
                             formControlName="name"
@@ -93,6 +94,7 @@
                           >
                           <input
                             type="text"
+                            id="naf-title"
                             class="form-control"
                             formControlName="nafTitle"
                             readonly
@@ -104,6 +106,7 @@
                         <div class="input-block">
                           <label for="naf-code" class="form-label">NAF</label>
                           <input
+                            id="naf-code"
                             type="text"
                             class="form-control"
                             formControlName="naf"
@@ -118,6 +121,7 @@
                             >Forme juridique</label
                           >
                           <input
+                            id="tagline"
                             type="text"
                             class="form-control"
                             formControlName="category"
@@ -132,6 +136,7 @@
                             >Taille de l'entreprise</label
                           >
                           <input
+                            id="team-size"
                             type="text"
                             class="form-control"
                             formControlName="workforce"
@@ -155,6 +160,7 @@
                             >Code Postal</label
                           >
                           <input
+                            id="post-code"
                             type="text"
                             class="form-control"
                             formControlName="postalCode"
@@ -166,6 +172,7 @@
                         <div class="input-block">
                           <label for="city" class="form-label">Ville</label>
                           <input
+                            id="city"
                             type="text"
                             class="form-control"
                             formControlName="city"
@@ -179,6 +186,7 @@
                             >Département</label
                           >
                           <input
+                            id="state"
                             type="text"
                             class="form-control"
                             formControlName="department"
@@ -190,6 +198,7 @@
                         <div class="input-block">
                           <label for="region" class="form-label">Région</label>
                           <input
+                            id="region"
                             type="text"
                             class="form-control"
                             formControlName="region"
@@ -203,6 +212,7 @@
                             >Adresse</label
                           >
                           <input
+                            id="address"
                             type="text"
                             class="form-control"
                             formControlName="address"
@@ -216,6 +226,7 @@
                             >Adresse Complémentaire</label
                           >
                           <input
+                            id="address2"
                             type="text"
                             class="form-control"
                             formControlName="addressLine2"
@@ -239,6 +250,7 @@
                           >Prénom <span class="label-star"> *</span></label
                         >
                         <input
+                          id="firstName"
                           type="text"
                           formControlName="firstName"
                           class="form-control"
@@ -250,6 +262,7 @@
                           >Nom <span class="label-star"> *</span></label
                         >
                         <input
+                          id="lastName"
                           type="text"
                           formControlName="lastName"
                           class="form-control"
@@ -262,6 +275,7 @@
                           <span class="label-star"> *</span></label
                         >
                         <input
+                          id="phone"
                           type="text"
                           formControlName="phone"
                           class="form-control"
@@ -298,6 +312,7 @@
                           <span class="label-star"> *</span></label
                         >
                         <input
+                          id="email"
                           type="email"
                           formControlName="email"
                           class="form-control"
@@ -312,6 +327,7 @@
                         >
                         <div class="position-relative">
                           <input
+                            id="password"
                             [type]="password[0] ? 'text' : 'password'"
                             formControlName="password"
                             class="form-control"
@@ -338,6 +354,7 @@
                         >
                         <div class="position-relative">
                           <input
+                            id="confirmPassword"
                             [type]="password[1] ? 'text' : 'password'"
                             formControlName="confirmPassword"
                             class="form-control"

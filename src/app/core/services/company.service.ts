@@ -113,4 +113,7 @@ export class CompanyService {
       statusId,
     });
   }
+  companiesFiler(data: any): Observable<any[]> {
+    return this.http.post<any[]>(`${this.baseUrl}/filter`, data);
+  }
 }

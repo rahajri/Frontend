@@ -87,24 +87,39 @@
         <!-- Search Filter -->
         <div class="card filter-card" [class.filter-show]="filter">
           <div class="card-body pb-0">
-            <form action="#" method="post">
+            <form [formGroup]="filterForm" (ngSubmit)="onFilterSubmit()">
               <div class="row filter-row">
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
                     <label for="company-name">Nom Entreprise</label>
-                    <input class="form-control" type="text" />
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="companyName"
+                      (change)="onChange()"
+                    />
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
                     <label for="from-date">Nom Contact</label>
-                    <input class="form-control" type="text" />
+                    <input
+                      formControlName="contactLName"
+                      class="form-control"
+                      type="text"
+                      (change)="onChange()"
+                    />
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
                     <label for="to-date">Prénom Contact</label>
-                    <input class="form-control" type="text" />
+                    <input
+                      formControlName="contactFName"
+                      class="form-control"
+                      type="text"
+                      (change)="onChange()"
+                    />
                   </div>
                 </div>
               </div>
@@ -112,19 +127,34 @@
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
                     <label for="city">Ville</label>
-                    <input class="form-control" type="text" />
+                    <input
+                      formControlName="city"
+                      class="form-control"
+                      type="text"
+                      (change)="onChange()"
+                    />
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
                     <label for="department">Département</label>
-                    <input class="form-control" type="text" />
+                    <input
+                      formControlName="department"
+                      class="form-control"
+                      type="text"
+                      (change)="onChange()"
+                    />
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
                     <label for="region">Région</label>
-                    <input class="form-control" type="text" />
+                    <input
+                      formControlName="region"
+                      class="form-control"
+                      type="text"
+                      (change)="onChange()"
+                    />
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
@@ -470,36 +500,273 @@
       </div>
 
       <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="full-name">Full Name</label>
-            <input type="text" class="form-control" />
+        <form [formGroup]="addClientForm" (ngSubmit)="onClienSubmit()">
+          <div formGroupName="company">
+            <div class="company-title">
+              <h4>Informations Générales</h4>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="input-block">
+                  <label for="company-name" class="form-label">Siret</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="siret"
+                    (change)="getSiretDetails($event)"
+                    placeholder="Saisir votre siret"
+                  />
+                  <small class="text-danger" *ngIf="siretErrorMessage">
+                    {{ siretErrorMessage }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="input-block">
+                  <label for="company-name" class="form-label"
+                    >Nom de l'entreprise</label
+                  >
+                  <input
+                    id="company-name"
+                    type="text"
+                    class="form-control disabled"
+                    formControlName="name"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="input-block">
+                  <label for="naf-title" class="form-label">Activité</label>
+                  <input
+                    type="text"
+                    id="naf-title"
+                    class="form-control disabled"
+                    formControlName="nafTitle"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="input-block">
+                  <label for="naf-code" class="form-label">NAF</label>
+                  <input
+                    id="naf-code"
+                    type="text"
+                    class="form-control disabled"
+                    formControlName="naf"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="input-block">
+                  <label for="tagline" class="form-label"
+                    >Forme juridique</label
+                  >
+                  <input
+                    id="tagline"
+                    type="text"
+                    class="form-control disabled"
+                    formControlName="category"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="input-block">
+                  <label for="team-size" class="form-label"
+                    >Taille de l'entreprise</label
+                  >
+                  <input
+                    id="team-size"
+                    type="text"
+                    class="form-control disabled"
+                    formControlName="workforce"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="row"
+              formGroupName="location"
+              [class.disabled]="siretErrorMessage"
+            >
+              <div class="col-md-12">
+                <h4>Location</h4>
+              </div>
+
+              <div class="col-md-6">
+                <div class="input-block">
+                  <label for="post-code" class="form-label">Code Postal</label>
+                  <input
+                    id="post-code"
+                    type="text"
+                    class="form-control"
+                    formControlName="postalCode"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="input-block">
+                  <label for="city" class="form-label">Ville</label>
+                  <input
+                    id="city"
+                    type="text"
+                    class="form-control"
+                    formControlName="city"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="input-block">
+                  <label for="state" class="form-label">Département</label>
+                  <input
+                    id="state"
+                    type="text"
+                    class="form-control"
+                    formControlName="department"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="input-block">
+                  <label for="region" class="form-label">Région</label>
+                  <input
+                    id="region"
+                    type="text"
+                    class="form-control"
+                    formControlName="region"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="input-block">
+                  <label for="address" class="form-label">Adresse</label>
+                  <input
+                    id="address"
+                    type="text"
+                    class="form-control"
+                    formControlName="address"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="input-block">
+                  <label for="address2" class="form-label"
+                    >Adresse Complémentaire</label
+                  >
+                  <input
+                    id="address2"
+                    type="text"
+                    class="form-control"
+                    formControlName="addressLine2"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" />
+
+          <hr />
+          <div formGroupName="user" [class.disabled]="siretErrorMessage">
+            <div class="company-title">
+              <h4>Contact</h4>
+            </div>
+            <div class="row">
+              <div class="input-block">
+                <label for="firstName"
+                  >Prénom <span class="label-star"> *</span></label
+                >
+                <input
+                  id="firstName"
+                  type="text"
+                  formControlName="firstName"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="input-block">
+                <label for="lastName"
+                  >Nom <span class="label-star"> *</span></label
+                >
+                <input
+                  id="lastName"
+                  type="text"
+                  formControlName="lastName"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="input-block">
+                <label for="phone"
+                  >Numéro de Téléphone <span class="label-star"> *</span></label
+                >
+                <input
+                  id="phone"
+                  type="text"
+                  formControlName="phone"
+                  class="form-control"
+                  required
+                  [ngClass]="{
+                    'is-invalid':
+                      addClientForm.get('user.phone')?.invalid &&
+                      addClientForm.get('user.phone')?.touched
+                  }"
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    addClientForm.get('user.phone')?.invalid &&
+                    addClientForm.get('user.phone')?.touched
+                  "
+                >
+                  <div
+                    *ngIf="addClientForm.get('user.phone')?.errors?.['required']"
+                  >
+                    Le champ Téléphone est obligatoire.
+                  </div>
+                  <div
+                    *ngIf="addClientForm.get('user.phone')?.errors?.['pattern']"
+                  >
+                    Veuillez entrer un numéro de téléphone valide.
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-block">
+                <label for="email"
+                  >Adresse Email <span class="label-star"> *</span></label
+                >
+                <input
+                  id="email"
+                  type="email"
+                  formControlName="email"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="freelancer-type">Freelancer Type</label>
-            <select class="form-control form-select">
-              <option>Select</option>
-              <option>Frontend Developer</option>
-              <option>Graphic Designer</option>
-            </select>
-          </div>
-          <div class="mt-4">
-            <button type="submit" class="btn btn-primary btn-block">
-              Submit
-            </button>
-          </div>
+          <hr />
+          <button
+            type="submit"
+            class="btn btn-primary w-100"
+            [disabled]="!addClientForm.valid || siretErrorMessage"
+          >
+            Ajouter
+          </button>
         </form>
       </div>
     </div>
