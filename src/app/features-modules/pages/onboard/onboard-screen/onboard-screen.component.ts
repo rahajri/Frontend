@@ -45,20 +45,22 @@ export class OnboardScreenComponent implements OnInit {
   public education: number[] = [];
   public certification: number[] = [];
   public activity: number[] = [];
-
   public experience: number[] = [];
   public language: number[] = [];
   public datas: boolean[] = [true];
   public isCheckboxChecked = true;
+  public globalErrorMessage: boolean | null = false;
   extractedText = '';
   spinner: boolean = false;
   locationForm: FormGroup;
+  filteredJobs: any[] = [];
+  jobNotExist = true;
 
   username: string = 'aicha';
   cvs: File[] = [];
   form: FormGroup;
 
-  skillLevels = ['Beginner', 'Intermediate', 'Advanced'];
+  skillLevels = ['Débutant', 'Intermédiaire', 'Avanvé'];
 
   selectedListActivities = [
     { value: 'Activity 1' },
@@ -75,6 +77,7 @@ export class OnboardScreenComponent implements OnInit {
   zipCodes: any[] = [];
   cities: any[] = [];
   jobs: any[] = [];
+  subActivities: any[] = [];
 
   constructor(
     private datePipe: DatePipe,
@@ -117,6 +120,7 @@ export class OnboardScreenComponent implements OnInit {
   ngOnInit(): void {
     this.getCodeZipes();
     this.getJobs();
+    this.getSubActivities();
   }
 
   createSkill(): FormGroup {
@@ -151,6 +155,46 @@ export class OnboardScreenComponent implements OnInit {
       name: ['', Validators.required],
       level: ['', Validators.required],
     });
+  }
+
+  getSubActivities() {
+    this.jobService.getSubActivities().subscribe({
+      next: (data) => {
+        this.subActivities = data;
+      },
+      error: (error) => {
+        console.error(error);
+        this.globalErrorMessage = true;
+      },
+    });
+  }
+
+  previous: string | null = null;
+
+  onSubActivityChange(event: any, index: number): void {
+    const subActivityName = event.target.value?.trim(); // Trim whitespace for consistency
+
+    // Check if the new sub-activity is different from the previous one
+    if (subActivityName && subActivityName !== this.previous) {
+      this.previous = subActivityName; // Update the previous value
+
+      // Fetch details for the new sub-activity
+      this.jobService.getSubActivitiesDetails(subActivityName).subscribe(
+        (data) => {
+          // Access the specific activity form group by index
+          const activitiesArray = this.form.get('activities') as FormArray;
+          const activityGroup = activitiesArray.at(index) as FormGroup;
+
+          // Patch the activite field in the selected activity group
+          activityGroup.patchValue({
+            activite: data?.activity?.name || '',
+          });
+        },
+        (error) => {
+          console.error('Error fetching sub-activity details:', error);
+        }
+      );
+    }
   }
 
   addSkillManually() {
@@ -521,5 +565,75 @@ export class OnboardScreenComponent implements OnInit {
         console.error('Error creating candidate:', error);
       }
     );
+  }
+
+  filterJobs(e: any): void {
+    const query = e.value?.trim(); // Trim whitespace from the query
+    if (!query) {
+      this.filteredJobs = [...this.jobs];
+      this.jobNotExist = false;
+    } else {
+      this.filteredJobs = this.jobs.filter((job) =>
+        job.name.toLowerCase().includes(query.toLowerCase())
+      );
+      this.jobNotExist = this.filteredJobs.length === 0;
+    }
+  }
+
+  selectJob(job: any): void {
+    // Clear the filteredJobs array and reset jobNotExist flag
+    this.filteredJobs = [];
+    this.jobNotExist = false;
+
+    // Update the first activity in the activities form array with the selected job's details
+    const activitiesArray = this.form.get('activities') as FormArray;
+
+    if (activitiesArray.length > 0) {
+      const firstActivityGroup = activitiesArray.at(0) as FormGroup;
+      firstActivityGroup.patchValue({
+        job: job?.name || '',
+        sousActivite: job?.subActivity?.name || '',
+        activite: job?.subActivity?.activity?.name || '',
+      });
+    }
+  }
+
+  addJob(): void {
+    const jobName = this.form.get('job')?.value?.trim(); // Get and trim the job name
+    if (!jobName) {
+      return; // Do nothing if the job name is empty
+    }
+
+    // Check if the job already exists in the filtered list
+    const existingJob = this.filteredJobs.find(
+      (job) => job.name.toLowerCase() === jobName.toLowerCase()
+    );
+
+    if (existingJob) {
+      // Job already exists, no need to add
+      return;
+    }
+
+    // Add the new job to the filtered list
+    this.filteredJobs.push({ name: jobName });
+
+    // Update the activities form array
+    const activitiesArray = this.form.get('activities') as FormArray;
+    if (activitiesArray.length === 0) {
+      // If no activities exist, add one
+      activitiesArray.push(this.createActivity());
+    }
+
+    // Update the first activity with the new job
+    const firstActivityGroup = activitiesArray.at(0) as FormGroup;
+    firstActivityGroup.patchValue({
+      job: jobName,
+      sousActivite: '',
+      activite: '',
+    });
+
+    // Reset temporary fields
+    this.filteredJobs = [];
+    this.jobNotExist = true;
   }
 }

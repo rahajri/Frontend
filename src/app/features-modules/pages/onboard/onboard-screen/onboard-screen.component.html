@@ -86,10 +86,12 @@
               [class.d-block]="selectedFieldSet[0] === 1"
             >
               <div class="text-center onboard-head">
-                <h2>{{ "personalDetails.title" | translate }}</h2>
+                <h2>Parlez-nous de vous</h2>
 
                 <p>
-                  {{ "personalDetails.description" | translate }}
+                  Ces informations, essentielles pour les entreprises et pour
+                  notre IA, doivent être les plus complètes possible afin de
+                  vous proposer les missions les mieux adaptées.
                 </p>
                 <span
                   *ngIf="spinner"
@@ -105,7 +107,7 @@
                       <div class="pro-form-img">
                         <div class="upload-files">
                           <label class="file-upload image-upbtn">
-                            <i class="feather icon-upload me-2"></i>Upload CV
+                            <i class="feather icon-upload me-2"></i>Importer CV
                             <input
                               type="file"
                               (change)="onFileSelected($event)"
@@ -113,8 +115,9 @@
                             />
                           </label>
                           <span
-                            >For better preview recommended size is 450px x
-                            450px. Max size 5mb.</span
+                            >Pour un traitement optimal, assurez-vous que votre
+                            CV est aussi complet que possible. Taille maximale
+                            recommandée : 2 Mo.</span
                           >
                         </div>
                       </div>
@@ -122,7 +125,7 @@
                     <div class="col-md-6 col-lg-6">
                       <div class="input-block">
                         <label for="first-name" class="form-label"
-                          >First Name</label
+                          >Prénom</label
                         >
                         <input
                           type="text"
@@ -133,9 +136,7 @@
                     </div>
                     <div class="col-md-6 col-lg-6">
                       <div class="input-block">
-                        <label for="last-name" class="form-label"
-                          >Last Name</label
-                        >
+                        <label for="last-name" class="form-label">Nom</label>
                         <input
                           type="text"
                           class="form-control"
@@ -146,7 +147,7 @@
                     <div class="col-md-6 col-lg-6">
                       <div class="input-block">
                         <label for="phone-number" class="form-label"
-                          >Phone Number</label
+                          >Téléphone</label
                         >
                         <input
                           type="text"
@@ -158,7 +159,7 @@
                     <div class="col-md-6 col-lg-6">
                       <div class="input-block">
                         <label for="email-address" class="form-label"
-                          >Email Address</label
+                          >Email</label
                         >
                         <input
                           type="text"
@@ -168,117 +169,18 @@
                         />
                       </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                      <div class="input-block">
-                        <label for="date-of-birth" class="form-label"
-                          >Date of Birth</label
-                        >
-                        <div class="cal-icon">
-                          <input
-                            type="text"
-                            class="form-control datetimepicker"
-                            bsDatepicker
-                            placeholder="Choose"
-                            formControlName="birthday"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                      <div class="input-block">
-                        <label for="job-title" class="form-label"
-                          >Your Job Title</label
-                        >
-                        <input
-                          type="text"
-                          class="form-control"
-                          formControlName="jobTitle"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                      <div class="input-block">
-                        <label for="jobs" class="form-label">Type of Job</label>
-                        <select
-                          [(ngModel)]="selectedValue1"
-                          [ngModelOptions]="{ standalone: true }"
-                          class="form-control form-select"
-                          placeholder="Select"
-                        >
-                          @for (data of selectedList6; track data) {
-                          <option [value]="data.value">
-                            {{ data.value }}
-                          </option>
-                          }
-                        </select>
-                      </div>
-                    </div>
+
+                    <input
+                      type="hidden"
+                      class="form-control datetimepicker"
+                      bsDatepicker
+                      placeholder="Choose"
+                      formControlName="birthday"
+                    />
                   </div>
                   <hr />
                   <div class="media-set">
                     <form [formGroup]="locationForm">
-                      <div class="row">
-                        <div class="col-md-3">
-                          <div class="input-block">
-                            <label for="post-code" class="form-label"
-                              >ZIP / Post Code</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control  "
-                              formControlName="postalCode"
-                              (change)="onZipCodeChange($event)"
-                               
-                            >
-                             
-                          </div>
-                        </div>
-
-                        <div class="col-md-3">
-                          <div class="input-block">
-                            <label for="city" class="form-label">City</label>
-                            <select
-                              class="form-control form-select"
-                              formControlName="city"
-                              (change)="onCityChange($event)"
-                              [disabled]="!cities.length"
-                            >
-                              <option *ngFor="let city of cities" [value]="city.name">
-                                {{ city.name }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="col-md-3">
-                          <div class="input-block">
-                            <label for="department" class="form-label"
-                              >Department</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              formControlName="department"
-                              readonly
-                            />
-                          </div>
-                        </div>
-
-                        <div class="col-md-3">
-                          <div class="input-block">
-                            <label for="region" class="form-label"
-                              >Region</label
-                            >
-                            <input
-                              type="text"
-                              class="form-control"
-                              formControlName="region"
-                              readonly
-                            />
-                          </div>
-                        </div>
-                      </div>
-
                       <div class="row">
                         <div class="col-md-12">
                           <div class="input-block">
@@ -293,6 +195,69 @@
                           </div>
                         </div>
                       </div>
+
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="input-block">
+                            <label for="post-code" class="form-label"
+                              >Code Postal</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="postalCode"
+                              (change)="onZipCodeChange($event)"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <div class="input-block">
+                            <label for="city" class="form-label">Ville</label>
+                            <select
+                              class="form-control form-select"
+                              formControlName="city"
+                              (change)="onCityChange($event)"
+                              [disabled]="!cities.length"
+                            >
+                              <option
+                                *ngFor="let city of cities"
+                                [value]="city.name"
+                              >
+                                {{ city.name }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <div class="input-block">
+                            <label for="department" class="form-label"
+                              >Département</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="department"
+                              readonly
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <div class="input-block">
+                            <label for="region" class="form-label"
+                              >Région</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="region"
+                              readonly
+                            />
+                          </div>
+                        </div>
+                      </div>
                     </form>
                   </div>
                 </form>
@@ -302,7 +267,7 @@
                   class="btn next_btn btn-primary btn-get btn-next"
                   name="next"
                   type="submit"
-                  value="Next"
+                  value="Suivant"
                   (click)="selectedFieldSet[0] = 2"
                   (keydown.enter)="selectedFieldSet[0] = 2"
                 />
@@ -316,50 +281,86 @@
               [class.d-block]="selectedFieldSet[0] === 2"
             >
               <div class="text-center onboard-head">
-                <h2>Skills & Experience</h2>
+                <h2>Compétences & Expériences</h2>
                 <p>
-                  This is your time to shine. Let potential buyers know what you
-                  do best and how you gained your skills, certifications and
-                  experience
+                  Découvrez et vérifiez les informations qui reflètent votre
+                  parcours professionnel et vos atouts, visibles par les
+                  entreprises pour mieux vous connaître.
                 </p>
               </div>
               <div class="field-item personal-info space-info">
                 <form [formGroup]="form">
+                  <div class="col-md-12">
+                    <div class="input-block">
+                      <label for="job-title" class="form-label"
+                        >Titre profil</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="jobTitle"
+                      />
+                    </div>
+                  </div>
+
                   <div class="row">
                     <div class="col-md-12">
-                      <h4>Skills</h4>
+                      <h4>Compétences</h4>
                     </div>
                     <div class="row" formArrayName="skills">
                       <!-- Existing Skills List -->
-                      <ng-container *ngFor="let skill of skillsArray.controls; let i = index" [formGroupName]="i">
+                      <ng-container
+                        *ngFor="
+                          let skill of skillsArray.controls;
+                          let i = index
+                        "
+                        [formGroupName]="i"
+                      >
                         <div class="col-md-6">
                           <div class="input-block">
-                            <label for="skillName-{{ i }}" class="form-label">Skill</label>
+                            <label for="skillName-{{ i }}" class="form-label"
+                              >Titre</label
+                            >
                             <input
                               id="skillName-{{ i }}"
                               formControlName="skillName"
                               class="form-control"
-                              placeholder="Enter a skill"
+                              placeholder="Saisi une compétence"
                             />
                           </div>
                         </div>
-                
+
                         <div class="col-md-6">
                           <div class="input-block">
-                            <label for="level-{{ i }}" class="focus-label">Level</label>
+                            <label for="level-{{ i }}" class="focus-label"
+                              >Niveau</label
+                            >
                             <select
                               formControlName="level"
                               class="form-control form-select"
                               placeholder="Choose Level"
                             >
-                              <option *ngFor="let level of skillLevels" [value]="level">{{ level }}</option>
+                              <option value="" selected disabled>
+                                Sélectionnez un niveau
+                              </option>
+                              <option
+                                *ngFor="let level of skillLevels"
+                                [value]="level"
+                              >
+                                {{ level }}
+                              </option>
                             </select>
                             <div class="new-addd">
                               <!-- Remove button visible except for the first skill -->
-                              <a class="remove_row" (click)="removeSkills(i)" tabindex="0" *ngIf="skillsArray.controls.length > 1">
-                                Remove
+                              <a
+                                class="remove_row"
+                                (click)="removeSkills(i)"
+                                tabindex="0"
+                                *ngIf="skillsArray.controls.length > 1"
+                              >
+                                Supprimer
                               </a>
-                
+
                               <!-- Add New Skill button visible only for the last skill -->
                               <a
                                 class="add-new"
@@ -368,7 +369,7 @@
                                 tabindex="0"
                               >
                                 <i class="feather icon-plus-circle me-1"></i>
-                                Add New Skill
+                                Ajouter
                               </a>
                             </div>
                           </div>
@@ -377,282 +378,380 @@
                     </div>
                   </div>
                 </form>
-                
-                
-                  <form [formGroup]="form">
-                    <div class="col-md-12">
-                      <h4>Métier</h4>
+
+                <form [formGroup]="form">
+                  <div class="col-md-12">
+                    <h4>Métier</h4>
+                  </div>
+                  <div formArrayName="activities">
+                    <div
+                      *ngFor="
+                        let activity of activities.controls;
+                        let i = index
+                      "
+                      [formGroupName]="i"
+                    >
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="input-block">
+                            <label for="job" class="focus-label">Métier</label>
+                            <input
+                              id="job"
+                              formControlName="job"
+                              class="form-control"
+                              type="text"
+                              placeholder="Saisir une métier"
+                              (input)="filterJobs($event.target)"
+                              (keydown.enter)="addJob()"
+                              [attr.autocomplete]="'off'"
+                            />
+                            <!-- Autocomplete suggestions -->
+                            <ul
+                              class="autocomplete-list"
+                              *ngIf="filteredJobs.length"
+                            >
+                              <li
+                                *ngFor="let job of filteredJobs"
+                                (click)="selectJob(job)"
+                                class="autocomplete-item"
+                              >
+                                {{ job.name }}
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4">
+                          <div class="input-block">
+                            <label for="sous-activite" class="focus-label"
+                              >Sous Activité</label
+                            >
+                            <select
+                              id="subActivity"
+                              formControlName="sousActivite"
+                              class="form-select"
+                              (change)="onSubActivityChange($event, i)"
+                              *ngIf="jobNotExist"
+                            >
+                              <option value="" disabled selected>
+                                Selectionner une Sous Activité
+                              </option>
+                              <option
+                                *ngFor="let subActivity of subActivities"
+                                [value]="subActivity.name"
+                              >
+                                {{ subActivity?.name }}
+                              </option>
+                            </select>
+                            <!-- show this if Job already in the database -->
+                            <input
+                              formControlName="sousActivite"
+                              type="text"
+                              class="form-control"
+                              placeholder="Sous Activité"
+                              *ngIf="!jobNotExist"
+                              readonly
+                            />
+                          </div>
+                        </div>
+
+                        <div class="col-md-4">
+                          <div class="input-block">
+                            <label for="activite" class="focus-label"
+                              >Activité</label
+                            >
+                            <input
+                              formControlName="activite"
+                              type="text"
+                              class="form-control"
+                              placeholder="Activité"
+                              readonly
+                            />
+                          </div>
+                        </div>
+                        <div class="new-addd">
+                          <a
+                            class="add-new"
+                            id="activit_add"
+                            (click)="addActivity()"
+                            tabindex="0"
+                          >
+                            <i class="feather icon-plus-circle me-1"></i> Add
+                            New
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                    <div formArrayName="activities">
-                      <div
-                        *ngFor="
-                          let activity of activities.controls;
-                          let i = index
-                        "
-                        [formGroupName]="i"
-                      >
-                        <div class="row">
-                          <div class="col-md-4">
-                            <div class="input-block">
-                              <label for="job" class="focus-label"
-                                >Métier</label
-                              >
-                              <select
-                                formControlName="job"
-                                (change)="onJobChange($event, i)"
-                                class="form-control form-select"
-                              >
-                                <option
-                                  *ngFor="let job of jobs"
-                                  [value]="job.id"
-                                >
-                                  {{ job.name }}
-                                </option>
-                              </select>
-                            </div>
+                  </div>
+                </form>
+
+                <form [formGroup]="form">
+                  <div class="row" formArrayName="education">
+                    <div class="col-md-12">
+                      <h4>Education</h4>
+                    </div>
+                    <div
+                      class="row"
+                      *ngFor="
+                        let education of educationArray.controls;
+                        let i = index
+                      "
+                      [formGroupName]="i"
+                    >
+                      <div class="col-md-6 col-lg-3">
+                        <div class="input-block">
+                          <label for="degree-name" class="focus-label"
+                            >Degree Name</label
+                          >
+                          <input
+                            type="text"
+                            formControlName="degreeName"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-lg-3">
+                        <div class="input-block">
+                          <label for="university-name" class="focus-label"
+                            >University Name</label
+                          >
+                          <input
+                            type="text"
+                            formControlName="universityName"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-lg-3">
+                        <div class="input-block">
+                          <label for="start-date" class="focus-label"
+                            >Start Date</label
+                          >
+                          <div class="cal-icon">
+                            <input
+                              type="text"
+                              formControlName="startDate"
+                              class="form-control datetimepicker"
+                              placeholder="Choose"
+                              bsDatepicker
+                              [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-lg-3">
+                        <div class="input-block">
+                          <label for="end-date" class="focus-label"
+                            >End Date</label
+                          >
+                          <div class="cal-icon">
+                            <input
+                              type="text"
+                              formControlName="endDate"
+                              class="form-control datetimepicker"
+                              placeholder="Choose"
+                              bsDatepicker
+                              [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                            />
                           </div>
 
-                          <div class="col-md-4">
-                            <div class="input-block">
-                              <label for="sous-activite" class="focus-label"
-                                >Sous Activité</label
-                              >
-                              <input
-                                formControlName="sousActivite"
-                                type="text"
-                                class="form-control"
-                                placeholder="Sous Activité"
-                                readonly
-                              />
-                            </div>
-                          </div>
-
-                          <div class="col-md-4">
-                            <div class="input-block">
-                              <label for="activite" class="focus-label"
-                                >Activité</label
-                              >
-                              <input
-                                formControlName="activite"
-                                type="text"
-                                class="form-control"
-                                placeholder="Activité"
-                                readonly
-                              />
-                            </div>
-                          </div>
+                          <!-- Add or Remove Button -->
                           <div class="new-addd">
+                            <!-- Show 'Add New' button for all except the last entry -->
                             <a
+                              *ngIf="i === educationArray.length - 1"
                               class="add-new"
-                              id="activit_add"
-                              (click)="addActivity()"
+                              (click)="addEducation()"
                               tabindex="0"
                             >
                               <i class="feather icon-plus-circle me-1"></i> Add
                               New
                             </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
 
-                  <form [formGroup]="form">
-                    <div class="row" formArrayName="education">
-                      <div class="col-md-12">
-                        <h4>Education</h4>
-                      </div>
-                      <div class="row" *ngFor="let education of educationArray.controls; let i = index" [formGroupName]="i">
-                        <div class="col-md-6 col-lg-3">
-                          <div class="input-block">
-                            <label for="degree-name" class="focus-label">Degree Name</label>
-                            <input type="text" formControlName="degreeName" class="form-control" />
-                          </div>
-                        </div>
-                    
-                        <div class="col-md-6 col-lg-3">
-                          <div class="input-block">
-                            <label for="university-name" class="focus-label">University Name</label>
-                            <input type="text" formControlName="universityName" class="form-control" />
-                          </div>
-                        </div>
-                    
-                        <div class="col-md-6 col-lg-3">
-                          <div class="input-block">
-                            <label for="start-date" class="focus-label">Start Date</label>
-                            <div class="cal-icon">
-                              <input
-                                type="text"
-                                formControlName="startDate"
-                                class="form-control datetimepicker"
-                                placeholder="Choose"
-                                bsDatepicker
-                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                    
-                        <div class="col-md-6 col-lg-3">
-                          <div class="input-block">
-                            <label for="end-date" class="focus-label">End Date</label>
-                            <div class="cal-icon">
-                              <input
-                                type="text"
-                                formControlName="endDate"
-                                class="form-control datetimepicker"
-                                placeholder="Choose"
-                                bsDatepicker
-                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-                              />
-                            </div>
-                    
-                            <!-- Add or Remove Button -->
-                            <div class="new-addd">
-                              <!-- Show 'Add New' button for all except the last entry -->
-                              <a
-                                *ngIf="i === educationArray.length - 1"
-                                class="add-new"
-                                (click)="addEducation()"
-                                tabindex="0"
-                              >
-                                <i class="feather icon-plus-circle me-1"></i> Add New
-                              </a>
-                    
-                              <!-- Show 'Remove' button only if there are more than one education entry -->
-                              <a
-                                *ngIf="educationArray.length > 1"
-                                class="remove_row"
-                                (click)="removeEducation(i)"
-                                tabindex="0"
-                              >
-                                Remove
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-
-                    <div class="row" formArrayName="experiences">
-                      <div class="col-md-12">
-                        <h4>Experience</h4>
-                      </div>
-                       
-                    
-                      <!-- Existing Experience Form Fields (Looping through experiencesArray) -->
-                      <div
-                        class="row"
-                        *ngFor="let experience of experiencesArray.controls; let i = index"
-                        [formGroupName]="i"
-                      >
-                        <div class="col-md-6 col-lg-3">
-                          <div class="input-block">
-                            <label for="company-name" class="focus-label">Company Name</label>
-                            <input
-                              type="text"
-                              formControlName="companyName"
-                              class="form-control"
-                            />
-                          </div>
-                        </div>
-                    
-                        <div class="col-md-6 col-lg-3">
-                          <div class="input-block">
-                            <label for="position" class="focus-label">Position</label>
-                            <select
-                              formControlName="position"
-                              placeholder="Select"
-                              class="form-control form-select"
+                            <!-- Show 'Remove' button only if there are more than one education entry -->
+                            <a
+                              *ngIf="educationArray.length > 1"
+                              class="remove_row"
+                              (click)="removeEducation(i)"
+                              tabindex="0"
                             >
-                              <option *ngFor="let level of skillLevels" [value]="level">
-                                {{ level }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                    
-                        <div class="col-md-6 col-lg-3">
-                          <div class="input-block">
-                            <label for="start-date" class="focus-label">Start Date</label>
-                            <div class="cal-icon">
-                              <input
-                                type="text"
-                                formControlName="startDate"
-                                class="form-control datetimepicker"
-                                bsDatepicker
-                                placeholder="Choose"
-                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                    
-                        <div class="col-md-6 col-lg-3">
-                          <div class="input-block">
-                            <label for="end-date" class="focus-label">End Date</label>
-                            <div class="cal-icon">
-                              <input
-                                type="text"
-                                formControlName="endDate"
-                                class="form-control datetimepicker"
-                                bsDatepicker
-                                placeholder="Choose"
-                                [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-                              />
-                            </div>
-                            <div class="new-addd">
-                              <a
-                                *ngIf="i === experiencesArray.length - 1"
-                                class="add-new"
-                                (click)="addExperience()"
-                                tabindex="0"
-                                ><i class="feather icon-plus-circle me-1"></i> Add New</a
-                              >
-                              <a
-                                *ngIf="experiencesArray.length > 1"
-                                class="remove_row"
-                                (click)="removeExperience(i)"
-                                >Remove</a
-                              >
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-
-                    <div class="row" formArrayName="languages">
-                      <div class="col-md-12">
-                        <h4>Language</h4>
-                      </div>
-                      <div class="col-md-6" *ngFor="let language of languagesArray.controls; let i = index" [formGroupName]="i">
-                        <div class="input-block">
-                          <label for="language" class="form-label">Language</label>
-                          <input type="text" class="form-control" formControlName="name" />
-                        </div>
-                      </div>
-                      <div class="col-md-6" *ngFor="let language of languagesArray.controls; let i = index" [formGroupName]="i">
-                        <div class="input-block">
-                          <label for="level" class="focus-label">Level</label>
-                          <select formControlName="level" class="form-control form-select">
-                            <option *ngFor="let level of selectedList6" [value]="level.value">
-                              {{ level.value }}
-                            </option>
-                          </select>
-                          <div class="new-addd">
-                            <a *ngIf="i === languagesArray.length - 1" class="add-new" (click)="addLanguage()" tabindex="0">
-                              <i class="feather icon-plus-circle me-1"></i> Add New
-                            </a>
-                            <a *ngIf="languagesArray.length > 1" class="remove_row" (click)="removeLanguage(i)">
                               Remove
                             </a>
                           </div>
                         </div>
                       </div>
                     </div>
-                    
+                  </div>
+
+                  <div class="row" formArrayName="experiences">
+                    <div class="col-md-12">
+                      <h4>Experience</h4>
+                    </div>
+
+                    <!-- Existing Experience Form Fields (Looping through experiencesArray) -->
+                    <div
+                      class="row"
+                      *ngFor="
+                        let experience of experiencesArray.controls;
+                        let i = index
+                      "
+                      [formGroupName]="i"
+                    >
+                      <div class="col-md-6 col-lg-3">
+                        <div class="input-block">
+                          <label for="company-name" class="focus-label"
+                            >Company Name</label
+                          >
+                          <input
+                            type="text"
+                            formControlName="companyName"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-lg-3">
+                        <div class="input-block">
+                          <label for="position" class="focus-label"
+                            >Position</label
+                          >
+                          <select
+                            formControlName="position"
+                            placeholder="Select"
+                            class="form-control form-select"
+                          >
+                            <option
+                              *ngFor="let level of skillLevels"
+                              [value]="level"
+                            >
+                              {{ level }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-lg-3">
+                        <div class="input-block">
+                          <label for="start-date" class="focus-label"
+                            >Start Date</label
+                          >
+                          <div class="cal-icon">
+                            <input
+                              type="text"
+                              formControlName="startDate"
+                              class="form-control datetimepicker"
+                              bsDatepicker
+                              placeholder="Choose"
+                              [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6 col-lg-3">
+                        <div class="input-block">
+                          <label for="end-date" class="focus-label"
+                            >End Date</label
+                          >
+                          <div class="cal-icon">
+                            <input
+                              type="text"
+                              formControlName="endDate"
+                              class="form-control datetimepicker"
+                              bsDatepicker
+                              placeholder="Choose"
+                              [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                            />
+                          </div>
+                          <div class="new-addd">
+                            <a
+                              *ngIf="i === experiencesArray.length - 1"
+                              class="add-new"
+                              (click)="addExperience()"
+                              tabindex="0"
+                              ><i class="feather icon-plus-circle me-1"></i> Add
+                              New</a
+                            >
+                            <a
+                              *ngIf="experiencesArray.length > 1"
+                              class="remove_row"
+                              (click)="removeExperience(i)"
+                              >Remove</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row" formArrayName="languages">
+                    <div class="col-md-12">
+                      <h4>Language</h4>
+                    </div>
+                    <div
+                      class="col-md-6"
+                      *ngFor="
+                        let language of languagesArray.controls;
+                        let i = index
+                      "
+                      [formGroupName]="i"
+                    >
+                      <div class="input-block">
+                        <label for="language" class="form-label"
+                          >Language</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="name"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-6"
+                      *ngFor="
+                        let language of languagesArray.controls;
+                        let i = index
+                      "
+                      [formGroupName]="i"
+                    >
+                      <div class="input-block">
+                        <label for="level" class="focus-label">Level</label>
+                        <select
+                          formControlName="level"
+                          class="form-control form-select"
+                        >
+                          <option
+                            *ngFor="let level of selectedList6"
+                            [value]="level.value"
+                          >
+                            {{ level.value }}
+                          </option>
+                        </select>
+                        <div class="new-addd">
+                          <a
+                            *ngIf="i === languagesArray.length - 1"
+                            class="add-new"
+                            (click)="addLanguage()"
+                            tabindex="0"
+                          >
+                            <i class="feather icon-plus-circle me-1"></i> Add
+                            New
+                          </a>
+                          <a
+                            *ngIf="languagesArray.length > 1"
+                            class="remove_row"
+                            (click)="removeLanguage(i)"
+                          >
+                            Remove
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </form>
               </div>
               <div class="text-center">
