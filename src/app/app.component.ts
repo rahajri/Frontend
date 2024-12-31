@@ -12,7 +12,10 @@ export class AppComponent {
   title = 'kofejob_angular';
   constructor(private authService: AuthService, private route: Router) {}
   ngOnInit(): void {
-    this.validateToken();
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.validateToken();
+    }
     // Set the primary color dynamically
     document.documentElement.style.setProperty(
       '--primary-color',

@@ -1,19 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-
-// import { Subject } from "rxjs";
-import { ShareDataService } from 'src/app/core/data/share-data.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Sort } from '@angular/material/sort';
-import { apiResultFormat, Company } from 'src/app/core/models/models';
+import { Company } from 'src/app/core/models/models';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
-import { CommonService } from 'src/app/core/services/common/common.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InseeApiService } from 'src/app/core/services/insee-api.service';
 import { LocationService } from 'src/app/core/services/location.service';
 import { UserService } from '../../auth/service/user.service';
 import { AlertService } from 'src/app/core/services/alert/alert.service';
 import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
 declare var bootstrap: any;
 @Component({
   selector: 'app-projects',
@@ -97,7 +94,7 @@ export class ProjectsComponent implements OnInit {
       }),
     });
   }
-
+ @ViewChild(MatPaginator) paginator!: MatPaginator;
   ngOnInit(): void {
     this.getTableData();
   }

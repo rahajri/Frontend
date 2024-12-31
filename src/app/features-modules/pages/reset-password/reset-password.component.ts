@@ -147,6 +147,7 @@ export class ResetPasswordComponent {
         next: (res) => {
           console.log(res);
           this.showSuccessModal();
+          this.router.navigate(['/auth/login']);
         },
         error: (err) => {
           console.error(err);
@@ -166,7 +167,6 @@ export class ResetPasswordComponent {
 
       setTimeout(() => {
         modal.hide();
-        this.router.navigate([this.routes.login]);
       }, 3000);
     }
   }
