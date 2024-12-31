@@ -23,7 +23,6 @@ export class EmployerGuard {
     | UrlTree {
     // Check if the route is 'change-password'
     if (state.url.includes('change-password')) {
-      // Allow access to change-password route without checking role
       return true;
     }
 

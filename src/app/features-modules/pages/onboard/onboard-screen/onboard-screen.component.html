@@ -264,7 +264,7 @@
               </div>
               <div class="text-center">
                 <input
-                  class="btn next_btn btn-primary btn-get btn-next"
+                  class="btn btn-primary btn-suivant"
                   name="next"
                   type="submit"
                   value="Suivant"
@@ -351,7 +351,7 @@
                               </option>
                             </select>
                             <div class="new-addd">
-                              <!-- Remove button visible except for the first skill -->
+                              <!-- Supprimer button visible except for the first skill -->
                               <a
                                 class="remove_row"
                                 (click)="removeSkills(i)"
@@ -476,8 +476,7 @@
                             (click)="addActivity()"
                             tabindex="0"
                           >
-                            <i class="feather icon-plus-circle me-1"></i> Add
-                            New
+                            <i class="feather icon-plus-circle me-1"></i> Ajouter
                           </a>
                         </div>
                       </div>
@@ -488,7 +487,7 @@
                 <form [formGroup]="form">
                   <div class="row" formArrayName="education">
                     <div class="col-md-12">
-                      <h4>Education</h4>
+                      <h4>Formation</h4>
                     </div>
                     <div
                       class="row"
@@ -501,7 +500,7 @@
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
                           <label for="degree-name" class="focus-label"
-                            >Degree Name</label
+                            >Nom du diplôme</label
                           >
                           <input
                             type="text"
@@ -514,7 +513,7 @@
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
                           <label for="university-name" class="focus-label"
-                            >University Name</label
+                            >Nom de l’établissement</label
                           >
                           <input
                             type="text"
@@ -527,7 +526,7 @@
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
                           <label for="start-date" class="focus-label"
-                            >Start Date</label
+                            >Date du débit</label
                           >
                           <div class="cal-icon">
                             <input
@@ -545,7 +544,7 @@
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
                           <label for="end-date" class="focus-label"
-                            >End Date</label
+                            >Date de fin</label
                           >
                           <div class="cal-icon">
                             <input
@@ -558,7 +557,7 @@
                             />
                           </div>
 
-                          <!-- Add or Remove Button -->
+                          <!-- Add or Supprimer Button -->
                           <div class="new-addd">
                             <!-- Show 'Add New' button for all except the last entry -->
                             <a
@@ -567,18 +566,17 @@
                               (click)="addEducation()"
                               tabindex="0"
                             >
-                              <i class="feather icon-plus-circle me-1"></i> Add
-                              New
+                              <i class="feather icon-plus-circle me-1"></i> Ajouter
                             </a>
 
-                            <!-- Show 'Remove' button only if there are more than one education entry -->
+                            <!-- Show 'Supprimer' button only if there are more than one education entry -->
                             <a
                               *ngIf="educationArray.length > 1"
                               class="remove_row"
                               (click)="removeEducation(i)"
                               tabindex="0"
                             >
-                              Remove
+                              Supprimer
                             </a>
                           </div>
                         </div>
@@ -603,7 +601,7 @@
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
                           <label for="company-name" class="focus-label"
-                            >Company Name</label
+                            >Nom de l'entreprise</label
                           >
                           <input
                             type="text"
@@ -616,27 +614,20 @@
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
                           <label for="position" class="focus-label"
-                            >Position</label
+                            >Post</label
                           >
-                          <select
+                          <input
+                            type="text"
                             formControlName="position"
-                            placeholder="Select"
-                            class="form-control form-select"
-                          >
-                            <option
-                              *ngFor="let level of skillLevels"
-                              [value]="level"
-                            >
-                              {{ level }}
-                            </option>
-                          </select>
+                            class="form-control"
+                          />
                         </div>
                       </div>
 
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
                           <label for="start-date" class="focus-label"
-                            >Start Date</label
+                            >Date du débit</label
                           >
                           <div class="cal-icon">
                             <input
@@ -654,7 +645,7 @@
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
                           <label for="end-date" class="focus-label"
-                            >End Date</label
+                            >Date de fin</label
                           >
                           <div class="cal-icon">
                             <input
@@ -672,14 +663,13 @@
                               class="add-new"
                               (click)="addExperience()"
                               tabindex="0"
-                              ><i class="feather icon-plus-circle me-1"></i> Add
-                              New</a
+                              ><i class="feather icon-plus-circle me-1"></i> Ajouter</a
                             >
                             <a
                               *ngIf="experiencesArray.length > 1"
                               class="remove_row"
                               (click)="removeExperience(i)"
-                              >Remove</a
+                              >Supprimer</a
                             >
                           </div>
                         </div>
@@ -689,7 +679,7 @@
 
                   <div class="row" formArrayName="languages">
                     <div class="col-md-12">
-                      <h4>Language</h4>
+                      <h4>Langue</h4>
                     </div>
                     <div
                       class="col-md-6"
@@ -701,7 +691,7 @@
                     >
                       <div class="input-block">
                         <label for="language" class="form-label"
-                          >Language</label
+                          >Titre</label
                         >
                         <input
                           type="text"
@@ -719,7 +709,7 @@
                       [formGroupName]="i"
                     >
                       <div class="input-block">
-                        <label for="level" class="focus-label">Level</label>
+                        <label for="level" class="focus-label">Niveau</label>
                         <select
                           formControlName="level"
                           class="form-control form-select"
@@ -738,15 +728,14 @@
                             (click)="addLanguage()"
                             tabindex="0"
                           >
-                            <i class="feather icon-plus-circle me-1"></i> Add
-                            New
+                            <i class="feather icon-plus-circle me-1"></i> Ajouter
                           </a>
                           <a
                             *ngIf="languagesArray.length > 1"
                             class="remove_row"
                             (click)="removeLanguage(i)"
                           >
-                            Remove
+                            Supprimer
                           </a>
                         </div>
                       </div>

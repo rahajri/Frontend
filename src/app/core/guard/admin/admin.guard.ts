@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 export class AdminGuard {
   constructor(private route: Router) {}
   canActivate(): boolean {
-    if (!localStorage.getItem('token')) {
+    const role = localStorage.getItem('role');
+    if (role !== 'admin') {
       this.route.navigate(['/auth/login']);
       return false;
     } else {

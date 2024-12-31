@@ -1,26 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Router  } from '@angular/router';
-// import { Observable } from 'rxjs';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class FreelancerGuard  {
+export class FreelancerGuard {
   constructor(private route: Router) {}
-  // canActivate(
-  //   // route: ActivatedRouteSnapshot,
-  //   // state: RouterStateSnapshot
-  //   ): 
-  //   Observable<boolean | UrlTree> 
-  //   | Promise<boolean | UrlTree> 
-  //   | boolean | UrlTree 
-  //   {
-  //     if (localStorage.getItem('freelancer')) {
-  //       return true;
-  //     } else {
-  //       this.route.navigate(['/home']);
-  //       return false;
-  //     }
-  // }
-  
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    const role = localStorage.getItem('freelancer');
+    if (role === 'freelancer') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
