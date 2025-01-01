@@ -23,6 +23,7 @@ export class EmployerheaderComponent {
   profile: Profile | null = null;
   initials: string = '';
   isLogged = false;
+  isEmployer = false;
 
   navbar: Array<header> = [];
   constructor(
@@ -48,6 +49,7 @@ export class EmployerheaderComponent {
   ngOnInit(): void {
     this.getUser();
     this.isLogged = this.authService.isLogged();
+    this.isEmployer = this.authService.isEmployer();
   }
 
   logout() {

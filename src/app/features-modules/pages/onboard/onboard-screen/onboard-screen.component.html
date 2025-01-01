@@ -476,7 +476,8 @@
                             (click)="addActivity()"
                             tabindex="0"
                           >
-                            <i class="feather icon-plus-circle me-1"></i> Ajouter
+                            <i class="feather icon-plus-circle me-1"></i>
+                            Ajouter
                           </a>
                         </div>
                       </div>
@@ -566,7 +567,8 @@
                               (click)="addEducation()"
                               tabindex="0"
                             >
-                              <i class="feather icon-plus-circle me-1"></i> Ajouter
+                              <i class="feather icon-plus-circle me-1"></i>
+                              Ajouter
                             </a>
 
                             <!-- Show 'Supprimer' button only if there are more than one education entry -->
@@ -613,9 +615,7 @@
 
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
-                          <label for="position" class="focus-label"
-                            >Post</label
-                          >
+                          <label for="position" class="focus-label">Post</label>
                           <input
                             type="text"
                             formControlName="position"
@@ -663,7 +663,8 @@
                               class="add-new"
                               (click)="addExperience()"
                               tabindex="0"
-                              ><i class="feather icon-plus-circle me-1"></i> Ajouter</a
+                              ><i class="feather icon-plus-circle me-1"></i>
+                              Ajouter</a
                             >
                             <a
                               *ngIf="experiencesArray.length > 1"
@@ -682,62 +683,61 @@
                       <h4>Langue</h4>
                     </div>
                     <div
-                      class="col-md-6"
+                      class="col-md-12"
                       *ngFor="
                         let language of languagesArray.controls;
                         let i = index
                       "
                       [formGroupName]="i"
                     >
-                      <div class="input-block">
-                        <label for="language" class="form-label"
-                          >Titre</label
-                        >
-                        <input
-                          type="text"
-                          class="form-control"
-                          formControlName="name"
-                        />
-                      </div>
-                    </div>
-                    <div
-                      class="col-md-6"
-                      *ngFor="
-                        let language of languagesArray.controls;
-                        let i = index
-                      "
-                      [formGroupName]="i"
-                    >
-                      <div class="input-block">
-                        <label for="level" class="focus-label">Niveau</label>
-                        <select
-                          formControlName="level"
-                          class="form-control form-select"
-                        >
-                          <option
-                            *ngFor="let level of selectedList6"
-                            [value]="level.value"
-                          >
-                            {{ level.value }}
-                          </option>
-                        </select>
-                        <div class="new-addd">
-                          <a
-                            *ngIf="i === languagesArray.length - 1"
-                            class="add-new"
-                            (click)="addLanguage()"
-                            tabindex="0"
-                          >
-                            <i class="feather icon-plus-circle me-1"></i> Ajouter
-                          </a>
-                          <a
-                            *ngIf="languagesArray.length > 1"
-                            class="remove_row"
-                            (click)="removeLanguage(i)"
-                          >
-                            Supprimer
-                          </a>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="input-block">
+                            <label for="language" class="form-label"
+                              >Titre</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="name"
+                            />
+                          </div>
                         </div>
+                        <div class="col-md-6">
+                          <div class="input-block">
+                            <label for="level" class="focus-label"
+                              >Niveau</label
+                            >
+                            <select
+                              formControlName="level"
+                              class="form-control form-select"
+                            >
+                              <option
+                                *ngFor="let level of selectedList6"
+                                [value]="level.value"
+                              >
+                                {{ level.value }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="new-addd">
+                        <a
+                          *ngIf="i === languagesArray.length - 1"
+                          class="add-new me-2"
+                          (click)="addLanguage()"
+                          tabindex="0"
+                        >
+                          <i class="feather icon-plus-circle"></i> Ajouter
+                        </a>
+                        <a
+                          *ngIf="languagesArray.length > 1"
+                          class="remove_row"
+                          (click)="removeLanguage(i)"
+                        >
+                          Supprimer
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -745,17 +745,17 @@
               </div>
               <div class="text-center">
                 <input
-                  class="btn btn-prev prev_btn btn-back"
-                  name="next"
+                  class="btn btn-prev prev_btn btn-suivant"
+                  name="back"
                   type="button"
-                  value="Back"
+                  value="Précédent"
                   (click)="selectedFieldSet[0] = 1"
                 />
                 <input
-                  class="btn next_btn btn-primary btn-get btn-next"
-                  name="next"
+                  class="btn btn-primary btn-suivant"
+                  name="save"
                   type="submit"
-                  value="Save"
+                  value="Enregistrer"
                   (click)="create(form)"
                 />
               </div>

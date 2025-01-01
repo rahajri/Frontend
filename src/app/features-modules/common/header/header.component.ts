@@ -25,7 +25,7 @@ export class HeaderComponent {
 
   navbar: Array<header> = [];
   public header_bg = false;
-  isLogged: boolean = false;
+  isEmployer: boolean = false;
   constructor(
     private Router: Router,
     private data: ShareDataService,
@@ -47,7 +47,19 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-    this.isLogged = this.authService.isLogged();
+    this.redirect();
+    this.isEmployer = this.authService.isEmployer();
+  }
+
+  redirect() {
+    const role = localStorage.getItem('role');
+    if (role === 'admin') {
+      this.Router.navigate(['/admin/dashboard']);
+    } else if (role === 'company-employee') {
+      this.Router.navigate(['/employer/dashboard']);
+    } else if (role === 'candidate') {
+      this.Router.navigate(['/freelancer/dashboards']);
+    }
   }
 
   employer() {
@@ -65,7 +77,7 @@ export class HeaderComponent {
   home() {
     this.Router.navigate(['/home']);
   }
-  
+
   public toggleSidebar(): void {
     this.navservices.openSidebar();
   }

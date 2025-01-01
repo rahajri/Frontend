@@ -338,7 +338,7 @@
             connecter</a
           >
         </li>
-        <li *ngIf="isLogged">
+        <li *ngIf="isLogged && isEmployer">
           <a [routerLink]="routes.employee_post_project" class="login-btn"
             ><i class="feather icon-plus me-1"></i>Créer Offre
           </a>

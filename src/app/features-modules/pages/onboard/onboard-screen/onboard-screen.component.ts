@@ -437,10 +437,9 @@ export class OnboardScreenComponent implements OnInit {
   }
 
   selectedList6: data[] = [
-    { value: 'Choose Level' },
-    { value: 'Basic' },
-    { value: 'Intermediate' },
-    { value: 'Proficient' },
+    { value: 'Basique' },
+    { value: 'Professionnel' },
+    { value: 'Avancé' },
   ];
 
   showTimePicker: Array<string> = [];

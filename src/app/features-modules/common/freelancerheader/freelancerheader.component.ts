@@ -18,6 +18,7 @@ export class FreelancerheaderComponent {
   page = '';
   last = '';
   isLogged = false;
+  isEmployer = false;
   public routes = routes;
 
   navbar: Array<header> = [];
@@ -48,6 +49,7 @@ export class FreelancerheaderComponent {
 
   ngOnInit(): void {
     this.isLogged = this.authService.isLogged();
+    this.isEmployer = this.authService.isEmployer();
   }
 
   employer() {

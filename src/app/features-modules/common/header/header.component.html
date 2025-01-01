@@ -100,22 +100,17 @@
         </ul>
       </div>
       <ul class="nav header-navbar-rht reg-head">
-        <li *ngIf="!isLogged">
+        <li>
           <a [routerLink]="routes.register" class="reg-btn"
             ><img src="assets/img/icon/reg-icon.svg" class="me-1" alt="icon" />
-            S'inscrire </a
-          >
+            S'inscrire
+          </a>
         </li>
-        <li *ngIf="!isLogged">
+        <li>
           <a [routerLink]="routes.login" class="log-btn"
             ><img src="assets/img/icon/lock-icon.svg" class="me-1" alt="icon" />
             Se connecter</a
           >
-        </li>
-        <li *ngIf="isLogged">
-          <a [routerLink]="'/employer/post-project'" class="login-btn"
-            ><i class="feather icon-plus me-1"></i>Créer Offre
-          </a>
         </li>
       </ul>
     </nav>

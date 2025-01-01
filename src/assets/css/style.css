@@ -22859,7 +22859,7 @@ img.checks-set {
 
 .btn.prev_btn {
   min-width: 107px;
-  padding: 10px 10px 10px 20px;
+  padding: 10px 10px 10px 40px;
   font-size: 16px;
   text-transform: capitalize;
   background-color: #081733;
@@ -22894,7 +22894,7 @@ img.checks-set {
 
 .select-account .btn-primary {
   min-width: 107px;
-  padding: 9px 20px 9px 10px;
+  padding: 9px 40px 9px 10px;
   font-size: 16px;
   text-transform: capitalize;
   background: var(--primary-color);
