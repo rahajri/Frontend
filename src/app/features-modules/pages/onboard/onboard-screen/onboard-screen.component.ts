@@ -102,11 +102,11 @@ export class OnboardScreenComponent implements OnInit {
       personalDetails: this.fb.group({
         lastName: [''],
         firstName: [''],
-        jobTitle: [''],
         birthday: [''],
         phoneNumber: [''],
-        emailAddress: [''],
+        emailAddress: [localStorage.getItem('email')],
       }),
+      jobTitle: [''],
       location: this.locationForm, // Add location form group here
       activities: this.fb.array([this.createActivity()]), // Initialize with one activity form group
 
@@ -222,13 +222,10 @@ export class OnboardScreenComponent implements OnInit {
       response['coordonnees_personnelles'];
 
     // Patch personal details
+    this.form.get('jobTitle')?.patchValue(response['titre_poste'] || '');
     this.form.get('personalDetails')?.patchValue({
       lastName: personal['Nom'] || personal['nom'] || '',
       firstName: personal['Prenom'] || personal['prenom'] || '',
-      jobTitle:
-        personal['Titre du poste ou de la mission'] ||
-        personal['titre_poste'] ||
-        '',
       birthday:
         personal['Date de naissance'] || personal['Date de naissance'] || '',
       phoneNumber: personal['Téléphone'] || personal['telephone'] || '',
@@ -351,7 +348,7 @@ export class OnboardScreenComponent implements OnInit {
 
       // Call the API and patch form with the response
       if (this.cvs.length > 0) {
-        this.ocrService.runPipeline(this.username, this.cvs).subscribe(
+        this.ocrService.runPipeline(this.cvs).subscribe(
           (response) => {
             const cleanedResponse = response.Result.replace(
               /json|/g,

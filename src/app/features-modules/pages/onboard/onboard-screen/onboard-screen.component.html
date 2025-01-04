@@ -218,7 +218,6 @@
                               class="form-control form-select"
                               formControlName="city"
                               (change)="onCityChange($event)"
-                              [disabled]="!cities.length"
                             >
                               <option
                                 *ngFor="let city of cities"

@@ -4,16 +4,13 @@
     <form>
       <div class="card">
         <div class="pro-head">
-          <h3>Profile Setting</h3>
+          <h3>Paramètres du profil</h3>
         </div>
         <div class="pro-body">
           <div class="row">
             <div class="col-lg-12">
               <div class="form-row pro-pad pt-0 ps-0">
                 <div class="input-block col-md-6 pro-pic">
-                  <label for="profile-picture" class="form-label"
-                    >Profile Picture</label
-                  >
                   <div class="d-flex align-items-center">
                     <div class="upload-images freelancer-pic-box">
                       <img
@@ -24,9 +21,9 @@
                     </div>
                     <div class="ms-3 freelancer-pic-upload">
                       <label class="file-upload image-upbtn">
-                        Upload Image <input type="file" id="imgInp" />
+                        Télécharger une image <input type="file" id="imgInp" />
                       </label>
-                      <p>Max Image size 300*300</p>
+                      <p>Taille maximale de l'image 300*300</p>
                     </div>
                   </div>
                 </div>
@@ -34,7 +31,7 @@
             </div>
             <div class="col-lg-6 col-md-12">
               <div class="mb-3">
-                <label for="first-name" class="form-label">First Name</label>
+                <label for="first-name" class="form-label">Prénom</label>
                 <input
                   type="text"
                   class="form-control"
@@ -46,7 +43,7 @@
 
             <div class="col-lg-6 col-md-12">
               <div class="mb-3">
-                <label for="last-name" class="form-label">Last Name</label>
+                <label for="last-name" class="form-label">Nom</label>
                 <input
                   type="text"
                   class="form-control"
@@ -58,9 +55,7 @@
 
             <div class="col-lg-6 col-md-12">
               <div class="mb-3">
-                <label for="phone-number" class="form-label"
-                  >Phone Number</label
-                >
+                <label for="phone-number" class="form-label">Téléphone</label>
                 <input
                   type="text"
                   class="form-control"
@@ -72,9 +67,7 @@
 
             <div class="col-lg-6 col-md-12">
               <div class="mb-3">
-                <label for="email-address" class="form-label"
-                  >Email Address</label
-                >
+                <label for="email-address" class="form-label">Email</label>
                 <input
                   type="text"
                   class="form-control"
@@ -87,7 +80,7 @@
             <div class="col-lg-4 col-md-12">
               <div class="mb-3">
                 <label for="date-of-birth" class="form-label"
-                  >Date of Birth</label
+                  >Date de naissance</label
                 >
                 <input
                   type="text"
@@ -100,7 +93,7 @@
 
             <div class="col-lg-4 col-md-12">
               <div class="mb-3">
-                <label for="job-title" class="form-label">Your Job Title</label>
+                <label for="job-title" class="form-label">Titre profil</label>
                 <input
                   type="text"
                   class="form-control"
@@ -112,7 +105,7 @@
 
             <div class="col-lg-4 col-md-12">
               <div class="mb-3">
-                <label for="jobs" class="form-label">Type of Job</label>
+                <label for="jobs" class="form-label">Post</label>
                 <input
                   type="text"
                   class="form-control"
@@ -126,9 +119,6 @@
       </div>
 
       <div class="card">
-        <div class="pro-head">
-          <h4 class="pro-titles mb-0">Overview</h4>
-        </div>
         <div class="pro-body">
           <div class="row">
             <div class="input-block col-md-12">
@@ -142,18 +132,22 @@
       <div class="form-row">
         <div class="col-lg-12 w-100">
           <div class="card flex-fill mb-3">
-            
             <form [formGroup]="form">
               <div class="row">
                 <div class="col-md-12">
-                  <h4>Skills</h4>
+                  <h4>Compétences</h4>
                 </div>
                 <div class="row" formArrayName="skills">
                   <!-- Existing Skills List -->
-                  <ng-container *ngFor="let skill of skillsArray.controls; let i = index" [formGroupName]="i">
+                  <ng-container
+                    *ngFor="let skill of skillsArray.controls; let i = index"
+                    [formGroupName]="i"
+                  >
                     <div class="col-md-6">
                       <div class="input-block">
-                        <label for="skillName-{{ i }}" class="form-label">Skill</label>
+                        <label for="skillName-{{ i }}" class="form-label"
+                          >Titre</label
+                        >
                         <input
                           id="skillName-{{ i }}"
                           formControlName="skillName"
@@ -162,23 +156,35 @@
                         />
                       </div>
                     </div>
-            
+
                     <div class="col-md-6">
                       <div class="input-block">
-                        <label for="level-{{ i }}" class="focus-label">Level</label>
+                        <label for="level-{{ i }}" class="focus-label"
+                          >Niveau</label
+                        >
                         <select
                           formControlName="level"
                           class="form-control form-select"
                           placeholder="Choose Level"
                         >
-                          <option *ngFor="let level of skillLevels" [value]="level">{{ level }}</option>
+                          <option
+                            *ngFor="let level of skillLevels"
+                            [value]="level"
+                          >
+                            {{ level }}
+                          </option>
                         </select>
                         <div class="new-addd">
                           <!-- Remove button visible except for the first skill -->
-                          <a class="remove_row" (click)="removeSkills(i)" tabindex="0" *ngIf="skillsArray.controls.length > 1">
-                            Remove
+                          <a
+                            class="remove_row"
+                            (click)="removeSkills(i)"
+                            tabindex="0"
+                            *ngIf="skillsArray.controls.length > 1"
+                          >
+                            Supprimer
                           </a>
-            
+
                           <!-- Add New Skill button visible only for the last skill -->
                           <a
                             class="add-new"
@@ -187,7 +193,7 @@
                             tabindex="0"
                           >
                             <i class="feather icon-plus-circle me-1"></i>
-                            Add New Skill
+                            Ajouter
                           </a>
                         </div>
                       </div>
@@ -196,35 +202,50 @@
                 </div>
               </div>
             </form>
-            
           </div>
         </div>
-
-       
 
         <form [formGroup]="form">
           <div class="row" formArrayName="education">
             <div class="col-md-12">
-              <h4>Education</h4>
+              <h4>Formation</h4>
             </div>
-            <div class="row" *ngFor="let education of educationArray.controls; let i = index" [formGroupName]="i">
+            <div
+              class="row"
+              *ngFor="let education of educationArray.controls; let i = index"
+              [formGroupName]="i"
+            >
               <div class="col-md-6 col-lg-3">
                 <div class="input-block">
-                  <label for="degree-name" class="focus-label">Degree Name</label>
-                  <input type="text" formControlName="degreeName" class="form-control" />
+                  <label for="degree-name" class="focus-label"
+                    >Nom du Diplôme</label
+                  >
+                  <input
+                    type="text"
+                    formControlName="degreeName"
+                    class="form-control"
+                  />
                 </div>
               </div>
-          
+
               <div class="col-md-6 col-lg-3">
                 <div class="input-block">
-                  <label for="university-name" class="focus-label">University Name</label>
-                  <input type="text" formControlName="universityName" class="form-control" />
+                  <label for="university-name" class="focus-label"
+                    >Nom de l’établissement</label
+                  >
+                  <input
+                    type="text"
+                    formControlName="universityName"
+                    class="form-control"
+                  />
                 </div>
               </div>
-          
+
               <div class="col-md-6 col-lg-3">
                 <div class="input-block">
-                  <label for="start-date" class="focus-label">Start Date</label>
+                  <label for="start-date" class="focus-label"
+                    >Date de début</label
+                  >
                   <div class="cal-icon">
                     <input
                       type="text"
@@ -237,10 +258,10 @@
                   </div>
                 </div>
               </div>
-          
+
               <div class="col-md-6 col-lg-3">
                 <div class="input-block">
-                  <label for="end-date" class="focus-label">End Date</label>
+                  <label for="end-date" class="focus-label">Date de Fin</label>
                   <div class="cal-icon">
                     <input
                       type="text"
@@ -251,7 +272,7 @@
                       [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                     />
                   </div>
-          
+
                   <!-- Add or Remove Button -->
                   <div class="new-addd">
                     <!-- Show 'Add New' button for all except the last entry -->
@@ -261,9 +282,9 @@
                       (click)="addEducation()"
                       tabindex="0"
                     >
-                      <i class="feather icon-plus-circle me-1"></i> Add New
+                      <i class="feather icon-plus-circle me-1"></i> Ajouter
                     </a>
-          
+
                     <!-- Show 'Remove' button only if there are more than one education entry -->
                     <a
                       *ngIf="educationArray.length > 1"
@@ -271,30 +292,33 @@
                       (click)="removeEducation(i)"
                       tabindex="0"
                     >
-                      Remove
+                      Supprimer
                     </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
 
           <div class="row" formArrayName="experiences">
             <div class="col-md-12">
-              <h4>Experience</h4>
+              <h4>Expérience</h4>
             </div>
-             
-          
+
             <!-- Existing Experience Form Fields (Looping through experiencesArray) -->
             <div
               class="row"
-              *ngFor="let experience of experiencesArray.controls; let i = index"
+              *ngFor="
+                let experience of experiencesArray.controls;
+                let i = index
+              "
               [formGroupName]="i"
             >
               <div class="col-md-6 col-lg-3">
                 <div class="input-block">
-                  <label for="company-name" class="focus-label">Company Name</label>
+                  <label for="company-name" class="focus-label"
+                    >Nom Entreprise</label
+                  >
                   <input
                     type="text"
                     formControlName="companyName"
@@ -302,10 +326,10 @@
                   />
                 </div>
               </div>
-          
+
               <div class="col-md-6 col-lg-3">
                 <div class="input-block">
-                  <label for="position" class="focus-label">Position</label>
+                  <label for="position" class="focus-label">Niveau</label>
                   <select
                     formControlName="position"
                     placeholder="Select"
@@ -317,10 +341,12 @@
                   </select>
                 </div>
               </div>
-          
+
               <div class="col-md-6 col-lg-3">
                 <div class="input-block">
-                  <label for="start-date" class="focus-label">Start Date</label>
+                  <label for="start-date" class="focus-label"
+                    >Date de début</label
+                  >
                   <div class="cal-icon">
                     <input
                       type="text"
@@ -333,10 +359,10 @@
                   </div>
                 </div>
               </div>
-          
+
               <div class="col-md-6 col-lg-3">
                 <div class="input-block">
-                  <label for="end-date" class="focus-label">End Date</label>
+                  <label for="end-date" class="focus-label">Date de fin</label>
                   <div class="cal-icon">
                     <input
                       type="text"
@@ -353,62 +379,77 @@
                       class="add-new"
                       (click)="addExperience()"
                       tabindex="0"
-                      ><i class="feather icon-plus-circle me-1"></i> Add New</a
+                      ><i class="feather icon-plus-circle me-1"></i> Ajouter</a
                     >
                     <a
                       *ngIf="experiencesArray.length > 1"
                       class="remove_row"
                       (click)="removeExperience(i)"
-                      >Remove</a
+                      >Supprimer</a
                     >
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
 
           <div class="row" formArrayName="languages">
             <div class="col-md-12">
-              <h4>Language</h4>
+              <h4>Langue</h4>
             </div>
-            <div class="row" *ngFor="let language of languagesArray.controls; let i = index" [formGroupName]="i">
-              <div class="col-md-6" >
+            <div
+              class="row"
+              *ngFor="let language of languagesArray.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="col-md-6">
                 <div class="input-block">
-                  <label for="language" class="form-label">Language</label>
-                  <input type="text" class="form-control" formControlName="name" />
+                  <label for="language" class="form-label">Titre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="name"
+                  />
                 </div>
               </div>
-              <div class="col-md-6" >
+              <div class="col-md-6">
                 <div class="input-block">
-                  <label for="level" class="focus-label">Level</label>
-                  <select formControlName="level" class="form-control form-select">
-                    <option *ngFor="let level of selectedList6" [value]="level.value">
-                      {{ level.value }}
+                  <label for="level" class="focus-label">Niveau</label>
+                  <select
+                    formControlName="level"
+                    class="form-control form-select"
+                  >
+                    <option *ngFor="let level of skillLevels" [value]="level">
+                      {{ level }}
                     </option>
                   </select>
                   <div class="new-addd">
-                    <a *ngIf="i === languagesArray.length - 1" class="add-new" (click)="addLanguage()" tabindex="0">
-                      <i class="feather icon-plus-circle me-1"></i> Add New
+                    <a
+                      *ngIf="i === languagesArray.length - 1"
+                      class="add-new"
+                      (click)="addLanguage()"
+                      tabindex="0"
+                    >
+                      <i class="feather icon-plus-circle me-1"></i> Ajouter
                     </a>
-                    <a *ngIf="languagesArray.length > 1" class="remove_row" (click)="removeLanguage(i)">
-                      Remove
+                    <a
+                      *ngIf="languagesArray.length > 1"
+                      class="remove_row"
+                      (click)="removeLanguage(i)"
+                    >
+                      Supprimer
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-           
           </div>
-          
-      </form>
+        </form>
       </div>
 
-      
-      
       <div class="card text-end border-0">
         <div class="pro-body">
-          <button class="btn btn-secondary click-btn btn-plan">Cancel</button>
+          <button class="btn btn-secondary click-btn btn-plan">Annuler</button>
           <button
             class="btn btn-primary click-btn btn-plan"
             type="button"
@@ -416,7 +457,7 @@
             (keydown.enter)="navigation()"
             tabindex="0"
           >
-            Update
+            Mise à jour
           </button>
         </div>
       </div>
@@ -424,4 +465,3 @@
   </div>
 </div>
 <!-- /Page Content -->
- 

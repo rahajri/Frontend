@@ -39,60 +39,8 @@ export class ProfileSettingsComponent implements OnInit {
 
   public datas: boolean[] = [true];
   public isCheckboxChecked = true;
-  skillLevels = ['Beginner', 'Intermediate', 'Advanced'];
-
-  selectedList1: data[] = [
-    { value: 'Basic' },
-    { value: 'Intermediate' },
-    { value: 'Expert' },
-  ];
-  selectedList2: data[] = [
-    { value: 'Advanced' },
-    { value: 'Intermediate' },
-    { value: 'Expert' },
-  ];
-  selectedList3: data[] = [
-    { value: 'Intermediate' },
-    { value: 'Basic' },
-    { value: 'Expert' },
-  ];
-  selectedList4: data[] = [
-    { value: 'Intermediate' },
-    { value: 'Basic' },
-    { value: 'Expert' },
-  ];
-  selectedList5: data[] = [
-    { value: 'Select' },
-    { value: 'Intermediate' },
-    { value: 'Expert' },
-  ];
-  selectedList6: data[] = [
-    { value: 'Select' },
-    { value: 'Intermediate' },
-    { value: 'Expert' },
-  ];
-  selectedList7: data[] = [
-    { value: 'Select' },
-    { value: 'Intermediate' },
-    { value: 'Expert' },
-  ];
-  selectedList8: data[] = [
-    { value: 'Select' },
-    { value: 'Intermediate' },
-    { value: 'Expert' },
-  ];
-  selectedList9: data[] = [
-    { value: 'Select' },
-    { value: 'USA' },
-    { value: 'UK' },
-  ];
-  custom1: data[] = [
-    { value: 'Basic' },
-    { value: 'Intermediate' },
-    { value: 'Expert' },
-  ];
+  skillLevels = ['Débutant', 'Intermédiaire', 'Avanvé'];
   candidate: any = {
-    // Define the candidate object to hold form data
     firstName: '',
     lastName: '',
     email: '',
@@ -100,6 +48,12 @@ export class ProfileSettingsComponent implements OnInit {
     birthDate: '',
     profileTitle: '',
     role: '',
+    candidateSkills: {
+      level: '',
+      skill: {
+        name: '',
+      },
+    },
   };
   form: FormGroup;
   locationForm: FormGroup;
@@ -142,6 +96,7 @@ export class ProfileSettingsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getCondidature();
+    console.log(this.candidate);
   }
 
   navigation() {
@@ -323,6 +278,19 @@ export class ProfileSettingsComponent implements OnInit {
               education['Date fin'] || education['endDate']
             ),
           ],
+        })
+      );
+    });
+    const skillsData = response['candidateSkills'] || [];
+    console.log(response);
+    this.skillsArray.clear();
+
+    skillsData.forEach((candidateSkill: any) => {
+      // console.log(candidateSkill);
+      this.skillsArray.push(
+        this.fb.group({
+          skillName: candidateSkill['skill']['name'] || '',
+          level: candidateSkill['level'] || '',
         })
       );
     });
