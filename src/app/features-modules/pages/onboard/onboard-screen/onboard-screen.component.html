@@ -614,12 +614,18 @@
 
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
-                          <label for="position" class="focus-label">Post</label>
-                          <input
-                            type="text"
-                            formControlName="position"
-                            class="form-control"
-                          />
+                          <label for="post" class="focus-label">Niveau</label>
+                          <select
+                            formControlName="level"
+                            class="form-control form-select"
+                          >
+                            <option
+                              *ngFor="let level of selectedList6"
+                              [value]="level.value"
+                            >
+                              {{ level.value }}
+                            </option>
+                          </select>
                         </div>
                       </div>
 

@@ -154,9 +154,9 @@ export class OnboardEmployerComponent implements OnInit {
   ];
   selectedList2: data[] = [
     { value: 'Choose Level' },
-    { value: 'Basic' },
-    { value: 'Intermediate' },
-    { value: 'Proficient' },
+    { value: 'Basique' },
+    { value: 'Professionnel' },
+    { value: 'Avancé' },
   ];
   selectedList3: data[] = [
     { value: 'Select' },
@@ -170,15 +170,15 @@ export class OnboardEmployerComponent implements OnInit {
   ];
   selectedList5: data[] = [
     { value: 'Select' },
-    { value: 'Basic' },
-    { value: 'Intermediate' },
-    { value: 'Proficient' },
+    { value: 'Basique' },
+    { value: 'Professionnel' },
+    { value: 'Avancé' },
   ];
   selectedList6: data[] = [
-    { value: 'Choose Level' },
-    { value: 'Basic' },
-    { value: 'Intermediate' },
-    { value: 'Proficient' },
+    { value: 'Sélectionner un niveau' },
+    { value: 'Basique' },
+    { value: 'Professionnel' },
+    { value: 'Avancé' },
   ];
   selectedList7: data[] = [
     { value: 'Select' },

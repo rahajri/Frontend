@@ -1,8 +1,8 @@
 <!-- Page Content -->
 <div class="pro-pos">
   <div class="setting-content">
-    <form>
-      <div class="card">
+    <form [formGroup]="form">
+      <div class="card" formGroupName="personalDetails">
         <div class="pro-head">
           <h3>Paramètres du profil</h3>
         </div>
@@ -29,6 +29,17 @@
                 </div>
               </div>
             </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="mb-3">
+                <label for="job-title" class="form-label">Titre profil</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="candidate.profileTitle"
+                  formControlName="profileTitle"
+                />
+              </div>
+            </div>
             <div class="col-lg-6 col-md-12">
               <div class="mb-3">
                 <label for="first-name" class="form-label">Prénom</label>
@@ -36,7 +47,7 @@
                   type="text"
                   class="form-control"
                   [(ngModel)]="candidate.firstName"
-                  name="firstName"
+                  formControlName="firstName"
                 />
               </div>
             </div>
@@ -48,7 +59,7 @@
                   type="text"
                   class="form-control"
                   [(ngModel)]="candidate.lastName"
-                  name="lastName"
+                  formControlName="lastName"
                 />
               </div>
             </div>
@@ -60,7 +71,7 @@
                   type="text"
                   class="form-control"
                   [(ngModel)]="candidate.phone"
-                  name="phone"
+                  formControlName="phone"
                 />
               </div>
             </div>
@@ -72,63 +83,13 @@
                   type="text"
                   class="form-control"
                   [(ngModel)]="candidate.email"
-                  name="email"
-                />
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-12">
-              <div class="mb-3">
-                <label for="date-of-birth" class="form-label"
-                  >Date de naissance</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="candidate.birthDate"
-                  name="birthDate"
-                />
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-12">
-              <div class="mb-3">
-                <label for="job-title" class="form-label">Titre profil</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="candidate.profileTitle"
-                  name="profileTitle"
-                />
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-12">
-              <div class="mb-3">
-                <label for="jobs" class="form-label">Post</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="candidate.role"
-                  name="role"
+                  formControlName="email"
                 />
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="card">
-        <div class="pro-body">
-          <div class="row">
-            <div class="input-block col-md-12">
-              <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" rows="5"></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="form-row">
         <div class="col-lg-12 w-100">
           <div class="card flex-fill mb-3">
@@ -165,7 +126,7 @@
                         <select
                           formControlName="level"
                           class="form-control form-select"
-                          placeholder="Choose Level"
+                          placeholder="Sélectionner un Niveau"
                         >
                           <option
                             *ngFor="let level of skillLevels"
@@ -419,7 +380,7 @@
                     formControlName="level"
                     class="form-control form-select"
                   >
-                    <option *ngFor="let level of skillLevels" [value]="level">
+                    <option *ngFor="let level of skillLevels" [value]="level" >
                       {{ level }}
                     </option>
                   </select>

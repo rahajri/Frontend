@@ -143,7 +143,7 @@ export class OnboardScreenComponent implements OnInit {
   createExperience(): FormGroup {
     return this.fb.group({
       companyName: ['', Validators.required],
-      position: ['', Validators.required],
+      level: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
     });
@@ -298,7 +298,7 @@ export class OnboardScreenComponent implements OnInit {
       this.experiencesArray.push(
         this.fb.group({
           companyName: [exp['Entreprise'] || exp['entreprise'] || ''],
-          position: [exp['Poste'] || ''],
+          level: [exp['Niveau'] || ''],
           location: [exp['Lieu'] || ''],
           startDate: [
             this.formatDateString(exp['Date début'] || exp['date_debut']),

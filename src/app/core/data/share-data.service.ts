@@ -1756,16 +1756,16 @@ export class ShareDataService {
           base: 'projects',
           subMenus: [],
         },
-        /*{
-          menuValue: 'Providers',
+        {
+          menuValue: 'Projets',
           route: routes.admin_providers,
           hasSubRoute: false,
           showSubRoute: false,
-          icon: 'icon-user-check',
+          icon: 'icon-database',
           base: 'providers',
           subMenus: [],
         },
-        {
+        /*{
           menuValue: 'Settings',
           route: routes.admin_settings_general,
           hasSubRoute: false,

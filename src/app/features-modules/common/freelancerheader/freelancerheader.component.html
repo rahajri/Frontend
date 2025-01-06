@@ -242,26 +242,15 @@
             data-bs-toggle="dropdown"
           >
             <span class="user-img">
-              <img src="assets/img/user/avatar-1.jpg" alt="Img" />
+              <div class="profile-initials" *ngIf="initials">
+                {{ initials }}
+              </div>
             </span>
-            <span>Bruce Bush</span>
+            <div>
+              <span>{{ profileName }}</span>
+            </div>
           </a>
           <div class="dropdown-menu emp">
-            <div class="drop-head">
-              <a
-                href="javascript:void(0);"
-                class="dropdown-toggle nav-link"
-                data-bs-toggle="dropdown"
-              >
-                <span class="user-img">
-                  <img src="assets/img/user/avatar-1.jpg" alt="Img" />
-                </span>
-                <div>
-                  <span>Bruce Bush</span>
-                  <p>info&#64;brucebush.com</p>
-                </div>
-              </a>
-            </div>
             <a
               class="dropdown-item"
               [routerLink]="routes.freelancer_developer_profile"

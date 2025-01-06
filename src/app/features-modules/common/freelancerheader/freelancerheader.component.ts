@@ -1,25 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
-import { url } from 'src/app/core/models/models';
+import { Profile, url } from 'src/app/core/models/models';
 import { header } from 'src/app/core/models/sidebar-model';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { NavbarService } from 'src/app/core/services/navbar.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { UserService } from '../../auth/service/user.service';
 
 @Component({
   selector: 'app-freelancerheader',
   templateUrl: './freelancerheader.component.html',
   styleUrls: ['./freelancerheader.component.scss'],
 })
-export class FreelancerheaderComponent {
+export class FreelancerheaderComponent implements OnInit {
   base = '';
   page = '';
   last = '';
   isLogged = false;
   isEmployer = false;
   public routes = routes;
+  profile: any | null = null;
+  initials: string = '';
+  profileName: string = '';
 
   navbar: Array<header> = [];
 
@@ -28,7 +32,8 @@ export class FreelancerheaderComponent {
     private data: ShareDataService,
     private navservices: NavbarService,
     private common: CommonService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {
     this.common.base.subscribe((res: string) => {
       this.base = res;
@@ -48,8 +53,23 @@ export class FreelancerheaderComponent {
   }
 
   ngOnInit(): void {
+    this.getUser();
     this.isLogged = this.authService.isLogged();
     this.isEmployer = this.authService.isEmployer();
+  }
+
+  getUser(): void {
+    this.userService.getProfile().subscribe({
+      next: (profile) => {
+        this.profile = profile;
+        const { fullName, initials } = this.userService.getProfileDetails(
+          this.profile
+        );
+        this.profileName = fullName;
+        this.initials = initials;
+      },
+      error: (err) => console.error(err),
+    });
   }
 
   employer() {

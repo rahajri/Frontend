@@ -36,7 +36,6 @@ export class UserService {
     // Retrieve the token from storage or service
     const token = localStorage.getItem('token'); // or use a service to manage tokens
 
-
     const body = { userId: userId };
 
     return this.http.post<any>(url, body);
@@ -47,9 +46,7 @@ export class UserService {
   }
 
   getProfile(): Observable<any> {
-    const token = localStorage.getItem('token');
-
-    return this.http.get(`${this.apiUrl}/profile`,);
+    return this.http.get(`${this.apiUrl}/profile`);
   }
 
   private baseUrlCop = `${environment.apiUrl}/companies`;

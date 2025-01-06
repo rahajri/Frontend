@@ -39,7 +39,7 @@ export class ProfileSettingsComponent implements OnInit {
 
   public datas: boolean[] = [true];
   public isCheckboxChecked = true;
-  skillLevels = ['Débutant', 'Intermédiaire', 'Avanvé'];
+  skillLevels = ['Basique', 'Professionnel', 'Avancé'];
   candidate: any = {
     firstName: '',
     lastName: '',
@@ -79,10 +79,9 @@ export class ProfileSettingsComponent implements OnInit {
       personalDetails: this.fb.group({
         lastName: [''],
         firstName: [''],
-        jobTitle: [''],
-        birthday: [''],
-        phoneNumber: [''],
-        emailAddress: [''],
+        profileTitle: [''],
+        phone: [''],
+        email: [''],
       }),
       location: this.locationForm, // Add location form group here
       activities: this.fb.array([this.createActivity()]), // Initialize with one activity form group
@@ -99,40 +98,10 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   navigation() {
-    this.router.navigate([routes.freelancerprofile]);
+    console.log(this.form.value);
+    // this.router.navigate([routes.freelancerprofile]);
   }
-  showTimePicker: Array<string> = [];
 
-  public hoursArray1 = [0];
-  public hoursArray2 = [0];
-  public hoursArray3 = [0];
-  public hoursArray4 = [0];
-  public hoursArray5 = [0];
-  public hoursArray6 = [0];
-  public hoursArray7 = [0];
-
-  startTime1 = new Date();
-  startTime2 = new Date();
-  startTime3 = new Date();
-  startTime4 = new Date();
-  startTime5 = new Date();
-  startTime6 = new Date();
-  startTime7 = new Date();
-  endTime1 = new Date();
-  endTime2 = new Date();
-  endTime3 = new Date();
-  endTime4 = new Date();
-  endTime5 = new Date();
-  endTime6 = new Date();
-  endTime7 = new Date();
-
-  toggleTimePicker(value: string): void {
-    if (this.showTimePicker[0] !== value) {
-      this.showTimePicker[0] = value;
-    } else {
-      this.showTimePicker = [];
-    }
-  }
   formatTime(date: Date) {
     const selectedDate: Date = new Date(date);
     return this.datePipe.transform(selectedDate, 'h:mm a');
@@ -148,6 +117,7 @@ export class ProfileSettingsComponent implements OnInit {
 
     this.candidateService.getCandidate(email).subscribe(
       (response) => {
+        console.log('Candidate details:', response);
 
         this.patchFormData(response);
         // Patch the response to the candidate form object
@@ -193,8 +163,8 @@ export class ProfileSettingsComponent implements OnInit {
   // Create a new language form group
   createLanguage(): FormGroup {
     return this.fb.group({
-      name: ['', Validators.required],
-      level: ['', Validators.required],
+      name: [''],
+      level: [''],
     });
   }
 
@@ -217,11 +187,6 @@ export class ProfileSettingsComponent implements OnInit {
     this.skillsArray.removeAt(index); // Use removeAt method to remove from FormArray
   }
   patchFormData(response: any) {
-    const responsepersonal =
-      response['Informations Personnelles'] ||
-      response['informations_personnelles'] ||
-      response['coordonnees_personnelles'];
-
     // Patch personal details
     this.form.get('personalDetails')?.patchValue({
       lastName: response['Nom'] || response['nom'] || '',
@@ -279,6 +244,7 @@ export class ProfileSettingsComponent implements OnInit {
         })
       );
     });
+
     const skillsData = response['candidateSkills'] || [];
     this.skillsArray.clear();
 
@@ -291,15 +257,14 @@ export class ProfileSettingsComponent implements OnInit {
       );
     });
 
-    const languageData = response['languages'] || [];
+    const languageData = response['candidateLanguages'] || [];
     this.languageArray.clear();
 
     languageData.forEach((language: any) => {
       this.languageArray.push(
         this.fb.group({
-          name: [language['name'] || ''],
+          name: [language['language']['name'] || ''],
           level: [language['level'] || ''],
-          certificateUrl: [language['certificateUrl'] || ''],
         })
       );
     });
