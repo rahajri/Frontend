@@ -63,20 +63,15 @@ export class LoginComponent implements OnInit, OnDestroy {
           localStorage.setItem('role', response.role);
           this.authService.setUser(response.user);
 
-          if (response.role == 'candidate') {
-            this.candidateService.checkCondidate(response.email).subscribe({
-              next: (condidate) => {
-                if (condidate == true) {
-                  this.router.navigate(['/freelancer/dashboards']);
-                } else this.router.navigate(['/pages/onboard-screen']);
-              },
-              error: (error) => {
-                console.error('Error fetching candidate:', error);
-              },
-            });
-          } else if (response.role == 'admin') {
+          if (response.role === 'candidate') {
+            if (response.user.profileUpdatedAt != null) {
+              this.router.navigate(['/freelancer/dashboards']);
+            } else {
+              this.router.navigate(['/pages/onboard-screen']);
+            }
+          } else if (response.role === 'admin') {
             this.router.navigate(['/admin/dashboard']);
-          } else if (response.role == 'company-employee') {
+          } else if (response.role === 'company-employee') {
             this.router.navigate(['/employer/dashboard']);
           }
           //

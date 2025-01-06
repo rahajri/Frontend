@@ -147,7 +147,6 @@ export class VerifyidentityComponent implements OnInit {
     getCompanies(): void {
       this.companyService.getUnvirifiedCompanies().subscribe((data: Company[]) => {
         this.companies = data;
-        console.log(this.companies); // You can check if the data is as expected
       });
     }
 

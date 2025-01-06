@@ -178,122 +178,104 @@
             <div class="tab-content pt-0">
               <div role="tabpanel" id="tab-4" class="tab-pane fade active show">
                 <div class="table-responsive">
-                  <div class="table_header mt-2">
-                    <div class="dataTables_length">
-                      <select
-                        [(ngModel)]="pageSize"
-                        (ngModelChange)="changePageSize()"
-                        class="form-select w-auto"
-                      >
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                      </select>
-                      <label entries-data for="data-entries"
-                        >Entrées par page</label
-                      >
-                    </div>
-                    <div class="dataTables_filter">
-                      <label for="search"> Recherche: </label>
-                      <input
-                        [(ngModel)]="searchDataValue"
-                        (ngModelChange)="searchData(searchDataValue)"
-                        class="form-control form-control-sm"
-                      />
-                    </div>
-                  </div>
                   <div class="table-scroll">
-                    <table
+                    <mat-form-field class="filter">
+                      <input
+                        matInput
+                        (keyup)="searchData($event.target)"
+                        placeholder="Recherche"
+                        class="form-control form-control-sm search"
+                      />
+                    </mat-form-field>
+                    <mat-table
+                      [dataSource]="dataSource"
                       matSort
-                      (matSortChange)="sortData($event)"
-                      class="table table-center table-hover mb-0 datatable"
+                      class="mat-elevation-z8"
                     >
-                      <thead>
-                        <tr>
-                          <th></th>
-
-                          <th mat-sort-header="createdAt">Date de création</th>
-                          <th mat-sort-header="lastName">Nom</th>
-                          <th mat-sort-header="job">Activité</th>
-                          <th mat-sort-header="employee">Contact</th>
-                          <th mat-sort-header="phone">Téléphone</th>
-                          <th mat-sort-header="city">Status</th>
-
-                          <th></th>
-                        </tr>
-                        <tr *ngIf="filteredCompanies.length === 0">
-                          <td colspan="9">
-                            <h5 style="text-align: center">No data found</h5>
-                          </td>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          *ngFor="
-                            let company of filteredCompanies;
-                            let i = index
-                          "
-                          (click)="setSelectedCompany(company)"
+                      <!-- Date de création Column -->
+                      <ng-container matColumnDef="createdAt">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Date de création
+                        </mat-header-cell>
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_company(element.id)"
                         >
-                          <td>
-                            <div class="form-check form-checkbox">
-                              <input
-                                type="checkbox"
-                                class="form-check-input"
-                                id="customCheck{{ i }}"
-                              />
-                              <label
-                                class="form-check-label"
-                                for="customCheck{{ i }}"
-                              ></label>
-                            </div>
-                          </td>
+                          {{ getDate(element.createdAt) }}
+                        </mat-cell>
+                      </ng-container>
 
-                          <td
-                            [routerLink]="routes.get_admin_company(company.id)"
-                            class="cursor-pointer btn-link"
-                          >
-                            {{ getDate(company.createdAt) }}
-                          </td>
-                          <td
-                            [routerLink]="routes.get_admin_company(company.id)"
-                            class="cursor-pointer btn-link"
-                          >
-                            {{ company.name }}
-                          </td>
-                          <td
-                            [routerLink]="routes.get_admin_company(company.id)"
-                            class="cursor-pointer btn-link"
-                          >
-                            {{ company.nafTitle }}
-                          </td>
-                          <td
-                            [routerLink]="routes.get_admin_company(company.id)"
-                            class="cursor-pointer btn-link"
-                          >
-                            {{ company.employees?.[0]?.firstName || '' }}
-                            {{ company.employees?.[0]?.lastName || '' }}
-                          </td>
-                          <td
-                            [routerLink]="routes.get_admin_company(company.id)"
-                            class="cursor-pointer btn-link"
-                          >
-                            {{ company.employees?.[0]?.phone || 'N/A' }}
-                          </td>
+                      <!-- Nom Column -->
+                      <ng-container matColumnDef="name">
+                        <mat-header-cell mat-sort-header *matHeaderCellDef>
+                          Nom
+                        </mat-header-cell>
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_company(element.id)"
+                        >
+                          {{ element.name }}
+                        </mat-cell>
+                      </ng-container>
 
-                          <td
+                      <!-- Activité Column -->
+                      <ng-container matColumnDef="nafTitle">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Activité
+                        </mat-header-cell>
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_company(element.id)"
+                        >
+                          {{ element.nafTitle }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Contact Column -->
+                      <ng-container matColumnDef="Contact">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Contact
+                        </mat-header-cell>
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_company(element.id)"
+                        >
+                          {{ getContact(element) }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Téléphone Column -->
+                      <ng-container matColumnDef="Téléphone">
+                        <mat-header-cell *matHeaderCellDef>
+                          Téléphone
+                        </mat-header-cell>
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_company(element.id)"
+                        >
+                          {{ element.employees?.[0]?.phone ||'' }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Status Column -->
+                      <ng-container matColumnDef="Status">
+                        <mat-header-cell *matHeaderCellDef>
+                          Status
+                        </mat-header-cell>
+                        <mat-cell
+                          *matCellDef="let element"
+                          class="d-flex justify-content-between align-items-center"
+                        >
+                          <div
                             [ngClass]="{
-                              'text-success': company.status?.name === 'Active',
-                              'text-danger': company.status?.name !== 'Active'
+                              'text-success': element.status?.name === 'Active',
+                              'text-danger': element.status?.name !== 'Active'
                             }"
-                            [routerLink]="routes.get_admin_company(company.id)"
-                            class="cursor-pointer btn-link"
+                            [routerLink]="routes.get_admin_company(element.id)"
                           >
-                            {{ company.status?.name }}
-                          </td>
-
-                          <td class="text-end hide-shave">
+                            {{ element.status?.name }}
+                          </div>
+                          <div class="hide-shave">
                             <a
                               href="javascript:void(0)"
                               class="dropdown-toggle nav-link"
@@ -304,7 +286,7 @@
                               <a
                                 class="dropdown-item"
                                 [routerLink]="
-                                  routes.get_admin_company(company.id)
+                                  routes.get_admin_company(element.id)
                                 "
                                 data-dismiss="modal"
                                 ><i class="feather icon-edit"></i> Editer</a
@@ -312,131 +294,69 @@
                               <a
                                 class="dropdown-item"
                                 href="javascript:void(0)"
-                                (click)="this.showDeleteCategoryModal(company)"
+                                (click)="this.showDeleteCategoryModal(element)"
                                 data-dismiss="modal"
                                 ><i class="feather icon-trash text-danger"></i>
                                 Supprimer</a
                               >
                             </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                          </div>
+                        </mat-cell>
+                      </ng-container>
+
+                      <mat-header-row
+                        *matHeaderRowDef="displayedColumns"
+                      ></mat-header-row>
+                      <mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                      ></mat-row>
+                    </mat-table>
                     <mat-paginator
-                      [pageSizeOptions]="[10, 25, 50, 75, 100]"
+                      [pageSizeOptions]="[5, 10, 25, 50, 75, 100]"
                       showFirstLastButtons
+                      class="d-flex justify-content-center align-items-center"
+                      style="font-weight: bold; font-size: 14px"
                     ></mat-paginator>
                   </div>
-                  <div class="table_footer">
-                    <div class="col-sm-12 col-md-5">
-                      <div class="dataTables_info">
-                        Affichage de 1 à 7 sur 7 entrées
-                      </div>
-                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Page Wrapper -->
+      </div>
 
-                    <div class="col-sm-12 col-md-7">
-                      <div class="pagination_section">
-                        <ul class="pagination">
-                          <li
-                            class="page-item"
-                            [ngClass]="{
-                              disabled: currentPage === 1
-                            }"
-                          >
-                            <a
-                              (click)="getMoreData('previous')"
-                              (keydown.enter)="getMoreData('previous')"
-                              class="page-link"
-                              href="javascript:void(0);"
-                              tabindex="-1"
-                              >Previous</a
-                            >
-                          </li>
-
-                          <ng-container
-                            *ngFor="let item of pageNumberArray; let i = index"
-                          >
-                            <li
-                              class="page-item"
-                              [class.active]="item === currentPage"
-                              [ngClass]="
-                                (pageNumberArray[currentPage - 2] > item &&
-                                  item !== 1 &&
-                                  pageNumberArray.length > 6) ||
-                                (pageNumberArray[currentPage] < item &&
-                                  item !== 1 &&
-                                  pageNumberArray.length > 6 &&
-                                  pageNumberArray.length !== item)
-                                  ? 'hide-page-no'
-                                  : 'show-page-no'
-                              "
-                            >
-                              <a
-                                (click)="moveToPage(item)"
-                                (keydown.enter)="moveToPage(item)"
-                                class="page-link"
-                                href="javascript:void(0);"
-                              >
-                                {{ item }}
-                              </a>
-                            </li>
-                            <li
-                              class="page-item"
-                              *ngIf="
-                                i === 0 &&
-                                pageNumberArray.length > 6 &&
-                                currentPage > 2
-                              "
-                              [hidden]="currentPage === 1"
-                              (click)="moveToPage(currentPage - 2)"
-                              (keydown.enter)="moveToPage(currentPage - 2)"
-                              tabindex="0"
-                            >
-                              <a class="page-link" href="javascript:void(0);">
-                                ...
-                              </a>
-                            </li>
-                            <li
-                              *ngIf="
-                                i === pageNumberArray.length - 2 &&
-                                pageNumberArray.length > 6
-                              "
-                              [hidden]="
-                                currentPage >=
-                                  pageNumberArray[pageNumberArray.length - 2] ||
-                                totalData < 7
-                              "
-                              class="page-item"
-                              (click)="moveToPage(currentPage + 2)"
-                              (keydown.enter)="moveToPage(currentPage + 2)"
-                              tabindex="0"
-                            >
-                              <a class="page-link" href="javascript:void(0);">
-                                ...
-                              </a>
-                            </li>
-                          </ng-container>
-
-                          <li
-                            class="page-item"
-                            [ngClass]="{
-                              disabled:
-                                currentPage ===
-                                  pageNumberArray[pageNumberArray.length - 1] ||
-                                filteredCompanies.length === 0
-                            }"
-                          >
-                            <a
-                              (click)="getMoreData('next')"
-                              (keydown.enter)="getMoreData('next')"
-                              class="page-link"
-                              href="javascript:void(0);"
-                              >Next
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+      <!-- Delete Modal -->
+      <div class="modal custom-modal fade" id="delete_client" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="form-header">
+                <h3>Supprimer</h3>
+                <p>Êtes-vous sur de vouloir supprimer</p>
+                <p>
+                  <strong class="text-danger"
+                    >{{ companyToDelete?.name }} ?</strong
+                  >
+                </p>
+              </div>
+              <div class="modal-btn delete-action">
+                <div class="row">
+                  <div class="col-6">
+                    <a
+                      href="javascript:void(0);"
+                      class="btn btn-primary continue-btn"
+                      (click)="deleteCompany(companyToDelete)"
+                      >Supprimer</a
+                    >
+                  </div>
+                  <div class="col-6">
+                    <a
+                      href="javascript:void(0);"
+                      data-bs-dismiss="modal"
+                      class="btn btn-primary cancel-btn"
+                      >Annuler</a
+                    >
                   </div>
                 </div>
               </div>
@@ -444,336 +364,299 @@
           </div>
         </div>
       </div>
-      <!-- /Page Wrapper -->
+      <!-- /Delete Modal -->
     </div>
-
-    <!-- Delete Modal -->
-    <div class="modal custom-modal fade" id="delete_client" role="dialog">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="form-header">
-              <h3>Supprimer</h3>
-              <p>Êtes-vous sur de vouloir supprimer</p>
-              <p>
-                <strong class="text-danger"
-                  >{{ companyToDelete?.name }} ?</strong
-                >
-              </p>
-            </div>
-            <div class="modal-btn delete-action">
-              <div class="row">
-                <div class="col-6">
-                  <a
-                    href="javascript:void(0);"
-                    class="btn btn-primary continue-btn"
-                    (click)="deleteCompany(companyToDelete)"
-                    >Supprimer</a
-                  >
-                </div>
-                <div class="col-6">
-                  <a
-                    href="javascript:void(0);"
-                    data-bs-dismiss="modal"
-                    class="btn btn-primary cancel-btn"
-                    >Annuler</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /Delete Modal -->
   </div>
-</div>
 
-<!-- Add Modal -->
-<div class="modal fade custom-modal" id="add-company">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header flex-wrap">
-        <div class="text-center w-100 mb-3">
-          <img src="assets/admin/img/logo-small.png" alt="" />
-        </div>
-        <h4 class="modal-title">Ajouter un Client</h4>
-        <button type="button" class="close" data-bs-dismiss="modal">
-          <span>&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <form [formGroup]="addClientForm" (ngSubmit)="onClienSubmit()">
-          <div formGroupName="company">
-            <div class="company-title">
-              <h4>Informations Générales</h4>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="input-block">
-                  <label for="company-name" class="form-label">Siret</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="siret"
-                    (change)="getSiretDetails($event)"
-                    placeholder="Saisir votre siret"
-                  />
-                  <small class="text-danger" *ngIf="siretErrorMessage">
-                    {{ siretErrorMessage }}
-                  </small>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="input-block">
-                  <label for="company-name" class="form-label"
-                    >Nom de l'entreprise</label
-                  >
-                  <input
-                    id="company-name"
-                    type="text"
-                    class="form-control disabled"
-                    formControlName="name"
-                    readonly
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-12">
-                <div class="input-block">
-                  <label for="naf-title" class="form-label">Activité</label>
-                  <input
-                    type="text"
-                    id="naf-title"
-                    class="form-control disabled"
-                    formControlName="nafTitle"
-                    readonly
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-12">
-                <div class="input-block">
-                  <label for="naf-code" class="form-label">NAF</label>
-                  <input
-                    id="naf-code"
-                    type="text"
-                    class="form-control disabled"
-                    formControlName="naf"
-                    readonly
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-12">
-                <div class="input-block">
-                  <label for="tagline" class="form-label"
-                    >Forme juridique</label
-                  >
-                  <input
-                    id="tagline"
-                    type="text"
-                    class="form-control disabled"
-                    formControlName="category"
-                    readonly
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-12">
-                <div class="input-block">
-                  <label for="team-size" class="form-label"
-                    >Taille de l'entreprise</label
-                  >
-                  <input
-                    id="team-size"
-                    type="text"
-                    class="form-control disabled"
-                    formControlName="workforce"
-                    readonly
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              class="row"
-              formGroupName="location"
-              [class.disabled]="siretErrorMessage"
-            >
-              <div class="col-md-12">
-                <h4>Location</h4>
-              </div>
-
-              <div class="col-md-6">
-                <div class="input-block">
-                  <label for="post-code" class="form-label">Code Postal</label>
-                  <input
-                    id="post-code"
-                    type="text"
-                    class="form-control"
-                    formControlName="postalCode"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="input-block">
-                  <label for="city" class="form-label">Ville</label>
-                  <input
-                    id="city"
-                    type="text"
-                    class="form-control"
-                    formControlName="city"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="input-block">
-                  <label for="state" class="form-label">Département</label>
-                  <input
-                    id="state"
-                    type="text"
-                    class="form-control"
-                    formControlName="department"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="input-block">
-                  <label for="region" class="form-label">Région</label>
-                  <input
-                    id="region"
-                    type="text"
-                    class="form-control"
-                    formControlName="region"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-12">
-                <div class="input-block">
-                  <label for="address" class="form-label">Adresse</label>
-                  <input
-                    id="address"
-                    type="text"
-                    class="form-control"
-                    formControlName="address"
-                  />
-                </div>
-              </div>
-
-              <div class="col-md-12">
-                <div class="input-block">
-                  <label for="address2" class="form-label"
-                    >Adresse Complémentaire</label
-                  >
-                  <input
-                    id="address2"
-                    type="text"
-                    class="form-control"
-                    formControlName="addressLine2"
-                  />
-                </div>
-              </div>
-            </div>
+  <!-- Add Modal -->
+  <div class="modal fade custom-modal" id="add-company">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header flex-wrap">
+          <div class="text-center w-100 mb-3">
+            <img src="assets/admin/img/logo-small.png" alt="" />
           </div>
+          <h4 class="modal-title">Ajouter un Client</h4>
+          <button type="button" class="close" data-bs-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
 
-          <hr />
-          <div formGroupName="user" [class.disabled]="siretErrorMessage">
-            <div class="company-title">
-              <h4>Contact</h4>
+        <div class="modal-body">
+          <form [formGroup]="addClientForm" (ngSubmit)="onClienSubmit()">
+            <div formGroupName="company">
+              <div class="company-title">
+                <h4>Informations Générales</h4>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="company-name" class="form-label">Siret</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="siret"
+                      (change)="getSiretDetails($event)"
+                      placeholder="Saisir votre siret"
+                    />
+                    <small class="text-danger" *ngIf="siretErrorMessage">
+                      {{ siretErrorMessage }}
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="company-name" class="form-label"
+                      >Nom de l'entreprise</label
+                    >
+                    <input
+                      id="company-name"
+                      type="text"
+                      class="form-control disabled"
+                      formControlName="name"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="naf-title" class="form-label">Activité</label>
+                    <input
+                      type="text"
+                      id="naf-title"
+                      class="form-control disabled"
+                      formControlName="nafTitle"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="naf-code" class="form-label">NAF</label>
+                    <input
+                      id="naf-code"
+                      type="text"
+                      class="form-control disabled"
+                      formControlName="naf"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="tagline" class="form-label"
+                      >Forme juridique</label
+                    >
+                    <input
+                      id="tagline"
+                      type="text"
+                      class="form-control disabled"
+                      formControlName="category"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="team-size" class="form-label"
+                      >Taille de l'entreprise</label
+                    >
+                    <input
+                      id="team-size"
+                      type="text"
+                      class="form-control disabled"
+                      formControlName="workforce"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row"
+                formGroupName="location"
+                [class.disabled]="siretErrorMessage"
+              >
+                <div class="col-md-12">
+                  <h4>Location</h4>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-block">
+                    <label for="post-code" class="form-label"
+                      >Code Postal</label
+                    >
+                    <input
+                      id="post-code"
+                      type="text"
+                      class="form-control"
+                      formControlName="postalCode"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-block">
+                    <label for="city" class="form-label">Ville</label>
+                    <input
+                      id="city"
+                      type="text"
+                      class="form-control"
+                      formControlName="city"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-block">
+                    <label for="state" class="form-label">Département</label>
+                    <input
+                      id="state"
+                      type="text"
+                      class="form-control"
+                      formControlName="department"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-block">
+                    <label for="region" class="form-label">Région</label>
+                    <input
+                      id="region"
+                      type="text"
+                      class="form-control"
+                      formControlName="region"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="address" class="form-label">Adresse</label>
+                    <input
+                      id="address"
+                      type="text"
+                      class="form-control"
+                      formControlName="address"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="input-block">
+                    <label for="address2" class="form-label"
+                      >Adresse Complémentaire</label
+                    >
+                    <input
+                      id="address2"
+                      type="text"
+                      class="form-control"
+                      formControlName="addressLine2"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="row">
-              <div class="input-block">
-                <label for="firstName"
-                  >Prénom <span class="label-star"> *</span></label
-                >
-                <input
-                  id="firstName"
-                  type="text"
-                  formControlName="firstName"
-                  class="form-control"
-                />
-              </div>
 
-              <div class="input-block">
-                <label for="lastName"
-                  >Nom <span class="label-star"> *</span></label
-                >
-                <input
-                  id="lastName"
-                  type="text"
-                  formControlName="lastName"
-                  class="form-control"
-                />
+            <hr />
+            <div formGroupName="user" [class.disabled]="siretErrorMessage">
+              <div class="company-title">
+                <h4>Contact</h4>
               </div>
+              <div class="row">
+                <div class="input-block">
+                  <label for="firstName"
+                    >Prénom <span class="label-star"> *</span></label
+                  >
+                  <input
+                    id="firstName"
+                    type="text"
+                    formControlName="firstName"
+                    class="form-control"
+                  />
+                </div>
 
-              <div class="input-block">
-                <label for="phone"
-                  >Numéro de Téléphone <span class="label-star"> *</span></label
-                >
-                <input
-                  id="phone"
-                  type="text"
-                  formControlName="phone"
-                  class="form-control"
-                  required
-                  [ngClass]="{
-                    'is-invalid':
+                <div class="input-block">
+                  <label for="lastName"
+                    >Nom <span class="label-star"> *</span></label
+                  >
+                  <input
+                    id="lastName"
+                    type="text"
+                    formControlName="lastName"
+                    class="form-control"
+                  />
+                </div>
+
+                <div class="input-block">
+                  <label for="phone"
+                    >Numéro de Téléphone
+                    <span class="label-star"> *</span></label
+                  >
+                  <input
+                    id="phone"
+                    type="text"
+                    formControlName="phone"
+                    class="form-control"
+                    required
+                    [ngClass]="{
+                      'is-invalid':
+                        addClientForm.get('user.phone')?.invalid &&
+                        addClientForm.get('user.phone')?.touched
+                    }"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
                       addClientForm.get('user.phone')?.invalid &&
                       addClientForm.get('user.phone')?.touched
-                  }"
-                />
-                <div
-                  class="invalid-feedback"
-                  *ngIf="
-                    addClientForm.get('user.phone')?.invalid &&
-                    addClientForm.get('user.phone')?.touched
-                  "
-                >
-                  <div
-                    *ngIf="addClientForm.get('user.phone')?.errors?.['required']"
+                    "
                   >
-                    Le champ Téléphone est obligatoire.
-                  </div>
-                  <div
-                    *ngIf="addClientForm.get('user.phone')?.errors?.['pattern']"
-                  >
-                    Veuillez entrer un numéro de téléphone valide.
+                    <div
+                      *ngIf="addClientForm.get('user.phone')?.errors?.['required']"
+                    >
+                      Le champ Téléphone est obligatoire.
+                    </div>
+                    <div
+                      *ngIf="addClientForm.get('user.phone')?.errors?.['pattern']"
+                    >
+                      Veuillez entrer un numéro de téléphone valide.
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="input-block">
-                <label for="email"
-                  >Adresse Email <span class="label-star"> *</span></label
-                >
-                <input
-                  id="email"
-                  type="email"
-                  formControlName="email"
-                  class="form-control"
-                  required
-                />
+                <div class="input-block">
+                  <label for="email"
+                    >Adresse Email <span class="label-star"> *</span></label
+                  >
+                  <input
+                    id="email"
+                    type="email"
+                    formControlName="email"
+                    class="form-control"
+                    required
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <hr />
-          <button
-            type="submit"
-            class="btn btn-primary w-100"
-            [disabled]="!addClientForm.valid || siretErrorMessage"
-          >
-            Ajouter
-          </button>
-        </form>
+            <hr />
+            <button
+              type="submit"
+              class="btn btn-primary w-100"
+              [disabled]="!addClientForm.valid || siretErrorMessage"
+            >
+              Ajouter
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
+  <!-- Add Modal -->
 </div>
-<!-- Add Modal -->

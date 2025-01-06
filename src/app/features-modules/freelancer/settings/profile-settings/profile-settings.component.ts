@@ -96,7 +96,6 @@ export class ProfileSettingsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getCondidature();
-    console.log(this.candidate);
   }
 
   navigation() {
@@ -149,7 +148,6 @@ export class ProfileSettingsComponent implements OnInit {
 
     this.candidateService.getCandidate(email).subscribe(
       (response) => {
-        console.log('Candidate details:', response);
 
         this.patchFormData(response);
         // Patch the response to the candidate form object
@@ -282,11 +280,9 @@ export class ProfileSettingsComponent implements OnInit {
       );
     });
     const skillsData = response['candidateSkills'] || [];
-    console.log(response);
     this.skillsArray.clear();
 
     skillsData.forEach((candidateSkill: any) => {
-      // console.log(candidateSkill);
       this.skillsArray.push(
         this.fb.group({
           skillName: candidateSkill['skill']['name'] || '',

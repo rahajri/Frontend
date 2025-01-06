@@ -77,8 +77,6 @@ export class OnboardEmployerComponent implements OnInit {
     this.companyService.loadCompaniesData().subscribe(
       (data) => {
         this.companiesData = data?.data; 
-         // Store the data in the component's variable
-        console.log('Companies Data:', this.companiesData);  // Log to check the result
       },
       (error) => {
         console.error('Error loading companies data:', error);  // Handle error
@@ -110,7 +108,6 @@ export class OnboardEmployerComponent implements OnInit {
   }
   addSkills() {
     this.skills.push(1);
-    console.log('hii');
   }
   removeSkills(index: number) {
     this.skills.splice(index, 1);
@@ -199,7 +196,6 @@ export class OnboardEmployerComponent implements OnInit {
     this.locationService.getZipCodes().subscribe(
       (data) => {
         this.zipCodes = data;
-        console.log('ZIP Codes:', this.zipCodes);
       },
       (error) => {
         console.error('Error fetching ZIP codes:', error);

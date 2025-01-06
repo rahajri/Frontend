@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { Company } from 'src/app/core/models/models';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
@@ -18,11 +18,19 @@ declare var bootstrap: any;
   styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent implements OnInit {
+  dataSource: MatTableDataSource<Company>;
+  displayedColumns: string[] = [
+    'createdAt',
+    'name',
+    'nafTitle',
+    'Contact',
+    'Téléphone',
+    'Status',
+  ];
   public routes = routes;
   public lstProject!: Array<Company>;
   public url = 'admin';
   public searchDataValue = '';
-  dataSource!: MatTableDataSource<Company>;
   filterForm!: FormGroup;
   addClientForm!: FormGroup;
   public lastIndex = 0;
@@ -33,7 +41,6 @@ export class ProjectsComponent implements OnInit {
   public pageIndex = 0;
   public currentPage = 1;
   public pageNumberArray: Array<number> = [];
-  public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
   filter: boolean = false;
   companiesData: any[] = [];
@@ -56,6 +63,7 @@ export class ProjectsComponent implements OnInit {
     private alertService: AlertService,
     private userService: UserService
   ) {
+    this.dataSource = new MatTableDataSource<Company>([]);
     this.filterForm = this.fb.group({
       companyName: [''],
       contactFName: [''],
@@ -94,9 +102,20 @@ export class ProjectsComponent implements OnInit {
       }),
     });
   }
- @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   ngOnInit(): void {
     this.getTableData();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  sortClicked() {
+    this.dataSource.sort = this.sort;
   }
 
   //Filter toggle
@@ -110,11 +129,13 @@ export class ProjectsComponent implements OnInit {
     if (!status) {
       // If no status is provided, return all companies
       this.filteredCompanies = this.companiesData;
+      this.dataSource.data = this.filteredCompanies;
     } else {
       // Filter companies based on the status name
       this.filteredCompanies = this.companiesData.filter(
         (company: any) => company.status?.name === status
       );
+      this.dataSource.data = this.filteredCompanies;
     }
     this.countClient = this.filteredCompanies.length;
   }
@@ -124,17 +145,22 @@ export class ProjectsComponent implements OnInit {
   }
 
   private getTableData(): void {
-    this.companyService.getAllCompanies().subscribe(
-      (response) => {
+    this.companyService.getAllCompanies().subscribe({
+      next: (response) => {
         console.log(response);
         this.companiesData = response;
         this.filteredCompanies = response;
+        this.dataSource = new MatTableDataSource(response);
         this.countClient = response.length;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching companies:', error);
-      }
-    );
+      },
+      complete: () => {
+        this.dataSource.sort = this.sort; // Assign sort after view initialization
+        this.dataSource.paginator = this.paginator;
+      },
+    });
   }
 
   onChange() {
@@ -147,84 +173,37 @@ export class ProjectsComponent implements OnInit {
 
   getDate(isoDate: string): string {
     const date = new Date(isoDate);
-    return new Intl.DateTimeFormat('en-GB').format(date); // Formats as DD/MM/YYYY
+    return new Intl.DateTimeFormat('en-GB').format(date);
   }
 
   onFilterSubmit() {
     if (this.filterForm.valid) {
-      console.log(this.filterForm.value);
       this.filterComp(this.filterForm.value);
     }
   }
 
-  public sortData(sort: Sort) {
-    const data = this.lstProject.slice();
+  searchData(target: any) {
+    const filterValue = target.value.trim().toLowerCase();
 
-    if (!sort.active || sort.direction === '') {
-      this.lstProject = data;
-    } else {
-      this.lstProject = data.sort((a, b) => {
-        const aValue = (a as never)[sort.active];
+    // Apply the filter to the dataSource
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+      const contact =
+        (data.employees?.[0]?.firstName || '') +
+        ' ' +
+        (data.employees?.[0]?.lastName || '');
+      const phone = data.employees?.[0]?.phone || '';
 
-        const bValue = (b as never)[sort.active];
-        return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
-      });
-    }
-  }
+      // Check if the filter value matches any relevant property (contact or phone)
+      return (
+        contact.toLowerCase().includes(filter) ||
+        phone.toLowerCase().includes(filter) ||
+        data.name.toLowerCase().includes(filter) ||
+        data.nafTitle.toLowerCase().includes(filter)
+      );
+    };
 
-  public searchData(value: string): void {
-    this.dataSource.filter = value.trim().toLowerCase();
-    this.lstProject = this.dataSource.filteredData;
-  }
-
-  public getMoreData(event: string): void {
-    if (event == 'next') {
-      this.currentPage++;
-      this.pageIndex = this.currentPage - 1;
-      this.limit += this.pageSize;
-      this.skip = this.pageSize * this.pageIndex;
-      this.getTableData();
-    } else if (event == 'previous') {
-      this.currentPage--;
-      this.pageIndex = this.currentPage - 1;
-      this.limit -= this.pageSize;
-      this.skip = this.pageSize * this.pageIndex;
-      this.getTableData();
-    }
-  }
-
-  public moveToPage(pageNumber: number): void {
-    this.currentPage = pageNumber;
-    this.skip = this.pageSelection[pageNumber - 1].skip;
-    this.limit = this.pageSelection[pageNumber - 1].limit;
-    if (pageNumber > this.currentPage) {
-      this.pageIndex = pageNumber - 1;
-    } else if (pageNumber < this.currentPage) {
-      this.pageIndex = pageNumber + 1;
-    }
-    this.getTableData();
-  }
-
-  public changePageSize(): void {
-    this.pageSelection = [];
-    this.limit = this.pageSize;
-    this.skip = 0;
-    this.currentPage = 1;
-    this.getTableData();
-  }
-
-  private calculateTotalPages(totalData: number, pageSize: number): void {
-    this.pageNumberArray = [];
-    this.totalPages = totalData / pageSize;
-    if (this.totalPages % 1 != 0) {
-      this.totalPages = Math.trunc(this.totalPages + 1);
-    }
-    for (let i = 1; i <= this.totalPages; i++) {
-      const limit = pageSize * i;
-      const skip = limit - pageSize;
-      this.pageNumberArray.push(i);
-      this.pageSelection.push({ skip: skip, limit: limit });
-    }
+    // Set the filter on the data source
+    this.dataSource.filter = filterValue;
   }
 
   getTranslation(key: string | null): string {
@@ -240,12 +219,10 @@ export class ProjectsComponent implements OnInit {
   }
 
   deleteCompany(company: any) {
-    console.log(company);
     this.companyService.deleteCompany(company?.id).subscribe({
       next: (res) => {
         this.hideModal('delete_client');
         this.getTableData();
-        console.log(res);
       },
       error: (err) => {
         console.error(err);
@@ -276,8 +253,8 @@ export class ProjectsComponent implements OnInit {
   filterComp(data: any) {
     this.companyService.companiesFiler(data).subscribe({
       next: (response) => {
-        console.log(response);
         this.filteredCompanies = response;
+        this.dataSource.data = response;
       },
       error: (error) => {
         console.error(error);
@@ -386,8 +363,6 @@ export class ProjectsComponent implements OnInit {
   }
 
   onClienSubmit() {
-    console.log(this.addClientForm.value);
-
     if (this.addClientForm.valid) {
       let data = this.addClientForm.value;
       this.userService.createCompany(data).subscribe(
@@ -415,8 +390,9 @@ export class ProjectsComponent implements OnInit {
       },
     });
   }
-}
-export interface pageSelection {
-  skip: number;
-  limit: number;
+
+  getContact(element: any): string {
+    const employee = element.employees?.[0];
+    return employee ? `${employee.firstName} ${employee.lastName}` : '';
+  }
 }

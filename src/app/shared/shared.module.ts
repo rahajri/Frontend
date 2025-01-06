@@ -49,6 +49,8 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ErrorHandlerService } from '../core/services/error-handler.service';
 import { authInterceptor } from '../interceptors/auth.interceptor';
 import { tokenInterceptor } from '../interceptors/token.interceptor';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -66,7 +68,6 @@ import { tokenInterceptor } from '../interceptors/token.interceptor';
     MatDatepickerModule,
     MatCardModule,
     MatSortModule,
-    MatTableModule,
     MatStepperModule,
     MatProgressBarModule,
     ClipboardModule,
@@ -74,6 +75,8 @@ import { tokenInterceptor } from '../interceptors/token.interceptor';
     MatCheckboxModule,
     ScrollingModule,
     MatIconModule,
+    MatMenuModule,
+    MatTableModule,
     PopoverModule.forRoot(),
     MatTooltipModule,
     ToastrModule.forRoot(),
@@ -101,6 +104,7 @@ import { tokenInterceptor } from '../interceptors/token.interceptor';
     MatNativeDateModule,
     MatToolbarModule,
     MatSliderModule,
+    MatMenuModule,
     MatCardModule,
     MatSortModule,
     MatTableModule,
@@ -135,9 +139,33 @@ import { tokenInterceptor } from '../interceptors/token.interceptor';
       provide: ErrorHandler,
       useClass: ErrorHandlerService,
     },
+    {
+      provide: MatPaginatorIntl,
+      useFactory: getFrenchPaginatorIntl,
+    },
     provideHttpClient(withInterceptors([authInterceptor, tokenInterceptor])),
     BsDatepickerConfig,
     provideHttpClient(withInterceptorsFromDi()),
   ],
 })
 export class SharedModule {}
+
+export function getFrenchPaginatorIntl() {
+  const paginatorIntl = new MatPaginatorIntl();
+  paginatorIntl.itemsPerPageLabel = 'Éléments par page'; // Change "Items per page" to French
+  paginatorIntl.nextPageLabel = 'Page suivante'; // Optionally change the next page label
+  paginatorIntl.previousPageLabel = 'Page précédente'; // Optionally change the previous page label
+  paginatorIntl.firstPageLabel = 'Première page'; // Optionally change the first page label
+  paginatorIntl.lastPageLabel = 'Dernière page'; // Optionally change the last page label
+  // Customizing the range (e.g., "1 – 5 of 16")
+  paginatorIntl.getRangeLabel = (
+    page: number,
+    pageSize: number,
+    length: number
+  ) => {
+    const start = page * pageSize + 1;
+    const end = Math.min((page + 1) * pageSize, length);
+    return `${start} – ${end} sur ${length}`; // "1 – 5 sur 16"
+  };
+  return paginatorIntl;
+}

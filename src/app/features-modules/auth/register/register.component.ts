@@ -103,10 +103,9 @@ export class RegisterComponent {
         email: formValues.email,
         password: formValues.password,
       };
-      console.log('daaata', data);
+
       this.userService.createUser(data).subscribe(
         (response) => {
-          console.log('User created successfully:', response);
           // Store the email in the service
           this.emailStorageService.setEmail(formValues.email);
           this.alertService.showAlert(

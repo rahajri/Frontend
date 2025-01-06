@@ -553,14 +553,14 @@ export class OnboardScreenComponent implements OnInit {
     const candidateData = new FormData();
     candidateData.append('userInformation', JSON.stringify(this.form.value));
     candidateData.append('cv', this.cvs[0]);
-    this.candidateService.createCandidate(candidateData).subscribe(
-      (response) => {
+    this.candidateService.createCandidate(candidateData).subscribe({
+      next: (response) => {
         this.router.navigate(['/freelancer/dashboards']);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error creating candidate:', error);
-      }
-    );
+      },
+    });
   }
 
   filterJobs(e: any): void {

@@ -59,7 +59,6 @@ export class EmployerheaderComponent {
 
   getUser(): void {
     const profile = this.authService.getUser();
-    console.log('response', profile);
     this.profile = profile;
     const { fullName, initials } = this.userService.getProfileDetails(profile);
     this.profileName = fullName;
@@ -93,9 +92,6 @@ export class EmployerheaderComponent {
     this.common.base.next(splitVal[1]);
     this.common.page.next(splitVal[2]);
     this.common.last.next(splitVal[3]);
-    console.log('base', this.base);
-    console.log('page', this.page);
-    console.log('last', this.last);
     if (
       events.url.split('/')[2] === 'developer' ||
       events.url.split('/')[2] === 'developer-details' ||

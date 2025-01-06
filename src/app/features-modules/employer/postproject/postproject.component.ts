@@ -443,7 +443,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
         },
       });
     } else {
-      console.log('Form is invalid');
+      console.error('Form is invalid');
     }
   }
 

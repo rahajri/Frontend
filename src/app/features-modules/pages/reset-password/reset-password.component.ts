@@ -64,7 +64,6 @@ export class ResetPasswordComponent {
     this.authService.checkPasswordToken(token).subscribe({
       next: (res) => {
         this.isTokenValid = true;
-        console.log(res);
       },
       error: (err) => {
         this.isTokenValid = false;
@@ -81,7 +80,7 @@ export class ResetPasswordComponent {
       const pass = this.resetForm.get('password')?.value;
       this.updatePassword(this.token, pass);
     } else {
-      console.log('Form is invalid');
+      console.error('Form is invalid');
     }
   }
 
@@ -109,7 +108,6 @@ export class ResetPasswordComponent {
       this.authService.resendResetPasswordEmail(this.token).subscribe({
         next: (res) => {
           this.emailResended = true;
-          console.log('Email ', res);
         },
         error: (err) => {
           console.error(err);
@@ -145,7 +143,6 @@ export class ResetPasswordComponent {
     if (token && password) {
       this.authService.resetPassword(token, password).subscribe({
         next: (res) => {
-          console.log(res);
           this.showSuccessModal();
           this.router.navigate(['/auth/login']);
         },

@@ -61,7 +61,6 @@ export class SidemenuComponent {
   getUser(): void {
     const profile = this.authService.getUser();
     this.profile = profile;
-    console.log('response', profile);
     const { fullName, initials } = this.userService.getProfileDetails(profile);
     this.profileName = fullName;
     this.initials = initials;

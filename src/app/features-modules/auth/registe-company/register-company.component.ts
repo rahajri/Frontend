@@ -127,8 +127,6 @@ export class RegisterCompanyComponent {
       const username = `${formValues.firstName}${randomSixDigitNumber}`;
       let data = this.signupForm.value;
 
-      //console.log('daaata', data);
-      //  console.log(this.signupForm.value , this.form.value);
       this.userService.createCompany(data).subscribe(
         (response) => {
           // Store the email in the service
@@ -193,65 +191,6 @@ export class RegisterCompanyComponent {
     );
   }
 
-  /* onCompanySelect(event: any) {
-    const selectedSiret = (event.target as HTMLSelectElement).value;
-    this.companyService.checkSiretExists(selectedSiret).subscribe(
-      (response) => {
-        console.log(response);
-        if(response !== true)
-        this.companyService.getCompanyBySiret(selectedSiret).subscribe(
-          (company) => {
-            if (company) {
-              this.selectedCompany = company;
-    
-              // Update company-related fields
-              this.signupForm.patchValue({
-                company: {
-                  name: company.denominationUniteLegale,
-                  category: company.categorieEntreprise,
-                  workforce: company.trancheEffectifsUniteLegale
-                }
-              });
-    
-              // Call to update department and region based on the city
-             // this.getDepartmentRegion(company.libelleCommuneEtablissement);
-    
-              // Fetch NAF details and update fields
-              this.companyService.getNafByCompany(naf).subscribe(
-                (naf) => {
-                  if (naf) {
-                    this.selectedNaf = naf;
-                    this.signupForm.patchValue({
-                      company: {
-                        nafTitle: naf.INTITULÉS,
-                        naf: naf.NAF732
-                      }
-                    });
-                  } else {
-                    console.log('No matching NAF found for the company\'s activity');
-                  }
-                },
-                (error) => {
-                  console.error('Error fetching NAF details:', error);
-                }
-              );
-            } else {
-              console.log('No matching company found for SIRET:', selectedSiret);
-            }
-          },
-          (error) => {
-            console.error('Error fetching company details:', error);
-          }
-        );
-        // Handle success, e.g., show company details or proceed further
-      },
-      (error) => {
-        console.error('Siret does not exist or error occurred:', error);
-        // Handle error, e.g., show a message to the user
-      }
-    );
-   
-  }*/
 
   getDepartmentRegion(city: string): void {
     this.locationService.getcityInfo(city).subscribe(
