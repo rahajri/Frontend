@@ -7,33 +7,32 @@ import { environment } from 'src/environments/environment.prod';
   providedIn: 'root',
 })
 export class CandidateService {
-  private baseUrl = `${environment.apiUrl}`;
+  private baseUrl = `${environment.apiUrl}/candidates`;
 
   constructor(private http: HttpClient) {}
 
   createCandidate(candidateData: FormData): Observable<any> {
-    const token = localStorage.getItem('token'); // Get the token from local storage
-    const url = `${this.baseUrl}/candidates/profile`;
+    const url = `${this.baseUrl}/profile`;
 
     return this.http.post(url, candidateData);
   }
 
   checkCondidate(email: string): Observable<any> {
-    const token = localStorage.getItem('token'); // Get the token from local storage
-    const url = `${this.baseUrl}/candidates/exist`;
+    const url = `${this.baseUrl}/exist`;
 
     return this.http.post(url, email);
   }
 
   getCandidate(email: string): Observable<any> {
-    const token = localStorage.getItem('token'); // Retrieve the token from local storage
-    const url = `${this.baseUrl}/candidates/candidate`;
-
-    if (!token) {
-      throw new Error('Authorization token is missing'); // Guard clause to prevent API call without a token
-    }
+    const url = `${this.baseUrl}/candidate`;
 
     const body = { email };
+
+    return this.http.post<any>(url, body);
+  }
+
+  updateCandidateProfile(candidateId: string, body: any): Observable<any> {
+    const url = `${this.baseUrl}/${candidateId}/profile`;
 
     return this.http.post<any>(url, body);
   }

@@ -322,10 +322,26 @@
                             >
                             <input
                               id="skillName-{{ i }}"
-                              formControlName="skillName"
+                              type="text"
                               class="form-control"
-                              placeholder="Saisi une compétence"
+                              placeholder="Saisir une competance"
+                              [attr.autocomplete]="'off'"
+                              formControlName="skillName"
+                              (input)="filterSkills($event.target, i)"
                             />
+                            <!-- Autocomplete suggestions -->
+                            <ul
+                              class="autocomplete-list"
+                              *ngIf="filteredSkills.length && index === i"
+                            >
+                              <li
+                                *ngFor="let skill of filteredSkills"
+                                (click)="selectSkill(skill, i)"
+                                class="autocomplete-item"
+                              >
+                                {{ skill.name }}
+                              </li>
+                            </ul>
                           </div>
                         </div>
 
@@ -350,16 +366,6 @@
                               </option>
                             </select>
                             <div class="new-addd">
-                              <!-- Supprimer button visible except for the first skill -->
-                              <a
-                                class="remove_row"
-                                (click)="removeSkills(i)"
-                                tabindex="0"
-                                *ngIf="skillsArray.controls.length > 1"
-                              >
-                                Supprimer
-                              </a>
-
                               <!-- Add New Skill button visible only for the last skill -->
                               <a
                                 class="add-new"
@@ -369,6 +375,15 @@
                               >
                                 <i class="feather icon-plus-circle me-1"></i>
                                 Ajouter
+                              </a>
+                              <!-- Supprimer button visible except for the first skill -->
+                              <a
+                                class="remove_row"
+                                (click)="removeSkills(i)"
+                                tabindex="0"
+                                *ngIf="skillsArray.controls.length > 1"
+                              >
+                                Supprimer
                               </a>
                             </div>
                           </div>
@@ -699,13 +714,31 @@
                         <div class="col-md-6">
                           <div class="input-block">
                             <label for="language" class="form-label"
-                              >Titre</label
+                              >Language</label
                             >
                             <input
                               type="text"
                               class="form-control"
+                              placeholder="Saisir une langue"
+                              [attr.autocomplete]="'off'"
                               formControlName="name"
+                              (input)="filterLanguages($event.target, i)"
                             />
+                            <!-- Autocomplete suggestions -->
+                            <ul
+                              class="autocomplete-list"
+                              *ngIf="
+                                filteredLanguages.length && activeIndex === i
+                              "
+                            >
+                              <li
+                                *ngFor="let language of filteredLanguages"
+                                (click)="selectLanguage(language, i)"
+                                class="autocomplete-item"
+                              >
+                                {{ language.name }}
+                              </li>
+                            </ul>
                           </div>
                         </div>
                         <div class="col-md-6">

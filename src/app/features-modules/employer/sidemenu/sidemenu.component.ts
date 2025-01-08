@@ -59,11 +59,17 @@ export class SidemenuComponent {
   }
 
   getUser(): void {
-    const profile = this.authService.getUser();
-    this.profile = profile;
-    const { fullName, initials } = this.userService.getProfileDetails(profile);
-    this.profileName = fullName;
-    this.initials = initials;
+    this.userService.getProfile().subscribe({
+      next: (profile) => {
+        this.profile = profile;
+        const { fullName, initials } = this.userService.getProfileDetails(
+          this.profile
+        );
+        this.profileName = fullName;
+        this.initials = initials;
+      },
+      error: (err) => console.error(err),
+    });
   }
 
   logout(): void {

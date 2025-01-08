@@ -106,11 +106,17 @@ export class SidemenuComponent implements OnInit {
   }
 
   getUser(): void {
-    const profile = this.auth.getUser();
-    this.profile = profile;
-    const { fullName, initials } = this.userService.getProfileDetails(profile);
-    this.profileName = fullName;
-    this.initials = initials;
+    this.userService.getProfile().subscribe({
+      next: (profile) => {
+        this.profile = profile;
+        const { fullName, initials } = this.userService.getProfileDetails(
+          this.profile
+        );
+        this.profileName = fullName;
+        this.initials = initials;
+      },
+      error: (err) => console.error(err),
+    });
   }
 
   public logOut(): void {

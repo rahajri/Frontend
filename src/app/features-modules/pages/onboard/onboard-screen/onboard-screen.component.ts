@@ -18,10 +18,20 @@ import { LocationService } from 'src/app/core/services/location.service';
 import { JobService } from 'src/app/core/services/job.service';
 import { CandidateService } from 'src/app/core/services/condidate.service';
 import { Router } from '@angular/router';
+import { LanguageService } from 'src/app/core/services/language.service';
+import { SkillService } from 'src/app/core/services/skill.service';
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 interface data {
   value: string;
+}
+interface Language {
+  id: string;
+  name: string;
+}
+interface Skill {
+  id: string;
+  name: string;
 }
 @Component({
   selector: 'app-onboard-screen',
@@ -56,11 +66,10 @@ export class OnboardScreenComponent implements OnInit {
   filteredJobs: any[] = [];
   jobNotExist = true;
 
-  username: string = 'aicha';
   cvs: File[] = [];
   form: FormGroup;
 
-  skillLevels = ['Débutant', 'Intermédiaire', 'Avanvé'];
+  skillLevels = ['Basique', 'Professionnel', 'Avancé'];
 
   selectedListActivities = [
     { value: 'Activity 1' },
@@ -78,6 +87,12 @@ export class OnboardScreenComponent implements OnInit {
   cities: any[] = [];
   jobs: any[] = [];
   subActivities: any[] = [];
+  filteredLanguages: Language[] = [];
+  dbLanguages: any[] = [];
+  activeIndex: number = 0;
+  filteredSkills: Skill[] = [];
+  dbSkills: any[] = [];
+  index: number = 0;
 
   constructor(
     private datePipe: DatePipe,
@@ -87,6 +102,8 @@ export class OnboardScreenComponent implements OnInit {
     private locationService: LocationService,
     private jobService: JobService,
     private candidateService: CandidateService,
+    private languageService: LanguageService,
+    private skillService: SkillService,
     private router: Router
   ) {
     this.translate.setDefaultLang(environment.defaultLanguage);
@@ -121,6 +138,8 @@ export class OnboardScreenComponent implements OnInit {
     this.getCodeZipes();
     this.getJobs();
     this.getSubActivities();
+    this.getSSkillsFromDb();
+    this.getLanguagesFromDb();
   }
 
   createSkill(): FormGroup {
@@ -128,6 +147,71 @@ export class OnboardScreenComponent implements OnInit {
       skillName: [''], // Default empty value
       level: [''], // Default empty value
     });
+  }
+
+  getSSkillsFromDb() {
+    this.skillService.getSkills().subscribe({
+      next: (res) => {
+        this.dbSkills = res;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  filterSkills(e: any, i: number) {
+    this.index = i;
+    let query = e.value;
+    if (!query) {
+      this.filteredSkills = this.dbSkills;
+    } else {
+      this.filteredSkills = this.dbSkills.filter((skill) =>
+        skill.name.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+  }
+
+  selectSkill(skill: any, index: number) {
+    const skillsArray = this.form.get('skills') as FormArray;
+    const skillForm = skillsArray.at(index) as FormGroup;
+
+    if (skillForm) {
+      skillForm.patchValue({ name: skill.name });
+    }
+
+    this.filteredSkills = [];
+  }
+
+  getLanguagesFromDb() {
+    this.languageService.getLanguages().subscribe({
+      next: (res) => {
+        this.dbLanguages = res;
+      },
+      error: (err) => {},
+    });
+  }
+
+  filterLanguages(e: any, i: number) {
+    this.activeIndex = i;
+    let query = e.value;
+    if (!query) {
+      this.filteredLanguages = this.dbLanguages;
+    } else {
+      this.filteredLanguages = this.dbLanguages.filter((lang) =>
+        lang.name.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+  }
+  selectLanguage(lang: any, index: number) {
+    const languagesArray = this.form.get('languages') as FormArray;
+    const languageForm = languagesArray.at(index) as FormGroup;
+
+    if (languageForm) {
+      languageForm.patchValue({ name: lang.name });
+    }
+
+    this.filteredLanguages = [];
   }
 
   createEducation(): FormGroup {

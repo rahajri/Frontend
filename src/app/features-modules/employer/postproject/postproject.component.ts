@@ -51,6 +51,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   jobForm: FormGroup;
   filteredCities: any[] = [];
   filteredLanguages: Language[] = [];
+  dbLanguages: any[] = [];
   cityInputSub: Subscription | undefined;
   jobs: any[] = [];
   subActivities: any[] = [];
@@ -64,7 +65,6 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   cityIsSelected = false;
   selectedSkills: any[] = [];
   languages: any[] = [];
-  dbLanguages: any[] = [];
   selectedLanguageList: data[] = [
     { value: 'Basique' },
     { value: 'Professionnel' },

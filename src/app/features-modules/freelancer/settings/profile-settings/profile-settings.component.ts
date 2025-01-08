@@ -10,9 +10,21 @@ import {
 import { Router } from '@angular/router';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { CandidateService } from 'src/app/core/services/condidate.service';
+import { LanguageService } from 'src/app/core/services/language.service';
+import { SkillService } from 'src/app/core/services/skill.service';
 interface data {
   value: string;
 }
+declare var bootstrap: any;
+interface Language {
+  id: string;
+  name: string;
+}
+interface Skill {
+  id: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-profile-settings',
   templateUrl: './profile-settings.component.html',
@@ -56,7 +68,13 @@ export class ProfileSettingsComponent implements OnInit {
     },
   };
   form: FormGroup;
-  locationForm: FormGroup;
+  // locationForm: FormGroup;
+  filteredLanguages: Language[] = [];
+  dbLanguages: any[] = [];
+  activeIndex: number = 0;
+  filteredSkills: Skill[] = [];
+  dbSkills: any[] = [];
+  index: number = 0;
 
   removeDatas(index: number) {
     this.datas[index] = !this.datas[index];
@@ -65,16 +83,17 @@ export class ProfileSettingsComponent implements OnInit {
     private router: Router,
     private datePipe: DatePipe,
     private fb: FormBuilder,
-
+    private languageService: LanguageService,
+    private skillService: SkillService,
     private candidateService: CandidateService
   ) {
-    this.locationForm = new FormGroup({
-      postalCode: new FormControl(''),
-      city: new FormControl(''),
-      department: new FormControl(''),
-      region: new FormControl(''),
-      adresse: new FormControl(''),
-    });
+    // this.locationForm = new FormGroup({
+    //   postalCode: new FormControl(''),
+    //   city: new FormControl(''),
+    //   department: new FormControl(''),
+    //   region: new FormControl(''),
+    //   adresse: new FormControl(''),
+    // });
     this.form = this.fb.group({
       personalDetails: this.fb.group({
         lastName: [''],
@@ -83,8 +102,8 @@ export class ProfileSettingsComponent implements OnInit {
         phone: [''],
         email: [''],
       }),
-      location: this.locationForm, // Add location form group here
-      activities: this.fb.array([this.createActivity()]), // Initialize with one activity form group
+      // location: this.locationForm, // Add location form group here
+      // activities: this.fb.array([this.createActivity()]), // Initialize with one activity form group
 
       skills: this.fb.array([this.createSkill()]), // Ensure skills are initialized
 
@@ -95,10 +114,21 @@ export class ProfileSettingsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getCondidature();
+    this.getLanguagesFromDb();
+    this.getSSkillsFromDb();
   }
 
-  navigation() {
-    console.log(this.form.value);
+  onSubmit() {
+    const profileData = this.form.value;
+    this.candidateService
+      .updateCandidateProfile(this.candidate?.id, profileData)
+      .subscribe({
+        next: (res) => {
+          this.getCondidature();
+          this.showSuccessModal();
+        },
+        error: (err) => {},
+      });
     // this.router.navigate([routes.freelancerprofile]);
   }
 
@@ -115,23 +145,79 @@ export class ProfileSettingsComponent implements OnInit {
       return;
     }
 
-    this.candidateService.getCandidate(email).subscribe(
-      (response) => {
-        console.log('Candidate details:', response);
-
+    this.candidateService.getCandidate(email).subscribe({
+      next: (response) => {
         this.patchFormData(response);
-        // Patch the response to the candidate form object
-        this.candidate = {
-          ...response,
-          birthDate: response.birthDate || '', // Handle null or missing birthDate
-          profileTitle: response.profileTitle || '',
-          role: response.role || '',
-        };
+        this.candidate = response;
       },
-      (error) => {
-        console.error('Error fetching candidate details:', error);
-      }
-    );
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+  getSSkillsFromDb() {
+    this.skillService.getSkills().subscribe({
+      next: (res) => {
+        this.dbSkills = res;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  filterSkills(e: any, i: number) {
+    this.index = i;
+    let query = e.value;
+    if (!query) {
+      this.filteredSkills = this.dbSkills;
+    } else {
+      this.filteredSkills = this.dbSkills.filter((skill) =>
+        skill.name.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+  }
+
+  selectSkill(skill: any, index: number) {
+    const skillsArray = this.form.get('skills') as FormArray;
+    const skillForm = skillsArray.at(index) as FormGroup;
+
+    if (skillForm) {
+      skillForm.patchValue({ name: skill.name });
+    }
+
+    this.filteredSkills = [];
+  }
+
+  getLanguagesFromDb() {
+    this.languageService.getLanguages().subscribe({
+      next: (res) => {
+        this.dbLanguages = res;
+      },
+      error: (err) => {},
+    });
+  }
+
+  filterLanguages(e: any, i: number) {
+    this.activeIndex = i;
+    let query = e.value;
+    if (!query) {
+      this.filteredLanguages = this.dbLanguages;
+    } else {
+      this.filteredLanguages = this.dbLanguages.filter((lang) =>
+        lang.name.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+  }
+  selectLanguage(lang: any, index: number) {
+    const languagesArray = this.form.get('languages') as FormArray;
+    const languageForm = languagesArray.at(index) as FormGroup;
+
+    if (languageForm) {
+      languageForm.patchValue({ name: lang.name });
+    }
+
+    this.filteredLanguages = [];
   }
 
   createSkill(): FormGroup {
@@ -154,7 +240,7 @@ export class ProfileSettingsComponent implements OnInit {
   createExperience(): FormGroup {
     return this.fb.group({
       companyName: ['', Validators.required],
-      position: ['', Validators.required],
+      level: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
     });
@@ -186,35 +272,42 @@ export class ProfileSettingsComponent implements OnInit {
   removeSkills(index: number) {
     this.skillsArray.removeAt(index); // Use removeAt method to remove from FormArray
   }
+
   patchFormData(response: any) {
-    // Patch personal details
     this.form.get('personalDetails')?.patchValue({
-      lastName: response['Nom'] || response['nom'] || '',
-      firstName: response['Prenom'] || response['prenom'] || '',
-      jobTitle:
-        response['Titre du poste ou de la mission'] ||
-        response['titre_poste'] ||
-        '',
-      birthday:
-        response['Date de naissance'] || response['Date de naissance'] || '',
-      phoneNumber: response['Téléphone'] || response['telephone'] || '',
-      emailAddress: response['E-mail'] || response['email'] || '',
+      lastName: response?.lastName || '',
+      firstName: response?.firstName || '',
+      profileTitle: response?.profileTitle || '',
+      phone: response?.phone || '',
+      email: response?.email || '',
     });
 
     // Patch skills
-    const skills: string[] = response['skills']; // Extract skills array
-    this.skillsArray.clear(); // Clear existing skills
+    const skills: any[] = response['candidateSkills'] || [];
+    this.skillsArray.clear();
 
-    // Iterate through the skills and create a form group for each skill
-    skills?.forEach((skillName: any) => {
+    skills.forEach((skill: any) => {
       this.skillsArray.push(
         this.fb.group({
-          skillName: [skillName?.name || ''], // Add skill name to form control
-          level: [''], // Initialize level as empty or provide a default value
+          skillName: [skill?.skill?.name || ''], // Add skill name to form control
+          level: [skill?.level || ''], // Add level if available
+        })
+      );
+    });
+    // Patch languages
+    const languages: any[] = response['candidateLanguages'] || [];
+    this.languagesArray.clear();
+
+    languages.forEach((lang: any) => {
+      this.languagesArray.push(
+        this.fb.group({
+          name: [lang?.language?.name || ''], // Add skill name to form control
+          level: [lang?.level || ''], // Add level if available
         })
       );
     });
 
+    // Patch education (formations)
     const educationData = response['formations'] || [];
     this.educationArray.clear();
 
@@ -231,90 +324,27 @@ export class ProfileSettingsComponent implements OnInit {
           universityName: [
             education['institution'] || education['Délivrée par'] || '',
           ],
-          startDate: [
-            this.formatDateString(
-              education['Date début'] || education['startDate']
-            ),
-          ],
-          endDate: [
-            this.formatDateString(
-              education['Date fin'] || education['endDate']
-            ),
-          ],
-        })
-      );
-    });
-
-    const skillsData = response['candidateSkills'] || [];
-    this.skillsArray.clear();
-
-    skillsData.forEach((candidateSkill: any) => {
-      this.skillsArray.push(
-        this.fb.group({
-          skillName: candidateSkill['skill']['name'] || '',
-          level: candidateSkill['level'] || '',
-        })
-      );
-    });
-
-    const languageData = response['candidateLanguages'] || [];
-    this.languageArray.clear();
-
-    languageData.forEach((language: any) => {
-      this.languageArray.push(
-        this.fb.group({
-          name: [language['language']['name'] || ''],
-          level: [language['level'] || ''],
+          startDate: education['startDate'] || '',
+          endDate: education['endDate'] || '',
+          description: [education['description'] || ''],
         })
       );
     });
 
     // Patch experiences
-    const experiences =
-      response['experiences'] || response['Expériences professionnelles'];
+    const experienceData = response['experiences'] || [];
     this.experiencesArray.clear();
-
-    experiences.forEach((exp: any) => {
-      let endDate = exp['endDate'] || exp['Date fin'] || '';
-
-      // Check if endDate is defined and if the day is 31
-      if (endDate) {
-        const endDateObj = new Date(endDate);
-        if (endDateObj.getDate() === 31) {
-          // Set the day to 1
-          endDateObj.setDate(1);
-          endDate = endDateObj.toISOString().split('T')[0]; // Format back to YYYY-MM-DD
-        }
-      }
-
+    experienceData.forEach((experience: any) => {
       this.experiencesArray.push(
         this.fb.group({
-          companyName: [exp['companyName'] || exp['entreprise'] || ''],
-          position: [exp['jobTitle'] || ''],
-          location: [exp['Lieu'] || ''],
-          startDate: [
-            this.formatDateString(exp['Date début'] || exp['startDate']),
-          ],
-          endDate: [this.formatDateString(exp['Date fin'] || exp['endDate'])],
+          companyName: [experience['companyName'] || ''],
+          level: [experience['level'] || ''],
+          startDate: experience['startDate'] || '',
+          endDate: experience['endDate'] || '',
+          description: [experience['description'] || ''],
         })
       );
     });
-  }
-
-  formatDateString(dateStr: string | undefined): string | null {
-    if (!dateStr) return null;
-
-    const dateParts = dateStr.split('/');
-    if (dateParts.length !== 3) return null; // Ensure date is in DD/MM/YYYY format
-
-    const day = +dateParts[0];
-    const month = +dateParts[1] - 1; // Months are 0-based in JavaScript Date
-    const year = +dateParts[2];
-
-    const formattedDate = new Date(year, month, day);
-    if (isNaN(formattedDate.getTime())) return null; // Check if date is valid
-
-    return this.datePipe.transform(formattedDate, 'dd/MM/yyyy'); // Format to "DD/MM/YYYY"
   }
 
   // Add a new experience to the array
@@ -369,7 +399,7 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   addActivity() {
-    this.activities.insert(0, this.createActivity()); // Insert at the first position (index 0)
+    this.activities.insert(0, this.createActivity());
   }
 
   removeActivity(index: number) {
@@ -389,5 +419,16 @@ export class ProfileSettingsComponent implements OnInit {
   }
   get activities(): FormArray {
     return this.form.get('activities') as FormArray;
+  }
+
+  showSuccessModal() {
+    const modalElement = document.getElementById('data-changed');
+    if (modalElement) {
+      modalElement.setAttribute('aria-hidden', 'false');
+      modalElement.style.display = 'block';
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+      modalElement.focus();
+    }
   }
 }
