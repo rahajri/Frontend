@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/core/services/common/common.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StatusService } from 'src/app/core/services/status.service';
 import * as lodash from 'lodash';
+import { environment } from 'src/environments/environment.prod';
 
 declare var bootstrap: any;
 
@@ -28,6 +29,9 @@ export class CompanyComponent {
   initialStatusName: string = '';
   emailHasChanged = false;
   isRequestInProgress = false;
+  coverUrl: string = '';
+  imgUrl: string = '';
+  baseUrl = environment.apiUrl;
 
   constructor(
     private fb: FormBuilder,
@@ -46,7 +50,7 @@ export class CompanyComponent {
         null,
         [
           Validators.pattern(
-            /^(https?:\/\/)?((www|m|web)\.)?facebook\.com\/(profile\.php\?id=\d+|[A-Za-z0-9_.-]+)\/?$/i
+            /^(https?:\/\/)?((www|m|web)\.)?facebook\.com\/(profile\.php\?id=\d+|[A-Za-z0-9_.-]+)(\/.*)?$/i
           ),
         ],
       ],
@@ -54,7 +58,7 @@ export class CompanyComponent {
         null,
         [
           Validators.pattern(
-            /^(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9._]+\/?$/i
+            /^(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9._]+(\/.*)?$/i
           ),
         ],
       ],
@@ -62,11 +66,13 @@ export class CompanyComponent {
         null,
         [
           Validators.pattern(
-            /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9-]+\/?$/i
+            /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|company|school|showcase)\/[A-Za-z0-9-]+(\/.*)?$/i
           ),
         ],
       ],
       userId: [''],
+      coverImage: [null],
+      image: [null],
     });
   }
   get firstName() {
@@ -101,7 +107,7 @@ export class CompanyComponent {
       next: (res) => {
         this.allCompanyStatus = res;
       },
-      error: (err) => {},
+      error: (err) => {console.error(err);},
     });
   }
 
@@ -111,7 +117,9 @@ export class CompanyComponent {
         .updateCompanyStatus(this.companyId, this.selectedStatusId)
         .subscribe({
           next: (response) => {},
-          error: (error) => {},
+          error: (err) => {
+            console.error(err);
+          },
         });
     }
   }
@@ -120,6 +128,8 @@ export class CompanyComponent {
     this.companyService.getCompanyDetails(this.companyId).subscribe({
       next: (res) => {
         this.company = res;
+        this.coverUrl = this.baseUrl + res.coverImage;
+        this.imgUrl = this.baseUrl + res.image;
         this.selectedStatusId = res?.status?.id;
         this.initialStatusId = res?.status?.id;
         this.selectedStatusName = res?.status?.name;
@@ -136,7 +146,7 @@ export class CompanyComponent {
         };
         this.companyForm.patchValue(this.initialFormValues);
       },
-      error: (err) => {},
+      error: (err) => {console.error(err);},
     });
   }
 
@@ -203,7 +213,24 @@ export class CompanyComponent {
 
   private updateCompany(companyId: string, values: any) {
     this.isRequestInProgress = true;
-    this.companyService.updateCompany(companyId, values).subscribe({
+    console.log(values);
+    // Convert values to FormData
+    const formData = new FormData();
+    Object.keys(values).forEach((key) => {
+      if (key === 'coverImage' || key === 'image') {
+        console.log(key);
+        if (values[key] instanceof File) {
+          formData.append('files', values[key], key);
+        }
+      } else if (key === 'emailHasChanged') {
+        // Convert to boolean explicitly
+        formData.append(key, values[key] ? 'true' : 'false');
+      } else {
+        formData.append(key, values[key]);
+      }
+    });
+
+    this.companyService.updateCompany(companyId, formData).subscribe({
       next: () => {
         this.showSuccessModal();
         this.initialFormValues = values;
@@ -237,6 +264,38 @@ export class CompanyComponent {
       setTimeout(() => {
         modal.hide();
       }, 3000);
+    }
+  }
+
+  onCoverChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      var reader = new FileReader();
+      const file = input.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = (e: any) => {
+        this.coverUrl = e.target.result;
+      };
+      this.companyForm.patchValue({
+        coverImage: file, // Add this to the form data
+      });
+      this.companyForm.get('coverImage')?.updateValueAndValidity(); // Mark the control as updated
+    }
+  }
+
+  onImageChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      var reader = new FileReader();
+      const file = input.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = (e: any) => {
+        this.imgUrl = e.target.result;
+      };
+      this.companyForm.patchValue({
+        image: file, // Add this to the form data
+      });
+      this.companyForm.get('image')?.updateValueAndValidity(); // Mark the control as updated
     }
   }
 

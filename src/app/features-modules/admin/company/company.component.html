@@ -19,11 +19,11 @@
 
     <div class="profile-cover">
       <div class="profile-cover-wrap">
-        <!-- <img
+        <img
           class="profile-cover-img"
-          src="assets/img/avatar/avatar-07.jpg"
-          alt="Profile Cover"
-        /> -->
+          [src]="coverUrl"
+          alt="Profil Couverture"
+        />
 
         <!-- Custom File Cover -->
         <div class="cover-content">
@@ -32,13 +32,17 @@
               type="file"
               class="custom-file-btn-input"
               id="cover_upload"
+              (change)="onCoverChange($event)"
+              accept="image/*"
             />
             <label
               class="custom-file-btn-label btn btn-sm btn-white"
               for="cover_upload"
             >
               <i class="fas fa-camera"></i>
-              <span class="d-none d-sm-inline-block ms-1">Update Cover</span>
+              <span class="d-none d-sm-inline-block ms-1"
+                >Mettre à jour la couverture</span
+              >
             </label>
           </div>
         </div>
@@ -48,12 +52,13 @@
 
     <div class="text-center mb-5">
       <label class="avatar avatar-xxl profile-cover-avatar" for="avatar_upload">
-        <!-- <img
-          class="avatar-img"
-          src="assets/img/avatar/avatar-07.jpg"
-          alt="Profile Image"
-        /> -->
-        <input type="file" id="avatar_upload" />
+        <img class="avatar-img" [src]="imgUrl" alt="Profile Image" />
+        <input
+          type="file"
+          id="avatar_upload"
+          (change)="onImageChange($event)"
+          accept="image/*"
+        />
         <span class="avatar-edit">
           <i class="feather icon-edit avatar-uploader-icon shadow-soft"></i>
         </span>

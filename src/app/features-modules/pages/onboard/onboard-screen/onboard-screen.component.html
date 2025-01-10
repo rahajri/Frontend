@@ -368,7 +368,7 @@
                             <div class="new-addd">
                               <!-- Add New Skill button visible only for the last skill -->
                               <a
-                                class="add-new"
+                                class="add-new me-2"
                                 (click)="addSkillManually()"
                                 *ngIf="i === skillsArray.controls.length - 1"
                                 tabindex="0"
@@ -577,7 +577,7 @@
                             <!-- Show 'Add New' button for all except the last entry -->
                             <a
                               *ngIf="i === educationArray.length - 1"
-                              class="add-new"
+                              class="add-new me-2"
                               (click)="addEducation()"
                               tabindex="0"
                             >
@@ -680,7 +680,7 @@
                           <div class="new-addd">
                             <a
                               *ngIf="i === experiencesArray.length - 1"
-                              class="add-new"
+                              class="add-new me-2"
                               (click)="addExperience()"
                               tabindex="0"
                               ><i class="feather icon-plus-circle me-1"></i>

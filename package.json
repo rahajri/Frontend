@@ -31,6 +31,7 @@
     "apexcharts": "^4.3.0",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.2",
+    "express": "^4.21.2",
     "feather-icons": "^4.29.1",
     "jquery": "^3.7.1",
     "jwt-decode": "^4.0.0",
