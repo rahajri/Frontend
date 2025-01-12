@@ -51,6 +51,7 @@ import { authInterceptor } from '../interceptors/auth.interceptor';
 import { tokenInterceptor } from '../interceptors/token.interceptor';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorIntl } from '@angular/material/paginator';
+import { UploadWidgetModule } from '@bytescale/upload-widget-angular';
 
 @NgModule({
   imports: [
@@ -90,6 +91,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
     BsDatepickerModule.forRoot(),
     CarouselModule,
     LightgalleryModule,
+    UploadWidgetModule,
     TimepickerModule.forRoot(),
   ],
   exports: [
@@ -129,6 +131,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
     CarouselModule,
     LightgalleryModule,
     TimepickerModule,
+    UploadWidgetModule,
   ],
   providers: [
     {

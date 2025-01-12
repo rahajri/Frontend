@@ -12,6 +12,10 @@ import { routes } from 'src/app/core/helpers/routes/routes';
 import { CandidateService } from 'src/app/core/services/condidate.service';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { SkillService } from 'src/app/core/services/skill.service';
+import {
+  UploadWidgetConfig,
+  UploadWidgetResult,
+} from '@bytescale/upload-widget';
 interface data {
   value: string;
 }
@@ -59,6 +63,7 @@ export class ProfileSettingsComponent implements OnInit {
     phone: '',
     birthDate: '',
     profileTitle: '',
+    image: '',
     role: '',
     candidateSkills: {
       level: '',
@@ -75,6 +80,45 @@ export class ProfileSettingsComponent implements OnInit {
   filteredSkills: Skill[] = [];
   dbSkills: any[] = [];
   index: number = 0;
+  imgUrl: string = '';
+  options: UploadWidgetConfig = {
+    apiKey: 'public_W142iwN3CCDgRqj4wAoMwkJ13sZY',
+    locale: {
+      addAnotherFileBtn: 'Ajouter un autre fichier...',
+      addAnotherImageBtn: 'Ajouter une autre image...',
+      cancelBtn: 'annuler',
+      cancelBtnClicked: 'annulé',
+      cancelPreviewBtn: 'Annuler',
+      continueBtn: 'Continuer',
+      cropBtn: 'Recadrer',
+      customValidationFailed: 'Échec de la validation du fichier.',
+      doneBtn: 'Terminé',
+      fileSizeLimitPrefix: 'Limite de taille de fichier :',
+      finishBtn: 'Terminer',
+      finishBtnIcon: true,
+      imageCropNumberPrefix: 'Image',
+      maxFilesReachedPrefix: 'Nombre maximum de fichiers :',
+      maxImagesReachedPrefix: "Nombre maximum d'images :",
+      orDragDropFile: '...ou glisser-déposer un fichier.',
+      orDragDropFileMulti: '...ou glisser-déposer des fichiers.',
+      orDragDropImage: '...ou glisser-déposer une image.',
+      orDragDropImageMulti: '...ou glisser-déposer des images.',
+      processingFile: 'Traitement du fichier...',
+      removeBtn: 'supprimer',
+      removeBtnClicked: 'supprimé',
+      submitBtnError: 'Erreur !',
+      submitBtnLoading: 'Veuillez patienter...',
+      unsupportedFileType: 'Type de fichier non supporté.',
+      uploadFileBtn: 'Téléverser un fichier',
+      uploadFileMultiBtn: 'Téléverser des fichiers',
+      uploadImageBtn: 'Téléverser une image',
+      uploadImageMultiBtn: 'Téléverser des images',
+      xOfY: 'sur',
+    },
+    maxFileCount: 1,
+  };
+
+  uploadedFileUrl: string | undefined = undefined;
 
   removeDatas(index: number) {
     this.datas[index] = !this.datas[index];
@@ -101,6 +145,7 @@ export class ProfileSettingsComponent implements OnInit {
         profileTitle: [''],
         phone: [''],
         email: [''],
+        image: [null],
       }),
       // location: this.locationForm, // Add location form group here
       // activities: this.fb.array([this.createActivity()]), // Initialize with one activity form group
@@ -117,6 +162,13 @@ export class ProfileSettingsComponent implements OnInit {
     this.getLanguagesFromDb();
     this.getSSkillsFromDb();
   }
+
+  onComplete = (files: UploadWidgetResult[]) => {
+    if (files.length > 0) {
+      this.uploadedFileUrl = files[0]?.fileUrl; // Get the uploaded file URL
+      this.form.get('personalDetails.image')?.setValue(this.uploadedFileUrl); // Set the URL in the form
+    }
+  };
 
   onSubmit() {
     const profileData = this.form.value;
@@ -155,6 +207,18 @@ export class ProfileSettingsComponent implements OnInit {
       },
     });
   }
+
+  // onImageChange(event: Event): void {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files && input.files.length > 0) {
+  //     var reader = new FileReader();
+  //     const file = input.files[0];
+  //     reader.readAsDataURL(file);
+  //     reader.onload = (e: any) => {
+  //       this.imgUrl = e.target.result;
+  //     };
+  //   }
+  // }
   getSSkillsFromDb() {
     this.skillService.getSkills().subscribe({
       next: (res) => {
@@ -281,6 +345,7 @@ export class ProfileSettingsComponent implements OnInit {
       phone: response?.phone || '',
       email: response?.email || '',
     });
+    this.uploadedFileUrl = response.image;
 
     // Patch skills
     const skills: any[] = response['candidateSkills'] || [];
