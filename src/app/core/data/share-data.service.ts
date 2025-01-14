@@ -1153,7 +1153,7 @@ export class ShareDataService {
           subMenus: [],
         },
         {
-          menuValue: 'My Profile',
+          menuValue: 'Mon Profil',
           route: routes.employee_company_profile,
           hasSubRoute: false,
           showSubRoute: false,
@@ -1300,7 +1300,7 @@ export class ShareDataService {
           subMenus: [],
         },
         {
-          menuValue: 'My Profile',
+          menuValue: 'Mon Profil',
           route: routes.freelancer_developer_profile,
           hasSubRoute: false,
           showSubRoute: false,
@@ -1606,7 +1606,7 @@ export class ShareDataService {
       icon: 'assets/img/icon/sidebar-icon-10.svg',
       routes: 'javascript:void(0);',
       submenu: [
-        { title: 'Profile Setting', routes: 'freelancer-favourites.html' },
+        { title: 'Profil', routes: 'freelancer-favourites.html' },
         { title: 'Plan & Billing', routes: 'freelancer-invitations.html' },
         { title: 'Verify Identity', routes: 'freelancer-invitations.html' },
         { title: 'Changes Password', routes: 'freelancer-invitations.html' },
@@ -1893,7 +1893,7 @@ export class ShareDataService {
       page5: 'delete-account',
       submenu: [
         {
-          title: 'Profile Setting',
+          title: 'Profil',
           routes: routes.freelancer_profiles_settings,
           page: 'profile-settings',
         },
@@ -2000,7 +2000,7 @@ export class ShareDataService {
       page5: 'delete-account',
       submenu: [
         {
-          title: 'Profile',
+          title: 'Profil',
           routes: routes.employee_basic_settings,
           page: 'basic-settings',
         },

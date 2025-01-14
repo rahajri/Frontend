@@ -242,7 +242,8 @@
             data-bs-toggle="dropdown"
           >
             <span class="user-img">
-              <div class="profile-initials" *ngIf="initials">
+              <img class="avatar-img" [src]="imgUrl" *ngIf="imgUrl !== ''" />
+              <div class="profile-initials" *ngIf="initials && imgUrl === ''">
                 {{ initials }}
               </div>
             </span>
@@ -295,7 +296,7 @@
                 src="assets/img/icon/user-dropdown-icon--06.svg"
                 alt="Img"
               />
-              Profile Settings</a
+              Profil</a
             >
             <a class="dropdown-item" (click)="logout()"
               ><img

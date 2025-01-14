@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -12,13 +11,8 @@ import { routes } from 'src/app/core/helpers/routes/routes';
 import { CandidateService } from 'src/app/core/services/condidate.service';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { SkillService } from 'src/app/core/services/skill.service';
-import {
-  UploadWidgetConfig,
-  UploadWidgetResult,
-} from '@bytescale/upload-widget';
-interface data {
-  value: string;
-}
+import { environment } from 'src/environments/environment.prod';
+
 declare var bootstrap: any;
 interface Language {
   id: string;
@@ -36,17 +30,6 @@ interface Skill {
 })
 export class ProfileSettingsComponent implements OnInit {
   public routes = routes;
-  public selectedValue1 = '';
-  public selectedValue2 = '';
-  public selectedValue3 = '';
-  public selectedValue4 = '';
-  public selectedValue5 = '';
-  public selectedValue6 = '';
-  public selectedValue7 = '';
-  public selectedValue8 = '';
-  public selectedValue9 = '';
-  public customvalue1 = '';
-
   public skills: number[] = [];
   public education: number[] = [];
   public certification: number[] = [];
@@ -55,6 +38,7 @@ export class ProfileSettingsComponent implements OnInit {
 
   public datas: boolean[] = [true];
   public isCheckboxChecked = true;
+  baseUrl = environment.apiUrl;
   skillLevels = ['Basique', 'Professionnel', 'Avancé'];
   candidate: any = {
     firstName: '',
@@ -73,7 +57,6 @@ export class ProfileSettingsComponent implements OnInit {
     },
   };
   form: FormGroup;
-  // locationForm: FormGroup;
   filteredLanguages: Language[] = [];
   dbLanguages: any[] = [];
   activeIndex: number = 0;
@@ -81,44 +64,6 @@ export class ProfileSettingsComponent implements OnInit {
   dbSkills: any[] = [];
   index: number = 0;
   imgUrl: string = '';
-  options: UploadWidgetConfig = {
-    apiKey: 'public_W142iwN3CCDgRqj4wAoMwkJ13sZY',
-    locale: {
-      addAnotherFileBtn: 'Ajouter un autre fichier...',
-      addAnotherImageBtn: 'Ajouter une autre image...',
-      cancelBtn: 'annuler',
-      cancelBtnClicked: 'annulé',
-      cancelPreviewBtn: 'Annuler',
-      continueBtn: 'Continuer',
-      cropBtn: 'Recadrer',
-      customValidationFailed: 'Échec de la validation du fichier.',
-      doneBtn: 'Terminé',
-      fileSizeLimitPrefix: 'Limite de taille de fichier :',
-      finishBtn: 'Terminer',
-      finishBtnIcon: true,
-      imageCropNumberPrefix: 'Image',
-      maxFilesReachedPrefix: 'Nombre maximum de fichiers :',
-      maxImagesReachedPrefix: "Nombre maximum d'images :",
-      orDragDropFile: '...ou glisser-déposer un fichier.',
-      orDragDropFileMulti: '...ou glisser-déposer des fichiers.',
-      orDragDropImage: '...ou glisser-déposer une image.',
-      orDragDropImageMulti: '...ou glisser-déposer des images.',
-      processingFile: 'Traitement du fichier...',
-      removeBtn: 'supprimer',
-      removeBtnClicked: 'supprimé',
-      submitBtnError: 'Erreur !',
-      submitBtnLoading: 'Veuillez patienter...',
-      unsupportedFileType: 'Type de fichier non supporté.',
-      uploadFileBtn: 'Téléverser un fichier',
-      uploadFileMultiBtn: 'Téléverser des fichiers',
-      uploadImageBtn: 'Téléverser une image',
-      uploadImageMultiBtn: 'Téléverser des images',
-      xOfY: 'sur',
-    },
-    maxFileCount: 1,
-  };
-
-  uploadedFileUrl: string | undefined = undefined;
 
   removeDatas(index: number) {
     this.datas[index] = !this.datas[index];
@@ -131,13 +76,6 @@ export class ProfileSettingsComponent implements OnInit {
     private skillService: SkillService,
     private candidateService: CandidateService
   ) {
-    // this.locationForm = new FormGroup({
-    //   postalCode: new FormControl(''),
-    //   city: new FormControl(''),
-    //   department: new FormControl(''),
-    //   region: new FormControl(''),
-    //   adresse: new FormControl(''),
-    // });
     this.form = this.fb.group({
       personalDetails: this.fb.group({
         lastName: [''],
@@ -147,14 +85,12 @@ export class ProfileSettingsComponent implements OnInit {
         email: [''],
         image: [null],
       }),
-      // location: this.locationForm, // Add location form group here
-      // activities: this.fb.array([this.createActivity()]), // Initialize with one activity form group
 
-      skills: this.fb.array([this.createSkill()]), // Ensure skills are initialized
+      skills: this.fb.array([this.createSkill()]),
 
       experiences: this.fb.array([this.createExperience()]),
-      education: this.fb.array([this.createEducation()]), // initialize the education form array
-      languages: this.fb.array([this.createLanguage()]), // Initialize with one language entry
+      education: this.fb.array([this.createEducation()]),
+      languages: this.fb.array([this.createLanguage()]),
     });
   }
   ngOnInit(): void {
@@ -163,23 +99,44 @@ export class ProfileSettingsComponent implements OnInit {
     this.getSSkillsFromDb();
   }
 
-  onComplete = (files: UploadWidgetResult[]) => {
-    if (files.length > 0) {
-      this.uploadedFileUrl = files[0]?.fileUrl; // Get the uploaded file URL
-      this.form.get('personalDetails.image')?.setValue(this.uploadedFileUrl); // Set the URL in the form
-    }
-  };
-
   onSubmit() {
+    // Create a new FormData object
+    const formData = new FormData();
+
+    // Get the form values
     const profileData = this.form.value;
+
+    // Append the image file to the FormData object
+    const imageFile = this.form.get('personalDetails.image')?.value;
+    if (imageFile instanceof File) {
+      formData.append('image', imageFile); // Use 'image' as the field name
+    }
+
+    // Append other form data to the FormData object
+    Object.keys(profileData).forEach((key) => {
+      if (key !== 'image') {
+        // Skip the image field, as it's already appended
+        if (typeof profileData[key] === 'object' && profileData[key] !== null) {
+          // If the value is an object (e.g., nested form group), stringify it
+          formData.append(key, JSON.stringify(profileData[key]));
+        } else {
+          // Append other values as strings
+          formData.append(key, profileData[key]);
+        }
+      }
+    });
+
+    // Send the FormData to the backend
     this.candidateService
-      .updateCandidateProfile(this.candidate?.id, profileData)
+      .updateCandidateProfile(this.candidate?.id, formData)
       .subscribe({
         next: (res) => {
-          this.getCondidature();
-          this.showSuccessModal();
+          this.getCondidature(); // Refresh the candidate data
+          this.showSuccessModal(); // Show a success message
         },
-        error: (err) => {},
+        error: (err) => {
+          console.error('Error updating profile:', err);
+        },
       });
     // this.router.navigate([routes.freelancerprofile]);
   }
@@ -208,17 +165,20 @@ export class ProfileSettingsComponent implements OnInit {
     });
   }
 
-  // onImageChange(event: Event): void {
-  //   const input = event.target as HTMLInputElement;
-  //   if (input.files && input.files.length > 0) {
-  //     var reader = new FileReader();
-  //     const file = input.files[0];
-  //     reader.readAsDataURL(file);
-  //     reader.onload = (e: any) => {
-  //       this.imgUrl = e.target.result;
-  //     };
-  //   }
-  // }
+  onImageChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      var reader = new FileReader();
+      const file = input.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = (e: any) => {
+        this.imgUrl = e.target.result;
+      };
+      // Update the form control with the file
+      this.form.get('personalDetails.image')?.patchValue(file);
+      this.form.get('personalDetails.image')?.updateValueAndValidity();
+    }
+  }
   getSSkillsFromDb() {
     this.skillService.getSkills().subscribe({
       next: (res) => {
@@ -345,7 +305,7 @@ export class ProfileSettingsComponent implements OnInit {
       phone: response?.phone || '',
       email: response?.email || '',
     });
-    this.uploadedFileUrl = response.image;
+    this.imgUrl = this.baseUrl + response.image;
 
     // Patch skills
     const skills: any[] = response['candidateSkills'] || [];
@@ -494,6 +454,10 @@ export class ProfileSettingsComponent implements OnInit {
       const modal = new bootstrap.Modal(modalElement);
       modal.show();
       modalElement.focus();
+
+      setTimeout(() => {
+        modal.hide();
+      }, 3000);
     }
   }
 }

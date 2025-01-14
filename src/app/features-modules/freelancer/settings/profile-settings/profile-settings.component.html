@@ -12,60 +12,19 @@
               class="avatar avatar-xxl profile-cover-avatar"
               for="avatar_upload"
             >
-              <img
-                class="avatar-img"
-                [src]="uploadedFileUrl"
-                alt="Profile Image"
-              />
-              <!-- <input
+              <img class="avatar-img" [src]="imgUrl" alt="Profile Image" />
+              <input
                 type="file"
                 id="avatar_upload"
                 (change)="onImageChange($event)"
                 accept="image/*"
               />
-              <button>Upload a file...</button> -->
-              <!-- <input
-                type="file"
-                id="avatar_upload"
-                (change)="onImageChange($event)"
-                accept="image/*"
-              /> -->
               <span class="avatar-edit">
                 <i
-                  uploadButton
-                  [uploadOptions]="options"
-                  [uploadComplete]="onComplete"
                   class="feather icon-edit avatar-uploader-icon shadow-soft"
                 ></i>
               </span>
             </label>
-            <!-- <div class="col-lg-12">
-              <div class="form-row pro-pad pt-0 ps-0">
-                <div class="input-block col-md-6 pro-pic">
-                  <div class="d-flex align-items-center">
-                    <div class="upload-images freelancer-pic-box">
-                      <img
-                        [src]="imgUrl"
-                        alt=""
-                        id="blah"
-                      />
-                    </div>
-                    <div class="ms-3 freelancer-pic-upload">
-                      <label class="file-upload image-upbtn">
-                        Télécharger une image
-                        <input
-                          type="file"
-                          id="imgInp"
-                          (change)="onImageChange($event)"
-                          accept="image/*"
-                        />
-                      </label>
-                      <p>Taille maximale de l'image 300*300</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
             <div class="col-lg-12 col-md-12">
               <div class="mb-3">
                 <label for="job-title" class="form-label">Titre profil</label>
@@ -491,17 +450,10 @@
 <!-- The Modal -->
 <div class="modal fade success-modal hire-modal" id="data-changed">
   <div class="modal-dialog modal-dialog-centered modal-md">
-    <div class="modal-content">
+    <div class="modal-content" style="background-color: #a3cfbb">
       <div class="modal-body pt-4">
         <div class="success-msg-content text-center">
-          <h4>Données Modifiées</h4>
-          <p>Vos données ont été modifiées avec succès.</p>
-          <a
-            href="javascript:void(0);"
-            data-bs-dismiss="modal"
-            class="btn btn-primary mt-3"
-            >D'accord</a
-          >
+          Vos données ont été modifiées avec <strong>succès</strong> .
         </div>
       </div>
     </div>

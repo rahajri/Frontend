@@ -1,140 +1,599 @@
-import { Component, OnInit } from '@angular/core';
-
-// import { Subject } from "rxjs";
-
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Sort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
-import { adminProviders, apiResultFormat } from 'src/app/core/models/models';
+import { adminProviders, Offer } from 'src/app/core/models/models';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/core/services/common/common.service';
+import { ProjectService } from 'src/app/core/services/project.service';
+import { MatPaginator } from '@angular/material/paginator';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  of,
+  Subscription,
+  switchMap,
+} from 'rxjs';
+import { JobService } from 'src/app/core/services/job.service';
+import { SkillService } from 'src/app/core/services/skill.service';
+import { ContractService } from 'src/app/core/services/contract.service';
+import { Router } from '@angular/router';
+import { LanguageService } from 'src/app/core/services/language.service';
+import { LocationService } from 'src/app/core/services/location.service';
+import { Editor, Toolbar } from 'ngx-editor';
 
+declare var bootstrap: any;
+interface data {
+  value: string;
+}
+interface Language {
+  id: string;
+  name: string;
+}
 @Component({
   selector: 'app-providers',
   templateUrl: './providers.component.html',
-  styleUrls: ['./providers.component.scss']
+  styleUrls: ['./providers.component.scss'],
 })
 export class ProvidersComponent implements OnInit {
+  editor: Editor = new Editor();
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
+  dataSource: MatTableDataSource<Offer>;
+  displayedColumns: string[] = [
+    'title',
+    'companyName',
+    'ContactType',
+    'city',
+    'startDate',
+    'endDate',
+  ];
   public routes = routes;
-  public searchDataValue = '';
-  dataSource!: MatTableDataSource<adminProviders>;
+  filter: boolean = false;
+  selectedStatus: string | null = null;
+  filterForm!: FormGroup;
+  addOfferForm!: FormGroup;
+  offerToDelete: string = '';
+  selectedHederTitle = 'Tous les projets';
+  offersCounter: number = 0;
+  inactiveOffersCounter: number = 0;
+  activeOffersCounter: number = 0;
+  deletedOffersCounter: number = 0;
+  counter: number = 0;
 
-  // pagination variables
-  public lastIndex = 0;
-  public pageSize = 10;
-  public totalData = 0;
-  public skip = 0;
-  public limit: number = this.pageSize;
-  public pageIndex = 0;
-  public serialNumberArray: Array<number> = [];
-  public currentPage = 1;
-  public pageNumberArray: Array<number> = [];
-  public pageSelection: Array<pageSelection> = [];
-  public totalPages = 0;
-  public lstProvider!: Array<adminProviders>;
-  public filter = false;
-  constructor(private data: ShareDataService) { }
+  //create Offer
+  public globalErrorMessage: boolean | null = false;
+  filteredCities: any[] = [];
+  filteredLanguages: Language[] = [];
+  dbLanguages: any[] = [];
+  cityInputSub: Subscription | undefined;
+  jobs: any[] = [];
+  subActivities: any[] = [];
+  savedSkills: any[] = [];
+  filteredSkills: any[] = [];
+  filteredJobs: any[] = [];
+  contractTypes: any[] = [];
+  isCdiSelected = false;
+  jobNotExist = true;
+  activeIndex: number = 0;
+  cityIsSelected = false;
+  selectedSkills: any[] = [];
+  languages: any[] = [];
+  selectedLanguageList: data[] = [
+    { value: 'Basique' },
+    { value: 'Professionnel' },
+    { value: 'Avancé' },
+  ];
+  selectedSalaryTypeList: data[] = [
+    { value: 'Heure' },
+    { value: 'Mensuel' },
+    { value: 'Annuel' },
+    { value: 'JTM' },
+  ];
 
-  //Filter toggle
-  openFilter(){
-    this.filter = !this.filter
-  }
-  ngOnInit(): void {
-    this.getTableData();
-  }
-  private getTableData(): void {
-    this.lstProvider = [];
-    this.serialNumberArray = [];
-
-    this.data.adminProviderList().subscribe((res: apiResultFormat) => {
-      this.totalData = res.totalData;
-      res.data.map((res:adminProviders, index: number) => {
-        const serialNumber = index + 1;
-        if (index >= this.skip && serialNumber <= this.limit) {
-          res.id = serialNumber;
-          this.lstProvider.push(res);
-          this.serialNumberArray.push(serialNumber);
-        }
-      });
-         this.dataSource = new MatTableDataSource<adminProviders>(this.lstProvider);
-    this.calculateTotalPages(this.totalData, this.pageSize);
+  constructor(
+    private data: ShareDataService,
+    private fb: FormBuilder,
+    private commonService: CommonService,
+    private jobService: JobService,
+    private skillService: SkillService,
+    private contractService: ContractService,
+    private projectService: ProjectService,
+    private offersService: ProjectService,
+    private languageService: LanguageService,
+    private locationService: LocationService,
+    private router: Router
+  ) {
+    this.dataSource = new MatTableDataSource<Offer>([]);
+    this.filterForm = this.fb.group({
+      companyName: [''],
+      contactFName: [''],
+      contactLName: [''],
+      city: [''],
+      department: [''],
+      region: [''],
     });
 
- 
+    this.addOfferForm = this.fb.group({
+      title: [
+        '',
+        [
+          Validators.required, // Validation obligatoire
+          Validators.minLength(5), // Minimum de 30 caractères
+        ],
+      ],
+      activity: ['', [Validators.required]],
+      subActivity: ['', [Validators.required]],
+      job: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      department: ['', [Validators.required]],
+      region: ['', [Validators.required]],
+      contractType: ['', [Validators.required]],
+      duration: [0, [Validators.required, Validators.min(1)]],
+      timeUnit: [null, [Validators.required]],
+      startDate: [null, [Validators.required]],
+      endDate: [null, [Validators.required]],
+      skills: [''],
+      salary: [0, Validators.min(0)],
+      typologie: ['', Validators.required],
+      description: ['', [Validators.required, Validators.minLength(30)]],
+      languages: this.fb.array([this.createLanguage()]),
+    });
   }
-  public sortData(sort: Sort) {
-    const data = this.lstProvider.slice();
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-    if (!sort.active || sort.direction === '') {
-      this.lstProvider = data;
+  //Filter toggle
+  openFilter() {
+    this.filter = !this.filter;
+  }
+  ngOnInit(): void {
+    this.editor = new Editor();
+    this.getTableData();
+    this.getJobs();
+    this.getSubActivities();
+    this.getSkills();
+    this.getLanguagesFromDb();
+    this.getContractTypes();
+    this.cityInputSub = this.addOfferForm
+      .get('city')
+      ?.valueChanges.pipe(
+        debounceTime(150), // Wait 300ms for user to stop typing
+        distinctUntilChanged(),
+        switchMap((query) =>
+          query ? this.locationService.searchCities(query) : of([])
+        )
+      )
+      .subscribe((cities) => {
+        if (!this.cityIsSelected) this.filteredCities = cities;
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.editor) {
+      this.editor.destroy();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  private getTableData(): void {
+    this.offersService.getAllOffers().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.dataSource = new MatTableDataSource(res);
+        this.offersCounter = res.length;
+        this.counter = res.length;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+      complete: () => {
+        this.dataSource.sort = this.sort; // Assign sort after view initialization
+        this.dataSource.paginator = this.paginator;
+      },
+    });
+  }
+
+  searchData(target: any) {
+    const filterValue = target.value.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
+  getDate(isoDate: string) {
+    return this.commonService.formatDate(isoDate);
+  }
+
+  filterOffersByStatus(status: string | null): void {
+    this.selectedHederTitle = this.getTranslation(status);
+    this.selectedStatus = status;
+  }
+
+  getTranslation(key: string | null): string {
+    if (key === null) {
+      return 'Tous les projets';
     } else {
-       
-      this.lstProvider = data.sort((a, b) => {
-         
-        const aValue = (a as never)[sort.active];
-         
-        const bValue = (b as never)[sort.active];
-        return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
+      const translations: { [key: string]: string } = {
+        Published: 'les projets publiés',
+        Draft: 'Projets non publiés',
+        Deleted: 'Les projets supprimés',
+      };
+      return translations[key] || key;
+    }
+  }
+
+  onFilterSubmit() {
+    if (this.filterForm.valid) {
+      // this.filterComp(this.filterForm.value);
+    }
+  }
+  onChange() {
+    const filterValues = this.filterForm.value;
+    const isEmpty = Object.values(filterValues).some((value) => value === '');
+    if (isEmpty) {
+      this.getTableData();
+    }
+  }
+
+  showDeleteOfferModal(offer: any) {
+    this.offerToDelete = offer;
+    const modalElement = document.getElementById('delete_offer');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+      modalElement.focus();
+    }
+  }
+
+  // add Offer
+  initForm() {
+    this.addOfferForm = this.fb.group({
+      languages: this.fb.array([this.createLanguage()]),
+    });
+  }
+
+  createLanguage(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      level: ['', Validators.required],
+    });
+  }
+
+  get title() {
+    return this.addOfferForm.get('title');
+  }
+  get activity() {
+    return this.addOfferForm.get('activity');
+  }
+  get subActivity() {
+    return this.addOfferForm.get('subActivity');
+  }
+  get job() {
+    return this.addOfferForm.get('job');
+  }
+  get city() {
+    return this.addOfferForm.get('city');
+  }
+  get salary() {
+    return this.addOfferForm.get('salary');
+  }
+  get department() {
+    return this.addOfferForm.get('department');
+  }
+  get region() {
+    return this.addOfferForm.get('region');
+  }
+  get contractType() {
+    return this.addOfferForm.get('contractType');
+  }
+  get duration() {
+    return this.addOfferForm.get('duration');
+  }
+  get skills() {
+    return this.addOfferForm.get('skills');
+  }
+  get description() {
+    return this.addOfferForm.get('description');
+  }
+  get startDate() {
+    return this.addOfferForm.get('startDate');
+  }
+  get endDate() {
+    return this.addOfferForm.get('endDate');
+  }
+  get timeUnit() {
+    return this.addOfferForm.get('timeUnit');
+  }
+
+  get languagesArray(): FormArray {
+    return this.addOfferForm.get('languages') as FormArray;
+  }
+  // Add a new language to the array
+  addLanguage(): void {
+    this.languagesArray.push(this.createLanguage());
+  }
+
+  // Remove a language from the array
+  removeLanguage(index: number): void {
+    if (this.languagesArray.length > 1) {
+      this.languagesArray.removeAt(index);
+    }
+  }
+
+  selectCity(city: any): void {
+    this.filteredCities = [];
+    this.cityIsSelected = true;
+    this.addOfferForm.patchValue({
+      city: city.name,
+      department: city.department?.name || '',
+      region: city.department?.region?.name || '',
+    });
+  }
+
+  filterLanguages(e: any, i: number) {
+    this.activeIndex = i;
+    let query = e.value;
+    if (!query) {
+      this.filteredLanguages = this.dbLanguages;
+    } else {
+      this.filteredLanguages = this.dbLanguages.filter((lang) =>
+        lang.name.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+  }
+
+  selectLanguage(lang: any, index: number) {
+    const languagesArray = this.addOfferForm.get('languages') as FormArray;
+    const languageForm = languagesArray.at(index) as FormGroup;
+
+    if (languageForm) {
+      languageForm.patchValue({ name: lang.name });
+    }
+
+    this.filteredLanguages = [];
+  }
+
+  getLanguagesFromDb() {
+    this.languageService.getLanguages().subscribe({
+      next: (res) => {
+        this.dbLanguages = res;
+      },
+      error: (err) => {},
+    });
+  }
+
+  getJobs() {
+    this.jobService.getJobs().subscribe({
+      next: (data) => {
+        this.jobs = data;
+      },
+      error: (error) => {
+        console.error(error);
+        this.globalErrorMessage = true;
+      },
+    });
+  }
+
+  filterJobs(e: any) {
+    let query = e.value;
+    if (!query) {
+      this.filteredJobs = this.jobs;
+      this.jobNotExist = false;
+    } else {
+      this.filteredJobs = this.jobs.filter((job) =>
+        job.name.toLowerCase().includes(query.toLowerCase())
+      );
+      this.jobNotExist = this.filteredJobs.length === 0;
+    }
+  }
+
+  selectJob(job: any): void {
+    console.log(job);
+    this.filteredJobs = [];
+    this.jobNotExist = false;
+    this.addOfferForm.patchValue({
+      job: job?.name || '',
+      subActivity: job?.subActivity?.name || '',
+      activity: job?.subActivity?.activity?.name || '',
+    });
+  }
+
+  addJob(): void {
+    const jobName = this.addOfferForm.get('job')?.value?.trim(); // Get and trim the job name
+    if (!jobName) {
+      return; // Do nothing if the job name is empty
+    }
+
+    // Check if the job already exists in the filtered list
+    const existingJob = this.filteredJobs.find(
+      (job) => job.name.toLowerCase() === jobName.toLowerCase()
+    );
+
+    if (existingJob) {
+      // Job already exists, no need to add
+      return;
+    }
+
+    this.filteredJobs.push({ name: jobName });
+
+    this.addOfferForm.patchValue({
+      job: jobName,
+    });
+    this.filteredJobs = [];
+    this.jobNotExist = true;
+  }
+
+  getSubActivities() {
+    this.jobService.getSubActivities().subscribe({
+      next: (data) => {
+        this.subActivities = data;
+      },
+      error: (error) => {
+        console.error(error);
+        this.globalErrorMessage = true;
+      },
+    });
+  }
+
+  getSkills() {
+    this.skillService.getSkills().subscribe({
+      next: (data) => {
+        this.savedSkills = data;
+      },
+      error: (error) => {
+        console.error(error);
+        this.globalErrorMessage = true;
+      },
+    });
+  }
+
+  filterSkills(e: any) {
+    let query = e.value;
+    if (!query) {
+      this.filteredSkills = this.savedSkills;
+    } else {
+      this.filteredSkills = this.savedSkills.filter((skill) =>
+        skill.name.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+  }
+
+  selectSkill(skill: any) {
+    if (!this.selectedSkills.some((s) => s.id === skill.id)) {
+      this.selectedSkills.push(skill);
+      this.addOfferForm.get('skills')?.setValue('');
+    }
+    this.filteredSkills = [];
+  }
+
+  addSkill(): void {
+    const skillName = this.addOfferForm.get('skills')?.value?.trim(); // Get and trim the job name
+    if (!skillName) {
+      return;
+    }
+    const existingSkill = this.filteredSkills.find(
+      (skill) => skill.name.toLowerCase() === skillName.toLowerCase()
+    );
+
+    if (existingSkill) {
+      return;
+    }
+
+    this.selectedSkills.push({ name: skillName });
+    this.addOfferForm.patchValue({
+      skills: '',
+    });
+    this.filteredSkills = [];
+  }
+
+  removeSkill(skill: any) {
+    this.selectedSkills = this.selectedSkills.filter((s) => s.id !== skill.id);
+  }
+
+  getContractTypes() {
+    this.contractService.getContractTypes().subscribe({
+      next: (data) => {
+        this.contractTypes = data;
+      },
+      error: (error) => {
+        console.error(error);
+        this.globalErrorMessage = true;
+      },
+    });
+  }
+
+  previous: string | null = null;
+  onSubActivityChange(event: any) {
+    const subActivitySName = event.target.value;
+    if (subActivitySName && subActivitySName !== this.previous) {
+      this.previous = subActivitySName;
+      this.jobService
+        .getSubActivitiesDetails(subActivitySName)
+        .subscribe((data) => {
+          this.addOfferForm.patchValue({
+            activity: data?.activity?.name || '',
+          });
+        });
+    }
+  }
+
+  onContractTypeChange(event: any) {
+    const typeId = event.target.value;
+    if (typeId && typeId !== this.previous) {
+      this.previous = typeId;
+      this.contractService.getTypeDetails(typeId).subscribe((data) => {
+        if (data.description === 'CDI (Contrat à Durée Indéterminée)') {
+          this.isCdiSelected = true;
+          this.removeValidation();
+        } else {
+          this.isCdiSelected = false;
+          this.setValidation();
+        }
       });
     }
   }
-  
-  public searchData(value: string): void {
-    this.dataSource.filter = value.trim().toLowerCase();
-    this.lstProvider = this.dataSource.filteredData;
+
+  onSubmit() {
+    this.markFormGroupTouched(this.addOfferForm);
+    this.globalErrorMessage = false; // Reset the error message before each submission
+
+    if (this.addOfferForm.valid) {
+      this.addOfferForm.get('skills')?.setValue(this.selectedSkills);
+      // this.projectService.createProject(this.addOfferForm.value).subscribe({
+      //   next: (response) => {
+      //     this.router.navigate([routes.getProjectConfirmation(response.id)]);
+      //   },
+      //   error: (error) => {
+      //     console.error('Error creating project:', error);
+      //     this.globalErrorMessage = true;
+      //   },
+      // });
+    } else {
+      console.error('Form is invalid');
+    }
   }
 
-public getMoreData(event: string): void {
-    if (event == 'next') {
-      this.currentPage++;
-      this.pageIndex = this.currentPage - 1;
-      this.limit += this.pageSize;
-      this.skip = this.pageSize * this.pageIndex;
-      this.getTableData();
-    } else if (event == 'previous') {
-      this.currentPage--;
-      this.pageIndex = this.currentPage - 1;
-      this.limit -= this.pageSize;
-      this.skip = this.pageSize * this.pageIndex;
-      this.getTableData();
-    }
-}
-
-  public moveToPage(pageNumber: number): void {
-    this.currentPage = pageNumber;
-    this.skip = this.pageSelection[pageNumber - 1].skip;
-    this.limit = this.pageSelection[pageNumber - 1].limit;
-    if (pageNumber > this.currentPage) {
-      this.pageIndex = pageNumber - 1;
-    } else if (pageNumber < this.currentPage) {
-      this.pageIndex = pageNumber + 1;
-    }
-    this.getTableData();
-    }
-
-  public changePageSize(): void {
-    this.pageSelection = [];
-    this.limit = this.pageSize;
-    this.skip = 0;
-    this.currentPage = 1;
-    this.getTableData();
+  setValidation() {
+    this.addOfferForm.get('endDate')?.setValidators([Validators.required]);
+    this.addOfferForm.get('duration')?.setValidators([Validators.required]);
+    this.addOfferForm.get('timeUnit')?.setValidators([Validators.required]);
+    this.addOfferForm.get('endDate')?.updateValueAndValidity();
+    this.addOfferForm.get('duration')?.updateValueAndValidity();
+    this.addOfferForm.get('timeUnit')?.updateValueAndValidity();
   }
 
-  private calculateTotalPages(totalData: number, pageSize: number): void {
-    this.pageNumberArray = [];
-    this.totalPages = totalData / pageSize;
-    if (this.totalPages % 1 != 0) {
-      this.totalPages = Math.trunc(this.totalPages + 1);
+  removeValidation() {
+    this.addOfferForm.get('endDate')?.clearValidators();
+    this.addOfferForm.get('duration')?.clearValidators();
+    this.addOfferForm.get('timeUnit')?.clearValidators();
+    this.addOfferForm.get('endDate')?.updateValueAndValidity();
+    this.addOfferForm.get('duration')?.updateValueAndValidity();
+    this.addOfferForm.get('timeUnit')?.updateValueAndValidity();
+  }
+
+  markFormGroupTouched(formGroup: FormGroup): void {
+    Object.values(formGroup.controls).forEach((control) => {
+      control.markAsTouched();
+      if ((control as FormGroup).controls) {
+        this.markFormGroupTouched(control as FormGroup); // Recursive for nested form groups
+      }
+    });
+  }
+
+  onFormKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
     }
-    for (let i = 1; i <= this.totalPages; i++) {
-      const limit = pageSize * i;
-      const skip = limit - pageSize;
-      this.pageNumberArray.push(i);
-      this.pageSelection.push({ skip: skip, limit: limit });
-    }
-    }
-     
-}
-export interface pageSelection {
-  skip: number;
-  limit: number;
+  }
 }

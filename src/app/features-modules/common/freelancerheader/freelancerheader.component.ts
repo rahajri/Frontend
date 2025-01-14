@@ -8,6 +8,7 @@ import { CommonService } from 'src/app/core/services/common/common.service';
 import { NavbarService } from 'src/app/core/services/navbar.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { UserService } from '../../auth/service/user.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-freelancerheader',
@@ -24,6 +25,8 @@ export class FreelancerheaderComponent implements OnInit {
   profile: any | null = null;
   initials: string = '';
   profileName: string = '';
+  imgUrl: string = '';
+  baseUrl = environment.apiUrl;
 
   navbar: Array<header> = [];
 
@@ -62,6 +65,9 @@ export class FreelancerheaderComponent implements OnInit {
     this.userService.getProfile().subscribe({
       next: (profile) => {
         this.profile = profile;
+        if (profile.image !== null) {
+          this.imgUrl = this.baseUrl + profile.image;
+        }
         const { fullName, initials } = this.userService.getProfileDetails(
           this.profile
         );

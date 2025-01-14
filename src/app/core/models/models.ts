@@ -64,6 +64,34 @@ export interface project {
   startdate: number;
   duedate: number;
 }
+export interface Offer {
+  id: string;
+  title: string;
+  description: string;
+  startDate: Date;
+  endDate: Date | null;
+  publicationDate: Date | null;
+  expectedDuration: number;
+  timeUnit: string;
+  createdAt: Date;
+  company: Company;
+  contractType: {
+    description: string;
+    id: string;
+    isRenewable: boolean;
+  };
+  job: {
+    name: string;
+  };
+  city: {
+    name: string;
+  };
+  status: {
+    name: string;
+    description: string;
+  };
+}
+
 export interface Company {
   id: string;
   name: string;

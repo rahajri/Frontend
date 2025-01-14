@@ -42,6 +42,7 @@ export class ProjectService {
 
     return this.http.post<any>(`${this.baseUrl}/${id}/publish`, {});
   }
+
   getJobOffers(
     offset: number,
     limit: number,
@@ -55,5 +56,8 @@ export class ProjectService {
     return this.http.get<any>(this.baseUrl, {
       params,
     });
+  }
+  getAllOffers(){
+    return this.http.get<any>(`${this.baseUrl}/all`)
   }
 }

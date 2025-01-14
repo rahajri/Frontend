@@ -11,6 +11,7 @@ import { UserService } from '../../auth/service/user.service';
 import { AlertService } from 'src/app/core/services/alert/alert.service';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
+import { CommonService } from 'src/app/core/services/common/common.service';
 declare var bootstrap: any;
 @Component({
   selector: 'app-projects',
@@ -61,7 +62,8 @@ export class ProjectsComponent implements OnInit {
     private inseeApiService: InseeApiService,
     private locationService: LocationService,
     private alertService: AlertService,
-    private userService: UserService
+    private userService: UserService,
+    private commonService: CommonService
   ) {
     this.dataSource = new MatTableDataSource<Company>([]);
     this.filterForm = this.fb.group({
@@ -171,9 +173,8 @@ export class ProjectsComponent implements OnInit {
     }
   }
 
-  getDate(isoDate: string): string {
-    const date = new Date(isoDate);
-    return new Intl.DateTimeFormat('en-GB').format(date);
+  getDate(isoDate: string) {
+    return this.commonService.formatDate(isoDate);
   }
 
   onFilterSubmit() {
