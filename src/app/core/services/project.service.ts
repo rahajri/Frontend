@@ -57,7 +57,12 @@ export class ProjectService {
       params,
     });
   }
-  getAllOffers(){
-    return this.http.get<any>(`${this.baseUrl}/all`)
+
+  getAllOffers() {
+    return this.http.get<any>(`${this.baseUrl}/all`);
+  }
+
+  projectsFiler(data: any): Observable<any[]> {
+    return this.http.post<any[]>(`${this.baseUrl}/filter`, data);
   }
 }

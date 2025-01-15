@@ -38,15 +38,7 @@ export class FreelancerheaderComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService
   ) {
-    this.common.base.subscribe((res: string) => {
-      this.base = res;
-    });
-    this.common.page.subscribe((res: string) => {
-      this.page = res;
-    });
-    this.common.last.subscribe((res: string) => {
-      this.last = res;
-    });
+    
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.getRoutes(this.router);
@@ -65,6 +57,7 @@ export class FreelancerheaderComponent implements OnInit {
     this.userService.getProfile().subscribe({
       next: (profile) => {
         this.profile = profile;
+        console.log(profile);
         if (profile.image !== null) {
           this.imgUrl = this.baseUrl + profile.image;
         }

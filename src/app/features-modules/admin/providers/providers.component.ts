@@ -22,6 +22,7 @@ import { Router } from '@angular/router';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { LocationService } from 'src/app/core/services/location.service';
 import { Editor, Toolbar } from 'ngx-editor';
+import { CompanyService } from 'src/app/core/services/company.service';
 
 declare var bootstrap: any;
 interface data {
@@ -68,6 +69,8 @@ export class ProvidersComponent implements OnInit {
   activeOffersCounter: number = 0;
   deletedOffersCounter: number = 0;
   counter: number = 0;
+  filteredOffers: any[] = [];
+  offersData: any[] = [];
 
   //create Offer
   public globalErrorMessage: boolean | null = false;
@@ -80,6 +83,7 @@ export class ProvidersComponent implements OnInit {
   savedSkills: any[] = [];
   filteredSkills: any[] = [];
   filteredJobs: any[] = [];
+  filteredCompanies: any[] = [];
   contractTypes: any[] = [];
   isCdiSelected = false;
   jobNotExist = true;
@@ -87,6 +91,7 @@ export class ProvidersComponent implements OnInit {
   cityIsSelected = false;
   selectedSkills: any[] = [];
   languages: any[] = [];
+  companies: any = [];
   selectedLanguageList: data[] = [
     { value: 'Basique' },
     { value: 'Professionnel' },
@@ -109,14 +114,15 @@ export class ProvidersComponent implements OnInit {
     private projectService: ProjectService,
     private offersService: ProjectService,
     private languageService: LanguageService,
+    private companyService: CompanyService,
     private locationService: LocationService,
     private router: Router
   ) {
     this.dataSource = new MatTableDataSource<Offer>([]);
     this.filterForm = this.fb.group({
       companyName: [''],
-      contactFName: [''],
-      contactLName: [''],
+      contractType: [''],
+      title: [''],
       city: [''],
       department: [''],
       region: [''],
@@ -146,6 +152,7 @@ export class ProvidersComponent implements OnInit {
       typologie: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(30)]],
       languages: this.fb.array([this.createLanguage()]),
+      company: [null, [Validators.required]],
     });
   }
   @ViewChild(MatSort) sort!: MatSort;
@@ -163,6 +170,7 @@ export class ProvidersComponent implements OnInit {
     this.getSkills();
     this.getLanguagesFromDb();
     this.getContractTypes();
+    this.getAllActiveComps();
     this.cityInputSub = this.addOfferForm
       .get('city')
       ?.valueChanges.pipe(
@@ -191,7 +199,7 @@ export class ProvidersComponent implements OnInit {
   private getTableData(): void {
     this.offersService.getAllOffers().subscribe({
       next: (res) => {
-        console.log(res);
+        this.offersData = res;
         this.dataSource = new MatTableDataSource(res);
         this.offersCounter = res.length;
         this.counter = res.length;
@@ -218,6 +226,17 @@ export class ProvidersComponent implements OnInit {
   filterOffersByStatus(status: string | null): void {
     this.selectedHederTitle = this.getTranslation(status);
     this.selectedStatus = status;
+    if (!status) {
+      this.filteredOffers = this.offersData;
+      this.dataSource.data = this.offersData;
+    } else {
+      this.filteredOffers = this.offersData.filter(
+        (company: any) => company.status?.name === status
+      );
+      this.dataSource.data = this.filteredOffers;
+    }
+
+    this.counter = this.filteredOffers.length;
   }
 
   getTranslation(key: string | null): string {
@@ -226,8 +245,7 @@ export class ProvidersComponent implements OnInit {
     } else {
       const translations: { [key: string]: string } = {
         Published: 'les projets publiés',
-        Draft: 'Projets non publiés',
-        Deleted: 'Les projets supprimés',
+        Closed: 'Les projets fermés',
       };
       return translations[key] || key;
     }
@@ -235,9 +253,24 @@ export class ProvidersComponent implements OnInit {
 
   onFilterSubmit() {
     if (this.filterForm.valid) {
-      // this.filterComp(this.filterForm.value);
+      this.filterProjects({
+        ...this.filterForm.value,
+        status: this.selectedStatus,
+      });
     }
   }
+
+  filterProjects(data: any) {
+    this.projectService.projectsFiler(data).subscribe({
+      next: (response) => {
+        this.dataSource.data = response;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+
   onChange() {
     const filterValues = this.filterForm.value;
     const isEmpty = Object.values(filterValues).some((value) => value === '');
@@ -293,6 +326,9 @@ export class ProvidersComponent implements OnInit {
   }
   get region() {
     return this.addOfferForm.get('region');
+  }
+  get company() {
+    return this.addOfferForm.get('company');
   }
   get contractType() {
     return this.addOfferForm.get('contractType');
@@ -398,8 +434,26 @@ export class ProvidersComponent implements OnInit {
     }
   }
 
+  filterCompanies(e: any) {
+    let query = e.value;
+    if (!query) {
+      this.filteredCompanies = this.companies;
+    } else {
+      this.filteredCompanies = this.companies.filter((company: any) =>
+        company.name.toLowerCase().includes(query.toLowerCase())
+      );
+      this.jobNotExist = this.filteredCompanies.length === 0;
+    }
+  }
+
+  selectCompany(company: any): void {
+    this.filteredCompanies = [];
+    this.addOfferForm.patchValue({
+      company: company?.name,
+    });
+  }
+
   selectJob(job: any): void {
-    console.log(job);
     this.filteredJobs = [];
     this.jobNotExist = false;
     this.addOfferForm.patchValue({
@@ -550,18 +604,30 @@ export class ProvidersComponent implements OnInit {
 
     if (this.addOfferForm.valid) {
       this.addOfferForm.get('skills')?.setValue(this.selectedSkills);
-      // this.projectService.createProject(this.addOfferForm.value).subscribe({
-      //   next: (response) => {
-      //     this.router.navigate([routes.getProjectConfirmation(response.id)]);
-      //   },
-      //   error: (error) => {
-      //     console.error('Error creating project:', error);
-      //     this.globalErrorMessage = true;
-      //   },
-      // });
+      this.projectService.createProject(this.addOfferForm.value).subscribe({
+        next: (response) => {
+          this.getTableData();
+          this.hideModal();
+        },
+        error: (error) => {
+          console.error('Error creating project:', error);
+          this.globalErrorMessage = true;
+        },
+      });
     } else {
       console.error('Form is invalid');
     }
+  }
+
+  getAllActiveComps() {
+    this.companyService.getAllActiveCompanies().subscribe({
+      next: (res) => {
+        this.companies = res;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   setValidation() {
@@ -594,6 +660,15 @@ export class ProvidersComponent implements OnInit {
   onFormKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       event.preventDefault();
+    }
+  }
+  hideModal() {
+    const modalElement = document.getElementById('add-offer');
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide();
+      }
     }
   }
 }

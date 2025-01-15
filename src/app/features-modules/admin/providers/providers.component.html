@@ -61,6 +61,17 @@
           <div class="row filter-row">
             <div class="col-sm-6 col-md-3">
               <div class="form-group">
+                <label for="from-date">Titre</label>
+                <input
+                  formControlName="title"
+                  class="form-control"
+                  type="text"
+                  (change)="onChange()"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="form-group">
                 <label for="company-name">Nom Entreprise</label>
                 <input
                   class="form-control"
@@ -70,22 +81,12 @@
                 />
               </div>
             </div>
+
             <div class="col-sm-6 col-md-3">
               <div class="form-group">
-                <label for="from-date">Nom Contact</label>
+                <label for="to-date">Type Contrat</label>
                 <input
-                  formControlName="contactLName"
-                  class="form-control"
-                  type="text"
-                  (change)="onChange()"
-                />
-              </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-              <div class="form-group">
-                <label for="to-date">Prénom Contact</label>
-                <input
-                  formControlName="contactFName"
+                  formControlName="contractType"
                   class="form-control"
                   type="text"
                   (change)="onChange()"
@@ -152,32 +153,25 @@
             <ul class="row">
               <!-- Add 'row' class here -->
               <li
-                class="col-3 text-center p-1 p-1"
+                class="col-4 text-center p-1 p-1"
                 (click)="filterOffersByStatus(null)"
                 [ngClass]="{ selected: selectedStatus === null }"
               >
                 Tous ({{ offersCounter }})
               </li>
               <li
-                class="col-3 text-center p-1"
+                class="col-4 text-center p-1"
                 (click)="filterOffersByStatus('Published')"
                 [ngClass]="{ selected: selectedStatus === 'Published' }"
               >
-                Publier ({{ activeOffersCounter }})
+                Actif ({{ activeOffersCounter }})
               </li>
               <li
-                class="col-3 text-center p-1"
-                (click)="filterOffersByStatus('Draft')"
-                [ngClass]="{ selected: selectedStatus === 'Draft' }"
+                class="col-4 text-center p-1"
+                (click)="filterOffersByStatus('Closed')"
+                [ngClass]="{ selected: selectedStatus === 'Closed' }"
               >
-                Brouillon ({{ inactiveOffersCounter }})
-              </li>
-              <li
-                class="col-3 text-center p-1"
-                (click)="filterOffersByStatus('Deleted')"
-                [ngClass]="{ selected: selectedStatus === 'Deleted' }"
-              >
-                Poubelle ({{ deletedOffersCounter }})
+                Inactif ({{ inactiveOffersCounter }})
               </li>
             </ul>
           </div>
@@ -295,6 +289,45 @@
             </div>
             <div class="row">
               <div class="col-md-12">
+                <div class="input-block">
+                  <label for="comp" class="form-label">Entreprise</label>
+                  <input
+                    id="comp"
+                    formControlName="company"
+                    class="form-control"
+                    type="text"
+                    placeholder="Saisir une nom d'entreprise"
+                    (input)="filterCompanies($event.target)"
+                    (keydown.enter)="addJob()"
+                    [attr.autocomplete]="'off'"
+                    [ngClass]="{
+                      'is-invalid': company?.invalid && (company?.touched || company?.dirty)
+                    }"
+                  />
+                  <!-- Autocomplete suggestions -->
+                  <ul
+                    class="autocomplete-list"
+                    *ngIf="filteredCompanies.length"
+                  >
+                    <li
+                      *ngFor="let company of filteredCompanies"
+                      (click)="selectCompany(company)"
+                      class="autocomplete-item"
+                    >
+                      {{ company.name }}
+                    </li>
+                  </ul>
+                  <!-- Message d'erreur -->
+                  <div
+                    *ngIf="company?.touched && company?.invalid"
+                    class="text-danger"
+                  >
+                    <div *ngIf="company?.errors?.['required']">
+                      L'entreprise est obligatoire.
+                    </div>
+                  </div>
+                </div>
+
                 <div class="input-block">
                   <label for="offer-title" class="form-label"
                     >Titre du poste recherché</label

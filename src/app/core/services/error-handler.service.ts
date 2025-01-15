@@ -9,7 +9,9 @@ export class ErrorHandlerService implements ErrorHandler {
     if (error instanceof HttpErrorResponse) {
       if (error.status === 401) {
         window.alert(error.message);
-        this.router.navigate(['/auth/login']);
+        setTimeout(() => {
+          this.router.navigate(['/auth/login']);
+        });
       } else {
         window.alert(error.message);
       }

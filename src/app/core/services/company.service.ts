@@ -87,6 +87,9 @@ export class CompanyService {
   getUnvirifiedCompanies(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/inactive`);
   }
+  getAllActiveCompanies(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/active/all`);
+  }
 
   approveCompany(companyId: string): Observable<any> {
     return this.http.patch<any>(`${this.baseUrl}/${companyId}/approve`, {});

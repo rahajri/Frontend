@@ -61,8 +61,8 @@ export class ProjectConfirmationComponent {
     return new Date(date).toLocaleDateString('fr-FR', options);
   }
 
-  publishProject() {
-    this.projectService.publishProject(this.projectId).subscribe({
+  publishProject(id: string) {
+    this.projectService.publishProject(id).subscribe({
       next: (res) => {},
       error(err) {
         console.error(err);

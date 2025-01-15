@@ -111,6 +111,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       typologie: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(30)]],
       languages: this.fb.array([this.createLanguage()]),
+      company: [null],
     });
   }
   ngOnInit(): void {

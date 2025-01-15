@@ -179,7 +179,10 @@ export class ProjectsComponent implements OnInit {
 
   onFilterSubmit() {
     if (this.filterForm.valid) {
-      this.filterComp(this.filterForm.value);
+      this.filterComp({
+        ...this.filterForm.value,
+        status: this.selectedStatus,
+      });
     }
   }
 
