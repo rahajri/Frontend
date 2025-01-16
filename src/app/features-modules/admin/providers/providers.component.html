@@ -243,7 +243,35 @@
                       {{ getDate(element.endDate) }}
                     </mat-cell>
                   </ng-container>
-
+                  <ng-container matColumnDef="action">
+                    <mat-header-cell
+                      *matHeaderCellDef
+                      style="flex: none"
+                    ></mat-header-cell
+                    ><mat-cell *matCellDef="let element" style="flex: none"
+                      ><div class="hide-shave">
+                        <a
+                          href="javascript:void(0)"
+                          class="dropdown-toggle nav-link"
+                          data-bs-toggle="dropdown"
+                          ><i class="fas fa-ellipsis-v"></i
+                        ></a>
+                        <div class="dropdown-menu user-menu-list">
+                          <a class="dropdown-item" data-dismiss="modal"
+                            ><i class="feather icon-edit"></i> Editer</a
+                          >
+                          <a
+                            class="dropdown-item"
+                            href="javascript:void(0)"
+                            (click)="this.showDeleteOfferModal(element)"
+                            data-dismiss="modal"
+                            ><i class="feather icon-trash text-danger"></i>
+                            Supprimer</a
+                          >
+                        </div>
+                      </div></mat-cell
+                    ></ng-container
+                  >
                   <mat-header-row
                     *matHeaderRowDef="displayedColumns"
                   ></mat-header-row>
@@ -301,7 +329,8 @@
                     (keydown.enter)="addJob()"
                     [attr.autocomplete]="'off'"
                     [ngClass]="{
-                      'is-invalid': company?.invalid && (company?.touched || company?.dirty)
+                      'is-invalid':
+                        company?.invalid && (company?.touched || company?.dirty)
                     }"
                   />
                   <!-- Autocomplete suggestions -->
@@ -932,19 +961,25 @@
 <!-- Add Modal -->
 
 <!-- Delete Modal -->
-<div class="modal custom-modal fade" id="delete_category" role="dialog">
+<div class="modal custom-modal fade" id="delete_offer" role="dialog">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body">
         <div class="form-header">
-          <h3>Delete</h3>
-          <p>Are you sure want to delete?</p>
+          <h3>Supprimer</h3>
+          <p>Êtes-vous sur de vouloir supprimer</p>
+          <p>
+            <strong class="text-danger">{{ offerToDelete?.title }} ?</strong>
+          </p>
         </div>
         <div class="modal-btn delete-action">
           <div class="row">
             <div class="col-6">
-              <a href="javascript:void(0);" class="btn btn-primary continue-btn"
-                >Delete</a
+              <a
+                href="javascript:void(0);"
+                class="btn btn-primary continue-btn"
+                (click)="deleteOffer(offerToDelete)"
+                >Supprimer</a
               >
             </div>
             <div class="col-6">
@@ -952,7 +987,7 @@
                 href="javascript:void(0);"
                 data-bs-dismiss="modal"
                 class="btn btn-primary cancel-btn"
-                >Cancel</a
+                >Annuler</a
               >
             </div>
           </div>

@@ -27,6 +27,7 @@ export class ProjectsComponent implements OnInit {
     'Contact',
     'Téléphone',
     'Status',
+    'action',
   ];
   public routes = routes;
   public lstProject!: Array<Company>;
@@ -371,10 +372,6 @@ export class ProjectsComponent implements OnInit {
       let data = this.addClientForm.value;
       this.userService.createCompany(data).subscribe(
         (response) => {
-          this.alertService.showAlert(
-            'company created successfully!',
-            'success'
-          );
           this.verifyOtp(response?.user.id);
           this.hideModal('add-company');
           this.getTableData();

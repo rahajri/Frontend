@@ -135,6 +135,10 @@ export class BasicSettingsComponent {
       const modal = new bootstrap.Modal(modalElement);
       modal.show();
       modalElement.focus();
+
+      setTimeout(() => {
+        modal.hide();
+      }, 3000);
     }
   }
 

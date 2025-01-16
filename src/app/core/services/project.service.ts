@@ -65,4 +65,8 @@ export class ProjectService {
   projectsFiler(data: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.baseUrl}/filter`, data);
   }
+
+  deleteOffer(offerId: string) {
+    return this.http.delete<any>(`${this.baseUrl}/${offerId}`);
+  }
 }

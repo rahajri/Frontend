@@ -57,7 +57,9 @@ export class InseeApiService {
       map((response) => response.data), // Extract the `data` field from the response
       catchError((error) => {
         console.error('Error fetching SIRET details:', error);
-        return throwError(() => new Error('Failed to fetch SIRET details.'));
+        return throwError(
+          () => new Error('Aucun résultat trouvé pour ce numéro SIRET.')
+        );
       })
     );
   }

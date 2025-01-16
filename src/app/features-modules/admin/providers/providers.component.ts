@@ -56,13 +56,14 @@ export class ProvidersComponent implements OnInit {
     'city',
     'startDate',
     'endDate',
+    'action',
   ];
   public routes = routes;
   filter: boolean = false;
   selectedStatus: string | null = null;
   filterForm!: FormGroup;
   addOfferForm!: FormGroup;
-  offerToDelete: string = '';
+  offerToDelete: any;
   selectedHederTitle = 'Tous les projets';
   offersCounter: number = 0;
   inactiveOffersCounter: number = 0;
@@ -607,7 +608,7 @@ export class ProvidersComponent implements OnInit {
       this.projectService.createProject(this.addOfferForm.value).subscribe({
         next: (response) => {
           this.getTableData();
-          this.hideModal();
+          this.hideModal('add-offer');
         },
         error: (error) => {
           console.error('Error creating project:', error);
@@ -623,6 +624,18 @@ export class ProvidersComponent implements OnInit {
     this.companyService.getAllActiveCompanies().subscribe({
       next: (res) => {
         this.companies = res;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  deleteOffer(offer: any) {
+    this.projectService.deleteOffer(offer?.id).subscribe({
+      next: (res) => {
+        this.hideModal('delete_offer');
+        this.getTableData();
       },
       error: (err) => {
         console.error(err);
@@ -662,8 +675,8 @@ export class ProvidersComponent implements OnInit {
       event.preventDefault();
     }
   }
-  hideModal() {
-    const modalElement = document.getElementById('add-offer');
+  hideModal(id: string) {
+    const modalElement = document.getElementById(id);
     if (modalElement) {
       const modal = bootstrap.Modal.getInstance(modalElement);
       if (modal) {

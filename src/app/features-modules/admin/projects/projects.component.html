@@ -233,7 +233,7 @@
 
                       <!-- Contact Column -->
                       <ng-container matColumnDef="Contact">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <mat-header-cell *matHeaderCellDef>
                           Contact
                         </mat-header-cell>
                         <mat-cell
@@ -262,10 +262,7 @@
                         <mat-header-cell *matHeaderCellDef>
                           Status
                         </mat-header-cell>
-                        <mat-cell
-                          *matCellDef="let element"
-                          class="d-flex justify-content-between align-items-center"
-                        >
+                        <mat-cell *matCellDef="let element">
                           <div
                             [ngClass]="{
                               'text-success': element.status?.name === 'Active',
@@ -275,7 +272,15 @@
                           >
                             {{ element.status?.name }}
                           </div>
-                          <div class="hide-shave">
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="action">
+                        <mat-header-cell
+                          *matHeaderCellDef
+                          style="flex: none"
+                        ></mat-header-cell
+                        ><mat-cell *matCellDef="let element" style="flex: none"
+                          ><div class="hide-shave">
                             <a
                               href="javascript:void(0)"
                               class="dropdown-toggle nav-link"
@@ -300,9 +305,9 @@
                                 Supprimer</a
                               >
                             </div>
-                          </div>
-                        </mat-cell>
-                      </ng-container>
+                          </div></mat-cell
+                        ></ng-container
+                      >
 
                       <mat-header-row
                         *matHeaderRowDef="displayedColumns"
