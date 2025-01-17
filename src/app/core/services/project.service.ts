@@ -43,6 +43,14 @@ export class ProjectService {
     return this.http.post<any>(`${this.baseUrl}/${id}/publish`, {});
   }
 
+  disableProject(id: string | null) {
+    if (!id) {
+      throw new Error('Project ID cannot be null');
+    }
+
+    return this.http.post<any>(`${this.baseUrl}/${id}/disable`, {});
+  }
+
   getJobOffers(
     offset: number,
     limit: number,

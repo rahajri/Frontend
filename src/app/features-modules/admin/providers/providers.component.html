@@ -37,7 +37,11 @@
           </p>
         </div>
         <div class="col-auto">
-          <a href="javascript:" class="btn export-btn me-1">
+          <a
+            href="javascript:"
+            class="btn export-btn me-1"
+            (click)="exportDataToCsv()"
+          >
             <img src="assets/admin/img/export.svg" alt="" /> Exporter
           </a>
           <a
@@ -153,25 +157,32 @@
             <ul class="row">
               <!-- Add 'row' class here -->
               <li
-                class="col-4 text-center p-1 p-1"
+                class="col-3 text-center p-1 p-1"
                 (click)="filterOffersByStatus(null)"
                 [ngClass]="{ selected: selectedStatus === null }"
               >
                 Tous ({{ offersCounter }})
               </li>
               <li
-                class="col-4 text-center p-1"
+                class="col-3 text-center p-1"
                 (click)="filterOffersByStatus('Published')"
                 [ngClass]="{ selected: selectedStatus === 'Published' }"
               >
                 Actif ({{ activeOffersCounter }})
               </li>
               <li
-                class="col-4 text-center p-1"
+                class="col-3 text-center p-1"
                 (click)="filterOffersByStatus('Closed')"
                 [ngClass]="{ selected: selectedStatus === 'Closed' }"
               >
                 Inactif ({{ inactiveOffersCounter }})
+              </li>
+              <li
+                class="col-3 text-center p-1"
+                (click)="filterOffersByStatus('Draft')"
+                [ngClass]="{ selected: selectedStatus === 'Draft' }"
+              >
+                Brouillon ({{ draftOffersCounter }})
               </li>
             </ul>
           </div>
@@ -280,7 +291,7 @@
                   ></mat-row>
                 </mat-table>
                 <mat-paginator
-                  [pageSizeOptions]="[5, 10, 25, 50, 75, 100]"
+                  [pageSizeOptions]="[10, 25, 50, 75, 100]"
                   showFirstLastButtons
                   class="d-flex justify-content-center align-items-center"
                   style="font-weight: bold; font-size: 14px"
@@ -967,7 +978,13 @@
       <div class="modal-body">
         <div class="form-header">
           <h3>Supprimer</h3>
-          <p>Êtes-vous sur de vouloir supprimer</p>
+          <p *ngIf="offerToDelete?.status?.name !== 'Published'">
+            Êtes-vous sur de vouloir supprimer
+          </p>
+          <p *ngIf="offerToDelete?.status?.name === 'Published'">
+            Il n'est pas possible de supprimer une offre en cours.
+            Souhaitez-vous la désactiver ?
+          </p>
           <p>
             <strong class="text-danger">{{ offerToDelete?.title }} ?</strong>
           </p>
@@ -976,11 +993,19 @@
           <div class="row">
             <div class="col-6">
               <a
+                *ngIf="offerToDelete?.status?.name !== 'Published'"
                 href="javascript:void(0);"
                 class="btn btn-primary continue-btn"
                 (click)="deleteOffer(offerToDelete)"
                 >Supprimer</a
               >
+              <a
+                *ngIf="offerToDelete?.status?.name === 'Published'"
+                href="javascript:void(0);"
+                class="btn btn-primary continue-btn"
+                (click)="disableOffer(offerToDelete?.id)"
+                >Désactiver
+              </a>
             </div>
             <div class="col-6">
               <a

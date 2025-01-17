@@ -126,6 +126,12 @@ const routes: Routes = [
           import('./company/company.module').then((m) => m.CompanyModule),
       },
       {
+        path: 'projet/:id',
+        canActivate: [AuthenticateGuard],
+        loadChildren: () =>
+          import('./offer/offer.module').then((m) => m.OfferModule),
+      },
+      {
         path: 'views',
         loadChildren: () =>
           import('./views/views.module').then((m) => m.ViewsModule),

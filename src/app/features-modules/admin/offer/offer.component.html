@@ -1,0 +1,48 @@
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row">
+        <div class="col">
+          <h3 class="page-title">Détails du projet</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a [routerLink]="'/admin/dashboard'">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Détails du projet</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Page Wrapper -->
+
+<!-- Success Modal -->
+<div class="modal fade success-modal hire-modal" id="data-changed">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content" style="background-color: #a3cfbb">
+      <div class="modal-body pt-4">
+        <div class="success-msg-content text-center">
+          Vos données ont été modifiées avec <strong>succès</strong>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Success Modal -->
+<!-- Error Modal -->
+<div class="modal fade error-modal hire-modal" id="error">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content bg-danger">
+      <div class="modal-body pt-4">
+        <div class="error-msg-content text-center">
+          <strong>Error! </strong> Une erreur s'est produite côté serveur.
+          Veuillez réessayer plus tard.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Error Modal -->

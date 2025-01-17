@@ -23,6 +23,7 @@ import { LanguageService } from 'src/app/core/services/language.service';
 import { LocationService } from 'src/app/core/services/location.service';
 import { Editor, Toolbar } from 'ngx-editor';
 import { CompanyService } from 'src/app/core/services/company.service';
+import { exportToCsv } from 'src/app/core/services/common/common-functions';
 
 declare var bootstrap: any;
 interface data {
@@ -67,6 +68,7 @@ export class ProvidersComponent implements OnInit {
   selectedHederTitle = 'Tous les projets';
   offersCounter: number = 0;
   inactiveOffersCounter: number = 0;
+  draftOffersCounter: number = 0;
   activeOffersCounter: number = 0;
   deletedOffersCounter: number = 0;
   counter: number = 0;
@@ -198,12 +200,18 @@ export class ProvidersComponent implements OnInit {
   }
 
   private getTableData(): void {
+    this.draftOffersCounter = 0;
+    this.inactiveOffersCounter = 0;
+    this.activeOffersCounter = 0;
+    this.counter = 0;
     this.offersService.getAllOffers().subscribe({
       next: (res) => {
         this.offersData = res;
+        console.log(res);
         this.dataSource = new MatTableDataSource(res);
         this.offersCounter = res.length;
         this.counter = res.length;
+        this.setCounter(res);
       },
       error: (err) => {
         console.error(err);
@@ -212,6 +220,16 @@ export class ProvidersComponent implements OnInit {
         this.dataSource.sort = this.sort; // Assign sort after view initialization
         this.dataSource.paginator = this.paginator;
       },
+    });
+  }
+
+  disableOffer(id: string) {
+    this.projectService.disableProject(id).subscribe({
+      next: (res) => {
+        this.getTableData();
+        this.hideModal('delete_offer');
+      },
+      error: (err) => {},
     });
   }
 
@@ -239,6 +257,23 @@ export class ProvidersComponent implements OnInit {
 
     this.counter = this.filteredOffers.length;
   }
+  setCounter(res: any) {
+    res.forEach((offer: any) => {
+      switch (offer.status.name) {
+        case 'Draft':
+          this.draftOffersCounter++;
+          break;
+        case 'Closed':
+          this.inactiveOffersCounter++;
+          break;
+        case 'Published':
+          this.activeOffersCounter++;
+          break;
+        default:
+          break;
+      }
+    });
+  }
 
   getTranslation(key: string | null): string {
     if (key === null) {
@@ -247,6 +282,7 @@ export class ProvidersComponent implements OnInit {
       const translations: { [key: string]: string } = {
         Published: 'les projets publiés',
         Closed: 'Les projets fermés',
+        Draft: 'Les Brouillon ',
       };
       return translations[key] || key;
     }
@@ -683,5 +719,13 @@ export class ProvidersComponent implements OnInit {
         modal.hide();
       }
     }
+  }
+
+  exportDataToCsv() {
+    const filename = 'offers_export.csv';
+    exportToCsv(
+      filename,
+       this.offersData
+    );
   }
 }
