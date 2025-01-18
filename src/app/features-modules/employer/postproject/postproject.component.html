@@ -319,6 +319,7 @@
                     class="form-control"
                     type="date"
                     placeholder="Choisissez une date"
+                    [min]="minDate"
                     [ngClass]="{
                       'is-invalid':
                         startDate?.invalid &&
@@ -331,7 +332,10 @@
                     class="text-danger"
                   >
                     <div *ngIf="startDate?.errors?.['required']">
-                      Date de début prévue est obligatoire.
+                      - Date de début prévue est obligatoire.
+                    </div>
+                    <div *ngIf="startDate?.errors?.['minDate']">
+                      - La date ne peut pas être dans le passé.
                     </div>
                   </div>
                 </div>
@@ -342,6 +346,7 @@
                     formControlName="endDate"
                     class="form-control"
                     type="date"
+                    [min]="minDate"
                     [ngClass]="{
                       'is-invalid':
                         endDate?.invalid && (endDate?.touched || endDate?.dirty)
@@ -353,7 +358,10 @@
                     class="text-danger"
                   >
                     <div *ngIf="endDate?.errors?.['required']">
-                      Date de fin est obligatoire.
+                      - Date de fin est obligatoire.
+                    </div>
+                    <div *ngIf="endDate?.errors?.['minDate']">
+                      - La date ne peut pas être dans le passé.
                     </div>
                   </div>
                 </div>
@@ -448,7 +456,7 @@
                     type="text"
                     class="border-0"
                     (input)="filterSkills($event.target)"
-                    (keydown.enter)="addSkill()"
+                    (keydown.enter)="addSkill($event)"
                     placeholder="Ajoutez des compétences"
                     autocomplete="off"
                   />

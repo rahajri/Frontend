@@ -251,7 +251,7 @@ export class routes {
     return this.admin + `/company/${id}`;
   }
   public static get_admin_offer(id: string): string {
-    return this.admin + `/projet/${id}`;
+    return this.admin + `/providers/${id}`;
   }
   public static get admin_setting(): string {
     return this.admin + '/settings/general';

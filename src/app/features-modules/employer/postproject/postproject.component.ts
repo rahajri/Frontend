@@ -16,6 +16,7 @@ import { ContractService } from 'src/app/core/services/contract.service';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { LanguageService } from 'src/app/core/services/language.service';
+import { minDateValidator } from 'src/app/core/services/common/common-functions';
 interface data {
   value: string;
 }
@@ -46,6 +47,9 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
+    ['horizontal_rule', 'format_clear', 'indent', 'outdent'],
+    ['superscript', 'subscript'],
+    ['undo', 'redo'],
   ];
 
   jobForm: FormGroup;
@@ -76,6 +80,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     { value: 'Annuel' },
     { value: 'JTM' },
   ];
+  minDate: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -87,6 +92,9 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     private languageService: LanguageService,
     private router: Router
   ) {
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0];
+
     this.jobForm = this.fb.group({
       title: [
         '',
@@ -104,8 +112,8 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       contractType: ['', [Validators.required]],
       duration: [0, [Validators.required, Validators.min(1)]],
       timeUnit: [null, [Validators.required]],
-      startDate: [null, [Validators.required]],
-      endDate: [null, [Validators.required]],
+      startDate: [null, [Validators.required, minDateValidator(today)]],
+      endDate: [null, [Validators.required, minDateValidator(today)]],
       skills: [''],
       salary: [0, Validators.min(0)],
       typologie: ['', Validators.required],
@@ -361,20 +369,37 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     this.filteredSkills = [];
   }
 
-  addSkill(): void {
-    const skillName = this.jobForm.get('skills')?.value?.trim(); // Get and trim the job name
+  addSkill(event: any): void {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    const skillName = this.jobForm.get('skills')?.value?.trim(); // Get and trim the skill name
     if (!skillName) {
-      return;
+      return; // Do nothing if the skill name is empty
     }
-    const existingSkill = this.filteredSkills.find(
+
+    // Check if the skill exists in the filteredSkills array
+    const existingSkillInFiltered = this.filteredSkills.find(
       (skill) => skill.name.toLowerCase() === skillName.toLowerCase()
     );
 
-    if (existingSkill) {
-      return;
+    // Check if the skill already exists in the selectedSkills array
+    const existingSkillInSelected = this.selectedSkills.find(
+      (skill) => skill.name.toLowerCase() === skillName.toLowerCase()
+    );
+
+    if (existingSkillInFiltered) {
+      // If the skill exists in filteredSkills, add it to selectedSkills (if not already added)
+      if (!existingSkillInSelected) {
+        this.selectedSkills.push(existingSkillInFiltered);
+      }
+    } else {
+      // If the skill does not exist in filteredSkills, add it as a new skill to selectedSkills
+      if (!existingSkillInSelected) {
+        this.selectedSkills.push({ name: skillName });
+      }
     }
 
-    this.selectedSkills.push({ name: skillName });
+    // Reset the input field
     this.jobForm.patchValue({
       skills: '',
     });
@@ -417,7 +442,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     if (typeId && typeId !== this.previous) {
       this.previous = typeId;
       this.contractService.getTypeDetails(typeId).subscribe((data) => {
-        if (data.description === 'CDI (Contrat à Durée Indéterminée)') {
+        if (data.description === 'CDI') {
           this.isCdiSelected = true;
           this.removeValidation();
         } else {

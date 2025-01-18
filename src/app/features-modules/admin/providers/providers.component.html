@@ -337,7 +337,6 @@
                     type="text"
                     placeholder="Saisir une nom d'entreprise"
                     (input)="filterCompanies($event.target)"
-                    (keydown.enter)="addJob()"
                     [attr.autocomplete]="'off'"
                     [ngClass]="{
                       'is-invalid':
@@ -641,6 +640,7 @@
               class="form-control"
               type="date"
               placeholder="Choisissez une date"
+              [min]="minDate"
               [ngClass]="{
                 'is-invalid':
                   startDate?.invalid && (startDate?.touched || startDate?.dirty)
@@ -652,7 +652,10 @@
               class="text-danger"
             >
               <div *ngIf="startDate?.errors?.['required']">
-                Date de début prévue est obligatoire.
+                - Date de début prévue est obligatoire.
+              </div>
+              <div *ngIf="startDate?.errors?.['minDate']">
+                - La date ne peut pas être dans le passé.
               </div>
             </div>
 
@@ -663,6 +666,7 @@
                 formControlName="endDate"
                 class="form-control"
                 type="date"
+                [min]="minDate"
                 [ngClass]="{
                   'is-invalid':
                     endDate?.invalid && (endDate?.touched || endDate?.dirty)
@@ -674,7 +678,10 @@
                 class="text-danger"
               >
                 <div *ngIf="endDate?.errors?.['required']">
-                  Date de fin est obligatoire.
+                  - Date de fin est obligatoire.
+                </div>
+                <div *ngIf="endDate?.errors?.['minDate']">
+                  - La date ne peut pas être dans le passé.
                 </div>
               </div>
             </div>
@@ -757,7 +764,11 @@
               >
                 <span *ngFor="let skill of selectedSkills" class="skill-chip">
                   {{ skill.name }}
-                  <button (click)="removeSkill(skill)" class="remove-btn">
+                  <button
+                    type="button"
+                    (click)="removeSkill(skill)"
+                    class="remove-btn"
+                  >
                     x
                   </button>
                 </span>
@@ -768,7 +779,7 @@
                   type="text"
                   class="border-0"
                   (input)="filterSkills($event.target)"
-                  (keydown.enter)="addSkill()"
+                  (keydown.enter)="addSkill($event)"
                   placeholder="Ajoutez des compétences"
                   autocomplete="off"
                 />
@@ -956,6 +967,18 @@
                 La description du poste doit contenir au moins 30 caractères.
               </div>
             </div>
+          </div>
+          <hr />
+          <div class="form-check custom-checkbox" class="h5">
+            <input
+              formControlName="publish"
+              type="checkbox"
+              class="form-check-input ms-2"
+              id="publish-ckeck"
+            />
+            <label class="form-check-label ms-2" for="publish-ckeck">
+              Activer directement l'offre</label
+            >
           </div>
           <hr />
           <button

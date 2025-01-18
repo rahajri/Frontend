@@ -1,3 +1,5 @@
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+
 // csv-export.util.ts
 export function exportToCsv(filename: string, rows: any[]) {
   if (!rows || !rows.length) {
@@ -65,4 +67,13 @@ export function exportToCsv(filename: string, rows: any[]) {
     link.click();
     document.body.removeChild(link);
   }
+}
+
+export function minDateValidator(minDate: Date): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const selectedDate = new Date(control.value);
+    return selectedDate < minDate
+      ? { minDate: { value: control.value } }
+      : null;
+  };
 }

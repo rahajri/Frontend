@@ -43,7 +43,7 @@ export class ProjectConfirmationComponent {
   }
 
   checkIfContractIsCDI(contract: any) {
-    if (contract?.description === 'CDI (Contrat à Durée Indéterminée)') {
+    if (contract?.description === 'CDI') {
       this.isNotCDIContract = false;
     } else {
       this.isNotCDIContract = true;
