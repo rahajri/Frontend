@@ -14,5 +14,8 @@ export class StatusService {
   getAllCompanyStatus(): Observable<any> {
     return this.http.get<any>(this.baseUrl + '/company');
   }
+  getProjectsStatus(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + '/project');
+  }
 
 }

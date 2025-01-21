@@ -57,6 +57,7 @@ export class ProvidersComponent implements OnInit {
   ];
   dataSource: MatTableDataSource<Offer>;
   displayedColumns: string[] = [
+    'createdAt',
     'title',
     'companyName',
     'ContactType',

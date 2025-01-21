@@ -1,0 +1,88 @@
+.autocomplete-list {
+  list-style: none; /* Remove default bullet points */
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
+  max-height: 200px; /* Limit height for scrollable content */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+  border: 1px solid #ccc; /* Add a border for the dropdown */
+  border-radius: 4px; /* Round the corners */
+  background-color: #fff; /* Set background to white */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  z-index: 1000; /* Ensure it appears above other elements */
+  position: absolute; /* Position dropdown appropriately */
+  width: 400px; /* Match the width of the input field */
+}
+
+/* Styling for each list item */
+.autocomplete-item {
+  padding: 8px 12px; /* Add padding for spacing */
+  cursor: pointer; /* Show pointer cursor to indicate clickability */
+  transition: background-color 0.2s ease; /* Smooth hover transition */
+}
+
+/* Hover effect for list items */
+.autocomplete-item:hover {
+  background-color: #f1f1f1; /* Light gray background on hover */
+  color: #007bff; /* Change text color to blue on hover */
+}
+
+.selected-skills {
+  display: flex; /* Makes child elements appear next to each other */
+  flex-wrap: wrap; /* Allows elements to wrap to the next line if they don't fit */
+  gap: 10px; /* Adds spacing between the elements */
+  padding: 5px;
+  border: 1px solid #ddd; /* Optional: Adds a border for visual clarity */
+  border-radius: 5px;
+}
+
+.skill-chip {
+  display: inline-flex; /* Aligns text and button inside the chip */
+  align-items: center; /* Vertically centers the content */
+  background-color: #2c8c99; /* Light gray background */
+  color: white; /* Text color */
+  padding: 5px 10px; /* Adds some padding inside the chip */
+  border-radius: 10px; /* Makes the chips rounded */
+  font-size: 14px; /* Optional: Adjusts text size */
+}
+
+.remove-btn {
+  background: none; /* Removes default button styling */
+  border: none; /* Removes border */
+  color: white; /* Red color for remove button */
+  font-size: 16px;
+  margin-left: 5px; /* Adds spacing between text and button */
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  color: #ff0000; /* Darker red on hover */
+}
+
+.is-invalid {
+  border-color: red !important;
+}
+
+select.disabled {
+  pointer-events: none; /* Prevent any interaction */
+  opacity: 0.5; /* Make it look disabled */
+}
+
+/* Define background colors for each status */
+.status-draft {
+  background-color: #ffa500; /* Orange for Draft */
+  color: white; /* White text for contrast */
+  font-weight: bold;
+}
+
+.status-published {
+  background-color: #008000; /* Green for Published */
+  color: white; /* White text for contrast */
+  font-weight: bold;
+}
+
+.status-closed {
+  background-color: #ff0000; /* Red for Closed */
+  color: white; /* White text for contrast */
+  font-weight: bold;
+}

@@ -207,8 +207,19 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header>
                       Titre
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
+                    <mat-cell
+                      *matCellDef="let element"
+                      [routerLink]="routes.get_admin_offer(element.id)"
+                    >
                       {{ element.title }}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="createdAt">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                      Date de création
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                      {{ getDate(element.createdAt) }}
                     </mat-cell>
                   </ng-container>
 
@@ -268,7 +279,10 @@
                           ><i class="fas fa-ellipsis-v"></i
                         ></a>
                         <div class="dropdown-menu user-menu-list">
-                          <a class="dropdown-item" data-dismiss="modal"
+                          <a
+                            class="dropdown-item"
+                            data-dismiss="modal"
+                            [routerLink]="routes.get_admin_offer(element.id)"
                             ><i class="feather icon-edit"></i> Editer</a
                           >
                           <a
@@ -312,7 +326,7 @@
     <div class="modal-content">
       <div class="modal-header flex-wrap">
         <div class="text-center w-100 mb-3">
-          <img src="assets/admin/img/logo-small.png" alt="" />
+          <img src="assets/img/interim.png" alt="logo" />
         </div>
         <h4 class="modal-title">Créer une offre</h4>
         <button type="button" class="close" data-bs-dismiss="modal">
@@ -924,6 +938,7 @@
                     class="add-new me-2"
                     (click)="addLanguage()"
                     tabindex="0"
+                    style="color: #179ab5 !important"
                   >
                     <i class="feather icon-plus-circle me-1"></i> Ajouter
                   </a>

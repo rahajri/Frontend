@@ -19,6 +19,13 @@ export class ProjectService {
     return this.http.post<any>(`${this.baseUrl}/create`, project);
   }
 
+  updateProject(id: string | null, projectData: any) {
+    if (!id) {
+      throw new Error('Project ID cannot be null');
+    }
+    return this.http.patch<any>(`${this.baseUrl}/${id}`, projectData);
+  }
+
   /**
    * Fetches details of a specific project
    * @param id The project ID
