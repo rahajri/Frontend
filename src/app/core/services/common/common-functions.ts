@@ -89,3 +89,20 @@ export function minDateValidator(minDate: Date): ValidatorFn {
       : null;
   };
 }
+
+export function companyExistsValidator(
+  getFilteredCompanies: () => any[]
+): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) {
+      return null;
+    }
+    const filteredCompanies = getFilteredCompanies();
+    const enteredValue = control.value.trim().toLowerCase();
+    const companyExists = filteredCompanies.some(
+      (company) => company.name.trim().toLowerCase() === enteredValue
+    );
+
+    return companyExists ? null : { companyNotExist: true };
+  };
+}

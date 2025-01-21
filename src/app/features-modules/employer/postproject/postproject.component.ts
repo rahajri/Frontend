@@ -43,7 +43,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     ['bold', 'italic'],
     ['underline', 'strike'],
     ['code', 'blockquote'],
-    ['ordered_list', 'bullet_list'],
+    ['ordered_list'],
     [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
@@ -111,11 +111,12 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       region: ['', [Validators.required]],
       contractType: ['', [Validators.required]],
       duration: [0, [Validators.required, Validators.min(1)]],
+      seniority: ['', [Validators.required]],
       timeUnit: [null, [Validators.required]],
       startDate: [null, [Validators.required, minDateValidator(today)]],
       endDate: [null, [Validators.required, minDateValidator(today)]],
       skills: [''],
-      salary: [0, Validators.min(0)],
+      salary: [0, [Validators.min(1), Validators.required]],
       typologie: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(30)]],
       languages: this.fb.array([this.createLanguage()]),
@@ -151,6 +152,9 @@ export class PostprojectComponent implements OnInit, OnDestroy {
 
   get title() {
     return this.jobForm.get('title');
+  }
+  get seniority() {
+    return this.jobForm.get('seniority');
   }
   get activity() {
     return this.jobForm.get('activity');

@@ -309,6 +309,36 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="col-md-4">
+                  <label for="seniority" class="focus-label">Séniorité</label>
+                  <select
+                    id="seniority"
+                    class="form-control form-select"
+                    formControlName="seniority"
+                    [ngClass]="{
+                      'is-invalid': seniority?.touched && seniority?.invalid
+                    }"
+                  >
+                    <option selected disabled>
+                      Veuillez sélectionner la séniorité...
+                    </option>
+                    <option value="< 1 ans">< 1 ans</option>
+                    <option value="de 1 à 5 ans">de 1 à 5 ans</option>
+                    <option value="de 5 à 10 ans">de 5 à 10 ans</option>
+                    <option value="> 10 ans">> 10 ans</option>
+                  </select>
+                  <!-- Message d'erreur -->
+                  <div
+                    *ngIf="seniority?.touched && seniority?.invalid"
+                    class="text-danger"
+                  >
+                    <div *ngIf="seniority?.errors?.['required']">
+                      La séniorité est obligatoire.
+                    </div>
+                  </div>
+                </div>
+
                 <div class="col-md-4">
                   <label for="startDate" class="focus-label"
                     >Date de début prévue</label
@@ -339,7 +369,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4" *ngIf="!isCdiSelected">
+              </div>
+
+              <div class="row mt-2" *ngIf="!isCdiSelected">
+                <div class="col-md-4">
                   <label for="startDate" class="focus-label">Date de fin</label>
                   <input
                     id="endDate"
@@ -365,10 +398,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="row mt-2" *ngIf="!isCdiSelected">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <label for="duration" class="focus-label">Durée prévue</label>
 
                   <input
@@ -397,7 +428,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <label for="timeUnit" class="focus-label"
                     >Unité de temps</label
                   >
@@ -488,18 +519,28 @@
                   <!-- Salaire Input -->
                   <div class="col-md-6">
                     <div class="input-block">
-                      <label for="salaire" class="form-label">Salaire</label>
+                      <label for="salaire" class="form-label"
+                        >Salaire à partir de
+                      </label>
                       <input
                         id="salaire"
                         formControlName="salary"
                         type="number"
                         class="form-control"
+                        [ngClass]="{
+                          'is-invalid':
+                            salary?.invalid &&
+                            (salary?.touched || salary?.dirty)
+                        }"
                       />
 
                       <div
                         *ngIf="salary?.touched && salary?.invalid"
                         class="text-danger"
                       >
+                        <div *ngIf="salary?.errors?.['required']">
+                          Le salaire est obligatoire.
+                        </div>
                         <div *ngIf="salary?.errors?.['min']">
                           La Salaire doit être supérieure à 0.
                         </div>
@@ -515,6 +556,11 @@
                         id="typologie"
                         formControlName="typologie"
                         class="form-select"
+                        [ngClass]="{
+                          'is-invalid':
+                            jobForm.get('typologie')?.touched &&
+                            jobForm.get('typologie')?.invalid
+                        }"
                       >
                         <option value="" disabled selected>
                           Sélectionner une typologie
@@ -526,6 +572,20 @@
                           {{ level.value }}
                         </option>
                       </select>
+                      <!-- Error Message -->
+                      <div
+                        *ngIf="
+                          jobForm.get('typologie')?.touched &&
+                          jobForm.get('typologie')?.invalid
+                        "
+                        class="text-danger"
+                      >
+                        <div
+                          *ngIf="jobForm.get('typologie')?.errors?.['required']"
+                        >
+                          La typologie est obligatoire.
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -533,7 +593,7 @@
 
               <div class="row" formArrayName="languages">
                 <div class="col-md-12">
-                  <h4>Language</h4>
+                  <h4>Langues</h4>
                 </div>
                 <div
                   class="col-md-12"
@@ -547,9 +607,7 @@
                     <!-- Language Input -->
                     <div class="col-md-6">
                       <div class="input-block">
-                        <label for="language" class="form-label"
-                          >Language</label
-                        >
+                        <label for="language" class="form-label">Langue</label>
                         <input
                           type="text"
                           class="form-control"
@@ -624,11 +682,6 @@
                   >Description détaillée</label
                 >
                 <ngx-editor-menu
-                  [ngClass]="{
-                    'is-invalid':
-                      description?.invalid &&
-                      (description?.touched || description?.dirty)
-                  }"
                   [editor]="editor"
                   [toolbar]="toolbar"
                 ></ngx-editor-menu>

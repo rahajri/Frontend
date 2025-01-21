@@ -24,6 +24,7 @@ import { LocationService } from 'src/app/core/services/location.service';
 import { Editor, Toolbar } from 'ngx-editor';
 import { CompanyService } from 'src/app/core/services/company.service';
 import {
+  companyExistsValidator,
   exportToCsv,
   minDateValidator,
 } from 'src/app/core/services/common/common-functions';
@@ -47,7 +48,7 @@ export class ProvidersComponent implements OnInit {
     ['bold', 'italic'],
     ['underline', 'strike'],
     ['code', 'blockquote'],
-    ['ordered_list', 'bullet_list'],
+    ['ordered_list'],
     [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
@@ -59,9 +60,10 @@ export class ProvidersComponent implements OnInit {
   displayedColumns: string[] = [
     'createdAt',
     'title',
+    'seniority',
     'companyName',
-    'ContactType',
     'city',
+    'ContactType',
     'startDate',
     'endDate',
     'action',
@@ -156,6 +158,7 @@ export class ProvidersComponent implements OnInit {
       city: ['', [Validators.required]],
       department: ['', [Validators.required]],
       region: ['', [Validators.required]],
+      seniority: ['', [Validators.required]],
       contractType: ['', [Validators.required]],
       duration: [0, [Validators.required, Validators.min(1)]],
       timeUnit: [null, [Validators.required]],
@@ -166,7 +169,13 @@ export class ProvidersComponent implements OnInit {
       typologie: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(30)]],
       languages: this.fb.array([this.createLanguage()]),
-      company: [null, [Validators.required]],
+      company: [
+        null,
+        [
+          Validators.required,
+          companyExistsValidator(() => this.filteredCompanies),
+        ],
+      ],
       publish: [false],
     });
   }
@@ -355,6 +364,9 @@ export class ProvidersComponent implements OnInit {
   get title() {
     return this.addOfferForm.get('title');
   }
+  get seniority() {
+    return this.addOfferForm.get('seniority');
+  }
   get activity() {
     return this.addOfferForm.get('activity');
   }
@@ -493,13 +505,19 @@ export class ProvidersComponent implements OnInit {
       );
       this.jobNotExist = this.filteredCompanies.length === 0;
     }
+    this.addOfferForm.get('company')?.updateValueAndValidity();
   }
 
   selectCompany(company: any): void {
-    this.filteredCompanies = [];
+    // Set the selected company in the form control
     this.addOfferForm.patchValue({
       company: company?.name,
     });
+
+    // Clear the filteredCompanies array after a short delay
+    setTimeout(() => {
+      this.filteredCompanies = [];
+    }, 200); // Adjust the delay as needed
   }
 
   selectJob(job: any): void {

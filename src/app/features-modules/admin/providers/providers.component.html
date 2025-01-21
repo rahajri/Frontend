@@ -218,7 +218,10 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header>
                       Date de création
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
+                    <mat-cell
+                      *matCellDef="let element"
+                      [routerLink]="routes.get_admin_offer(element.id)"
+                    >
                       {{ getDate(element.createdAt) }}
                     </mat-cell>
                   </ng-container>
@@ -227,7 +230,10 @@
                     <mat-header-cell *matHeaderCellDef>
                       Nom Entreprise
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
+                    <mat-cell
+                      *matCellDef="let element"
+                      [routerLink]="routes.get_admin_offer(element.id)"
+                    >
                       {{ element?.company?.name }}
                     </mat-cell>
                   </ng-container>
@@ -236,15 +242,33 @@
                     <mat-header-cell *matHeaderCellDef>
                       Type Contrat
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
+                    <mat-cell
+                      *matCellDef="let element"
+                      [routerLink]="routes.get_admin_offer(element.id)"
+                    >
                       {{ element?.contractType?.description }}
                     </mat-cell>
                   </ng-container>
 
                   <ng-container matColumnDef="city">
                     <mat-header-cell *matHeaderCellDef> Ville </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
+                    <mat-cell
+                      *matCellDef="let element"
+                      [routerLink]="routes.get_admin_offer(element.id)"
+                    >
                       {{ element?.city?.name }}
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="seniority">
+                    <mat-header-cell *matHeaderCellDef>
+                      Séniorité
+                    </mat-header-cell>
+                    <mat-cell
+                      *matCellDef="let element"
+                      [routerLink]="routes.get_admin_offer(element.id)"
+                    >
+                      {{ element?.seniority || "< 1 ans" }}
                     </mat-cell>
                   </ng-container>
 
@@ -252,7 +276,10 @@
                     <mat-header-cell mat-sort-header *matHeaderCellDef>
                       Date Début
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
+                    <mat-cell
+                      *matCellDef="let element"
+                      [routerLink]="routes.get_admin_offer(element.id)"
+                    >
                       {{ getDate(element.startDate) }}
                     </mat-cell>
                   </ng-container>
@@ -261,7 +288,10 @@
                     <mat-header-cell mat-sort-header *matHeaderCellDef>
                       Date Fin
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let element">
+                    <mat-cell
+                      *matCellDef="let element"
+                      [routerLink]="routes.get_admin_offer(element.id)"
+                    >
                       {{ getDate(element.endDate) }}
                     </mat-cell>
                   </ng-container>
@@ -269,13 +299,15 @@
                     <mat-header-cell
                       *matHeaderCellDef
                       style="flex: none"
-                    ></mat-header-cell
-                    ><mat-cell *matCellDef="let element" style="flex: none"
+                    ></mat-header-cell>
+                    <mat-cell
+                      *matCellDef="let element"
+                      style="flex: none"
+                      data-bs-toggle="dropdown"
                       ><div class="hide-shave">
                         <a
                           href="javascript:void(0)"
                           class="dropdown-toggle nav-link"
-                          data-bs-toggle="dropdown"
                           ><i class="fas fa-ellipsis-v"></i
                         ></a>
                         <div class="dropdown-menu user-menu-list">
@@ -377,6 +409,10 @@
                   >
                     <div *ngIf="company?.errors?.['required']">
                       L'entreprise est obligatoire.
+                    </div>
+                    <div *ngIf="company?.errors?.['companyNotExist']">
+                      Cette entreprise n'est pas encore inscrite sur la
+                      plateforme.
                     </div>
                   </div>
                 </div>
@@ -645,6 +681,33 @@
               </div>
             </div>
 
+            <label for="seniority" class="focus-label">Séniorité</label>
+            <select
+              id="seniority"
+              class="form-control form-select"
+              formControlName="seniority"
+              [ngClass]="{
+                'is-invalid': seniority?.touched && seniority?.invalid
+              }"
+            >
+              <option value="" disabled selected>
+                Veuillez sélectionner la séniorité...
+              </option>
+              <option value="< 1 ans">< 1 ans</option>
+              <option value="de 1 à 5 ans">de 1 à 5 ans</option>
+              <option value="de 5 à 10 ans">de 5 à 10 ans</option>
+              <option value="> 10 ans">> 10 ans</option>
+            </select>
+            <!-- Message d'erreur -->
+            <div
+              *ngIf="seniority?.touched && seniority?.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="seniority?.errors?.['required']">
+                La séniorité est obligatoire.
+              </div>
+            </div>
+
             <label for="startDate" class="focus-label"
               >Date de début prévue</label
             >
@@ -735,7 +798,7 @@
               <select
                 id="timeUnit"
                 formControlName="timeUnit"
-                class="form-select"
+                class="form-control form-select"
                 [ngClass]="{
                   'is-invalid':
                     timeUnit?.invalid && (timeUnit?.touched || timeUnit?.dirty)

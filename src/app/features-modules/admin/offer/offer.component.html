@@ -323,6 +323,36 @@
               </div>
             </div>
           </div>
+          
+          <div class="col-md-4">
+            <label for="seniority" class="focus-label">Séniorité</label>
+            <select
+              id="seniority"
+              class="form-control form-select"
+              formControlName="seniority"
+              [ngClass]="{
+                'is-invalid': seniority?.touched && seniority?.invalid
+              }"
+            >
+              <option value="" disabled selected>
+                Veuillez sélectionner la séniorité...
+              </option>
+              <option value="< 1 ans">< 1 ans</option>
+              <option value="de 1 à 5 ans">de 1 à 5 ans</option>
+              <option value="de 5 à 10 ans">de 5 à 10 ans</option>
+              <option value="> 10 ans">> 10 ans</option>
+            </select>
+            <!-- Message d'erreur -->
+            <div
+              *ngIf="seniority?.touched && seniority?.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="seniority?.errors?.['required']">
+                La séniorité est obligatoire.
+              </div>
+            </div>
+          </div>
+
           <div class="col-md-4">
             <label for="startDate" class="focus-label"
               >Date de début prévue</label
@@ -352,36 +382,10 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4" *ngIf="!isCdiSelected">
-            <label for="startDate" class="focus-label">Date de fin</label>
-            <input
-              id="endDate"
-              formControlName="endDate"
-              class="form-control"
-              type="date"
-              [min]="minDate"
-              [ngClass]="{
-                'is-invalid':
-                  endDate?.invalid && (endDate?.touched || endDate?.dirty)
-              }"
-            />
-            <!-- Message d'erreur -->
-            <div
-              *ngIf="endDate?.touched && endDate?.invalid"
-              class="text-danger"
-            >
-              <div *ngIf="endDate?.errors?.['required']">
-                - Date de fin est obligatoire.
-              </div>
-              <div *ngIf="endDate?.errors?.['minDate']">
-                - La date ne peut pas être dans le passé.
-              </div>
-            </div>
-          </div>
         </div>
 
         <div class="row mt-2" *ngIf="!isCdiSelected">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="duration" class="focus-label">Durée prévue</label>
 
             <input
@@ -409,7 +413,7 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="timeUnit" class="focus-label">Unité de temps</label>
             <select
               id="timeUnit"
@@ -434,6 +438,33 @@
             >
               <div *ngIf="timeUnit?.errors?.['required']">
                 Unité de temps est obligatoire.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label for="startDate" class="focus-label">Date de fin</label>
+            <input
+              id="endDate"
+              formControlName="endDate"
+              class="form-control"
+              type="date"
+              [min]="minDate"
+              [ngClass]="{
+                'is-invalid':
+                  endDate?.invalid && (endDate?.touched || endDate?.dirty)
+              }"
+            />
+            <!-- Message d'erreur -->
+            <div
+              *ngIf="endDate?.touched && endDate?.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="endDate?.errors?.['required']">
+                - Date de fin est obligatoire.
+              </div>
+              <div *ngIf="endDate?.errors?.['minDate']">
+                - La date ne peut pas être dans le passé.
               </div>
             </div>
           </div>

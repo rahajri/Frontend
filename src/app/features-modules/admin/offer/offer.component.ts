@@ -43,7 +43,7 @@ export class OfferComponent {
     ['bold', 'italic'],
     ['underline', 'strike'],
     ['code', 'blockquote'],
-    ['ordered_list', 'bullet_list'],
+    ['ordered_list'],
     [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
@@ -115,6 +115,7 @@ export class OfferComponent {
       city: ['', [Validators.required]],
       department: ['', [Validators.required]],
       region: ['', [Validators.required]],
+      seniority: ['', [Validators.required]],
       contractType: ['', [Validators.required]],
       duration: [0, [Validators.required, Validators.min(1)]],
       timeUnit: [null, [Validators.required]],
@@ -170,6 +171,7 @@ export class OfferComponent {
           title: res.title || '',
           description: res?.description || '',
           endDate: res.endDate || '',
+          seniority: res.seniority || '',
           contractType: res.contractType.id || '',
           startDate: res?.startDate || '',
           duration: res?.expectedDuration || '',
@@ -231,6 +233,9 @@ export class OfferComponent {
 
   get title() {
     return this.jobForm.get('title');
+  }
+  get seniority() {
+    return this.jobForm.get('seniority');
   }
   get activity() {
     return this.jobForm.get('activity');
