@@ -1743,7 +1743,7 @@ export class ShareDataService {
           route: routes.admin_projects,
           hasSubRoute: false,
           showSubRoute: false,
-          icon: 'icon-users',
+          icon: 'icon-target',
           base: 'projects',
           subMenus: [],
         },
