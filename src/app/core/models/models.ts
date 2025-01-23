@@ -157,6 +157,32 @@ export interface Company {
   };
 }
 
+export interface Candidate {
+  id: string;
+  lastName: string;
+  firstName: string;
+  email: string;
+  password: string;
+  phone: string | null;
+  birthDate: null;
+  age: null;
+  role: string;
+  emailVerifiedAt: Date | null;
+  profileTitle: string | null;
+  aiId: null;
+  createdAt: Date;
+  updatedAt: Date;
+  lastConnection: Date | null;
+  profileUpdatedAt: Date | null;
+  image: string | null;
+  status: {
+    id: string;
+    name: string;
+    description: string;
+    context: string;
+  };
+}
+
 export interface Profile {
   age: string;
   startDate: string;

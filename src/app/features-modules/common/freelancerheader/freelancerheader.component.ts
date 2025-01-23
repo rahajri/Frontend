@@ -24,9 +24,9 @@ export class FreelancerheaderComponent implements OnInit {
   public routes = routes;
   profile: any | null = null;
   initials: string = '';
-  profileName: string = '';
   imgUrl: string = '';
   baseUrl = environment.apiUrl;
+  profileName: string = '';
 
   navbar: Array<header> = [];
 

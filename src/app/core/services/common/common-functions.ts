@@ -106,3 +106,19 @@ export function companyExistsValidator(
     return companyExists ? null : { companyNotExist: true };
   };
 }
+
+export function toggleAllCheckboxes(event: Event): void {
+  // Get the target checkbox that was clicked
+  const targetCheckbox = event.target as HTMLInputElement;
+  const isChecked = targetCheckbox.checked;
+
+  // Select all checkboxes in the table
+  const allCheckboxes = document.querySelectorAll(
+    'input[type="checkbox"]'
+  ) as NodeListOf<HTMLInputElement>;
+
+  // Set the checked state of all checkboxes to match the clicked checkbox
+  allCheckboxes.forEach((checkbox) => {
+    checkbox.checked = isChecked;
+  });
+}

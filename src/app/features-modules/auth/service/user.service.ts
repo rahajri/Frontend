@@ -55,7 +55,7 @@ export class UserService {
     return this.http.post<any>(url, userData);
   }
 
-  getProfileDetails(profile: Profile | null) {
+  getProfileDetails(profile: any | null) {
     let fullName = '';
     let initials = '';
 

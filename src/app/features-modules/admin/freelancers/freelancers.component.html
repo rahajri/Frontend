@@ -1,50 +1,64 @@
 <!-- Page Wrapper -->
 <div class="page-wrapper">
-  <div class="content report-box container-fluid">
+  <div class="content container-fluid">
     <!-- Page Header -->
     <div class="page-header subscribe-head">
       <div class="row align-items-center">
         <div class="col">
-          <h3 class="page-title">Clients</h3>
+          <h3 class="page-title">Candidats</h3>
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
               <a [routerLink]="'/admin/dashboard'">Accueil</a>
             </li>
 
-            <li class="breadcrumb-item active">Clients</li>
+            <li class="breadcrumb-item active">Candidats</li>
           </ul>
         </div>
         <div class="col-auto">
           <ng-container>
             <a
               class="btn add-user"
-              href="javascript:void()"
+              href="javascript:void(0)"
               data-bs-toggle="modal"
-              data-bs-target="#add-category"
+              data-bs-target="#add-company"
             >
-              <i class="fas fa-plus"></i> Ajouter un Client
+              <i class="fas fa-plus"></i> Ajouter Candidat
             </a>
           </ng-container>
         </div>
       </div>
     </div>
-    <!-- /Page Header -->
 
     <div class="row">
       <div class="col-sm-12">
         <div class="subscribe-employe users-list">
-          <ul>
-            <li [class.active]="last === 'all'">
-              <a [routerLink]="'/admin/freelancers/all'">Tous les Clients</a>
-            </li>
-            <li [class.active]="last === 'active'">
-              <a [routerLink]="'/admin/freelancers/active'"
-                >Clients Actifs</a
+          <ul class="client-filter">
+            <li>
+              <a
+                (click)="filterCandidatesByStatus(null)"
+                [ngClass]="{ selected: selectedStatus === null }"
+                >Tous les Candidats</a
               >
             </li>
-            <li [class.active]="last === 'inactive'">
-              <a [routerLink]="'/admin/freelancers/inactive'"
-                >Clients Inactifs</a
+            <li>
+              <a
+                (click)="filterCandidatesByStatus('Active')"
+                [ngClass]="{ selected: selectedStatus === 'Active' }"
+                >Candidats Actifs</a
+              >
+            </li>
+            <li>
+              <a
+                (click)="filterCandidatesByStatus('Inactive')"
+                [ngClass]="{ selected: selectedStatus === 'Inactive' }"
+                >Candidats Inactifs</a
+              >
+            </li>
+            <li>
+              <a
+                (click)="filterCandidatesByStatus('Hired')"
+                [ngClass]="{ selected: selectedStatus === 'Hired' }"
+                >En Mission</a
               >
             </li>
           </ul>
@@ -54,15 +68,17 @@
         <div class="page-header user-active">
           <div class="row align-items-center">
             <div class="col">
-              <h3 class="page-title">{{ str2 }} Clients</h3>
-              <p>Total <span>57</span> clients</p>
+              <h3 class="page-title">{{ selectedHederTitle }} Candidats</h3>
+              <p>
+                Total <span>{{ countCandidates }} </span> Candidats
+              </p>
             </div>
             <div class="col-auto">
               <a href="javascript:" class="btn export-btn me-1">
                 <img src="assets/admin/img/export.svg" alt="" /> Exporter
               </a>
               <a
-                class="btn filter-btn"
+                class="btn fil filter-btn"
                 href="javascript:void(0);"
                 id="filter_search"
                 (click)="openFilter()"
@@ -76,36 +92,85 @@
         <!-- /Active User Header -->
 
         <!-- Search Filter -->
-        <div
-          class="card filter-card"
-          id="filter_inputs"
-          [ngClass]="filter === true ? 'filter-show' : ''"
-        >
+        <div class="card filter-card" [class.filter-show]="filter">
           <div class="card-body pb-0">
-            <form action="#" method="post">
+            <form [formGroup]="filterForm" (ngSubmit)="onFilterSubmit()">
               <div class="row filter-row">
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
-                    <label for="name">Name</label>
-                    <input class="form-control" type="text" />
+                    <label for="company-name">Métier</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="profileTiltle"
+                      (change)="onChange()"
+                    />
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" />
+                    <label for="from-date">Nom</label>
+                    <input
+                      formControlName="lastName"
+                      class="form-control"
+                      type="text"
+                      (change)="onChange()"
+                    />
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
-                    <label for="expertise">Expertise</label>
-                    <input type="text" class="form-control" />
+                    <label for="to-date">Prénom</label>
+                    <input
+                      formControlName="firstName"
+                      class="form-control"
+                      type="text"
+                      (change)="onChange()"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row filter-row">
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <label for="city">Ville</label>
+                    <input
+                      formControlName="city"
+                      class="form-control"
+                      type="text"
+                      (change)="onChange()"
+                    />
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit">
-                      Submit
+                    <label for="department">Département</label>
+                    <input
+                      formControlName="department"
+                      class="form-control"
+                      type="text"
+                      (change)="onChange()"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <label for="region">Région</label>
+                    <input
+                      formControlName="region"
+                      class="form-control"
+                      type="text"
+                      (change)="onChange()"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <button
+                      class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center"
+                      type="submit"
+                    >
+                      Rechercher
                     </button>
                   </div>
                 </div>
@@ -114,165 +179,242 @@
           </div>
         </div>
         <!-- /Search Filter -->
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /Page Wrapper -->
 
-<!-- Add Modal -->
-<div class="modal fade transaction-modal" id="transaction-category">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header flex-wrap">
-        <div class="transaction-group">
-          <div class="head-transaction">
-            <h4>Transaction</h4>
-            <p>#TNX24586414</p>
-          </div>
-          <div class="complete-btn">
-            <a href="" class="btn btn-primary">Completed</a>
-          </div>
-        </div>
-      </div>
+        <div class="card bg-white projects-card">
+          <div class="card-body pt-0">
+            <div class="tab-content pt-0">
+              <div role="tabpanel" id="tab-4" class="tab-pane fade active show">
+                <div class="table-responsive">
+                  <div class="table-scroll">
+                    <mat-form-field class="filter">
+                      <input
+                        matInput
+                        (keyup)="searchData($event.target)"
+                        placeholder="Recherche"
+                        class="form-control form-control-sm search"
+                      />
+                    </mat-form-field>
+                    <mat-table
+                      [dataSource]="dataSource"
+                      matSort
+                      class="mat-elevation-z8"
+                    >
+                      <!-- Nom Column -->
+                      <ng-container matColumnDef="ckeckbox">
+                        <mat-header-cell
+                          *matHeaderCellDef
+                          style="flex: none; font-size: 16px"
+                        >
+                          <input
+                            type="checkbox"
+                            class="form-check-input"
+                            id="customCheck1"
+                            (click)="toggleCheckBoxes($event)"
+                          />
+                        </mat-header-cell>
+                        <mat-cell
+                          *matCellDef="let element"
+                          style="flex: none; font-size: 16px"
+                        >
+                          <div class="form-check custom-checkbox">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              id="customCheck1"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="customCheck1"
+                            ></label>
+                          </div>
+                        </mat-cell>
+                      </ng-container>
 
-      <div class="modal-body">
-        <div class="table-avatar user-profile invest-acount">
-          <a [routerLink]="routes.admin_profile"
-            ><i class="fas fa-exchange-alt exchange"></i>
-            <div>
-              <h5>Received from Investment Account</h5>
-              <p class="receive-date">Mar 13, 2022<span>Completed</span></p>
-            </div>
-          </a>
-        </div>
-        <div class="acount-transaction">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="basic-info">
-                <h4>IN ACCOUNT</h4>
-                <div class="additional-info">
-                  <p>Amount</p>
-                  <h5>6,335.006 USD</h5>
-                </div>
-                <div class="additional-info">
-                  <p>Fees</p>
-                  <h5>0.00 USD</h5>
-                </div>
-                <div class="additional-info">
-                  <p>Total Investment</p>
-                  <h5>6,335.006 USD</h5>
+                      <!-- Date de création Column -->
+                      <ng-container matColumnDef="candidate">
+                        <mat-header-cell *matHeaderCellDef>
+                          Candidat
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          <span class="user-img">
+                            <img
+                              class="profile-initials"
+                              [src]="baseUrl + element.image"
+                              *ngIf="element.image !== null"
+                            />
+                            <div
+                              class="profile-initials"
+                              *ngIf="
+                                getInitials(element) && element.image === null
+                              "
+                            >
+                              {{ getInitials(element) }}
+                            </div>
+                          </span>
+                          {{ getContact(element) }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Nom Column -->
+                      <ng-container matColumnDef="phone">
+                        <mat-header-cell mat-sort-header *matHeaderCellDef>
+                          Téléphone
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          {{ element.phone }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Activité Column -->
+                      <ng-container matColumnDef="profileTitle">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>
+                          Métier
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          {{ element.profileTitle }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Contact Column -->
+                      <ng-container matColumnDef="emailVerifiedAt">
+                        <mat-header-cell *matHeaderCellDef>
+                          Vérification
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          <i
+                            class="fa-regular fa-circle-check me-1"
+                            style="font-size: 16px"
+                            [ngClass]="{
+                              'text-success': element.emailVerifiedAt
+                            }"
+                          >
+                          </i>
+                          Email
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Téléphone Column -->
+                      <ng-container matColumnDef="createdAt">
+                        <mat-header-cell mat-sort-header *matHeaderCellDef>
+                          Date d'inscription
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          {{ getDate(element?.createdAt) }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="lastConnexion">
+                        <mat-header-cell mat-sort-header *matHeaderCellDef>
+                          Dernière connexion
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          {{ getDate(element?.lastConnection) }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Status Column -->
+                      <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef>
+                          Status
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          <div
+                            [ngClass]="{
+                              'text-success': element.status?.name === 'Active',
+                              'text-danger':
+                                element.status?.name === 'Inactive',
+                              'text-warning': element.status?.name === 'Hired'
+                            }"
+                          >
+                            {{ element.status?.name }}
+                          </div>
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="action">
+                        <mat-header-cell
+                          *matHeaderCellDef
+                          style="flex: none"
+                        ></mat-header-cell
+                        ><mat-cell
+                          *matCellDef="let element"
+                          style="flex: none"
+                          data-bs-toggle="dropdown"
+                          ><div class="hide-shave">
+                            <a
+                              href="javascript:void(0)"
+                              class="dropdown-toggle nav-link"
+                              ><i class="fas fa-ellipsis-v"></i
+                            ></a>
+                            <div class="dropdown-menu user-menu-list">
+                              <a class="dropdown-item" data-dismiss="modal"
+                                ><i class="fa-solid fa-eye"></i> Détails</a
+                              >
+                              <a
+                                class="dropdown-item"
+                                href="javascript:void(0)"
+                                (click)="this.showDeleteCategoryModal(element)"
+                                data-dismiss="modal"
+                                ><i class="feather icon-trash text-danger"></i>
+                                Supprimer</a
+                              >
+                            </div>
+                          </div></mat-cell
+                        ></ng-container
+                      >
+
+                      <mat-header-row
+                        *matHeaderRowDef="displayedColumns"
+                      ></mat-header-row>
+                      <mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                      ></mat-row>
+                    </mat-table>
+                    <mat-paginator
+                      [pageSizeOptions]="[10, 25, 50, 75, 100]"
+                      showFirstLastButtons
+                      class="d-flex justify-content-center align-items-center"
+                      style="font-weight: bold; font-size: 14px"
+                    ></mat-paginator>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="basic-info">
-                <h4>IN TRANSACTION</h4>
-                <div class="additional-info">
-                  <p>Amount</p>
-                  <h5>6,335.006 USD</h5>
-                </div>
-                <div class="additional-info">
-                  <p>Fees</p>
-                  <h5>0.00 USD</h5>
-                </div>
-                <div class="additional-info">
-                  <p>Total Investment</p>
-                  <h5>6,335.006 USD</h5>
-                </div>
-                <div class="additional-info">
-                  <p>Freelancer Account</p>
-                  <h5>UID00003</h5>
-                </div>
-                <div class="additional-info">
-                  <p>Freelancer Email</p>
-                  <h5>william&#64;example.com</h5>
-                </div>
+          </div>
+        </div>
+        <!-- /Page Wrapper -->
+      </div>
+
+      <!-- Delete Modal -->
+      <div class="modal custom-modal fade" id="delete_client" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="form-header">
+                <h3>Supprimer</h3>
+                <p>Êtes-vous sur de vouloir supprimer</p>
+                <p>
+                  <strong class="text-danger"
+                    >{{ getContact(candidateToDelete) }} ?</strong
+                  >
+                </p>
               </div>
-            </div>
-            <div class="col-md-12">
-              <div class="basic-info additional-detail top-border">
-                <h4>Order Details</h4>
+              <div class="modal-btn delete-action">
                 <div class="row">
-                  <div class="col-lg-3 col-md-6">
-                    <div class="additional-info">
-                      <p>Order Date</p>
-                      <h5>Mar 13, 2022</h5>
-                    </div>
+                  <div class="col-6">
+                    <a
+                      href="javascript:void(0);"
+                      class="btn btn-primary continue-btn"
+                      (click)="deleteCandidate(candidateToDelete)"
+                      >Supprimer</a
+                    >
                   </div>
-                  <div class="col-lg-3 col-md-6">
-                    <div class="additional-info">
-                      <p>Placed By</p>
-                      <h5>UID00001</h5>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-6">
-                    <div class="additional-info">
-                      <p>Completed At</p>
-                      <h5>Mar 13, 2022 07:00 PM</h5>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-6">
-                    <div class="additional-info">
-                      <p>Completed By</p>
-                      <h5>Super Admin</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="basic-info additional-detail">
-                <h4 class="mt-0">Additional Details</h4>
-                <div class="row">
-                  <div class="col-lg-3 col-md-6">
-                    <div class="additional-info">
-                      <p>Transaction</p>
-                      <h5>Mar 13, 2022</h5>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-6">
-                    <div class="additional-info">
-                      <p>Payment Gateway</p>
-                      <h5>Paypal</h5>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-6">
-                    <div class="additional-info">
-                      <p>Payment From</p>
-                      <h5>Dean Jones</h5>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-6">
-                    <div class="additional-info">
-                      <p>Payment To</p>
-                      <h5>Main Account</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="basic-info additional-detail">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="additional-info">
-                      <p>Updated Balance</p>
-                      <h5 class="active-balance">13,144.626 USD</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="basic-info additional-detail">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="additional-info mb-0">
-                      <p>Transaction Details</p>
-                      <h5>Received from Investment Account</h5>
-                    </div>
+                  <div class="col-6">
+                    <a
+                      href="javascript:void(0);"
+                      data-bs-dismiss="modal"
+                      class="btn btn-primary cancel-btn"
+                      >Annuler</a
+                    >
                   </div>
                 </div>
               </div>
@@ -280,147 +422,27 @@
           </div>
         </div>
       </div>
+      <!-- /Delete Modal -->
     </div>
   </div>
-</div>
-<!-- Add Modal -->
 
-<!-- Add Modal -->
-<div class="modal fade custom-modal" id="add-category">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header flex-wrap">
-        <div class="text-center w-100 mb-3">
-          <img src="assets/admin/img/logo-small.png" alt="" />
+  <!-- Add Modal -->
+  <div class="modal fade custom-modal" id="add-company">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header flex-wrap">
+          <div class="text-center w-100 mb-3">
+            <img src="assets/img/interim.png" alt="" />
+          </div>
+          <h4 class="modal-title">Ajouter un Client</h4>
+          <button type="button" class="close" data-bs-dismiss="modal">
+            <span>&times;</span>
+          </button>
         </div>
-        <h4 class="modal-title">Add New Freelancer</h4>
-        <button type="button" class="close" data-bs-dismiss="modal">
-          <span>&times;</span>
-        </button>
-      </div>
 
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="full-name">Full Name</label>
-            <input type="text" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" class="form-control" />
-          </div>
-          <div class="form-group">
-            <label for="freelancer-type">Freelancer Type</label>
-            <select class="form-control form-select">
-              <option>Select</option>
-              <option>Frontend Developer</option>
-              <option>Graphic Designer</option>
-            </select>
-          </div>
-          <div class="mt-4">
-            <button type="submit" class="btn btn-primary btn-block">
-              Submit
-            </button>
-          </div>
-        </form>
+        <div class="modal-body"></div>
       </div>
     </div>
   </div>
+  <!-- Add Modal -->
 </div>
-<!-- Add Modal -->
-
-<!-- Add Modal -->
-<div class="modal fade custom-modal" id="edit-category">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header flex-wrap">
-        <div class="text-center w-100 mb-3">
-          <img src="assets/admin/img/logo-small.png" alt="" />
-        </div>
-        <h4 class="modal-title">Edit User</h4>
-        <button type="button" class="close" data-bs-dismiss="modal">
-          <span>&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="full-name">Full Name</label>
-            <input type="text" class="form-control" value=" George Wells" />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              value="georgewells&#64;example.com"
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" value="*******" />
-          </div>
-          <div class="form-group">
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" class="form-control" value="********" />
-          </div>
-          <div class="form-group">
-            <label for="user-type">User Type</label>
-            <select class="form-control form-select">
-              <option>Select</option>
-              <option selected>Frontend Developer</option>
-              <option>Graphic Designer</option>
-            </select>
-          </div>
-          <div class="mt-4">
-            <button type="submit" class="btn btn-primary btn-block">
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Add Modal -->
-
-<!-- Delete Modal -->
-<div class="modal custom-modal fade" id="delete_category" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="form-header">
-          <h3>Delete</h3>
-          <p>Are you sure want to delete?</p>
-        </div>
-        <div class="modal-btn delete-action">
-          <div class="row">
-            <div class="col-6">
-              <a href="javascript:void(0);" class="btn btn-primary continue-btn"
-                >Delete</a
-              >
-            </div>
-            <div class="col-6">
-              <a
-                href="javascript:void(0);"
-                data-bs-dismiss="modal"
-                class="btn btn-primary cancel-btn"
-                >Cancel</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /Delete Modal -->

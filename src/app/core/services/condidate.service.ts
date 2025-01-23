@@ -23,6 +23,10 @@ export class CandidateService {
     return this.http.post(url, email);
   }
 
+  getallCandidates(): Observable<any> {
+    return this.http.get(this.baseUrl);
+  }
+
   getCandidate(email: string): Observable<any> {
     const url = `${this.baseUrl}/candidate`;
 
@@ -35,5 +39,13 @@ export class CandidateService {
     const url = `${this.baseUrl}/${candidateId}/profile`;
 
     return this.http.post<any>(url, body);
+  }
+
+  candidatesFiler(data: any): Observable<any[]> {
+    return this.http.post<any[]>(`${this.baseUrl}/filter`, data);
+  }
+
+  deleteCandidate(candidateId: string) {
+    return this.http.delete<any>(`${this.baseUrl}/${candidateId}`);
   }
 }

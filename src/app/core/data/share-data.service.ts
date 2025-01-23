@@ -1658,15 +1658,6 @@ export class ShareDataService {
           subMenus: [],
         },
         {
-          menuValue: 'Freelancer',
-          route: routes.admin_freelancers_all,
-          hasSubRoute: false,
-          showSubRoute: false,
-          icon: 'icon-users',
-          base: 'freelancers',
-          subMenus: [],
-        },
-        {
           menuValue: 'Deposit',
           route: routes.admin_deposit_history,
           hasSubRoute: false,
@@ -1748,7 +1739,7 @@ export class ShareDataService {
           subMenus: [],
         },
         {
-          menuValue: 'Client',
+          menuValue: 'Clients',
           route: routes.admin_projects,
           hasSubRoute: false,
           showSubRoute: false,
@@ -1763,6 +1754,15 @@ export class ShareDataService {
           showSubRoute: false,
           icon: 'icon-database',
           base: 'providers',
+          subMenus: [],
+        },
+        {
+          menuValue: 'Candidats',
+          route: routes.admin_freelancers_all,
+          hasSubRoute: false,
+          showSubRoute: false,
+          icon: 'icon-users',
+          base: 'freelancers',
           subMenus: [],
         },
         /*{
