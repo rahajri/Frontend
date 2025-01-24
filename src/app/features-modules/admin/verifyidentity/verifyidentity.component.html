@@ -1,14 +1,15 @@
 <!-- Page Wrapper -->
 <div class="page-wrapper">
   <div class="content container-fluid">
-
     <!-- Page Header -->
     <div class="page-header">
       <div class="row align-items-center">
         <div class="col">
-          <h3 class="page-title">Verification d'entreprise</h3>
+          <h3 class="page-title">Entreprises en attente de validation</h3>
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a [routerLink]="'/admin/dashboard'">Dashbord</a></li>
+            <li class="breadcrumb-item">
+              <a [routerLink]="'/admin/dashboard'">Dashbord</a>
+            </li>
             <li class="breadcrumb-item active">Verification d'entreprise</li>
           </ul>
         </div>
@@ -16,184 +17,337 @@
     </div>
     <!-- /Page Header -->
 
-
     <div class="row">
       <div class="col-lg-12">
         <div class="card bg-white">
           <div class="card-body pt-0">
-            <div class="card-header mb-4">
-               
-            </div>
+            <div class="card-header mb-4"></div>
             <div class="tab-content pt-0">
-              <div role="tabpanel" id="employer" class="tab-pane fade show active">
+              <div
+                role="tabpanel"
+                id="employer"
+                class="tab-pane fade show active"
+              >
                 <div class="card">
                   <div class="card-body">
                     <div class="table-responsive">
-                      <div class="table_header">
-                        <div class="dataTables_length">
-                          <label for="show">Show</label>
-                          <select [(ngModel)]="pageSize" (ngModelChange)="changePageSize()" class="form-control form-control-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                          </select>
-                          <label for="entries">Entries</label>
-                        </div>
-                        <div class="dataTables_filter">
-                          <label for="search">Search:</label>
-                          <input [(ngModel)]="searchDataValue" (ngModelChange)="searchData(searchDataValue)" class="form-control form-control-sm" />
-                        </div>
-                      </div>
                       <div class="table-scroll">
-                        <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover mb-0 datatable">
-                          <thead>
-                            <tr>
-                              <th mat-sort-header="Date Creation">Date de création</th>
-                              <th mat-sort-header="Nom">Nom</th>
-                               <th mat-sort-header="Activite">Activité</th>
-                               <th mat-sort-header="Contact">Contact</th>
-                              <th mat-sort-header="Telephone">Téléphone</th>
-                              <th mat-sort-header="Ville">Ville</th>
-     
-                               <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let company of companies" (click)="setSelectedCompany(company)">
-                              <td>{{ getDate(company.createdAt) }}</td>
-                               <td data-bs-toggle="modal"
-                               data-bs-target="#show-details">{{ company.name }}
-                             
-                              </td>
-                              <td>{{ company.nafTitle }}</td>
-                               <td>
-                                {{ company.employees?.[0]?.firstName || '' }}
-                                {{ company.employees?.[0]?.lastName || '' }}
-                              </td>
-                              <td>{{ company.employees?.[0]?.phone || 'N/A' }}</td>
-                              <td>
-                                {{   company.location?.city?.name  }}
-                               </td>
-                             
-                               <td>
-                                <button (click)="approve(company.id)" class="btn btn-success me-2">Approve</button>
-                                 <button (click)="reject(company.id)" class="btn btn-danger">Reject</button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                        <mat-form-field class="filter">
+                          <input
+                            matInput
+                            (keyup)="searchData($event.target)"
+                            placeholder="Recherche"
+                            class="form-control form-control-sm search"
+                          />
+                        </mat-form-field>
+                        <mat-table
+                          [dataSource]="dataSource"
+                          matSort
+                          class="mat-elevation-z8"
+                        >
+                          <ng-container matColumnDef="createdAt">
+                            <mat-header-cell *matHeaderCellDef>
+                              Date de création
+                            </mat-header-cell>
+                            <mat-cell
+                              *matCellDef="let element"
+                              data-bs-toggle="modal"
+                              data-bs-target="#show-details"
+                              (click)="setSelectedCompany(element)"
+                            >
+                              {{ getDate(element.createdAt) }}
+                            </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef>
+                              Nom
+                            </mat-header-cell>
+                            <mat-cell
+                              *matCellDef="let element"
+                              data-bs-toggle="modal"
+                              data-bs-target="#show-details"
+                              (click)="setSelectedCompany(element)"
+                            >
+                              {{ element?.name }}
+                            </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="activity">
+                            <mat-header-cell *matHeaderCellDef>
+                              Activité
+                            </mat-header-cell>
+                            <mat-cell
+                              *matCellDef="let element"
+                              data-bs-toggle="modal"
+                              data-bs-target="#show-details"
+                              (click)="setSelectedCompany(element)"
+                            >
+                              {{ element?.nafTitle }}
+                            </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="contact">
+                            <mat-header-cell *matHeaderCellDef>
+                              Contact
+                            </mat-header-cell>
+                            <mat-cell
+                              *matCellDef="let element"
+                              data-bs-toggle="modal"
+                              data-bs-target="#show-details"
+                              (click)="setSelectedCompany(element)"
+                            >
+                              {{ getContact(element) }}
+                            </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="phone">
+                            <mat-header-cell mat-sort-header *matHeaderCellDef>
+                              Téléphone
+                            </mat-header-cell>
+                            <mat-cell
+                              *matCellDef="let element"
+                              data-bs-toggle="modal"
+                              data-bs-target="#show-details"
+                              (click)="setSelectedCompany(element)"
+                            >
+                              {{element.employees?.[0]?.phone ||'' }}
+                            </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="city">
+                            <mat-header-cell mat-sort-header *matHeaderCellDef>
+                              Ville
+                            </mat-header-cell>
+                            <mat-cell
+                              *matCellDef="let element"
+                              data-bs-toggle="modal"
+                              data-bs-target="#show-details"
+                              (click)="setSelectedCompany(element)"
+                            >
+                              {{ element.location?.city?.name }}
+                            </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="action">
+                            <mat-header-cell *matHeaderCellDef>
+                              <!-- <div
+                                class="icon-buttons"
+                                style="gap: 20px !important"
+                              >
+                                <i
+                                  title="Refuser en masse"
+                                  class="fa-solid fa-xmarks-lines ms-2"
+                                  (click)="rejectAll()"
+                                ></i>
+                                <i
+                                  title="Approuver en masse"
+                                  class="fa-solid fa-check-double"
+                                  (click)="approveAll()"
+                                ></i></div
+                            > -->
+                            </mat-header-cell>
+                            <mat-cell
+                              *matCellDef="let element"
+                              data-bs-toggle="dropdown"
+                            >
+                              <div class="icon-buttons">
+                                <i
+                                  title="Voir les détails"
+                                  class="fa-solid fa-eye"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#show-details"
+                                  (click)="setSelectedCompany(element)"
+                                ></i>
+                                <i
+                                  title="Refuser"
+                                  class="fa-solid fa-xmark"
+                                  (click)="reject(element.id)"
+                                ></i>
+                                <i
+                                  title="Accepter"
+                                  class="fa-solid fa-check"
+                                  (click)="approve(element.id)"
+                                ></i>
+                              </div> </mat-cell
+                          ></ng-container>
+                          <mat-header-row
+                            *matHeaderRowDef="displayedColumns"
+                          ></mat-header-row>
+                          <mat-row
+                            *matRowDef="let row; columns: displayedColumns"
+                          ></mat-row>
+                        </mat-table>
+                        <mat-paginator
+                          [pageSizeOptions]="[10, 25, 50, 75, 100]"
+                          showFirstLastButtons
+                          class="d-flex justify-content-center align-items-center"
+                          style="font-weight: bold; font-size: 14px"
+                        ></mat-paginator>
                       </div>
-                      <div class="table_footer">
-                        <div class="col-sm-12 col-md-5">
-                          <div class="dataTables_info">
-                            Showing {{ serialNumberArray[0] }} to {{ serialNumberArray[serialNumberArray.length - 1] }} of {{ totalData }} entries
-                          </div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                          <div class="pagination_section">
-                            <ul class="pagination">
-                              <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
-                                <a (click)="getMoreData('previous')" (keydown.enter)="getMoreData('previous')" class="page-link" href="javascript:void(0);" tabindex="-1">Previous</a>
-                              </li>
-                              <li *ngFor="let item of pageNumberArray" class="page-item" [class.active]="item === currentPage">
-                                <a (click)="moveToPage(item)" (keydown.enter)="moveToPage(item)" class="page-link" href="javascript:void(0);">{{ item }}</a>
-                              </li>
-                              <li class="page-item" [ngClass]="{ disabled: currentPage === pageNumberArray[pageNumberArray.length - 1] || lstIdentity.length === 0 }">
-                                <a (click)="getMoreData('next')" (keydown.enter)="getMoreData('next')" class="page-link" href="javascript:void(0);">Next</a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
                     </div>
                   </div>
                 </div>
-                 
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- /Page Wrapper -->
+  </div>
+  <!-- /Page Wrapper -->
 
-
- 
   <!-- Modal -->
-<div class="modal fade" id="show-details">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">{{ selectedCompany?.name }}</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body">
-        <h5>Company Details</h5>
-        <div class="form-group">
-          <label for="siret">date </label>
-          <input type="text" id="date" class="form-control" [value]="getDate(selectedCompany?.createdAt)" readonly />
-        </div>
-        <div class="form-group">
-          <label for="siret">SIRET</label>
-          <input type="text" id="siret" class="form-control" [value]="selectedCompany?.siret" readonly />
-        </div>
-        <div class="form-group">
-          <label for="email">Contact</label>
-          <input type="text" id="email" class="form-control" [value]="selectedCompany?.employees?.[0]?.firstName - selectedCompany?.employees?.[0]?.lastName" readonly />
-        </div>
-        
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="text" id="email" class="form-control" [value]="selectedCompany?.employees?.[0]?.email || 'N/A'" readonly />
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input type="text" id="phone" class="form-control" [value]="selectedCompany?.employees?.[0]?.phone || 'N/A'" readonly />
-        </div>
-        <div class="form-group">
-          <label for="naf">NAF</label>
-          <input type="text" id="naf" class="form-control" [value]="selectedCompany?.naf" readonly />
-        </div>
-        <div class="form-group">
-          <label for="nafTitle">Activite</label>
-          <input type="text" id="nafTitle" class="form-control" [value]="selectedCompany?.nafTitle" readonly />
-        </div>
-        <div class="form-group">
-          <label for="category">Category</label>
-          <input type="text" id="category" class="form-control" [value]="selectedCompany?.category" readonly />
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <input type="text" id="message" class="form-control" [value]="selectedCompany?.message" readonly />
+  <div class="modal fade" id="show-details">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{ selectedCompany?.name }}</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+          ></button>
         </div>
 
-        <h5>Location</h5>
-        <div class="form-group">
-          <label for="address">Ville</label>
-          <input type="text" id="address" class="form-control" [value]="selectedCompany?.location?.city?.name" readonly />
-        </div>
-         
-        <div class="form-group">
-          <label for="address">Address</label>
-          <input type="text" id="address" class="form-control" [value]="selectedCompany?.location?.address" readonly />
-        </div>
-        <div class="form-group">
-          <label for="addressLine2">Address Line 2</label>
-          <input type="text" id="addressLine2" class="form-control" [value]="selectedCompany?.location?.addressLine2 || 'N/A'" readonly />
-        </div>
+        <div class="modal-body">
+          <h5>Company Details</h5>
+          <div class="form-group">
+            <label for="siret">date </label>
+            <input
+              type="text"
+              id="date"
+              class="form-control"
+              [value]="getDate(selectedCompany?.createdAt)"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="siret">SIRET</label>
+            <input
+              type="text"
+              id="siret"
+              class="form-control"
+              [value]="selectedCompany?.siret"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Contact</label>
+            <input
+              type="text"
+              id="email"
+              class="form-control"
+              [value]="getContact(selectedCompany)"
+              readonly
+            />
+          </div>
 
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              class="form-control"
+              [value]="selectedCompany?.employees?.[0]?.email || ''"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input
+              type="text"
+              id="phone"
+              class="form-control"
+              [value]="selectedCompany?.employees?.[0]?.phone || ''"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="naf">NAF</label>
+            <input
+              type="text"
+              id="naf"
+              class="form-control"
+              [value]="selectedCompany?.naf"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="nafTitle">Activite</label>
+            <input
+              type="text"
+              id="nafTitle"
+              class="form-control"
+              [value]="selectedCompany?.nafTitle"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <input
+              type="text"
+              id="category"
+              class="form-control"
+              [value]="selectedCompany?.category"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <input
+              type="text"
+              id="message"
+              class="form-control"
+              [value]="selectedCompany?.message"
+              readonly
+            />
+          </div>
 
-        <h5>Status</h5>
-        <div class="form-group">
-          <label for="status">Description</label>
-          <input type="text" id="status" class="form-control" [value]="selectedCompany?.status?.description" readonly />
+          <h5>Location</h5>
+          <div class="form-group">
+            <label for="address">Ville</label>
+            <input
+              type="text"
+              id="address"
+              class="form-control"
+              [value]="selectedCompany?.location?.city?.name"
+              readonly
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input
+              type="text"
+              id="address"
+              class="form-control"
+              [value]="selectedCompany?.location?.address"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="addressLine2">Address Line 2</label>
+            <input
+              type="text"
+              id="addressLine2"
+              class="form-control"
+              [value]="selectedCompany?.location?.addressLine2 || ''"
+              readonly
+            />
+          </div>
+
+          <h5>Status</h5>
+          <div class="form-group">
+            <label for="status">Description</label>
+            <input
+              type="text"
+              id="status"
+              class="form-control"
+              [value]="selectedCompany?.status?.description"
+              readonly
+            />
+          </div>
         </div>
-        
-        
       </div>
     </div>
   </div>

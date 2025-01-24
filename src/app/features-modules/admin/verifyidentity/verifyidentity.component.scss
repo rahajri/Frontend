@@ -1,0 +1,50 @@
+.icon-buttons {
+  display: flex;
+  gap: 8px; /* Space between buttons */
+}
+
+.icon-buttons i {
+  cursor: pointer; /* Change cursor to pointer on hover */
+  padding: 8px 12px; /* Add padding to make it look like a button */
+  border-radius: 4px; /* Rounded corners */
+  border: 1px solid transparent; /* Transparent border */
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s; /* Smooth transitions */
+}
+
+/* Eye icon (View details) */
+.icon-buttons .fa-eye {
+  background-color: #007bff; /* Blue background */
+  color: white; /* White icon */
+}
+
+.icon-buttons .fa-eye:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Xmark icon (Reject) */
+.icon-buttons .fa-xmark,
+.icon-buttons .fa-xmarks-lines {
+  background-color: #dc3545; /* Red background */
+  color: white; /* White icon */
+}
+
+.icon-buttons .fa-xmark:hover,
+.icon-buttons .fa-xmarks-lines:hover {
+  background-color: #a71d2a; /* Darker red on hover */
+}
+
+/* Check icon (Approve) */
+.icon-buttons .fa-check,
+.icon-buttons .fa-check-double {
+  background-color: #28a745; /* Green background */
+  color: white; /* White icon */
+}
+
+.icon-buttons .fa-check:hover,
+.icon-buttons .fa-check-double:hover {
+  background-color: #1e7e34; /* Darker green on hover */
+}
+
+.icon-buttons .fa-check-double {
+  width: 44px;
+}

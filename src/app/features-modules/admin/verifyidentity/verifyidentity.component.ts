@@ -1,46 +1,43 @@
-import { Component, OnInit} from '@angular/core';
-
-// import { Subject } from "rxjs";
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Sort } from '@angular/material/sort';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
-import { Company, IdentityList, apiResultFormat } from 'src/app/core/models/models';
+import { Company } from 'src/app/core/models/models';
 import { CompanyService } from 'src/app/core/services/company.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-verifyidentity',
   templateUrl: './verifyidentity.component.html',
-  styleUrls: ['./verifyidentity.component.scss']
+  styleUrls: ['./verifyidentity.component.scss'],
 })
 export class VerifyidentityComponent implements OnInit {
-
-  constructor(private data: ShareDataService , private companyService : CompanyService) { }
-
+  dataSource!: MatTableDataSource<Company>;
+  displayedColumns: string[] = [
+    'createdAt',
+    'name',
+    'activity',
+    'contact',
+    'phone',
+    'city',
+    'action',
+  ];
+  constructor(
+    private data: ShareDataService,
+    private companyService: CompanyService
+  ) {
+    this.dataSource = new MatTableDataSource<Company>([]);
+  }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   public searchDataValue = '';
-  dataSource!: MatTableDataSource<IdentityList>;
 
-  // pagination variables
-  public lastIndex = 0;
-  public pageSize = 10;
-  public totalData = 0;
-  public skip = 0;
-  public limit: number = this.pageSize;
-  public pageIndex = 0;
-  public serialNumberArray: Array<number> = [];
-  public currentPage = 1;
-  public pageNumberArray: Array<number> = [];
-  public pageSelection: Array<pageSelection> = [];
-  public totalPages = 0;
-  public lstIdentity!: Array<IdentityList>;
-  public url = "admin";
-  public filter = false;
-  public companies:Company[] = [];
+  public companies: Company[] = [];
 
   ngOnInit(): void {
-    this.getlstIdentity();
-    this.getCompanies()
-
+    this.getCompanies();
+  }
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   selectedCompany: any = null;
@@ -48,114 +45,57 @@ export class VerifyidentityComponent implements OnInit {
   setSelectedCompany(company: any): void {
     this.selectedCompany = company;
   }
-    //Filter toggle
-    openFilter(){
-      this.filter = !this.filter
-    }
-    private getlstIdentity(): void {
-      this.lstIdentity = [];
-      this.serialNumberArray = [];
-  
-      this.data.adminIdentityList().subscribe((res: apiResultFormat) => {
-        this.totalData = res.totalData;
-        res.data.map((res: IdentityList, index: number) => {
-          const serialNumber = index + 1;
-          if (index >= this.skip && serialNumber <= this.limit) {
-            res.id = serialNumber;
-            this.lstIdentity.push(res);
-            this.serialNumberArray.push(serialNumber);
-          }
-        });
-           this.dataSource = new MatTableDataSource<IdentityList>(this.lstIdentity);
-      this.calculateTotalPages(this.totalData, this.pageSize);
-      });
-  
-   
-    }
-    public sortData(sort: Sort) {
-      const data = this.lstIdentity.slice();
-  
-      if (!sort.active || sort.direction === '') {
-        this.lstIdentity = data;
-      } else {
-         
-        this.lstIdentity = data.sort((a, b) => {
-           
-          const aValue = (a as never)[sort.active];
-           
-          const bValue = (b as never)[sort.active];
-          return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
-        });
-      }
-    }
-   
-    public searchData(value: string): void {
-      this.dataSource.filter = value.trim().toLowerCase();
-      this.lstIdentity = this.dataSource.filteredData;
-    }
-  
-    public getMoreData(event: string): void {
-      if (event == 'next') {
-        this.currentPage++;
-        this.pageIndex = this.currentPage - 1;
-        this.limit += this.pageSize;
-        this.skip = this.pageSize * this.pageIndex;
-        this.getlstIdentity();
-      } else if (event == 'previous') {
-        this.currentPage--;
-        this.pageIndex = this.currentPage - 1;
-        this.limit -= this.pageSize;
-        this.skip = this.pageSize * this.pageIndex;
-        this.getlstIdentity();
-      }
-    }
-  
-    public moveToPage(pageNumber: number): void {
-      this.currentPage = pageNumber;
-      this.skip = this.pageSelection[pageNumber - 1].skip;
-      this.limit = this.pageSelection[pageNumber - 1].limit;
-      if (pageNumber > this.currentPage) {
-        this.pageIndex = pageNumber - 1;
-      } else if (pageNumber < this.currentPage) {
-        this.pageIndex = pageNumber + 1;
-      }
-      this.getlstIdentity();
-    }
-  
-    public changePageSize(): void {
-      this.pageSelection = [];
-      this.limit = this.pageSize;
-      this.skip = 0;
-      this.currentPage = 1;
-      this.getlstIdentity();
-    }
-  
-    private calculateTotalPages(totalData: number, pageSize: number): void {
-      this.pageNumberArray = [];
-      this.totalPages = totalData / pageSize;
-      if (this.totalPages % 1 != 0) {
-        this.totalPages = Math.trunc(this.totalPages + 1);
-      }
-      for (let i = 1; i <= this.totalPages; i++) {
-        const limit = pageSize * i;
-        const skip = limit - pageSize;
-        this.pageNumberArray.push(i);
-        this.pageSelection.push({ skip: skip, limit: limit });
-      }
-    }
 
-    getCompanies(): void {
-      this.companyService.getUnvirifiedCompanies().subscribe((data: Company[]) => {
+  searchData(target: any) {
+    const filterValue = target.value.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
+  getCompanies(): void {
+    this.companyService.getUnvirifiedCompanies().subscribe({
+      next: (data: Company[]) => {
+        this.dataSource = new MatTableDataSource(data);
         this.companies = data;
-      });
-    }
-
+      },
+      error: (err) => {
+        console.error(err);
+      },
+      complete: () => {
+        this.dataSource.paginator = this.paginator;
+      },
+    });
+  }
 
   approve(companyId: string) {
     this.companyService.approveCompany(companyId).subscribe(() => {
       // Handle successful approval
       this.getCompanies(); // Reload the list
     });
+  }
+  approveAll() {
+    // Vérifiez s'il y a des entreprises à valider
+    if (!this.companies || this.companies.length === 0) {
+      console.warn('Aucune entreprise à valider.');
+      return;
+    }
+
+    // Itérer sur chaque entreprise et appeler la fonction approve
+    this.companies.forEach((company: any) => {
+      this.companyService.approveCompany(company.id).subscribe({
+        next: () => {
+          console.log(`Entreprise ${company.id} approuvée avec succès.`);
+        },
+        error: (err) => {
+          console.error(
+            `Erreur lors de l'approbation de l'entreprise ${company.id}:`,
+            err
+          );
+        },
+      });
+    });
+
+    // Recharger la liste après avoir tout approuvé
+    this.getCompanies();
   }
 
   reject(companyId: string) {
@@ -165,15 +105,55 @@ export class VerifyidentityComponent implements OnInit {
     });
   }
 
+  rejectAll() {
+    // Vérifiez s'il y a des entreprises à refuser
+    if (!this.companies || this.companies.length === 0) {
+      console.warn('Aucune entreprise à refuser.');
+      return;
+    }
+
+    // Itérer sur chaque entreprise et appeler la fonction reject
+    this.companies.forEach((company: any) => {
+      this.companyService.rejectCompany(company.id).subscribe({
+        next: () => {},
+        error: (err) => {
+          console.error(
+            `Erreur lors du refus de l'entreprise ${company.id}:`,
+            err
+          );
+        },
+      });
+    });
+
+    // Recharger la liste après avoir tout refusé
+    this.getCompanies();
+  }
+
   getDate(isoDate: string): string {
     const date = new Date(isoDate);
     return new Intl.DateTimeFormat('en-GB').format(date); // Formats as DD/MM/YYYY
+  }
+
+  getContact(element: any): string {
+    if (!element || !element.employees || element.employees.length === 0) {
+      return ''; // Return an empty string if the element or employees array is null/undefined or empty
+    }
+
+    const employee = element.employees[0]; // Get the first employee
+
+    // Format first name: First letter uppercase, rest lowercase
+    const firstName =
+      employee.firstName.charAt(0).toUpperCase() + // First letter uppercase
+      employee.firstName.slice(1).toLowerCase(); // Rest lowercase
+
+    // Format last name: All uppercase
+    const lastName = employee.lastName.toUpperCase();
+
+    // Return the formatted name
+    return `${firstName} ${lastName}`;
   }
 }
 export interface pageSelection {
   skip: number;
   limit: number;
 }
- 
-
- 

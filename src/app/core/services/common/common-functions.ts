@@ -18,23 +18,39 @@ export function exportToCsv(filename: string, rows: any[]) {
     return html;
   };
 
+  // Function to format date as M/D/YYYY
+  const formatDate = (dateString: string | Date): string => {
+    const date = new Date(dateString);
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  };
+
+  const translateStatusToFrench = (status: string): string => {
+    const statusTranslations: { [key: string]: string } = {
+      Draft: 'Brouillon',
+      Published: 'Publiée',
+      Closed: 'Fermée',
+    };
+
+    return statusTranslations[status] || status; // Return the translated status or the original status if not found
+  };
+
   // Flatten the data and map headers to French
   const flattenedRows = rows.map((row) => {
     return {
       ID: row.id,
-      'Date de création': row.createdAt,
+      'Date de création': formatDate(row.createdAt),
       Titre: row.title,
       "Nom de l'entreprise": row.company?.name || '',
-      Description: htmlToPlainText(row.description), // Convert HTML to plain text
+      Description: htmlToPlainText(row.description),
       Poste: row.job?.name || '',
       Ville: row.city?.name || '',
-      'Date de publication': row.publicationDate,
+      'Date de publication': formatDate(row.publicationDate),
       'Type de contrat': row.contractType?.description || '',
-      'Date de début': row.startDate,
-      'Date de fin': row.endDate,
+      'Date de début': formatDate(row.startDate),
+      'Date de fin': formatDate(row.endDate),
       'Durée prévue': row.expectedDuration,
       'Unité de temps': row.timeUnit,
-      Statut: row.status?.name || '',
+      Statut: translateStatusToFrench(row.status?.name) || '',
     };
   });
 

@@ -393,7 +393,21 @@ export class ProjectsComponent implements OnInit {
   }
 
   getContact(element: any): string {
-    const employee = element.employees?.[0];
-    return employee ? `${employee.firstName} ${employee.lastName}` : '';
+    if (!element || !element.employees || element.employees.length === 0) {
+      return ''; // Return an empty string if the element or employees array is null/undefined or empty
+    }
+
+    const employee = element.employees[0]; // Get the first employee
+
+    // Format first name: First letter uppercase, rest lowercase
+    const firstName =
+      employee.firstName.charAt(0).toUpperCase() + // First letter uppercase
+      employee.firstName.slice(1).toLowerCase(); // Rest lowercase
+
+    // Format last name: All uppercase
+    const lastName = employee.lastName.toUpperCase();
+
+    // Return the formatted name
+    return `${firstName} ${lastName}`;
   }
 }
