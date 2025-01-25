@@ -8,7 +8,7 @@
           <h3 class="page-title">Entreprises en attente de validation</h3>
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a [routerLink]="'/admin/dashboard'">Dashbord</a>
+              <a [routerLink]="'/admin/dashboard'">Accueil</a>
             </li>
             <li class="breadcrumb-item active">Verification d'entreprise</li>
           </ul>
@@ -130,7 +130,7 @@
                           </ng-container>
                           <ng-container matColumnDef="action">
                             <mat-header-cell *matHeaderCellDef>
-                              <!-- <div
+                              <div
                                 class="icon-buttons"
                                 style="gap: 20px !important"
                               >
@@ -143,8 +143,8 @@
                                   title="Approuver en masse"
                                   class="fa-solid fa-check-double"
                                   (click)="approveAll()"
-                                ></i></div
-                            > -->
+                                ></i>
+                              </div>
                             </mat-header-cell>
                             <mat-cell
                               *matCellDef="let element"
@@ -197,22 +197,23 @@
   <!-- /Page Wrapper -->
 
   <!-- Modal -->
-  <div class="modal fade" id="show-details">
+  <div class="modal fade custom-modal" id="show-details">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">{{ selectedCompany?.name }}</h4>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-          ></button>
+        <div class="modal-header flex-wrap">
+          <div class="text-center w-100 mb-3">
+            <img src="assets/img/interim.png" alt="logo" />
+          </div>
+          <h3 class="modal-title">Détails de l'entreprise</h3>
+          <button type="button" class="close" data-bs-dismiss="modal">
+            <span>&times;</span>
+          </button>
         </div>
 
         <div class="modal-body">
-          <h5>Company Details</h5>
+          <h4>{{ selectedCompany?.name }}</h4>
           <div class="form-group">
-            <label for="siret">date </label>
+            <label for="siret">Date de création</label>
             <input
               type="text"
               id="date"
@@ -243,7 +244,7 @@
           </div>
 
           <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">E-mail</label>
             <input
               type="text"
               id="email"
@@ -253,7 +254,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="phone">Phone</label>
+            <label for="phone">Téléphone</label>
             <input
               type="text"
               id="phone"
@@ -263,7 +264,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="naf">NAF</label>
+            <label for="naf">Code NAF</label>
             <input
               type="text"
               id="naf"
@@ -273,7 +274,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="nafTitle">Activite</label>
+            <label for="nafTitle">Activité</label>
             <input
               type="text"
               id="nafTitle"
@@ -283,7 +284,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="category">Category</label>
+            <label for="category">Catégorie</label>
             <input
               type="text"
               id="category"
@@ -303,7 +304,7 @@
             />
           </div>
 
-          <h5>Location</h5>
+          <h5>Localisation</h5>
           <div class="form-group">
             <label for="address">Ville</label>
             <input
@@ -316,34 +317,15 @@
           </div>
 
           <div class="form-group">
-            <label for="address">Address</label>
+            <label for="address">Adresse</label>
             <input
               type="text"
               id="address"
               class="form-control"
-              [value]="selectedCompany?.location?.address"
-              readonly
-            />
-          </div>
-          <div class="form-group">
-            <label for="addressLine2">Address Line 2</label>
-            <input
-              type="text"
-              id="addressLine2"
-              class="form-control"
-              [value]="selectedCompany?.location?.addressLine2 || ''"
-              readonly
-            />
-          </div>
-
-          <h5>Status</h5>
-          <div class="form-group">
-            <label for="status">Description</label>
-            <input
-              type="text"
-              id="status"
-              class="form-control"
-              [value]="selectedCompany?.status?.description"
+              [value]="
+                selectedCompany?.location?.address +
+                (selectedCompany?.location?.addressLine2 || '')
+              "
               readonly
             />
           </div>

@@ -4,6 +4,7 @@ import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { Company } from 'src/app/core/models/models';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-verifyidentity',
@@ -66,67 +67,77 @@ export class VerifyidentityComponent implements OnInit {
     });
   }
 
-  approve(companyId: string) {
+  async approve(companyId: string) {
     this.companyService.approveCompany(companyId).subscribe(() => {
-      // Handle successful approval
       this.getCompanies(); // Reload the list
     });
   }
-  approveAll() {
-    // Vérifiez s'il y a des entreprises à valider
-    if (!this.companies || this.companies.length === 0) {
+
+  async approveAll(intervalMs: number = 1000) {
+    if (!this.companies?.length) {
       console.warn('Aucune entreprise à valider.');
       return;
     }
 
-    // Itérer sur chaque entreprise et appeler la fonction approve
-    this.companies.forEach((company: any) => {
-      this.companyService.approveCompany(company.id).subscribe({
-        next: () => {
-          console.log(`Entreprise ${company.id} approuvée avec succès.`);
-        },
-        error: (err) => {
-          console.error(
-            `Erreur lors de l'approbation de l'entreprise ${company.id}:`,
-            err
-          );
-        },
-      });
-    });
+    const results = [];
 
-    // Recharger la liste après avoir tout approuvé
-    this.getCompanies();
+    const delay = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
+
+    try {
+      for (const company of this.companies) {
+        try {
+          const result = await lastValueFrom(
+            this.companyService.approveCompany(company.id)
+          );
+          results.push({ status: 'fulfilled', value: result });
+          this.getCompanies(); // Refresh the list after all requests
+        } catch (error) {
+          results.push({ status: 'rejected', reason: error });
+          console.error(`Erreur pour ${company.id}:`, error);
+        }
+
+        await delay(intervalMs);
+      }
+    } catch (globalError) {
+      console.error('Erreur globale:', globalError);
+    }
   }
 
   reject(companyId: string) {
     this.companyService.rejectCompany(companyId).subscribe(() => {
-      // Handle successful rejection
-      this.getCompanies(); // Reload the list
+      this.getCompanies();
     });
   }
 
-  rejectAll() {
-    // Vérifiez s'il y a des entreprises à refuser
-    if (!this.companies || this.companies.length === 0) {
+  async rejectAll(intervalMs: number = 1000) {
+    if (!this.companies?.length) {
       console.warn('Aucune entreprise à refuser.');
       return;
     }
+    const results = [];
 
-    // Itérer sur chaque entreprise et appeler la fonction reject
-    this.companies.forEach((company: any) => {
-      this.companyService.rejectCompany(company.id).subscribe({
-        next: () => {},
-        error: (err) => {
-          console.error(
-            `Erreur lors du refus de l'entreprise ${company.id}:`,
-            err
+    const delay = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
+
+    try {
+      for (const company of this.companies) {
+        try {
+          const result = await lastValueFrom(
+            this.companyService.rejectCompany(company.id)
           );
-        },
-      });
-    });
-
-    // Recharger la liste après avoir tout refusé
-    this.getCompanies();
+          results.push({ status: 'fulfilled', value: result });
+          this.getCompanies(); // Refresh list after all requests
+        } catch (error) {
+          results.push({ status: 'rejected', reason: error });
+          console.error(`Erreur pour ${company.id}:`, error);
+        }
+        // Add interval between requests
+        await delay(intervalMs);
+      }
+    } catch (globalError) {
+      console.error('Erreur globale:', globalError);
+    }
   }
 
   getDate(isoDate: string): string {
