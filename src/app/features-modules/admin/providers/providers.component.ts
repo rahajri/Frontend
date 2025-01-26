@@ -27,6 +27,7 @@ import {
   companyExistsValidator,
   exportToCsv,
   minDateValidator,
+  markFormGroupTouched,
 } from 'src/app/core/services/common/common-functions';
 
 declare var bootstrap: any;
@@ -683,7 +684,7 @@ export class ProvidersComponent implements OnInit {
   }
 
   onSubmit() {
-    this.markFormGroupTouched(this.addOfferForm);
+    markFormGroupTouched(this.addOfferForm);
     this.globalErrorMessage = false; // Reset the error message before each submission
 
     if (this.addOfferForm.valid) {
@@ -743,15 +744,6 @@ export class ProvidersComponent implements OnInit {
     this.addOfferForm.get('endDate')?.updateValueAndValidity();
     this.addOfferForm.get('duration')?.updateValueAndValidity();
     this.addOfferForm.get('timeUnit')?.updateValueAndValidity();
-  }
-
-  markFormGroupTouched(formGroup: FormGroup): void {
-    Object.values(formGroup.controls).forEach((control) => {
-      control.markAsTouched();
-      if ((control as FormGroup).controls) {
-        this.markFormGroupTouched(control as FormGroup); // Recursive for nested form groups
-      }
-    });
   }
 
   onFormKeyDown(event: KeyboardEvent): void {

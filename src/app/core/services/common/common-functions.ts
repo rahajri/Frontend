@@ -1,4 +1,9 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 
 export function exportToCsv(filename: string, rows: any[]) {
   if (!rows || !rows.length) {
@@ -138,3 +143,13 @@ export function toggleAllCheckboxes(event: Event): void {
     checkbox.checked = isChecked;
   });
 }
+
+export const markFormGroupTouched = (formGroup: FormGroup): void => {
+  Object.values(formGroup.controls).forEach((control) => {
+    control.markAsTouched();
+
+    if (control instanceof FormGroup) {
+      markFormGroupTouched(control); // Recursive call for nested FormGroups
+    }
+  });
+};

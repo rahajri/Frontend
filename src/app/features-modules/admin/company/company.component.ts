@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StatusService } from 'src/app/core/services/status.service';
 import * as lodash from 'lodash';
 import { environment } from 'src/environments/environment.prod';
+import { markFormGroupTouched } from 'src/app/core/services/common/common-functions';
 
 declare var bootstrap: any;
 
@@ -107,7 +108,9 @@ export class CompanyComponent {
       next: (res) => {
         this.allCompanyStatus = res;
       },
-      error: (err) => {console.error(err);},
+      error: (err) => {
+        console.error(err);
+      },
     });
   }
 
@@ -146,13 +149,15 @@ export class CompanyComponent {
         };
         this.companyForm.patchValue(this.initialFormValues);
       },
-      error: (err) => {console.error(err);},
+      error: (err) => {
+        console.error(err);
+      },
     });
   }
 
   onSubmit() {
     this.isRequestInProgress = true;
-    this.markFormGroupTouched(this.companyForm);
+    markFormGroupTouched(this.companyForm);
     const trimmedValues = this.trimFormValues(this.companyForm.value);
     trimmedValues.emailHasChanged = false;
     if (trimmedValues.email !== this.initialFormValues.email) {
@@ -196,15 +201,6 @@ export class CompanyComponent {
   onStatusSelect(status: { id: string; name: string }): void {
     this.selectedStatusId = status.id;
     this.selectedStatusName = status.name;
-  }
-
-  markFormGroupTouched(formGroup: FormGroup): void {
-    Object.values(formGroup.controls).forEach((control) => {
-      control.markAsTouched();
-      if ((control as FormGroup).controls) {
-        this.markFormGroupTouched(control as FormGroup);
-      }
-    });
   }
 
   formatDate(date: any): string {

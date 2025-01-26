@@ -7,6 +7,7 @@ import { CompanyService } from 'src/app/core/services/company.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { Profile } from 'src/app/core/models/models';
 import * as lodash from 'lodash';
+import { markFormGroupTouched } from 'src/app/core/services/common/common-functions';
 
 declare var bootstrap: any;
 
@@ -106,7 +107,7 @@ export class BasicSettingsComponent {
   }
 
   onSubmit() {
-    this.markFormGroupTouched(this.basicForm);
+    markFormGroupTouched(this.basicForm);
     const trimmedValues = this.trimFormValues(this.basicForm.value);
 
     if (lodash.isEqual(trimmedValues, this.initialFormValues)) {
@@ -156,14 +157,5 @@ export class BasicSettingsComponent {
     if (this.initialFormValues) {
       this.basicForm.patchValue(this.initialFormValues);
     }
-  }
-
-  markFormGroupTouched(formGroup: FormGroup): void {
-    Object.values(formGroup.controls).forEach((control) => {
-      control.markAsTouched();
-      if ((control as FormGroup).controls) {
-        this.markFormGroupTouched(control as FormGroup);
-      }
-    });
   }
 }

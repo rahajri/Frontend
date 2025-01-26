@@ -440,7 +440,114 @@
           </button>
         </div>
 
-        <div class="modal-body"></div>
+        <div class="modal-body">
+          <form [formGroup]="addCandidateForm" (ngSubmit)="onCandidateSubmit()">
+            <div class="input-block">
+              <label for="firstName" class="focus-label"
+                >Prénom <span class="label-star"> *</span></label
+              >
+              <input
+                id="firstName"
+                formControlName="firstName"
+                type="text"
+                class="form-control floating"
+                [ngClass]="{
+                  'is-invalid':
+                    addCandidateForm.get('firstName')?.invalid &&
+                    (addCandidateForm.get('firstName')?.touched ||
+                      addCandidateForm.get('firstName')?.dirty)
+                }"
+              />
+              <div
+                *ngIf="
+                  addCandidateForm.get('firstName')?.touched &&
+                  addCandidateForm.get('firstName')?.invalid
+                "
+                class="text-danger"
+              >
+                <div
+                  *ngIf="addCandidateForm.get('firstName')?.errors?.['required']"
+                >
+                  Le prénom est obligatoire.
+                </div>
+              </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="input-block">
+              <label for="lastName" class="focus-label"
+                >Nom <span class="label-star"> *</span></label
+              >
+              <input
+                id="lastName"
+                formControlName="lastName"
+                type="text"
+                class="form-control floating"
+                [ngClass]="{
+                  'is-invalid':
+                    addCandidateForm.get('lastName')?.invalid &&
+                    (addCandidateForm.get('lastName')?.touched ||
+                      addCandidateForm.get('lastName')?.dirty)
+                }"
+              />
+              <div
+                *ngIf="
+                  addCandidateForm.get('lastName')?.touched &&
+                  addCandidateForm.get('lastName')?.invalid
+                "
+                class="text-danger"
+              >
+                <div
+                  *ngIf="addCandidateForm.get('lastName')?.errors?.['required']"
+                >
+                  Le nom est obligatoire.
+                </div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="input-block">
+              <label for="email" class="focus-label"
+                >Email <span class="label-star"> *</span></label
+              >
+              <input
+                id="email"
+                formControlName="email"
+                type="email"
+                class="form-control floating"
+                [ngClass]="{
+                  'is-invalid':
+                    addCandidateForm.get('email')?.invalid &&
+                    (addCandidateForm.get('email')?.touched ||
+                      addCandidateForm.get('email')?.dirty)
+                }"
+              />
+              <div
+                *ngIf="
+                  addCandidateForm.get('email')?.touched &&
+                  addCandidateForm.get('email')?.invalid
+                "
+                class="text-danger"
+              >
+                <div
+                  *ngIf="addCandidateForm.get('email')?.errors?.['required']"
+                >
+                  L'email est obligatoire.
+                </div>
+                <div *ngIf="addCandidateForm.get('email')?.errors?.['email']">
+                  Veuillez entrer une adresse email valide.
+                </div>
+              </div>
+            </div>
+            <hr />
+            <button
+              type="submit"
+              class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center"
+            >
+              Ajouter
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

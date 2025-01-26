@@ -16,7 +16,10 @@ import { ContractService } from 'src/app/core/services/contract.service';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { LanguageService } from 'src/app/core/services/language.service';
-import { minDateValidator } from 'src/app/core/services/common/common-functions';
+import {
+  minDateValidator,
+  markFormGroupTouched,
+} from 'src/app/core/services/common/common-functions';
 interface data {
   value: string;
 }
@@ -458,7 +461,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.markFormGroupTouched(this.jobForm);
+    markFormGroupTouched(this.jobForm);
     this.globalErrorMessage = false; // Reset the error message before each submission
 
     if (this.jobForm.valid) {
@@ -495,26 +498,9 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     this.jobForm.get('timeUnit')?.updateValueAndValidity();
   }
 
-  markFormGroupTouched(formGroup: FormGroup): void {
-    Object.values(formGroup.controls).forEach((control) => {
-      control.markAsTouched();
-      if ((control as FormGroup).controls) {
-        this.markFormGroupTouched(control as FormGroup); // Recursive for nested form groups
-      }
-    });
-  }
-
   onFormKeyDown(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       event.preventDefault();
     }
   }
-
-  // showErrorModal(): void {
-  //   const modalElement = document.getElementById('post-error') as HTMLElement;
-  //   if (modalElement) {
-  //     const modal = new Bootstrap.Modal(modalElement); // Correctly reference Bootstrap.Modal
-  //     modal.show();
-  //   }
-  // }
 }

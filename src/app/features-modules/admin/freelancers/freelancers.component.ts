@@ -11,7 +11,10 @@ import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { CandidateService } from 'src/app/core/services/condidate.service';
-import { toggleAllCheckboxes } from 'src/app/core/services/common/common-functions';
+import {
+  markFormGroupTouched,
+  toggleAllCheckboxes,
+} from 'src/app/core/services/common/common-functions';
 declare var bootstrap: any;
 
 @Component({
@@ -69,32 +72,9 @@ export class FreelancersComponent {
     });
 
     this.addCandidateForm = this.fb.group({
-      user: this.fb.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        phone: [
-          '',
-          [Validators.required, Validators.pattern(/^\+?\d{10,15}$/)],
-        ],
-        email: ['', [Validators.required, Validators.email]],
-        password: [null],
-      }),
-      company: this.fb.group({
-        siret: [''],
-        name: [''],
-        nafTitle: [''],
-        naf: [''],
-        category: [''],
-        workforce: [''],
-        location: this.fb.group({
-          postalCode: [''],
-          city: [''],
-          department: [''],
-          region: [''],
-          address: [''],
-          addressLine2: [''],
-        }),
-      }),
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
     });
   }
   @ViewChild(MatSort) sort!: MatSort;
@@ -254,18 +234,23 @@ export class FreelancersComponent {
     return initials;
   }
 
-  onClienSubmit() {
+  onCandidateSubmit() {
+    markFormGroupTouched(this.addCandidateForm);
     if (this.addCandidateForm.valid) {
-      let data = this.addCandidateForm.value;
-      this.userService.createCompany(data).subscribe(
-        (response) => {
-          this.hideModal('add-company');
-          this.getTableData();
-        },
-        (error) => {
-          console.error('Error creating client:', error);
-        }
-      );
+      this.candidateService
+        .adminCreateUser(this.addCandidateForm.value)
+        .subscribe({
+          next: (response) => {
+            this.hideModal('add-company');
+            this.getTableData();
+            this.addCandidateForm.reset();
+          },
+          error: (error) => {
+            console.error('Error creating client:', error);
+          },
+        });
+    } else {
+      console.log('invalid');
     }
   }
 
