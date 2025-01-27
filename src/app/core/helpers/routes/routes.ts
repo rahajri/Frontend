@@ -250,6 +250,9 @@ export class routes {
   public static get_admin_company(id: string): string {
     return this.admin + `/company/${id}`;
   }
+  public static get_admin_candidate(id: string): string {
+    return this.admin + `/candidat/${id}`;
+  }
   public static get_admin_offer(id: string): string {
     return this.admin + `/providers/${id}`;
   }

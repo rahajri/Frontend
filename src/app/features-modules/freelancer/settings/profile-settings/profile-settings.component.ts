@@ -133,7 +133,6 @@ export class ProfileSettingsComponent implements OnInit {
           console.error('Error updating profile:', err);
         },
       });
-    // this.router.navigate([routes.freelancerprofile]);
   }
 
   formatTime(date: Date) {

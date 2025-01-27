@@ -215,6 +215,7 @@
                         <mat-cell
                           *matCellDef="let element"
                           style="flex: none; font-size: 16px"
+                          [routerLink]="routes.get_admin_candidate(element?.id)"
                         >
                           <div class="form-check custom-checkbox">
                             <input
@@ -235,7 +236,10 @@
                         <mat-header-cell *matHeaderCellDef>
                           Candidat
                         </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_candidate(element?.id)"
+                        >
                           <span class="user-img">
                             <img
                               class="profile-initials"
@@ -260,7 +264,10 @@
                         <mat-header-cell mat-sort-header *matHeaderCellDef>
                           Téléphone
                         </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_candidate(element?.id)"
+                        >
                           {{ element.phone }}
                         </mat-cell>
                       </ng-container>
@@ -270,7 +277,10 @@
                         <mat-header-cell *matHeaderCellDef mat-sort-header>
                           Métier
                         </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_candidate(element?.id)"
+                        >
                           {{ element.profileTitle }}
                         </mat-cell>
                       </ng-container>
@@ -280,7 +290,10 @@
                         <mat-header-cell *matHeaderCellDef>
                           Vérification
                         </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_candidate(element?.id)"
+                        >
                           <i
                             class="fa-regular fa-circle-check me-1"
                             style="font-size: 16px"
@@ -298,7 +311,10 @@
                         <mat-header-cell mat-sort-header *matHeaderCellDef>
                           Date d'inscription
                         </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_candidate(element?.id)"
+                        >
                           {{ getDate(element?.createdAt) }}
                         </mat-cell>
                       </ng-container>
@@ -307,7 +323,10 @@
                         <mat-header-cell mat-sort-header *matHeaderCellDef>
                           Dernière connexion
                         </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_candidate(element?.id)"
+                        >
                           {{ getDate(element?.lastConnection) }}
                         </mat-cell>
                       </ng-container>
@@ -317,7 +336,10 @@
                         <mat-header-cell *matHeaderCellDef>
                           Status
                         </mat-header-cell>
-                        <mat-cell *matCellDef="let element">
+                        <mat-cell
+                          *matCellDef="let element"
+                          [routerLink]="routes.get_admin_candidate(element?.id)"
+                        >
                           <div
                             [ngClass]="{
                               'text-success': element.status?.name === 'Active',
@@ -346,8 +368,14 @@
                               ><i class="fas fa-ellipsis-v"></i
                             ></a>
                             <div class="dropdown-menu user-menu-list">
-                              <a class="dropdown-item" data-dismiss="modal"
-                                ><i class="fa-solid fa-eye"></i> Détails</a
+                              <a
+                                class="dropdown-item"
+                                data-dismiss="modal"
+                                [routerLink]="
+                                  routes.get_admin_candidate(element?.id)
+                                "
+                                ><i class="fa-solid fa-pen text-info"></i>
+                                Editer</a
                               >
                               <a
                                 class="dropdown-item"

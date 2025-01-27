@@ -1,0 +1,520 @@
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+  <div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row">
+        <div class="col">
+          <h3 class="page-title">Détails du Candidat</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a [routerLink]="'/admin/dashboard'">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Détails du projet</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Page Header -->
+
+    <div class="pro-pos">
+      <div class="setting-content">
+        <form [formGroup]="form">
+          <div class="card" formGroupName="personalDetails">
+            <div class="pro-head">
+              <h3>Paramètres du profil</h3>
+            </div>
+            <div class="pro-body">
+              <div class="row">
+                <label
+                  class="avatar avatar-xxl profile-cover-avatar"
+                  for="avatar_upload"
+                >
+                  <img class="avatar-img" [src]="imgUrl" alt="" />
+                  <input
+                    type="file"
+                    id="avatar_upload"
+                    (change)="onImageChange($event)"
+                    accept="image/*"
+                  />
+                  <span class="avatar-edit">
+                    <i
+                      class="feather icon-edit avatar-uploader-icon shadow-soft"
+                    ></i>
+                  </span>
+                </label>
+                <div class="col-lg-12 col-md-12">
+                  <div class="mb-3">
+                    <label for="job-title" class="form-label"
+                      >Titre profil</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="profileTitle"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="first-name" class="form-label">Prénom</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="firstName"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="last-name" class="form-label">Nom</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="lastName"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="phone-number" class="form-label"
+                      >Téléphone</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="phone"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12">
+                  <div class="mb-3">
+                    <label for="email-address" class="form-label">Email</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="email"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-lg-12 w-100">
+              <div class="card flex-fill mb-3">
+                <form [formGroup]="form">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h4>Compétences</h4>
+                    </div>
+                    <div class="row" formArrayName="skills">
+                      <!-- Existing Skills List -->
+                      <ng-container
+                        *ngFor="
+                          let skill of skillsArray.controls;
+                          let i = index
+                        "
+                        [formGroupName]="i"
+                      >
+                        <div class="col-md-6">
+                          <div class="input-block">
+                            <label for="skillName-{{ i }}" class="form-label"
+                              >Titre</label
+                            >
+                            <input
+                              id="skillName-{{ i }}"
+                              type="text"
+                              class="form-control"
+                              placeholder="Saisir une competance"
+                              [attr.autocomplete]="'off'"
+                              formControlName="skillName"
+                              (input)="filterSkills($event.target, i)"
+                            />
+                            <!-- Autocomplete suggestions -->
+                            <ul
+                              class="autocomplete-list"
+                              *ngIf="filteredSkills.length && index === i"
+                            >
+                              <li
+                                *ngFor="let skill of filteredSkills"
+                                (click)="selectSkill(skill, i)"
+                                class="autocomplete-item"
+                              >
+                                {{ skill.name }}
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="input-block">
+                            <label for="level-{{ i }}" class="focus-label"
+                              >Niveau</label
+                            >
+                            <select
+                              formControlName="level"
+                              class="form-control form-select"
+                              placeholder="Sélectionner un Niveau"
+                            >
+                              <option
+                                *ngFor="let level of skillLevels"
+                                [value]="level"
+                              >
+                                {{ level }}
+                              </option>
+                            </select>
+                            <div class="new-addd">
+                              <!-- Add New Skill button visible only for the last skill -->
+                              <a
+                                class="add-new me-2"
+                                (click)="addSkillManually()"
+                                *ngIf="i === skillsArray.controls.length - 1"
+                                tabindex="0"
+                              >
+                                <i class="feather icon-plus-circle me-1"></i>
+                                Ajouter
+                              </a>
+                              <!-- Remove button visible except for the first skill -->
+                              <a
+                                class="remove_row"
+                                (click)="removeSkills(i)"
+                                tabindex="0"
+                                *ngIf="skillsArray.controls.length > 1"
+                              >
+                                Supprimer
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <form [formGroup]="form">
+              <div class="row" formArrayName="education">
+                <div class="col-md-12">
+                  <h4>Formation</h4>
+                </div>
+                <div
+                  class="row"
+                  *ngFor="
+                    let education of educationArray.controls;
+                    let i = index
+                  "
+                  [formGroupName]="i"
+                >
+                  <div class="col-md-6 col-lg-3">
+                    <div class="input-block">
+                      <label for="degree-name" class="focus-label"
+                        >Nom du Diplôme</label
+                      >
+                      <input
+                        type="text"
+                        formControlName="degreeName"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-lg-3">
+                    <div class="input-block">
+                      <label for="university-name" class="focus-label"
+                        >Nom de l’établissement</label
+                      >
+                      <input
+                        type="text"
+                        formControlName="universityName"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-lg-3">
+                    <div class="input-block">
+                      <label for="start-date" class="focus-label"
+                        >Date de début</label
+                      >
+                      <div class="cal-icon">
+                        <input
+                          type="text"
+                          formControlName="startDate"
+                          class="form-control datetimepicker"
+                          bsDatepicker
+                          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-lg-3">
+                    <div class="input-block">
+                      <label for="end-date" class="focus-label"
+                        >Date de Fin</label
+                      >
+                      <div class="cal-icon">
+                        <input
+                          type="text"
+                          formControlName="endDate"
+                          class="form-control datetimepicker"
+                          bsDatepicker
+                          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+                        />
+                      </div>
+
+                      <!-- Add or Remove Button -->
+                      <div class="new-addd">
+                        <!-- Show 'Add New' button for all except the last entry -->
+                        <a
+                          *ngIf="i === educationArray.length - 1"
+                          class="add-new me-2"
+                          (click)="addEducation()"
+                          tabindex="0"
+                        >
+                          <i class="feather icon-plus-circle me-1"></i> Ajouter
+                        </a>
+
+                        <!-- Show 'Remove' button only if there are more than one education entry -->
+                        <a
+                          *ngIf="educationArray.length > 1"
+                          class="remove_row"
+                          (click)="removeEducation(i)"
+                          tabindex="0"
+                        >
+                          Supprimer
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" formArrayName="experiences">
+                <div class="col-md-12">
+                  <h4>Expérience</h4>
+                </div>
+
+                <!-- Existing Experience Form Fields (Looping through experiencesArray) -->
+                <div
+                  class="row"
+                  *ngFor="
+                    let experience of experiencesArray.controls;
+                    let i = index
+                  "
+                  [formGroupName]="i"
+                >
+                  <div class="col-md-6 col-lg-3">
+                    <div class="input-block">
+                      <label for="company-name" class="focus-label"
+                        >Nom Entreprise</label
+                      >
+                      <input
+                        type="text"
+                        formControlName="companyName"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-lg-3">
+                    <div class="input-block">
+                      <label for="position" class="focus-label">Niveau</label>
+                      <select
+                        formControlName="level"
+                        placeholder="Select"
+                        class="form-control form-select"
+                      >
+                        <option
+                          *ngFor="let level of skillLevels"
+                          [value]="level"
+                        >
+                          {{ level }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-lg-3">
+                    <div class="input-block">
+                      <label for="start-date" class="focus-label"
+                        >Date de début</label
+                      >
+                      <div class="cal-icon">
+                        <input
+                          type="text"
+                          formControlName="startDate"
+                          class="form-control datetimepicker"
+                          bsDatepicker
+                          placeholder="Choose"
+                          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-lg-3">
+                    <div class="input-block">
+                      <label for="end-date" class="focus-label"
+                        >Date de fin</label
+                      >
+                      <div class="cal-icon">
+                        <input
+                          type="text"
+                          formControlName="endDate"
+                          class="form-control datetimepicker"
+                          bsDatepicker
+                          placeholder="Choose"
+                          [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+                        />
+                      </div>
+                      <div class="new-addd">
+                        <a
+                          *ngIf="i === experiencesArray.length - 1"
+                          class="add-new me-2"
+                          (click)="addExperience()"
+                          tabindex="0"
+                          ><i class="feather icon-plus-circle me-1"></i>
+                          Ajouter</a
+                        >
+                        <a
+                          *ngIf="experiencesArray.length > 1"
+                          class="remove_row"
+                          (click)="removeExperience(i)"
+                          >Supprimer</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" formArrayName="languages">
+                <div class="col-md-12">
+                  <h4>Langue</h4>
+                </div>
+                <div
+                  class="row"
+                  *ngFor="
+                    let language of languagesArray.controls;
+                    let i = index
+                  "
+                  [formGroupName]="i"
+                >
+                  <div class="col-md-6">
+                    <div class="input-block">
+                      <label for="language" class="form-label">Language</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Saisir une langue"
+                        [attr.autocomplete]="'off'"
+                        formControlName="name"
+                        (input)="filterLanguages($event.target, i)"
+                      />
+                      <!-- Autocomplete suggestions -->
+                      <ul
+                        class="autocomplete-list"
+                        *ngIf="filteredLanguages.length && activeIndex === i"
+                      >
+                        <li
+                          *ngFor="let language of filteredLanguages"
+                          (click)="selectLanguage(language, i)"
+                          class="autocomplete-item"
+                        >
+                          {{ language.name }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-block">
+                      <label for="level" class="focus-label">Niveau</label>
+                      <select
+                        formControlName="level"
+                        class="form-control form-select"
+                      >
+                        <option
+                          *ngFor="let level of skillLevels"
+                          [value]="level"
+                        >
+                          {{ level }}
+                        </option>
+                      </select>
+                      <div class="new-addd">
+                        <a
+                          *ngIf="i === languagesArray.length - 1"
+                          class="add-new me-2"
+                          (click)="addLanguage()"
+                          tabindex="0"
+                        >
+                          <i class="feather icon-plus-circle me-1"></i> Ajouter
+                        </a>
+                        <a
+                          *ngIf="languagesArray.length > 1"
+                          class="remove_row"
+                          (click)="removeLanguage(i)"
+                        >
+                          Supprimer
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="card text-end border-0">
+            <div class="pro-body">
+              <button class="btn btn-primary login-btn me-3">Annuler</button>
+              <button
+                class="btn btn-primary login-btn"
+                type="button"
+                (click)="onSubmit()"
+                tabindex="0"
+              >
+                Mise à jour
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Page Wrapper -->
+
+<!-- Success Modal -->
+<div class="modal fade success-modal hire-modal" id="data-changed">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content" style="background-color: #a3cfbb">
+      <div class="modal-body pt-4">
+        <div class="success-msg-content text-center">
+          Vos données ont été modifiées avec <strong>succès</strong>.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Success Modal -->
+<!-- Error Modal -->
+<div class="modal fade error-modal hire-modal" id="error">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content bg-danger">
+      <div class="modal-body pt-4">
+        <div class="error-msg-content text-center">
+          <strong>Error! </strong> Une erreur s'est produite côté serveur.
+          Veuillez réessayer plus tard.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Error Modal -->

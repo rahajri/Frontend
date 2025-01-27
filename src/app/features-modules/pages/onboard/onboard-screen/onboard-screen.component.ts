@@ -1,8 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { routes } from 'src/app/core/helpers/routes/routes';
-import * as pdfjsLib from 'pdfjs-dist'; // Use the legacy build for better compatibility
-import * as Tesseract from 'tesseract.js';
+import * as pdfjsLib from 'pdfjs-dist';
 import { OcrService } from 'src/app/core/services/ocr.service';
 import {
   FormArray,
@@ -11,7 +10,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { SpinnerService } from 'src/app/core/services/spinner/spinner.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment.prod';
 import { LocationService } from 'src/app/core/services/location.service';

@@ -12,7 +12,7 @@
               class="avatar avatar-xxl profile-cover-avatar"
               for="avatar_upload"
             >
-              <img class="avatar-img" [src]="imgUrl" alt="Profile Image" />
+              <img class="avatar-img" [src]="imgUrl" alt="" />
               <input
                 type="file"
                 id="avatar_upload"
@@ -431,9 +431,9 @@
 
       <div class="card text-end border-0">
         <div class="pro-body">
-          <button class="btn btn-secondary click-btn btn-plan">Annuler</button>
+          <button class="btn btn-secondary login-btn me-3">Annuler</button>
           <button
-            class="btn btn-primary click-btn btn-plan"
+            class="btn btn-primary login-btn"
             type="button"
             (click)="onSubmit()"
             tabindex="0"

@@ -34,6 +34,10 @@ export class CandidateService {
 
     return this.http.post<any>(url, body);
   }
+  getCandidateById(id: string): Observable<any> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.get<any>(url );
+  }
 
   updateCandidateProfile(candidateId: string, body: any): Observable<any> {
     const url = `${this.baseUrl}/${candidateId}/profile`;
