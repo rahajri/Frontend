@@ -544,8 +544,14 @@
             <button
               type="submit"
               class="btn btn-primary w-100 btn-lg login-btn d-flex align-items-center justify-content-center"
+              [disabled]="isSubmitting || addCandidateForm.invalid"
             >
-              Ajouter
+              <span *ngIf="!isSubmitting">Ajouter</span>
+              <span
+                *ngIf="isSubmitting"
+                class="spinner-border spinner-border-sm"
+                role="status"
+              ></span>
             </button>
           </form>
         </div>

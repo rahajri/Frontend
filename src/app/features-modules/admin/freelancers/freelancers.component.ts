@@ -50,6 +50,7 @@ export class FreelancersComponent {
   initials: string = '';
   userEmail: string = '';
   baseUrl = environment.apiUrl;
+  isSubmitting: boolean = false;
 
   candidateToDelete: any;
   selectedHederTitle = 'Tous les';
@@ -238,8 +239,11 @@ export class FreelancersComponent {
 
   onCandidateSubmit() {
     markFormGroupTouched(this.addCandidateForm);
-    if (this.addCandidateForm.valid) {
+
+    if (this.addCandidateForm.valid && !this.isSubmitting) {
+      this.isSubmitting = true;
       this.userEmail = this.addCandidateForm.get('email')?.value;
+
       this.candidateService
         .adminCreateUser(this.addCandidateForm.value)
         .subscribe({
@@ -247,14 +251,14 @@ export class FreelancersComponent {
             this.hideModal('add-candidat');
             this.getTableData();
             this.addCandidateForm.reset();
+            this.isSubmitting = false;
             showSuccessModal('success-added', false);
           },
           error: (error) => {
             console.error('Error creating client:', error);
+            this.isSubmitting = false;
           },
         });
-    } else {
-      console.log('invalid');
     }
   }
 
