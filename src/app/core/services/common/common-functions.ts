@@ -5,6 +5,8 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 
+declare var bootstrap: any;
+
 export function exportToCsv(filename: string, rows: any[]) {
   if (!rows || !rows.length) {
     return;
@@ -152,4 +154,20 @@ export const markFormGroupTouched = (formGroup: FormGroup): void => {
       markFormGroupTouched(control); // Recursive call for nested FormGroups
     }
   });
+};
+
+export const showSuccessModal = (id: string, hide: boolean = true) => {
+  const modalElement = document.getElementById(id);
+  if (modalElement) {
+    modalElement.setAttribute('aria-hidden', 'false');
+    modalElement.style.display = 'block';
+    const modal = new bootstrap.Modal(modalElement);
+    modal.show();
+    modalElement.focus();
+    if (hide) {
+      setTimeout(() => {
+        modal.hide();
+      }, 3000);
+    }
+  }
 };

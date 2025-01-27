@@ -1,19 +1,14 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { routes } from 'src/app/core/helpers/routes/routes';
+import { showSuccessModal } from 'src/app/core/services/common/common-functions';
 import { CandidateService } from 'src/app/core/services/condidate.service';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { environment } from 'src/environments/environment.prod';
 
-declare var bootstrap: any;
 interface Language {
   id: string;
   name: string;
@@ -132,7 +127,7 @@ export class ProfileSettingsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.getCondidature(); // Refresh the candidate data
-          this.showSuccessModal(); // Show a success message
+          showSuccessModal('data-changed'); // Show a success message
         },
         error: (err) => {
           console.error('Error updating profile:', err);
@@ -444,20 +439,5 @@ export class ProfileSettingsComponent implements OnInit {
   }
   get activities(): FormArray {
     return this.form.get('activities') as FormArray;
-  }
-
-  showSuccessModal() {
-    const modalElement = document.getElementById('data-changed');
-    if (modalElement) {
-      modalElement.setAttribute('aria-hidden', 'false');
-      modalElement.style.display = 'block';
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-      modalElement.focus();
-
-      setTimeout(() => {
-        modal.hide();
-      }, 3000);
-    }
   }
 }

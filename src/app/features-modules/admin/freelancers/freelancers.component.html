@@ -20,7 +20,7 @@
               class="btn add-user"
               href="javascript:void(0)"
               data-bs-toggle="modal"
-              data-bs-target="#add-company"
+              data-bs-target="#add-candidat"
             >
               <i class="fas fa-plus"></i> Ajouter Candidat
             </a>
@@ -427,7 +427,7 @@
   </div>
 
   <!-- Add Modal -->
-  <div class="modal fade custom-modal" id="add-company">
+  <div class="modal fade custom-modal" id="add-candidat">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header flex-wrap">
@@ -442,6 +442,7 @@
 
         <div class="modal-body">
           <form [formGroup]="addCandidateForm" (ngSubmit)="onCandidateSubmit()">
+            <!-- First Name -->
             <div class="input-block">
               <label for="firstName" class="focus-label"
                 >Prénom <span class="label-star"> *</span></label
@@ -552,4 +553,49 @@
     </div>
   </div>
   <!-- Add Modal -->
+</div>
+<div class="modal fade custom-modal" id="success-added">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header flex-wrap">
+        <div class="text-center w-100 mb-3">
+          <img src="assets/img/interim.png" alt="" />
+        </div>
+        <h4 class="modal-title">Candidat créé avec succès</h4>
+        <button type="button" class="close" data-bs-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body parent">
+        <p>
+          <strong>Identifiants par défaut :</strong><br />
+          <i class="fas fa-envelope"></i> Email :
+          <span class="highlight" (click)="copyToClipboard(userEmail)">{{
+            userEmail
+          }}</span
+          ><br />
+          <i class="fas fa-key"></i> Mot de passe temporaire :
+          <span class="warning" (click)="copyToClipboard('admin1234')"
+            >admin1234</span
+          >
+        </p>
+
+        <div class="alert alert-warning">
+          <i class="fas fa-exclamation-triangle"></i>
+          Le candidat doit se connecter et modifier son mot de passe dès la
+          première connexion.
+        </div>
+
+        <p class="instructions">
+          Pour compléter le profil :<br />
+          1. Transmettez ces identifiants au candidat<br />
+          2. Demandez-lui de se connecter
+          <span class="ici text-danger" (click)="requestLogin(userEmail)"
+            >ici</span
+          >
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

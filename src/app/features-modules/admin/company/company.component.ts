@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StatusService } from 'src/app/core/services/status.service';
 import * as lodash from 'lodash';
 import { environment } from 'src/environments/environment.prod';
-import { markFormGroupTouched } from 'src/app/core/services/common/common-functions';
+import { markFormGroupTouched, showSuccessModal } from 'src/app/core/services/common/common-functions';
 
 declare var bootstrap: any;
 
@@ -169,7 +169,7 @@ export class CompanyComponent {
       this.initialStatusId = this.selectedStatusId;
       this.ChangeStatus();
       this.isRequestInProgress = false;
-      this.showSuccessModal();
+      showSuccessModal('data-changed');
     }
 
     if (lodash.isEqual(trimmedValues, this.initialFormValues)) {
@@ -228,7 +228,7 @@ export class CompanyComponent {
 
     this.companyService.updateCompany(companyId, formData).subscribe({
       next: () => {
-        this.showSuccessModal();
+        showSuccessModal('data-changed');
         this.initialFormValues = values;
       },
       error: (err) => {
@@ -246,21 +246,6 @@ export class CompanyComponent {
         this.isRequestInProgress = false;
       },
     });
-  }
-
-  showSuccessModal() {
-    const modalElement = document.getElementById('data-changed');
-    if (modalElement) {
-      modalElement.setAttribute('aria-hidden', 'false');
-      modalElement.style.display = 'block';
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-      modalElement.focus();
-
-      setTimeout(() => {
-        modal.hide();
-      }, 3000);
-    }
   }
 
   onCoverChange(event: Event): void {

@@ -7,9 +7,7 @@ import { CompanyService } from 'src/app/core/services/company.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { Profile } from 'src/app/core/models/models';
 import * as lodash from 'lodash';
-import { markFormGroupTouched } from 'src/app/core/services/common/common-functions';
-
-declare var bootstrap: any;
+import { markFormGroupTouched, showSuccessModal } from 'src/app/core/services/common/common-functions';
 
 @Component({
   selector: 'app-basic-settings',
@@ -119,27 +117,12 @@ export class BasicSettingsComponent {
         .updateCompany(this.companyId, trimmedValues)
         .subscribe({
           next: (res) => {
-            this.showSuccessModal();
+            showSuccessModal('data-changed');
           },
           error: (err) => {
             console.error(err);
           },
         });
-    }
-  }
-
-  showSuccessModal() {
-    const modalElement = document.getElementById('data-changed');
-    if (modalElement) {
-      modalElement.setAttribute('aria-hidden', 'false');
-      modalElement.style.display = 'block';
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-      modalElement.focus();
-
-      setTimeout(() => {
-        modal.hide();
-      }, 3000);
     }
   }
 

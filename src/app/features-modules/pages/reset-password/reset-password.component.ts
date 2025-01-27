@@ -9,8 +9,8 @@ import {
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { showSuccessModal } from 'src/app/core/services/common/common-functions';
 
-declare var bootstrap: any;
 
 @Component({
   selector: 'app-reset-password',
@@ -143,7 +143,7 @@ export class ResetPasswordComponent {
     if (token && password) {
       this.authService.resetPassword(token, password).subscribe({
         next: (res) => {
-          this.showSuccessModal();
+          showSuccessModal('data-changed');
         },
         error: (err) => {
           console.error(err);
@@ -152,21 +152,6 @@ export class ResetPasswordComponent {
     }
   }
 
-  showSuccessModal() {
-    const modalElement = document.getElementById('data-changed');
-    if (modalElement) {
-      modalElement.setAttribute('aria-hidden', 'false');
-      modalElement.style.display = 'block';
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-      modalElement.focus();
-
-      setTimeout(() => {
-        modal.hide();
-        this.router.navigate([routes.login]);
-      }, 3000);
-    }
-  }
 
   onCancel() {
     this.resetForm.reset({

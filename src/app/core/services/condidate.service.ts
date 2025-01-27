@@ -48,9 +48,13 @@ export class CandidateService {
   deleteCandidate(candidateId: string) {
     return this.http.delete<any>(`${this.baseUrl}/${candidateId}`);
   }
-  
+
   adminCreateUser(data: any) {
     const url = `${this.baseUrl}/create`;
     return this.http.post<any>(url, data);
+  }
+  sendWelcomeMail(email: string) {
+    const url = `${this.baseUrl}/welcome`;
+    return this.http.post<any>(url, { email });
   }
 }
