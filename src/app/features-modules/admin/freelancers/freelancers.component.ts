@@ -6,7 +6,7 @@ import { routes } from 'src/app/core/helpers/routes/routes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocationService } from 'src/app/core/services/location.service';
 import { UserService } from '../../auth/service/user.service';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { CommonService } from 'src/app/core/services/common/common.service';

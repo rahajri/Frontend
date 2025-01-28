@@ -11,7 +11,7 @@ import { Validators } from '@angular/forms';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { UserService } from '../service/user.service';
 import { EmailStorageService } from '../service/email-storage.service';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { LocationService } from 'src/app/core/services/location.service';
 import { AlertService } from 'src/app/core/services/alert/alert.service';

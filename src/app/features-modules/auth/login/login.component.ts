@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { WebStorage } from 'src/app/core/storage/web.storage';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { CandidateService } from 'src/app/core/services/condidate.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { Location } from '@angular/common';

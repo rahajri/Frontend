@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, tap, throwError } from 'rxjs';
 import { routes } from '../../helpers/routes/routes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({

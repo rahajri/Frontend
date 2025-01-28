@@ -7,8 +7,11 @@ import { CommonService } from 'src/app/core/services/common/common.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StatusService } from 'src/app/core/services/status.service';
 import * as lodash from 'lodash';
-import { environment } from 'src/environments/environment.prod';
-import { markFormGroupTouched, showSuccessModal } from 'src/app/core/services/common/common-functions';
+import { environment } from 'src/environments/environment';
+import {
+  markFormGroupTouched,
+  showSuccessModal,
+} from 'src/app/core/services/common/common-functions';
 
 declare var bootstrap: any;
 

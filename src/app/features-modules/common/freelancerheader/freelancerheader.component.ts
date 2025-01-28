@@ -8,7 +8,7 @@ import { CommonService } from 'src/app/core/services/common/common.service';
 import { NavbarService } from 'src/app/core/services/navbar.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { UserService } from '../../auth/service/user.service';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-freelancerheader',
@@ -38,7 +38,6 @@ export class FreelancerheaderComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService
   ) {
-    
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.getRoutes(this.router);

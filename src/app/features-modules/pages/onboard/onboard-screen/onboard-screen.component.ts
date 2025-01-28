@@ -11,7 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { LocationService } from 'src/app/core/services/location.service';
 import { JobService } from 'src/app/core/services/job.service';
 import { CandidateService } from 'src/app/core/services/condidate.service';

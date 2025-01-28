@@ -7,7 +7,7 @@ import { showSuccessModal } from 'src/app/core/services/common/common-functions'
 import { CandidateService } from 'src/app/core/services/condidate.service';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { SkillService } from 'src/app/core/services/skill.service';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 interface Language {
   id: string;
