@@ -291,6 +291,7 @@ export class CandidateComponent {
   }
 
   patchFormData(response: any) {
+    // Patch personal details
     this.form.get('personalDetails')?.patchValue({
       lastName: response?.lastName || '',
       firstName: response?.firstName || '',
@@ -304,65 +305,85 @@ export class CandidateComponent {
     const skills: any[] = response['candidateSkills'] || [];
     this.skillsArray.clear();
 
-    skills.forEach((skill: any) => {
-      this.skillsArray.push(
-        this.fb.group({
-          skillName: [skill?.skill?.name || ''], // Add skill name to form control
-          level: [skill?.level || ''], // Add level if available
-        })
-      );
-    });
+    if (skills.length > 0) {
+      skills.forEach((skill: any) => {
+        this.skillsArray.push(
+          this.fb.group({
+            skillName: [skill?.skill?.name || ''], // Add skill name to form control
+            level: [skill?.level || ''], // Add level if available
+          })
+        );
+      });
+    } else {
+      // If no skills, add one empty skill group
+      this.addSkillManually();
+    }
+
     // Patch languages
     const languages: any[] = response['candidateLanguages'] || [];
     this.languagesArray.clear();
 
-    languages.forEach((lang: any) => {
-      this.languagesArray.push(
-        this.fb.group({
-          name: [lang?.language?.name || ''], // Add skill name to form control
-          level: [lang?.level || ''], // Add level if available
-        })
-      );
-    });
+    if (languages.length > 0) {
+      languages.forEach((lang: any) => {
+        this.languagesArray.push(
+          this.fb.group({
+            name: [lang?.language?.name || ''], // Add language name to form control
+            level: [lang?.level || ''], // Add level if available
+          })
+        );
+      });
+    } else {
+      // If no language data, add one empty language group
+      this.addLanguage();
+    }
 
     // Patch education (formations)
     const educationData = response['formations'] || [];
     this.educationArray.clear();
-
-    educationData.forEach((education: any) => {
-      this.educationArray.push(
-        this.fb.group({
-          degreeName: [
-            education['title'] ||
-              education['Certification'] ||
-              education['Formation'] ||
-              education['nom'] ||
-              '',
-          ],
-          universityName: [
-            education['institution'] || education['Délivrée par'] || '',
-          ],
-          startDate: education['startDate'] || '',
-          endDate: education['endDate'] || '',
-          description: [education['description'] || ''],
-        })
-      );
-    });
+    if (educationData.length > 0) {
+      educationData.forEach((education: any) => {
+        this.educationArray.push(
+          this.fb.group({
+            degreeName: [
+              education['title'] ||
+                education['Certification'] ||
+                education['Formation'] ||
+                education['nom'] ||
+                '',
+            ],
+            universityName: [
+              education['institution'] || education['Délivrée par'] || '',
+            ],
+            startDate: education['startDate'] || '',
+            endDate: education['endDate'] || '',
+            description: [education['description'] || ''],
+          })
+        );
+      });
+    } else {
+      // If no education data, add one empty education group
+      this.addEducation();
+    }
 
     // Patch experiences
     const experienceData = response['experiences'] || [];
     this.experiencesArray.clear();
-    experienceData.forEach((experience: any) => {
-      this.experiencesArray.push(
-        this.fb.group({
-          companyName: [experience['companyName'] || ''],
-          level: [experience['level'] || ''],
-          startDate: experience['startDate'] || '',
-          endDate: experience['endDate'] || '',
-          description: [experience['description'] || ''],
-        })
-      );
-    });
+    if (experienceData.length > 0) {
+      experienceData.forEach((experience: any) => {
+        this.experiencesArray.push(
+          this.fb.group({
+            companyName: [experience['companyName'] || ''],
+            level: [experience['level'] || ''],
+            startDate: experience['startDate'] || '',
+            endDate: experience['endDate'] || '',
+            description: [experience['description'] || ''],
+          })
+        );
+      });
+    } else {
+      // If no experience data, add one empty experience group
+      this.addExperience();
+    }
   }
 
   // Add a new experience to the array
