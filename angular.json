@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "kofejob-angular": {
+    "interim-online": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/kofejob-angular"
+              "base": "dist/interim-online"
             },
             "index": "src/index.html",
             "polyfills": ["zone.js"],
@@ -90,10 +90,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "kofejob-angular:build:production"
+              "buildTarget": "interim-online:build:production"
             },
             "development": {
-              "buildTarget": "kofejob-angular:build:development"
+              "buildTarget": "interim-online:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -101,7 +101,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "kofejob-angular:build"
+            "buildTarget": "interim-online:build"
           }
         },
         "test": {

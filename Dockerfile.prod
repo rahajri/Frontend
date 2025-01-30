@@ -1,0 +1,26 @@
+# Build stage
+FROM node:18-alpine AS builder
+WORKDIR /app
+
+# Copy dependencies files and install
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps  # Faster and ensures lockfile is respected
+
+# Copy the rest of the app
+COPY . .
+
+# Build Angular project
+RUN npm run build --project=interim-online --configuration=production
+
+# Production stage
+FROM nginx:alpine
+COPY --from=builder /app/dist/interim-online /usr/share/nginx/html
+
+# Copy custom Nginx config (ensure this file exists and is correctly formatted)
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
