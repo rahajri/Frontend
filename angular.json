@@ -47,7 +47,8 @@
               "apexcharts",
               "file-saver",
               "feather-icons",
-              "aos"
+              "aos",
+              "validator"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
