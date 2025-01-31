@@ -12,7 +12,7 @@ import { Profile } from 'src/app/core/models/models';
 export class UserService {
   private baseUrl = `${environment.apiUrl}/auth`;
   constructor(private http: HttpClient, private router: Router) {}
-  private apiUrl = 'http://localhost:3000/users';
+  private apiUrl = `${environment.apiUrl}/users`;
 
   // Register new user
   createUser(userData: any): Observable<any> {
@@ -31,7 +31,7 @@ export class UserService {
 
   // Verify OTP with Bearer token
   verifyOtp(userId: string): Observable<any> {
-    const url = 'http://localhost:3000/users/verification-otp';
+    const url = `${environment.apiUrl}/users/verification-otp`;
 
     // Retrieve the token from storage or service
     const token = localStorage.getItem('token'); // or use a service to manage tokens
