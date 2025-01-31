@@ -213,15 +213,13 @@
         <div class="modal-body">
           <h4>{{ selectedCompany?.name }}</h4>
           <div class="form-group">
-            <label for="siret">Date de création</label>
-            <input
-              type="text"
-              id="date"
-              class="form-control"
-              [value]="getDate(selectedCompany?.createdAt)"
-              readonly
-            />
+            <i class="ms-2">
+              Créé le :
+              <strong>{{ getDate(selectedCompany?.createdAt) }}</strong></i
+            >
           </div>
+          <hr />
+          <h5>Informations Générales</h5>
           <div class="form-group">
             <label for="siret">SIRET</label>
             <input
@@ -232,6 +230,39 @@
               readonly
             />
           </div>
+
+          <div class="form-group">
+            <label for="naf">Code NAF</label>
+            <input
+              type="text"
+              id="naf"
+              class="form-control"
+              [value]="selectedCompany?.naf"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="nafTitle">Activité</label>
+            <input
+              type="text"
+              id="nafTitle"
+              class="form-control"
+              [value]="selectedCompany?.nafTitle"
+              readonly
+            />
+          </div>
+          <div class="form-group">
+            <label for="category">Catégorie</label>
+            <input
+              type="text"
+              id="category"
+              class="form-control"
+              [value]="selectedCompany?.category"
+              readonly
+            />
+          </div>
+          <hr />
+          <h4>informations Contact</h4>
           <div class="form-group">
             <label for="email">Contact</label>
             <input
@@ -263,47 +294,7 @@
               readonly
             />
           </div>
-          <div class="form-group">
-            <label for="naf">Code NAF</label>
-            <input
-              type="text"
-              id="naf"
-              class="form-control"
-              [value]="selectedCompany?.naf"
-              readonly
-            />
-          </div>
-          <div class="form-group">
-            <label for="nafTitle">Activité</label>
-            <input
-              type="text"
-              id="nafTitle"
-              class="form-control"
-              [value]="selectedCompany?.nafTitle"
-              readonly
-            />
-          </div>
-          <div class="form-group">
-            <label for="category">Catégorie</label>
-            <input
-              type="text"
-              id="category"
-              class="form-control"
-              [value]="selectedCompany?.category"
-              readonly
-            />
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <input
-              type="text"
-              id="message"
-              class="form-control"
-              [value]="selectedCompany?.message"
-              readonly
-            />
-          </div>
-
+          <hr />
           <h5>Localisation</h5>
           <div class="form-group">
             <label for="address">Ville</label>
@@ -326,6 +317,17 @@
                 selectedCompany?.location?.address +
                 (selectedCompany?.location?.addressLine2 || '')
               "
+              readonly
+            />
+          </div>
+          <hr />
+          <div class="form-group">
+            <label for="message">Besoin de base</label>
+            <input
+              type="text"
+              id="message"
+              class="form-control"
+              [value]="selectedCompany?.message"
               readonly
             />
           </div>
