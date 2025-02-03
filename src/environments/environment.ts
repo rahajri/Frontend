@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  primaryColor: '#E65425',
+  primaryColor: '#179ab5',
   secondaryColor: '#75e6da',
   backgroundColor: 'blue',
   warningyColor: '#05445e',
