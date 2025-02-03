@@ -1295,7 +1295,7 @@ export class ShareDataService {
     //       hasSubRoute: false,
     //       showSubRoute: false,
     //       base: 'freelancer',
-    //       page: 'dashboards',
+    //       page: 'dashboard',
     //       last: '',
     //       subMenus: [],
     //     },
@@ -1786,7 +1786,7 @@ export class ShareDataService {
       title: 'Tableau de Bord',
       icon: 'assets/img/icon/sidebar-icon-01.svg',
       routes: routes.freelancer_dashboard,
-      page: 'dashboards',
+      page: 'dashboard',
       hasSubRoute: false,
     },
     {

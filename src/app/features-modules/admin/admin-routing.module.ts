@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
-import { AuthenticateGuard } from 'src/app/core/guard/guard.index';
+import { AdminGuard, AuthenticateGuard } from 'src/app/core/guard/guard.index';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
+    canActivate: [AdminGuard],
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       {

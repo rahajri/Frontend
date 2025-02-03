@@ -56,7 +56,6 @@ export class FreelancerheaderComponent implements OnInit {
     this.userService.getProfile().subscribe({
       next: (profile) => {
         this.profile = profile;
-        console.log(profile);
         if (profile.image !== null) {
           this.imgUrl = this.baseUrl + profile.image;
         }

@@ -1,8 +1,12 @@
 <!-- Page Wrapper -->
 <div class="page-wrapper">
-  <div class="content container-fluid">
+  <div
+    [ngClass]="{
+      'content container-fluid': showAdminHeader
+    }"
+  >
     <!-- Page Header -->
-    <div class="page-header">
+    <div class="page-header" *ngIf="showAdminHeader">
       <div class="row">
         <div class="col">
           <h3 class="page-title">Détails du projet</h3>
@@ -323,7 +327,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="col-md-4">
             <label for="seniority" class="focus-label">Séniorité</label>
             <select

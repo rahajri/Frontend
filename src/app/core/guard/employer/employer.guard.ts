@@ -7,12 +7,17 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SpinnerService } from '../../services/spinner/spinner.service';
+import { NavigationService } from '../../services/navigate.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmployerGuard {
-  constructor(private route: Router, private spinner: SpinnerService) {}
+  constructor(
+    private router: Router,
+    private spinner: SpinnerService,
+    private navigationService: NavigationService
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -26,12 +31,18 @@ export class EmployerGuard {
       return true;
     }
 
+    const previousUrl = this.navigationService.getPreviousUrl();
+
     const role = localStorage.getItem('role');
     if (role === 'company-employee') {
       return true;
     } else {
-      this.route.navigate(['/home']);
       this.spinner.hide();
+      if (previousUrl) {
+        this.router.navigateByUrl(previousUrl);
+      } else {
+        this.router.navigate(['/auth/login']);
+      }
       return false;
     }
   }

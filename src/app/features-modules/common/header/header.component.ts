@@ -58,7 +58,7 @@ export class HeaderComponent {
     } else if (role === 'company-employee') {
       this.Router.navigate(['/employer/dashboard']);
     } else if (role === 'candidate') {
-      this.Router.navigate(['/freelancer/dashboards']);
+      this.Router.navigate(['/freelancer/dashboard']);
     }
   }
 

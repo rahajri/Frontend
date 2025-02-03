@@ -229,7 +229,6 @@ export class ProvidersComponent implements OnInit {
     this.offersService.getAllOffers().subscribe({
       next: (res) => {
         this.offersData = res;
-        console.log(res);
         this.dataSource = new MatTableDataSource(res);
         this.offersCounter = res.length;
         this.counter = res.length;

@@ -60,7 +60,12 @@
                       <a href="javascript:void(0);" class="projects-btn"
                         >Matching IA</a
                       >
-                      <a href="javascript:void(0);" class="mb-0"
+                      <a
+                        [routerLink]="
+                          routes.get_employee_project_details(jobOffer.id)
+                        "
+                        href="javascript:void(0);"
+                        class="mb-0 projects-btn"
                         >Plus de Details</a
                       >
                     </div>

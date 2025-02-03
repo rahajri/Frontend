@@ -57,6 +57,9 @@ export class routes {
   public static get employee_all_projects(): string {
     return this.employer + '/all-projects';
   }
+  public static get_employee_project_details(id: string): string {
+    return this.employer + `/all-projects/${id}`;
+  }
   public static get employee_markedfavourites(): string {
     return this.employer + '/markedfavourites';
   }
@@ -95,7 +98,7 @@ export class routes {
     return this.freelance + '/project-details';
   }
   public static get freelancer_dashboard(): string {
-    return this.freelance + '/dashboards';
+    return this.freelance + '/dashboard';
   }
   public static get freelancer_projects_proposals(): string {
     return this.freelance + '/project-proposals';

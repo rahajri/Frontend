@@ -212,12 +212,10 @@ export class CompanyComponent {
 
   private updateCompany(companyId: string, values: any) {
     this.isRequestInProgress = true;
-    console.log(values);
     // Convert values to FormData
     const formData = new FormData();
     Object.keys(values).forEach((key) => {
       if (key === 'coverImage' || key === 'image') {
-        console.log(key);
         if (values[key] instanceof File) {
           formData.append('files', values[key], key);
         }

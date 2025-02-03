@@ -1,10 +1,14 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { apiResultFormat } from 'src/app/core/models/models';
 import { CompanyService } from 'src/app/core/services/company.service';
- import { LocationService } from 'src/app/core/services/location.service';
-
+import { LocationService } from 'src/app/core/services/location.service';
 
 interface data {
   value: string;
@@ -12,10 +16,8 @@ interface data {
 @Component({
   selector: 'app-onboard-employer',
   templateUrl: './onboard-employer.component.html',
-  styleUrls: ['./onboard-employer.component.scss']
+  styleUrls: ['./onboard-employer.component.scss'],
 })
-
-
 export class OnboardEmployerComponent implements OnInit {
   public selectedFieldSet = [1];
   public routes = routes;
@@ -34,52 +36,52 @@ export class OnboardEmployerComponent implements OnInit {
   public certification: number[] = [];
   public experience: number[] = [];
   public language: number[] = [];
-  public datas : boolean[] = [true]
+  public datas: boolean[] = [true];
   public isCheckboxChecked = true;
-  companiesData : any   // Variable to store the companies data
-  selectedCompany: FormControl = new FormControl('');  // Initialize FormControl
-   zipCodes: any[] = [];
-   cities: any[] = [];
+  companiesData: any; // Variable to store the companies data
+  selectedCompany: FormControl = new FormControl(''); // Initialize FormControl
+  zipCodes: any[] = [];
+  cities: any[] = [];
   locationForm: FormGroup;
   companyForm: FormGroup;
 
-
-  constructor(private companyService: CompanyService, private fb: FormBuilder,
-    private locationService: LocationService,
-    ) {
-      this.locationForm = new FormGroup({
-        postalCode: new FormControl(''),
-        city: new FormControl(''),
-        department: new FormControl(''),
-        region: new FormControl(''),
-        adresse: new FormControl(''),
-      });
+  constructor(
+    private companyService: CompanyService,
+    private fb: FormBuilder,
+    private locationService: LocationService
+  ) {
+    this.locationForm = new FormGroup({
+      postalCode: new FormControl(''),
+      city: new FormControl(''),
+      department: new FormControl(''),
+      region: new FormControl(''),
+      adresse: new FormControl(''),
+    });
     this.companyForm = this.fb.group({
       name: ['', [Validators.required]],
       siret: ['', [Validators.required]],
-      siren: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],  // Example: 9 digits
+      siren: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]], // Example: 9 digits
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^\+?\d{10,15}$/)]],  // Example: valid phone number
+      phone: ['', [Validators.required, Validators.pattern(/^\+?\d{10,15}$/)]], // Example: valid phone number
       naf: ['', [Validators.required]],
       category: ['', [Validators.required]],
-      workforce: ['', [Validators.required, Validators.min(1)]], 
-      location: this.locationForm ,
+      workforce: ['', [Validators.required, Validators.min(1)]],
+      location: this.locationForm,
       // Example: workforce must be >= 1
     });
-   }
+  }
   ngOnInit(): void {
-     this.getCodeZipes();
+    this.getCodeZipes();
   }
 
-   
   // Method to load companies data
   loadCompanies() {
     this.companyService.loadCompaniesData().subscribe(
       (data) => {
-        this.companiesData = data?.data; 
+        this.companiesData = data?.data;
       },
       (error) => {
-        console.error('Error loading companies data:', error);  // Handle error
+        console.error('Error loading companies data:', error); // Handle error
       }
     );
   }
@@ -87,15 +89,14 @@ export class OnboardEmployerComponent implements OnInit {
   // Method to handle company selection
   onCompanySelect(event: any) {
     const selectedSiret = (event.target as HTMLSelectElement).value; // Get the selected SIRET value
- 
+
     // Fetch the full company details based on the selected SIRET
     this.companyService.getCompanyBySiret(selectedSiret).subscribe(
       (company) => {
-       // this.selectedCompany = company;  // Store the selected company details
-        console.log('Selected Company Details:',company);  // Log the details
+        console.log('Selected '); // Log the details
       },
       (error) => {
-        console.error('Error fetching company details:', error);  // Handle error
+        console.error('Error fetching company details:', error); // Handle error
       }
     );
   }
@@ -133,14 +134,13 @@ export class OnboardEmployerComponent implements OnInit {
   removeExperience(index: number) {
     this.experience.splice(index, 1);
   }
-  
+
   addLanguage() {
     this.language.push(1);
   }
   removeLanguage(index: number) {
     this.language.splice(index, 1);
   }
-
 
   removeDatas(index: number) {
     this.datas[index] = !this.datas[index];
@@ -165,8 +165,8 @@ export class OnboardEmployerComponent implements OnInit {
   ];
   selectedList4: data[] = [
     { value: 'Select' },
-    { value: "Certification" },
-    { value: "Award" },
+    { value: 'Certification' },
+    { value: 'Award' },
   ];
   selectedList5: data[] = [
     { value: 'Select' },
@@ -192,7 +192,7 @@ export class OnboardEmployerComponent implements OnInit {
     { value: 'UK' },
     { value: 'India' },
   ];
-  getCodeZipes(){
+  getCodeZipes() {
     this.locationService.getZipCodes().subscribe(
       (data) => {
         this.zipCodes = data;
@@ -213,7 +213,7 @@ export class OnboardEmployerComponent implements OnInit {
           this.locationForm.patchValue({
             city: '',
             department: '',
-            region: ''
+            region: '',
           });
         },
         (error) => {
@@ -225,17 +225,17 @@ export class OnboardEmployerComponent implements OnInit {
 
   onCityChange(event: Event): void {
     const selectedCityId = (event.target as HTMLSelectElement).value;
-    const selectedCity = this.cities.find(city => city.id === selectedCityId);
+    const selectedCity = this.cities.find((city) => city.id === selectedCityId);
 
     if (selectedCity) {
       this.locationForm.patchValue({
         department: selectedCity.department.name,
-        region: selectedCity.department.region.name
+        region: selectedCity.department.region.name,
       });
     }
   }
 
   save(form: FormGroup) {
-      console.log("event",this.companyForm.value);
+    console.log('event', this.companyForm.value);
   }
 }

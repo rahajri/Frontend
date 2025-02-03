@@ -68,6 +68,7 @@ export class OfferComponent {
   filteredJobs: any[] = [];
   contractTypes: any[] = [];
   isCdiSelected = false;
+  showAdminHeader: boolean = false;
   jobNotExist = true;
   activeIndex: number = 0;
   cityIsSelected = false;
@@ -134,6 +135,7 @@ export class OfferComponent {
     });
   }
   ngOnInit(): void {
+    this.showAdminHeader = this.showHeader();
     this.offerId = this.route.snapshot.paramMap.get('id');
     this.editor = new Editor();
     this.getAllOfferStatus();
@@ -309,6 +311,11 @@ export class OfferComponent {
       },
       error: (err) => {},
     });
+  }
+
+  showHeader(): boolean {
+    const role = localStorage.getItem('role');
+    return role === 'admin' ? true : false;
   }
 
   // Create a new language form group
@@ -560,7 +567,7 @@ export class OfferComponent {
         .updateProject(this.offerId, this.jobForm.value)
         .subscribe({
           next: (response) => {
-            this.router.navigate([routes.admin_providers]);
+            this.getOfferDetails();
           },
           error: (error) => {
             console.error('Error creating project:', error);

@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
           if (response.role === 'candidate') {
             if (response.user.profileUpdatedAt != null) {
-              this.router.navigate(['/freelancer/dashboards']);
+              this.router.navigate(['/freelancer/dashboard']);
             } else {
               this.router.navigate(['/pages/onboard-screen']);
             }

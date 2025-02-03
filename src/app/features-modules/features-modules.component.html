@@ -1,13 +1,64 @@
 <app-loader></app-loader>
 
-<div class="main-wrapper" [ngClass]="{
+<div
+  class="main-wrapper"
+  [ngClass]="{
     'chat-page': page === 'chats',
     'main-chat-blk': page === 'chats',
     'body-two': base === 'home2',
     'body-three': base === 'home3',
     'body-five': base === 'home5',
-    'dashboard-page': page === 'dashboard' || page === 'dashboards' || page === 'markedfavourites'|| page === 'deposit-funds'|| page === 'invitedfavourites' || page === 'ongoing-projects' || page === 'completed-projects' || page === 'pending-projects' || page === 'cancelled-projects' || page === 'all-projects' || page === 'expired-project' || page === 'membership' || page === 'change-password' || page === 'verify-identitys' || page === 'profile-settings' || page === 'ongoing-projects' || page === 'completed-projects' || page === 'cancelled-projects' || page === 'files' || page === 'delete-account' || page === 'tasks' || page === 'files'
-    || page === 'reviews' || page === 'portfolio' || page === 'statement' || last === 'withdraw-money' || page === 'chats' || page === 'project-proposals'|| page === 'view-project-details' || page === 'review' || last === 'milestone' || last === 'overviews' || last === 'payments' || page === 'milestones' || page === 'payments' || page === 'task' || page === 'verified' || page === 'verify-identity' || page === 'view-project-detail' || page === 'favourites' || page === 'invitations' || page === 'payout' || page === 'withdraw-money' || page === 'basic-settings' || page === 'membership-plans' || last === 'project-employer-view-proposal' || page === 'completed-project-view-details' || page === 'project-milestone' || page === 'project-task' || page === 'payment-project',
+    'dashboard-page':
+      page === 'dashboard' ||
+      page === 'dashboard' ||
+      page === 'markedfavourites' ||
+      page === 'deposit-funds' ||
+      page === 'invitedfavourites' ||
+      page === 'ongoing-projects' ||
+      page === 'completed-projects' ||
+      page === 'pending-projects' ||
+      page === 'cancelled-projects' ||
+      page === 'all-projects' ||
+      page === 'expired-project' ||
+      page === 'membership' ||
+      page === 'change-password' ||
+      page === 'verify-identitys' ||
+      page === 'profile-settings' ||
+      page === 'ongoing-projects' ||
+      page === 'completed-projects' ||
+      page === 'cancelled-projects' ||
+      page === 'files' ||
+      page === 'delete-account' ||
+      page === 'tasks' ||
+      page === 'files' ||
+      page === 'reviews' ||
+      page === 'portfolio' ||
+      page === 'statement' ||
+      last === 'withdraw-money' ||
+      page === 'chats' ||
+      page === 'project-proposals' ||
+      page === 'view-project-details' ||
+      page === 'review' ||
+      last === 'milestone' ||
+      last === 'overviews' ||
+      last === 'payments' ||
+      page === 'milestones' ||
+      page === 'payments' ||
+      page === 'task' ||
+      page === 'verified' ||
+      page === 'verify-identity' ||
+      page === 'view-project-detail' ||
+      page === 'favourites' ||
+      page === 'invitations' ||
+      page === 'payout' ||
+      page === 'withdraw-money' ||
+      page === 'basic-settings' ||
+      page === 'membership-plans' ||
+      last === 'project-employer-view-proposal' ||
+      page === 'completed-project-view-details' ||
+      page === 'project-milestone' ||
+      page === 'project-task' ||
+      page === 'payment-project',
     'expand-menu': expandMenu === true && miniSidebar === true,
     'account-page': page === 'login',
     'mini-sidebar': miniSidebar === true,
@@ -22,29 +73,45 @@
     'about-us-page': page === 'about',
     'login-body': last === 'login',
     'app-admin-wrapper': last === 'login'
-  }">
+  }"
+>
   @if (isuserHeader === true) {
-    <app-header></app-header>
+  <app-header></app-header>
   }
   <router-outlet></router-outlet>
 
   @if (isFooter === true) {
-    <app-footer
-    [ngClass]="{'d-none': page === 'login' || page === 'register' || page === 'forgot-password' || page === 'change-password'}"></app-footer>
-  }
-
-  @if (
-    (base !== 'home4' && base !== 'home5' && base === 'home1') ||
-    base === 'home3'
-    ) {
-    <button [class.open]="isButtonOpen" (click)="scrollToTop()" (keydown.enter)="scrollToTop()" class="scroll-top scroll-to-target" data-target="html">
-      <span class="ti-angle-up"><img src="assets/img/icon/top-icon.svg" class="img-fluid" alt="" /></span>
-    </button>
-  }
-  @if (base === 'home4' || base === 'home5' || base === 'home2') {
-    <button [class.open]="isButtonOpen" (click)="scrollToTop()" (keydown.enter)="scrollToTop()"
-      class="scroll-top scroll-top-next scroll-to-target" data-target="html">
-      <span class="ti-angle-up"><i class="feather icon-arrow-up"></i></span>
-    </button>
+  <app-footer
+    [ngClass]="{
+      'd-none':
+        page === 'login' ||
+        page === 'register' ||
+        page === 'forgot-password' ||
+        page === 'change-password'
+    }"
+  ></app-footer>
+  } @if ( (base !== 'home4' && base !== 'home5' && base === 'home1') || base ===
+  'home3' ) {
+  <button
+    [class.open]="isButtonOpen"
+    (click)="scrollToTop()"
+    (keydown.enter)="scrollToTop()"
+    class="scroll-top scroll-to-target"
+    data-target="html"
+  >
+    <span class="ti-angle-up"
+      ><img src="assets/img/icon/top-icon.svg" class="img-fluid" alt=""
+    /></span>
+  </button>
+  } @if (base === 'home4' || base === 'home5' || base === 'home2') {
+  <button
+    [class.open]="isButtonOpen"
+    (click)="scrollToTop()"
+    (keydown.enter)="scrollToTop()"
+    class="scroll-top scroll-top-next scroll-to-target"
+    data-target="html"
+  >
+    <span class="ti-angle-up"><i class="feather icon-arrow-up"></i></span>
+  </button>
   }
 </div>

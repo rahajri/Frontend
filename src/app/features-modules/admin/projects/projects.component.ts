@@ -150,7 +150,6 @@ export class ProjectsComponent implements OnInit {
   private getTableData(): void {
     this.companyService.getAllCompanies().subscribe({
       next: (response) => {
-        console.log(response);
         this.companiesData = response;
         this.filteredCompanies = response;
         this.dataSource = new MatTableDataSource(response);

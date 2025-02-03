@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FreelancerComponent } from './freelancer.component';
+import { CandidateGuard } from 'src/app/core/guard/guard.index';
 
 const routes: Routes = [
   {
     path: '',
     component: FreelancerComponent,
+    canActivate: [CandidateGuard],
     children: [
-      { path: '', redirectTo: 'dashboards', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
-        path: 'dashboards',
+        path: 'dashboard',
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },

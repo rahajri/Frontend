@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './core/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { NavigationService } from './core/services/navigate.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,21 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'kofejob_angular';
-  constructor(private authService: AuthService, private route: Router) {}
+  constructor(
+    private authService: AuthService,
+    private route: Router,
+    private navigationService: NavigationService
+  ) {
+    this.route.events
+      .pipe(
+        filter(
+          (event: any): event is NavigationEnd => event instanceof NavigationEnd
+        )
+      )
+      .subscribe((event: NavigationEnd) => {
+        this.navigationService.setPreviousUrl(event.url);
+      });
+  }
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if (token) {

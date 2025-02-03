@@ -637,7 +637,7 @@ export class OnboardScreenComponent implements OnInit {
     candidateData.append('cv', this.cvs[0]);
     this.candidateService.createCandidate(candidateData).subscribe({
       next: (response) => {
-        this.router.navigate(['/freelancer/dashboards']);
+        this.router.navigate(['/freelancer/dashboard']);
       },
       error: (error) => {
         console.error('Error creating candidate:', error);

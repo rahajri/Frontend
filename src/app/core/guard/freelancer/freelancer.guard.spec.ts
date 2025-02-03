@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FreelancerGuard } from './freelancer.guard';
+import { CandidateGuard } from './freelancer.guard';
 
-describe('FreelancerGuard', () => {
-  let guard: FreelancerGuard;
+describe('CandidateGuard', () => {
+  let guard: CandidateGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(FreelancerGuard);
+    guard = TestBed.inject(CandidateGuard);
   });
 
   it('should be created', () => {

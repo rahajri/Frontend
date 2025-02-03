@@ -77,6 +77,7 @@ export class AllProjectsComponent {
 }
 
 interface JobOffer {
+  id: string;
   title: string;
   startDate: string;
   endDate: string | null;

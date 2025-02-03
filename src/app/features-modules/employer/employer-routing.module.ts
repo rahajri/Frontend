@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployerComponent } from './employer.component';
+import { EmployerGuard } from 'src/app/core/guard/guard.index';
 
 const routes: Routes = [
   {
     path: '',
     component: EmployerComponent,
+    canActivate: [EmployerGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
@@ -153,6 +155,11 @@ const routes: Routes = [
           import('./project-confirmation/project-confirmation.module').then(
             (m) => m.ProjectConfirmationModule
           ),
+      },
+      {
+        path: 'all-projects/:id',
+        loadChildren: () =>
+          import('../admin/offer/offer.module').then((m) => m.OfferModule),
       },
       {
         path: 'all-projects',
