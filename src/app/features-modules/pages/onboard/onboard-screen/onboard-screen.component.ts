@@ -422,7 +422,7 @@ export class OnboardScreenComponent implements OnInit {
     return this.form.get('experiences') as FormArray;
   }
 
-  onFileSelected(event: Event) {
+  async onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files) {
       this.spinner = true;
@@ -430,21 +430,15 @@ export class OnboardScreenComponent implements OnInit {
 
       // Call the API and patch form with the response
       if (this.cvs.length > 0) {
-        this.ocrService.runPipeline(this.cvs).subscribe(
-          (response) => {
-            const cleanedResponse = response.Result.replace(
-              /json|/g,
-              ''
-            ).trim();
-            const jsonObject = JSON.parse(cleanedResponse);
-            // Call the patch function to populate the form
-            this.patchFormData(jsonObject);
-            this.spinner = false;
-          },
-          (error) => {
-            console.error('Error:', error);
-          }
-        );
+        try {
+          this.spinner = true;
+          const response = await this.ocrService.runPipeline(this.cvs);
+          this.patchFormData(response);
+        } catch (error) {
+          console.error('Error:', error);
+        } finally {
+          this.spinner = false;
+        }
       } else {
         console.warn('Please enter a username.');
       }
