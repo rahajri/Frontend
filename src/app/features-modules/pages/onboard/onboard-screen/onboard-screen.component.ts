@@ -105,12 +105,12 @@ export class OnboardScreenComponent implements OnInit {
     private router: Router
   ) {
     this.translate.setDefaultLang(environment.defaultLanguage);
-    this.locationForm = new FormGroup({
-      postalCode: new FormControl(''),
-      city: new FormControl(''),
-      department: new FormControl(''),
-      region: new FormControl(''),
-      adresse: new FormControl(''),
+    this.locationForm = this.fb.group({
+      adresse: [''],
+      postalCode: ['', Validators.required],
+      city: [{ value: '', disabled: true }],
+      department: [{ value: '', disabled: true }],
+      region: [{ value: '', disabled: true }],
     });
 
     this.form = this.fb.group({
@@ -138,6 +138,25 @@ export class OnboardScreenComponent implements OnInit {
     this.getSubActivities();
     this.getSSkillsFromDb();
     this.getLanguagesFromDb();
+    this.locationForm.get('postalCode')?.valueChanges.subscribe((value) => {
+      if (value) {
+        this.locationForm.get('city')?.enable();
+        this.locationForm.get('department')?.enable();
+        this.locationForm.get('region')?.enable();
+      } else {
+        this.locationForm.get('city')?.disable();
+        this.locationForm.get('department')?.disable();
+        this.locationForm.get('region')?.disable();
+      }
+    });
+
+    this.locationForm.get('postalCode')?.valueChanges.subscribe((zipCode) => {
+      if (zipCode) {
+        this.onZipCodeChange({
+          target: { value: zipCode },
+        } as unknown as Event);
+      }
+    });
   }
 
   createSkill(): FormGroup {
@@ -188,6 +207,17 @@ export class OnboardScreenComponent implements OnInit {
       },
       error: (err) => {},
     });
+  }
+
+  onNextClick(): void {
+    const postalCodeControl = this.locationForm.get('postalCode');
+    postalCodeControl?.markAsTouched();
+
+    if (this.locationForm.invalid) {
+      return; // Stop further execution
+    }
+
+    this.selectedFieldSet[0] = 2;
   }
 
   filterLanguages(e: any, i: number) {
@@ -297,6 +327,7 @@ export class OnboardScreenComponent implements OnInit {
   removeSkills(index: number) {
     this.skillsArray.removeAt(index); // Use removeAt method to remove from FormArray
   }
+
   patchFormData(response: any) {
     const personal =
       response['Informations Personnelles'] ||
@@ -314,6 +345,9 @@ export class OnboardScreenComponent implements OnInit {
       emailAddress: localStorage.getItem('email'),
     });
 
+    this.locationForm.get('postalCode')?.patchValue(personal['code_postal']);
+    this.locationForm.get('adresse')?.patchValue(personal['adresse']);
+
     // Patch skills
     const skills: string[] = response['competences']; // Extract skills array
     this.skillsArray.clear(); // Clear existing skills
@@ -323,7 +357,7 @@ export class OnboardScreenComponent implements OnInit {
       this.skillsArray.push(
         this.fb.group({
           skillName: [skillName || ''], // Add skill name to form control
-          level: [''], // Initialize level as empty or provide a default value
+          level: ['Professionnel'], // Initialize level as empty or provide a default value
         })
       );
     });
@@ -386,6 +420,18 @@ export class OnboardScreenComponent implements OnInit {
             this.formatDateString(exp['Date début'] || exp['date_debut']),
           ],
           endDate: [this.formatDateString(exp['Date fin'] || exp['date_fin'])],
+        })
+      );
+    });
+
+    // Patch languages
+    const languages = response['langues'] || response['languages'] || [];
+    this.languagesArray.clear();
+    languages.forEach((lang: any) => {
+      this.languagesArray.push(
+        this.fb.group({
+          name: [lang || '', Validators.required],
+          level: ['Professionnel', Validators.required],
         })
       );
     });
@@ -514,43 +560,6 @@ export class OnboardScreenComponent implements OnInit {
     { value: 'Professionnel' },
     { value: 'Avancé' },
   ];
-
-  showTimePicker: Array<string> = [];
-
-  public hoursArray1 = [0];
-  public hoursArray2 = [0];
-  public hoursArray3 = [0];
-  public hoursArray4 = [0];
-  public hoursArray5 = [0];
-  public hoursArray6 = [0];
-  public hoursArray7 = [0];
-
-  startTime1 = new Date();
-  startTime2 = new Date();
-  startTime3 = new Date();
-  startTime4 = new Date();
-  startTime5 = new Date();
-  startTime6 = new Date();
-  startTime7 = new Date();
-  endTime1 = new Date();
-  endTime2 = new Date();
-  endTime3 = new Date();
-  endTime4 = new Date();
-  endTime5 = new Date();
-  endTime6 = new Date();
-  endTime7 = new Date();
-
-  toggleTimePicker(value: string): void {
-    if (this.showTimePicker[0] !== value) {
-      this.showTimePicker[0] = value;
-    } else {
-      this.showTimePicker = [];
-    }
-  }
-  formatTime(date: Date) {
-    const selectedDate: Date = new Date(date);
-    return this.datePipe.transform(selectedDate, 'h:mm a');
-  }
 
   getCodeZipes() {
     this.locationService.getZipCodes().subscribe(

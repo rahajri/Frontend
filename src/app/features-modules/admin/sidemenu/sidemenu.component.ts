@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { AdminSidebar } from 'src/app/core/models/sidebar-model';
-
+import { routes } from 'src/app/core/helpers/routes/routes';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { SideBarService } from 'src/app/core/services/side-bar/side-bar.service';
@@ -15,6 +15,7 @@ import { UserService } from '../../auth/service/user.service';
   styleUrls: ['./sidemenu.component.scss'],
 })
 export class SidemenuComponent implements OnInit {
+  public routes = routes;
   base = '';
   page = '';
   last = '';
@@ -73,7 +74,7 @@ export class SidemenuComponent implements OnInit {
 
   Logout(): void {
     this.auth.logout();
-    this.router.navigate(['/auth/login']);
+    this.router.navigate([routes.login]);
   }
   public miniSideBarMouseHover(position: string): void {
     if (position == 'over') {

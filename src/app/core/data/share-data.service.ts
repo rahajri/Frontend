@@ -1919,12 +1919,6 @@ export class ShareDataService {
         },
       ],
     },
-    {
-      title: 'Logout',
-      hasSubRoute: false,
-      icon: 'assets/img/icon/sidebar-icon-11.svg',
-      routes: routes.home,
-    },
   ];
   public menuItem = [
     {

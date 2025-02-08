@@ -52,7 +52,7 @@
                           </div>
                           <div class="steps-count">
                             <span>Step 2/3</span>
-                            <h5>Skills & Experience</h5>
+                            <h5>Compétences et expérience</h5>
                           </div>
                         </li>
 
@@ -207,7 +207,22 @@
                               class="form-control"
                               formControlName="postalCode"
                               (change)="onZipCodeChange($event)"
+                              [ngClass]="{
+                                'is-invalid':
+                                  locationForm.get('postalCode')?.invalid &&
+                                  (locationForm.get('postalCode')?.touched ||
+                                    locationForm.get('postalCode')?.dirty)
+                              }"
                             />
+                            <div
+                              *ngIf="
+                                locationForm.get('postalCode')?.invalid &&
+                                locationForm.get('postalCode')?.touched
+                              "
+                              class="error"
+                            >
+                              Le code postal est obligatoire.
+                            </div>
                           </div>
                         </div>
 
@@ -267,8 +282,8 @@
                   name="next"
                   type="submit"
                   value="Suivant"
-                  (click)="selectedFieldSet[0] = 2"
-                  (keydown.enter)="selectedFieldSet[0] = 2"
+                  (click)="onNextClick()"
+                  (keydown.enter)="onNextClick()"
                 />
               </div>
             </div>
