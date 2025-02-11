@@ -1,5 +1,5 @@
-import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
-import { catchError, throwError, of, switchMap } from 'rxjs';
+import {  HttpInterceptorFn } from '@angular/common/http';
+import {  throwError, of, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,7 +19,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     '/insee',
     '/verification-otp',
     '/verify',
-    '/api.vectorshift.ai/api/pipelines/run',
   ];
 
   const isPublicRoute = publicRoutes.some((route) => req.url.includes(route));
@@ -29,7 +28,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   const accessToken = localStorage.getItem('token');
-  var refresh = false;
   const request = accessToken
     ? req.clone({
         setHeaders: {
@@ -39,35 +37,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     : req;
 
   return next(request);
-  // .pipe(
-  //   catchError((err: HttpErrorResponse) => {
-  //     if (err.status === 401 && !refresh) {
-  //       refresh = true;
-  //       // Refresh token logic
-  //       return refreshToken(httpClient).pipe(
-  //         switchMap((newToken: string) => {
-  //           localStorage.setItem('token', newToken);
-
-  //           const newRequest = req.clone({
-  //             setHeaders: {
-  //               Authorization: `Bearer ${newToken}`,
-  //             },
-  //           });
-
-  //           return next(newRequest);
-  //         }),
-  //         catchError(() => {
-  //           localStorage.removeItem('token');
-  //           router.navigate(['/login']);
-  //           return throwError(() => new Error('Unauthorized'));
-  //         })
-  //       );
-  //     }
-
-  //     refresh = false;
-  //     return throwError(() => err);
-  //   })
-  // );
 };
 
 // Refresh token function
