@@ -134,8 +134,9 @@ export class CompanyComponent {
     this.companyService.getCompanyDetails(this.companyId).subscribe({
       next: (res) => {
         this.company = res;
-        this.coverUrl = this.baseUrl + res.coverImage;
-        this.imgUrl = this.baseUrl + res.image;
+        this.coverUrl =
+          res.coverImage !== null ? this.baseUrl + res.coverImage : '';
+        this.imgUrl = res.image !== null ? this.baseUrl + res.image : '';
         this.selectedStatusId = res?.status?.id;
         this.initialStatusId = res?.status?.id;
         this.selectedStatusName = res?.status?.name;

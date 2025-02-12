@@ -185,6 +185,7 @@
             <div class="input-block">
               <label for="activite" class="focus-label">Activité</label>
               <input
+                id="activite"
                 formControlName="activity"
                 type="text"
                 class="form-control"
@@ -281,6 +282,7 @@
                 'is-invalid':
                   region?.invalid && (region?.touched || region?.dirty)
               }"
+              autocomplete="off"
             />
             <!-- Message d'erreur -->
             <div *ngIf="region?.touched && region?.invalid" class="text-danger">
@@ -300,6 +302,7 @@
               >Type de contrat</label
             >
             <select
+              id="contractType"
               formControlName="contractType"
               class="form-control form-select"
               (change)="onContractTypeChange($event)"
@@ -447,7 +450,7 @@
           </div>
 
           <div class="col-md-4">
-            <label for="startDate" class="focus-label">Date de fin</label>
+            <label for="endDate" class="focus-label">Date de fin</label>
             <input
               id="endDate"
               formControlName="endDate"
@@ -610,6 +613,7 @@
                 <div class="input-block">
                   <label for="language" class="form-label">Language</label>
                   <input
+                    id="language"
                     type="text"
                     class="form-control"
                     placeholder="Saisir une langue"
@@ -638,6 +642,7 @@
                 <div class="input-block">
                   <label for="level" class="focus-label">Niveau</label>
                   <select
+                    id="level"
                     formControlName="level"
                     class="form-control form-select"
                   >
@@ -692,9 +697,7 @@
         </div>
 
         <div class="col-md-12 input-block">
-          <label for="cober-letter" class="form-label"
-            >Description détaillée</label
-          >
+          <label class="form-label">Description détaillée</label>
           <ngx-editor-menu
             [ngClass]="{
               'is-invalid':

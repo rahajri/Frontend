@@ -9,7 +9,7 @@ export const environment = {
   backgroundColor: 'blue',
   warningyColor: '#05445e',
   defaultLanguage: 'fr',
-  apiUrl: 'http://localhost:3000',
+  apiUrl: 'http://localhost:3000/api',
 };
 
 /*

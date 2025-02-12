@@ -17,6 +17,7 @@ import { ProjectService } from 'src/app/core/services/project.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { LanguageService } from 'src/app/core/services/language.service';
 import {
+  showSuccessModal,
   minDateValidator,
   markFormGroupTouched,
 } from 'src/app/core/services/common/common-functions';
@@ -175,11 +176,11 @@ export class OfferComponent {
         this.initialFormValues = {
           title: res.title || '',
           description: res?.description || '',
-          endDate: res.endDate || '',
+          endDate: res.endDate,
           seniority: res.seniority || '',
           contractType: res.contractType.id || '',
-          startDate: res?.startDate || '',
-          duration: res?.expectedDuration || '',
+          startDate: res?.startDate,
+          duration: res?.expectedDuration || 0,
           timeUnit: res?.timeUnit || '',
           typologie: res.salaryType?.type || '',
           salary: res.salaryType?.salary || '',
@@ -559,14 +560,18 @@ export class OfferComponent {
 
   onSubmit() {
     markFormGroupTouched(this.jobForm);
-    this.globalErrorMessage = false; // Reset the error message before each submission
-    this.jobForm.get('skills')?.setValue(this.selectedSkills);
+    this.globalErrorMessage = false;
+    this.updateSkillsValidation();
 
     if (this.jobForm.valid) {
       this.projectService
-        .updateProject(this.offerId, this.jobForm.value)
+        .updateProject(this.offerId, {
+          ...this.jobForm.value,
+          skills: this.selectedSkills,
+        })
         .subscribe({
           next: (response) => {
+            showSuccessModal('data-changed');
             this.getOfferDetails();
           },
           error: (error) => {
@@ -638,5 +643,20 @@ export class OfferComponent {
     };
 
     return statusTranslations[status] || status; // Return the translated status or the original status if not found
+  }
+
+  updateSkillsValidation() {
+    const skillsControl = this.jobForm.get('skills');
+
+    if (this.selectedSkills.length > 0) {
+      // Remove the required validator if selectedSkills is not empty
+      skillsControl?.clearValidators(); // Clear all validators
+    } else {
+      // Add the required validator if selectedSkills is empty
+      skillsControl?.setValidators([Validators.required]);
+    }
+
+    // Update the control's validity state
+    skillsControl?.updateValueAndValidity();
   }
 }

@@ -463,21 +463,38 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   onSubmit() {
     markFormGroupTouched(this.jobForm);
     this.globalErrorMessage = false; // Reset the error message before each submission
+    this.updateSkillsValidation();
 
     if (this.jobForm.valid) {
-      this.jobForm.get('skills')?.setValue(this.selectedSkills);
-      this.projectService.createProject(this.jobForm.value).subscribe({
-        next: (response) => {
-          this.router.navigate([routes.getProjectConfirmation(response.id)]);
-        },
-        error: (error) => {
-          console.error('Error creating project:', error);
-          this.globalErrorMessage = true;
-        },
-      });
+      this.projectService
+        .createProject({ ...this.jobForm.value, skills: this.selectedSkills })
+        .subscribe({
+          next: (response) => {
+            this.router.navigate([routes.getProjectConfirmation(response.id)]);
+          },
+          error: (error) => {
+            console.error('Error creating project:', error);
+            this.globalErrorMessage = true;
+          },
+        });
     } else {
       console.error('Form is invalid');
     }
+  }
+
+  updateSkillsValidation() {
+    const skillsControl = this.jobForm.get('skills');
+
+    if (this.selectedSkills.length > 0) {
+      // Remove the required validator if selectedSkills is not empty
+      skillsControl?.clearValidators(); // Clear all validators
+    } else {
+      // Add the required validator if selectedSkills is empty
+      skillsControl?.setValidators([Validators.required]);
+    }
+
+    // Update the control's validity state
+    skillsControl?.updateValueAndValidity();
   }
 
   setValidation() {
