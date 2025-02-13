@@ -1,5 +1,5 @@
-import {  HttpInterceptorFn } from '@angular/common/http';
-import {  throwError, of, switchMap } from 'rxjs';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { throwError, of, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';

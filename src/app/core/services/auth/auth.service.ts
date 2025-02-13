@@ -1,10 +1,7 @@
 import { Injectable, signal } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, tap, throwError } from 'rxjs';
-import { routes } from '../../helpers/routes/routes';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +12,7 @@ export class AuthService {
   public checkAuth = new BehaviorSubject<boolean>(
     JSON.parse(localStorage.getItem('authenticated') || 'false')
   );
-  public isLoggedIn: boolean = !!localStorage.getItem('authToken');
+  public isLoggedIn: boolean = !!localStorage.getItem('token');
 
   constructor(private http: HttpClient) {}
 
@@ -75,6 +72,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
     this.currentUserSubject.next(null);
+    this.setIsLoggedIn(false);
   }
 
   getToken(): string {

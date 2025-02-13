@@ -17,8 +17,18 @@
     <div class="settings-menu">
       <div id="sidebar-menu" class="sidebar-menu">
         <ul>
-          @for (menuItem of menuItem; track menuItem) { @if
-          (menuItem.hasSubRoute === false) {
+          @for (menuItem of menuItem; track menuItem) {
+          <!-- Condition for Logout -->
+          @if (menuItem.title === 'Se Déconnecter') {
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()">
+              <img [src]="menuItem.icon" alt="Img" /> {{ menuItem.title }}
+            </a>
+          </li>
+          }
+
+          <!-- Regular Menu Items without Submenus -->
+          @else if (menuItem.hasSubRoute === false) {
           <li class="nav-item">
             <a
               [routerLink]="menuItem.routes"
@@ -29,7 +39,10 @@
               <img [src]="menuItem.icon" alt="Img" /> {{ menuItem.title }}
             </a>
           </li>
-          } @if (menuItem.hasSubRoute === true) { @if (menuItem.submenu) {
+          }
+
+          <!-- Menu Items with Submenus -->
+          @else if (menuItem.hasSubRoute === true && menuItem.submenu) {
           <li class="nav-item submenu">
             <a
               href="javascript:void(0)"
@@ -45,9 +58,7 @@
               [ngClass]="{ subdrop: menuItem.expanded }"
             >
               <img [src]="menuItem.icon" alt="Img" /> {{ menuItem.title }}
-              @if (menuItem.submenu) {
               <span class="menu-arrow"></span>
-              }
             </a>
             <ul
               class="sub-menu-ul"
@@ -61,13 +72,14 @@
                 <a
                   [routerLink]="subMenuItem.routes"
                   [class.active]="page === subMenuItem.page"
-                  >{{ subMenuItem.title }}</a
                 >
+                  {{ subMenuItem.title }}
+                </a>
               </li>
               }
             </ul>
           </li>
-          } } }
+          } }
         </ul>
       </div>
     </div>

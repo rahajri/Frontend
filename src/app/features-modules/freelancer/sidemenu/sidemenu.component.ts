@@ -5,6 +5,8 @@ import { SidebarData } from 'src/app/core/models/models';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { FreelancerSidebarItem } from 'src/app/core/models/sidebar-model';
 import { UserService } from '../../auth/service/user.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidemenu',
@@ -22,9 +24,11 @@ export class SidemenuComponent implements OnInit {
   currentroute = '';
   sidebar: SidebarData[] = [];
   constructor(
+    private router: Router,
     private data: ShareDataService,
     private common: CommonService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) {
     this.common.base.subscribe((res: string) => {
       this.base = res;
@@ -59,5 +63,10 @@ export class SidemenuComponent implements OnInit {
       },
       error: (err) => console.error(err),
     });
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate([routes.login]);
   }
 }

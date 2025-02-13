@@ -144,6 +144,7 @@ export class ResetPasswordComponent {
       this.authService.resetPassword(token, password).subscribe({
         next: (res) => {
           showSuccessModal('data-changed');
+          this.router.navigate([routes.login]);
         },
         error: (err) => {
           console.error(err);

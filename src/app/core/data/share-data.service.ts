@@ -2023,7 +2023,7 @@ export class ShareDataService {
     {
       title: 'Se Déconnecter',
       icon: 'assets/img/icon/sidebar-icon-11.svg',
-      routes: routes.freelancer_dashboard,
+      routes: routes.login,
       hasSubRoute: false,
     },
   ];

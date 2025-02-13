@@ -24,7 +24,7 @@
             <img [src]="menuItem.icon" alt="Img" /> {{ menuItem.title }}
           </a>
         </li>
-        } @if (menuItem.hasSubRoute === true) { @if (menuItem.submenu) {
+        } @if(menuItem.submenu) {
         <li class="nav-item submenu">
           <a
             href="javascript:void(0)"
@@ -62,7 +62,13 @@
             }
           </ul>
         </li>
-        } } }
+        } }
+        <li class="nav-item">
+          <a class="nav-link" (click)="logout()">
+            <img src="assets\img\icon\sidebar-icon-11.svg" alt="Img" /> Se
+            Déconnecter
+          </a>
+        </li>
       </ul>
     </div>
   </div>

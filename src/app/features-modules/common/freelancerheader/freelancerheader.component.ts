@@ -48,7 +48,7 @@ export class FreelancerheaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    this.isLogged = this.authService.isLogged();
+    this.isLogged = this.authService.isAuthenticated;
     this.isEmployer = this.authService.isEmployer();
   }
 

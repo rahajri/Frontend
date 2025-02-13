@@ -99,7 +99,10 @@
           } }
         </ul>
       </div>
-      <ul class="nav header-navbar-rht reg-head">
+      <ul
+        class="nav header-navbar-rht reg-head"
+        *ngIf="!authService.isLoggedIn"
+      >
         <li>
           <a [routerLink]="routes.register" class="reg-btn"
             ><img src="assets/img/icon/reg-icon.svg" class="me-1" alt="icon" />
@@ -113,6 +116,13 @@
           >
         </li>
       </ul>
+      <a
+        class="reg-btn"
+        (click)="navigateToDash()"
+        *ngIf="authService.isLoggedIn"
+      >
+        <i class="fa-solid fa-house-user"></i> Accueil
+      </a>
     </nav>
   </div>
 </header>

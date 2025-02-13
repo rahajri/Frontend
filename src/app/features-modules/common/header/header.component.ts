@@ -27,10 +27,10 @@ export class HeaderComponent {
   public header_bg = false;
   isEmployer: boolean = false;
   constructor(
-    private Router: Router,
+    private router: Router,
     private data: ShareDataService,
     private navservices: NavbarService,
-    private authService: AuthService,
+    public authService: AuthService,
     private common: CommonService
   ) {
     this.common.base.subscribe((res: string) => {
@@ -51,14 +51,29 @@ export class HeaderComponent {
     this.isEmployer = this.authService.isEmployer();
   }
 
+  navigateToDash() {
+    const role = localStorage.getItem('role');
+    if (role) {
+      if (role === 'candidate') {
+        this.router.navigate([routes.freelancer_dashboard]);
+      } else if (role === 'admin') {
+        this.router.navigate([routes.admin_dashboard]);
+      } else if (role === 'company-employee') {
+        this.router.navigate([routes.employee_dashboard]);
+      } else {
+        this.router.navigate(['/']); // Default route for unknown roles
+      }
+    }
+  }
+
   redirect() {
     const role = localStorage.getItem('role');
     if (role === 'admin') {
-      this.Router.navigate(['/admin/dashboard']);
+      this.router.navigate(['/admin/dashboard']);
     } else if (role === 'company-employee') {
-      this.Router.navigate(['/employer/dashboard']);
+      this.router.navigate(['/employer/dashboard']);
     } else if (role === 'candidate') {
-      this.Router.navigate(['/freelancer/dashboard']);
+      this.router.navigate(['/freelancer/dashboard']);
     }
   }
 
@@ -75,7 +90,7 @@ export class HeaderComponent {
   }
 
   home() {
-    this.Router.navigate(['/home']);
+    this.router.navigate(['/home']);
   }
 
   public toggleSidebar(): void {

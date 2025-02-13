@@ -6,9 +6,7 @@ import { routes } from 'src/app/core/helpers/routes/routes';
 import { WebStorage } from 'src/app/core/storage/web.storage';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { CandidateService } from 'src/app/core/services/condidate.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -30,9 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService,
-    private candidateService: CandidateService,
-    private location: Location
+    private authService: AuthService
   ) {
     this.translate.setDefaultLang(environment.defaultLanguage);
     this.subscription = this.storage.Loginvalue.subscribe((data) => {
@@ -46,8 +42,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit() {
-    if (!!localStorage.getItem('token')) {
-      this.location.back();
+    const role = localStorage.getItem('role');
+    if (role) {
+      if (role === 'candidate') {
+        this.router.navigate([routes.freelancer_dashboard]);
+      } else if (role === 'admin') {
+        this.router.navigate([routes.admin_dashboard]);
+      } else if (role === 'company-employee') {
+        this.router.navigate([routes.employee_dashboard]);
+      } else {
+        this.router.navigate(['/']); // Default route for unknown roles
+      }
     }
   }
 
@@ -62,17 +67,18 @@ export class LoginComponent implements OnInit, OnDestroy {
           localStorage.setItem('email', response.email);
           localStorage.setItem('role', response.role);
           this.authService.setUser(response.user);
+          this.authService.setIsLoggedIn(true);
 
           if (response.role === 'candidate') {
             if (response.user.profileUpdatedAt != null) {
-              this.router.navigate(['/freelancer/dashboard']);
+              this.router.navigate([routes.freelancer_dashboard]);
             } else {
               this.router.navigate(['/pages/onboard-screen']);
             }
           } else if (response.role === 'admin') {
-            this.router.navigate(['/admin/dashboard']);
+            this.router.navigate([routes.admin_dashboard]);
           } else if (response.role === 'company-employee') {
-            this.router.navigate(['/employer/dashboard']);
+            this.router.navigate([routes.employee_dashboard]);
           }
           //
           this.loginError = null; // Clear any previous errors

@@ -170,4 +170,5 @@ export const showSuccessModal = (id: string, hide: boolean = true) => {
       }, 3000);
     }
   }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 };

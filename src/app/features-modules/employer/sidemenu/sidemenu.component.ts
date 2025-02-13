@@ -74,7 +74,7 @@ export class SidemenuComponent {
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate([routes.home]);
+    this.router.navigate([routes.login]);
   }
 
   public menuItem: Array<FreelancerSidebarItem> = [];

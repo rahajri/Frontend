@@ -12,13 +12,8 @@ export class HomeComponent implements OnInit {
   public routes = routes;
   selected = 'freelancers';
   getLink = 'project';
-  role: string = '';
   constructor(private router: Router) {}
   ngOnInit(): void {
-    this.role = localStorage.getItem('role') || '';
-    if (this.role === 'admin') {
-      this.router.navigate(['/admin/dashboard']);
-    }
     AOS.init({
       duration: 1200,
       once: true,
