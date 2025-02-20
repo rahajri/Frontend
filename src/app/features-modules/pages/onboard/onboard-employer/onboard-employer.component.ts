@@ -91,14 +91,14 @@ export class OnboardEmployerComponent implements OnInit {
     const selectedSiret = (event.target as HTMLSelectElement).value; // Get the selected SIRET value
 
     // Fetch the full company details based on the selected SIRET
-    this.companyService.getCompanyBySiret(selectedSiret).subscribe(
-      (company) => {
+    this.companyService.getCompanyBySiret(selectedSiret).subscribe({
+      next: (company) => {
         console.log('Selected '); // Log the details
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching company details:', error); // Handle error
-      }
-    );
+      },
+    });
   }
 
   block() {

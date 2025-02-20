@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/features-modules/auth/service/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -7,7 +7,10 @@ import { CompanyService } from 'src/app/core/services/company.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { Profile } from 'src/app/core/models/models';
 import * as lodash from 'lodash';
-import { markFormGroupTouched, showSuccessModal } from 'src/app/core/services/common/common-functions';
+import {
+  markFormGroupTouched,
+  showSuccessModal,
+} from 'src/app/core/services/common/common-functions';
 
 @Component({
   selector: 'app-basic-settings',
@@ -15,6 +18,7 @@ import { markFormGroupTouched, showSuccessModal } from 'src/app/core/services/co
   styleUrls: ['./basic-settings.component.scss'],
 })
 export class BasicSettingsComponent {
+  @Output() profileUpdated = new EventEmitter<any>();
   public routes = routes;
   profile: Profile | null = null;
   companyId: string | null = null;
@@ -117,6 +121,7 @@ export class BasicSettingsComponent {
         .updateCompany(this.companyId, trimmedValues)
         .subscribe({
           next: (res) => {
+            this.saveProfileChanges(res);
             showSuccessModal('data-changed');
           },
           error: (err) => {
@@ -140,5 +145,9 @@ export class BasicSettingsComponent {
     if (this.initialFormValues) {
       this.basicForm.patchValue(this.initialFormValues);
     }
+  }
+
+  saveProfileChanges(updatedProfile: any) {
+    this.profileUpdated.emit(updatedProfile); // Notify the parent
   }
 }

@@ -18,7 +18,6 @@ export class OcrService {
 
     try {
       const res = await this.http.post<any>(this.apiUrl, data).toPromise();
-      console.log(res);
       return res;
     } catch (error) {
       console.error('Error uploading files:', error);

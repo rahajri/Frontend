@@ -42,6 +42,13 @@ export class ProjectConfirmationComponent {
     }
   }
 
+  editOffer(offerId: string | null) {
+    if (!offerId) return;
+    this.router.navigate(['/employer/post-project'], {
+      queryParams: { id: offerId },
+    });
+  }
+
   checkIfContractIsCDI(contract: any) {
     if (contract?.description === 'CDI') {
       this.isNotCDIContract = false;

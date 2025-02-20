@@ -1,5 +1,5 @@
 <!-- Breadcrumb -->
-<div class="bread-crumb-bar">
+<div *ngIf="!hasId" class="bread-crumb-bar">
   <div class="container">
     <div class="row align-items-center inner-banner">
       <div class="col-md-12 col-12 text-center">
@@ -294,6 +294,7 @@
                     <option
                       *ngFor="let type of contractTypes"
                       [value]="type.id"
+                      [selected]="contractTypeIns?.id === type?.id"
                     >
                       {{ type?.description }}
                     </option>
@@ -723,7 +724,17 @@
                 <button type="reset" class="btn btn-secondary mr-4 me-2">
                   Annuler
                 </button>
-                <button type="submit" class="btn btn-primary">Publier</button>
+                <button *ngIf="!hasId" type="submit" class="btn btn-primary">
+                  Publier
+                </button>
+                <button
+                  *ngIf="hasId"
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="updateProject()"
+                >
+                  Mettre à jour
+                </button>
               </div>
             </div>
           </form>

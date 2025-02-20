@@ -6,6 +6,7 @@ import { routes } from 'src/app/core/helpers/routes/routes';
 import { showSuccessModal } from 'src/app/core/services/common/common-functions';
 import { CandidateService } from 'src/app/core/services/condidate.service';
 import { LanguageService } from 'src/app/core/services/language.service';
+import { ProfileService } from 'src/app/core/services/profile.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { environment } from 'src/environments/environment';
 
@@ -69,7 +70,8 @@ export class ProfileSettingsComponent implements OnInit {
     private fb: FormBuilder,
     private languageService: LanguageService,
     private skillService: SkillService,
-    private candidateService: CandidateService
+    private candidateService: CandidateService,
+    private profileService: ProfileService
   ) {
     this.form = this.fb.group({
       personalDetails: this.fb.group({
@@ -127,7 +129,8 @@ export class ProfileSettingsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.getCondidature(); // Refresh the candidate data
-          showSuccessModal('data-changed'); // Show a success message
+          showSuccessModal('data-changed');
+          this.saveProfileChanges(res.data);
         },
         error: (err) => {
           console.error('Error updating profile:', err);
@@ -459,5 +462,9 @@ export class ProfileSettingsComponent implements OnInit {
   }
   get activities(): FormArray {
     return this.form.get('activities') as FormArray;
+  }
+
+  saveProfileChanges(updatedProfile: any) {
+    this.profileService.updateUserProfile(updatedProfile);
   }
 }

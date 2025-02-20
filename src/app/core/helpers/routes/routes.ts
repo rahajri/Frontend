@@ -78,6 +78,23 @@ export class routes {
   public static get employee_post_project(): string {
     return this.employer + '/post-project';
   }
+  public static getEmployeePostProjectUrl(queryParams?: {
+    [key: string]: any;
+  }): string {
+    let url = this.employee_post_project;
+
+    if (queryParams && Object.keys(queryParams).length > 0) {
+      const queryString = Object.entries(queryParams)
+        .map(
+          ([key, value]) =>
+            `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+        )
+        .join('&');
+      url += `?${queryString}`;
+    }
+
+    return url;
+  }
   public static get employee_deposit_funds(): string {
     return this.employer + '/deposit-funds';
   }

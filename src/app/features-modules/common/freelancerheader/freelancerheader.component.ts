@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
-import { Profile, url } from 'src/app/core/models/models';
+import { url } from 'src/app/core/models/models';
 import { header } from 'src/app/core/models/sidebar-model';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { NavbarService } from 'src/app/core/services/navbar.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { UserService } from '../../auth/service/user.service';
 import { environment } from 'src/environments/environment';
+import { ProfileService } from 'src/app/core/services/profile.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-freelancerheader',
@@ -27,6 +29,7 @@ export class FreelancerheaderComponent implements OnInit {
   imgUrl: string = '';
   baseUrl = environment.apiUrl;
   profileName: string = '';
+  subscription: Subscription | null = null;
 
   navbar: Array<header> = [];
 
@@ -36,7 +39,8 @@ export class FreelancerheaderComponent implements OnInit {
     private navservices: NavbarService,
     private common: CommonService,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private profileService: ProfileService
   ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -47,9 +51,27 @@ export class FreelancerheaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.subscription = this.profileService.currentUserProfile$.subscribe(
+      (profile) => {
+        this.profile = profile;
+        if (profile && profile.image !== null) {
+          this.imgUrl = this.baseUrl + profile.image;
+          const { fullName, initials } =
+            this.userService.getProfileDetails(profile);
+          this.profileName = fullName;
+          this.initials = initials;
+        }
+      }
+    );
     this.getUser();
     this.isLogged = this.authService.isAuthenticated;
     this.isEmployer = this.authService.isEmployer();
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe(); // Clean up the subscription
+    }
   }
 
   getUser(): void {
