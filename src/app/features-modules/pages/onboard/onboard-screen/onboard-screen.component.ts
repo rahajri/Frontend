@@ -211,7 +211,9 @@ export class OnboardScreenComponent implements OnInit {
 
   onNextClick(): void {
     const postalCodeControl = this.locationForm.get('postalCode');
+    const cityControl = this.locationForm.get('city');
     postalCodeControl?.markAsTouched();
+    cityControl?.markAsTouched();
 
     if (this.locationForm.invalid) {
       return; // Stop further execution
@@ -525,8 +527,8 @@ export class OnboardScreenComponent implements OnInit {
 
   createActivity(): FormGroup {
     return this.fb.group({
-      job: [''],
-      sousActivite: [''],
+      job: ['', Validators.required],
+      sousActivite: ['', Validators.required],
       activite: [''],
     });
   }
@@ -577,12 +579,13 @@ export class OnboardScreenComponent implements OnInit {
       this.locationService.getZipCodeInfo(selectedZipId).subscribe(
         (data) => {
           this.cities = data.cities; // Update the cities list
+          console.log(data);
 
           // Reset department and region fields
           this.locationForm.patchValue({
-            city: '',
-            department: '',
-            region: '',
+            city: data.cities[0]?.name,
+            department: data.cities[0]?.department?.name,
+            region: data.cities[0]?.department?.region?.name,
           });
         },
         (error) => {
@@ -635,15 +638,33 @@ export class OnboardScreenComponent implements OnInit {
   }
 
   create(event: any) {
+    // Check if the form is valid
+    if (this.form.invalid) {
+      // Mark all controls as touched to show validation errors
+      this.form.markAllAsTouched();
+      return; // Stop further processing
+    }
+
     const candidateData = new FormData();
     candidateData.append('userInformation', JSON.stringify(this.form.value));
-    candidateData.append('cv', this.cvs[0]);
+
+    // Ensure there's at least one CV before appending
+    if (this.cvs && this.cvs.length > 0) {
+      candidateData.append('cv', this.cvs[0]);
+    } else {
+      console.error('No CV uploaded.');
+      // Optionally, show an error message to the user
+      return; // Stop further processing
+    }
+
     this.candidateService.createCandidate(candidateData).subscribe({
       next: (response) => {
+        console.log('Candidate created successfully:', response);
         this.router.navigate(['/freelancer/dashboard']);
       },
       error: (error) => {
         console.error('Error creating candidate:', error);
+        // Optionally, handle error feedback to the user
       },
     });
   }

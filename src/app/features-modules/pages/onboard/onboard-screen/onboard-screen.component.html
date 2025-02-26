@@ -433,7 +433,21 @@
                               (input)="filterJobs($event.target)"
                               (keydown.enter)="addJob()"
                               [attr.autocomplete]="'off'"
+                              [ngClass]="{
+                                'is-invalid':
+                                  activity.get('job')?.invalid &&
+                                  activity.get('job')?.touched
+                              }"
                             />
+                            <div
+                              *ngIf="
+                                activity.get('job')?.invalid &&
+                                activity.get('job')?.touched
+                              "
+                              class="text-danger"
+                            >
+                              Métier est requis.
+                            </div>
                             <!-- Autocomplete suggestions -->
                             <ul
                               class="autocomplete-list"
@@ -461,6 +475,11 @@
                               class="form-select"
                               (change)="onSubActivityChange($event, i)"
                               *ngIf="jobNotExist"
+                              [ngClass]="{
+                                'is-invalid':
+                                  activity.get('sousActivite')?.invalid &&
+                                  activity.get('sousActivite')?.touched
+                              }"
                             >
                               <option value="" disabled selected>
                                 Selectionner une Sous Activité
@@ -480,7 +499,21 @@
                               placeholder="Sous Activité"
                               *ngIf="!jobNotExist"
                               readonly
+                              [ngClass]="{
+                                'is-invalid':
+                                  activity.get('sousActivite')?.invalid &&
+                                  activity.get('sousActivite')?.touched
+                              }"
                             />
+                            <div
+                              *ngIf="
+                                activity.get('sousActivite')?.invalid &&
+                                activity.get('sousActivite')?.touched
+                              "
+                              class="text-danger"
+                            >
+                              Sous Activité est requise.
+                            </div>
                           </div>
                         </div>
 
