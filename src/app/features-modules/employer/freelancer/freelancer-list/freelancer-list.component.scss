@@ -1,0 +1,22 @@
+/* offers.component.css */
+p {
+  margin: 0;
+  transition: max-height 0.3s ease;
+  overflow: hidden; /* Ensure overflow is hidden */
+}
+
+p.expanded {
+  max-height: none; /* Allow full height when expanded */
+}
+
+.expand-text,
+.collapse-text {
+  cursor: pointer;
+  color: #007bff; /* Link color */
+  text-decoration: underline;
+}
+
+.expand-text:hover,
+.collapse-text:hover {
+  text-decoration: none; /* Remove underline on hover */
+}

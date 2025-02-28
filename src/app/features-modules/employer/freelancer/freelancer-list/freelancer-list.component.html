@@ -365,7 +365,7 @@
         <div class="list-book-mark book-mark favour-book">
           <div class="row justify-content-center">
             <div class="col-lg-12">
-              <div class="card list-develop-group">
+              <div *ngFor="let offer of offers" class="card list-develop-group">
                 <div class="freelancer-header m-2">
                   <div class="about-author-img">
                     <div class="author-img-wrap">
@@ -373,7 +373,11 @@
                         <img
                           class="img-fluid"
                           alt="Img"
-                          src="assets/img/img-02.jpg"
+                          [src]="
+                            offer?.company?.image !== null
+                              ? baseUrl + offer?.company?.image
+                              : ''
+                          "
                         />
                         <span class="verified"
                           ><i class="fas fa-check-circle"></i
@@ -383,38 +387,37 @@
                   </div>
                   <div class="author-details d-flex">
                     <div class="freelance-info">
-                      <div class="freelance-specific">UI/UX Designer</div>
+                      <div class="freelance-specific">
+                        {{ offer?.job?.subActivity?.name }}
+                      </div>
                       <h3>
-                        <a [routerLink]="routes.developerdetails"
-                          >Akshay Handge</a
-                        >
+                        <a [routerLink]="routes.developerdetails">{{
+                          offer?.title
+                        }}</a>
                       </h3>
                       <div class="d-flex">
                         <div class="freelance-location">
-                          <i class="feather icon-map-pin me-1"></i>Alabama, USA
+                          <i class="feather icon-map-pin me-1"></i
+                          >{{ offer?.city?.name }},
+                          {{ offer?.city?.department?.region?.name }}
                         </div>
                         <div class="freelance-location ms-3">
                           <i class="feather icon-calendar me-1"></i>Postuler le:
-                          06/12/2024
+                          {{ offer?.publicationDate }}
                         </div>
                         <div class="freelance-location ms-3">
                           <i class="feather icon-dollar-sign me-1"></i>A partir
-                          de : 25550 €
+                          de : {{ offer?.salaryType?.salary }} € |
+                          {{ offer?.salaryType?.type }}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="about-author d-flex align-items-center">
-                  <div class="about-list-author d-flex align-items-center">
-                    <div class="freelancer-body">
-                      <p>
-                        {{
-                          limitWords(
-                            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia minima recusandae ea laborum obcaecati consequuntur reprehenderit cumque nulla suscipit quis, iure cupiditate perspiciatis, veritatis eaque. Praesentium quisquam totam optio nostru												Delectus neque saepe tempore. Expedita delectus provident consequatur sapiente, quas eum. Debitis commodi fugit, nisi voluptatum sed itaque magnam accusamus, consectetur numquam quas sapiente, eveniet dolor iure eaque ab dicta!"
-                          )
-                        }}
-                      </p>
+                <div class="about-author">
+                  <div class="about-list-author row">
+                    <div class="freelancer-body col-9">
+                      <p [innerHTML]="offer.description"></p>
                       <div class="freelance-rating">
                         <div class="rating">
                           <i class="fas fa-star filled"></i>
@@ -443,7 +446,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="develop-list-pro">
+                    <div class="develop-list-pro col-3">
                       <div class="cart-hover">
                         <a
                           href="javascript:void(0);"

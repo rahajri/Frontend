@@ -578,12 +578,12 @@ export class OnboardScreenComponent implements OnInit {
     if (selectedZipId) {
       this.locationService.getZipCodeInfo(selectedZipId).subscribe(
         (data) => {
-          this.cities = data.cities;
+          this.cities = data?.cities;
           // Reset department and region fields
           this.locationForm.patchValue({
-            city: data.cities[0]?.name,
-            department: data.cities[0]?.department?.name,
-            region: data.cities[0]?.department?.region?.name,
+            city: data?.cities[0]?.name,
+            department: data?.cities[0]?.department?.name,
+            region: data?.cities[0]?.department?.region?.name,
           });
         },
         (error) => {
