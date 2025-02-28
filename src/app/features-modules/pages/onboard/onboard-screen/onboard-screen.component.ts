@@ -578,9 +578,7 @@ export class OnboardScreenComponent implements OnInit {
     if (selectedZipId) {
       this.locationService.getZipCodeInfo(selectedZipId).subscribe(
         (data) => {
-          this.cities = data.cities; // Update the cities list
-          console.log(data);
-
+          this.cities = data.cities;
           // Reset department and region fields
           this.locationForm.patchValue({
             city: data.cities[0]?.name,
@@ -644,7 +642,6 @@ export class OnboardScreenComponent implements OnInit {
       this.form.markAllAsTouched();
       return; // Stop further processing
     }
-
     const candidateData = new FormData();
     candidateData.append('userInformation', JSON.stringify(this.form.value));
 
