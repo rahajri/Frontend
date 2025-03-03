@@ -31,14 +31,6 @@ export class EmployerGuard {
       return true;
     }
 
-    // Check if the route is 'employer' or 'developer'
-    if (
-      state.url.includes('developer-list') ||
-      state.url.includes('developer')
-    ) {
-      return true;
-    }
-
     const previousUrl = this.navigationService.getPreviousUrl();
 
     const role = localStorage.getItem('role');

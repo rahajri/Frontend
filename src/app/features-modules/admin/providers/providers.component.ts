@@ -169,6 +169,7 @@ export class ProvidersComponent implements OnInit {
       salary: [0, Validators.min(0)],
       typologie: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(30)]],
+      summary: ['', [Validators.required, Validators.minLength(30)]],
       languages: this.fb.array([this.createLanguage()]),
       company: [
         null,
@@ -402,6 +403,9 @@ export class ProvidersComponent implements OnInit {
   }
   get description() {
     return this.addOfferForm.get('description');
+  }
+  get summary() {
+    return this.addOfferForm.get('summary');
   }
   get startDate() {
     return this.addOfferForm.get('startDate');

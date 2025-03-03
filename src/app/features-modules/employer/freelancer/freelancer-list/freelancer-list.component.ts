@@ -13,10 +13,10 @@ import { environment } from 'src/environments/environment';
 })
 export class FreelancerListComponent {
   public routes = routes;
-  baseUrl = environment.apiUrl;
   selected = 'Relevance';
-  offers: any[] = [];
   freelancer: Array<freelancerlist> = [];
+  baseUrl = environment.apiUrl;
+  offers: any[] = [];
   globalErrorMessage: boolean = false;
   constructor(
     public router: Router,
@@ -36,7 +36,6 @@ export class FreelancerListComponent {
     this.projectService.getPublishedOffers().subscribe({
       next: (data) => {
         this.offers = data;
-        console.log(data);
       },
       error: (error) => {
         console.error(error);

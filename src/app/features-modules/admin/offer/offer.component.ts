@@ -131,6 +131,7 @@ export class OfferComponent {
       salary: [0, [Validators.required, Validators.min(1)]],
       typologie: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(30)]],
+      summary: ['', [Validators.required, Validators.minLength(30)]],
       languages: this.fb.array([this.createLanguage()]),
       company: [null],
     });
@@ -176,6 +177,7 @@ export class OfferComponent {
         this.initialFormValues = {
           title: res.title || '',
           description: res?.description || '',
+          summary: res?.summary || '',
           endDate: res.endDate,
           seniority: res.seniority || '',
           contractType: res.contractType.id || '',
@@ -275,6 +277,9 @@ export class OfferComponent {
   }
   get description() {
     return this.jobForm.get('description');
+  }
+  get summary() {
+    return this.jobForm.get('summary');
   }
   get startDate() {
     return this.jobForm.get('startDate');

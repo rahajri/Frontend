@@ -127,10 +127,12 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       salary: [0, [Validators.min(1), Validators.required]],
       typologie: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(30)]],
+      summary: ['', [Validators.required, Validators.minLength(30)]],
       languages: this.fb.array([this.createLanguage()]),
       company: [null],
     });
   }
+
   ngOnInit(): void {
     this.editor = new Editor();
     this.getJobs();
@@ -218,6 +220,9 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   }
   get description() {
     return this.jobForm.get('description');
+  }
+  get summary() {
+    return this.jobForm.get('summary');
   }
   get startDate() {
     return this.jobForm.get('startDate');
@@ -589,7 +594,8 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       endDate: offerData.endDate,
       salary: offerData.salaryType.salary,
       typologie: offerData.salaryType.type,
-      description: offerData.description,
+      description: offerData?.description,
+      summary: offerData?.summary,
       company: offerData.company,
     });
     this.contractTypeIns = offerData.contractType;
