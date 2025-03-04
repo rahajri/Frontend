@@ -88,4 +88,16 @@ export class ProjectService {
   deleteOffer(offerId: string) {
     return this.http.delete<any>(`${this.baseUrl}/${offerId}`);
   }
+
+  getActivities(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/activity`);
+  }
+
+  getSubActivities(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/sub-activities`);
+  }
+
+  getContractTypes(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/contract-types`);
+  }
 }

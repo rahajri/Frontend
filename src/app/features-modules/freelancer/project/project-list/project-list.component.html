@@ -55,63 +55,38 @@
                 class="collapse show"
                 data-bs-parent="#accordionExample1"
               >
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_time" />
-                    <span class="checkmark"></span> Developer (25)
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_time" />
-                    <span class="checkmark"></span> UI Developer (62)
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_time" />
-                    <span class="checkmark"></span> React Developer (46)
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_time" />
-                    <span class="checkmark"></span> .Net Developer (37)
-                  </label>
-                </div>
+                <!-- Show only a limited number of activities -->
                 <div
-                  id="collapseOnes"
-                  class="collapse"
-                  data-bs-parent="#accordionExample1"
+                  *ngFor="
+                    let activity of activities.slice(0, displayedActivities)
+                  "
                 >
-                  <div>
-                    <label class="custom_check">
-                      <input type="checkbox" name="select_time" />
-                      <span class="checkmark"></span> UI Developer (62)
-                    </label>
-                  </div>
-                  <div>
-                    <label class="custom_check">
-                      <input type="checkbox" name="select_time" />
-                      <span class="checkmark"></span> React Developer (46)
-                    </label>
-                  </div>
-                  <div>
-                    <label class="custom_check">
-                      <input type="checkbox" name="select_time" />
-                      <span class="checkmark"></span> .Net Developer (37)
-                    </label>
-                  </div>
+                  <label class="custom_check">
+                    <input
+                      type="checkbox"
+                      name="select_activity"
+                      [value]="activity.id"
+                    />
+                    <span class="checkmark"></span> {{ activity.name }} ({{
+                      activity.subActivities.length
+                    }})
+                  </label>
                 </div>
-                <div class="showmore mt-2">
-                  <a
-                    href="javascript:void(0);"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOnes"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
-                    ><i class="feather icon-plus me-1"></i>Afficher Plus</a
-                  >
+
+                <!-- Show More / Show Less Button -->
+                <div
+                  class="showmore mt-2"
+                  *ngIf="displayedActivities < activities.length"
+                >
+                  <a href="javascript:void(0);" (click)="showMore()">
+                    <i class="feather icon-plus me-1"></i> Afficher Plus
+                  </a>
+                </div>
+
+                <div class="showmore mt-2" *ngIf="displayedActivities > 5">
+                  <a href="javascript:void(0);" (click)="showLess()">
+                    <i class="feather icon-minus me-1"></i> Afficher Moins
+                  </a>
                 </div>
               </div>
             </div>
@@ -123,7 +98,7 @@
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseskills"
                   aria-expanded="true"
-                  aria-controls="collapseOne"
+                  aria-controls="collapseskills"
                 >
                   Sous-Activité
                   <span class="float-end"
@@ -136,69 +111,46 @@
                 class="collapse show"
                 data-bs-parent="#accordionExample1"
               >
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_time" />
-                    <span class="checkmark"></span> After Effects (6)
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_time" />
-                    <span class="checkmark"></span> Android Developer (7)
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_time" />
-                    <span class="checkmark"></span> Backend Developer (7)
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_time" />
-                    <span class="checkmark"></span> Computer Operator (1)
-                  </label>
-                </div>
+                <!-- Display only a limited number of sub-activities -->
                 <div
-                  id="collapseOnes1"
-                  class="collapse"
-                  data-bs-parent="#accordionExample1"
+                  *ngFor="
+                    let subActivity of subActivities.slice(
+                      0,
+                      displayedSubActivities
+                    )
+                  "
                 >
-                  <div>
-                    <label class="custom_check">
-                      <input type="checkbox" name="select_time" />
-                      <span class="checkmark"></span> After Effects (6)
-                    </label>
-                  </div>
-                  <div>
-                    <label class="custom_check">
-                      <input type="checkbox" name="select_time" />
-                      <span class="checkmark"></span> Android Developer (7)
-                    </label>
-                  </div>
-                  <div>
-                    <label class="custom_check">
-                      <input type="checkbox" name="select_time" />
-                      <span class="checkmark"></span> Backend Developer (7)
-                    </label>
-                  </div>
-                  <div>
-                    <label class="custom_check">
-                      <input type="checkbox" name="select_time" />
-                      <span class="checkmark"></span> Computer Operator (1)
-                    </label>
-                  </div>
+                  <label class="custom_check">
+                    <input
+                      type="checkbox"
+                      name="select_subactivity"
+                      [value]="subActivity.id"
+                    />
+                    <span class="checkmark"></span> {{ subActivity.name }} (0)
+                  </label>
                 </div>
-                <div class="showmore mt-2">
+
+                <!-- Show More Button -->
+                <div
+                  class="showmore mt-2"
+                  *ngIf="displayedSubActivities < subActivities.length"
+                >
                   <a
                     href="javascript:void(0);"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOnes1"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
-                    ><i class="feather icon-plus me-1"></i>Afficher Plus</a
+                    (click)="showMoreSubActivities()"
                   >
+                    <i class="feather icon-plus me-1"></i> Afficher Plus
+                  </a>
+                </div>
+
+                <!-- Show Less Button -->
+                <div class="showmore mt-2" *ngIf="displayedSubActivities > 5">
+                  <a
+                    href="javascript:void(0);"
+                    (click)="showLessSubActivities()"
+                  >
+                    <i class="feather icon-minus me-1"></i> Afficher Moins
+                  </a>
                 </div>
               </div>
             </div>
@@ -223,22 +175,16 @@
                 class="collapse show"
                 data-bs-parent="#accordionExample1"
               >
-                <div>
+                <!-- Loop through contract types -->
+                <div *ngFor="let contractType of contractTypes">
                   <label class="custom_check">
-                    <input type="checkbox" name="select_time" />
-                    <span class="checkmark"></span>Full Time (3)
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_time" />
-                    <span class="checkmark"></span> Part Time (4)
-                  </label>
-                </div>
-                <div>
-                  <label class="custom_check">
-                    <input type="checkbox" name="select_time" />
-                    <span class="checkmark"></span>Project Based (2)
+                    <input
+                      type="checkbox"
+                      name="select_contractType"
+                      [value]="contractType.id"
+                    />
+                    <span class="checkmark"></span>
+                    {{ contractType.description }} (0)
                   </label>
                 </div>
               </div>

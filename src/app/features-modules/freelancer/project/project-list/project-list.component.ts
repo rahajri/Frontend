@@ -18,6 +18,11 @@ export class ProjectListComponent {
   baseUrl = environment.apiUrl;
   offers: any[] = [];
   globalErrorMessage: boolean = false;
+  activities: any[] = [];
+  displayedActivities = 5;
+  subActivities: any[] = [];
+  displayedSubActivities = 5;
+  contractTypes: any[] = [];
 
   selectedList1: data[] = [
     { value: 'Relevance' },
@@ -34,6 +39,9 @@ export class ProjectListComponent {
 
   ngOnInit(): void {
     this.getOffers();
+    this.getActivities();
+    this.getSubActivities();
+    this.getContractTypes();
   }
 
   getOffers() {
@@ -48,6 +56,17 @@ export class ProjectListComponent {
     });
   }
 
+  getContractTypes() {
+    this.projectService.getContractTypes().subscribe({
+      next: (data) => {
+        this.contractTypes = data;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+
   limitWords(text: string | null): string {
     if (!text) {
       return '';
@@ -55,5 +74,58 @@ export class ProjectListComponent {
     const words = text.split(' ');
     if (words.length <= 25) return text;
     return words.slice(0, 25).join(' ') + '...';
+  }
+
+  getActivities() {
+    this.projectService.getActivities().subscribe({
+      next: (data) => {
+        this.activities = data;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+  showMore() {
+    if (this.displayedActivities + 5 <= this.activities.length) {
+      this.displayedActivities += 5;
+    } else {
+      this.displayedActivities = this.activities.length; // Show all if fewer than 5 remain
+    }
+  }
+
+  showLess() {
+    if (this.displayedActivities - 5 >= 5) {
+      this.displayedActivities -= 5;
+    } else {
+      this.displayedActivities = 5; // Reset to initial state
+    }
+  }
+
+  getSubActivities() {
+    this.projectService.getSubActivities().subscribe({
+      next: (data) => {
+        this.subActivities = data;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+
+  showMoreSubActivities() {
+    if (this.displayedSubActivities + 5 <= this.subActivities.length) {
+      this.displayedSubActivities += 5;
+    } else {
+      this.displayedSubActivities = this.subActivities.length; // Show all if fewer than 5 remain
+    }
+  }
+
+  showLessSubActivities() {
+    if (this.displayedSubActivities - 5 >= 5) {
+      this.displayedSubActivities -= 5;
+    } else {
+      this.displayedSubActivities = 5; // Reset to initial state
+    }
   }
 }
