@@ -1,21 +1,23 @@
 <!-- Breadcrumb -->
-<!-- <div class="bread-crumb-bar">
-	<div class="container">
-		<div class="row align-items-center inner-banner">
-			<div class="col-md-12 col-12 text-center">
-				<div class="breadcrumb-list">
-					<h2>Freelancer List</h2>
-					<nav aria-label="breadcrumb" class="page-breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a [routerLink]="routes.home"> Home</a></li>
-							<li class="breadcrumb-item" aria-current="page">Developers</li>
-						</ol>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div> 
-</div>-->
+<div class="bread-crumb-bar">
+  <div class="container">
+    <div class="row align-items-center inner-banner">
+      <div class="col-md-12 col-12 text-center">
+        <div class="breadcrumb-list">
+          <h2>Freelancer List</h2>
+          <nav aria-label="breadcrumb" class="page-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="routes.home"> Home</a>
+              </li>
+              <li class="breadcrumb-item" aria-current="page">Developers</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- /Breadcrumb -->
 
 <!-- Page Content -->
@@ -23,15 +25,93 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
-        <div class="stickybar mt-3">
+        <div class="stickybar">
           <div class="card search-filter">
-            <div
-              class="card-header d-flex justify-content-between"
-              style="background-color: #fff6f1 !important"
-            >
-              <h4 class="card-title mb-0">Filtre de recherche</h4>
+            <div class="card-header d-flex justify-content-between">
+              <h4 class="card-title mb-0">Search Filter</h4>
             </div>
             <div class="card-body">
+              <div class="filter-widget">
+                <h4 class="filter-title">
+                  <a
+                    href="javascript:void(0);"
+                    class="w-100"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapselocation"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    Location
+                    <span class="float-end"
+                      ><i class="fa-solid fa-chevron-down"></i
+                    ></span>
+                  </a>
+                </h4>
+                <div
+                  id="collapselocation"
+                  class="collapse show"
+                  data-bs-parent="#accordionExample1"
+                >
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_time" />
+                      <span class="checkmark"></span>USA (25)
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_time" />
+                      <span class="checkmark"></span> IND (62)
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_time" />
+                      <span class="checkmark"></span>UK (46)
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_time" />
+                      <span class="checkmark"></span>AUS (37)
+                    </label>
+                  </div>
+                  <div
+                    id="collapseOnes3"
+                    class="collapse"
+                    data-bs-parent="#accordionExample1"
+                  >
+                    <div>
+                      <label class="custom_check">
+                        <input type="checkbox" name="select_time" />
+                        <span class="checkmark"></span> IND (62)
+                      </label>
+                    </div>
+                    <div>
+                      <label class="custom_check">
+                        <input type="checkbox" name="select_time" />
+                        <span class="checkmark"></span>UK (46)
+                      </label>
+                    </div>
+                    <div>
+                      <label class="custom_check">
+                        <input type="checkbox" name="select_time" />
+                        <span class="checkmark"></span>AUS (37)
+                      </label>
+                    </div>
+                  </div>
+                  <div class="showmore mt-2">
+                    <a
+                      href="javascript:void(0);"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOnes3"
+                      aria-expanded="true"
+                      aria-controls="collapseOne"
+                      ><i class="feather icon-plus me-1"></i>Show More</a
+                    >
+                  </div>
+                </div>
+              </div>
               <div class="filter-widget">
                 <h4 class="filter-title">
                   <a
@@ -114,7 +194,7 @@
                       data-bs-target="#collapseOnes1"
                       aria-expanded="true"
                       aria-controls="collapseOne"
-                      ><i class="feather icon-plus me-1"></i>Afficher Plus</a
+                      ><i class="feather icon-plus me-1"></i>Show More</a
                     >
                   </div>
                 </div>
@@ -195,7 +275,7 @@
                       data-bs-target="#collapseOnes"
                       aria-expanded="true"
                       aria-controls="collapseOne"
-                      ><i class="feather icon-plus me-1"></i>Afficher Plus</a
+                      ><i class="feather icon-plus me-1"></i>Show More</a
                     >
                   </div>
                 </div>
@@ -306,22 +386,63 @@
                       data-bs-target="#collapseOnes2"
                       aria-expanded="true"
                       aria-controls="collapseOne"
-                      ><i class="feather icon-plus me-1"></i>Afficher Plus</a
+                      ><i class="feather icon-plus me-1"></i>Show More</a
                     >
+                  </div>
+                </div>
+              </div>
+              <div class="filter-widget">
+                <h4 class="filter-title">
+                  <a
+                    href="javascript:void(0);"
+                    class="w-100"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapselanguagea"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    Freelancer Type
+                    <span class="float-end"
+                      ><i class="fa-solid fa-chevron-down"></i
+                    ></span>
+                  </a>
+                </h4>
+                <div
+                  id="collapselanguagea"
+                  class="collapse show"
+                  data-bs-parent="#accordionExample1"
+                >
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_time" />
+                      <span class="checkmark"></span>Full Time (3)
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_time" />
+                      <span class="checkmark"></span> Part Time (4)
+                    </label>
+                  </div>
+                  <div>
+                    <label class="custom_check">
+                      <input type="checkbox" name="select_time" />
+                      <span class="checkmark"></span>Project Based (2)
+                    </label>
                   </div>
                 </div>
               </div>
 
               <div class="btn-search">
-                <button type="button" class="btn btn-primary">Filter</button>
-                <button type="button" class="btn btn-block">Initialiser</button>
+                <button type="button" class="btn btn-primary">Search</button>
+                <button type="button" class="btn btn-block">Reset</button>
               </div>
             </div>
           </div>
           <!-- /Search Filter -->
         </div>
       </div>
-      <div class="col-md-12 col-lg-8 col-xl-9 mt-3">
+      <div class="col-md-12 col-lg-8 col-xl-9">
         <div class="sort-tab develop-list-select">
           <div class="sort-tab develop-list-select">
             <div class="row align-items-center">
@@ -365,59 +486,35 @@
         <div class="list-book-mark book-mark favour-book">
           <div class="row justify-content-center">
             <div class="col-lg-12">
-              <div *ngFor="let offer of offers" class="card list-develop-group">
-                <div class="freelancer-header m-2">
-                  <div class="about-author-img">
-                    <div class="author-img-wrap">
-                      <a [routerLink]="routes.developerdetails">
-                        <img
-                          class="img-fluid"
-                          alt="Img"
-                          [src]="
-                            offer?.company?.image !== null
-                              ? baseUrl + offer?.company?.image
-                              : ''
-                          "
-                        />
-                        <span class="verified"
-                          ><i class="fas fa-check-circle"></i
-                        ></span>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="author-details d-flex">
-                    <div class="freelance-info">
-                      <div class="freelance-specific">
-                        {{ offer?.job?.subActivity?.name }}
+              <div class="card list-develop-group">
+                <div class="about-author d-flex align-items-center">
+                  <div class="about-list-author d-flex align-items-center">
+                    <div class="about-author-img">
+                      <div class="author-img-wrap">
+                        <a [routerLink]="routes.developerdetails">
+                          <img
+                            class="img-fluid"
+                            alt="Img"
+                            src="assets/img/img-02.jpg"
+                          />
+                          <span class="verified"
+                            ><i class="fas fa-check-circle"></i
+                          ></span>
+                        </a>
                       </div>
-                      <h3>
-                        <a [routerLink]="routes.developerdetails">{{
-                          offer?.title
-                        }}</a>
-                      </h3>
-                      <div class="d-flex">
+                    </div>
+                    <div class="author-details d-flex">
+                      <div class="freelance-info">
+                        <h3>
+                          <a [routerLink]="routes.developerdetails"
+                            >Akshay Handge</a
+                          >
+                        </h3>
+                        <div class="freelance-specific">UI/UX Designer</div>
                         <div class="freelance-location">
-                          <i class="feather icon-map-pin me-1"></i
-                          >{{ offer?.city?.name }},
-                          {{ offer?.city?.department?.region?.name }}
-                        </div>
-                        <div class="freelance-location ms-3">
-                          <i class="feather icon-calendar me-1"></i>Postuler le:
-                          {{ offer?.publicationDate }}
-                        </div>
-                        <div class="freelance-location ms-3">
-                          <i class="feather icon-dollar-sign me-1"></i>A partir
-                          de : {{ offer?.salaryType?.salary }} € |
-                          {{ offer?.salaryType?.type }}
+                          <i class="feather icon-map-pin me-1"></i>Alabama, USA
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="about-author">
-                  <div class="about-list-author row">
-                    <div class="freelancer-body col-9">
-                      <p [innerHTML]="offer.description"></p>
                       <div class="freelance-rating">
                         <div class="rating">
                           <i class="fas fa-star filled"></i>
@@ -445,16 +542,626 @@
                           >
                         </div>
                       </div>
-                    </div>
-                    <div class="develop-list-pro col-3">
-                      <div class="cart-hover">
-                        <a
-                          href="javascript:void(0);"
-                          class="btn-invite d-block w-100 mb-2"
-                          tabindex="-1"
-                          >Postuler</a
-                        >
+                      <div class="freelance-price">
+                        <div class="freelance-price-img">
+                          <img src="assets/img/icon/price.png" alt="img" />
+                        </div>
+                        <div class="freelance-price-content">
+                          <h6>price</h6>
+                          <h5>$42 Hourly</h5>
+                        </div>
                       </div>
+                    </div>
+                  </div>
+                  <div class="develop-list-pro">
+                    <div class="cart-hover">
+                      <a
+                        href="javascript:void(0);"
+                        class="btn-invite d-block w-100 mb-2"
+                        tabindex="-1"
+                        >Invite</a
+                      >
+                      <a
+                        [routerLink]="routes.developerdetails"
+                        class="btn-cart"
+                        tabindex="-1"
+                        >View Profile</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card list-develop-group">
+                <div class="about-author d-flex align-items-center">
+                  <div class="about-list-author d-flex align-items-center">
+                    <div class="about-author-img">
+                      <div class="author-img-wrap">
+                        <a [routerLink]="routes.developerdetails">
+                          <img
+                            class="img-fluid"
+                            alt="Img"
+                            src="assets/img/img-03.jpg"
+                          />
+                          <span class="verified"
+                            ><i class="fas fa-check-circle"></i
+                          ></span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="author-details d-flex">
+                      <div class="freelance-info">
+                        <h3>
+                          <a [routerLink]="routes.developerdetails"
+                            >George Wells</a
+                          >
+                        </h3>
+                        <div class="freelance-specific">UI/UX Designer</div>
+                        <div class="freelance-location">
+                          <i class="feather icon-map-pin me-1"></i>Newyork, USA
+                        </div>
+                      </div>
+                      <div class="freelance-rating">
+                        <div class="rating">
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star"></i>
+                          <span class="average-rating">4.7 (32)</span>
+                        </div>
+                        <div class="freelance-tags border-0">
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Web Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >UI Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Node Js</span
+                            ></a
+                          >
+                        </div>
+                      </div>
+                      <div class="freelance-price">
+                        <div class="freelance-price-img">
+                          <img src="assets/img/icon/price.png" alt="img" />
+                        </div>
+                        <div class="freelance-price-content">
+                          <h6>price</h6>
+                          <h5>$24 Hourly</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="develop-list-pro">
+                    <div class="cart-hover">
+                      <a
+                        href="javascript:void(0);"
+                        class="btn-invite d-block w-100 mb-2"
+                        tabindex="-1"
+                        >Invite</a
+                      >
+                      <a
+                        [routerLink]="routes.developerdetails"
+                        class="btn-cart"
+                        tabindex="-1"
+                        >View Profile</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card list-develop-group">
+                <div class="about-author d-flex align-items-center">
+                  <div class="about-list-author d-flex align-items-center">
+                    <div class="about-author-img">
+                      <div class="author-img-wrap">
+                        <a [routerLink]="routes.developerdetails">
+                          <img
+                            class="img-fluid"
+                            alt="Img"
+                            src="assets/img/img-04.jpg"
+                          />
+                          <span class="verified"
+                            ><i class="fas fa-check-circle"></i
+                          ></span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="author-details d-flex">
+                      <div class="freelance-info">
+                        <h3>
+                          <a [routerLink]="routes.developerdetails"
+                            >Terri Morales</a
+                          >
+                        </h3>
+                        <div class="freelance-specific">UI/UX Designer</div>
+                        <div class="freelance-location">
+                          <i class="feather icon-map-pin me-1"></i>Alabama, USA
+                        </div>
+                      </div>
+                      <div class="freelance-rating">
+                        <div class="rating">
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star"></i>
+                          <span class="average-rating">4.7 (12)</span>
+                        </div>
+                        <div class="freelance-tags border-0">
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Web Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >UI Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Node Js</span
+                            ></a
+                          >
+                        </div>
+                      </div>
+                      <div class="freelance-price">
+                        <div class="freelance-price-img">
+                          <img src="assets/img/icon/price.png" alt="img" />
+                        </div>
+                        <div class="freelance-price-content">
+                          <h6>price</h6>
+                          <h5>$13 Hourly</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="develop-list-pro">
+                    <div class="cart-hover">
+                      <a
+                        href="javascript:void(0);"
+                        class="btn-invite d-block w-100 mb-2"
+                        tabindex="-1"
+                        >Invite</a
+                      >
+                      <a
+                        [routerLink]="routes.developerdetails"
+                        class="btn-cart"
+                        tabindex="-1"
+                        >View Profile</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card list-develop-group">
+                <div class="about-author d-flex align-items-center">
+                  <div class="about-list-author d-flex align-items-center">
+                    <div class="about-author-img">
+                      <div class="author-img-wrap">
+                        <a [routerLink]="routes.developerdetails">
+                          <img
+                            class="img-fluid"
+                            alt="Img"
+                            src="assets/img/img-05.jpg"
+                          />
+                          <span class="verified"
+                            ><i class="fas fa-check-circle"></i
+                          ></span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="author-details d-flex">
+                      <div class="freelance-info">
+                        <h3>
+                          <a [routerLink]="routes.developerdetails"
+                            >Sara Wyatt</a
+                          >
+                        </h3>
+                        <div class="freelance-specific">iOS Developer</div>
+                        <div class="freelance-location">
+                          <i class="feather icon-map-pin me-1"></i>Newyork, USA
+                        </div>
+                      </div>
+                      <div class="freelance-rating">
+                        <div class="rating">
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star"></i>
+                          <span class="average-rating">4.7 (32)</span>
+                        </div>
+                        <div class="freelance-tags border-0">
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Web Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >UI Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Node Js</span
+                            ></a
+                          >
+                        </div>
+                      </div>
+                      <div class="freelance-price">
+                        <div class="freelance-price-img">
+                          <img src="assets/img/icon/price.png" alt="img" />
+                        </div>
+                        <div class="freelance-price-content">
+                          <h6>price</h6>
+                          <h5>$18 Hourly</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="develop-list-pro">
+                    <div class="cart-hover">
+                      <a
+                        href="javascript:void(0);"
+                        class="btn-invite d-block w-100 mb-2"
+                        tabindex="-1"
+                        >Invite</a
+                      >
+                      <a
+                        [routerLink]="routes.developerdetails"
+                        class="btn-cart"
+                        tabindex="-1"
+                        >View Profile</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card list-develop-group">
+                <div class="about-author d-flex align-items-center">
+                  <div class="about-list-author d-flex align-items-center">
+                    <div class="about-author-img">
+                      <div class="author-img-wrap">
+                        <a [routerLink]="routes.developerdetails">
+                          <img
+                            class="img-fluid"
+                            alt="Img"
+                            src="assets/img/img-04.jpg"
+                          />
+                          <span class="verified"
+                            ><i class="fas fa-check-circle"></i
+                          ></span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="author-details d-flex">
+                      <div class="freelance-info">
+                        <h3>
+                          <a [routerLink]="routes.developerdetails"
+                            >Richard Wilson</a
+                          >
+                        </h3>
+                        <div class="freelance-specific">SEO Developer</div>
+                        <div class="freelance-location">
+                          <i class="feather icon-map-pin me-1"></i>Alabama, USA
+                        </div>
+                      </div>
+                      <div class="freelance-rating">
+                        <div class="rating">
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star"></i>
+                          <span class="average-rating">4.7 (20)</span>
+                        </div>
+                        <div class="freelance-tags border-0">
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Web Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >UI Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Node Js</span
+                            ></a
+                          >
+                        </div>
+                      </div>
+                      <div class="freelance-price">
+                        <div class="freelance-price-img">
+                          <img src="assets/img/icon/price.png" alt="img" />
+                        </div>
+                        <div class="freelance-price-content">
+                          <h6>Price</h6>
+                          <h5>$63 Hourly</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="develop-list-pro">
+                    <div class="cart-hover">
+                      <a
+                        href="javascript:void(0);"
+                        class="btn-invite d-block w-100 mb-2"
+                        tabindex="-1"
+                        >Invite</a
+                      >
+                      <a
+                        [routerLink]="routes.developerdetails"
+                        class="btn-cart"
+                        tabindex="-1"
+                        >View Profile</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card list-develop-group">
+                <div class="about-author d-flex align-items-center">
+                  <div class="about-list-author d-flex align-items-center">
+                    <div class="about-author-img">
+                      <div class="author-img-wrap">
+                        <a [routerLink]="routes.developerdetails">
+                          <img
+                            class="img-fluid"
+                            alt="Img"
+                            src="assets/img/img-02.jpg"
+                          />
+                          <span class="verified"
+                            ><i class="fas fa-check-circle"></i
+                          ></span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="author-details d-flex">
+                      <div class="freelance-info">
+                        <h3>
+                          <a [routerLink]="routes.developerdetails"
+                            >George Wells</a
+                          >
+                        </h3>
+                        <div class="freelance-specific">UI/UX Designer</div>
+                        <div class="freelance-location">
+                          <i class="feather icon-map-pin me-1"></i>Newyork, USA
+                        </div>
+                      </div>
+                      <div class="freelance-rating">
+                        <div class="rating">
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star"></i>
+                          <span class="average-rating">4.7 (32)</span>
+                        </div>
+                        <div class="freelance-tags border-0">
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Web Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >UI Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Node Js</span
+                            ></a
+                          >
+                        </div>
+                      </div>
+                      <div class="freelance-price">
+                        <div class="freelance-price-img">
+                          <img src="assets/img/icon/price.png" alt="img" />
+                        </div>
+                        <div class="freelance-price-content">
+                          <h6>price</h6>
+                          <h5>$24 Hourly</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="develop-list-pro">
+                    <div class="cart-hover">
+                      <a
+                        href="javascript:void(0);"
+                        class="btn-invite d-block w-100 mb-2"
+                        tabindex="-1"
+                        >Invite</a
+                      >
+                      <a
+                        [routerLink]="routes.developerdetails"
+                        class="btn-cart"
+                        tabindex="-1"
+                        >View Profile</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card list-develop-group">
+                <div class="about-author d-flex align-items-center">
+                  <div class="about-list-author d-flex align-items-center">
+                    <div class="about-author-img">
+                      <div class="author-img-wrap">
+                        <a [routerLink]="routes.developerdetails">
+                          <img
+                            class="img-fluid"
+                            alt="Img"
+                            src="assets/img/img-03.jpg"
+                          />
+                          <span class="verified"
+                            ><i class="fas fa-check-circle"></i
+                          ></span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="author-details d-flex">
+                      <div class="freelance-info">
+                        <h3>
+                          <a [routerLink]="routes.developerdetails"
+                            >Terri Morales</a
+                          >
+                        </h3>
+                        <div class="freelance-specific">UI/UX Designer</div>
+                        <div class="freelance-location">
+                          <i class="feather icon-map-pin me-1"></i>Alabama, USA
+                        </div>
+                      </div>
+                      <div class="freelance-rating">
+                        <div class="rating">
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star"></i>
+                          <span class="average-rating">4.7 (12)</span>
+                        </div>
+                        <div class="freelance-tags border-0">
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Web Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >UI Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Node Js</span
+                            ></a
+                          >
+                        </div>
+                      </div>
+                      <div class="freelance-price">
+                        <div class="freelance-price-img">
+                          <img src="assets/img/icon/price.png" alt="img" />
+                        </div>
+                        <div class="freelance-price-content">
+                          <h6>price</h6>
+                          <h5>$13 Hourly</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="develop-list-pro">
+                    <div class="cart-hover">
+                      <a
+                        href="javascript:void(0);"
+                        class="btn-invite d-block w-100 mb-2"
+                        tabindex="-1"
+                        >Invite</a
+                      >
+                      <a
+                        [routerLink]="routes.developerdetails"
+                        class="btn-cart"
+                        tabindex="-1"
+                        >View Profile</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card list-develop-group">
+                <div class="about-author d-flex align-items-center">
+                  <div class="about-list-author d-flex align-items-center">
+                    <div class="about-author-img">
+                      <div class="author-img-wrap">
+                        <a [routerLink]="routes.developerdetails">
+                          <img
+                            class="img-fluid"
+                            alt="Img"
+                            src="assets/img/img-04.jpg"
+                          />
+                          <span class="verified"
+                            ><i class="fas fa-check-circle"></i
+                          ></span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="author-details d-flex">
+                      <div class="freelance-info">
+                        <h3>
+                          <a [routerLink]="routes.developerdetails"
+                            >Sara Wyatt</a
+                          >
+                        </h3>
+                        <div class="freelance-specific">iOS Developer</div>
+                        <div class="freelance-location">
+                          <i class="feather icon-map-pin me-1"></i>Newyork, USA
+                        </div>
+                      </div>
+                      <div class="freelance-rating">
+                        <div class="rating">
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star filled"></i>
+                          <i class="fas fa-star"></i>
+                          <span class="average-rating">4.7 (32)</span>
+                        </div>
+                        <div class="freelance-tags border-0">
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Web Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >UI Design</span
+                            ></a
+                          >
+                          <a href="javascript:void(0);"
+                            ><span class="badge badge-pill badge-design"
+                              >Node Js</span
+                            ></a
+                          >
+                        </div>
+                      </div>
+                      <div class="freelance-price">
+                        <div class="freelance-price-img">
+                          <img src="assets/img/icon/price.png" alt="img" />
+                        </div>
+                        <div class="freelance-price-content">
+                          <h6>price</h6>
+                          <h5>$18 Hourly</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="develop-list-pro">
+                    <div class="cart-hover">
+                      <a
+                        href="javascript:void(0);"
+                        class="btn-invite d-block w-100 mb-2"
+                        tabindex="-1"
+                        >Invite</a
+                      >
+                      <a
+                        [routerLink]="routes.developerdetails"
+                        class="btn-cart"
+                        tabindex="-1"
+                        >View Profile</a
+                      >
                     </div>
                   </div>
                 </div>

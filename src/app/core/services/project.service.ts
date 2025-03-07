@@ -84,20 +84,24 @@ export class ProjectService {
   projectsFiler(data: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.baseUrl}/filter`, data);
   }
+  
+  projectsFilerCheckBoxes(arrays: any): Observable<any[]> {
+    return this.http.post<any[]>(`${this.baseUrl}/filters`, arrays);
+  }
 
   deleteOffer(offerId: string) {
     return this.http.delete<any>(`${this.baseUrl}/${offerId}`);
   }
 
   getActivities(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/activity`);
+    return this.http.get<any[]>(`${this.baseUrl}/activities`);
   }
 
   getSubActivities(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/sub-activities`);
+    return this.http.get<any[]>(`${this.baseUrl}/sub-activities`);
   }
 
   getContractTypes(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/contract-types`);
+    return this.http.get<any[]>(`${this.baseUrl}/contract-types`);
   }
 }

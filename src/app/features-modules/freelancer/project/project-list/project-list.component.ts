@@ -3,6 +3,9 @@ import { routes } from 'src/app/core/helpers/routes/routes';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 interface data {
   value: string;
 }
@@ -23,15 +26,31 @@ export class ProjectListComponent {
   subActivities: any[] = [];
   displayedSubActivities = 5;
   contractTypes: any[] = [];
+  filter: boolean = true;
+  filterForm!: FormGroup;
 
-  selectedList1: data[] = [
-    { value: 'Relevance' },
-    { value: 'Rating' },
-    { value: 'Popular' },
-    { value: 'Latest' },
-    { value: 'Free' },
-  ];
-  constructor(public router: Router, private projectService: ProjectService) {}
+  selectedActivities: string[] = [];
+  selectedSubActivities: string[] = [];
+  selectedContractTypes: string[] = [];
+
+  public currentPage: number = 1;
+  public itemsPerPage: number = 5; // Adjust based on your needs
+  public totalOffers: number = 0; // Total number of offers
+  public paginatedOffers: any[] = []; // Offers for the current page
+
+  constructor(
+    public router: Router,
+    private fb: FormBuilder,
+    private projectService: ProjectService,
+    private sanitizer: DomSanitizer
+  ) {
+    this.filterForm = this.fb.group({
+      title: [''],
+      city: [''],
+      department: [''],
+      region: [''],
+    });
+  }
 
   toggleLike(index: number) {
     this.like[index] = !this.like[index];
@@ -44,16 +63,34 @@ export class ProjectListComponent {
     this.getContractTypes();
   }
 
+  onChange() {
+    const filterValues = this.filterForm.value;
+    const isEmpty = Object.values(filterValues).some((value) => value === '');
+    if (isEmpty) {
+      this.getOffers();
+    }
+  }
+
   getOffers() {
     this.projectService.getPublishedOffers().subscribe({
       next: (data) => {
         this.offers = data;
+        this.totalOffers = data.length;
+        this.updatePaginatedOffers();
       },
       error: (error) => {
         console.error(error);
         this.globalErrorMessage = true;
       },
     });
+  }
+
+  updatePaginatedOffers() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    this.paginatedOffers = this.offers.slice(
+      startIndex,
+      startIndex + this.itemsPerPage
+    );
   }
 
   getContractTypes() {
@@ -67,13 +104,22 @@ export class ProjectListComponent {
     });
   }
 
-  limitWords(text: string | null): string {
-    if (!text) {
-      return '';
-    }
+  getSafeDescription(description: string): SafeHtml {
+    const text = this.extractText(description);
+    const limitedText = this.limitWords(text, 25);
+    return this.sanitizer.bypassSecurityTrustHtml(limitedText);
+  }
+
+  extractText(html: string): string {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    return tempDiv.innerText || tempDiv.textContent || '';
+  }
+
+  limitWords(text: string, limit: number): string {
     const words = text.split(' ');
-    if (words.length <= 25) return text;
-    return words.slice(0, 25).join(' ') + '...';
+    const limitedWords = words.slice(0, limit).join(' ');
+    return limitedWords + (words.length > limit ? '...' : '');
   }
 
   getActivities() {
@@ -127,5 +173,136 @@ export class ProjectListComponent {
     } else {
       this.displayedSubActivities = 5; // Reset to initial state
     }
+  }
+
+  openFilter() {
+    this.filter = !this.filter;
+  }
+
+  onFilterSubmit() {
+    if (this.filterForm.valid) {
+      this.filterOffers(this.filterForm.value);
+    }
+  }
+
+  filterOffers(data: any) {
+    this.projectService.projectsFiler(data).subscribe({
+      next: (response) => {
+        this.paginatedOffers = response;
+        this.totalOffers = response.length;
+        this.offers = response;
+        this.updatePaginatedOffers();
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+
+  goToPage(page: number) {
+    if (page < 1 || page > this.getTotalPages()) return; // Prevent invalid pages
+    this.currentPage = page;
+    this.updatePaginatedOffers();
+  }
+
+  nextPage() {
+    if (this.currentPage < this.getTotalPages()) {
+      this.currentPage++;
+      this.updatePaginatedOffers();
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedOffers();
+    }
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.totalOffers / this.itemsPerPage);
+  }
+
+  onActivityChange(event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.selectedActivities.push(checkbox.value);
+    } else {
+      this.selectedActivities = this.selectedActivities.filter(
+        (activity) => activity !== checkbox.value
+      );
+    }
+  }
+
+  onSubActivityChange(event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.selectedSubActivities.push(checkbox.value);
+    } else {
+      this.selectedSubActivities = this.selectedSubActivities.filter(
+        (subActivity) => subActivity !== checkbox.value
+      );
+    }
+  }
+
+  onContractTypeChange(event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.selectedContractTypes.push(checkbox.value);
+    } else {
+      this.selectedContractTypes = this.selectedContractTypes.filter(
+        (contractType) => contractType !== checkbox.value
+      );
+    }
+  }
+
+  applyFilters() {
+    this.projectService
+      .projectsFilerCheckBoxes({
+        selectedActivities: this.selectedActivities,
+        selectedSubActivities: this.selectedSubActivities,
+        selectedContractTypes: this.selectedContractTypes,
+      })
+      .subscribe({
+        next: (response) => {
+          this.paginatedOffers = response;
+          this.totalOffers = response.length;
+          this.offers = response;
+          this.updatePaginatedOffers();
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+  }
+
+  resetFilters() {
+    this.selectedActivities = [];
+    this.selectedSubActivities = [];
+    this.selectedContractTypes = [];
+    // Uncheck all checkboxes in the UI
+    const activityCheckboxes = document.querySelectorAll(
+      'input[name="select_activity"]'
+    );
+    const subActivityCheckboxes = document.querySelectorAll(
+      'input[name="select_subactivity"]'
+    );
+    const contractTypeCheckboxes = document.querySelectorAll(
+      'input[name="select_contractType"]'
+    );
+
+    activityCheckboxes.forEach((checkbox) => {
+      (checkbox as HTMLInputElement).checked = false;
+    });
+
+    subActivityCheckboxes.forEach((checkbox) => {
+      (checkbox as HTMLInputElement).checked = false;
+    });
+
+    contractTypeCheckboxes.forEach((checkbox) => {
+      (checkbox as HTMLInputElement).checked = false;
+    });
+
+    this.getOffers();
   }
 }

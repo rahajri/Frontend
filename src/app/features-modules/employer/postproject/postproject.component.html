@@ -704,31 +704,6 @@
                 ></ngx-editor-menu>
                 <ngx-editor [editor]="editor" formControlName="description">
                 </ngx-editor>
-
-                <label for="summary" class="form-label mt-3"
-                  >Résumé de l'offre</label
-                >
-                <textarea
-                  id="summary"
-                  class="form-control"
-                  formControlName="summary"
-                  [ngClass]="{
-                    'is-invalid': summary?.touched && summary?.invalid
-                  }"
-                >
-                </textarea>
-                <!-- Message d'erreur -->
-                <div
-                  *ngIf="summary?.touched && summary?.invalid"
-                  class="text-danger"
-                >
-                  <div *ngIf="summary?.errors?.['required']">
-                    Veuillez saisir un résumé de l'offre.
-                  </div>
-                  <div *ngIf="summary?.errors?.['minlength']">
-                    Le résumé du poste doit contenir au moins 30 caractères.
-                  </div>
-                </div>
               </div>
               <div
                 *ngIf="globalErrorMessage"

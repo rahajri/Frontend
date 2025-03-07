@@ -111,9 +111,10 @@ export class routes {
     return this.employer + '/developer-details';
   }
 
-  public static get freelancer_project_details(): string {
-    return this.freelance + '/project-details';
+  public static get_freelancer_project_details(id: string): string {
+    return this.freelance + `/project-details/${id}`;
   }
+
   public static get freelancer_dashboard(): string {
     return this.freelance + '/dashboard';
   }

@@ -168,8 +168,7 @@ export class ProvidersComponent implements OnInit {
       skills: [''],
       salary: [0, Validators.min(0)],
       typologie: ['', Validators.required],
-      description: ['', [Validators.required, Validators.minLength(30)]],
-      summary: ['', [Validators.required, Validators.minLength(30)]],
+      description: ['', [Validators.required, Validators.minLength(200)]],
       languages: this.fb.array([this.createLanguage()]),
       company: [
         null,
@@ -403,9 +402,6 @@ export class ProvidersComponent implements OnInit {
   }
   get description() {
     return this.addOfferForm.get('description');
-  }
-  get summary() {
-    return this.addOfferForm.get('summary');
   }
   get startDate() {
     return this.addOfferForm.get('startDate');
@@ -697,6 +693,8 @@ export class ProvidersComponent implements OnInit {
           this.getTableData();
           this.hideModal('add-offer');
           this.addOfferForm.reset();
+          this.resetCityInput();
+          this.resetSkills();
         },
         error: (error) => {
           console.error('Error creating project:', error);
@@ -767,5 +765,29 @@ export class ProvidersComponent implements OnInit {
   exportDataToCsv() {
     const filename = 'offers_export.csv';
     exportToCsv(filename, this.offersData);
+  }
+
+  resetCityInput() {
+    this.cityIsSelected = false; // Reset city selection
+    this.filteredCities = []; // Clear filtered cities
+    this.addOfferForm.get('city')?.setValue(''); // Clear the city input
+    this.cityInputSub = this.addOfferForm
+      .get('city')
+      ?.valueChanges.pipe(
+        debounceTime(150),
+        distinctUntilChanged(),
+        switchMap((query) =>
+          query ? this.locationService.searchCities(query) : of([])
+        )
+      )
+      .subscribe((cities) => {
+        if (!this.cityIsSelected) this.filteredCities = cities;
+      });
+  }
+
+  resetSkills() {
+    this.selectedSkills = []; // Clear selected skills
+    this.filteredSkills = []; // Clear filtered skills
+    this.addOfferForm.get('skills')?.setValue(''); // Clear the skills input field
   }
 }

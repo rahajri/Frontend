@@ -1,0 +1,8 @@
+.card.filter-card {
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.card.filter-card.filter-show {
+  display: block;
+}

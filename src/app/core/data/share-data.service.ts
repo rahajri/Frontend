@@ -1260,8 +1260,8 @@ export class ShareDataService {
       separateRoute: false,
       menu: [
         {
-          menuValue: 'Trouver un emploi',
-          route: routes.freelancer_project,
+          menuValue: "Nos offres d'emplois",
+          route: routes.projectList,
           hasSubRoute: false,
           showSubRoute: false,
           base: 'employer',
@@ -1288,7 +1288,7 @@ export class ShareDataService {
         //     },
         //     {
         //       menuValue: 'Projects details',
-        //       route: routes.freelancer_project_details,
+        //       route: routes.get_freelancer_project_details('123'),
         //       hasSubRoute: false,
         //       showSubRoute: false,
         //       base: 'freelancer',
