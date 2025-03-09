@@ -29,6 +29,9 @@
           </a>
         </div>
         <ul class="main-nav">
+          <li [class.active]="false" routerLinkActive="active">
+            <a [routerLink]="routes.projectList">Nos offres d'emplois</a>
+          </li>
           @for (mainMenus of navbar; track mainMenus) { @if
           (mainMenus.separateRoute === true) {
           <li

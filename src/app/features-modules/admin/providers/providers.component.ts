@@ -146,13 +146,7 @@ export class ProvidersComponent implements OnInit {
     });
 
     this.addOfferForm = this.fb.group({
-      title: [
-        '',
-        [
-          Validators.required, // Validation obligatoire
-          Validators.minLength(5), // Minimum de 30 caractères
-        ],
-      ],
+      title: ['', [Validators.required, Validators.minLength(5)]],
       activity: ['', [Validators.required]],
       subActivity: ['', [Validators.required]],
       job: ['', [Validators.required]],

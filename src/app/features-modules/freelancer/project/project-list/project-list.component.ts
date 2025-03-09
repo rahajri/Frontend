@@ -26,7 +26,7 @@ export class ProjectListComponent {
   subActivities: any[] = [];
   displayedSubActivities = 5;
   contractTypes: any[] = [];
-  filter: boolean = true;
+  filter: boolean = false;
   filterForm!: FormGroup;
 
   selectedActivities: string[] = [];

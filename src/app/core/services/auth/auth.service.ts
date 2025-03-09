@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   get isAuthenticated(): boolean {
-    return !!this.currentUser;
+    return !!localStorage.getItem('token');
   }
 
   setUser(user: any): void {

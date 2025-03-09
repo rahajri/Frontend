@@ -107,8 +107,8 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       title: [
         '',
         [
-          Validators.required, // Validation obligatoire
-          Validators.minLength(5), // Minimum de 30 caractères
+          Validators.required,
+          Validators.minLength(5),
         ],
       ],
       activity: ['', [Validators.required]],

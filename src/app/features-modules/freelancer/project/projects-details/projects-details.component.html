@@ -1,27 +1,3 @@
-<!-- Breadcrumb -->
-<div class="bread-crumb-bar">
-  <div class="container">
-    <div class="row align-items-center inner-banner">
-      <div class="col-md-12 col-12 text-center">
-        <div class="breadcrumb-list">
-          <h2>Project Details</h2>
-          <nav aria-label="breadcrumb" class="page-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item">
-                <a [routerLink]="routes.home">Accueil</a>
-              </li>
-              <li class="breadcrumb-item" aria-current="page">
-                Project Details
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /Breadcrumb -->
-
 <!-- Page Content -->
 <div class="content">
   <div class="container">
@@ -31,22 +7,30 @@
           <div class="company-detail">
             <div class="company-detail-image">
               <img
-                src="assets/img/default-logo.svg"
+                [src]="
+                  offer?.company?.image !== null
+                    ? baseUrl + offer?.company?.image
+                    : ''
+                "
                 class="img-fluid"
                 alt="logo"
               />
             </div>
             <div class="company-title">
-              <p>Soft Technologies</p>
-              <h4>Build a Coaching Website Product Store images</h4>
+              <p>{{ offer?.job?.subActivity?.name }}</p>
+              <h4>{{ offer?.title }}</h4>
             </div>
           </div>
           <div class="company-address">
             <ul>
-              <li><i class="feather icon-map-pin"></i>Los Angels</li>
-              <li><i class="feather icon-calendar"></i>22 September 2023</li>
-              <li><i class="feather icon-eye"></i>902 Views</li>
-              <li><i class="feather icon-edit-2"></i>15 Proposal</li>
+              <li>
+                <i class="feather icon-map-pin"></i>{{ offer?.city?.name }}
+              </li>
+              <li>
+                <i class="feather icon-calendar"></i
+                >{{ getDate(offer?.publicationDate) }}
+              </li>
+              <li><i class="feather icon-eye"></i>12 Vues</li>
             </ul>
           </div>
           <div class="project-proposal-detail">
@@ -56,8 +40,8 @@
                   <img src="assets/img/icon/computer-line.svg" alt="icons" />
                 </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Freelancer Type</span>
-                  <p class="mb-0">Full Time</p>
+                  <span class="d-block">Contrat</span>
+                  <p class="mb-0">{{ offer?.contractType?.description }}</p>
                 </div>
               </li>
               <li>
@@ -65,8 +49,8 @@
                   <img src="assets/img/icon/time-line.svg" alt="icons" />
                 </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Project Type</span>
-                  <p class="mb-0">Hourly</p>
+                  <span class="d-block">Expérience</span>
+                  <p class="mb-0">{{ offer?.seniority }}</p>
                 </div>
               </li>
               <li>
@@ -74,8 +58,11 @@
                   <img src="assets/img/icon/time-line.svg" alt="icons" />
                 </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Project Duration</span>
-                  <p class="mb-0">10-15 Hours</p>
+                  <span class="d-block">Durée</span>
+                  <p class="mb-0" *ngIf="offer?.expectedDuration">
+                    {{ offer?.expectedDuration }} {{ offer?.timeUnit }}
+                  </p>
+                  <p class="mb-0" *ngIf="!offer?.expectedDuration">---</p>
                 </div>
               </li>
               <li>
@@ -92,8 +79,10 @@
                   <img src="assets/img/icon/translate-2.svg" alt="icons" />
                 </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Languages</span>
-                  <p class="mb-0">English, Arabic</p>
+                  <span class="d-block">Langues</span>
+                  <p class="mb-0">
+                    {{ getFirstTwoLanguages(offer?.jobOfferLanguages) }}
+                  </p>
                 </div>
               </li>
               <li>
@@ -101,8 +90,10 @@
                   <img src="assets/img/icon/translate.svg" alt="icons" />
                 </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Language Fluency</span>
-                  <p class="mb-0">Conversational</p>
+                  <span class="d-block">Niveau</span>
+                  <p class="mb-0">
+                    {{ getFirstTwoLanguagesLevel(offer?.jobOfferLanguages) }}
+                  </p>
                 </div>
               </li>
             </ul>
@@ -110,346 +101,15 @@
         </div>
         <div class="company-detail-block company-description">
           <h4 class="company-detail-title">Description</h4>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <p class="mb-0">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo. Nemo enim ipsam consequuntur magni dolores eos
-            qui ratione voluptatem sequi nesciunt.
-          </p>
+          <p [innerHTML]="offer?.description"></p>
         </div>
         <div class="company-detail-block company-description">
-          <h4 class="company-detail-title">Skills Required</h4>
-          <div class="tags">
-            <a href="javascript:void(0);"
-              ><span class="badge badge-pill badge-design"
-                >After Effects</span
-              ></a
-            >
-            <a href="javascript:void(0);"
-              ><span class="badge badge-pill badge-design">Illustrator</span></a
-            >
-            <a href="javascript:void(0);"
-              ><span class="badge badge-pill badge-design">HTML</span></a
-            >
-            <a href="javascript:void(0);"
-              ><span class="badge badge-pill badge-design">Whiteboard</span></a
-            >
-          </div>
-        </div>
-        <div class="company-detail-block">
-          <h4 class="company-detail-title">Attachments</h4>
-          <div class="row row-gap">
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="attachment-file">
-                <div class="attachment-files-details">
-                  <h6>sample.pdf</h6>
-                  <span>file size 139 KB</span>
-                </div>
-                <a href="javascript:void(0);" class="file-download-btn">
-                  <i class="feather icon-download"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="attachment-file">
-                <div class="attachment-files-details">
-                  <h6>Website logo.jpg</h6>
-                  <span>file size 139 KB</span>
-                </div>
-                <a href="javascript:void(0);" class="file-download-btn">
-                  <i class="feather icon-download"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="attachment-file">
-                <div class="attachment-files-details">
-                  <h6>Banner image.jpg</h6>
-                  <span>file size 139 KB</span>
-                </div>
-                <a href="javascript:void(0);" class="file-download-btn">
-                  <i class="feather icon-download"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="attachment-file">
-                <div class="attachment-files-details">
-                  <h6>Services image.jpg</h6>
-                  <span>file size 139 KB</span>
-                </div>
-                <a href="javascript:void(0);" class="file-download-btn">
-                  <i class="feather icon-download"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="attachment-file">
-                <div class="attachment-files-details">
-                  <h6>About us.jpg</h6>
-                  <span>file size 139 KB</span>
-                </div>
-                <a href="javascript:void(0);" class="file-download-btn">
-                  <i class="feather icon-download"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="attachment-file">
-                <div class="attachment-files-details">
-                  <h6>Website Content.dcs</h6>
-                  <span>file size 139 KB</span>
-                </div>
-                <a href="javascript:void(0);" class="file-download-btn">
-                  <i class="feather icon-download"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="company-detail-block company-description">
-          <h4 class="company-detail-title">Tags</h4>
-          <div class="tags">
-            <a href="javascript:void(0);"
-              ><span class="badge badge-pill badge-design"
-                >Machine Learning</span
-              ></a
-            >
-            <a href="javascript:void(0);"
-              ><span class="badge badge-pill badge-design">AI Chatbot</span></a
-            >
-            <a href="javascript:void(0);"
-              ><span class="badge badge-pill badge-design"
-                >Virtual Assistant</span
-              ></a
-            >
-          </div>
-        </div>
-        <div class="company-detail-block pb-0">
-          <h4 class="company-detail-title">Project Proposals (5)</h4>
-          <div class="project-proposals-block">
-            <div class="project-proposals-img">
-              <img
-                src="assets/img/user/avatar-1.jpg"
-                class="img-fluid"
-                alt="user"
-              />
-            </div>
-            <div class="project-proposals-description">
-              <div class="proposals-user-detail">
-                <div>
-                  <h5>Theresa Phillips</h5>
-                  <ul class="d-flex">
-                    <li>
-                      <div class="proposals-user-review">
-                        <span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="proposals-user-review">
-                        <span
-                          ><i class="feather icon-calendar"></i>1 min ago</span
-                        >
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <div class="proposals-pricing">
-                    <h4>$40-$500</h4>
-                    <span>Price : Fixed </span>
-                  </div>
-                </div>
-              </div>
-              <p class="mb-0">
-                I've been buying and selling on kofejob Marketplace for the past
-                two years, and it's been a game-changer for me. The platform is
-                user-friendly, and I've had great success selling my handmade
-                crafts. Plus, the customer support team is always there to help
-                if I have any questions or issues.
-              </p>
-            </div>
-          </div>
-          <div class="project-proposals-block">
-            <div class="project-proposals-img">
-              <img
-                src="assets/img/user/avatar-2.jpg"
-                class="img-fluid"
-                alt="user"
-              />
-            </div>
-            <div class="project-proposals-description">
-              <div class="proposals-user-detail">
-                <div>
-                  <h5>Aaron Storey</h5>
-                  <ul class="d-flex">
-                    <li>
-                      <div class="proposals-user-review">
-                        <span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="proposals-user-review">
-                        <span
-                          ><i class="feather icon-calendar"></i>1 min ago</span
-                        >
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <div class="proposals-pricing">
-                    <h4>$20-$350</h4>
-                    <span>Price : Fixed </span>
-                  </div>
-                </div>
-              </div>
-              <p class="mb-0">
-                I've been buying and selling on kofejob Marketplace for the past
-                two years, and it's been a game-changer for me. The platform is
-                user-friendly, and I've had great success selling my handmade
-                crafts. Plus, the customer support team is always there to help
-                if I have any questions or issues.
-              </p>
-            </div>
-          </div>
-          <div class="project-proposals-block">
-            <div class="project-proposals-img">
-              <img
-                src="assets/img/user/avatar-3.jpg"
-                class="img-fluid"
-                alt="user"
-              />
-            </div>
-            <div class="project-proposals-description">
-              <div class="proposals-user-detail">
-                <div>
-                  <h5>Aaron Storey</h5>
-                  <ul class="d-flex">
-                    <li>
-                      <div class="proposals-user-review">
-                        <span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="proposals-user-review">
-                        <span
-                          ><i class="feather icon-calendar"></i>1 min ago</span
-                        >
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <div class="proposals-pricing">
-                    <h4>$50-$200</h4>
-                    <span>Price : Fixed </span>
-                  </div>
-                </div>
-              </div>
-              <p class="mb-0">
-                I've been buying and selling on kofejob Marketplace for the past
-                two years, and it's been a game-changer for me. The platform is
-                user-friendly, and I've had great success selling my handmade
-                crafts. Plus, the customer support team is always there to help
-                if I have any questions or issues.
-              </p>
-            </div>
-          </div>
-          <div class="project-proposals-block">
-            <div class="project-proposals-img">
-              <img
-                src="assets/img/user/avatar-4.jpg"
-                class="img-fluid"
-                alt="user"
-              />
-            </div>
-            <div class="project-proposals-description">
-              <div class="proposals-user-detail">
-                <div>
-                  <h5>Archer Crossley</h5>
-                  <ul class="d-flex">
-                    <li>
-                      <div class="proposals-user-review">
-                        <span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="proposals-user-review">
-                        <span
-                          ><i class="feather icon-calendar"></i>1 min ago</span
-                        >
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <div class="proposals-pricing">
-                    <h4>$10-$450</h4>
-                    <span>Price : Fixed </span>
-                  </div>
-                </div>
-              </div>
-              <p class="mb-0">
-                I've been buying and selling on kofejob Marketplace for the past
-                two years, and it's been a game-changer for me. The platform is
-                user-friendly, and I've had great success selling my handmade
-                crafts. Plus, the customer support team is always there to help
-                if I have any questions or issues.
-              </p>
-            </div>
-          </div>
-          <div class="project-proposals-block">
-            <div class="project-proposals-img">
-              <img
-                src="assets/img/user/avatar-5.jpg"
-                class="img-fluid"
-                alt="user"
-              />
-            </div>
-            <div class="project-proposals-description">
-              <div class="proposals-user-detail">
-                <div>
-                  <h5>Amy Stockdill</h5>
-                  <ul class="d-flex">
-                    <li>
-                      <div class="proposals-user-review">
-                        <span><i class="fa fa-star"></i>5.0 (346 Reviews)</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="proposals-user-review">
-                        <span
-                          ><i class="feather icon-calendar"></i>5 min ago</span
-                        >
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <div class="proposals-pricing">
-                    <h4>$300-$350</h4>
-                    <span>Price : Fixed </span>
-                  </div>
-                </div>
-              </div>
-              <p class="mb-0">
-                I've been buying and selling on kofejob Marketplace for the past
-                two years, and it's been a game-changer for me. The platform is
-                user-friendly, and I've had great success selling my handmade
-                crafts. Plus, the customer support team is always there to help
-                if I have any questions or issues.
-              </p>
+          <h4 class="company-detail-title">Compétences</h4>
+          <div class="tags d-flex gap-2">
+            <div *ngFor="let skill of offer?.skills">
+              <span class="badge badge-pill badge-design">{{
+                skill.name
+              }}</span>
             </div>
           </div>
         </div>
@@ -462,31 +122,35 @@
         <div class="stickybar">
           <div class="card budget-widget">
             <div class="budget-widget-details">
-              <h6>Budget</h6>
-              <h4>$125 - $180</h4>
-              <p class="mb-0">Hourly Rate</p>
+              <h6>A partir de:</h6>
+              <h4>{{ offer?.salaryType?.salary }} €</h4>
+              <p class="mb-0">{{ offer?.salaryType?.type }}</p>
             </div>
             <div>
               <a
                 data-bs-toggle="modal"
                 href="#file"
                 class="btn proposal-btn btn-primary"
-                >Submit Proposal
+                >Postuler
               </a>
             </div>
           </div>
           <div class="card budget-widget">
             <div class="budget-widget-details">
-              <h6>About Client</h6>
+              <h6>À propos de l'entreprise</h6>
               <div class="company-detail-image">
                 <img
-                  src="assets/img/default-logo.svg"
+                  [src]="
+                    offer?.company?.image !== null
+                      ? baseUrl + offer?.company?.image
+                      : ''
+                  "
                   class="img-fluid"
                   alt="logo"
                 />
               </div>
-              <h5>KIND SOFTWARES</h5>
-              <span>Member Since December 31, 2020</span>
+              <h5>{{ offer?.company?.name }}</h5>
+              <span>{{ offer?.company?.nafTitle }}</span>
               <div class="rating mb-3">
                 <i class="fas fa-star filled"></i>
                 <i class="fas fa-star filled"></i>
@@ -496,35 +160,45 @@
                 <span class="average-rating">5.0</span>
               </div>
               <ul class="d-flex list-style mb-0 social-list">
-                <li>
-                  <a href="javascript:void(0);" class="social-link-block">
+                <li *ngIf="offer?.company?.socialMedia?.facebook">
+                  <a
+                    [href]="offer?.company?.socialMedia?.facebook"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-link-block"
+                  >
                     <i class="fa-brands fa-facebook-f"></i>
                   </a>
                 </li>
-                <li>
-                  <a href="javascript:void(0);" class="social-link-block">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:void(0);" class="social-link-block">
+                <li *ngIf="offer?.company?.socialMedia?.linkedIn">
+                  <a
+                    [href]="offer?.company?.socialMedia?.linkedIn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-link-block"
+                  >
                     <i class="fa-brands fa-linkedin-in"></i>
                   </a>
                 </li>
-                <li>
-                  <a href="javascript:void(0);" class="social-link-block">
+                <li *ngIf="offer?.company?.socialMedia?.instagram">
+                  <a
+                    [href]="offer?.company?.socialMedia?.instagram"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-link-block"
+                  >
                     <i class="fa-brands fa-instagram"></i>
                   </a>
                 </li>
               </ul>
               <ul class="d-flex list-style mb-0 client-detail-list">
                 <li>
-                  <span>Departments</span>
-                  <p class="mb-0">Designer</p>
+                  <span>Départements</span>
+                  <p class="mb-0">{{ offer?.company?.category }}</p>
                 </li>
                 <li>
-                  <span>Employees</span>
-                  <p class="mb-0">30-50</p>
+                  <span>Employés</span>
+                  <p class="mb-0">{{ offer?.company?.workforce }}</p>
                 </li>
               </ul>
             </div>
@@ -532,37 +206,9 @@
               <a
                 href="javascript:void(0);"
                 class="btn btn-primary price-btn btn-block"
-                >Contact Me
+                >Contactez-moi
               </a>
             </div>
-          </div>
-          <div class="card budget-widget">
-            <ul class="d-flex mb-0 list-style job-list-block">
-              <li>
-                <span>Jobs Posted</span>
-                <p class="mb-0">48</p>
-              </li>
-              <li>
-                <span>Hire Rate</span>
-                <p class="mb-0">22</p>
-              </li>
-              <li>
-                <span>Open Jobs</span>
-                <p class="mb-0">75</p>
-              </li>
-              <li>
-                <span>Total Spent</span>
-                <p class="mb-0">22</p>
-              </li>
-              <li>
-                <span>Hired</span>
-                <p class="mb-0">64</p>
-              </li>
-              <li>
-                <span>Active</span>
-                <p class="mb-0">29</p>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
