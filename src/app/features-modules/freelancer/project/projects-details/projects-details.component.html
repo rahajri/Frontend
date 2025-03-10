@@ -309,8 +309,8 @@
 <div class="modal fade" id="file">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Send Your Proposal</h4>
+      <div class="modal-header d-flex justify-content-between">
+        <h4 class="modal-title">Postuler</h4>
         <span class="modal-close"
           ><a
             href="javascript:void(0);"
@@ -324,198 +324,89 @@
           <form>
             <div class="feedback-form proposal-form">
               <div class="row">
-                <div class="col-md-6 input-block">
-                  <label for="Your" class="form-label">Your Price</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Your Price"
-                  />
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="delivery-estimate" class="form-label"
-                    >Estimated Delivery</label
-                  >
-                  <div class="input-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Estimated Hours"
-                      aria-label="Recipient's username"
-                      aria-describedby="basic-addon2"
-                    />
-                    <span class="input-group-text" id="basic-addon2">Days</span>
-                  </div>
-                </div>
-
                 <div class="col-md-12 input-block">
                   <label for="cober-letter" class="form-label"
-                    >Cover Letter</label
+                    >Message au recruteur</label
                   >
-                  <ngx-editor [editor]="editor">
-                    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
-                    </ngx-editor-menu>
+                  <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                  </ngx-editor-menu>
+                  <ngx-editor
+                    [editor]="editor"
+                    [placeholder]="
+                      'Exprimez votre motivation en quelques lignes en mettant en avant votre expérience et vos compétences en lien avec cette offre. Un message personnalisé augmente vos chances d’être retenu !'
+                    "
+                  >
                   </ngx-editor>
                 </div>
               </div>
             </div>
-            <div class="suggested-milestones-form">
-              <div class="row">
-                <div class="col-md-4 input-block">
-                  <label for="Milestone " class="form-label"
-                    >Milestone name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Milestone name"
-                  />
-                </div>
-                <div class="col-md-2 input-block floating-icon">
-                  <label for="Amount" class="form-label">Amount</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Amount"
-                  />
-                  <span><i class="feather icon-dollar-sign"></i></span>
-                </div>
-                <div class="col-md-3 input-block floating-icon">
-                  <label for="start" class="form-label">Start Date</label>
-                  <input
-                    type="text"
-                    class="form-control datetimepicker"
-                    placeholder="Choose"
-                    bsDatepicker
-                  />
-                  <span><i class="feather icon-calendar"></i></span>
-                </div>
-                <div class="col-md-3 input-block floating-icon">
-                  <label for="end-date" class="form-label">End Date</label>
-                  <input
-                    type="text"
-                    class="form-control datetimepicker"
-                    placeholder="Choose"
-                    bsDatepicker
-                  />
-                  <span><i class="feather icon-calendar"></i></span>
-                </div>
-                <div class="col-md-12">
-                  <div class="new-addd">
-                    <a
-                      (click)="addDetails(details)"
-                      (keydown.enter)="addDetails(details)"
-                      tabindex="0"
-                      id="new_add1"
-                      class="add-new"
-                      ><i class="feather icon-plus-circle"></i> Add New</a
-                    >
-                  </div>
-                </div>
-              </div>
-              @for (details of details; track details; let i = $index) {
-              <div class="row">
-                <div class="col-md-4 input-block">
-                  <label for="Milestone " class="form-label"
-                    >Milestone name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Milestone name"
-                  />
-                </div>
-                <div class="col-md-2 input-block floating-icon">
-                  <label for="Amount" class="form-label">Amount</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Amount"
-                  />
-                  <span><i class="feather icon-dollar-sign"></i></span>
-                </div>
-                <div class="col-md-3 input-block floating-icon">
-                  <label for="start" class="form-label">Start Date</label>
-                  <input
-                    type="text"
-                    class="form-control datetimepicker"
-                    placeholder="Choose"
-                    bsDatepicker
-                  />
-                  <span><i class="feather icon-calendar"></i></span>
-                </div>
-                <div class="col-md-3 input-block floating-icon">
-                  <label for="end-date" class="form-label">End Date</label>
-                  <input
-                    type="text"
-                    class="form-control datetimepicker"
-                    placeholder="Choose"
-                    bsDatepicker
-                  />
-                  <span><i class="feather icon-calendar"></i></span>
-                </div>
-                <div class="col-md-12">
-                  <div class="new-addd">
-                    <a
-                      (click)="deleteDetails(details, i)"
-                      (keydown.enter)="deleteDetails(details, i)"
-                      tabindex="0"
-                      id="new_add1"
-                      class="add-new"
-                      ><i class="feather icon-plus-circle"></i> Remove</a
-                    >
-                  </div>
-                </div>
-              </div>
-              }
-              <div id="add_row1"></div>
-            </div>
-            <div class="proposal-features">
-              <div class="proposal-widget proposal-warning">
-                <label class="custom_check">
-                  <input type="checkbox" name="select_time" checked /><span
-                    class="checkmark"
-                  ></span>
-                  <span class="proposal-text"
-                    >Stick this Proposal to the Top</span
-                  >
-                  <span class="proposal-text float-end">$12.00</span>
-                </label>
-                <p>
-                  The sticky proposal will always be displayed on top of all the
-                  proposals.
-                </p>
-              </div>
-              <div class="proposal-widget proposal-blue">
-                <label class="custom_check">
-                  <input type="checkbox" name="select_time" /><span
-                    class="checkmark"
-                  ></span>
-                  <span class="proposal-text"
-                    >Stick this Proposal to the Top</span
-                  >
-                  <span class="proposal-text float-end">$12.00</span>
-                </label>
-                <p>
-                  The sticky proposal will always be displayed on top of all the
-                  proposals.
-                </p>
-              </div>
-            </div>
             <div class="row">
-              <div class="col-md-12 submit-section">
-                <label class="custom_check">
-                  <input type="checkbox" name="select_time" />
-                  <span class="checkmark"></span> I agree to the Terms And
-                  Conditions
-                </label>
+              <div class="project-list-card">
+                <a href="javascript:void(0);" class="add-fav-list"
+                  ><i class="fa-regular fa-heart"></i
+                ></a>
+                <div class="company-detail-image">
+                  <img
+                    [src]="
+                      offer?.company?.image !== null
+                        ? baseUrl + offer?.company?.image
+                        : ''
+                    "
+                    class="img-fluid"
+                    alt="logo"
+                  />
+                </div>
+                <div>
+                  <div class="company-title">
+                    <p>{{ offer?.job?.subActivity?.name }}</p>
+                    <h4>{{ offer?.title }}</h4>
+                  </div>
+                  <div class="company-splits">
+                    <div>
+                      <div class="d-flex">
+                        <div class="freelance-location">
+                          <i class="feather icon-map-pin me-1"></i
+                          >{{ offer?.city?.name }},
+                          {{ offer?.city?.department?.region?.name }}
+                        </div>
+                        <div class="freelance-location ms-3">
+                          <i class="feather icon-calendar me-1"></i>Postuler le:
+                          {{ offer?.publicationDate }}
+                        </div>
+                      </div>
+                      <div class="company-description">
+                        <p
+                          [innerHTML]="getSafeDescription(offer?.description)"
+                        ></p>
+                      </div>
+                      <div class="company-description">
+                        <div class="tags">
+                          <div
+                            *ngFor="let skill of offer?.skills"
+                            class="skill-badge"
+                          >
+                            <span class="badge badge-pill badge-design">{{
+                              skill.name
+                            }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="company-split-price">
+                      <h6>
+                        A partir de :{{ offer?.salaryType?.salary }} € |
+                        {{ offer?.salaryType?.type }}
+                      </h6>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="col-md-12 submit-section text-end">
                 <a
                   data-bs-dismiss="modal"
                   href="javascript:void(0);"
                   class="btn btn-cancel submit-btn"
-                  >Cancel</a
+                  >Annuler</a
                 >
                 <a
                   (click)="navigation1()"
@@ -523,7 +414,7 @@
                   data-bs-dismiss="modal"
                   href="#success"
                   class="btn btn-primary submit-btn"
-                  >Send Proposal</a
+                  >Envoyer</a
                 >
               </div>
             </div>

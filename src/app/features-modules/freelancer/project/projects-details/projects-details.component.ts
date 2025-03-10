@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { environment } from 'src/environments/environment';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-projects-details',
   templateUrl: './projects-details.component.html',
@@ -23,7 +25,8 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private sanitizer: DomSanitizer
   ) {}
 
   addDetails(array: number[]) {
@@ -54,6 +57,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     this.editor = new Editor();
     this.getProjectDetails();
   }
+
   getProjectDetails() {
     this.projectService.getProjectDetails(this.pojectId).subscribe({
       next: (res) => {
@@ -64,14 +68,17 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
       },
     });
   }
+  
   ngOnDestroy(): void {
     if (this.editor) {
       this.editor.destroy();
     }
   }
+
   navigation() {
     this.router.navigate([routes.employee_dashboard]);
   }
+
   navigation1() {
     this.router.navigate([routes.freelancer_projects_proposals]);
   }
@@ -90,6 +97,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
       .map((lang) => lang?.language?.name) // Extract language names
       .join(', '); // Join them with a comma
   }
+
   getFirstTwoLanguagesLevel(jobOfferLanguages: any[]): string {
     if (!Array.isArray(jobOfferLanguages) || jobOfferLanguages?.length === 0) {
       return '';
@@ -99,5 +107,23 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
       .slice(0, 2) // Take only the first two elements
       .map((lang) => lang?.level) // Extract language names
       .join(', '); // Join them with a comma
+  }
+
+  getSafeDescription(description: string): SafeHtml {
+    const text = this.extractText(description);
+    const limitedText = this.limitWords(text, 25);
+    return this.sanitizer.bypassSecurityTrustHtml(limitedText);
+  }
+
+  extractText(html: string): string {
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = html;
+    return tempDiv.innerText || tempDiv.textContent || '';
+  }
+
+  limitWords(text: string, limit: number): string {
+    const words = text.split(' ');
+    const limitedWords = words.slice(0, limit).join(' ');
+    return limitedWords + (words.length > limit ? '...' : '');
   }
 }
