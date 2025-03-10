@@ -5,6 +5,8 @@ import { Company } from 'src/app/core/models/models';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { lastValueFrom } from 'rxjs';
+import { routes } from 'src/app/core/helpers/routes/routes';
+import { SpinnerService } from 'src/app/core/services/spinner/spinner.service';
 
 @Component({
   selector: 'app-verifyidentity',
@@ -14,6 +16,7 @@ import { lastValueFrom } from 'rxjs';
 export class VerifyidentityComponent implements OnInit {
   dataSource!: MatTableDataSource<Company>;
   displayedColumns: string[] = [
+    'ckeckbox',
     'createdAt',
     'name',
     'activity',
@@ -22,9 +25,14 @@ export class VerifyidentityComponent implements OnInit {
     'city',
     'action',
   ];
+  spinner: boolean = false;
+
+  public routes = routes;
+
+  selectedCompaniesIds: string[] = [];
   constructor(
     private data: ShareDataService,
-    private companyService: CompanyService
+    private companyService: CompanyService // private spinner: SpinnerService
   ) {
     this.dataSource = new MatTableDataSource<Company>([]);
   }
@@ -73,34 +81,33 @@ export class VerifyidentityComponent implements OnInit {
     });
   }
 
-  async approveAll(intervalMs: number = 1000) {
-    if (!this.companies?.length) {
-      console.warn('Aucune entreprise à valider.');
+  async approveAll() {
+    this.spinner = true;
+
+    if (this.selectedCompaniesIds.length === 0) {
+      console.warn('Aucune entreprise sélectionnée.');
+      this.spinner = false;
       return;
     }
 
-    const results = [];
-
-    const delay = (ms: number) =>
-      new Promise((resolve) => setTimeout(resolve, ms));
-
     try {
-      for (const company of this.companies) {
-        try {
-          const result = await lastValueFrom(
-            this.companyService.approveCompany(company.id)
-          );
-          results.push({ status: 'fulfilled', value: result });
-          this.getCompanies(); // Refresh the list after all requests
-        } catch (error) {
-          results.push({ status: 'rejected', reason: error });
-          console.error(`Erreur pour ${company.id}:`, error);
-        }
-
-        await delay(intervalMs);
-      }
-    } catch (globalError) {
-      console.error('Erreur globale:', globalError);
+      this.companyService
+        .approveSelectedCompanies(this.selectedCompaniesIds)
+        .subscribe({
+          next: (res) => {
+            console.log(res.message);
+          },
+          error: (err) => {
+            console.error(err);
+          },
+          complete: () => {
+            this.getCompanies();
+            this.spinner = false;
+          },
+        });
+    } catch (error) {
+      console.error('Erreur:', error);
+      this.spinner = false;
     }
   }
 
@@ -108,36 +115,6 @@ export class VerifyidentityComponent implements OnInit {
     this.companyService.rejectCompany(companyId).subscribe(() => {
       this.getCompanies();
     });
-  }
-
-  async rejectAll(intervalMs: number = 1000) {
-    if (!this.companies?.length) {
-      console.warn('Aucune entreprise à refuser.');
-      return;
-    }
-    const results = [];
-
-    const delay = (ms: number) =>
-      new Promise((resolve) => setTimeout(resolve, ms));
-
-    try {
-      for (const company of this.companies) {
-        try {
-          const result = await lastValueFrom(
-            this.companyService.rejectCompany(company.id)
-          );
-          results.push({ status: 'fulfilled', value: result });
-          this.getCompanies(); // Refresh list after all requests
-        } catch (error) {
-          results.push({ status: 'rejected', reason: error });
-          console.error(`Erreur pour ${company.id}:`, error);
-        }
-        // Add interval between requests
-        await delay(intervalMs);
-      }
-    } catch (globalError) {
-      console.error('Erreur globale:', globalError);
-    }
   }
 
   getDate(isoDate: string): string {
@@ -162,6 +139,56 @@ export class VerifyidentityComponent implements OnInit {
 
     // Return the formatted name
     return `${firstName} ${lastName}`;
+  }
+
+  toggleCheckBoxes(event: Event) {
+    const targetCheckbox = event.target as HTMLInputElement;
+    const isChecked = targetCheckbox.checked;
+
+    // Select all checkboxes in the table
+    const allCheckboxes = document.querySelectorAll(
+      'input[type="checkbox"]'
+    ) as NodeListOf<HTMLInputElement>;
+
+    allCheckboxes.forEach((checkbox) => {
+      checkbox.checked = isChecked;
+      const companyId = checkbox.value;
+
+      // Make sure to ignore the "on" value (this happens if value is not set on the checkbox)
+      if (companyId && companyId !== 'on') {
+        if (isChecked) {
+          // Add the company ID to the selectedCompaniesIds array if it's checked
+          if (!this.selectedCompaniesIds.includes(companyId)) {
+            this.selectedCompaniesIds.push(companyId);
+          }
+        } else {
+          // Remove the company ID from the selectedCompaniesIds array if it's unchecked
+          const index = this.selectedCompaniesIds.indexOf(companyId);
+          if (index !== -1) {
+            this.selectedCompaniesIds.splice(index, 1);
+          }
+        }
+      }
+    });
+  }
+
+  // This method will be triggered when a checkbox is clicked
+  onCheckboxChange(element: any, event: any) {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      // Add the company ID to the array if it's selected
+      this.selectedCompaniesIds.push(element.id);
+    } else {
+      // Remove the company ID from the array if it's deselected
+      this.selectedCompaniesIds = this.selectedCompaniesIds.filter(
+        (id) => id !== element.id
+      );
+    }
+  }
+
+  // Optional: To check if a company is selected (for the checkbox state)
+  isSelected(element: any): boolean {
+    return this.selectedCompaniesIds.includes(element.id);
   }
 }
 export interface pageSelection {

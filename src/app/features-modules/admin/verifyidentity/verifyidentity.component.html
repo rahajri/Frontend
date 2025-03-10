@@ -45,6 +45,40 @@
                           matSort
                           class="mat-elevation-z8"
                         >
+                          <!-- Nom Column -->
+                          <ng-container matColumnDef="ckeckbox">
+                            <mat-header-cell
+                              *matHeaderCellDef
+                              style="flex: none; font-size: 16px"
+                            >
+                              <input
+                                type="checkbox"
+                                class="form-check-input"
+                                id="customCheckAll"
+                                (click)="toggleCheckBoxes($event)"
+                              />
+                            </mat-header-cell>
+                            <mat-cell
+                              *matCellDef="let element"
+                              style="flex: none; font-size: 16px"
+                              (click)="setSelectedCompany(element)"
+                            >
+                              <div class="form-check custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  class="form-check-input"
+                                  [value]="element?.id"
+                                  [checked]="isSelected(element)"
+                                  (change)="onCheckboxChange(element, $event)"
+                                  id="customCheck{{ element?.id }}"
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="customCheck{{ element?.id }}"
+                                ></label>
+                              </div>
+                            </mat-cell>
+                          </ng-container>
                           <ng-container matColumnDef="createdAt">
                             <mat-header-cell *matHeaderCellDef>
                               Date de création
@@ -135,15 +169,16 @@
                                 style="gap: 20px !important"
                               >
                                 <i
-                                  title="Refuser en masse"
-                                  class="fa-solid fa-xmarks-lines ms-2"
-                                  (click)="rejectAll()"
-                                ></i>
-                                <i
+                                  *ngIf="selectedCompaniesIds.length !== 0"
                                   title="Approuver en masse"
                                   class="fa-solid fa-check-double"
                                   (click)="approveAll()"
                                 ></i>
+                                <span
+                                  *ngIf="spinner"
+                                  class="spinner-border spinner-border-sm me-2"
+                                  role="status"
+                                ></span>
                               </div>
                             </mat-header-cell>
                             <mat-cell

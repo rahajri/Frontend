@@ -2,13 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SpinnerService {
-
-  
-  
-
   private _loading = new BehaviorSubject<boolean>(false);
   public readonly loading$ = this._loading.asObservable();
 
@@ -22,5 +18,3 @@ export class SpinnerService {
     }, 400);
   }
 }
-
-

@@ -95,6 +95,10 @@ export class CompanyService {
     return this.http.patch<any>(`${this.baseUrl}/${companyId}/approve`, {});
   }
 
+  approveSelectedCompanies(companyIds: string[]): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/approve-selected`, companyIds);
+  }
+
   rejectCompany(companyId: string): Observable<any> {
     return this.http.patch<any>(`${this.baseUrl}/${companyId}/reject`, {});
   }

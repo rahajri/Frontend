@@ -5,24 +5,15 @@ import { FeaturesModulesRoutingModule } from './features-modules-routing.module'
 import { FeaturesModulesComponent } from './features-modules.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
- import { LoaderComponent } from './common/loader/loader.component';
-
-
-
+import { LoaderComponent } from './common/loader/loader.component';
 
 @NgModule({
   declarations: [
     FeaturesModulesComponent,
     HeaderComponent,
     FooterComponent,
-     LoaderComponent,
-  
-  
+    LoaderComponent,
   ],
-  imports: [
-    CommonModule,
-    FeaturesModulesRoutingModule,
-  ],
-
+  imports: [CommonModule, FeaturesModulesRoutingModule],
 })
-export class FeaturesModulesModule { }
+export class FeaturesModulesModule {}
