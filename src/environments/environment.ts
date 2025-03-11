@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   primaryColor: '#179ab5',
   secondaryColor: '#75e6da',
-  backgroundColor: 'blue',
+  backgroundColor: '#FFF8F5',
   warningyColor: '#05445e',
   defaultLanguage: 'fr',
   apiUrl: 'http://localhost:3000/api',

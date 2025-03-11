@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import * as AOS from 'aos';
 import { routes } from 'src/app/core/helpers/routes/routes';
+interface data {
+  value: string;
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,233 +22,223 @@ export class HomeComponent implements OnInit {
       once: true,
     });
   }
+  slideConfig = {
+    slidesToShow: 1,
+    SlidesToScroll: 1,
+    asNavFor: '.client-img',
+    dots: false,
+    nav: false,
+  };
+  slideConfig2 = {
+    slidesToShow: 3,
+    SlidesToScroll: 1,
+    asNavFor: '.say-about',
+    dots: false,
+    nav: false,
+    centerMode: true,
+    infinite: true,
+    focusOnSelect: true,
+  };
 
-  customOptions: OwlOptions = {
+  customsOption: OwlOptions = {
     loop: true,
     margin: 30,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: true,
     navSpeed: 700,
     navText: [
-      '<i class="fas fa-chevron-left"></i>',
-      '<i class="fas fa-chevron-right"></i>',
+      '<i class="fas fa-arrow-left"></i>',
+      '<i class="fas fa-arrow-right"></i>',
     ],
     responsive: {
       0: {
-        items: 1,
-      },
-      400: {
         items: 2,
       },
-      740: {
-        items: 3,
+      768: {
+        items: 2,
       },
-      940: {
-        items: 4,
+      1170: {
+        items: 2,
       },
     },
     nav: true,
   };
-  clinicsslides = [
+
+  hiredslides = [
     {
-      img: 'assets/img/user/avatar-1.jpg',
-      name: 'Dran Gonzalez',
-      department: 'React Developer',
-      rating: '5.0 (30)',
-      tech1: 'Web Design',
-      tech2: 'UI Design',
-      tech3: 'Node Js',
-      subscriptionPrice: '$25 Hourly',
-      address: 'Illinois, USA',
-      favourite: '',
-      like: false,
+      image: 'assets/img/user/avatar-1.jpg',
+      name: 'George Wells',
+      role: 'UI/UX Designer',
+      amount: '25 Hourly',
     },
     {
-      img: 'assets/img/user/avatar-2.jpg',
-      name: 'Timothy Smith',
-      department: 'PHP Developer',
-      address: 'Illinois, USA',
-      rating: '3.5 (25)',
-      tech1: 'Web Design',
-      tech2: 'UI Design',
-      tech3: 'Node Js',
-      subscriptionPrice: '$25 Hourly',
-      like: false,
+      image: 'assets/img/user/avatar-2.jpg',
+      name: 'George Wells',
+      role: 'UI/UX Designer',
+      amount: '25 Hourly',
     },
     {
-      img: 'assets/img/user/avatar-3.jpg',
-      name: 'Janet Paden',
-      department: 'Graphic Designer',
-      address: 'Illinois, USA',
-      rating: '4.1 (30)',
-      tech1: 'Web Design',
-      tech2: 'UI Design',
-      tech3: 'Node Js',
-      subscriptionPrice: '$25 Hourly',
-      like: false,
+      image: 'assets/img/user/avatar-7.jpg',
+      name: 'George Wells',
+      role: 'UI/UX Designer',
+      amount: '25 Hourly',
     },
     {
-      img: 'assets/img/user/avatar-4.jpg',
-      name: 'James Douglas',
-      department: 'iOS Developer',
-      address: 'Florida, USA',
-      rating: '4.3 (31)',
-      tech1: 'Web Design',
-      tech2: 'UI Design',
-      tech3: 'Node Js',
-      subscriptionPrice: '$25 Hourly',
-      like: false,
-    },
-    {
-      img: 'assets/img/user/avatar-3.jpg',
-      name: 'Richard Wilson',
-      department: 'UI/UX Designer',
-      address: 'Alabama, USA',
-      rating: '4.7 (32)',
-      tech1: 'Web Design',
-      tech2: 'UI Design',
-      tech3: 'Node Js',
-      subscriptionPrice: '$25 Hourly',
-      like: false,
-    },
-    {
-      img: 'assets/img/user/avatar-5.jpg',
-      name: 'Richard Wilson',
-      department: 'Alabama, USA',
-      address: 'Alabama, USA',
-      rating: '4.7 (32)',
-      tech1: 'Web Design',
-      tech2: 'UI Design',
-      tech3: 'Node Js',
-      subscriptionPrice: '$25 Hourly',
-      like: false,
-    },
-    {
-      img: 'assets/img/user/avatar-3.jpg',
-      name: 'Richard Wilson',
-      department: 'UI/UX Designer',
-      address: 'Alabama, USA',
-      rating: '4.8 (55)',
-      tech1: 'Web Design',
-      tech2: 'UI Design',
-      tech3: 'Node Js',
-      subscriptionPrice: '$25 Hourly',
-      like: false,
-    },
-    {
-      img: 'assets/img/user/avatar-5.jpg',
-      name: 'Richard Wilson',
-      department: 'UI/UX Designer',
-      address: 'Alabama, USA',
-      rating: '5.0 (4)',
-      tech1: 'Web Design',
-      tech2: 'UI Design',
-      tech3: 'Node Js',
-      subscriptionPrice: '$25 Hourly',
-      like: false,
+      image: 'assets/img/user/avatar-4.jpg',
+      name: 'George Wells',
+      role: 'UI/UX Designer',
+      amount: '25 Hourly',
     },
   ];
 
-  tetimonialOptions: OwlOptions = {
+  customOption: OwlOptions = {
     loop: true,
     margin: 30,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: false,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: true,
     navSpeed: 700,
     navText: [
-      '<i class="fas fa-chevron-left"></i>',
-      '<i class="fas fa-chevron-right"></i>',
+      '<i class="fas fa-arrow-left"></i>',
+      '<i class="fas fa-arrow-right"></i>',
     ],
     responsive: {
       0: {
         items: 1,
       },
       768: {
-        items: 3,
+        items: 1,
       },
       1170: {
-        items: 3,
+        items: 1,
       },
     },
     nav: true,
   };
 
-  testimonialslides = [
+  developslide = [
     {
+      para: 'Eget aenean accumsan Search School, OLorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan Eget Eget aenean accumsan Search School, OLorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan Eget ',
       img: 'assets/img/review/review-01.jpg',
-      name: 'Durso Raeen',
-      position: 'Project Lead',
-      rating: '4.7',
+      name: 'Janet Paden',
+      role: 'iOS Developer',
     },
     {
+      para: 'Eget aenean accumsan Search School, OLorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan Eget Eget aenean accumsan Search School, OLorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan Eget ',
       img: 'assets/img/review/review-02.jpg',
-      name: 'Camelia Rennesa',
-      position: 'Project Lead',
-      rating: '4.8',
+      name: 'Janet Paden',
+      role: 'iOS Developer',
     },
     {
+      para: 'Eget aenean accumsan Search School, OLorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan Eget Eget aenean accumsan Search School, OLorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan Eget ',
       img: 'assets/img/review/review-03.jpg',
-      name: 'Brayan',
-      position: 'Team Lead',
-      rating: '5.0',
+      name: 'Janet Paden',
+      role: 'iOS Developer',
     },
     {
-      img: 'assets/img/review/review-02.jpg',
-      name: 'Davis Payerf',
-      position: 'Project Lead',
-      rating: '3.2',
+      para: 'Eget aenean accumsan Search School, OLorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan Eget Eget aenean accumsan Search School, OLorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan Eget ',
+      img: 'assets/img/review/review-01.jpg',
+      name: 'Janet Paden',
+      role: 'iOS Developer',
     },
   ];
-  companyOptions: OwlOptions = {
-    loop: true,
-    margin: 30,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
+  images = [
+    {
+      img: 'assets/img/quote-01.svg',
+      img1: 'assets/img/user/avatar-4.jpg',
+      name: 'George Wells',
+      domain: 'Product Designer',
+      para: 'Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing',
+    },
+    {
+      img: 'assets/img/quote-01.svg',
+      img1: 'assets/img/user/avatar-2.jpg',
+      name: 'Timothy Smith',
+      domain: 'Product Designer',
+      para: 'Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae.Lorem ipsum dolor sit amet consectetur. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing',
+    },
+    {
+      img: 'assets/img/quote-01.svg',
+      img1: 'assets/img/user/avatar-3.jpg',
+      name: 'Janet Paden',
+      domain: 'Product Designer',
+      para: 'Faucibus varius condimentum adipiscingLorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a.',
+    },
+    {
+      img: 'assets/img/quote-01.svg',
+      img1: 'assets/img/user/avatar-4.jpg',
+      name: 'James Douglas',
+      domain: 'Product Designer',
+      para: 'Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae.Lorem ipsum dolor sit amet consectetur. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing ',
+    },
+    {
+      img: 'assets/img/quote-01.svg',
+      img1: 'assets/img/user/avatar-5.jpg',
+      name: 'Timothy Smith',
+      domain: 'Product Designer',
+      para: 'Faucibus varius condimentum adipiscingLorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a. Faucibus varius condimentum adipiscing Lorem ipsum dolor sit amet consectetur. Nam nulla velit ullamcorper tellus arcu ligula id nulla vitae. Sed laoreet turpis elementum egestas vestibulum lacinia a.',
+    },
+  ];
+  blog = [
+    {
+      blogimg: 'assets/img/blog/blog-20.jpg',
+      date: '15, December 2022',
+      details: 'Resume Building',
+      para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet.',
+      statement:
+        'Lorem ipsum dolor sit amet consectetur. Vitae amet cras nulla mi laoreet quis amet phasellus....',
+    },
+    {
+      blogimg: 'assets/img/blog/blog-18.jpg',
+      date: '02, December 2020',
+      details: 'Resume Building',
+      para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet.',
+      statement:
+        'Lorem ipsum dolor sit amet consectetur. Vitae amet cras nulla mi laoreet quis amet phasellus....',
+    },
+    {
+      blogimg: 'assets/img/blog/blog-19.jpg',
+      date: '20, October 2023',
+      details: 'Resume Building',
+      para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet.',
+      statement:
+        'Lorem ipsum dolor sit amet consectetur. Vitae amet cras nulla mi laoreet quis amet phasellus....',
+    },
+    {
+      blogimg: 'assets/img/blog/blog-18.jpg',
+      date: '10, December 2022',
+      details: 'Resume Building',
+      para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet.',
+      statement:
+        'Lorem ipsum dolor sit amet consectetur. Vitae amet cras nulla mi laoreet quis amet phasellus....',
+    },
+  ];
+  blogSlider: OwlOptions = {
+    items: 5,
+    margin: 25,
     dots: false,
-    navSpeed: 700,
+    nav: true,
+    smartSpeed: 2000,
     navText: [
-      '<i class="fas fa-chevron-left"></i>',
-      '<i class="fas fa-chevron-right"></i>',
+      '<i class="fas fa-arrow-left"></i>',
+      '<i class="fas fa-arrow-right"></i>',
     ],
+    loop: true,
     responsive: {
       0: {
         items: 1,
       },
       768: {
-        items: 6,
+        items: 1,
       },
       1170: {
-        items: 6,
+        items: 5,
       },
     },
-    nav: true,
   };
-
-  companyslides = [
-    {
-      img: 'assets/img/company-logo-01.svg',
-    },
-    {
-      img: 'assets/img/company-logo-02.svg',
-    },
-    {
-      img: 'assets/img/company-logo-03.svg',
-    },
-    {
-      img: 'assets/img/company-logo-04.svg',
-    },
-    {
-      img: 'assets/img/company-logo-05.svg',
-    },
-    {
-      img: 'assets/img/company-logo-06.svg',
-    },
-  ];
   search() {
     if (this.selected === 'projects') {
       this.router.navigateByUrl('/freelancer/project');
@@ -253,33 +246,14 @@ export class HomeComponent implements OnInit {
       this.router.navigateByUrl('/freelancer/project');
     }
   }
-  scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  public selectedValue = '';
+  public like: boolean[] = [false];
+  toggleLike(index: number) {
+    this.like[index] = !this.like[index];
   }
-  aboutusslides = [
-    {
-      id: 1,
-      img: 'assets/img/review/review-01.jpg',
-      name: 'Durso Raeen',
-      officer: 'Project Lead',
-      rating: '4.7',
-      para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean.',
-    },
-    {
-      id: 2,
-      img: 'assets/img/review/review-02.jpg',
-      name: 'Camelia Rennesa',
-      officer: 'Project Lead',
-      rating: '4.7',
-      para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean.',
-    },
-    {
-      id: 3,
-      img: 'assets/img/review/review-03.jpg',
-      name: 'Brayan',
-      officer: 'Team Lead',
-      rating: '4.7',
-      para: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat orci enim, mattis nibh aliquam dui, nibh faucibus aenean.',
-    },
-  ];
+
+  selectedList: data[] = [{ value: 'Projets' }, { value: 'Freelancers' }];
+  navigation() {
+    this.router.navigate([routes.freelancer_project]);
+  }
 }
