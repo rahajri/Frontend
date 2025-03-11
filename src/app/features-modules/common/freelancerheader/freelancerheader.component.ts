@@ -51,21 +51,23 @@ export class FreelancerheaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.profileService.currentUserProfile$.subscribe(
-      (profile) => {
-        this.profile = profile;
-        if (profile && profile.image !== null) {
-          this.imgUrl = this.baseUrl + profile.image;
-          const { fullName, initials } =
-            this.userService.getProfileDetails(profile);
-          this.profileName = fullName;
-          this.initials = initials;
-        }
-      }
-    );
-    this.getUser();
     this.isLogged = this.authService.isAuthenticated;
-    this.isEmployer = this.authService.isEmployer();
+    if (this.isLogged) {
+      this.subscription = this.profileService.currentUserProfile$.subscribe(
+        (profile) => {
+          this.profile = profile;
+          if (profile && profile.image !== null) {
+            this.imgUrl = this.baseUrl + profile.image;
+            const { fullName, initials } =
+              this.userService.getProfileDetails(profile);
+            this.profileName = fullName;
+            this.initials = initials;
+          }
+        }
+      );
+      this.getUser();
+      this.isEmployer = this.authService.isEmployer();
+    }
   }
 
   ngOnDestroy() {

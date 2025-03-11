@@ -22,6 +22,7 @@ export class SidemenuComponent implements OnInit {
   page = '';
   last = '';
   currentroute = '';
+  isLogged = false;
   sidebar: SidebarData[] = [];
   constructor(
     private router: Router,
@@ -43,7 +44,10 @@ export class SidemenuComponent implements OnInit {
     this.menuItems = this.data.freelancer_sidebar;
   }
   ngOnInit(): void {
-    this.getUser();
+    this.isLogged = this.authService.isAuthenticated;
+    if (this.isLogged) {
+      this.getUser();
+    }
   }
 
   public menuItems: Array<FreelancerSidebarItem> = [];

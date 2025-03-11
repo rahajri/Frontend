@@ -27,6 +27,10 @@ export class CandidateGuard {
     const role = localStorage.getItem('role');
     const previousUrl = this.navigationService.getPreviousUrl();
 
+    if (state.url.includes('project-list')) {
+      return true;
+    }
+
     if (role === 'candidate') {
       return true;
     } else {

@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { showSuccessModal } from 'src/app/core/services/common/common-functions';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { SpinnerService } from 'src/app/core/services/spinner/spinner.service';
 
 interface data {
   value: string;
@@ -19,6 +22,7 @@ export class ProjectListComponent {
   public selectedValue1 = '';
   public like: boolean[] = [false];
   baseUrl = environment.apiUrl;
+  isLogged: boolean = false;
   offers: any[] = [];
   globalErrorMessage: boolean = false;
   activities: any[] = [];
@@ -42,7 +46,9 @@ export class ProjectListComponent {
     public router: Router,
     private fb: FormBuilder,
     private projectService: ProjectService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private authService: AuthService,
+    private spinner: SpinnerService
   ) {
     this.filterForm = this.fb.group({
       title: [''],
@@ -57,6 +63,8 @@ export class ProjectListComponent {
   }
 
   ngOnInit(): void {
+    this.spinner.hide();
+    this.isLogged = this.authService.isAuthenticated;
     this.getOffers();
     this.getActivities();
     this.getSubActivities();
@@ -137,6 +145,14 @@ export class ProjectListComponent {
       this.displayedActivities += 5;
     } else {
       this.displayedActivities = this.activities.length; // Show all if fewer than 5 remain
+    }
+  }
+
+  postulerBtn(id: string | null) {
+    if (id && this.isLogged) {
+      this.router.navigate([routes.get_freelancer_project_details(id)]);
+    } else {
+      showSuccessModal('not-connected');
     }
   }
 

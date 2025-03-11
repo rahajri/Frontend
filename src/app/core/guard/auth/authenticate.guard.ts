@@ -22,6 +22,9 @@ export class AuthenticateGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    if (state.url.includes('project-list')) {
+      return true;
+    }
     const isLoggedIn = this.authService.isLogged(); // Replace with your actual logic
     if (!isLoggedIn) {
       return this.router.createUrlTree(['/auth/login']);

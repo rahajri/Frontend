@@ -100,8 +100,8 @@
           } }
         </ul>
       </div>
-      @if (anotherMenu === false) {
-      <ul class="nav header-navbar-rht">
+      @if (anotherMenu === false ) {
+      <ul class="nav header-navbar-rht" *ngIf="isLogged">
         <li>
           <a [routerLink]="routes.freelancer_message"
             ><img src="assets/img/icon/message-chat-icon.svg" alt="Img"
@@ -306,7 +306,7 @@
           </div>
         </li>
       </ul>
-      } @if (anotherMenu === true) {
+      }
       <ul class="nav header-navbar-rht reg-head">
         <li *ngIf="!isLogged">
           <a [routerLink]="routes.register" class="reg-btn"
@@ -329,7 +329,6 @@
           </a>
         </li>
       </ul>
-      }
     </nav>
   </div>
 </header>
