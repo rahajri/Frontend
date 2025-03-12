@@ -84,7 +84,7 @@ export class ProjectService {
   projectsFiler(data: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.baseUrl}/filter`, data);
   }
-  
+
   projectsFilerCheckBoxes(arrays: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.baseUrl}/filters`, arrays);
   }

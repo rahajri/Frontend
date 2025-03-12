@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { Router } from '@angular/router';
@@ -9,13 +13,11 @@ import { showSuccessModal } from 'src/app/core/services/common/common-functions'
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { SpinnerService } from 'src/app/core/services/spinner/spinner.service';
 
-interface data {
-  value: string;
-}
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectListComponent {
   public routes = routes;
@@ -40,7 +42,6 @@ export class ProjectListComponent {
   public currentPage: number = 1;
   public itemsPerPage: number = 5; // Adjust based on your needs
   public totalOffers: number = 0; // Total number of offers
-  public paginatedOffers: any[] = []; // Offers for the current page
 
   constructor(
     public router: Router,
@@ -48,7 +49,8 @@ export class ProjectListComponent {
     private projectService: ProjectService,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
-    private spinner: SpinnerService
+    private spinner: SpinnerService,
+    private cdr: ChangeDetectorRef
   ) {
     this.filterForm = this.fb.group({
       title: [''],
@@ -82,32 +84,33 @@ export class ProjectListComponent {
   getOffers() {
     this.projectService.getPublishedOffers().subscribe({
       next: (data) => {
-        this.offers = data;
+        this.offers = [...data];
         this.totalOffers = data.length;
         this.updatePaginatedOffers();
+        this.updateUI();
       },
       error: (error) => {
         console.error(error);
         this.globalErrorMessage = true;
+        this.updateUI();
       },
     });
   }
 
   updatePaginatedOffers() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    this.paginatedOffers = this.offers.slice(
-      startIndex,
-      startIndex + this.itemsPerPage
-    );
+    this.offers = this.offers.slice(startIndex, startIndex + this.itemsPerPage);
   }
 
   getContractTypes() {
     this.projectService.getContractTypes().subscribe({
       next: (data) => {
         this.contractTypes = data;
+        this.updateUI();
       },
       error: (error) => {
         console.error(error);
+        this.updateUI();
       },
     });
   }
@@ -134,9 +137,11 @@ export class ProjectListComponent {
     this.projectService.getActivities().subscribe({
       next: (data) => {
         this.activities = data;
+        this.updateUI();
       },
       error: (error) => {
         console.error(error);
+        this.updateUI();
       },
     });
   }
@@ -146,6 +151,7 @@ export class ProjectListComponent {
     } else {
       this.displayedActivities = this.activities.length; // Show all if fewer than 5 remain
     }
+    this.updateUI();
   }
 
   postulerBtn(id: string | null) {
@@ -154,6 +160,7 @@ export class ProjectListComponent {
     } else {
       showSuccessModal('not-connected');
     }
+    this.updateUI();
   }
 
   showLess() {
@@ -168,9 +175,11 @@ export class ProjectListComponent {
     this.projectService.getSubActivities().subscribe({
       next: (data) => {
         this.subActivities = data;
+        this.updateUI();
       },
       error: (error) => {
         console.error(error);
+        this.updateUI();
       },
     });
   }
@@ -198,19 +207,21 @@ export class ProjectListComponent {
   onFilterSubmit() {
     if (this.filterForm.valid) {
       this.filterOffers(this.filterForm.value);
+      this.updateUI();
     }
   }
 
   filterOffers(data: any) {
     this.projectService.projectsFiler(data).subscribe({
       next: (response) => {
-        this.paginatedOffers = response;
         this.totalOffers = response.length;
         this.offers = response;
         this.updatePaginatedOffers();
+        this.updateUI();
       },
       error: (error) => {
         console.error(error);
+        this.updateUI();
       },
     });
   }
@@ -273,23 +284,23 @@ export class ProjectListComponent {
   }
 
   applyFilters() {
-    this.projectService
-      .projectsFilerCheckBoxes({
-        selectedActivities: this.selectedActivities,
-        selectedSubActivities: this.selectedSubActivities,
-        selectedContractTypes: this.selectedContractTypes,
-      })
-      .subscribe({
-        next: (response) => {
-          this.paginatedOffers = response;
-          this.totalOffers = response.length;
-          this.offers = response;
-          this.updatePaginatedOffers();
-        },
-        error: (error) => {
-          console.error(error);
-        },
-      });
+    const filters = {
+      selectedActivities: this.selectedActivities,
+      selectedSubActivities: this.selectedSubActivities,
+      selectedContractTypes: this.selectedContractTypes,
+    };
+    this.projectService.projectsFilerCheckBoxes(filters).subscribe({
+      next: (response) => {
+        this.totalOffers = response.length;
+        this.offers = [...response];
+        this.updatePaginatedOffers();
+        this.updateUI();
+      },
+      error: (error) => {
+        console.error(error);
+        this.updateUI();
+      },
+    });
   }
 
   resetFilters() {
@@ -320,5 +331,9 @@ export class ProjectListComponent {
     });
 
     this.getOffers();
+  }
+
+  private updateUI() {
+    this.cdr.markForCheck();
   }
 }
