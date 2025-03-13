@@ -16,6 +16,7 @@ import { CompanyService } from 'src/app/core/services/company.service';
 import { LocationService } from 'src/app/core/services/location.service';
 import { InseeApiService } from 'src/app/core/services/insee-api.service';
 import { AlertService } from 'src/app/core/services/alert/alert.service';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-register-company',
@@ -37,6 +38,20 @@ export class RegisterCompanyComponent {
   selectedNaf: any;
   selectedCompany: any;
   siretErrorMessage: string | null = null;
+
+  editor: Editor = new Editor();
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+    ['horizontal_rule', 'format_clear', 'indent', 'outdent'],
+    ['superscript', 'subscript'],
+    ['undo', 'redo'],
+  ];
 
   form!: FormGroup;
   location!: FormGroup;

@@ -253,9 +253,38 @@
               <strong>{{ getDate(selectedCompany?.createdAt) }}</strong></i
             >
           </div>
-          <hr />
-          <h5>Informations Générales</h5>
+          <hr class="m-0 mt-2" />
           <div class="form-group">
+            <h5 class="text-center">Besoin de base</h5>
+            <p class="ms-2" [innerHTML]="selectedCompany?.message"></p>
+          </div>
+
+          <hr class="m-0 mt-2" />
+          <h5 class="text-center">Informations Générales</h5>
+          <div class="ms-2">
+            <div>
+              <i
+                >SIRET : <strong>{{ selectedCompany?.siret }}</strong></i
+              >
+            </div>
+            <div>
+              <i
+                >Code NAF : <strong>{{ selectedCompany?.naf }}</strong></i
+              >
+            </div>
+            <div>
+              <i
+                >Activité : <strong>{{ selectedCompany?.nafTitle }}</strong></i
+              >
+            </div>
+            <div>
+              <i
+                >Catégorie : <strong>{{ selectedCompany?.category }}</strong></i
+              >
+            </div>
+          </div>
+
+          <!-- <div class="form-group">
             <label for="siret">SIRET</label>
             <input
               type="text"
@@ -263,6 +292,7 @@
               class="form-control"
               [value]="selectedCompany?.siret"
               readonly
+              disabled
             />
           </div>
 
@@ -274,6 +304,7 @@
               class="form-control"
               [value]="selectedCompany?.naf"
               readonly
+              disabled
             />
           </div>
           <div class="form-group">
@@ -284,6 +315,7 @@
               class="form-control"
               [value]="selectedCompany?.nafTitle"
               readonly
+              disabled
             />
           </div>
           <div class="form-group">
@@ -294,11 +326,36 @@
               class="form-control"
               [value]="selectedCompany?.category"
               readonly
+              disabled
             />
+          </div> -->
+          <hr class="m-0 mt-2" />
+          <h4 class="text-center">informations Contact</h4>
+
+          <div class="ms-2">
+            <div>
+              <i
+                >Contact : <strong>{{ getContact(selectedCompany) }}</strong></i
+              >
+            </div>
+            <div>
+              <i
+                >E-mail :
+                <strong
+                  >{{ selectedCompany?.employees?.[0]?.email || '' }}</strong
+                ></i
+              >
+            </div>
+            <div>
+              <i
+                >Téléphone :
+                <strong
+                  >{{ selectedCompany?.employees?.[0]?.phone || '' }}</strong
+                ></i
+              >
+            </div>
           </div>
-          <hr />
-          <h4>informations Contact</h4>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="email">Contact</label>
             <input
               type="text"
@@ -306,6 +363,7 @@
               class="form-control"
               [value]="getContact(selectedCompany)"
               readonly
+              disabled
             />
           </div>
 
@@ -317,6 +375,7 @@
               class="form-control"
               [value]="selectedCompany?.employees?.[0]?.email || ''"
               readonly
+              disabled
             />
           </div>
           <div class="form-group">
@@ -327,11 +386,30 @@
               class="form-control"
               [value]="selectedCompany?.employees?.[0]?.phone || ''"
               readonly
+              disabled
             />
+          </div> -->
+          <hr class="m-0 mt-2" />
+          <h5 class="text-center">Localisation</h5>
+
+          <div class="ms-2">
+            <div>
+              <i
+                >Ville :
+                <strong>{{ selectedCompany?.location?.city?.name }}</strong></i
+              >
+            </div>
+            <div>
+              <i
+                >Adresse :
+                <strong>{{
+                  selectedCompany?.location?.address +
+                    (selectedCompany?.location?.addressLine2 || "")
+                }}</strong></i
+              >
+            </div>
           </div>
-          <hr />
-          <h5>Localisation</h5>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="address">Ville</label>
             <input
               type="text"
@@ -339,6 +417,7 @@
               class="form-control"
               [value]="selectedCompany?.location?.city?.name"
               readonly
+              disabled
             />
           </div>
 
@@ -353,19 +432,9 @@
                 (selectedCompany?.location?.addressLine2 || '')
               "
               readonly
+              disabled
             />
-          </div>
-          <hr />
-          <div class="form-group">
-            <label for="message">Besoin de base</label>
-            <input
-              type="text"
-              id="message"
-              class="form-control"
-              [value]="selectedCompany?.message"
-              readonly
-            />
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

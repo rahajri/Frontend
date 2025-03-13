@@ -11,6 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { Editor, Toolbar } from 'ngx-editor';
 import { environment } from 'src/environments/environment';
 import { LocationService } from 'src/app/core/services/location.service';
 import { JobService } from 'src/app/core/services/job.service';
@@ -66,6 +67,20 @@ export class OnboardScreenComponent implements OnInit {
 
   cvs: File[] = [];
   form: FormGroup;
+
+  editor: Editor = new Editor();
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+    ['horizontal_rule', 'format_clear', 'indent', 'outdent'],
+    ['superscript', 'subscript'],
+    ['undo', 'redo'],
+  ];
 
   skillLevels = ['Basique', 'Professionnel', 'Avancé'];
 
@@ -257,7 +272,8 @@ export class OnboardScreenComponent implements OnInit {
   createExperience(): FormGroup {
     return this.fb.group({
       companyName: ['', Validators.required],
-      level: ['', Validators.required],
+      postTitle: ['', Validators.required],
+      description: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
     });
@@ -416,8 +432,9 @@ export class OnboardScreenComponent implements OnInit {
       this.experiencesArray.push(
         this.fb.group({
           companyName: [exp['Entreprise'] || exp['entreprise'] || ''],
-          level: [exp['Niveau'] || ''],
+          postTitle: [exp['titre_poste'] || ''],
           location: [exp['Lieu'] || ''],
+          description: [exp['description'] || ''],
           startDate: [
             this.formatDateString(exp['Date début'] || exp['date_debut']),
           ],

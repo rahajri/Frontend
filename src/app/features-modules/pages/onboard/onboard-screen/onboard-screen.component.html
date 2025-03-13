@@ -317,98 +317,6 @@
                     </div>
                   </div>
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <h4>Compétences</h4>
-                    </div>
-                    <div class="row" formArrayName="skills">
-                      <!-- Existing Skills List -->
-                      <ng-container
-                        *ngFor="
-                          let skill of skillsArray.controls;
-                          let i = index
-                        "
-                        [formGroupName]="i"
-                      >
-                        <div class="col-md-6">
-                          <div class="input-block">
-                            <label for="skillName-{{ i }}" class="form-label"
-                              >Titre</label
-                            >
-                            <input
-                              id="skillName-{{ i }}"
-                              type="text"
-                              class="form-control"
-                              placeholder="Saisir une competance"
-                              [attr.autocomplete]="'off'"
-                              formControlName="skillName"
-                              (input)="filterSkills($event.target, i)"
-                            />
-                            <!-- Autocomplete suggestions -->
-                            <ul
-                              class="autocomplete-list"
-                              *ngIf="filteredSkills.length && index === i"
-                            >
-                              <li
-                                *ngFor="let skill of filteredSkills"
-                                (click)="selectSkill(skill, i)"
-                                class="autocomplete-item"
-                              >
-                                {{ skill.name }}
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                        <div class="col-md-6">
-                          <div class="input-block">
-                            <label for="level-{{ i }}" class="focus-label"
-                              >Niveau</label
-                            >
-                            <select
-                              formControlName="level"
-                              class="form-control form-select"
-                              placeholder="Choose Level"
-                            >
-                              <option value="" selected disabled>
-                                Sélectionnez un niveau
-                              </option>
-                              <option
-                                *ngFor="let level of skillLevels"
-                                [value]="level"
-                              >
-                                {{ level }}
-                              </option>
-                            </select>
-                            <div class="new-addd">
-                              <!-- Add New Skill button visible only for the last skill -->
-                              <a
-                                class="add-new me-2"
-                                (click)="addSkillManually()"
-                                *ngIf="i === skillsArray.controls.length - 1"
-                                tabindex="0"
-                              >
-                                <i class="feather icon-plus-circle me-1"></i>
-                                Ajouter
-                              </a>
-                              <!-- Supprimer button visible except for the first skill -->
-                              <a
-                                class="remove_row"
-                                (click)="removeSkills(i)"
-                                tabindex="0"
-                                *ngIf="skillsArray.controls.length > 1"
-                              >
-                                Supprimer
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </ng-container>
-                    </div>
-                  </div>
-                </form>
-
-                <form [formGroup]="form">
                   <div class="col-md-12">
                     <h4>Métier</h4>
                   </div>
@@ -532,6 +440,98 @@
                           </div>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </form>
+
+                <form [formGroup]="form">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h4>Compétences</h4>
+                    </div>
+                    <div class="row" formArrayName="skills">
+                      <!-- Existing Skills List -->
+                      <ng-container
+                        *ngFor="
+                          let skill of skillsArray.controls;
+                          let i = index
+                        "
+                        [formGroupName]="i"
+                      >
+                        <div class="col-md-6">
+                          <div class="input-block">
+                            <label for="skillName-{{ i }}" class="form-label"
+                              >Titre</label
+                            >
+                            <input
+                              id="skillName-{{ i }}"
+                              type="text"
+                              class="form-control"
+                              placeholder="Saisir une competance"
+                              [attr.autocomplete]="'off'"
+                              formControlName="skillName"
+                              (input)="filterSkills($event.target, i)"
+                            />
+                            <!-- Autocomplete suggestions -->
+                            <ul
+                              class="autocomplete-list"
+                              *ngIf="filteredSkills.length && index === i"
+                            >
+                              <li
+                                *ngFor="let skill of filteredSkills"
+                                (click)="selectSkill(skill, i)"
+                                class="autocomplete-item"
+                              >
+                                {{ skill.name }}
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="input-block">
+                            <label for="level-{{ i }}" class="focus-label"
+                              >Niveau</label
+                            >
+                            <select
+                              formControlName="level"
+                              class="form-control form-select"
+                              placeholder="Choose Level"
+                            >
+                              <option value="" selected disabled>
+                                Sélectionnez un niveau
+                              </option>
+                              <option
+                                *ngFor="let level of skillLevels"
+                                [value]="level"
+                              >
+                                {{ level }}
+                              </option>
+                            </select>
+                            <div class="new-addd">
+                              <!-- Add New Skill button visible only for the last skill -->
+                              <a
+                                class="add-new me-2"
+                                (click)="addSkillManually()"
+                                *ngIf="i === skillsArray.controls.length - 1"
+                                tabindex="0"
+                              >
+                                <i class="feather icon-plus-circle me-1"></i>
+                                Ajouter
+                              </a>
+                              <!-- Supprimer button visible except for the first skill -->
+                              <a
+                                class="remove_row"
+                                (click)="removeSkills(i)"
+                                tabindex="0"
+                                *ngIf="skillsArray.controls.length > 1"
+                              >
+                                Supprimer
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
                     </div>
                   </div>
                 </form>
@@ -666,18 +666,12 @@
 
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
-                          <label for="post" class="focus-label">Niveau</label>
-                          <select
-                            formControlName="level"
-                            class="form-control form-select"
-                          >
-                            <option
-                              *ngFor="let level of selectedList6"
-                              [value]="level.value"
-                            >
-                              {{ level.value }}
-                            </option>
-                          </select>
+                          <label for="post" class="focus-label">Post</label>
+                          <input
+                            type="text"
+                            formControlName="postTitle"
+                            class="form-control"
+                          />
                         </div>
                       </div>
 
@@ -714,22 +708,38 @@
                               [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                             />
                           </div>
-                          <div class="new-addd">
-                            <a
-                              *ngIf="i === experiencesArray.length - 1"
-                              class="add-new me-2"
-                              (click)="addExperience()"
-                              tabindex="0"
-                              ><i class="feather icon-plus-circle me-1"></i>
-                              Ajouter</a
-                            >
-                            <a
-                              *ngIf="experiencesArray.length > 1"
-                              class="remove_row"
-                              (click)="removeExperience(i)"
-                              >Supprimer</a
-                            >
-                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="col-md-12 input-block">
+                          <label class="form-label"
+                            >Description détaillée</label
+                          >
+                          <ngx-editor-menu
+                            [editor]="editor"
+                            [toolbar]="toolbar"
+                          ></ngx-editor-menu>
+                          <ngx-editor
+                            [editor]="editor"
+                            formControlName="description"
+                          >
+                          </ngx-editor>
+                        </div>
+                        <div class="new-addd">
+                          <a
+                            *ngIf="i === experiencesArray.length - 1"
+                            class="add-new me-2"
+                            (click)="addExperience()"
+                            tabindex="0"
+                            ><i class="feather icon-plus-circle me-1"></i>
+                            Ajouter</a
+                          >
+                          <a
+                            *ngIf="experiencesArray.length > 1"
+                            class="remove_row"
+                            (click)="removeExperience(i)"
+                            >Supprimer</a
+                          >
                         </div>
                       </div>
                     </div>

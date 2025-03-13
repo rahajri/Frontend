@@ -447,11 +447,16 @@
                       <label for="message" class="form-label"
                         >Décrivez votre besoin
                       </label>
-                      <textarea
+                      <ngx-editor-menu
+                        [editor]="editor"
+                        [toolbar]="toolbar"
+                      ></ngx-editor-menu>
+                      <ngx-editor
+                        [editor]="editor"
                         formControlName="message"
-                        class="form-control"
                         placeholder="Décrivez votre besoin en quelques mots..."
-                      ></textarea>
+                      >
+                      </ngx-editor>
                     </div>
                   </div>
                   <hr />
