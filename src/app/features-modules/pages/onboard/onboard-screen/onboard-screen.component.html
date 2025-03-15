@@ -666,7 +666,9 @@
 
                       <div class="col-md-6 col-lg-3">
                         <div class="input-block">
-                          <label for="post" class="focus-label">Post</label>
+                          <label for="post" class="focus-label"
+                            >Intitulé du poste</label
+                          >
                           <input
                             type="text"
                             formControlName="postTitle"
@@ -712,18 +714,12 @@
                       </div>
                       <div class="col-md-12">
                         <div class="col-md-12 input-block">
-                          <label class="form-label"
-                            >Description détaillée</label
-                          >
-                          <ngx-editor-menu
-                            [editor]="editor"
-                            [toolbar]="toolbar"
-                          ></ngx-editor-menu>
-                          <ngx-editor
-                            [editor]="editor"
+                          <label class="form-label">Responsabilités</label>
+                          <textarea
                             formControlName="description"
-                          >
-                          </ngx-editor>
+                            class="form-control"
+                            rows="10"
+                          ></textarea>
                         </div>
                         <div class="new-addd">
                           <a

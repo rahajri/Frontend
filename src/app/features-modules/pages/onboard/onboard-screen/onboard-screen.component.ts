@@ -11,7 +11,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Editor, Toolbar } from 'ngx-editor';
 import { environment } from 'src/environments/environment';
 import { LocationService } from 'src/app/core/services/location.service';
 import { JobService } from 'src/app/core/services/job.service';
@@ -67,21 +66,6 @@ export class OnboardScreenComponent implements OnInit {
 
   cvs: File[] = [];
   form: FormGroup;
-
-  editor: Editor = new Editor();
-  toolbar: Toolbar = [
-    ['bold', 'italic'],
-    ['underline', 'strike'],
-    ['code', 'blockquote'],
-    ['ordered_list'],
-    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
-    ['text_color', 'background_color'],
-    ['align_left', 'align_center', 'align_right', 'align_justify'],
-    ['horizontal_rule', 'format_clear', 'indent', 'outdent'],
-    ['superscript', 'subscript'],
-    ['undo', 'redo'],
-  ];
-
   skillLevels = ['Basique', 'Professionnel', 'Avancé'];
 
   selectedListActivities = [
