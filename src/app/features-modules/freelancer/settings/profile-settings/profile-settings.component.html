@@ -12,7 +12,11 @@
               class="avatar avatar-xxl profile-cover-avatar"
               for="avatar_upload"
             >
-              <img class="avatar-img" [src]="imgUrl" alt="" />
+              <img
+                class="avatar-img"
+                [src]="imgUrl !== null ? imgUrl : ''"
+                alt=""
+              />
               <input
                 type="file"
                 id="avatar_upload"
@@ -82,6 +86,124 @@
           </div>
         </div>
       </div>
+
+      <div class="col-md-12">
+        <h4>Métier</h4>
+      </div>
+      <div formArrayName="activities">
+        <div
+          *ngFor="let activity of activities.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="row">
+            <div class="col-md-4">
+              <div class="input-block">
+                <label for="job" class="focus-label">Métier</label>
+                <input
+                  id="job"
+                  formControlName="job"
+                  class="form-control"
+                  type="text"
+                  placeholder="Saisir une métier"
+                  (input)="filterJobs($event.target)"
+                  (keydown.enter)="addJob()"
+                  [attr.autocomplete]="'off'"
+                  [ngClass]="{
+                    'is-invalid':
+                      activity.get('job')?.invalid &&
+                      activity.get('job')?.touched
+                  }"
+                />
+                <div
+                  *ngIf="
+                    activity.get('job')?.invalid && activity.get('job')?.touched
+                  "
+                  class="text-danger"
+                >
+                  Métier est requis.
+                </div>
+                <!-- Autocomplete suggestions -->
+                <ul class="autocomplete-list" *ngIf="filteredJobs.length">
+                  <li
+                    *ngFor="let job of filteredJobs"
+                    (click)="selectJob(job)"
+                    class="autocomplete-item"
+                  >
+                    {{ job.name }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="input-block">
+                <label for="sous-activite" class="focus-label"
+                  >Sous Activité</label
+                >
+                <select
+                  id="subActivity"
+                  formControlName="sousActivite"
+                  class="form-select"
+                  (change)="onSubActivityChange($event, i)"
+                  *ngIf="jobNotExist"
+                  [ngClass]="{
+                    'is-invalid':
+                      activity.get('sousActivite')?.invalid &&
+                      activity.get('sousActivite')?.touched
+                  }"
+                >
+                  <option value="" disabled selected>
+                    Selectionner une Sous Activité
+                  </option>
+                  <option
+                    *ngFor="let subActivity of subActivities"
+                    [value]="subActivity.name"
+                  >
+                    {{ subActivity?.name }}
+                  </option>
+                </select>
+                <!-- show this if Job already in the database -->
+                <input
+                  formControlName="sousActivite"
+                  type="text"
+                  class="form-control"
+                  placeholder="Sous Activité"
+                  *ngIf="!jobNotExist"
+                  readonly
+                  [ngClass]="{
+                    'is-invalid':
+                      activity.get('sousActivite')?.invalid &&
+                      activity.get('sousActivite')?.touched
+                  }"
+                />
+                <div
+                  *ngIf="
+                    activity.get('sousActivite')?.invalid &&
+                    activity.get('sousActivite')?.touched
+                  "
+                  class="text-danger"
+                >
+                  Sous Activité est requise.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="input-block">
+                <label for="activite" class="focus-label">Activité</label>
+                <input
+                  formControlName="activite"
+                  type="text"
+                  class="form-control"
+                  placeholder="Activité"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
       <div class="form-row">
         <div class="col-lg-12 w-100">
           <div class="card flex-fill mb-3">
@@ -295,16 +417,14 @@
 
               <div class="col-md-6 col-lg-3">
                 <div class="input-block">
-                  <label for="position" class="focus-label">Niveau</label>
-                  <select
-                    formControlName="level"
-                    placeholder="Select"
-                    class="form-control form-select"
+                  <label for="position" class="focus-label"
+                    >Intitulé du poste</label
                   >
-                    <option *ngFor="let level of skillLevels" [value]="level">
-                      {{ level }}
-                    </option>
-                  </select>
+                  <input
+                    type="text"
+                    formControlName="postTitle"
+                    class="form-control"
+                  />
                 </div>
               </div>
 
@@ -339,21 +459,32 @@
                       [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
                     />
                   </div>
-                  <div class="new-addd">
-                    <a
-                      *ngIf="i === experiencesArray.length - 1"
-                      class="add-new me-2"
-                      (click)="addExperience()"
-                      tabindex="0"
-                      ><i class="feather icon-plus-circle me-1"></i> Ajouter</a
-                    >
-                    <a
-                      *ngIf="experiencesArray.length > 1"
-                      class="remove_row"
-                      (click)="removeExperience(i)"
-                      >Supprimer</a
-                    >
-                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="col-md-12 input-block">
+                  <label class="form-label">Responsabilités</label>
+                  <textarea
+                    formControlName="description"
+                    class="form-control"
+                    rows="10"
+                  ></textarea>
+                </div>
+                <div class="new-addd">
+                  <a
+                    *ngIf="i === experiencesArray.length - 1"
+                    class="add-new me-2"
+                    (click)="addExperience()"
+                    tabindex="0"
+                    ><i class="feather icon-plus-circle me-1"></i> Ajouter</a
+                  >
+                  <a
+                    *ngIf="experiencesArray.length > 1"
+                    class="remove_row"
+                    (click)="removeExperience(i)"
+                    >Supprimer</a
+                  >
                 </div>
               </div>
             </div>

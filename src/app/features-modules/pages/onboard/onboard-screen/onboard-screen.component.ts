@@ -41,14 +41,7 @@ export class OnboardScreenComponent implements OnInit {
   public routes = routes;
   public displayBlock = false;
   public displayNone = false;
-  public selectedValue1 = '';
-  public selectedValue2 = '';
-  public selectedValue3 = '';
-  public selectedValue4 = '';
-  public selectedValue5 = '';
-  public selectedValue6 = '';
-  public selectedValue7 = '';
-  public selectedValue8 = '';
+
   public skills: number[] = [];
   public education: number[] = [];
   public certification: number[] = [];
@@ -67,17 +60,6 @@ export class OnboardScreenComponent implements OnInit {
   cvs: File[] = [];
   form: FormGroup;
   skillLevels = ['Basique', 'Professionnel', 'Avancé'];
-
-  selectedListActivities = [
-    { value: 'Activity 1' },
-    { value: 'Activity 2' },
-    { value: 'Activity 3' },
-  ];
-
-  selectedListSousActivite = [
-    { value: 'Sous Activité 1' },
-    { value: 'Sous Activité 2' },
-  ];
 
   selectedListMetiers = [{ value: 'Métier 1' }, { value: 'Métier 2' }];
   zipCodes: any[] = [];
