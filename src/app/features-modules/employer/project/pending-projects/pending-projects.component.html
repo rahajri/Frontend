@@ -1,8 +1,8 @@
 <div class="page-title">
-  <h3>Offres Suspendues</h3>
+  <h3>Candidatures</h3>
 </div>
 <!-- project list -->
-@for (emp of empprojects; track emp) {
+@for (offer of offers; track offer) {
 <div class="my-projects-list ongoing-projects">
   <div class="row">
     <div class="col-xl-9 flex-wrap">
@@ -10,40 +10,40 @@
         <div class="project-proposals align-items-center freelancer">
           <div class="proposal-info">
             <div class="proposals-details">
-              <span class="tech-name-badge">{{ emp.company }}</span>
+              <span class="tech-name-badge">{{
+                offer?.job?.subActivity?.name
+              }}</span>
               <div class="d-flex justify-content-between align-items-start">
                 <div class="employee-project-card">
-                  <h3 class="proposals-title">{{ emp.content }}</h3>
+                  <h3 class="proposals-title">{{ offer?.title }}</h3>
                   <ul>
                     <li>
                       <div class="proposal-job-type">
-                        <h4 class="title-info">{{ emp.type }}</h4>
-                        <h3>{{ emp.worktime }}</h3>
+                        <h4 class="title-info">Type Contrat</h4>
+                        <h3>{{ offer?.contractType?.description }}</h3>
                       </div>
                     </li>
                     <li>
                       <div class="proposal-job-type">
-                        <h4 class="title-info">Location</h4>
+                        <h4 class="title-info">Localisation</h4>
                         <h3 class="flag-icon">
-                          <img
-                            src="assets/img/icon/flag-icon.svg"
-                            height="13"
-                            alt="Lang"
-                          />
-                          UK
+                          {{ offer?.city?.name }}
+                        </h3>
+                      </div>
+                    </li>
+                    <li *ngIf="offer?.expectedDuration">
+                      <div class="proposal-job-type">
+                        <h4 class="title-info">Duree</h4>
+                        <h3>
+                          {{ offer?.expectedDuration }}
+                          {{ offer?.timeUnit }}
                         </h3>
                       </div>
                     </li>
                     <li>
                       <div class="proposal-job-type">
-                        <h4 class="title-info">Expiry</h4>
-                        <h3>{{ emp.workingday }}</h3>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="proposal-job-type">
-                        <h4 class="title-info">{{ emp.price }}</h4>
-                        <h3>{{ emp.day }}</h3>
+                        <h4 class="title-info">Date de publication</h4>
+                        <h3>{{ getDate(offer?.publicationDate) }}</h3>
                       </div>
                     </li>
                   </ul>
@@ -52,12 +52,16 @@
                   <li>
                     <div class="project-action text-center">
                       <a
-                        [routerLink]="routes.projectproposal"
+                        [routerLink]="routes.get_projectproposal(offer?.id)"
                         class="projects-btn"
-                        >View Proposal</a
+                        >Voir Candidatures</a
                       >
-                      <a href="javascript:void(0);" class="mb-0"
-                        >Edit Project</a
+                      <a
+                        [routerLink]="
+                          routes.get_employee_project_details(offer?.id)
+                        "
+                        class="mb-0"
+                        >Voir Détails</a
                       >
                     </div>
                   </li>
@@ -72,8 +76,14 @@
       <div class="projects-card flex-fill">
         <div class="card-body p-2">
           <div class="prj-proposal-count text-center hired">
-            <h2>{{ emp.proposals }}</h2>
-            <h3 class="mb-0">Proposal</h3>
+            <h2>{{ offer?.assignedCandidates?.length }}</h2>
+            <h3 class="mb-0">
+              {{
+                offer?.assignedCandidates?.length === 1
+                  ? "Candidature"
+                  : "Candidatures"
+              }}
+            </h3>
           </div>
         </div>
       </div>

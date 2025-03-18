@@ -8,6 +8,7 @@ import { NavbarService } from 'src/app/core/services/navbar.service';
 import { UserService } from '../../auth/service/user.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { Profile } from 'src/app/core/models/models';
+import { CompanyService } from 'src/app/core/services/company.service';
 
 @Component({
   selector: 'app-employerheader',
@@ -32,6 +33,7 @@ export class EmployerheaderComponent {
     private navservices: NavbarService,
     private userService: UserService,
     private authService: AuthService,
+    private companyService: CompanyService,
     private common: CommonService
   ) {
     this.common.base.subscribe((res: string) => {
@@ -61,6 +63,7 @@ export class EmployerheaderComponent {
     this.userService.getProfile().subscribe({
       next: (profile) => {
         this.profile = profile;
+        this.setCompanyId(profile?.company?.id);
         const { fullName, initials } = this.userService.getProfileDetails(
           this.profile
         );
@@ -106,6 +109,11 @@ export class EmployerheaderComponent {
       this.anotherMenu = true;
     } else {
       this.anotherMenu = false;
+    }
+  }
+  setCompanyId(companyId: string | null): void {
+    if (companyId) {
+      this.companyService.setCompanyId(companyId);
     }
   }
 }

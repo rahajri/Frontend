@@ -240,7 +240,7 @@ const routes: Routes = [
           ).then((m) => m.CompletdProjectViewDetailsModule),
       },
       {
-        path: 'project-employer-view-proposal',
+        path: 'project-employer-view-proposal/:id',
         loadChildren: () =>
           import(
             './project/project-employer-view-proposal/project-employer-view-proposal.module'

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, map, of, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 // Define the Company interface within the service file
 export interface Company {
@@ -42,6 +42,17 @@ export interface apiResultFormat {
 })
 export class CompanyService {
   private baseUrl = `${environment.apiUrl}/companies`; // URL to get zip codes
+
+  private companyIdSource = new BehaviorSubject<string | null>(null);
+  companyId$ = this.companyIdSource.asObservable();
+
+  setCompanyId(companyId: string): void {
+    this.companyIdSource.next(companyId);
+  }
+
+  getCompanyId(): string | null {
+    return this.companyIdSource.getValue();
+  }
 
   constructor(private http: HttpClient) {}
   // Method to load all companies data

@@ -478,9 +478,14 @@
                               *ngIf="filteredSkills.length && index === i"
                             >
                               <li
-                                *ngFor="let skill of filteredSkills"
+                                *ngFor="
+                                  let skill of filteredSkills;
+                                  let skillIndex = index
+                                "
                                 (click)="selectSkill(skill, i)"
                                 class="autocomplete-item"
+                                [class.active]="skillIndex === activeIndex"
+                                [attr.data-index]="skillIndex"
                               >
                                 {{ skill.name }}
                               </li>
@@ -837,6 +842,7 @@
                   name="save"
                   type="submit"
                   value="Enregistrer"
+                  [disabled]="form.invalid"
                   (click)="create(form)"
                 />
               </div>

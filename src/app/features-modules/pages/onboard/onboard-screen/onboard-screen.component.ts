@@ -411,15 +411,17 @@ export class OnboardScreenComponent implements OnInit {
 
     // Patch languages
     const languages = response['langues'] || response['languages'] || [];
-    this.languagesArray.clear();
-    languages.forEach((lang: any) => {
-      this.languagesArray.push(
-        this.fb.group({
-          name: [lang || '', Validators.required],
-          level: ['Professionnel', Validators.required],
-        })
-      );
-    });
+    if (languages.length !== 0) {
+      this.languagesArray.clear();
+      languages.forEach((lang: any) => {
+        this.languagesArray.push(
+          this.fb.group({
+            name: [lang || '', Validators.required],
+            level: ['Professionnel', Validators.required],
+          })
+        );
+      });
+    }
   }
 
   formatDateString(dateStr: string | undefined): string | null {

@@ -1966,7 +1966,7 @@ export class ShareDataService {
           page: 'completed-projects',
         },
         {
-          title: 'Offres Suspendues',
+          title: 'Candidatures',
           routes: routes.pendingproject,
           page: 'pending-projects',
         },

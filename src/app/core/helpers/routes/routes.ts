@@ -316,8 +316,8 @@ export class routes {
   public static get completedviewproject(): string {
     return this.employer + '/completed-project-view-details';
   }
-  public static get projectproposal(): string {
-    return this.employer + '/project-employer-view-proposal';
+  public static get_projectproposal(id: string): string {
+    return this.employer + `/project-employer-view-proposal/${id}`;
   }
   public static get files(): string {
     return this.employer + '/files';

@@ -7,6 +7,7 @@ import { ProjectService } from 'src/app/core/services/project.service';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CandidateService } from 'src/app/core/services/condidate.service';
 
 @Component({
   selector: 'app-projects-details',
@@ -21,12 +22,15 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
   offer: any = null;
   baseUrl = environment.apiUrl;
 
+  candidateId: string | null = null;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private commonService: CommonService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private candidateService: CandidateService
   ) {}
 
   addDetails(array: number[]) {
@@ -56,6 +60,22 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     this.pojectId = this.route.snapshot.paramMap.get('id');
     this.editor = new Editor();
     this.getProjectDetails();
+
+    const email = localStorage.getItem('email');
+
+    if (!email) {
+      console.error('No email found in local storage.');
+      return;
+    }
+
+    this.candidateService.getCandidate(email).subscribe({
+      next: (response) => {
+        this.candidateId = response?.id;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 
   getProjectDetails() {
@@ -68,7 +88,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
       },
     });
   }
-  
+
   ngOnDestroy(): void {
     if (this.editor) {
       this.editor.destroy();
@@ -80,7 +100,19 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
   }
 
   navigation1() {
-    this.router.navigate([routes.freelancer_projects_proposals]);
+    const offerId = this.offer?.id;
+    const candidateId = this.candidateId;
+    if (offerId && candidateId) {
+      this.projectService.assignCandidate(offerId, candidateId).subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+    }
+    // this.router.navigate([routes.freelancer_projects_proposals]);
   }
 
   getDate(isoDate: string) {
