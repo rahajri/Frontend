@@ -2,7 +2,7 @@
   <h3>Candidatures</h3>
 </div>
 <!-- project list -->
-@for (offer of offers; track offer) {
+@for (offer of paginatedOffers; track offer) {
 <div class="my-projects-list ongoing-projects">
   <div class="row">
     <div class="col-xl-9 flex-wrap">
@@ -96,22 +96,25 @@
 <div class="row">
   <div class="col-md-12">
     <ul class="paginations list-pagination">
-      <li class="page-item">
-        <a href="javascript:void(0);"
-          ><i class="feather icon-chevron-left"></i
-        ></a>
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a (click)="changePage(currentPage - 1)" [class.disabled]="currentPage === 1">
+          <i class="feather icon-chevron-left"></i>
+        </a>
       </li>
-      <li class="page-item">
-        <a href="javascript:void(0);" class="active">1</a>
-      </li>
-      <li class="page-item"><a href="javascript:void(0);">2</a></li>
-      <li class="page-item"><a href="javascript:void(0);">3</a></li>
-      <li class="page-item"><a href="javascript:void(0);">...</a></li>
-      <li class="page-item"><a href="javascript:void(0);">10</a></li>
-      <li class="page-item">
-        <a href="javascript:void(0);"
-          ><i class="feather icon-chevron-right"></i
-        ></a>
+
+      @for (page of getPageNumbers(); track page) {
+        <li class="page-item">
+          <a (click)="changePage(page)"
+             [class.active]="currentPage === page">
+            {{page}}
+          </a>
+        </li>
+      }
+
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a (click)="changePage(currentPage + 1)" [class.disabled]="currentPage === totalPages">
+          <i class="feather icon-chevron-right"></i>
+        </a>
       </li>
     </ul>
   </div>

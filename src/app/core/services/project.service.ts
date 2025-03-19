@@ -105,8 +105,14 @@ export class ProjectService {
     return this.http.get<any[]>(`${this.baseUrl}/contract-types`);
   }
 
-  getAvailableOffersByCompany(companyId: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/available/${companyId}`);
+  getAvailableOffersByCompany(
+    companyId: string,
+    page: number,
+    limit: number
+  ): Observable<{ offers: any[]; total: number }> {
+    return this.http.get<{ offers: any[]; total: number }>(
+      `${this.baseUrl}/available/${companyId}?page=${page}&limit=${limit}`
+    );
   }
 
   assignCandidate(offerId: string, candidateId: string) {
