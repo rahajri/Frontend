@@ -17,7 +17,7 @@ export class PendingProjectsComponent {
   offers: any[] = [];
   paginatedOffers: any[] = [];
   currentPage: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
   totalPages: number = 1;
   constructor(
     public router: Router,

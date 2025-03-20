@@ -115,10 +115,10 @@ export class ProjectService {
     );
   }
 
-  assignCandidate(offerId: string, candidateId: string) {
+  assignCandidate(offerId: string, candidateId: string, data: any) {
     return this.http.post<any>(
       `${this.baseUrl}/assign/${offerId}/candidate/${candidateId}`,
-      {}
+      data
     );
   }
 }

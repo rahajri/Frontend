@@ -67,10 +67,10 @@
       <div class="projects-card flex-fill">
         <div class="card-body p-2">
           <div class="prj-proposal-count text-center hired">
-            <h2>{{ offer?.assignedCandidates?.length }}</h2>
+            <h2>{{ offer?.candidateJobOffers?.length }}</h2>
             <h3 class="mb-0">
               {{
-                offer?.assignedCandidates?.length === 1
+                offer?.candidateJobOffers?.length === 1
                   ? "Candidature"
                   : "Candidatures"
               }}
@@ -82,68 +82,81 @@
   </div>
 </div>
 <!-- /project list -->
-@for (candidate of offer?.assignedCandidates; track offer) {
-
-<div class="my-projects-list ongoing-projects">
-  <div class="pending-proposal-profile">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <div class="user-img-box">
-        <img src="assets/img/user/user-04.jpg" alt="Img" />
-        <div class="user-name">
-          <h6>{{ getFullName(candidate?.firstName, candidate?.lastName) }}</h6>
-          <span
-            >Applied on : February 26, 2024
-            <i class="fa-solid fa-star"></i>5.0</span
-          >
+<ng-container *ngIf="offer?.candidateJobOffers?.length">
+  <div
+    class="my-projects-list ongoing-projects"
+    *ngFor="let appli of paginatedOffers; trackBy: trackOffer"
+  >
+    <div class="pending-proposal-profile">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="user-img-box">
+          <img src="assets/img/user/user-04.jpg" alt="Img" />
+          <div class="user-name">
+            <h6>
+              {{
+                getFullName(
+                  appli?.candidate?.firstName,
+                  appli?.candidate?.lastName
+                )
+              }}
+            </h6>
+            <span
+              >Postulé le : {{ getDate(appli?.appliedAt) }}
+              <i class="fa-solid fa-star"></i>5.0</span
+            >
+          </div>
+        </div>
+        <div class="payment-count">
+          <div class="hire-now">
+            <a href="#hire-now" class="btn btn-primary" data-bs-toggle="modal"
+              >Recruter</a
+            >
+          </div>
         </div>
       </div>
-      <div class="payment-count">
-        <div class="cost">
-          <h4>$400</h4>
-          <span>in 09 Days</span>
-        </div>
-        <div class="hire-now">
-          <a href="#hire-now" class="btn btn-primary" data-bs-toggle="modal"
-            >Hire Now</a
-          >
-        </div>
+      <div class="describe-info">
+        <p
+          [innerHTML]="
+            isExpanded
+              ? appli?.message
+              : (appli?.message | slice : 0 : 100) + '...'
+          "
+        ></p>
+        <a
+          href="javascript:void(0);"
+          class="more-text"
+          (click)="toggleReadMore()"
+        >
+          {{ isExpanded ? "Lire moins" : "Lire plus" }}
+        </a>
       </div>
-    </div>
-    <div class="describe-info">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. At diam sit
-        erat et eros. Et cursus tellus viverra adipiscing suspendisse. Semper
-        arcu est eget eleifend. Faucibus elit massa sollicitudin elementum ut
-        feugiat nunc ac. Turpis quam sed in sed curabitur netus laoreet. In
-        tortor neque sapien praesent porttitor cursus sed cum Turpis quam sed in
-        sed curabitur netus laoreet. In tortor neque sapien praesent porttitor
-        cursus
-      </p>
-      <a href="javascript:void(0);" class="more-text">Readmore</a>
     </div>
   </div>
-</div>
-}
+</ng-container>
 
 <div class="row">
   <div class="col-md-12">
     <ul class="paginations list-pagination justify-content-end">
-      <li class="page-item">
-        <a href="javascript:void(0);"
-          ><i class="feather icon-chevron-left"></i
-        ></a>
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a href="javascript:void(0);" (click)="changePage(currentPage - 1)">
+          <i class="feather icon-chevron-left"></i>
+        </a>
       </li>
-      <li class="page-item">
-        <a href="javascript:void(0);" class="active">1</a>
+      <li
+        class="page-item"
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+      >
+        <a
+          href="javascript:void(0);"
+          [class.active]="currentPage === i + 1"
+          (click)="changePage(i + 1)"
+          >{{ i + 1 }}</a
+        >
       </li>
-      <li class="page-item"><a href="javascript:void(0);">2</a></li>
-      <li class="page-item"><a href="javascript:void(0);">3</a></li>
-      <li class="page-item"><a href="javascript:void(0);">...</a></li>
-      <li class="page-item"><a href="javascript:void(0);">10</a></li>
-      <li class="page-item">
-        <a href="javascript:void(0);"
-          ><i class="feather icon-chevron-right"></i
-        ></a>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a href="javascript:void(0);" (click)="changePage(currentPage + 1)">
+          <i class="feather icon-chevron-right"></i>
+        </a>
       </li>
     </ul>
   </div>

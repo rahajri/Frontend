@@ -21,7 +21,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
   public pojectId: string | null = '';
   offer: any = null;
   baseUrl = environment.apiUrl;
-
+  form: FormGroup;
   candidateId: string | null = null;
 
   constructor(
@@ -31,7 +31,11 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     private commonService: CommonService,
     private sanitizer: DomSanitizer,
     private candidateService: CandidateService
-  ) {}
+  ) {
+    this.form = new FormGroup({
+      message: new FormControl('', Validators.required()),
+    });
+  }
 
   addDetails(array: number[]) {
     array.push(1);
@@ -51,10 +55,6 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
-
-  form = new FormGroup({
-    editorContent: new FormControl('', Validators.required()),
-  });
 
   ngOnInit(): void {
     this.pojectId = this.route.snapshot.paramMap.get('id');
@@ -102,15 +102,19 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
   navigation1() {
     const offerId = this.offer?.id;
     const candidateId = this.candidateId;
+    const message = this.form.value;
+
     if (offerId && candidateId) {
-      this.projectService.assignCandidate(offerId, candidateId).subscribe({
-        next: (res) => {
-          console.log(res);
-        },
-        error: (err) => {
-          console.error(err);
-        },
-      });
+      this.projectService
+        .assignCandidate(offerId, candidateId, message)
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+          },
+          error: (err) => {
+            console.error(err);
+          },
+        });
     }
     // this.router.navigate([routes.freelancer_projects_proposals]);
   }

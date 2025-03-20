@@ -13,6 +13,10 @@ export class ProjectEmployerViewProposalComponent {
   public routes = routes;
   offerId: string | null = null;
   offer: any | null;
+  isExpanded: boolean = false;
+
+  currentPage = 1;
+  itemsPerPage = 5;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,12 +28,24 @@ export class ProjectEmployerViewProposalComponent {
     this.getOfferDetails();
   }
 
+  trackOffer(index: number, offer: any): number {
+    return offer.id; // Use the unique identifier
+  }
+
+  toggleReadMore() {
+    this.isExpanded = !this.isExpanded;
+  }
+
   getOfferDetails() {
     const offerId = this.offerId;
     if (offerId) {
       this.projectService.getProjectDetails(offerId).subscribe({
         next: (res) => {
           this.offer = res;
+          // Ensure candidateJobOffers is initialized
+          if (!this.offer.candidateJobOffers) {
+            this.offer.candidateJobOffers = [];
+          }
         },
         error: (err) => {
           console.error(err);
@@ -49,5 +65,30 @@ export class ProjectEmployerViewProposalComponent {
 
   getDate(isoDate: string) {
     return this.commonService.formatDate(isoDate);
+  }
+
+  get totalPages(): number {
+    const offersLength = this.offer?.candidateJobOffers?.length || 0; // Default to 0 if undefined
+    return Math.ceil(offersLength / this.itemsPerPage);
+  }
+
+  get paginatedOffers() {
+    if (!this.offer || !this.offer.candidateJobOffers) {
+      return []; // Return an empty array if offer or candidateJobOffers is null
+    }
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    if (start < 0 || start >= this.offer.candidateJobOffers.length) {
+      return []; // Prevent invalid slicing
+    }
+    return this.offer.candidateJobOffers.slice(
+      start,
+      start + this.itemsPerPage
+    );
+  }
+
+  changePage(page: number) {
+    if (page > 0 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
   }
 }

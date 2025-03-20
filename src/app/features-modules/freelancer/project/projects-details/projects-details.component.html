@@ -219,93 +219,6 @@
 <!-- /Page Content -->
 
 <!-- The Modal -->
-<div class="modal fade custom-modal" id="hire">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-modal">
-      <div class="modal-header">
-        <button
-          type="button"
-          class="close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="text-center pt-0 mb-4">
-          <img src="assets/img/logo-01.png" alt="logo" class="img-fluid mb-1" />
-          <h5 class="modal-title">Discuss your project with David</h5>
-        </div>
-        <form>
-          <div class="modal-info">
-            <div class="row">
-              <div class="col-12 col-md-12">
-                <div class="input-block">
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="First name & Lastname"
-                  />
-                </div>
-                <div class="input-block">
-                  <input
-                    type="email"
-                    name="name"
-                    class="form-control"
-                    placeholder="Email Address"
-                  />
-                </div>
-                <div class="input-block">
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="Phone Number"
-                  />
-                </div>
-                <div class="input-block">
-                  <textarea
-                    class="form-control"
-                    name="message"
-                    rows="5"
-                    placeholder="Message"
-                  ></textarea>
-                </div>
-                <div class="input-block row">
-                  <div class="col-12 col-md-4 pr-0">
-                    <label class="file-upload">
-                      Add Attachment <input type="file" />
-                    </label>
-                  </div>
-                  <div class="col-12 col-md-8">
-                    <p class="mb-1">Allowed file types: zip, pdf, png, jpg</p>
-                    <p>Max file size: 50 MB</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="submit-section text-center">
-            <button
-              type="button"
-              (click)="navigation()"
-              (keydown.enter)="navigation()"
-              tabindex="0"
-              class="btn btn-primary btn-block submit-btn"
-            >
-              Hire Now
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /The Modal -->
-
-<!-- The Modal -->
 <div class="modal fade" id="file">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
@@ -321,7 +234,7 @@
       </div>
       <div class="modal-body">
         <div class="modal-info proposal-modal-info">
-          <form>
+          <form [formGroup]="form">
             <div class="feedback-form proposal-form">
               <div class="row">
                 <div class="col-md-12 input-block">
@@ -335,6 +248,7 @@
                     [placeholder]="
                       'Exprimez votre motivation en quelques lignes en mettant en avant votre expérience et vos compétences en lien avec cette offre. Un message personnalisé augmente vos chances d’être retenu !'
                     "
+                    formControlName="message"
                   >
                   </ngx-editor>
                 </div>
