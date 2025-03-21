@@ -26,16 +26,17 @@ export class ProjectService {
     return this.http.patch<any>(`${this.baseUrl}/${id}`, projectData);
   }
 
-  /**
-   * Fetches details of a specific project
-   * @param id The project ID
-   */
-  getProjectDetails(id: string | null) {
+  getProjectDetails(id: string | null, candidateId?: string | null) {
     if (!id) {
       throw new Error('Project ID cannot be null');
     }
 
-    return this.http.get<any>(`${this.baseUrl}/${id}`);
+    let params = new HttpParams();
+    if (candidateId) {
+      params = params.set('candidateId', candidateId);
+    }
+
+    return this.http.get<any>(`${this.baseUrl}/${id}`, { params });
   }
 
   /**

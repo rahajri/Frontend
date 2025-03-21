@@ -70,8 +70,8 @@
                   <img src="assets/img/icon/user-heart-line.svg" alt="icons" />
                 </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Experience</span>
-                  <p class="mb-0">Basic</p>
+                  <span class="d-block">Expérience</span>
+                  <p class="mb-0">{{ offer?.seniority }}</p>
                 </div>
               </li>
               <li>
@@ -131,8 +131,18 @@
                 data-bs-toggle="modal"
                 href="#file"
                 class="btn proposal-btn btn-primary"
-                >Postuler
+                *ngIf="!offer?.hasApplied; else alreadyApplied"
+              >
+                Postuler
               </a>
+
+              <ng-template #alreadyApplied>
+                <span
+                  class="ms-3 btn proposal-btn btn-primary disabled"
+                  disabled
+                  >Vous avez déjà postulé.</span
+                >
+              </ng-template>
             </div>
           </div>
           <div class="card budget-widget">

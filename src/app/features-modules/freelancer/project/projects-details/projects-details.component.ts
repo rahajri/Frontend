@@ -59,7 +59,6 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.pojectId = this.route.snapshot.paramMap.get('id');
     this.editor = new Editor();
-    this.getProjectDetails();
 
     const email = localStorage.getItem('email');
 
@@ -71,6 +70,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     this.candidateService.getCandidate(email).subscribe({
       next: (response) => {
         this.candidateId = response?.id;
+        this.getProjectDetails(this.pojectId, this.candidateId);
       },
       error: (error) => {
         console.error(error);
@@ -78,8 +78,8 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  getProjectDetails() {
-    this.projectService.getProjectDetails(this.pojectId).subscribe({
+  getProjectDetails(projectId: string | null, candidateId?: string | null) {
+    this.projectService.getProjectDetails(projectId, candidateId).subscribe({
       next: (res) => {
         this.offer = res;
       },

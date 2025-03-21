@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { routes } from 'src/app/core/helpers/routes/routes';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { CommonService } from 'src/app/core/services/common/common.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-project-employer-view-proposal',
@@ -14,15 +15,24 @@ export class ProjectEmployerViewProposalComponent {
   offerId: string | null = null;
   offer: any | null;
   isExpanded: boolean = false;
+  selectedCandidate: any = null;
 
   currentPage = 1;
   itemsPerPage = 5;
+  sendForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private readonly projectService: ProjectService,
-    private commonService: CommonService
-  ) {}
+    private commonService: CommonService,
+    private fb: FormBuilder
+  ) {
+    this.sendForm = this.fb.group({
+      closeOffer: [false],
+      message: [''], // Add a form control for the message
+    });
+  }
+
   ngOnInit() {
     this.offerId = this.route.snapshot.paramMap.get('id');
     this.getOfferDetails();
@@ -90,5 +100,31 @@ export class ProjectEmployerViewProposalComponent {
     if (page > 0 && page <= this.totalPages) {
       this.currentPage = page;
     }
+  }
+
+  setSelectedCandidate(company: any): void {
+    this.selectedCandidate = company;
+  }
+
+  sendMessage() {
+    const formData = {
+      closeOffer: this.sendForm.value.closeOffer,
+      offer: this.offer?.id,
+      message: this.sendForm.value.message,
+      candidateId: this.selectedCandidate?.id, // Assuming selectedCandidate has an id
+    };
+
+    console.log(formData);
+
+    // this.commonService.sendMessage(formData).subscribe({
+    //   next: (response) => {
+    //     console.log('Message sent successfully', response);
+    //     // Handle success (e.g., show a success message)
+    //   },
+    //   error: (err) => {
+    //     console.error('Error sending message', err);
+    //     // Handle error (e.g., show an error message)
+    //   },
+    // });
   }
 }
