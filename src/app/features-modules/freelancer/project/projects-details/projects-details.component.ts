@@ -1,6 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Validators, Editor, Toolbar } from 'ngx-editor';
-import { FormControl, FormGroup } from '@angular/forms';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
+import { Editor, Toolbar } from 'ngx-editor';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from 'src/app/core/services/project.service';
@@ -9,10 +15,12 @@ import { environment } from 'src/environments/environment';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CandidateService } from 'src/app/core/services/condidate.service';
 
+declare var bootstrap: any;
 @Component({
   selector: 'app-projects-details',
   templateUrl: './projects-details.component.html',
   styleUrls: ['./projects-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsDetailsComponent implements OnInit, OnDestroy {
   public routes = routes;
@@ -30,10 +38,11 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     private projectService: ProjectService,
     private commonService: CommonService,
     private sanitizer: DomSanitizer,
-    private candidateService: CandidateService
+    private candidateService: CandidateService,
+    private cdr: ChangeDetectorRef
   ) {
     this.form = new FormGroup({
-      message: new FormControl('', Validators.required()),
+      message: new FormControl('', Validators.required),
     });
   }
 
@@ -71,6 +80,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
       next: (response) => {
         this.candidateId = response?.id;
         this.getProjectDetails(this.pojectId, this.candidateId);
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.error(error);
@@ -82,6 +92,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     this.projectService.getProjectDetails(projectId, candidateId).subscribe({
       next: (res) => {
         this.offer = res;
+        this.cdr.markForCheck();
       },
       error: (err) => {
         console.error(err);
@@ -97,26 +108,6 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
 
   navigation() {
     this.router.navigate([routes.employee_dashboard]);
-  }
-
-  navigation1() {
-    const offerId = this.offer?.id;
-    const candidateId = this.candidateId;
-    const message = this.form.value;
-
-    if (offerId && candidateId) {
-      this.projectService
-        .assignCandidate(offerId, candidateId, message)
-        .subscribe({
-          next: (res) => {
-            console.log(res);
-          },
-          error: (err) => {
-            console.error(err);
-          },
-        });
-    }
-    // this.router.navigate([routes.freelancer_projects_proposals]);
   }
 
   getDate(isoDate: string) {
@@ -161,5 +152,50 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     const words = text.split(' ');
     const limitedWords = words.slice(0, limit).join(' ');
     return limitedWords + (words.length > limit ? '...' : '');
+  }
+
+  onSubmit() {
+    this.form.markAllAsTouched(); // Mark all fields as touched
+
+    if (this.form.valid) {
+      // Proceed with the submission logic
+      const offerId = this.offer?.id;
+      const candidateId = this.candidateId;
+      const message = this.form.value;
+
+      if (offerId && candidateId) {
+        this.projectService
+          .assignCandidate(offerId, candidateId, message)
+          .subscribe({
+            next: (res) => {
+              console.log(res);
+              // Show success modal or perform other actions
+              this.hideModal('file');
+              // Show the modal programmatically
+              const modalElement = document.getElementById('success');
+              const modal = new bootstrap.Modal(modalElement);
+              modal.show();
+
+              this.getProjectDetails(this.pojectId, this.candidateId);
+            },
+            error: (err) => {
+              console.error(err);
+            },
+          });
+      }
+    } else {
+      // Prevent modal from closing
+      alert('Veuillez ajouter un message au recruteur avant de soumettre.');
+    }
+  }
+
+  hideModal(id: string) {
+    const modalElement = document.getElementById(id);
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide();
+      }
+    }
   }
 }

@@ -16,6 +16,7 @@ export class ProjectEmployerViewProposalComponent {
   offer: any | null;
   isExpanded: boolean = false;
   selectedCandidate: any = null;
+  globalError: boolean = false;
 
   currentPage = 1;
   itemsPerPage = 5;
@@ -59,6 +60,7 @@ export class ProjectEmployerViewProposalComponent {
         },
         error: (err) => {
           console.error(err);
+          this.globalError = true;
         },
       });
     }
@@ -124,6 +126,7 @@ export class ProjectEmployerViewProposalComponent {
     //   error: (err) => {
     //     console.error('Error sending message', err);
     //     // Handle error (e.g., show an error message)
+    //  // Impossible de recruter ce candidat pour le moment. Veuillez vérifier les informations.
     //   },
     // });
   }

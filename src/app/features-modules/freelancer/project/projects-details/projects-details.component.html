@@ -248,9 +248,31 @@
             <div class="feedback-form proposal-form">
               <div class="row">
                 <div class="col-md-12 input-block">
-                  <label for="cober-letter" class="form-label"
-                    >Message au recruteur</label
+                  <label
+                    for="cober-letter"
+                    class="form-label"
+                    [ngClass]="{
+                      'is-invalid text-danger':
+                        form.get('message')?.invalid &&
+                        form.get('message')?.touched
+                    }"
+                    >Message au recruteur
+                    <strong
+                      *ngIf="
+                        form.get('message')?.invalid &&
+                        (form.get('message')?.touched ||
+                          form.get('message')?.dirty)
+                      "
+                      [ngClass]="{
+                        'is-invalid text-danger':
+                          form.get('message')?.invalid &&
+                          form.get('message')?.touched
+                      }"
+                    >
+                      est requis.</strong
+                    ></label
                   >
+
                   <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
                   </ngx-editor-menu>
                   <ngx-editor
@@ -332,14 +354,18 @@
                   class="btn btn-cancel submit-btn"
                   >Annuler</a
                 >
-                <a
+                <!-- <button
                   (click)="navigation1()"
                   data-bs-toggle="modal"
                   data-bs-dismiss="modal"
-                  href="#success"
                   class="btn btn-primary submit-btn"
-                  >Envoyer</a
                 >
+                  Envoyer
+                </button> -->
+
+                <button (click)="onSubmit()" class="btn btn-primary submit-btn">
+                  Envoyer
+                </button>
               </div>
             </div>
           </form>

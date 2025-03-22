@@ -122,4 +122,11 @@ export class ProjectService {
       data
     );
   }
+
+  sendAdminMessage(formData: any) {
+    return this.http.post<any>(
+      `${this.baseUrl}/assign/approuve-candidate`,
+      formData
+    );
+  }
 }

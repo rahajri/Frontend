@@ -82,6 +82,26 @@
   </div>
 </div>
 <!-- /project list -->
+
+<div
+  *ngIf="globalError"
+  class="alert alert-danger alert-dismissible fade show"
+  role="alert"
+>
+  <strong
+    >Une erreur est survenue lors du chargement des candidatures. Veuillez
+    réessayer ultérieurement.</strong
+  >
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<ng-container *ngIf="offer?.candidateJobOffers?.length === 0">
+  <div class="h2 m-5">Aucun candidat n'a encore postulé à cette offre.</div>
+</ng-container>
 <ng-container *ngIf="offer?.candidateJobOffers?.length">
   <div
     class="my-projects-list ongoing-projects"
@@ -138,7 +158,7 @@
   </div>
 </ng-container>
 
-<div class="row">
+<div class="row" *ngIf="offer?.candidateJobOffers?.length">
   <div class="col-md-12">
     <ul class="paginations list-pagination justify-content-end">
       <li class="page-item" [class.disabled]="currentPage === 1">
