@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
-import { empprojects } from 'src/app/core/models/models';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { ProjectService } from 'src/app/core/services/project.service';
-import { UserService } from 'src/app/features-modules/auth/service/user.service';
+import { Subscription } from 'rxjs';
+import { ProfileService } from 'src/app/core/services/profile.service';
 
 @Component({
   selector: 'app-all-projects',
@@ -13,6 +11,7 @@ import { UserService } from 'src/app/features-modules/auth/service/user.service'
   styleUrls: ['./all-projects.component.scss'],
 })
 export class AllProjectsComponent {
+  subscription: Subscription | null = null;
   jobOffers: JobOffer[] = [];
   totalItems: number = 100; // Total d'éléments, ajustez selon les données renvoyées par votre API
   currentPage: number = 1;
@@ -22,28 +21,27 @@ export class AllProjectsComponent {
   company: any;
 
   public routes = routes;
-  empprojects: Array<empprojects> = [];
   constructor(
     public router: Router,
-    private dataservice: ShareDataService,
     private projectService: ProjectService,
-    private authService: AuthService,
-    private userService: UserService
-  ) {
-    this.dataservice.ManageUsers.subscribe((data: Array<empprojects>) => {
-      this.empprojects = data;
-    });
-  }
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
-    this.userService.getProfile().subscribe({
+    this.subscription = this.profileService.currentUserProfile$.subscribe({
       next: (profile) => {
-        this.user = profile;
-        this.company = profile.company;
-        this.loadJobOffers(profile?.company?.id);
+        if (profile) {
+          this.user = profile;
+          this.company = profile.company;
+          this.loadJobOffers(profile.company?.id);
+        }
       },
       error: (err) => console.error(err),
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe(); // Clean up the subscription
   }
 
   loadJobOffers(companyId: string): void {

@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ProfileService } from 'src/app/core/services/profile.service';
+import { MessageService } from 'src/app/core/services/message.service';
 
 @Component({
   selector: 'app-project-employer-view-proposal',
@@ -26,6 +28,8 @@ export class ProjectEmployerViewProposalComponent {
     private route: ActivatedRoute,
     private readonly projectService: ProjectService,
     private commonService: CommonService,
+    private profileService: ProfileService,
+    private messageService: MessageService,
     private fb: FormBuilder
   ) {
     this.sendForm = this.fb.group({
@@ -109,25 +113,24 @@ export class ProjectEmployerViewProposalComponent {
   }
 
   sendMessage() {
+    const profileId = this.profileService.profileId;
     const formData = {
       closeOffer: this.sendForm.value.closeOffer,
       offer: this.offer?.id,
       message: this.sendForm.value.message,
       candidateId: this.selectedCandidate?.id, // Assuming selectedCandidate has an id
+      employerId: profileId,
     };
 
     console.log(formData);
+    this.messageService.sendMessageToAdmins(formData).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
 
-    // this.commonService.sendMessage(formData).subscribe({
-    //   next: (response) => {
-    //     console.log('Message sent successfully', response);
-    //     // Handle success (e.g., show a success message)
-    //   },
-    //   error: (err) => {
-    //     console.error('Error sending message', err);
-    //     // Handle error (e.g., show an error message)
-    //  // Impossible de recruter ce candidat pour le moment. Veuillez vérifier les informations.
-    //   },
-    // });
   }
 }

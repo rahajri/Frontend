@@ -7,6 +7,8 @@ import { FreelancerSidebarItem } from 'src/app/core/models/sidebar-model';
 import { UserService } from '../../auth/service/user.service';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ProfileService } from 'src/app/core/services/profile.service';
 
 export interface SidemenuItem {
   page: string;
@@ -27,6 +29,7 @@ export interface SidemenuItem {
   styleUrls: ['./sidemenu.component.scss'],
 })
 export class SidemenuComponent {
+  subscription: Subscription | null = null;
   public routes = routes;
   profile: Profile | null = null;
   profileName: string = '';
@@ -40,8 +43,9 @@ export class SidemenuComponent {
     private router: Router,
     private data: ShareDataService,
     private common: CommonService,
-    private userService: UserService,
-    private authService: AuthService
+    private profileService: ProfileService,
+    private authService: AuthService,
+    private userService: UserService
   ) {
     this.common.base.subscribe((res: string) => {
       this.base = res;
@@ -59,17 +63,23 @@ export class SidemenuComponent {
   }
 
   getUser(): void {
-    this.userService.getProfile().subscribe({
+    this.subscription = this.profileService.currentUserProfile$.subscribe({
       next: (profile) => {
-        this.profile = profile;
-        const { fullName, initials } = this.userService.getProfileDetails(
-          this.profile
-        );
-        this.profileName = fullName;
-        this.initials = initials;
+        if (profile) {
+          this.profile = profile;
+          const { fullName, initials } = this.userService.getProfileDetails(
+            this.profile
+          );
+          this.profileName = fullName;
+          this.initials = initials;
+        }
       },
       error: (err) => console.error(err),
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe(); // Clean up the subscription
   }
 
   logout(): void {

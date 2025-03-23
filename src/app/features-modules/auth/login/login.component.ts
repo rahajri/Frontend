@@ -7,6 +7,7 @@ import { WebStorage } from 'src/app/core/storage/web.storage';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { ProfileService } from 'src/app/core/services/profile.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private profileService: ProfileService
   ) {
     this.translate.setDefaultLang(environment.defaultLanguage);
     this.subscription = this.storage.Loginvalue.subscribe((data) => {
@@ -68,6 +70,8 @@ export class LoginComponent implements OnInit, OnDestroy {
           localStorage.setItem('role', response.role);
           this.authService.setUser(response.user);
           this.authService.setIsLoggedIn(true);
+          console.log('user', response.user);
+          this.profileService.profile = response.user;
 
           if (response.role === 'candidate') {
             if (response.user.profileUpdatedAt != null) {

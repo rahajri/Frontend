@@ -53,20 +53,28 @@ export class FreelancerheaderComponent implements OnInit {
   ngOnInit(): void {
     this.isLogged = this.authService.isAuthenticated;
     if (this.isLogged) {
-      this.subscription = this.profileService.currentUserProfile$.subscribe(
-        (profile) => {
-          this.profile = profile;
-          if (profile && profile.image !== null) {
-            this.imgUrl = this.baseUrl + profile.image;
-            const { fullName, initials } =
-              this.userService.getProfileDetails(profile);
-            this.profileName = fullName;
-            this.initials = initials;
-          }
-        }
-      );
-      this.getUser();
+      this.initializeProfile();
       this.isEmployer = this.authService.isEmployer();
+    }
+  }
+
+  private initializeProfile(): void {
+    this.subscription = this.profileService.currentUserProfile$.subscribe(
+      (profile) => {
+        this.updateProfile(profile);
+      }
+    );
+    this.getUser();
+  }
+
+  private updateProfile(profile: any): void {
+    this.profile = profile;
+    if (profile) {
+      this.imgUrl = profile.image ? `${this.baseUrl}${profile.image}` : '';
+      const { fullName, initials } =
+        this.userService.getProfileDetails(profile);
+      this.profileName = fullName;
+      this.initials = initials;
     }
   }
 
@@ -79,15 +87,8 @@ export class FreelancerheaderComponent implements OnInit {
   getUser(): void {
     this.userService.getProfile().subscribe({
       next: (profile) => {
-        this.profile = profile;
-        if (profile.image !== null) {
-          this.imgUrl = this.baseUrl + profile.image;
-        }
-        const { fullName, initials } = this.userService.getProfileDetails(
-          this.profile
-        );
-        this.profileName = fullName;
-        this.initials = initials;
+        this.profileService.profile = profile; // Set profile in ProfileService
+        this.updateProfile(profile); // Update local profile data
       },
       error: (err) => console.error(err),
     });
