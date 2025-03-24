@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { MessageService } from 'src/app/core/services/message.service';
 
+declare var bootstrap: any;
 @Component({
   selector: 'app-project-employer-view-proposal',
   templateUrl: './project-employer-view-proposal.component.html',
@@ -30,7 +32,8 @@ export class ProjectEmployerViewProposalComponent {
     private commonService: CommonService,
     private profileService: ProfileService,
     private messageService: MessageService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public router: Router
   ) {
     this.sendForm = this.fb.group({
       closeOffer: [false],
@@ -126,11 +129,26 @@ export class ProjectEmployerViewProposalComponent {
     this.messageService.sendMessageToAdmins(formData).subscribe({
       next: (res) => {
         console.log(res);
+        this.sendForm.reset({
+          closeOffer: false,
+          message: '',
+        });
+        this.hideModal('hire-now');
+        this.router.navigate([routes.pendingproject]);
       },
       error: (err) => {
         console.error(err);
       },
     });
+  }
 
+  hideModal(id: string) {
+    const modalElement = document.getElementById(id);
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide();
+      }
+    }
   }
 }

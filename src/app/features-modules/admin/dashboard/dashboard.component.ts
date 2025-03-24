@@ -19,7 +19,8 @@ import {
   ApexFill,
   ApexResponsive,
 } from 'ng-apexcharts';
-import { adminDashboard } from 'src/app/core/models/models';
+import { Candidature } from 'src/app/core/models/models';
+import { ProjectService } from 'src/app/core/services/project.service';
 export type ChartOptions = {
   series: ApexAxisChartSeries | any;
   chart: ApexChart | any;
@@ -59,11 +60,21 @@ export class DashboardComponent implements OnInit {
   public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
   public filter = false;
-  public lstBoard: adminDashboard[] = [];
+  public lstBoard: Candidature[] = [];
   public url = 'admin';
+  selectedStatus: string | null = null;
+  candidatures: any = [];
+
+  public counter: number = 0;
+  appliedCount: number = 0;
+  recruitmentApprovedCount: number = 0;
+
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  constructor(private data: ShareDataService) {
+  constructor(
+    private data: ShareDataService,
+    private projectService: ProjectService
+  ) {
     this.chartOptions = {
       series: [
         {
@@ -121,20 +132,37 @@ export class DashboardComponent implements OnInit {
     this.lstBoard = [];
     this.serialNumberArray = [];
 
-    this.data.loadDashboardData().subscribe((res) => {
-      this.totalData = res.totalData;
-      res.data.map((res: adminDashboard, index: number) => {
-        const serialNumber = index + 1;
-        if (index >= this.skip && serialNumber <= this.limit) {
-          res.id = serialNumber;
-          this.lstBoard.push(res);
-          this.serialNumberArray.push(serialNumber);
-        }
+    this.projectService
+      .getCandidatures(this.currentPage, this.pageSize, this.selectedStatus)
+      .subscribe({
+        next: (res) => {
+          this.totalData = res.total;
+          this.counter = res.all;
+          this.appliedCount = res.appliedCount;
+          this.recruitmentApprovedCount = res.recruitmentApprovedCount;
+          res.data.forEach((candidate: any, index: number) => {
+            const serialNumber = index + 1;
+            if (index >= this.skip && serialNumber <= this.limit) {
+              candidate.id = serialNumber;
+              this.lstBoard.push(candidate);
+              this.serialNumberArray.push(serialNumber);
+            }
+          });
+          this.dataSource = new MatTableDataSource<any>(this.lstBoard); // Update the data source
+          this.calculateTotalPages(this.totalData, this.pageSize); // Calculate total pages
+        },
+        error: (err) => {
+          console.error(err); // Handle error
+        },
       });
-      this.dataSource = new MatTableDataSource<any>(this.lstBoard);
-      this.calculateTotalPages(this.totalData, this.pageSize);
-    });
   }
+
+  public filterOffersByStatus(status: string | null): void {
+    this.selectedStatus = status;
+    this.currentPage = 1;
+    this.getTableData();
+  }
+
   public sortData(sort: Sort) {
     const data = this.lstBoard.slice();
 
@@ -150,36 +178,31 @@ export class DashboardComponent implements OnInit {
   }
 
   public searchData(value: string): void {
-    this.dataSource.filter = value.trim().toLowerCase();
-    this.lstBoard = this.dataSource.filteredData;
+    const filterValue = value.trim().toLowerCase();
+    // Filter the data based on the search criteria
+    this.lstBoard = this.dataSource.data.filter((candidate: Candidature) => {
+      return (
+        candidate.candidate.firstName.toLowerCase().includes(filterValue) ||
+        candidate.candidate.lastName.toLowerCase().includes(filterValue) ||
+        candidate.candidate.phone.toLowerCase().includes(filterValue) ||
+        candidate.jobOffer.title.toLowerCase().includes(filterValue) ||
+        candidate.jobOffer.company.name.toLowerCase().includes(filterValue)
+      );
+    });
   }
 
   public getMoreData(event: string): void {
-    if (event == 'next') {
+    if (event === 'next' && this.currentPage < this.totalPages) {
       this.currentPage++;
-      this.pageIndex = this.currentPage - 1;
-      this.limit += this.pageSize;
-      this.skip = this.pageSize * this.pageIndex;
-      this.getTableData();
-    } else if (event == 'previous') {
+    } else if (event === 'previous' && this.currentPage > 1) {
       this.currentPage--;
-      this.pageIndex = this.currentPage - 1;
-      this.limit -= this.pageSize;
-      this.skip = this.pageSize * this.pageIndex;
-      this.getTableData();
     }
+    this.getTableData(); // Fetch the data for the new page
   }
 
   public moveToPage(pageNumber: number): void {
     this.currentPage = pageNumber;
-    this.skip = this.pageSelection[pageNumber - 1].skip;
-    this.limit = this.pageSelection[pageNumber - 1].limit;
-    if (pageNumber > this.currentPage) {
-      this.pageIndex = pageNumber - 1;
-    } else if (pageNumber < this.currentPage) {
-      this.pageIndex = pageNumber + 1;
-    }
-    this.getTableData();
+    this.getTableData(); // Fetch the data for the selected page
   }
 
   public changePageSize(): void {

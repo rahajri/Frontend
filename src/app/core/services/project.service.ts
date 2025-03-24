@@ -87,6 +87,28 @@ export class ProjectService {
     );
   }
 
+  getCandidatures(
+    page: number = 1,
+    limit: number = 10,
+    status: string | null = null
+  ): Observable<{
+    data: any[];
+    total: number;
+    appliedCount: number;
+    recruitmentApprovedCount: number;
+    all: number;
+  }> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+
+    if (status) {
+      params = params.set('status', status);
+    }
+
+    return this.http.get<any>(`${this.baseUrl}/candidatures`, { params });
+  }
+
   projectsFiler(data: any): Observable<any[]> {
     return this.http.post<any[]>(`${this.baseUrl}/filter`, data);
   }

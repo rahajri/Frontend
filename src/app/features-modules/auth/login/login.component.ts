@@ -70,7 +70,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           localStorage.setItem('role', response.role);
           this.authService.setUser(response.user);
           this.authService.setIsLoggedIn(true);
-          console.log('user', response.user);
           this.profileService.profile = response.user;
 
           if (response.role === 'candidate') {

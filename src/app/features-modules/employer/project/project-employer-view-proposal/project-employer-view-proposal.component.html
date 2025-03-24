@@ -128,7 +128,16 @@
         </div>
         <div class="payment-count">
           <div class="hire-now">
+            <button
+              *ngIf="appli?.status?.name !== 'Applied'"
+              disabled
+              class="btn btn-primary"
+            >
+              En Cours ...
+            </button>
+
             <a
+              *ngIf="appli?.status?.name === 'Applied'"
               href="#hire-now"
               class="btn btn-primary"
               data-bs-toggle="modal"

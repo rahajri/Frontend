@@ -569,6 +569,73 @@ export interface adminDashboard {
   category: string;
   id: number;
 }
+export interface Candidature {
+  id: string;
+  appliedAt: string;
+  message: string;
+  status: {
+    id: string;
+    name: string;
+    description: string;
+    context: string;
+  };
+  jobOffer: {
+    id: string;
+    title: string;
+    seniority: string;
+    description: string;
+    isAvailable: boolean;
+    startDate: string;
+    endDate: string | null;
+    publicationDate: string;
+    expectedDuration: number;
+    timeUnit: string | null;
+    embedding: any;
+    createdAt: string;
+    contractType: {
+      description: string;
+      id: string;
+      isRenewable: boolean;
+    };
+    company: {
+      id: string;
+      name: string;
+      siret: string;
+      email: string | null;
+      phone: string | null;
+      naf: string;
+      nafTitle: string;
+      category: string;
+      workforce: number;
+      coverImage: string | null;
+      image: string | null;
+      message: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+  };
+  candidate: {
+    id: string;
+    lastName: string;
+    firstName: string;
+    email: string;
+    password: string;
+    phone: string;
+    birthDate: string | null;
+    age: number | null;
+    role: string;
+    emailVerifiedAt: string | null;
+    profileTitle: string;
+    aiId: string | null;
+    embedding: any;
+    createdAt: string;
+    updatedAt: string;
+    lastConnection: string;
+    profileUpdatedAt: string;
+    image: string;
+  };
+}
+
 export interface adminReports {
   id: number;
   name: string;
