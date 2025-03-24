@@ -78,8 +78,13 @@ export class ProjectService {
     return this.http.get<any>(`${this.baseUrl}/all`);
   }
 
-  getPublishedOffers() {
-    return this.http.get<any>(`${this.baseUrl}/published`);
+  getPublishedOffers(
+    page: number,
+    limit: number
+  ): Observable<{ offers: any[]; total: number }> {
+    return this.http.get<any>(
+      `${this.baseUrl}/published?page=${page}&limit=${limit}`
+    );
   }
 
   projectsFiler(data: any): Observable<any[]> {

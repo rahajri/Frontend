@@ -43,6 +43,7 @@ export class ProjectListComponent {
   public currentPage: number = 1;
   public itemsPerPage: number = 5; // Adjust based on your needs
   public totalOffers: number = 0; // Total number of offers
+  totalPages: number = 1;
 
   constructor(
     public router: Router,
@@ -83,28 +84,59 @@ export class ProjectListComponent {
   }
 
   getOffers() {
-    this.projectService.getPublishedOffers().subscribe({
-      next: (data) => {
-        this.offers = [...data];
-        this.paginatedOffers = data;
-        this.totalOffers = data.length;
-        this.currentPage = 1; // Reset to first page on new data
-        this.updatePaginatedOffers(); // Update paginated offers
-        this.updateUI();
-      },
-      error: (error) => {
-        console.error(error);
-        this.globalErrorMessage = true;
-        this.updateUI();
-      },
-    });
+    this.projectService
+      .getPublishedOffers(this.currentPage, this.itemsPerPage)
+      .subscribe({
+        next: (res) => {
+          this.offers = res.offers;
+          this.paginatedOffers = res.offers;
+          this.totalPages = Math.ceil(res.total / this.itemsPerPage);
+          this.totalOffers = res.total;
+          this.updateUI();
+        },
+        error: (error) => {
+          console.error(error);
+          this.globalErrorMessage = true;
+          this.updateUI();
+        },
+      });
   }
-  updatePaginatedOffers() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    this.paginatedOffers = this.offers.slice(
-      startIndex,
-      startIndex + this.itemsPerPage
-    );
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.getOffers();
+    }
+  }
+
+  getPageNumbers(): number[] {
+    const pages: number[] = [];
+    const maxVisiblePages = 5;
+
+    if (this.totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= this.totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      let startPage = this.currentPage - Math.floor(maxVisiblePages / 2);
+      let endPage = this.currentPage + Math.floor(maxVisiblePages / 2);
+
+      if (startPage < 1) {
+        startPage = 1;
+        endPage = maxVisiblePages;
+      }
+
+      if (endPage > this.totalPages) {
+        endPage = this.totalPages;
+        startPage = this.totalPages - maxVisiblePages + 1;
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+    }
+
+    return pages;
   }
 
   getContractTypes() {
@@ -222,7 +254,7 @@ export class ProjectListComponent {
         this.totalOffers = response.length;
         this.offers = response;
         this.paginatedOffers = response;
-        this.updatePaginatedOffers();
+        this.totalPages = Math.ceil(response.length / this.itemsPerPage);
         this.updateUI();
       },
       error: (error) => {
@@ -230,30 +262,6 @@ export class ProjectListComponent {
         this.updateUI();
       },
     });
-  }
-
-  goToPage(page: number) {
-    if (page < 1 || page > this.getTotalPages()) return; // Prevent invalid pages
-    this.currentPage = page;
-    this.updatePaginatedOffers();
-  }
-
-  nextPage() {
-    if (this.currentPage < this.getTotalPages()) {
-      this.currentPage++;
-      this.updatePaginatedOffers();
-    }
-  }
-
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updatePaginatedOffers();
-    }
-  }
-
-  getTotalPages(): number {
-    return Math.ceil(this.totalOffers / this.itemsPerPage);
   }
 
   onActivityChange(event: Event) {
@@ -300,7 +308,7 @@ export class ProjectListComponent {
         this.totalOffers = response.length;
         this.offers = [...response];
         this.paginatedOffers = response;
-        this.updatePaginatedOffers();
+        this.totalPages = Math.ceil(response.length / this.itemsPerPage);
         this.updateUI();
       },
       error: (error) => {

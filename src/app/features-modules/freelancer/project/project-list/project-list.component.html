@@ -383,28 +383,34 @@
           <div class="row">
             <div class="col-md-12">
               <ul class="paginations list-pagination">
-                <li class="page-item">
-                  <a href="javascript:void(0);" (click)="prevPage()">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a
+                    (click)="changePage(currentPage - 1)"
+                    [class.disabled]="currentPage === 1"
+                  >
                     <i class="feather icon-chevron-left"></i>
                   </a>
                 </li>
-                <li
-                  class="page-item"
-                  *ngFor="
-                    let page of [].constructor(getTotalPages());
-                    let i = index
-                  "
-                >
+
+                @for (page of getPageNumbers(); track page) {
+                <li class="page-item">
                   <a
-                    href="javascript:void(0);"
-                    [class.active]="currentPage === i + 1"
-                    (click)="goToPage(i + 1)"
+                    (click)="changePage(page)"
+                    [class.active]="currentPage === page"
                   >
-                    {{ i + 1 }}
+                    {{ page }}
                   </a>
                 </li>
-                <li class="page-item">
-                  <a href="javascript:void(0);" (click)="nextPage()">
+                }
+
+                <li
+                  class="page-item"
+                  [class.disabled]="currentPage === totalPages"
+                >
+                  <a
+                    (click)="changePage(currentPage + 1)"
+                    [class.disabled]="currentPage === totalPages"
+                  >
                     <i class="feather icon-chevron-right"></i>
                   </a>
                 </li>
