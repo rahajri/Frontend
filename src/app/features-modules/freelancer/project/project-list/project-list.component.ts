@@ -26,6 +26,7 @@ export class ProjectListComponent {
   baseUrl = environment.apiUrl;
   isLogged: boolean = false;
   offers: any[] = [];
+  paginatedOffers: any[] = [];
   globalErrorMessage: boolean = false;
   activities: any[] = [];
   displayedActivities = 5;
@@ -85,8 +86,10 @@ export class ProjectListComponent {
     this.projectService.getPublishedOffers().subscribe({
       next: (data) => {
         this.offers = [...data];
+        this.paginatedOffers = data;
         this.totalOffers = data.length;
-        this.updatePaginatedOffers();
+        this.currentPage = 1; // Reset to first page on new data
+        this.updatePaginatedOffers(); // Update paginated offers
         this.updateUI();
       },
       error: (error) => {
@@ -96,10 +99,12 @@ export class ProjectListComponent {
       },
     });
   }
-
   updatePaginatedOffers() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    this.offers = this.offers.slice(startIndex, startIndex + this.itemsPerPage);
+    this.paginatedOffers = this.offers.slice(
+      startIndex,
+      startIndex + this.itemsPerPage
+    );
   }
 
   getContractTypes() {
@@ -216,6 +221,7 @@ export class ProjectListComponent {
       next: (response) => {
         this.totalOffers = response.length;
         this.offers = response;
+        this.paginatedOffers = response;
         this.updatePaginatedOffers();
         this.updateUI();
       },
@@ -293,6 +299,7 @@ export class ProjectListComponent {
       next: (response) => {
         this.totalOffers = response.length;
         this.offers = [...response];
+        this.paginatedOffers = response;
         this.updatePaginatedOffers();
         this.updateUI();
       },
