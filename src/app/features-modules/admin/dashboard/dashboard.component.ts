@@ -38,6 +38,8 @@ export type ChartOptions = {
   labels: string[] | any;
 };
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -64,6 +66,10 @@ export class DashboardComponent implements OnInit {
   public url = 'admin';
   selectedStatus: string | null = null;
   candidatures: any = [];
+  candidatureToDelete: any = [];
+  candidatureToChange: any = [];
+  selectedCandidature: any;
+  newStatus: string = 'Accepted';
 
   public counter: number = 0;
   appliedCount: number = 0;
@@ -143,7 +149,6 @@ export class DashboardComponent implements OnInit {
           res.data.forEach((candidate: any, index: number) => {
             const serialNumber = index + 1;
             if (index >= this.skip && serialNumber <= this.limit) {
-              candidate.id = serialNumber;
               this.lstBoard.push(candidate);
               this.serialNumberArray.push(serialNumber);
             }
@@ -170,10 +175,33 @@ export class DashboardComponent implements OnInit {
       this.lstBoard = data;
     } else {
       this.lstBoard = data.sort((a, b) => {
-        const aValue = (a as never)[sort.active];
-        const bValue = (b as never)[sort.active];
+        const aValue = this.getValue(a, sort.active);
+        const bValue = this.getValue(b, sort.active);
+
+        // Handle null values
+        if (aValue == null && bValue == null) return 0;
+        if (aValue == null) return 1;
+        if (bValue == null) return -1;
+
         return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
       });
+    }
+  }
+
+  private getValue(item: Candidature, key: string): any {
+    switch (key) {
+      case 'companyName':
+        return item.jobOffer?.company?.name;
+      case 'offerTitle':
+        return item.jobOffer?.title;
+      case 'contractType':
+        return item.jobOffer?.contractType?.description;
+      case 'candidate':
+        return `${item.candidate?.firstName} ${item.candidate?.lastName}`;
+      case 'status':
+        return item.status?.name;
+      default:
+        return null; // Handle any unknown keys
     }
   }
 
@@ -225,6 +253,104 @@ export class DashboardComponent implements OnInit {
       this.pageNumberArray.push(i);
       this.pageSelection.push({ skip: skip, limit: limit });
     }
+  }
+
+  deleteCandidature(candidature: any) {
+    this.projectService.deleteCandidature(candidature?.id).subscribe({
+      next: (res) => {
+        this.hideModal('delete_Candidature');
+        this.getTableData();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  changeCandidatureStatus(candidatureId: string, status: string) {
+    this.projectService
+      .changeCandidatureStatus(candidatureId, status)
+      .subscribe({
+        next: (res) => {
+          this.hideModal('change_status');
+          this.getTableData();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+  }
+
+  showDeleteCandidatureModal(candidature: any) {
+    this.candidatureToDelete = candidature;
+    const modalElement = document.getElementById('delete_Candidature');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+      modalElement.focus();
+    }
+  }
+
+  showCandidatureDetailsModal(candidature: any) {
+    this.selectedCandidature = candidature;
+    const modalElement = document.getElementById('show-candidature-details');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+      modalElement.focus();
+    }
+  }
+
+  showChangeCandidatureStatusModal(candidature: any, status: string) {
+    this.newStatus = status;
+    this.candidatureToChange = candidature;
+    const modalElement = document.getElementById('change_status');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+      modalElement.focus();
+    }
+  }
+
+  hideModal(id: string) {
+    const modalElement = document.getElementById(id);
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide();
+      }
+    }
+  }
+
+  translateStatusToFrench = (status: string): string => {
+    const statusTranslations: { [key: string]: string } = {
+      Applied: 'Candidature Soumise',
+      'Recruitment Approved': 'Recrutement a Approuvé',
+      Rejected: 'Rejeté',
+      Accepted: 'Accepté',
+    };
+
+    return statusTranslations[status] || status;
+  };
+
+  getStatusClass = (status: string): string => {
+    switch (status) {
+      case 'Applied':
+        return 'text-primary';
+      case 'Recruitment Approved':
+        return 'text-info';
+      case 'Rejected':
+        return 'text-danger';
+      case 'Accepted':
+        return 'text-success';
+      default:
+        return 'text-secondary';
+    }
+  };
+
+  getDate(isoDate: any): string {
+    const date = new Date(isoDate);
+    return new Intl.DateTimeFormat('en-GB').format(date);
   }
 }
 export interface pageSelection {

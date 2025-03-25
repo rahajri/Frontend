@@ -5,16 +5,8 @@ import { ProvidersRoutingModule } from './providers-routing.module';
 import { ProvidersComponent } from './providers.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
-
 @NgModule({
-  declarations: [
-    ProvidersComponent
-  ],
-  imports: [
-    CommonModule,
-    ProvidersRoutingModule,
-    SharedModule
-]
+  declarations: [ProvidersComponent],
+  imports: [CommonModule, ProvidersRoutingModule, SharedModule],
 })
-export class ProvidersModule { }
+export class ProvidersModule {}

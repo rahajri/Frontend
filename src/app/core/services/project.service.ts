@@ -26,6 +26,15 @@ export class ProjectService {
     return this.http.patch<any>(`${this.baseUrl}/${id}`, projectData);
   }
 
+  changeCandidatureStatus(id: string | null, status: string) {
+    if (!id) {
+      throw new Error('Project ID cannot be null');
+    }
+    return this.http.patch<any>(`${this.baseUrl}/candidature/${id}`, {
+      status,
+    });
+  }
+
   getProjectDetails(id: string | null, candidateId?: string | null) {
     if (!id) {
       throw new Error('Project ID cannot be null');
@@ -119,6 +128,12 @@ export class ProjectService {
 
   deleteOffer(offerId: string) {
     return this.http.delete<any>(`${this.baseUrl}/${offerId}`);
+  }
+
+  deleteCandidature(candidatureId: string) {
+    return this.http.delete<any>(
+      `${this.baseUrl}/candidature/${candidatureId}`
+    );
   }
 
   getActivities(): Observable<any[]> {

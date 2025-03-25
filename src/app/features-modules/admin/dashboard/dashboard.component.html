@@ -281,6 +281,7 @@
                           <th mat-sort-header="offerTitle">Titre</th>
                           <th mat-sort-header="contractType">Type Contrat</th>
                           <th mat-sort-header="candidate">Candidate</th>
+                          <th mat-sort-header="status">Status</th>
                           <th class="text-end">Action</th>
                         </tr>
                         @if (lstBoard.length === 0) {
@@ -309,25 +310,31 @@
                               ></label>
                             </div>
                           </td>
-                          <td>
+                          <td (click)="showCandidatureDetailsModal(board)">
                             <h2 class="table-avatar">
                               <a [routerLink]="'/admin/profile'">
                                 {{ board?.jobOffer?.company?.name }}
                               </a>
                             </h2>
                           </td>
-                          <td>
+                          <td (click)="showCandidatureDetailsModal(board)">
                             {{ board?.jobOffer?.title }}
                           </td>
-                          <td>
+                          <td (click)="showCandidatureDetailsModal(board)">
                             <div>
                               {{ board?.jobOffer?.contractType?.description }}
                             </div>
                           </td>
-                          <td>
+                          <td (click)="showCandidatureDetailsModal(board)">
                             {{ board?.candidate?.firstName }}
                             {{ board?.candidate?.lastName }},
                             {{ board?.candidate?.phone }}
+                          </td>
+                          <td
+                            [ngClass]="getStatusClass(board.status.name)"
+                            (click)="showCandidatureDetailsModal(board)"
+                          >
+                            {{ translateStatusToFrench(board.status.name) }}
                           </td>
                           <td class="text-end" data-bs-toggle="dropdown">
                             <div class="hide-shave">
@@ -341,17 +348,49 @@
                                   class="dropdown-item"
                                   data-dismiss="modal"
                                   href="javascript:void(0)"
-                                  ><i class="feather icon-edit"></i> Editer</a
-                                >
+                                  (click)="showCandidatureDetailsModal(board)"
+                                  ><i class="feather icon-eye text-info"></i>
+                                  Details
+                                </a>
+                                <a
+                                  class="dropdown-item"
+                                  data-dismiss="modal"
+                                  href="javascript:void(0)"
+                                  (click)="
+                                    showChangeCandidatureStatusModal(
+                                      board,
+                                      'Accepted'
+                                    )
+                                  "
+                                  ><i
+                                    class="feather icon-user-check text-success"
+                                  ></i>
+                                  Valider
+                                </a>
+                                <a
+                                  class="dropdown-item"
+                                  data-dismiss="modal"
+                                  href="javascript:void(0)"
+                                  (click)="
+                                    showChangeCandidatureStatusModal(
+                                      board,
+                                      'Rejected'
+                                    )
+                                  "
+                                  ><i
+                                    class="feather icon-user-x text-danger"
+                                  ></i>
+                                  Rejeter
+                                </a>
                                 <a
                                   class="dropdown-item"
                                   href="javascript:void(0)"
                                   data-dismiss="modal"
-                                  ><i
-                                    class="feather icon-trash text-danger"
-                                  ></i>
-                                  Supprimer</a
+                                  (click)="showDeleteCandidatureModal(board)"
                                 >
+                                  <i class="feather icon-trash text-danger"></i>
+                                  Supprimer
+                                </a>
                               </div>
                             </div>
                           </td>
@@ -477,4 +516,206 @@
     </div>
   </div>
   <!-- /Page Wrapper -->
+</div>
+
+<!-- Delete Modal -->
+<div class="modal custom-modal fade" id="delete_Candidature" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Supprimer</h3>
+          <p>Êtes-vous sûr de vouloir supprimer la candidature de :</p>
+          <p class="text-danger">
+            <strong
+              >{{ candidatureToDelete?.candidate?.firstName }}
+              {{ candidatureToDelete?.candidate?.lastName }}</strong
+            >
+            au poste de
+            <strong>{{ candidatureToDelete?.jobOffer?.title }}</strong> chez
+            <strong>{{ candidatureToDelete?.jobOffer?.company?.name }}</strong
+            >?
+          </p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a
+                href="javascript:void(0);"
+                class="btn btn-primary continue-btn"
+                (click)="deleteCandidature(candidatureToDelete)"
+                >Supprimer</a
+              >
+            </div>
+            <div class="col-6">
+              <a
+                href="javascript:void(0);"
+                data-bs-dismiss="modal"
+                class="btn btn-primary cancel-btn"
+                >Annuler</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Modal -->
+
+<!-- Change Status Modal -->
+<div class="modal custom-modal fade" id="change_status" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>
+            {{
+              newStatus === "Accepted"
+                ? "Acceptation de la candidature"
+                : "Rejet de la candidature"
+            }}
+          </h3>
+          <p
+            [ngClass]="
+              newStatus === 'Accepted' ? 'text-success' : 'text-danger'
+            "
+          >
+            Êtes-vous sûr de vouloir
+            {{ newStatus === "Accepted" ? "accepter" : "rejeter" }} la
+            candidature de :
+          </p>
+          <p
+            [ngClass]="
+              newStatus === 'Accepted' ? 'text-success' : 'text-danger'
+            "
+          >
+            <strong>
+              {{ candidatureToChange?.candidate?.firstName }}
+              {{ candidatureToChange?.candidate?.lastName }}
+            </strong>
+            au poste de
+            <strong>{{ candidatureToChange?.jobOffer?.title }}</strong> chez
+            <strong>{{ candidatureToChange?.jobOffer?.company?.name }}</strong
+            >?
+          </p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a
+                href="javascript:void(0);"
+                class="btn btn-primary continue-btn"
+                (click)="
+                  changeCandidatureStatus(candidatureToChange.id, newStatus)
+                "
+                >Confirmer</a
+              >
+            </div>
+            <div class="col-6">
+              <a
+                href="javascript:void(0);"
+                data-bs-dismiss="modal"
+                class="btn btn-primary cancel-btn"
+                >Annuler</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Candidature Details Modal -->
+<div
+  class="modal custom-modal fade"
+  id="show-candidature-details"
+  role="dialog"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header flex-wrap">
+        <div class="text-center w-100 mb-3">
+          <img src="assets/img/interim.png" alt="logo" />
+        </div>
+        <h3 class="modal-title">Détails de Candidature</h3>
+        <button type="button" class="close" data-bs-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+
+      <div class="p-3">
+        <div class="form-group">
+          <i class="ms-2">
+            date d'applcation :
+            <strong>{{ getDate(selectedCandidature?.appliedAt) }}</strong></i
+          >
+        </div>
+        <hr class="m-0 mt-2" />
+        <div class="form-group">
+          <h5 class="text-center">Message</h5>
+          <p class="ms-2" [innerHTML]="selectedCandidature?.message"></p>
+        </div>
+
+        <hr class="m-0 mt-2" />
+        <h5 class="text-center">Offre</h5>
+        <div class="ms-2">
+          <div>
+            <i
+              >Entreprise :
+              <strong>{{
+                selectedCandidature?.jobOffer?.company?.name
+              }}</strong></i
+            >
+          </div>
+          <div>
+            <i
+              >titre d'offre :
+              <strong>{{ selectedCandidature?.jobOffer?.title }}</strong></i
+            >
+          </div>
+          <div>
+            <i
+              >Date de publication :
+              <strong>{{
+                getDate(selectedCandidature?.jobOffer?.publicationDate)
+              }}</strong></i
+            >
+          </div>
+        </div>
+
+        <hr class="m-0 mt-2" />
+        <h4 class="text-center">Candidate</h4>
+
+        <div class="ms-2">
+          <div>
+            <i
+              >Candidate :
+              <strong
+                >{{ selectedCandidature?.candidate?.firstName }}
+                {{ selectedCandidature?.candidate?.lastName }}</strong
+              ></i
+            >
+          </div>
+          <div>
+            <i
+              >E-mail :
+              <strong>{{
+                selectedCandidature?.candidate?.email || ""
+              }}</strong></i
+            >
+          </div>
+          <div>
+            <i
+              >Téléphone :
+              <strong>{{
+                selectedCandidature?.candidate?.phone || ""
+              }}</strong></i
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

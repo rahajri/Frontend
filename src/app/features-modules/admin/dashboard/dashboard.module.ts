@@ -6,18 +6,13 @@ import { DashboardComponent } from './dashboard.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
-
 @NgModule({
-  declarations: [
-    DashboardComponent
-  ],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     NgApexchartsModule,
-    SharedModule
-    
-  ]
+    SharedModule,
+  ],
 })
-export class DashboardModule { }
+export class DashboardModule {}
