@@ -191,13 +191,8 @@ export class ProjectListComponent {
     this.updateUI();
   }
 
-  postulerBtn(id: string | null) {
-    if (id && this.isLogged) {
-      this.router.navigate([routes.get_freelancer_project_details(id)]);
-    } else {
-      showSuccessModal('not-connected');
-    }
-    this.updateUI();
+  postulerBtn(id: string) {
+    this.router.navigate([routes.get_freelancer_project_details(id)]);
   }
 
   showLess() {

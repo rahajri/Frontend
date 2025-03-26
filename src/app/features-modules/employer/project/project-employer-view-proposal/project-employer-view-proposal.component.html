@@ -129,13 +129,22 @@
         <div class="payment-count">
           <div class="hire-now">
             <button
-              *ngIf="appli?.status?.name !== 'Applied'"
+              *ngIf="
+                appli?.status?.name !== 'Applied' &&
+                appli?.status?.name !== 'Recruitment Approved'
+              "
+              disabled
+              class="btn btn-primary"
+            >
+              Terminer
+            </button>
+            <button
+              *ngIf="appli?.status?.name === 'Recruitment Approved'"
               disabled
               class="btn btn-primary"
             >
               En Cours ...
             </button>
-
             <a
               *ngIf="appli?.status?.name === 'Applied'"
               href="#hire-now"

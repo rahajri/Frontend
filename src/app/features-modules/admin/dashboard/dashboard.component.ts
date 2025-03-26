@@ -66,7 +66,6 @@ export class DashboardComponent implements OnInit {
   public url = 'admin';
   selectedStatus: string | null = null;
   candidatures: any = [];
-  candidatureToDelete: any = [];
   candidatureToChange: any = [];
   selectedCandidature: any;
   newStatus: string = 'Accepted';
@@ -208,13 +207,15 @@ export class DashboardComponent implements OnInit {
   public searchData(value: string): void {
     const filterValue = value.trim().toLowerCase();
     // Filter the data based on the search criteria
+    const translatedStatus = this.translateStatusToEnglish(value.trim());
     this.lstBoard = this.dataSource.data.filter((candidate: Candidature) => {
       return (
         candidate.candidate.firstName.toLowerCase().includes(filterValue) ||
         candidate.candidate.lastName.toLowerCase().includes(filterValue) ||
         candidate.candidate.phone.toLowerCase().includes(filterValue) ||
         candidate.jobOffer.title.toLowerCase().includes(filterValue) ||
-        candidate.jobOffer.company.name.toLowerCase().includes(filterValue)
+        candidate.jobOffer.company.name.toLowerCase().includes(filterValue) ||
+        candidate.status.name.toLowerCase() === translatedStatus.toLowerCase()
       );
     });
   }
@@ -238,6 +239,12 @@ export class DashboardComponent implements OnInit {
     this.limit = this.pageSize;
     this.skip = 0;
     this.currentPage = 1;
+    this.getTableData();
+  }
+
+  public changeStatus(): void {
+    this.selectedStatus =
+      this.selectedStatus === 'null' ? null : this.selectedStatus;
     this.getTableData();
   }
 
@@ -279,16 +286,6 @@ export class DashboardComponent implements OnInit {
           console.error(err);
         },
       });
-  }
-
-  showDeleteCandidatureModal(candidature: any) {
-    this.candidatureToDelete = candidature;
-    const modalElement = document.getElementById('delete_Candidature');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-      modalElement.focus();
-    }
   }
 
   showCandidatureDetailsModal(candidature: any) {
@@ -352,6 +349,18 @@ export class DashboardComponent implements OnInit {
     const date = new Date(isoDate);
     return new Intl.DateTimeFormat('en-GB').format(date);
   }
+
+  // Reverse translation from French to English
+  translateStatusToEnglish = (status: string): string => {
+    const statusTranslations: { [key: string]: string } = {
+      'Candidature Soumise': 'Applied',
+      'Recrutement a Approuvé': 'Recruitment Approved',
+      Rejeté: 'Rejected',
+      Accepté: 'Accepted',
+    };
+
+    return statusTranslations[status] || status;
+  };
 }
 export interface pageSelection {
   skip: number;

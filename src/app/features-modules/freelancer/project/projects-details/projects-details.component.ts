@@ -13,7 +13,9 @@ import { ProjectService } from 'src/app/core/services/project.service';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { CandidateService } from 'src/app/core/services/condidate.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { showSuccessModal } from 'src/app/core/services/common/common-functions';
+import { ProfileService } from 'src/app/core/services/profile.service';
 
 declare var bootstrap: any;
 @Component({
@@ -31,6 +33,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
   baseUrl = environment.apiUrl;
   form: FormGroup;
   candidateId: string | null = null;
+  isLogged: boolean = false;
 
   constructor(
     private router: Router,
@@ -38,7 +41,8 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     private projectService: ProjectService,
     private commonService: CommonService,
     private sanitizer: DomSanitizer,
-    private candidateService: CandidateService,
+    private authService: AuthService,
+    private profileService: ProfileService,
     private cdr: ChangeDetectorRef
   ) {
     this.form = new FormGroup({
@@ -68,24 +72,11 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.pojectId = this.route.snapshot.paramMap.get('id');
     this.editor = new Editor();
+    this.isLogged = this.authService.isAuthenticated;
+    this.candidateId = this.profileService.profileId;
 
-    const email = localStorage.getItem('email');
-
-    if (!email) {
-      console.error('No email found in local storage.');
-      return;
-    }
-
-    this.candidateService.getCandidate(email).subscribe({
-      next: (response) => {
-        this.candidateId = response?.id;
-        this.getProjectDetails(this.pojectId, this.candidateId);
-        this.cdr.markForCheck();
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
+    this.getProjectDetails(this.pojectId, this.candidateId);
+    this.cdr.markForCheck();
   }
 
   getProjectDetails(projectId: string | null, candidateId?: string | null) {
@@ -95,6 +86,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       },
       error: (err) => {
+        this.cdr.markForCheck();
         console.error(err);
       },
     });
@@ -108,6 +100,15 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
 
   navigation() {
     this.router.navigate([routes.employee_dashboard]);
+  }
+
+  postulerBtn() {
+    if (this.isLogged) {
+      showSuccessModal('file', false);
+    } else {
+      showSuccessModal('not-connected', false);
+    }
+    this.cdr.markForCheck();
   }
 
   getDate(isoDate: string) {

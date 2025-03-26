@@ -127,14 +127,13 @@
               <p class="mb-0">{{ offer?.salaryType?.type }}</p>
             </div>
             <div>
-              <a
-                data-bs-toggle="modal"
-                href="#file"
+              <button
                 class="btn proposal-btn btn-primary"
                 *ngIf="!offer?.hasApplied; else alreadyApplied"
+                (click)="postulerBtn()"
               >
                 Postuler
-              </a>
+              </button>
 
               <ng-template #alreadyApplied>
                 <span
@@ -392,15 +391,59 @@
       </div>
       <div class="modal-body">
         <div class="text-center modal-body-content pt-0">
-          <h5 class="modal-title">Submitted Successfully</h5>
-          <p>You will be Notified once, your Proposal approves.</p>
+          <h5 class="modal-title">Candidature envoyée avec succés</h5>
+          <p>Si votre profil est retenu, vous serez contacté prochainement.</p>
         </div>
         <div class="col-md-12 submit-section text-center">
           <a
             data-bs-dismiss="modal"
             [routerLink]="routes.freelancer_dashboard"
             class="btn btn-primary submit-btn"
-            >Go to Tableau de Bord</a
+            >Tableau de Bord</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /The Modal -->
+
+<!-- Not Connected Modal -->
+<div class="modal fade custom-modal" id="not-connected">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content proposal-modal-info">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center modal-body-content pt-0">
+          <h5 class="modal-title">Connexion Requise</h5>
+          <p>
+            Pour postuler à cette offre, veuillez vous connecter à votre compte.
+            Si vous n'avez pas encore de compte, inscrivez-vous dès maintenant
+            pour accéder à toutes les opportunités et maximiser vos chances de
+            trouver l'emploi idéal !
+          </p>
+        </div>
+        <div class="col-md-12 submit-section text-center">
+          <a
+            data-bs-dismiss="modal"
+            [routerLink]="routes.register"
+            class="btn btn-primary submit-btn"
+            >S'inscrire</a
+          >
+          <a
+            data-bs-dismiss="modal"
+            [routerLink]="routes.login"
+            class="btn btn-primary submit-btn"
+            >Se connecter</a
           >
         </div>
       </div>

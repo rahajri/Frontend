@@ -110,6 +110,7 @@ export class ProjectService {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('limit', limit.toString());
+    status = status === 'null' || status === '' ? null : status;
 
     if (status) {
       params = params.set('status', status);
