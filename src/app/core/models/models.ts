@@ -573,6 +573,7 @@ export interface Candidature {
   id: string;
   appliedAt: string;
   message: string;
+  employeeMessage: string;
   status: {
     id: string;
     name: string;

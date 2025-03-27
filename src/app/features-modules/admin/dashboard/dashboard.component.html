@@ -389,7 +389,7 @@
                                   href="javascript:void(0)"
                                   (click)="showCandidatureDetailsModal(board)"
                                   ><i class="feather icon-eye text-info"></i>
-                                  Details
+                                  Détails
                                 </a>
                                 <a
                                   class="dropdown-item"
@@ -632,74 +632,155 @@
 
       <div class="p-3">
         <div class="form-group">
-          <i class="ms-2">
-            date d'applcation :
-            <strong>{{ getDate(selectedCandidature?.appliedAt) }}</strong></i
-          >
+          <h4>{{ selectedCandidature?.jobOffer?.company?.name }}</h4>
         </div>
         <hr class="m-0 mt-2" />
         <div class="form-group">
-          <h5 class="text-center">Message</h5>
+          <h5 class="text-center">Information Contact</h5>
+          <div class="ms-2">
+            <table>
+              <tr>
+                <td>Contact :</td>
+                <td>
+                  <strong class="ms-4"
+                    >{{
+                      selectedCandidature?.jobOffer?.company?.employees[0]
+                        ?.firstName
+                    }}
+                    {{
+                      selectedCandidature?.jobOffer?.company?.employees[0]
+                        ?.lastName
+                    }}</strong
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td>E-mail :</td>
+                <td>
+                  <strong class="ms-4">{{
+                    selectedCandidature?.jobOffer?.company?.employees[0]
+                      ?.email || ""
+                  }}</strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Téléphone :</td>
+                <td>
+                  <strong class="ms-4">{{
+                    selectedCandidature?.jobOffer?.company?.employees[0]
+                      ?.phone || ""
+                  }}</strong>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <h5 class="text-center">Message Client</h5>
+          <p
+            class="ms-2"
+            [innerHTML]="selectedCandidature?.employeeMessage"
+          ></p>
+        </div>
+
+        <div class="form-group">
+          <hr class="m-0 mt-2" />
+          <h5 class="text-center">Message Candidat</h5>
           <p class="ms-2" [innerHTML]="selectedCandidature?.message"></p>
         </div>
 
         <hr class="m-0 mt-2" />
-        <h5 class="text-center">Offre</h5>
+        <h5 class="text-center">Information Générales</h5>
         <div class="ms-2">
-          <div>
-            <i
-              >Entreprise :
-              <strong>{{
-                selectedCandidature?.jobOffer?.company?.name
-              }}</strong></i
-            >
-          </div>
-          <div>
-            <i
-              >titre d'offre :
-              <strong>{{ selectedCandidature?.jobOffer?.title }}</strong></i
-            >
-          </div>
-          <div>
-            <i
-              >Date de publication :
-              <strong>{{
-                getDate(selectedCandidature?.jobOffer?.publicationDate)
-              }}</strong></i
-            >
-          </div>
+          <table>
+            <tr>
+              <td><i>Titre d'offre :</i></td>
+              <td>
+                <strong class="ms-4">{{
+                  selectedCandidature?.jobOffer?.title
+                }}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td><i>Date de publication :</i></td>
+              <td>
+                <strong class="ms-4">{{
+                  getDate(selectedCandidature?.jobOffer?.publicationDate)
+                }}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td><i>Entreprise :</i></td>
+              <td>
+                <strong class="ms-4">{{
+                  selectedCandidature?.jobOffer?.company?.name
+                }}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td><i>Activité :</i></td>
+              <td>
+                <strong class="ms-4">{{
+                  selectedCandidature?.jobOffer?.company?.nafTitle
+                }}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td><i>Catégorie :</i></td>
+              <td>
+                <strong class="ms-4">{{
+                  selectedCandidature?.jobOffer?.company?.category
+                }}</strong>
+              </td>
+            </tr>
+          </table>
         </div>
 
         <hr class="m-0 mt-2" />
         <h4 class="text-center">Candidate</h4>
 
         <div class="ms-2">
-          <div>
-            <i
-              >Candidate :
-              <strong
-                >{{ selectedCandidature?.candidate?.firstName }}
-                {{ selectedCandidature?.candidate?.lastName }}</strong
-              ></i
-            >
-          </div>
-          <div>
-            <i
-              >E-mail :
-              <strong>{{
-                selectedCandidature?.candidate?.email || ""
-              }}</strong></i
-            >
-          </div>
-          <div>
-            <i
-              >Téléphone :
-              <strong>{{
-                selectedCandidature?.candidate?.phone || ""
-              }}</strong></i
-            >
-          </div>
+          <table>
+            <tr>
+              <td>Candidate :</td>
+              <td>
+                <strong class="ms-4"
+                  >{{ selectedCandidature?.candidate?.firstName }}
+                  {{ selectedCandidature?.candidate?.lastName }}</strong
+                >
+              </td>
+            </tr>
+            <tr>
+              <td><i>Date de Candidature :</i></td>
+              <td>
+                <strong class="ms-4">{{
+                  getDate(selectedCandidature?.appliedAt)
+                }}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>E-mail :</td>
+              <td>
+                <strong class="ms-4">{{
+                  selectedCandidature?.candidate?.email || ""
+                }}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>Téléphone :</td>
+              <td>
+                <strong class="ms-4">{{
+                  selectedCandidature?.candidate?.phone || ""
+                }}</strong>
+              </td>
+            </tr>
+          </table>
         </div>
+      </div>
+      <div class="btn-group p-3 m-2 gap-3">
+        <button class="btn btn-success">Valider</button>
+        <button class="btn btn-danger">Rejeter</button>
       </div>
     </div>
   </div>
