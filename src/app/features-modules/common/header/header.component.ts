@@ -23,6 +23,13 @@ export class HeaderComponent {
   page = '';
   last = '';
 
+  private publicRoutes = [
+    '/',
+    '/auth/login',
+    '/auth/register',
+    '/freelancer/project-details',
+  ];
+
   navbar: Array<header> = [];
   public header_bg = false;
   isEmployer: boolean = false;
@@ -47,8 +54,19 @@ export class HeaderComponent {
   }
 
   ngOnInit(): void {
-    this.redirect();
+    this.checkNavigation();
     this.isEmployer = this.authService.isEmployer();
+  }
+
+  checkNavigation() {
+    const currentRoute = this.router.url;
+
+    // Skip redirection if current route is public
+    if (this.publicRoutes.some((route) => currentRoute.startsWith(route))) {
+      return;
+    }
+
+    this.navigateToDash();
   }
 
   navigateToDash() {
@@ -61,19 +79,8 @@ export class HeaderComponent {
       } else if (role === 'company-employee') {
         this.router.navigate([routes.employee_dashboard]);
       } else {
-        this.router.navigate(['/']); // Default route for unknown roles
+        this.router.navigate(['/']);
       }
-    }
-  }
-
-  redirect() {
-    const role = localStorage.getItem('role');
-    if (role === 'admin') {
-      this.router.navigate(['/admin/dashboard']);
-    } else if (role === 'company-employee') {
-      this.router.navigate(['/employer/dashboard']);
-    } else if (role === 'candidate') {
-      this.router.navigate(['/freelancer/dashboard']);
     }
   }
 

@@ -126,9 +126,7 @@ export class RegisterComponent {
 
   verifyOtp(userId: string) {
     this.userService.verifyOtp(userId).subscribe(
-      (response) => {
-        console.log('OTP verified successfully', response);
-      },
+      (response) => {},
       (error) => {
         console.error('Verification failed', error);
       }

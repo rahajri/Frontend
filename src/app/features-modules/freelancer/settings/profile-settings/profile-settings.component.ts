@@ -198,7 +198,6 @@ export class ProfileSettingsComponent implements OnInit {
     this.skillService.getSkills().subscribe({
       next: (res) => {
         this.dbSkills = res;
-        console.log('1');
       },
       error: (err) => {
         console.error(err);

@@ -49,7 +49,7 @@ export class FreelancerComponent {
       event.url === '/freelancer/chats' ||
       event.url === '/freelancer/project' ||
       event.url === '/freelancer/project-details' ||
-      event.url === '/freelancer/developer-profile' ||
+      event.url === '/freelancer/candidate-profile' ||
       event.url === '/freelancer/developers-details' ||
       event.url === '/freelancer/project-list'
     ) {

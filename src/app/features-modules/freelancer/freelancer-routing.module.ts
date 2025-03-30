@@ -16,7 +16,7 @@ const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
-        path: 'developer-profile',
+        path: 'candidate-profile',
         loadChildren: () =>
           import('./profile/profile.module').then((m) => m.ProfileModule),
       },

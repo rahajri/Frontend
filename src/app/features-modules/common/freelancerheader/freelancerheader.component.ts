@@ -118,7 +118,7 @@ export class FreelancerheaderComponent implements OnInit {
     this.common.last.next(splitVal[3]);
     if (
       events.url.split('/')[2] === 'project' ||
-      events.url.split('/')[2] === 'developer-profile'
+      events.url.split('/')[2] === 'candidate-profile'
     ) {
       this.anotherMenu = true;
     } else {

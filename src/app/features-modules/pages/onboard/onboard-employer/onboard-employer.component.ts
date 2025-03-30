@@ -92,9 +92,7 @@ export class OnboardEmployerComponent implements OnInit {
 
     // Fetch the full company details based on the selected SIRET
     this.companyService.getCompanyBySiret(selectedSiret).subscribe({
-      next: (company) => {
-        console.log('Selected '); // Log the details
-      },
+      next: (company) => {},
       error: (error) => {
         console.error('Error fetching company details:', error); // Handle error
       },

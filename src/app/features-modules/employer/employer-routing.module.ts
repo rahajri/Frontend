@@ -114,7 +114,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'developer-details',
+        path: 'developer-details/:id',
         loadChildren: () =>
           import('./developer-details/developer-details.module').then(
             (m) => m.DeveloperDetailsModule

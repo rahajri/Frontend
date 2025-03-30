@@ -1314,7 +1314,7 @@ export class ShareDataService {
     //   hasSubRoute: false,
     //   showSubRoute: false,
     //   base: 'freelancer',
-    //   page: 'developer-profile',
+    //   page: 'candidate-profile',
     //   last: '',
     //   subMenus: [],
     // },

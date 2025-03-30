@@ -34,6 +34,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
   form: FormGroup;
   candidateId: string | null = null;
   isLogged: boolean = false;
+  isValidId: boolean = true;
 
   constructor(
     private router: Router,
@@ -75,8 +76,11 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     this.isLogged = this.authService.isAuthenticated;
     this.candidateId = this.profileService.profileId;
 
-    this.getProjectDetails(this.pojectId, this.candidateId);
-    this.cdr.markForCheck();
+    this.profileService.currentUserProfile$.subscribe((profile) => {
+      this.candidateId = profile?.id || null;
+      this.getProjectDetails(this.pojectId, this.candidateId);
+      this.cdr.markForCheck();
+    });
   }
 
   getProjectDetails(projectId: string | null, candidateId?: string | null) {
@@ -86,6 +90,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       },
       error: (err) => {
+        this.isValidId = false;
         this.cdr.markForCheck();
         console.error(err);
       },
@@ -169,7 +174,6 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
           .assignCandidate(offerId, candidateId, message)
           .subscribe({
             next: (res) => {
-              console.log(res);
               // Show success modal or perform other actions
               this.hideModal('file');
               // Show the modal programmatically

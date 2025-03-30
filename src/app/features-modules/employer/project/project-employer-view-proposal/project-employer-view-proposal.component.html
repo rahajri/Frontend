@@ -110,16 +110,28 @@
     <div class="pending-proposal-profile">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <div class="user-img-box">
-          <img src="assets/img/user/user-04.jpg" alt="Img" />
+          <a [routerLink]="routes.developerdetails(appli?.candidate?.id)">
+            <img
+              [src]="
+                appli?.candidate?.image !== null
+                  ? baseUrl + appli?.candidate?.image
+                  : ''
+              "
+              alt="Img"
+            />
+          </a>
           <div class="user-name">
-            <h6>
+            <a
+              class="h5 d-block"
+              [href]="routes.developerdetails(appli?.candidate?.id)"
+            >
               {{
                 getFullName(
                   appli?.candidate?.firstName,
                   appli?.candidate?.lastName
                 )
               }}
-            </h6>
+            </a>
             <span
               >Postulé le : {{ getDate(appli?.appliedAt) }}
               <i class="fa-solid fa-star"></i>5.0</span

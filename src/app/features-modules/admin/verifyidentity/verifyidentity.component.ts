@@ -94,9 +94,7 @@ export class VerifyidentityComponent implements OnInit {
       this.companyService
         .approveSelectedCompanies(this.selectedCompaniesIds)
         .subscribe({
-          next: (res) => {
-            console.log(res.message);
-          },
+          next: (res) => {},
           error: (err) => {
             console.error(err);
           },

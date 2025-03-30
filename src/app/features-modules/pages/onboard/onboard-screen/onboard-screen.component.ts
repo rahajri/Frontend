@@ -641,7 +641,6 @@ export class OnboardScreenComponent implements OnInit {
 
     this.candidateService.createCandidate(candidateData).subscribe({
       next: (response) => {
-        console.log('Candidate created successfully:', response);
         this.router.navigate(['/freelancer/dashboard']);
       },
       error: (error) => {

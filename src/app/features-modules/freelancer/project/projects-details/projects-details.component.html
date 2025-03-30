@@ -1,5 +1,5 @@
 <!-- Page Content -->
-<div class="content">
+<div class="content" *ngIf="isValidId">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-12">
@@ -353,15 +353,6 @@
                   class="btn btn-cancel submit-btn"
                   >Annuler</a
                 >
-                <!-- <button
-                  (click)="navigation1()"
-                  data-bs-toggle="modal"
-                  data-bs-dismiss="modal"
-                  class="btn btn-primary submit-btn"
-                >
-                  Envoyer
-                </button> -->
-
                 <button (click)="onSubmit()" class="btn btn-primary submit-btn">
                   Envoyer
                 </button>
@@ -451,3 +442,13 @@
   </div>
 </div>
 <!-- /The Modal -->
+
+<div class="content text-center" *ngIf="!isValidId">
+  <h1>Cette offre n’est plus disponible.</h1>
+  <p>Elle a peut-être été pourvue ou retirée par l’entreprise.</p>
+  <a
+    [href]="routes.projectList"
+    class="btn btn-primary btn-lg login-btn"
+    >Voir d’autres offres</a
+  >
+</div>

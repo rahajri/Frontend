@@ -7,6 +7,7 @@ import { CommonService } from 'src/app/core/services/common/common.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { MessageService } from 'src/app/core/services/message.service';
+import { environment } from 'src/environments/environment';
 
 declare var bootstrap: any;
 @Component({
@@ -21,6 +22,9 @@ export class ProjectEmployerViewProposalComponent {
   isExpanded: boolean = false;
   selectedCandidate: any = null;
   globalError: boolean = false;
+  baseUrl = environment.apiUrl;
+
+  profileId: any;
 
   currentPage = 1;
   itemsPerPage = 5;
@@ -42,6 +46,9 @@ export class ProjectEmployerViewProposalComponent {
   }
 
   ngOnInit() {
+    this.profileService.currentUserProfile$.subscribe((profile) => {
+      this.profileId = this.profileService.profileId;
+    });
     this.offerId = this.route.snapshot.paramMap.get('id');
     this.getOfferDetails();
   }
@@ -116,19 +123,16 @@ export class ProjectEmployerViewProposalComponent {
   }
 
   sendMessage() {
-    const profileId = this.profileService.profileId;
     const formData = {
       closeOffer: this.sendForm.value.closeOffer,
       offer: this.offer?.id,
       message: this.sendForm.value.message,
       candidateId: this.selectedCandidate?.id, // Assuming selectedCandidate has an id
-      employerId: profileId,
+      employerId: this.profileId,
     };
 
-    console.log(formData);
     this.messageService.sendMessageToAdmins(formData).subscribe({
       next: (res) => {
-        console.log(res);
         this.sendForm.reset({
           closeOffer: false,
           message: '',

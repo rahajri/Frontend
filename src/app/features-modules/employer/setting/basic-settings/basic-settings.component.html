@@ -313,12 +313,12 @@
 
       <div class="col-lg-12">
         <label for="message" class="form-label">Besoin de base</label>
-        <textarea
-          rows="4"
+        <p
+          type="text"
           class="form-control"
-          [value]="profile?.company?.message"
           disabled
-        ></textarea>
+          [innerHTML]="profile?.company?.message"
+        ></p>
       </div>
 
       <div class="card text-end border-0">

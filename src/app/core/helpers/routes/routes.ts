@@ -122,7 +122,7 @@ export class routes {
     return this.freelance + '/project-proposals';
   }
   public static get freelancer_developer_profile(): string {
-    return this.freelance + '/developer-profile';
+    return this.freelance + '/candidate-profile';
   }
   public static get freelancer_favourite(): string {
     return this.freelance + '/favourites';
@@ -289,8 +289,8 @@ export class routes {
   public static get invitedfavourites(): string {
     return this.employer + '/invitedfavourites';
   }
-  public static get developerdetails(): string {
-    return this.employer + '/developer-details';
+  public static developerdetails(id: string): string {
+    return this.employer + `/developer-details/${id}`;
   }
   public static get projecttask(): string {
     return this.employer + '/project-task';
