@@ -23,7 +23,7 @@
 <!-- /Breadcrumb -->
 
 <!-- Page Content -->
-<div class="content">
+<div class="content print-content" #contentToPrint>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-12">
@@ -42,13 +42,22 @@
               <h4>{{ getFullName(candidate) }}</h4>
               <p>{{ candidate?.profileTitle || "" }}</p>
             </div>
-            <a href="javascript:void(0)" (click)="downloadPdf()"
-              ><img
+            <a
+              href="javascript:void(0)"
+              (click)="downloadPdf()"
+              [class.disabled]="!isPdfReady && disable"
+              class="no-print"
+            >
+              <img
                 src="assets/img/icon/file.png"
                 alt="pdf"
                 width="40"
                 height="40"
-            /></a>
+              />
+              <span *ngIf="!isPdfReady" class="loading-text"
+                >Preparing PDF...</span
+              >
+            </a>
           </div>
           <div class="company-address">
             <ul>
@@ -177,7 +186,7 @@
               </span>
             </div>
           </div>
-          <div class="card budget-widget">
+          <div class="card budget-widget no-print">
             <h6>Localisation</h6>
             <div class="map-location p-0">
               <iframe

@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
@@ -7,6 +14,7 @@ import { CandidateService } from 'src/app/core/services/condidate.service';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../../auth/service/user.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { PdfService } from 'src/app/core/services/pdf.service';
 
 @Component({
   selector: 'app-developer-details',
@@ -38,12 +46,19 @@ export class DeveloperDetailsComponent implements OnInit, OnDestroy {
     editorContent: new FormControl('', Validators.required()),
   });
 
+  @ViewChild('contentToPrint') contentToPrint!: ElementRef;
+  isPdfReady = false;
+  isGeneratingPdf = false;
+  disable: boolean = false;
+
   constructor(
     private router: Router,
     private readonly candidateService: CandidateService,
     private readonly userService: UserService,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private pdfService: PdfService,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +68,11 @@ export class DeveloperDetailsComponent implements OnInit, OnDestroy {
       this.getCandidateInfo(this.candidateId);
     }
     this.loadMap();
+  }
+
+  ngAfterViewInit() {
+    this.isPdfReady = true;
+    this.cdRef.detectChanges(); // Force change detection
   }
 
   getCandidateInfo(id: string) {
@@ -107,7 +127,26 @@ export class DeveloperDetailsComponent implements OnInit, OnDestroy {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
-  downloadPdf() {
-    window.print();
+  async downloadPdf() {
+    if (!this.isPdfReady || !this.contentToPrint || this.isGeneratingPdf) {
+      return;
+    }
+    this.disable = true;
+    this.isGeneratingPdf = true;
+    try {
+      // Add a small delay to ensure DOM is ready
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      const fileName = `${this.candidate?.firstName}_${this.candidate?.lastName}_CV.pdf`;
+      await this.pdfService.generatePdf(
+        this.contentToPrint.nativeElement,
+        fileName
+      );
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      this.isGeneratingPdf = false;
+      this.disable = false;
+    }
   }
 }
