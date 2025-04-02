@@ -59,6 +59,7 @@ export class DeveloperDetailsComponent implements OnInit, OnDestroy {
     this.candidateService.getCandidateById(id).subscribe({
       next: (res) => {
         this.candidate = res;
+        console.log(res);
       },
       error: (err) => {
         console.error(err);
@@ -92,7 +93,8 @@ export class DeveloperDetailsComponent implements OnInit, OnDestroy {
   }
 
   loadMap() {
-    if (!this.candidate?.location) return '';
+    if (!this.candidate?.location)
+      return this.sanitizer.bypassSecurityTrustResourceUrl('');
 
     const postalCode = this.candidate.location.postalCode?.code || '';
     const city = this.candidate.location.city?.name || 'Toulouse';
@@ -103,5 +105,9 @@ export class DeveloperDetailsComponent implements OnInit, OnDestroy {
     const url = `https://maps.google.com/maps?q=${query}&output=embed&z=15`;
 
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  downloadPdf() {
+    window.print();
   }
 }

@@ -42,6 +42,13 @@
               <h4>{{ getFullName(candidate) }}</h4>
               <p>{{ candidate?.profileTitle || "" }}</p>
             </div>
+            <a href="javascript:void(0)" (click)="downloadPdf()"
+              ><img
+                src="assets/img/icon/file.png"
+                alt="pdf"
+                width="40"
+                height="40"
+            /></a>
           </div>
           <div class="company-address">
             <ul>
@@ -59,22 +66,22 @@
           <div class="project-proposal-detail">
             <ul>
               <li>
-                <!-- <div class="proposal-detail-img">
+                <div class="proposal-detail-img">
                   <i class="feather icon-email"></i>
                   <img src="assets/img/icon/computer-line.svg" alt="icons" />
-                </div> -->
+                </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Email</span>
-                  <p class="mb-0">{{ candidate?.email }}</p>
+                  <span class="d-block">Feedbacks</span>
+                  <p class="mb-0">78</p>
                 </div>
               </li>
               <li>
-                <!-- <div class="proposal-detail-img">
+                <div class="proposal-detail-img">
                   <img src="assets/img/icon/time-line.svg" alt="icons" />
-                </div> -->
+                </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Télephone</span>
-                  <p class="mb-0">{{ candidate?.phone }}</p>
+                  <span class="d-block">Expérience</span>
+                  <p class="mb-0">De 5 Á 10 Ans</p>
                 </div>
               </li>
               <li>
@@ -82,8 +89,8 @@
                   <img src="assets/img/icon/user-heart-line.svg" alt="icons" />
                 </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Feedbacks</span>
-                  <p class="mb-0">78</p>
+                  <span class="d-block">Durée</span>
+                  <p class="mb-0">6 Mois</p>
                 </div>
               </li>
             </ul>

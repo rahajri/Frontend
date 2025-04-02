@@ -1970,11 +1970,11 @@ export class ShareDataService {
           routes: routes.pendingproject,
           page: 'pending-projects',
         },
-        {
-          title: 'Offres Annulées',
-          routes: routes.cancelledproject,
-          page: 'cancelled-projects',
-        },
+        // {
+        //   title: 'Offres Annulées',
+        //   routes: routes.cancelledproject,
+        //   page: 'cancelled-projects',
+        // },
       ],
     },
     {

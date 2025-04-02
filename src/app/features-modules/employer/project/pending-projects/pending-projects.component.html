@@ -75,16 +75,18 @@
     <div class="col-xl-3 d-flex flex-wrap">
       <div class="projects-card flex-fill">
         <div class="card-body p-2">
-          <div class="prj-proposal-count text-center hired">
-            <h2>{{ offer?.candidateJobOffers?.length }}</h2>
-            <h3 class="mb-0">
-              {{
-                offer?.candidateJobOffers?.length === 1
-                  ? "Candidature"
-                  : "Candidatures"
-              }}
-            </h3>
-          </div>
+          <a [routerLink]="routes.get_projectproposal(offer?.id)">
+            <div class="prj-proposal-count text-center hired">
+              <h2>{{ offer?.candidateJobOffers?.length }}</h2>
+              <h3 class="mb-0">
+                {{
+                  offer?.candidateJobOffers?.length === 1
+                    ? "Candidature"
+                    : "Candidatures"
+                }}
+              </h3>
+            </div>
+          </a>
         </div>
       </div>
     </div>
@@ -97,22 +99,27 @@
   <div class="col-md-12">
     <ul class="paginations list-pagination">
       <li class="page-item" [class.disabled]="currentPage === 1">
-        <a (click)="changePage(currentPage - 1)" [class.disabled]="currentPage === 1">
+        <a
+          (click)="changePage(currentPage - 1)"
+          [class.disabled]="currentPage === 1"
+        >
           <i class="feather icon-chevron-left"></i>
         </a>
       </li>
 
       @for (page of getPageNumbers(); track page) {
-        <li class="page-item">
-          <a (click)="changePage(page)"
-             [class.active]="currentPage === page">
-            {{page}}
-          </a>
-        </li>
+      <li class="page-item">
+        <a (click)="changePage(page)" [class.active]="currentPage === page">
+          {{ page }}
+        </a>
+      </li>
       }
 
       <li class="page-item" [class.disabled]="currentPage === totalPages">
-        <a (click)="changePage(currentPage + 1)" [class.disabled]="currentPage === totalPages">
+        <a
+          (click)="changePage(currentPage + 1)"
+          [class.disabled]="currentPage === totalPages"
+        >
           <i class="feather icon-chevron-right"></i>
         </a>
       </li>
