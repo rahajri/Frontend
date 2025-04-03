@@ -97,13 +97,6 @@ export class DeveloperDetailsComponent implements OnInit, OnDestroy {
     return fullName;
   }
 
-  addDetails(array: number[]) {
-    array.push(1);
-  }
-
-  deleteDetails(array: number[], index: number) {
-    this.details.splice(index, 1);
-  }
 
   ngOnDestroy(): void {
     this.editor.destroy();
@@ -148,5 +141,30 @@ export class DeveloperDetailsComponent implements OnInit, OnDestroy {
       this.isGeneratingPdf = false;
       this.disable = false;
     }
+  }
+
+  getFirstTwoLanguages(candidateLanguages: any[]): string {
+    if (!Array.isArray(candidateLanguages) || candidateLanguages.length === 0) {
+      return '';
+    }
+
+    return candidateLanguages
+      .slice(0, 2) // Take only the first two elements
+      .map((lang) => lang?.language?.name) // Extract language names
+      .join(', '); // Join them with a comma
+  }
+
+  getFirstTwoLanguagesLevel(candidateLanguages: any[]): string {
+    if (
+      !Array.isArray(candidateLanguages) ||
+      candidateLanguages?.length === 0
+    ) {
+      return '';
+    }
+
+    return candidateLanguages
+      .slice(0, 2) // Take only the first two elements
+      .map((lang) => lang?.level) // Extract language names
+      .join(', '); // Join them with a comma
   }
 }

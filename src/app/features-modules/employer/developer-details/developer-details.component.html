@@ -80,8 +80,8 @@
                   <img src="assets/img/icon/computer-line.svg" alt="icons" />
                 </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Feedbacks</span>
-                  <p class="mb-0">78</p>
+                  <span class="d-block">Recommended</span>
+                  <p class="mb-0">89%</p>
                 </div>
               </li>
               <li>
@@ -89,8 +89,8 @@
                   <img src="assets/img/icon/time-line.svg" alt="icons" />
                 </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Expérience</span>
-                  <p class="mb-0">De 5 Á 10 Ans</p>
+                  <span class="d-block">Nombre De Missions</span>
+                  <p class="mb-0">22</p>
                 </div>
               </li>
               <li>
@@ -98,8 +98,41 @@
                   <img src="assets/img/icon/user-heart-line.svg" alt="icons" />
                 </div>
                 <div class="proposal-detail text-capitalize">
-                  <span class="d-block">Durée</span>
-                  <p class="mb-0">6 Mois</p>
+                  <span class="d-block">Status</span>
+                  <p class="mb-0">Actif</p>
+                </div>
+              </li>
+              <li>
+                <div class="proposal-detail-img">
+                  <img src="assets/img/icon/user-heart-line.svg" alt="icons" />
+                </div>
+                <div class="proposal-detail text-capitalize">
+                  <span class="d-block">Evaluations</span>
+                  <p class="mb-0">10</p>
+                </div>
+              </li>
+              <li>
+                <div class="proposal-detail-img">
+                  <img src="assets/img/icon/translate-2.svg" alt="icons" />
+                </div>
+                <div class="proposal-detail text-capitalize">
+                  <span class="d-block">Langues</span>
+                  <p class="mb-0">
+                    {{ getFirstTwoLanguages(candidate?.candidateLanguages) }}
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div class="proposal-detail-img">
+                  <img src="assets/img/icon/translate.svg" alt="icons" />
+                </div>
+                <div class="proposal-detail text-capitalize">
+                  <span class="d-block">Niveau</span>
+                  <p class="mb-0">
+                    {{
+                      getFirstTwoLanguagesLevel(candidate?.candidateLanguages)
+                    }}
+                  </p>
                 </div>
               </li>
             </ul>
@@ -208,347 +241,3 @@
   </div>
 </div>
 <!-- /Page Content -->
-<!-- The Modal -->
-<div class="modal fade custom-modal" id="hire">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-modal">
-      <div class="modal-header">
-        <button
-          type="button"
-          class="close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="text-center pt-0 mb-4">
-          <img src="assets/img/logo-01.png" alt="logo" class="img-fluid mb-1" />
-          <h5 class="modal-title">Discuss your project with David</h5>
-        </div>
-        <form>
-          <div class="modal-info">
-            <div class="row">
-              <div class="col-12 col-md-12">
-                <div class="input-block">
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="First name & Lastname"
-                  />
-                </div>
-                <div class="input-block">
-                  <input
-                    type="email"
-                    name="name"
-                    class="form-control"
-                    placeholder="Email Address"
-                  />
-                </div>
-                <div class="input-block">
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="Phone Number"
-                  />
-                </div>
-                <div class="input-block">
-                  <textarea
-                    class="form-control"
-                    name="message"
-                    rows="5"
-                    placeholder="Message"
-                  ></textarea>
-                </div>
-                <div class="input-block row">
-                  <div class="col-12 col-md-4 pr-0">
-                    <label class="file-upload">
-                      Add Attachment <input type="file" />
-                    </label>
-                  </div>
-                  <div class="col-12 col-md-8">
-                    <p class="mb-1">Allowed file types: zip, pdf, png, jpg</p>
-                    <p>Max file size: 50 MB</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="submit-section text-center">
-            <button type="submit" class="btn btn-primary btn-block submit-btn">
-              Hire Now
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /The Modal -->
-
-<!-- The Modal -->
-<div class="modal fade" id="file">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Send Your Proposal</h4>
-        <span class="modal-close"
-          ><a
-            href="javascript:void(0);"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-            ><i class="fa fa-times orange-text"></i></a
-        ></span>
-      </div>
-      <div class="modal-body">
-        <div class="modal-info proposal-modal-info">
-          <form>
-            <div class="feedback-form proposal-form">
-              <div class="row">
-                <div class="col-md-6 input-block">
-                  <label for="Your" class="form-label">Your Price</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Your Price"
-                  />
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="Estimated" class="form-label"
-                    >Estimated Delivery</label
-                  >
-                  <div class="input-group">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Estimated Hours"
-                      aria-label="Recipient's username"
-                      aria-describedby="basic-addon2"
-                    />
-                    <span class="input-group-text" id="basic-addon2">Days</span>
-                  </div>
-                </div>
-
-                <div class="col-md-12 input-block">
-                  <label for="Cover" class="form-label">Cover Letter</label>
-                  <ngx-editor [editor]="editor">
-                    <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
-                    </ngx-editor-menu>
-                  </ngx-editor>
-                </div>
-              </div>
-            </div>
-            <div class="suggested-milestones-form">
-              <div class="row">
-                <div class="col-md-4 input-block">
-                  <label for="Milestone " class="form-label"
-                    >Milestone name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Milestone name"
-                  />
-                </div>
-                <div class="col-md-2 input-block floating-icon">
-                  <label for="amount" class="form-label">Amount</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Amount"
-                  />
-                  <span><i class="feather icon-dollar-sign"></i></span>
-                </div>
-                <div class="col-md-3 input-block floating-icon">
-                  <label for="start" class="form-label">Start Date</label>
-                  <input
-                    type="text"
-                    class="form-control datetimepicker"
-                    placeholder="Choose"
-                    bsDatepicker
-                  />
-                  <span><i class="feather icon-calendar"></i></span>
-                </div>
-                <div class="col-md-3 input-block floating-icon">
-                  <label for="end date" class="form-label">End Date</label>
-                  <input
-                    type="text"
-                    class="form-control datetimepicker"
-                    placeholder="Choose"
-                    bsDatepicker
-                  />
-                  <span><i class="feather icon-calendar"></i></span>
-                </div>
-                <div class="col-md-12">
-                  <div class="new-addd">
-                    <a
-                      (click)="addDetails(details)"
-                      (keydown.enter)="addDetails(details)"
-                      tabindex="0"
-                      id="new_add1"
-                      class="add-new"
-                      href="javascript:void(0);"
-                      ><i class="feather icon-plus-circle"></i> Add New</a
-                    >
-                  </div>
-                </div>
-              </div>
-              @for (details of details; track details; let i = $index) {
-              <div class="row">
-                <div class="col-md-4 input-block">
-                  <label for="Milestone " class="form-label"
-                    >Milestone name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Milestone name"
-                  />
-                </div>
-                <div class="col-md-2 input-block floating-icon">
-                  <label for="Amount" class="form-label">Amount</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Amount"
-                  />
-                  <span><i class="feather icon-dollar-sign"></i></span>
-                </div>
-                <div class="col-md-3 input-block floating-icon">
-                  <label for="start" class="form-label">Start Date</label>
-                  <input
-                    type="text"
-                    class="form-control datetimepicker"
-                    placeholder="Choose"
-                    bsDatepicker
-                  />
-                  <span><i class="feather icon-calendar"></i></span>
-                </div>
-                <div class="col-md-3 input-block floating-icon">
-                  <label for="end-date" class="form-label">End Date</label>
-                  <input
-                    type="text"
-                    class="form-control datetimepicker"
-                    placeholder="Choose"
-                    bsDatepicker
-                  />
-                  <span><i class="feather icon-calendar"></i></span>
-                </div>
-                <div class="col-md-12">
-                  <div class="new-addd">
-                    <a
-                      (click)="deleteDetails(details, i)"
-                      (keydown.enter)="deleteDetails(details, i)"
-                      tabindex="0"
-                      id="new_add1"
-                      class="add-new"
-                      ><i class="feather icon-plus-circle"></i> Remove</a
-                    >
-                  </div>
-                </div>
-              </div>
-              }
-              <div id="add_row1"></div>
-            </div>
-            <div class="proposal-features">
-              <div class="proposal-widget proposal-warning">
-                <label class="custom_check">
-                  <input type="checkbox" name="select_time" checked /><span
-                    class="checkmark"
-                  ></span>
-                  <span class="proposal-text"
-                    >Stick this Proposal to the Top</span
-                  >
-                  <span class="proposal-text float-end">$12.00</span>
-                </label>
-                <p>
-                  The sticky proposal will always be displayed on top of all the
-                  proposals.
-                </p>
-              </div>
-              <div class="proposal-widget proposal-blue">
-                <label class="custom_check">
-                  <input type="checkbox" name="select_time" /><span
-                    class="checkmark"
-                  ></span>
-                  <span class="proposal-text"
-                    >Stick this Proposal to the Top</span
-                  >
-                  <span class="proposal-text float-end">$12.00</span>
-                </label>
-                <p>
-                  The sticky proposal will always be displayed on top of all the
-                  proposals.
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12 submit-section">
-                <label class="custom_check">
-                  <input type="checkbox" name="select_time" />
-                  <span class="checkmark"></span> I agree to the Terms And
-                  Conditions
-                </label>
-              </div>
-              <div class="col-md-12 submit-section text-end">
-                <a
-                  data-bs-dismiss="modal"
-                  href="javascript:void(0);"
-                  class="btn btn-cancel submit-btn"
-                  >Cancel</a
-                >
-                <a
-                  (click)="ngsubmit()"
-                  (keydown.enter)="ngsubmit()"
-                  tabindex="0"
-                  data-bs-toggle="modal"
-                  data-bs-dismiss="modal"
-                  href="#success"
-                  class="btn btn-primary submit-btn"
-                  >Send Proposal</a
-                >
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /The Modal -->
-
-<!-- The Modal -->
-<div class="modal fade custom-modal" id="success">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content proposal-modal-info">
-      <div class="modal-header">
-        <button
-          type="button"
-          class="close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="text-center modal-body-content pt-0">
-          <h5 class="modal-title">Submitted Successfully</h5>
-          <p>You will be Notified once, your Proposal approves.</p>
-        </div>
-        <div class="col-md-12 submit-section text-center">
-          <a
-            data-bs-dismiss="modal"
-            [routerLink]="routes.freelancer_dashboard"
-            class="btn btn-primary submit-btn"
-            >Go to Tableau de Bord</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /The Modal -->

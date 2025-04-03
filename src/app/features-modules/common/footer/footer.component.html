@@ -9,33 +9,50 @@
               <img src="assets/img/interim.png" class="img-fluid" alt="Logo" />
             </a>
             <p>
-              We’re always in search for talented and motivated people. Don’t be
-              shy introduce yourself!
+              Nous sommes toujours à la recherche de profils talentueux et
+              motivés. N’hésitez pas à vous présenter, votre prochaine mission
+              vous attend peut-être ici !
             </p>
             <ul>
               <li>
-                <a href="javascript:void(0);"
+                <a
+                  href="https://www.facebook.com/interim.protech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visitez notre page Facebook"
                   ><i class="fa-brands fa-facebook-f" aria-hidden="true"></i
                 ></a>
               </li>
               <li>
-                <a href="javascript:void(0);"
+                <a
+                  href="https://x.com/Online_Pro_tech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visitez notre compte X"
                   ><i class="fa-brands fa-twitter" aria-hidden="true"></i
                 ></a>
               </li>
               <li>
-                <a href="javascript:void(0);"
+                <a
+                  href="https://www.instagram.com/interim_protech/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visitez notre compte Instagram"
                   ><i class="fa-brands fa-instagram" aria-hidden="true"></i
                 ></a>
               </li>
               <li>
-                <a href="javascript:void(0);"
+                <a
+                  href="https://www.linkedin.com/company/interim-online-pro-tech/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visitez notre page LinkedIn"
                   ><i class="fa-brands fa-linkedin" aria-hidden="true"></i
                 ></a>
               </li>
             </ul>
             <a href="javascript:void(0);" class="btn btn-connectus"
-              >Contact with us</a
+              >Contactez-nous</a
             >
           </div>
         </div>
@@ -43,11 +60,11 @@
           <div class="row">
             <div class="col-xl-3 col-md-6">
               <div class="footer-widget footer-menu">
-                <h2 class="footer-title">Useful Links</h2>
+                <h2 class="footer-title">Liens Utiles</h2>
                 <ul>
                   <li>
                     <a [routerLink]="routes.page_about"
-                      ><i class="fas fa-angle-right me-1"></i>About Us</a
+                      ><i class="fas fa-angle-right me-1"></i>A Propos</a
                     >
                   </li>
                   <li>
@@ -57,17 +74,18 @@
                   </li>
                   <li>
                     <a [routerLink]="routes.login"
-                      ><i class="fas fa-angle-right me-1"></i>Login</a
+                      ><i class="fas fa-angle-right me-1"></i>Se Connecter</a
                     >
                   </li>
                   <li>
                     <a [routerLink]="routes.register"
-                      ><i class="fas fa-angle-right me-1"></i>Register</a
+                      ><i class="fas fa-angle-right me-1"></i>S'inscrire</a
                     >
                   </li>
                   <li>
                     <a [routerLink]="routes.forgot_password"
-                      ><i class="fas fa-angle-right me-1"></i>Forgot Password</a
+                      ><i class="fas fa-angle-right me-1"></i>Mot de Passe
+                      Oublié</a
                     >
                   </li>
                 </ul>
@@ -75,33 +93,21 @@
             </div>
             <div class="col-xl-3 col-md-6">
               <div class="footer-widget footer-menu">
-                <h2 class="footer-title">Help & Support</h2>
+                <h2 class="footer-title">Aide &amp; Support</h2>
                 <ul>
                   <li>
                     <a href="javascript:void(0);"
-                      ><i class="fas fa-angle-right me-1"></i>Browse
-                      Candidates</a
+                      ><i class="fas fa-angle-right me-1"></i>Espace Clients</a
                     >
                   </li>
                   <li>
                     <a href="javascript:void(0);"
-                      ><i class="fas fa-angle-right me-1"></i>Employers Tableau
-                      de Bord</a
+                      ><i class="fas fa-angle-right me-1"></i>Tableau de Bord</a
                     >
                   </li>
                   <li>
                     <a href="javascript:void(0);"
-                      ><i class="fas fa-angle-right me-1"></i>Job Packages</a
-                    >
-                  </li>
-                  <li>
-                    <a href="javascript:void(0);"
-                      ><i class="fas fa-angle-right me-1"></i>Jobs Featured</a
-                    >
-                  </li>
-                  <li>
-                    <a href="javascript:void(0);"
-                      ><i class="fas fa-angle-right me-1"></i>Post A Job</a
+                      ><i class="fas fa-angle-right me-1"></i>Créer une Offre</a
                     >
                   </li>
                 </ul>
@@ -113,31 +119,17 @@
                 <ul>
                   <li>
                     <a [routerLink]="routes.freelancer_dashboard"
-                      ><i class="fas fa-angle-right me-1"></i>Freelancers</a
+                      ><i class="fas fa-angle-right me-1"></i>Espace candidat</a
                     >
                   </li>
                   <li>
                     <a [routerLink]="routes.freelancer_portfolio"
-                      ><i class="fas fa-angle-right me-1"></i>Freelancer
-                      Details</a
+                      ><i class="fas fa-angle-right me-1"></i>Tableau de Bord</a
                     >
                   </li>
                   <li>
                     <a [routerLink]="routes.freelancerProject"
-                      ><i class="fas fa-angle-right me-1"></i>Project</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      [routerLink]="
-                        routes.get_freelancer_project_details('123')
-                      "
-                      ><i class="fas fa-angle-right me-1"></i>Project Details</a
-                    >
-                  </li>
-                  <li>
-                    <a [routerLink]="routes.employee_post_project"
-                      ><i class="fas fa-angle-right me-1"></i>Post Project</a
+                      ><i class="fas fa-angle-right me-1"></i>Candidatures</a
                     >
                   </li>
                 </ul>
@@ -145,19 +137,19 @@
             </div>
             <div class="col-xl-3 col-md-6">
               <div class="footer-widget footer-menu">
-                <h2 class="footer-title">Connect With Us</h2>
+                <h2 class="footer-title">Restons en Contact</h2>
                 <ul>
-                  <li>
+                  <!-- <li>
                     <a [routerLink]="routes.freelancer_message"
                       ><i class="fas fa-angle-right me-1"></i>Chat</a
                     >
-                  </li>
+                  </li> -->
                   <li>
                     <a [routerLink]="routes.faq"
                       ><i class="fas fa-angle-right me-1"></i>Faq</a
                     >
                   </li>
-                  <li>
+                  <!-- <li>
                     <a [routerLink]="routes.freelancer_review"
                       ><i class="fas fa-angle-right me-1"></i>Reviews</a
                     >
@@ -166,10 +158,10 @@
                     <a [routerLink]="routes.privacypolicy"
                       ><i class="fas fa-angle-right me-1"></i>Privacy Policy</a
                     >
-                  </li>
+                  </li> -->
                   <li>
                     <a [routerLink]="routes.termscondition"
-                      ><i class="fas fa-angle-right me-1"></i>Terms of use</a
+                      ><i class="fas fa-angle-right me-1"></i>CGU</a
                     >
                   </li>
                 </ul>
