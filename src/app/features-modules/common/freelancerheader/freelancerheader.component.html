@@ -32,6 +32,12 @@
           <li [class.active]="false" routerLinkActive="active">
             <a [routerLink]="routes.projectList">Nos offres d'emplois</a>
           </li>
+          <li [class.active]="false" routerLinkActive="active">
+            <a [routerLink]="routes.page_about">Á propos</a>
+          </li>
+          <li [class.active]="false" routerLinkActive="active">
+            <a [routerLink]="routes.faq">FAQ</a>
+          </li>
           @for (mainMenus of navbar; track mainMenus) { @if
           (mainMenus.separateRoute === true) {
           <li

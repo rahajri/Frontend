@@ -3,46 +3,7 @@
   <div class="container">
     <div class="row align-items-center justify-content-center">
       <div class="col-lg-12">
-        <div class="banner-blk-five justify-content-center">
-          <div class="banner-content text-center aos" data-aos="fade-up">
-            <h1>Get the Perfect Developers & Projects</h1>
-            <p>With the world's #1 Developers Marketplace</p>
-            <form class="form" name="store" id="store" method="post">
-              <div class="form-inner">
-                <div class="input-group">
-                  <span class="drop-detail">
-                    <mat-select
-                      [(ngModel)]="selectedValue"
-                      [ngModelOptions]="{ standalone: true }"
-                      class="select"
-                      placeholder="Projects"
-                    >
-                      @for (data of selectedList; track data) {
-                      <mat-option [value]="data.value">
-                        {{ data.value }}
-                      </mat-option>
-                      }
-                    </mat-select>
-                  </span>
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Keywords"
-                  />
-                  <button
-                    class="btn btn-primary sub-btn"
-                    type="button"
-                    (click)="navigation()"
-                    (keydown.enter)="navigation()"
-                    tabindex="0"
-                  >
-                    Search
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+        <div class="banner-blk-five justify-content-center"></div>
       </div>
     </div>
   </div>
@@ -91,10 +52,7 @@
         <owl-carousel-o [options]="blogSlider">
           <ng-template carouselSlide>
             <div class="project-by-category-widget">
-              <a
-                [routerLink]="routes.freelancerProject"
-                class="category-widget-img"
-              >
+              <a [routerLink]="routes.projectList" class="category-widget-img">
                 <img
                   src="assets/img/slider/category-img-1.jpg"
                   class="img-fluid"
@@ -109,10 +67,7 @@
           </ng-template>
           <ng-template carouselSlide>
             <div class="project-by-category-widget">
-              <a
-                [routerLink]="routes.freelancerProject"
-                class="category-widget-img"
-              >
+              <a [routerLink]="routes.projectList" class="category-widget-img">
                 <img
                   src="assets/img/slider/category-img-2.jpg"
                   class="img-fluid"
@@ -127,10 +82,7 @@
           </ng-template>
           <ng-template carouselSlide>
             <div class="project-by-category-widget">
-              <a
-                [routerLink]="routes.freelancerProject"
-                class="category-widget-img"
-              >
+              <a [routerLink]="routes.projectList" class="category-widget-img">
                 <img
                   src="assets/img/slider/category-img-3.jpg"
                   class="img-fluid"
@@ -145,10 +97,7 @@
           </ng-template>
           <ng-template carouselSlide>
             <div class="project-by-category-widget">
-              <a
-                [routerLink]="routes.freelancerProject"
-                class="category-widget-img"
-              >
+              <a [routerLink]="routes.projectList" class="category-widget-img">
                 <img
                   src="assets/img/slider/category-img-4.jpg"
                   class="img-fluid"
@@ -163,10 +112,7 @@
           </ng-template>
           <ng-template carouselSlide>
             <div class="project-by-category-widget">
-              <a
-                [routerLink]="routes.freelancerProject"
-                class="category-widget-img"
-              >
+              <a [routerLink]="routes.projectList" class="category-widget-img">
                 <img
                   src="assets/img/slider/category-img-5.jpg"
                   class="img-fluid"
@@ -185,7 +131,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="home-five-section-btn">
-          <a [routerLink]="routes.freelancerProject" class="btn btn-primary"
+          <a [routerLink]="routes.projectList" class="btn btn-primary"
             >Voir toutes les Catégories</a
           >
         </div>
@@ -311,7 +257,7 @@
       <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
         <div class="project-item project-popular-item aos" data-aos="fade-up">
           <div class="project-img">
-            <a [routerLink]="routes.freelancerProject"
+            <a [routerLink]="routes.projectList"
               ><img
                 src="assets/img/project/project-35.jpg"
                 alt="Img"
@@ -320,7 +266,7 @@
           </div>
           <div class="feature-content">
             <h4>
-              <a [routerLink]="routes.freelancerProject"
+              <a [routerLink]="routes.projectList"
                 >Maçon Traditionnel (H/F) - Paris 13</a
               >
             </h4>
@@ -337,7 +283,7 @@
       <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
         <div class="project-item project-popular-item aos" data-aos="fade-up">
           <div class="project-img">
-            <a [routerLink]="routes.freelancerProject"
+            <a [routerLink]="routes.projectList"
               ><img
                 src="assets/img/project/project-36.jpg"
                 alt="Img"
@@ -346,7 +292,7 @@
           </div>
           <div class="feature-content">
             <h4>
-              <a [routerLink]="routes.freelancerProject"
+              <a [routerLink]="routes.projectList"
                 >Développeur PHP Symfony (H/F) - Lyon</a
               >
             </h4>
@@ -363,7 +309,7 @@
       <div class="col-lg-4 col-md-6 col-sm-6 d-flex">
         <div class="project-item project-popular-item aos" data-aos="fade-up">
           <div class="project-img">
-            <a [routerLink]="routes.freelancerProject"
+            <a [routerLink]="routes.projectList"
               ><img
                 src="assets/img/project/project-37.png"
                 alt="Img"
@@ -372,7 +318,7 @@
           </div>
           <div class="feature-content">
             <h4>
-              <a [routerLink]="routes.freelancerProject"
+              <a [routerLink]="routes.projectList"
                 >Responsable Exploitation Régional Ouest H/F
               </a>
             </h4>
@@ -388,7 +334,7 @@
       <!--- /Project Item  -->
       <div class="col-md-12">
         <div class="home-five-section-btn">
-          <a [routerLink]="routes.freelancerProject" class="btn btn-primary"
+          <a [routerLink]="routes.projectList" class="btn btn-primary"
             >Voir Plus d'Offres</a
           >
         </div>
@@ -483,12 +429,12 @@
             </p>
             <div class="market-place-btn bidding-btn">
               <a
-                [routerLink]="routes.freelancerProject"
+                [routerLink]="routes.projectList"
                 class="btn btn-primary market-project me-2"
                 >Créer Offre</a
               >
               <a
-                [routerLink]="routes.freelancerProject"
+                [routerLink]="routes.projectList"
                 class="btn btn-primary project-post"
                 >Commencez à postuler</a
               >
