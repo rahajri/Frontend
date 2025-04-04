@@ -53,7 +53,6 @@ export class EmployerheaderComponent {
   ngOnInit(): void {
     this.isLogged = this.authService.isLogged();
     this.isEmployer = this.authService.isEmployer();
-    console.log(this.isLogged);
     if (this.isLogged) {
       this.getUser();
     }
