@@ -35,6 +35,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
   candidateId: string | null = null;
   isLogged: boolean = false;
   isValidId: boolean = true;
+  disable: boolean = false;
 
   constructor(
     private router: Router,
@@ -164,6 +165,7 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
     this.form.markAllAsTouched(); // Mark all fields as touched
 
     if (this.form.valid) {
+      this.disable = true;
       // Proceed with the submission logic
       const offerId = this.offer?.id;
       const candidateId = this.candidateId;
@@ -180,11 +182,14 @@ export class ProjectsDetailsComponent implements OnInit, OnDestroy {
               const modalElement = document.getElementById('success');
               const modal = new bootstrap.Modal(modalElement);
               modal.show();
+              this.form.reset();
+              this.disable = false;
 
               this.getProjectDetails(this.pojectId, this.candidateId);
             },
             error: (err) => {
               console.error(err);
+              this.disable = false;
             },
           });
       }

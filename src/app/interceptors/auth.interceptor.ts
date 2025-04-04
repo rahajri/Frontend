@@ -20,6 +20,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     '/verification-otp',
     '/verify',
     '/freelancer/project-details',
+    '/employer/developer-details',
   ];
 
   const isPublicRoute = publicRoutes.some((route) => req.url.includes(route));

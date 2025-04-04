@@ -27,7 +27,10 @@ export class EmployerGuard {
     | boolean
     | UrlTree {
     // Check if the route is 'change-password'
-    if (state.url.includes('change-password')) {
+    if (
+      state.url.includes('change-password') ||
+      state.url.includes('/employer/developer-details')
+    ) {
       return true;
     }
 

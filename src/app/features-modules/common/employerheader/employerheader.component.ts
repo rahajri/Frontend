@@ -33,7 +33,7 @@ export class EmployerheaderComponent {
     private data: ShareDataService,
     private navservices: NavbarService,
     private userService: UserService,
-    private authService: AuthService,
+    public authService: AuthService,
     private companyService: CompanyService,
     private profileService: ProfileService,
     private common: CommonService
@@ -51,9 +51,12 @@ export class EmployerheaderComponent {
   }
 
   ngOnInit(): void {
-    this.getUser();
     this.isLogged = this.authService.isLogged();
     this.isEmployer = this.authService.isEmployer();
+    console.log(this.isLogged);
+    if (this.isLogged) {
+      this.getUser();
+    }
   }
 
   logout() {

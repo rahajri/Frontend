@@ -104,7 +104,7 @@
         </ul>
       </div>
       @if (anotherMenu === false) {
-      <ul class="nav header-navbar-rht">
+      <ul class="nav header-navbar-rht" *ngIf="isLogged">
         <li>
           <a [routerLink]="routes.freelancer_message"
             ><img src="assets/img/icon/message-chat-icon.svg" alt="Img"
@@ -236,10 +236,10 @@
             </div>
           </div>
         </li>
-        <li>
+        <li *ngIf="isLogged && isEmployer">
           <a [routerLink]="routes.employee_post_project" class="login-btn"
-            >Créer Offre <i class="feather icon-plus ms-1"></i
-          ></a>
+            ><i class="feather icon-plus me-1"></i>Créer Offre
+          </a>
         </li>
         <li class="nav-item dropdown account-item">
           <a
@@ -327,9 +327,10 @@
           </div>
         </li>
       </ul>
-      } @if (anotherMenu === true) {
+      }
       <ul class="nav header-navbar-rht reg-head">
-        <li *ngIf="!isLogged">
+        <li>{{ isLogged }}</li>
+        <li *ngIf="!authService.isLoggedIn">
           <a [routerLink]="routes.register" class="reg-btn"
             ><img
               src="assets/img/icon/users.svg"
@@ -338,19 +339,13 @@
             />S'inscrire
           </a>
         </li>
-        <li *ngIf="!isLogged">
+        <li *ngIf="!authService.isLoggedIn">
           <a [routerLink]="routes.login" class="log-btn"
             ><img src="assets/img/icon/lock.svg" class="me-1" alt="img" /> Se
             connecter</a
           >
         </li>
-        <li *ngIf="isLogged && isEmployer">
-          <a [routerLink]="routes.employee_post_project" class="login-btn"
-            ><i class="feather icon-plus me-1"></i>Créer Offre
-          </a>
-        </li>
       </ul>
-      }
     </nav>
   </div>
 </header>
