@@ -498,7 +498,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
         next: (response) => {
           this.router.navigate([routes.getProjectConfirmation(response.id)]);
 
-          this.iaService.genereteOfferEmb(response.id);
+          // this.iaService.genereteOfferEmb(response.id);
         },
         error: (error) => {
           console.error('Error creating project:', error);
