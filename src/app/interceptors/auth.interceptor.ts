@@ -19,6 +19,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     '/insee',
     '/verification-otp',
     '/verify',
+    '/token',
     '/freelancer/project-details',
     '/employer/developer-details',
   ];

@@ -2,7 +2,7 @@
   <h3>Offres Terminées</h3>
 </div>
 <!-- project list -->
-@for (emp of empprojects; track emp) {
+@for (offer of paginatedOffers; track offer) {
 <div class="my-projects-list ongoing-projects">
   <div class="row">
     <div class="col-xl-9 flex-wrap">
@@ -10,40 +10,42 @@
         <div class="project-proposals align-items-center freelancer">
           <div class="proposal-info">
             <div class="proposals-details">
-              <span class="tech-name-badge">{{ emp.company }}</span>
+              <span class="tech-name-badge">{{
+                offer?.jobOffer?.job?.subActivity?.name
+              }}</span>
               <div class="d-flex justify-content-between align-items-start">
                 <div class="employee-project-card">
-                  <h3 class="proposals-title">{{ emp.content }}</h3>
+                  <h3 class="proposals-title">{{ offer?.jobOffer?.title }}</h3>
                   <ul>
                     <li>
                       <div class="proposal-job-type">
-                        <h4 class="title-info">{{ emp.type }}</h4>
-                        <h3>{{ emp.worktime }}</h3>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="proposal-job-type">
-                        <h4 class="title-info">Location</h4>
-                        <h3 class="flag-icon">
-                          <img
-                            src="assets/img/icon/flag-icon.svg"
-                            height="13"
-                            alt="Lang"
-                          />
-                          UK
+                        <h4 class="title-info">Type Contrat</h4>
+                        <h3>
+                          {{ offer?.jobOffer?.contractType?.description }}
                         </h3>
                       </div>
                     </li>
                     <li>
                       <div class="proposal-job-type">
-                        <h4 class="title-info">Expiry</h4>
-                        <h3>{{ emp.workingday }}</h3>
+                        <h4 class="title-info">Localisation</h4>
+                        <h3 class="flag-icon">
+                          {{ offer?.jobOffer?.city?.name }}
+                        </h3>
+                      </div>
+                    </li>
+                    <li *ngIf="offer?.jobOffer?.expectedDuration">
+                      <div class="proposal-job-type">
+                        <h4 class="title-info">Durée mission</h4>
+                        <h3>
+                          {{ offer?.jobOffer?.expectedDuration }}
+                          {{ offer?.jobOffer?.timeUnit }}
+                        </h3>
                       </div>
                     </li>
                     <li>
                       <div class="proposal-job-type">
-                        <h4 class="title-info">{{ emp.price }}</h4>
-                        <h3>{{ emp.day }}</h3>
+                        <h4 class="title-info">Date de publication</h4>
+                        <h3>{{ getDate(offer?.jobOffer?.publicationDate) }}</h3>
                       </div>
                     </li>
                   </ul>
@@ -54,27 +56,13 @@
                       <a
                         [routerLink]="routes.completedviewproject"
                         class="projects-btn"
-                        >View Details</a
+                        >Plus de Détails</a
                       >
                       <a
                         href="javascript:void(0);"
                         class="projects-btn completed-btn"
-                        ><i class="fa fa-award me-2"></i>Completed</a
+                        ><i class="fa fa-award me-2"></i>Terminée</a
                       >
-                      <a
-                        href="#write-review"
-                        data-bs-toggle="modal"
-                        class="btn-write-review mb-0"
-                        >{{ emp.review }}</a
-                      >
-                      <span>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        4.5
-                      </span>
                     </div>
                   </li>
                 </ul>
@@ -89,8 +77,18 @@
         <div class="card-body p-2">
           <div class="prj-proposal-count text-center hired">
             <h3>Hired</h3>
-            <img [src]="emp.image" alt="Img" class="img-fluid" />
-            <p class="mb-0">{{ emp.employeename }}</p>
+            <img
+              [src]="
+                offer?.candidate?.image !== null
+                  ? baseUrl + offer?.candidate?.image
+                  : ''
+              "
+              alt="Img"
+              class="img-fluid"
+            />
+            <p class="mb-0">
+              {{ offer?.candidate.firstName }} {{ offer?.candidate.lastName }}
+            </p>
           </div>
         </div>
       </div>
@@ -99,30 +97,42 @@
 </div>
 }
 <!-- /project list -->
-
-<div class="row">
+<div class="no-project-message" *ngIf="paginatedOffers.length === 0">
+  <h4>Vous n'avez pas encore de projet.</h4>
+</div>
+<!-- pagination -->
+<div class="row" *ngIf="paginatedOffers.length > 0">
   <div class="col-md-12">
     <ul class="paginations list-pagination">
-      <li class="page-item">
-        <a href="javascript:void(0);"
-          ><i class="feather icon-chevron-left"></i
-        ></a>
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a
+          (click)="changePage(currentPage - 1)"
+          [class.disabled]="currentPage === 1"
+        >
+          <i class="feather icon-chevron-left"></i>
+        </a>
       </li>
+
+      @for (page of getPageNumbers(); track page) {
       <li class="page-item">
-        <a href="javascript:void(0);" class="active">1</a>
+        <a (click)="changePage(page)" [class.active]="currentPage === page">
+          {{ page }}
+        </a>
       </li>
-      <li class="page-item"><a href="javascript:void(0);">2</a></li>
-      <li class="page-item"><a href="javascript:void(0);">3</a></li>
-      <li class="page-item"><a href="javascript:void(0);">...</a></li>
-      <li class="page-item"><a href="javascript:void(0);">10</a></li>
-      <li class="page-item">
-        <a href="javascript:void(0);"
-          ><i class="feather icon-chevron-right"></i
-        ></a>
+      }
+
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a
+          (click)="changePage(currentPage + 1)"
+          [class.disabled]="currentPage === totalPages"
+        >
+          <i class="feather icon-chevron-right"></i>
+        </a>
       </li>
     </ul>
   </div>
 </div>
+<!-- /pagination -->
 <!-- The Modal -->
 <div class="modal fade edit-proposal-modal" id="write-review">
   <div class="modal-dialog modal-dialog-centered modal-md">
