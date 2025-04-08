@@ -159,6 +159,16 @@ export class ProjectService {
     );
   }
 
+  getClosedOffersByCompany(
+    companyId: string,
+    page: number,
+    limit: number
+  ): Observable<{ offers: any[]; total: number }> {
+    return this.http.get<{ offers: any[]; total: number }>(
+      `${this.baseUrl}/closed/${companyId}?page=${page}&limit=${limit}`
+    );
+  }
+
   assignCandidate(offerId: string, candidateId: string, data: any) {
     return this.http.post<any>(
       `${this.baseUrl}/assign/${offerId}/candidate/${candidateId}`,

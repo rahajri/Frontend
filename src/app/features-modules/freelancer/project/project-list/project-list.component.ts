@@ -8,8 +8,7 @@ import { ProjectService } from 'src/app/core/services/project.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { showSuccessModal } from 'src/app/core/services/common/common-functions';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { SpinnerService } from 'src/app/core/services/spinner/spinner.service';
 
