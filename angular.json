@@ -61,6 +61,11 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/constants.ts",
+                  "with": "src/app/constants.pro.ts"
+                }
               "budgets": [
                 {
                   "type": "initial",
