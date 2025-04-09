@@ -1,6 +1,6 @@
-import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -33,12 +33,18 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<any> {
+    const body = new HttpParams()
+      .set('email', email)
+      .set('password', password);
+
     return this.http
       .post<any>(
         `${this.baseUrl}/login`,
-        { email, password },
+        body.toString(), // <-- envoyons sous forme URL-ENCODED
         {
-          headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+          headers: new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded', // <-- format attendu par Passport-local
+          }),
         }
       )
       .pipe(
@@ -57,12 +63,13 @@ export class AuthService {
   isLogged(): boolean {
     return !!localStorage.getItem('token');
   }
+
   isEmployer(): boolean {
     return localStorage.getItem('role') === 'company-employee' ? true : false;
   }
 
-  setIsLoggedIn(loggeIn: boolean): void {
-    this.isLoggedIn = loggeIn;
+  setIsLoggedIn(loggedIn: boolean): void {
+    this.isLoggedIn = loggedIn;
   }
 
   public logout(): void {
@@ -91,6 +98,7 @@ export class AuthService {
       password,
     });
   }
+
   validateToken() {
     return this.http.post<any>(`${this.baseUrl}/validate-token`, {});
   }
