@@ -9,7 +9,7 @@ export const environment = {
   backgroundColor: '#FFF8F5',
   warningyColor: '#05445e',
   defaultLanguage: 'fr',
-  apiUrl: 'http://localhost:3000/api',
+  apiUrl: 'https://agile-attitude.com/api',
 };
 
 /*
