@@ -71,12 +71,17 @@ export class ProjectService {
   getJobOffers(
     offset: number,
     limit: number,
-    companyId: string
+    companyId: string,
+    status: string | null = null
   ): Observable<any> {
-    const params = new HttpParams()
+    let params = new HttpParams()
       .set('page', offset.toString())
       .set('limit', limit.toString())
       .set('company', companyId);
+
+    if (status !== null) {
+      params = params.set('status', status);
+    }
 
     return this.http.get<any>(this.baseUrl, {
       params,

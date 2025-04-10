@@ -29,6 +29,47 @@ export interface empprojects {
   review: string;
   dates: string;
 }
+
+export interface JobOffer {
+  id: string;
+  title: string;
+  startDate: string;
+  endDate: string | null;
+  expectedDuration: number;
+  timeUnit: string | null;
+  createdAt: Date;
+  publicationDate: Date;
+  job: {
+    name: string;
+  };
+  contractType: {
+    description: string;
+    isRenewable: boolean;
+  };
+  city: {
+    name: string;
+  };
+  company: {
+    name: string;
+    siret: string;
+    email: string | null;
+    phone: string | null;
+    naf: string;
+    nafTitle: string;
+    category: string;
+    workforce: number;
+    message: string;
+    establishedDate: Date | null;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  status: {
+    name: string;
+    description: string;
+    context: string;
+  };
+}
+
 export interface completed {
   id: number;
   order: string;

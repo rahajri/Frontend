@@ -22,6 +22,7 @@ import {
   markFormGroupTouched,
 } from 'src/app/core/services/common/common-functions';
 import { StatusService } from 'src/app/core/services/status.service';
+import { IaService } from 'src/app/core/services/ia.service';
 interface data {
   value: string;
 }
@@ -100,6 +101,7 @@ export class OfferComponent {
     private skillService: SkillService,
     private languageService: LanguageService,
     private statusService: StatusService,
+    private iaService: IaService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -107,13 +109,7 @@ export class OfferComponent {
     this.minDate = today.toISOString().split('T')[0];
 
     this.jobForm = this.fb.group({
-      title: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(5),
-        ],
-      ],
+      title: ['', [Validators.required, Validators.minLength(5)]],
       activity: ['', [Validators.required]],
       subActivity: ['', [Validators.required]],
       job: ['', [Validators.required]],
@@ -571,6 +567,7 @@ export class OfferComponent {
         })
         .subscribe({
           next: (response) => {
+            this.iaService.generateOfferEmb(response.id);
             showSuccessModal('data-changed');
             this.getOfferDetails();
           },

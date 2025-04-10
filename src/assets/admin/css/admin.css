@@ -1081,9 +1081,9 @@ button.bg-danger:hover {
   padding: 30px;
 }
 .custom-modal .close {
-  background-color: #179ab5 ;
+  background-color: #179ab5;
   border-radius: 50%;
-  border: 2px solid #179ab5 ;
+  border: 2px solid #179ab5;
   color: #fff;
   font-size: 18px;
   height: 26px;
@@ -1120,7 +1120,7 @@ button.bg-danger:hover {
   position: absolute;
   left: -20px;
   top: -20px;
-  background-color: #179ab5 ;
+  background-color: #179ab5;
   width: 100px;
   height: 100px;
   border-radius: 100px;
@@ -5216,7 +5216,7 @@ table.table-inbox tbody tr.checked {
   margin-bottom: 8px;
   color: #1b2559;
 }
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
 }
 .user-menu-list .dropdown-item:hover,
@@ -5623,7 +5623,7 @@ table.table-inbox tbody tr.checked {
   color: #161c2d;
 }
 .paginations li a.active {
-  background: #ff5b37;
+  background: #179ab5;
   color: #fff;
   padding: 0px 7px;
   border-radius: 50%;
