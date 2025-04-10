@@ -5,6 +5,6 @@ export const environment = {
   backgroundColor: '#d4f1f4',
   warningyColor: '#05445e',
   defaultLanguage: 'fr',
-  apiUrl: 'http://localhost:3000'   
+  apiUrl: 'https://46.202.129.82:3000'   
 
 };
