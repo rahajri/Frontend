@@ -1,21 +1,119 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
-import { empprojects } from 'src/app/core/models/models';
+import { ProjectService } from 'src/app/core/services/project.service';
+import { Subscription } from 'rxjs';
+import { ProfileService } from 'src/app/core/services/profile.service';
+import { JobOffer } from 'src/app/core/models/models';
 
 @Component({
   selector: 'app-expired-project',
   templateUrl: './expired-project.component.html',
-  styleUrls: ['./expired-project.component.scss']
+  styleUrls: ['./expired-project.component.scss'],
 })
 export class ExpiredProjectComponent {
-  public routes = routes
-  empprojects: Array<empprojects> = [];
-  constructor( public router: Router, private dataservice: ShareDataService) {
-    this.dataservice.ManageUsers.subscribe((data: Array<empprojects>) => {
-      this.empprojects = data
-    })
-   }
+  subscription: Subscription | null = null;
+  jobOffers: JobOffer[] = [];
+  totalItems: number = 100; // Total d'éléments, ajustez selon les données renvoyées par votre API
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalPages: number = 10;
+  user: any;
+  company: any;
+  companyId: string = '';
 
+  public routes = routes;
+  constructor(
+    public router: Router,
+    private projectService: ProjectService,
+    private profileService: ProfileService
+  ) {}
+
+  ngOnInit(): void {
+    this.subscription = this.profileService.currentUserProfile$.subscribe({
+      next: (profile) => {
+        if (profile) {
+          this.user = profile;
+          this.company = profile.company;
+          this.companyId = profile.company?.id;
+          this.loadActiveOffers();
+        }
+      },
+      error: (err) => console.error(err),
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe(); // Clean up the subscription
+  }
+
+  loadActiveOffers(): void {
+    this.projectService
+      .getJobOffers(
+        this.currentPage,
+        this.itemsPerPage,
+        this.companyId,
+        'Closed'
+      )
+      .subscribe({
+        next: (res) => {
+          // Destructure the response
+          const { data, total } = res;
+          // Assign job offers and total item count
+          this.jobOffers = data;
+          this.totalPages = Math.ceil(res.total / this.itemsPerPage);
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+  }
+
+  formatDate(date: any): string {
+    if (!date) return '';
+    const options: Intl.DateTimeFormatOptions = {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    };
+
+    return new Date(date).toLocaleDateString('fr-FR', options);
+  }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.loadActiveOffers();
+    }
+  }
+
+  getPageNumbers(): number[] {
+    const pages: number[] = [];
+    const maxVisiblePages = 5;
+
+    if (this.totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= this.totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      let startPage = this.currentPage - Math.floor(maxVisiblePages / 2);
+      let endPage = this.currentPage + Math.floor(maxVisiblePages / 2);
+
+      if (startPage < 1) {
+        startPage = 1;
+        endPage = maxVisiblePages;
+      }
+
+      if (endPage > this.totalPages) {
+        endPage = this.totalPages;
+        startPage = this.totalPages - maxVisiblePages + 1;
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+    }
+
+    return pages;
+  }
 }

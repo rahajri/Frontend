@@ -17838,6 +17838,30 @@ label.award-upload input[type="file"] {
   display: block;
   margin: 0 auto 10px;
 }
+.projects-btn-info {
+  font-size: 12px;
+  font-weight: 600;
+  background: lightblue;
+  border-radius: 3px;
+  padding: 8px 10px;
+  color: #fff;
+  text-align: center;
+  width: 140px;
+  display: block;
+  margin: 0 auto 10px;
+}
+.projects-btn-x {
+  font-size: 12px;
+  font-weight: 600;
+  background: red;
+  border-radius: 3px;
+  padding: 8px 10px;
+  color: #fff;
+  text-align: center;
+  width: 140px;
+  display: block;
+  margin: 0 auto 10px;
+}
 
 .projects-btn:hover {
   background-color: #131135;

@@ -57,7 +57,11 @@
                 <ul class="employee-project">
                   <li>
                     <div class="project-action text-center">
-                      <a href="javascript:void(0);" class="projects-btn"
+                      <a
+                        href="javascript:void(0);"
+                        *ngIf="jobOffer?.status?.name !== 'Closed'"
+                        [routerLink]="routes.matching_project(jobOffer.id)"
+                        class="projects-btn"
                         >Matching IA</a
                       >
                       <a
@@ -67,6 +71,13 @@
                         href="javascript:void(0);"
                         class="mb-0 projects-btn"
                         >Plus de Details</a
+                      >
+
+                      <a
+                        *ngIf="jobOffer?.status?.name === 'Closed'"
+                        href="javascript:void(0);"
+                        class="projects-btn-x"
+                        >fermée</a
                       >
                     </div>
                   </li>
@@ -88,79 +99,32 @@
 <div class="row" *ngIf="jobOffers.length > 0">
   <div class="col-md-12">
     <ul class="paginations list-pagination">
-      <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }">
-        <a href="javascript:void(0);" (click)="changePage(currentPage - 1)"
-          ><i class="feather icon-chevron-left"></i
-        ></a>
-      </li>
-      <li
-        *ngFor="let page of [].constructor(totalPages); let i = index"
-        class="page-item"
-        [ngClass]="{ active: currentPage === i + 1 }"
-      >
-        <a href="javascript:void(0);" (click)="changePage(i + 1)">
-          {{ i + 1 }}</a
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a
+          (click)="changePage(currentPage - 1)"
+          [class.disabled]="currentPage === 1"
         >
+          <i class="feather icon-chevron-left"></i>
+        </a>
       </li>
-      <li
-        class="page-item"
-        [ngClass]="{ disabled: currentPage === totalPages }"
-      >
-        <a href="javascript:void(0);" (click)="changePage(currentPage + 1)"
-          ><i class="feather icon-chevron-right"></i
-        ></a>
+
+      @for (page of getPageNumbers(); track page) {
+      <li class="page-item">
+        <a (click)="changePage(page)" [class.active]="currentPage === page">
+          {{ page }}
+        </a>
+      </li>
+      }
+
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a
+          (click)="changePage(currentPage + 1)"
+          [class.disabled]="currentPage === totalPages"
+        >
+          <i class="feather icon-chevron-right"></i>
+        </a>
       </li>
     </ul>
   </div>
 </div>
 <!-- /pagination -->
-<!-- The Modal -->
-<div class="modal fade edit-proposal-modal" id="write-review">
-  <div class="modal-dialog modal-dialog-centered modal-md">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Write a Review</h4>
-        <span class="modal-close"
-          ><a
-            href="javascript:void(0);"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-            ><i class="feather icon-x"></i></a
-        ></span>
-      </div>
-      <div class="modal-body">
-        <form action="#">
-          <div class="modal-info">
-            <div class="reviewed-user">
-              <img src="assets/img/user/table-avatar-02.jpg" alt="Img" />
-              <span>Bolethe Fleischer</span>
-            </div>
-            <div class="input-block form-info">
-              <label for="Ratings" class="col-form-label mb-0 mt-2"
-                >Ratings</label
-              >
-              <div class="rating rating-select mb-0">
-                <a href="javascript:void(0);"><i class="fas fa-star"></i></a>
-                <a href="javascript:void(0);"><i class="fas fa-star"></i></a>
-                <a href="javascript:void(0);"><i class="fas fa-star"></i></a>
-                <a href="javascript:void(0);"><i class="fas fa-star"></i></a>
-                <a href="javascript:void(0);"><i class="fas fa-star"></i></a>
-              </div>
-            </div>
-            <div class="input-block">
-              <label for="Description" class="form-label">Description</label>
-              <textarea class="form-control"></textarea>
-            </div>
-          </div>
-          <div class="submit-section text-end">
-            <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
-            <button type="submit" class="btn btn-primary submit-btn">
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- /The Modal -->

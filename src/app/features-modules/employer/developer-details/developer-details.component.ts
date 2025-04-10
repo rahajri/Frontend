@@ -79,7 +79,6 @@ export class DeveloperDetailsComponent implements OnInit, OnDestroy {
     this.candidateService.getCandidateById(id).subscribe({
       next: (res) => {
         this.candidate = res;
-        console.log(res);
       },
       error: (err) => {
         console.error(err);

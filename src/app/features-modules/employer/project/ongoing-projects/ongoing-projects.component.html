@@ -2,48 +2,49 @@
   <h3>Offres Actives</h3>
 </div>
 <!-- project list -->
-@for (emp of empprojects; track emp) {
-<div class="my-projects-list ongoing-projects">
-  <div class="row">
-    <div class="col-xl-9 flex-wrap">
+<div class="my-projects-list ongoing-projects" *ngIf="jobOffers.length > 0">
+  <div class="row" *ngFor="let jobOffer of jobOffers">
+    <div class="col-xl-12 flex-wrap mt-2">
       <div class="freelancer-proposals proposal-ongoing mb-0">
         <div class="project-proposals align-items-center freelancer">
           <div class="proposal-info">
             <div class="proposals-details">
-              <span class="tech-name-badge">{{ emp.company }}</span>
+              <span class="tech-name-badge">{{ jobOffer?.job?.name }}</span>
               <div class="d-flex justify-content-between align-items-start">
                 <div class="employee-project-card">
-                  <h3 class="proposals-title">{{ emp.content }}</h3>
+                  <h3 class="proposals-title">
+                    {{ jobOffer?.title }}
+                  </h3>
                   <ul>
                     <li>
                       <div class="proposal-job-type">
-                        <h4 class="title-info">{{ emp.type }}</h4>
-                        <h3>{{ emp.worktime }}</h3>
+                        <h4 class="title-info">type Contrat</h4>
+                        <h3>{{ jobOffer?.contractType?.description }}</h3>
                       </div>
                     </li>
                     <li>
                       <div class="proposal-job-type">
                         <h4 class="title-info">Location</h4>
-                        <h3 class="flag-icon">
-                          <img
-                            src="assets/img/icon/flag-icon.svg"
-                            height="13"
-                            alt="Lang"
-                          />
-                          UK
+                        <h3>
+                          {{ jobOffer?.city?.name }}
                         </h3>
                       </div>
                     </li>
                     <li>
                       <div class="proposal-job-type">
-                        <h4 class="title-info">Expiry</h4>
-                        <h3>{{ emp.workingday }}</h3>
+                        <h4 class="title-info">Duree</h4>
+                        <h3>
+                          {{ jobOffer?.expectedDuration }}
+                          {{ jobOffer?.timeUnit }}
+                        </h3>
                       </div>
                     </li>
-                    <li>
+                    <li *ngIf="jobOffer?.publicationDate">
                       <div class="proposal-job-type">
-                        <h4 class="title-info">{{ emp.price }}</h4>
-                        <h3>{{ emp.day }}</h3>
+                        <h4 class="title-info">Date de publication</h4>
+                        <h3>
+                          {{ formatDate(jobOffer?.publicationDate) }}
+                        </h3>
                       </div>
                     </li>
                   </ul>
@@ -51,10 +52,20 @@
                 <ul class="employee-project">
                   <li>
                     <div class="project-action text-center">
-                      <a [routerLink]="routes.viewproject" class="projects-btn"
-                        >View Details</a
+                      <a
+                        href="javascript:void(0);"
+                        [routerLink]="routes.matching_project(jobOffer.id)"
+                        class="projects-btn"
+                        >Matching IA</a
                       >
-                      <span>{{ emp.date }}</span>
+                      <a
+                        [routerLink]="
+                          routes.get_employee_project_details(jobOffer.id)
+                        "
+                        href="javascript:void(0);"
+                        class="mb-0 projects-btn"
+                        >Plus de Details</a
+                      >
                     </div>
                   </li>
                 </ul>
@@ -64,42 +75,43 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-3 d-flex flex-wrap">
-      <div class="projects-card flex-fill">
-        <div class="card-body p-2">
-          <div class="prj-proposal-count text-center hired">
-            <h3>Hired</h3>
-            <img [src]="emp.image" alt="Img" class="img-fluid" />
-            <p class="mb-0">{{ emp.employeename }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
-}
 <!-- /project list -->
 
-<div class="row">
+<div class="no-project-message" *ngIf="jobOffers.length === 0">
+  <h4>Vous n'avez pas encore de projet.</h4>
+</div>
+<!-- pagination -->
+<div class="row" *ngIf="jobOffers.length > 0">
   <div class="col-md-12">
     <ul class="paginations list-pagination">
-      <li class="page-item">
-        <a href="javascript:void(0);"
-          ><i class="feather icon-chevron-left"></i
-        ></a>
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a
+          (click)="changePage(currentPage - 1)"
+          [class.disabled]="currentPage === 1"
+        >
+          <i class="feather icon-chevron-left"></i>
+        </a>
       </li>
+
+      @for (page of getPageNumbers(); track page) {
       <li class="page-item">
-        <a href="javascript:void(0);" class="active">1</a>
+        <a (click)="changePage(page)" [class.active]="currentPage === page">
+          {{ page }}
+        </a>
       </li>
-      <li class="page-item"><a href="javascript:void(0);">2</a></li>
-      <li class="page-item"><a href="javascript:void(0);">3</a></li>
-      <li class="page-item"><a href="javascript:void(0);">...</a></li>
-      <li class="page-item"><a href="javascript:void(0);">10</a></li>
-      <li class="page-item">
-        <a href="javascript:void(0);"
-          ><i class="feather icon-chevron-right"></i
-        ></a>
+      }
+
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a
+          (click)="changePage(currentPage + 1)"
+          [class.disabled]="currentPage === totalPages"
+        >
+          <i class="feather icon-chevron-right"></i>
+        </a>
       </li>
     </ul>
   </div>
 </div>
+<!-- /pagination -->

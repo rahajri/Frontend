@@ -1,5 +1,5 @@
 <div class="page-title">
-  <h3>Offres Terminées</h3>
+  <h3>Candidatures Terminées</h3>
 </div>
 <!-- project list -->
 @for (offer of paginatedOffers; track offer) {
@@ -53,15 +53,26 @@
                 <ul class="employee-project">
                   <li>
                     <div class="project-action text-center">
-                      <a
-                        [routerLink]="routes.completedviewproject"
-                        class="projects-btn"
+                      <a href="javascript:void(0)" class="projects-btn"
                         >Plus de Détails</a
                       >
                       <a
+                        *ngIf="offer?.status?.name === 'Recruitment Approved'"
                         href="javascript:void(0);"
                         class="projects-btn completed-btn"
                         ><i class="fa fa-award me-2"></i>Terminée</a
+                      >
+                      <a
+                        *ngIf="offer?.status?.name === 'Accepted'"
+                        href="javascript:void(0);"
+                        class="projects-btn-info"
+                        ><i class="fa fa-spinner me-2"></i>En cours...</a
+                      >
+                      <a
+                        *ngIf="offer?.status?.name === 'Rejected'"
+                        href="javascript:void(0);"
+                        class="projects-btn-x"
+                        ><i class="fa fa-user-xmark me-2"></i>Rejeté</a
                       >
                     </div>
                   </li>

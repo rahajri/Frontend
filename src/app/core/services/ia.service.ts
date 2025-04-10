@@ -3,16 +3,16 @@ import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
+  HttpStatusCode,
 } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError, firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IaService {
   private apiUrl = 'http://46.202.129.82:9090';
-  private authToken: string | null =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiYWNrZW5kX3VzZXIiLCJleHAiOjE3NDQxMDU3OTR9.mxM1nssTMqkA1ZtOqYPCyNQuMFiC5dw16bYjPiEg7ns';
+  private authToken: string | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -35,6 +35,11 @@ export class IaService {
             'Network error - please check your connection and API availability'
           )
       );
+    } else if (error.status === HttpStatusCode.Unauthorized) {
+      console.error('Authentication error:', error.error);
+      return throwError(
+        () => new Error('Session expired - please login again')
+      );
     } else {
       console.error(
         `Backend returned code ${error.status}, body was:`,
@@ -46,103 +51,132 @@ export class IaService {
     );
   }
 
-  async genereteToken() {
+  private async ensureValidToken(): Promise<void> {
+    if (!this.authToken) {
+      await this.generateToken();
+    }
+  }
+
+  async generateToken(): Promise<string> {
     try {
-      const res = await this.http
-        .post<any>(
-          `${this.apiUrl}/token`,
-          {}, // Add credentials here if needed
-          { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
-        )
-        .pipe(catchError(this.handleError))
-        .toPromise();
+      const res = await firstValueFrom(
+        this.http
+          .post<{ access_token: string }>(
+            `${this.apiUrl}/token`,
+            {},
+            { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
+          )
+          .pipe(catchError(this.handleError))
+      );
 
       if (res?.access_token) {
-        console.log(res.access_token);
+        this.authToken = res.access_token;
+        return res.access_token;
       }
-      return res;
+      throw new Error('No token received');
     } catch (error) {
       console.error('Error generating token:', error);
       throw error;
     }
   }
 
-  async genereteCandidateEmb() {
-    //candidateId: string
+  async generateCandidateEmb(candidateId: string): Promise<any> {
+    await this.ensureValidToken();
     try {
-      const res = await this.http
-        .post<any>(
-          `${this.apiUrl}/embeddings/candidate`,
-          {
-            id: '66259b81-02b0-4168-b1fe-fbfbc0f39d7a',
-            type: 'candidate',
-          },
-          { headers: this.getHeaders() }
-        )
-        .toPromise();
-
-      return res;
+      return await firstValueFrom(
+        this.http
+          .post<any>(
+            `${this.apiUrl}/embeddings/candidate`,
+            {
+              id: candidateId,
+              type: 'candidate',
+            },
+            { headers: this.getHeaders() }
+          )
+          .pipe(catchError(this.handleError))
+      );
     } catch (error) {
+      if (this.isAuthError(error)) {
+        this.clearToken();
+        return this.generateCandidateEmb(candidateId); // Retry once with new token
+      }
       console.error('Error generating candidate embeddings:', error);
       throw error;
     }
   }
 
-  async genereteOfferEmb(offerId: string) {
-    //offerId: string
-    console.log('OfferId : ', offerId);
+  async generateOfferEmb(offerId: string): Promise<any> {
+    await this.ensureValidToken();
     try {
-      const res = await this.http
-        .post<any>(
-          `${this.apiUrl}/embeddings/offer`,
-          {
-            id: offerId, //change it to Dynamic
-            type: 'offer',
-          },
-          { headers: this.getHeaders() }
-        )
-        .toPromise();
-      console.log('res : ', res);
-      return res;
+      return await firstValueFrom(
+        this.http
+          .post<any>(
+            `${this.apiUrl}/embeddings/offer`,
+            {
+              id: 'c3e0f87a-51db-45fd-89ec-5528306be507',
+              type: 'offer',
+            },
+            { headers: this.getHeaders() }
+          )
+          .pipe(catchError(this.handleError))
+      );
     } catch (error) {
+      if (this.isAuthError(error)) {
+        this.clearToken();
+        return this.generateOfferEmb(offerId); // Retry once with new token
+      }
       console.error('Error generating offer embeddings:', error);
       throw error;
     }
   }
 
-  async iaCandidates(id: string) {
+  async iaCandidates(id: string): Promise<any[]> {
+    await this.ensureValidToken();
     try {
-      const res = await this.http
-        .post<any>(
-          `${this.apiUrl}/matching/candidates/${id}`,
-          {},
-          { headers: this.getHeaders() }
-        )
-        .toPromise();
-      return res;
+      return await firstValueFrom(
+        this.http
+          .get<any>(`${this.apiUrl}/matching/candidates/${id}`, {
+            headers: this.getHeaders(),
+          })
+          .pipe(catchError(this.handleError))
+      );
     } catch (error) {
+      if (this.isAuthError(error)) {
+        this.clearToken();
+        return this.iaCandidates(id); // Retry once with new token
+      }
       console.error('Error matching candidates:', error);
       throw error;
     }
   }
 
-  async iaOffers(id: string) {
+  async iaOffers(id: string): Promise<any[]> {
+    await this.ensureValidToken();
     try {
-      const res = await this.http
-        .post<any>(
-          `${this.apiUrl}/matching/offers/${id}`,
-          {},
-          { headers: this.getHeaders() }
-        )
-        .toPromise();
-      return res;
+      return await firstValueFrom(
+        this.http
+          .get<any>(`${this.apiUrl}/matching/offers/${id}`, {
+            headers: this.getHeaders(),
+          })
+          .pipe(catchError(this.handleError))
+      );
     } catch (error) {
+      if (this.isAuthError(error)) {
+        this.clearToken();
+        return this.iaOffers(id); // Retry once with new token
+      }
       console.error('Error matching offers:', error);
       throw error;
     }
   }
 
-  // Optional: Add a method to clear the token
+  private isAuthError(error: any): boolean {
+    return (
+      error instanceof HttpErrorResponse &&
+      error.status === HttpStatusCode.Unauthorized
+    );
+  }
+
   clearToken() {
     this.authToken = null;
   }

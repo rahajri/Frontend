@@ -1,0 +1,199 @@
+<div class="page-title">
+  <h3>les meilleurs candidats identifiés par l'IA</h3>
+</div>
+<!-- project list -->
+<div class="my-projects-list ongoing-projects">
+  <div class="row">
+    <div class="col-xl-9 flex-wrap">
+      <div class="freelancer-proposals proposal-ongoing mb-0">
+        <div class="project-proposals align-items-center freelancer">
+          <div class="proposal-info">
+            <div class="proposals-details">
+              <span class="tech-name-badge">{{
+                offer?.job?.subActivity?.name
+              }}</span>
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="employee-project-card w-100">
+                  <h3 class="proposals-title">
+                    {{ offer?.title }}
+                  </h3>
+                  <ul>
+                    <li>
+                      <div class="proposal-job-type">
+                        <h4 class="title-info">Type Contract</h4>
+                        <h3>{{ offer?.contractType?.description }}</h3>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="proposal-job-type">
+                        <h4 class="title-info">Localisation</h4>
+                        <h3 class="flag-icon">
+                          {{ offer?.city?.name }}
+                        </h3>
+                      </div>
+                    </li>
+                    <li *ngIf="offer?.expectedDuration">
+                      <div class="proposal-job-type">
+                        <h4 class="title-info">Duree</h4>
+                        <h3>
+                          {{ offer?.expectedDuration }} {{ offer?.timeUnit }}
+                        </h3>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="proposal-job-type">
+                        <h4 class="title-info">Date de publication</h4>
+                        <h3>{{ getDate(offer?.publicationDate) }}</h3>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="proposal-job-type">
+                        <h4 class="title-info">Salaire</h4>
+                        <h3>
+                          {{ offer?.salaryType?.salary }} € /
+                          {{ offer?.salaryType?.type }}
+                        </h3>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 d-flex flex-wrap">
+      <div class="projects-card flex-fill">
+        <div class="card-body p-2">
+          <div class="prj-proposal-count text-center hired">
+            <h2>{{ matchingOffers.length }}</h2>
+            <h3 class="mb-0">Propositions</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="globalError"
+  class="alert alert-danger alert-dismissible fade show"
+  role="alert"
+>
+  <strong
+    >Une erreur est survenue lors du chargement des candidatures. Veuillez
+    réessayer ultérieurement.</strong
+  >
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<ng-container *ngIf="matchingOffers.length === 0">
+  <div class="h2 m-5">
+    Aucun des meilleurs candidats identifiés par l'IA n'a été trouvé pour cette
+    offre pour le moment.
+  </div>
+</ng-container>
+<ng-container *ngIf="matchingOffers && matchingOffers.length">
+  <div
+    class="my-projects-list ongoing-projects"
+    *ngFor="let candidate of matchingOffers; trackBy: trackOffer"
+  >
+    <div class="pending-proposal-profile">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="user-img-box">
+          <a [routerLink]="routes.developerdetails(candidate?.candidate?.id)">
+            <img
+              [src]="
+                candidate?.image !== null ? baseUrl + candidate?.image : ''
+              "
+              alt="Img"
+            />
+          </a>
+          <div class="user-name">
+            <a
+              class="h5 d-block"
+              [href]="routes.developerdetails(candidate?.id)"
+            >
+              {{ candidate.name }}
+            </a>
+            <span
+              >Postulé le : 12 mars 1901
+              <i class="fa-solid fa-star"></i>5.0</span
+            >
+          </div>
+        </div>
+        <div class="payment-count">
+          <div class="me-4 p-2">
+            <h4>{{ parseFloat(candidate.similarity_score) }}</h4>
+            <p style="color: #179ab5">Similarité</p>
+          </div>
+          <div class="hire-now">
+            <a
+              [routerLink]="routes.employee_post_project"
+              class="login-btn"
+              style="color: white"
+              >Recruter
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<div class="row" *ngIf="matchingOffers && matchingOffers.length">
+  <div class="col-md-12">
+    <ul class="paginations list-pagination justify-content-end">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a href="javascript:void(0);" (click)="changePage(currentPage - 1)">
+          <i class="feather icon-chevron-left"></i>
+        </a>
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+      >
+        <a
+          href="javascript:void(0);"
+          [class.active]="currentPage === i + 1"
+          (click)="changePage(i + 1)"
+          >{{ i + 1 }}</a
+        >
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a href="javascript:void(0);" (click)="changePage(currentPage + 1)">
+          <i class="feather icon-chevron-right"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- /The Modal -->
+
+<!-- The Modal -->
+<div class="modal fade success-modal hire-modal" id="success-hire">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="success-msg-content text-center">
+          <h4>Hired Successfully</h4>
+          <p>
+            Freelancer Hannah finn has been successfully hired for the project
+            “Project Name”, This project will be hide for Other freelancers & in
+            future
+          </p>
+          <a href="javascript:voit(0);" class="btn btn-primary mt-3"
+            >Go to Projects</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /The Modal -->
