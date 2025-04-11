@@ -9,7 +9,7 @@ export const environment = {
   backgroundColor: '#FFF8F5',
   warningyColor: '#05445e',
   defaultLanguage: 'fr',
-  apiUrl: '/api',
+  apiUrl: 'https://www.interim-online.fr/api',
 };
 
 /*
