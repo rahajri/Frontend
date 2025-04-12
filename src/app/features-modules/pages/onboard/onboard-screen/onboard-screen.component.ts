@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import * as pdfjsLib from 'pdfjs-dist';
-import { OcrService } from 'src/app/core/services/ocr.service';
+import { OcrService } from 'src/app/core/services/ocr.service.prod';
 import {
   FormArray,
   FormBuilder,
