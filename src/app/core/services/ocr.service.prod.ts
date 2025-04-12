@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class OcrService {
-  private apiUrl = 'https://www.interim-online.fr/ocr/upload';
+  private apiUrl = 'http://46.202.129.82:9000/ocr/upload/';
 
   constructor(private http: HttpClient) {}
 
