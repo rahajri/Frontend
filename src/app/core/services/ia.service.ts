@@ -10,9 +10,8 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class IaService {
-  private apiUrl = 'http://46.202.129.82:9090';
-  private authToken: string | null =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiYWNrZW5kX3VzZXIiLCJleHAiOjE3NDQxMDU3OTR9.mxM1nssTMqkA1ZtOqYPCyNQuMFiC5dw16bYjPiEg7ns';
+  private apiUrl = 'http://46.202.129.82:9090/ia';
+  private authToken: string | null = '';
 
   constructor(private http: HttpClient) {}
 
