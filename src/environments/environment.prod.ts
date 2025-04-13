@@ -5,6 +5,6 @@ export const environment = {
   backgroundColor: '#d4f1f4',
   warningyColor: '#05445e',
   defaultLanguage: 'fr',
-  apiUrl: 'https://46.202.129.82:3000/api'   
+  apiUrl: 'https://www.interim-online.fr/api'   
 
 };
