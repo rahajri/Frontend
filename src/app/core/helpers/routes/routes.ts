@@ -60,6 +60,9 @@ export class routes {
   public static get_employee_project_details(id: string): string {
     return this.employer + `/all-projects/${id}`;
   }
+  public static matching_project(id: string): string {
+    return this.employer + `/matching/${id}`;
+  }
   public static get employee_markedfavourites(): string {
     return this.employer + '/markedfavourites';
   }

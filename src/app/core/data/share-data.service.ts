@@ -1961,12 +1961,17 @@ export class ShareDataService {
           page: 'ongoing-projects',
         },
         {
+          title: 'Offres Terminées',
+          routes: routes.expiredproject,
+          page: 'expired-projects',
+        },
+        {
           title: 'Candidatures',
           routes: routes.pendingproject,
           page: 'pending-projects',
         },
         {
-          title: 'Offres Terminées',
+          title: 'Candidatures Terminées',
           routes: routes.completedproject,
           page: 'completed-projects',
         },

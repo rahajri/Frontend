@@ -162,6 +162,11 @@ const routes: Routes = [
           import('../admin/offer/offer.module').then((m) => m.OfferModule),
       },
       {
+        path: 'matching/:id',
+        loadChildren: () =>
+          import('./maching/maching.module').then((m) => m.MachingModule),
+      },
+      {
         path: 'all-projects',
         loadChildren: () =>
           import('./project/all-projects/all-projects.module').then(

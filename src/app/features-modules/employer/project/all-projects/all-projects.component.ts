@@ -4,6 +4,7 @@ import { routes } from 'src/app/core/helpers/routes/routes';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { Subscription } from 'rxjs';
 import { ProfileService } from 'src/app/core/services/profile.service';
+import { JobOffer } from 'src/app/core/models/models';
 
 @Component({
   selector: 'app-all-projects',
@@ -13,12 +14,12 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 export class AllProjectsComponent {
   subscription: Subscription | null = null;
   jobOffers: JobOffer[] = [];
-  totalItems: number = 100; // Total d'éléments, ajustez selon les données renvoyées par votre API
   currentPage: number = 1;
   itemsPerPage: number = 10;
-  totalPages: number = 10;
+  totalPages: number = 1;
   user: any;
   company: any;
+  companyId: string = '';
 
   public routes = routes;
   constructor(
@@ -33,7 +34,8 @@ export class AllProjectsComponent {
         if (profile) {
           this.user = profile;
           this.company = profile.company;
-          this.loadJobOffers(profile.company?.id);
+          this.companyId = profile.company?.id;
+          this.loadJobOffers();
         }
       },
       error: (err) => console.error(err),
@@ -44,16 +46,20 @@ export class AllProjectsComponent {
     this.subscription?.unsubscribe(); // Clean up the subscription
   }
 
-  loadJobOffers(companyId: string): void {
+  loadJobOffers(): void {
     this.projectService
-      .getJobOffers(this.currentPage, this.itemsPerPage, companyId)
-      .subscribe((response) => {
-        // Destructure the response
-        const { data, total, page, lastPage } = response;
-        // Assign job offers and total item count
-        this.jobOffers = data;
-        this.totalItems = total;
-        this.totalPages = lastPage;
+      .getJobOffers(this.currentPage, this.itemsPerPage, this.companyId, null)
+      .subscribe({
+        next: (res) => {
+          // Destructure the response
+          const { data, total } = res;
+          // Assign job offers and total item count
+          this.jobOffers = data;
+          this.totalPages = Math.ceil(res.total / this.itemsPerPage);
+        },
+        error: (err) => {
+          console.error(err);
+        },
       });
   }
 
@@ -68,48 +74,40 @@ export class AllProjectsComponent {
     return new Date(date).toLocaleDateString('fr-FR', options);
   }
 
-  changePage(page: number): void {
-    this.currentPage = page;
-    this.loadJobOffers(this.company?.id);
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.loadJobOffers();
+    }
   }
-}
 
-interface JobOffer {
-  id: string;
-  title: string;
-  startDate: string;
-  endDate: string | null;
-  expectedDuration: number;
-  timeUnit: string | null;
-  createdAt: Date;
-  publicationDate: Date;
-  job: {
-    name: string;
-  };
-  contractType: {
-    description: string;
-    isRenewable: boolean;
-  };
-  city: {
-    name: string;
-  };
-  company: {
-    name: string;
-    siret: string;
-    email: string | null;
-    phone: string | null;
-    naf: string;
-    nafTitle: string;
-    category: string;
-    workforce: number;
-    message: string;
-    establishedDate: Date | null;
-    createdAt: Date;
-    updatedAt: Date;
-  };
-  status: {
-    name: string;
-    description: string;
-    context: string;
-  };
+  getPageNumbers(): number[] {
+    const pages: number[] = [];
+    const maxVisiblePages = 5;
+
+    if (this.totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= this.totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      let startPage = this.currentPage - Math.floor(maxVisiblePages / 2);
+      let endPage = this.currentPage + Math.floor(maxVisiblePages / 2);
+
+      if (startPage < 1) {
+        startPage = 1;
+        endPage = maxVisiblePages;
+      }
+
+      if (endPage > this.totalPages) {
+        endPage = this.totalPages;
+        startPage = this.totalPages - maxVisiblePages + 1;
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+    }
+
+    return pages;
+  }
 }

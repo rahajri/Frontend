@@ -31,8 +31,7 @@ export class CompletedProjectsComponent implements OnInit, OnDestroy {
     private projectService: ProjectService,
     private companyService: CompanyService,
     private commonService: CommonService
-  ) {
-  }
+  ) {}
 
   editor!: Editor;
   toolbar: Toolbar = [

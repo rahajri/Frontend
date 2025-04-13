@@ -58,15 +58,15 @@ export class PendingProjectsComponent {
     }
   }
 
+  getDate(isoDate: string) {
+    return this.commonService.formatDate(isoDate);
+  }
+
   changePage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
       this.getAvailableOffersByCompany();
     }
-  }
-
-  getDate(isoDate: string) {
-    return this.commonService.formatDate(isoDate);
   }
 
   getPageNumbers(): number[] {
