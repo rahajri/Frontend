@@ -106,7 +106,7 @@
     <div class="pending-proposal-profile">
       <div class="d-flex justify-content-between align-items-center">
         <div class="user-img-box">
-          <a [routerLink]="routes.developerdetails(candidate?.candidate?.id)">
+          <a [routerLink]="routes.developerdetails(candidate?.id)">
             <img
               [src]="
                 candidate?.image !== null ? baseUrl + candidate?.image : ''
@@ -118,6 +118,7 @@
             <a
               class="h5 d-block"
               [href]="routes.developerdetails(candidate?.id)"
+              target="_blank"
             >
               {{ candidate.name }}
             </a>
@@ -134,9 +135,11 @@
           </div>
           <div class="hire-now">
             <a
-              [routerLink]="routes.employee_post_project"
+              href="#hire-now"
               class="login-btn"
+              data-bs-toggle="modal"
               style="color: white"
+              (click)="setSelectedCandidate(candidate)"
               >Recruter
             </a>
           </div>
@@ -174,6 +177,53 @@
   </div>
 </div>
 
+<!-- The Modal -->
+<div class="modal fade edit-proposal-modal" id="hire-now">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header d-flex justify-content-between">
+        <h4 class="modal-title">Embaucher - {{ selectedCandidate?.name }}</h4>
+        <span class="modal-close"
+          ><a
+            href="javascript:void(0);"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            ><i class="feather icon-x"></i></a
+        ></span>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="sendForm" (ngSubmit)="sendMessage()">
+          <div class="modal-info">
+            <div class="row">
+              <div class="input-block">
+                <label for="Message" class="form-label">Message</label>
+                <textarea
+                  class="form-control"
+                  placeholder="Votre message à l'agence pour la validation du recrutement"
+                  formControlName="message"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <label class="custom_check close-project">
+            <input
+              type="checkbox"
+              name="rem_password"
+              formControlName="closeOffer"
+            />
+            <span class="checkmark"></span>Fermer ce projet aux autres candidats
+          </label>
+          <div class="submit-section text-end">
+            <a href="javascript:void(0);" class="btn btn-cancel">Annuler</a>
+            <button type="submit" class="btn btn-primary submit-btn">
+              Envoyer message
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- /The Modal -->
 
 <!-- The Modal -->

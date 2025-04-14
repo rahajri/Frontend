@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { IaService } from 'src/app/core/services/ia.service';
 import { environment } from 'src/environments/environment';
 import { CommonService } from 'src/app/core/services/common/common.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MessageService } from 'src/app/core/services/message.service';
 
+declare var bootstrap: any;
 @Component({
   selector: 'app-maching',
   templateUrl: './maching.component.html',
@@ -28,12 +31,22 @@ export class MachingComponent {
   currentPage = 1;
   itemsPerPage = 5;
 
+  sendForm!: FormGroup;
+
   constructor(
     private projectService: ProjectService,
     private iaService: IaService,
     private commonService: CommonService,
-    private route: ActivatedRoute
-  ) {}
+    private fb: FormBuilder,
+    private messageService: MessageService,
+    private route: ActivatedRoute,
+    public router: Router
+  ) {
+    this.sendForm = this.fb.group({
+      closeOffer: [false],
+      message: [''], // Add a form control for the message
+    });
+  }
 
   ngOnInit(): void {
     this.offerId = this.route.snapshot.paramMap.get('id');
@@ -111,12 +124,46 @@ export class MachingComponent {
     return offer.id; // Use the unique identifier
   }
 
-  setSelectedCandidate(company: any): void {
-    this.selectedCandidate = company;
+  setSelectedCandidate(candidate: any): void {
+    this.selectedCandidate = candidate;
   }
 
   toggleReadMore() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  sendMessage() {
+    const formData = {
+      closeOffer: this.sendForm.value.closeOffer,
+      offer: this.offer?.id,
+      message: this.sendForm.value.message,
+      candidateId: this.selectedCandidate?.id, // Assuming selectedCandidate has an id
+      employerId: this.profileId,
+    };
+
+    this.messageService.sendMessageToAdmins(formData).subscribe({
+      next: (res) => {
+        this.sendForm.reset({
+          closeOffer: false,
+          message: '',
+        });
+        this.hideModal('hire-now');
+        this.router.navigate([routes.pendingproject]);
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  hideModal(id: string) {
+    const modalElement = document.getElementById(id);
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      if (modal) {
+        modal.hide();
+      }
+    }
   }
 
   // Optional: Add a retry method for your template
