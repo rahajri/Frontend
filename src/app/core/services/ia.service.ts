@@ -11,7 +11,7 @@ import { catchError, Observable, throwError, firstValueFrom } from 'rxjs';
   providedIn: 'root',
 })
 export class IaService {
-  private apiUrl = 'http://46.202.129.82:9090';
+  private apiUrl = 'https://www.interim-online.fr/ia';
   private authToken: string | null = null;
 
   constructor(private http: HttpClient) {}
