@@ -113,7 +113,7 @@ export class IaService {
           .post<any>(
             `${this.apiUrl}/embeddings/offer`,
             {
-              id: 'c3e0f87a-51db-45fd-89ec-5528306be507',
+              id: offerId,
               type: 'offer',
             },
             { headers: this.getHeaders() }
