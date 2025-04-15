@@ -640,10 +640,11 @@ export class OnboardScreenComponent implements OnInit {
       // Optionally, show an error message to the user
       return; // Stop further processing
     }
-
+    
     this.candidateService.createCandidate(candidateData).subscribe({
       next: (res) => {
-        this.iaService.generateCandidateEmb(res?.data?.id)
+        console.log(res?.data?.id);
+        this.iaService.generateCandidateEmb(res?.data?.id);
         this.router.navigate(['/freelancer/dashboard']);
       },
       error: (error) => {
