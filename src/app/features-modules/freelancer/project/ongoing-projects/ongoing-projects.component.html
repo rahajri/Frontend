@@ -3,328 +3,248 @@
   <h3>Offres Actives</h3>
 </div>
 <!-- Proposals list -->
-<div class="proposals-section ongoing-projects">
-  <!-- Proposals -->
-  <div class="freelancer-proposals proposal-ongoing">
-    <div class="project-proposals align-items-center freelancer">
-      <div class="proposal-info">
-        <div class="proposals-details">
-          <h3 class="proposals-title">
-            3D Renders and Amazon Product Store images/Video
-          </h3>
-          <ul>
-            <li>
-              <div class="proposal-client-price">
-                <h4 class="title-info">Client Price</h4>
-                <h3 class="client-price">
-                  $599.00 <span class="price-type">( Fixed )</span>
-                </h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-job-type">
-                <h4 class="title-info">Project Deadline</h4>
-                <h3>28 Oct 2023</h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-img">
-                <div class="proposal-client d-flex align-items-center">
-                  <img
-                    src="assets/img/user/table-avatar-02.jpg"
-                    alt="Img"
-                    class="img-fluid me-2"
-                  />
-                  <div>
-                    <h4>Hayley Melba</h4>
-                    <span>10 Oct 2023<i class="fa-solid fa-star"></i>5.0</span>
+<div class="list-book-mark book-mark favour-book">
+  <ng-container *ngIf="matchingOffers && matchingOffers.length">
+    <div class="row">
+      <div class="col-lg-12">
+        <div
+          *ngFor="let offer of matchingOffers; let i = index"
+          class="project-list-card"
+        >
+          <a
+            href="javascript:void(0);"
+            class="add-fav-list"
+            [ngClass]="{ checked: like[i] }"
+            (click)="toggleLike(i)"
+            ><i class="fa-regular fa-heart"></i
+          ></a>
+          <div class="company-detail-image">
+            <img
+              [src]="
+                offer?.company?.image !== null
+                  ? baseUrl + offer?.company?.image
+                  : ''
+              "
+              class="img-fluid"
+              alt="logo"
+            />
+          </div>
+          <div>
+            <div class="company-title">
+              <p>{{ offer?.job?.subActivity?.name }}</p>
+              <h4>{{ offer?.name }}</h4>
+            </div>
+            <div class="company-splits">
+              <div>
+                <div class="d-flex">
+                  <div class="freelance-location">
+                    <i class="feather icon-map-pin me-1"></i
+                    >{{ offer?.city_name }},
+                    {{ offer?.region_name }}
                   </div>
+                  <div class="freelance-location ms-3">
+                    <i class="feather icon-calendar me-1"></i>Postuler le:
+                    15/15/15
+                  </div>
+                  <!-- <div class="freelance-location ms-3">
+                  <i class="feather icon-calendar me-1"></i>Postuler le:
+                  {{ offer?.publicationDate }}
+                </div> -->
+                </div>
+                <div class="company-description">
+                  <p
+                    [innerHTML]="
+                      getSafeDescription(
+                        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates temporibus explicabo quaerat rem illo amet ratione, provident quidem illum ut eius architecto similique, quisquam blanditiis sint nihil laudantium omnis quo?'
+                      )
+                    "
+                  ></p>
                 </div>
               </div>
-            </li>
-            <li>
-              <div class="project-action text-center">
+              <div class="company-split-price">
+                <!-- <h6>
+                A partir de :{{ offer?.salaryType?.salary }} € |
+                {{ offer?.salaryType?.type }}
+              </h6> -->
+                <h6>A partir de :15000 € | Annuel</h6>
                 <a
-                  [routerLink]="routes.freelancerViewProjectDetail"
-                  class="projects-btn mb-0"
-                  >View Details</a
+                  href="javascript:void(0);"
+                  class="btn btn-submits"
+                  (click)="postulerBtn(offer?.id)"
+                  >Détails</a
                 >
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Proposals -->
+  </ng-container>
 
-  <!-- Proposals -->
-  <div class="freelancer-proposals proposal-ongoing">
-    <div class="project-proposals align-items-center freelancer">
-      <div class="proposal-info">
-        <div class="proposals-details">
-          <h3 class="proposals-title">
-            Landing Page Redesign / Sales Page Redesign (Not Entire Web)
-          </h3>
-          <ul>
-            <li>
-              <div class="proposal-client-price">
-                <h4 class="title-info">Client Price</h4>
-                <h3 class="client-price">
-                  $280.00 <span class="price-type">( Fixed )</span>
-                </h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-job-type">
-                <h4 class="title-info">Project Deadline</h4>
-                <h3>25 Oct 2023</h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-img">
-                <div class="proposal-client d-flex align-items-center">
-                  <img
-                    src="assets/img/user/user-01.jpg"
-                    alt="Img"
-                    class="img-fluid me-2"
-                  />
-                  <div>
-                    <h4>James Douglas</h4>
-                    <span>12 Oct 2023<i class="fa-solid fa-star"></i>5.0</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="project-action text-center">
-                <a
-                  [routerLink]="routes.freelancerViewProjectDetail"
-                  class="projects-btn mb-0"
-                  >View Details</a
-                >
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+  <ng-container *ngIf="matchingOffers.length === 0">
+    <div class="h2 m-5">
+      Pas d'offre correspondante disponible actuellement.
     </div>
-  </div>
-  <!-- Proposals -->
+  </ng-container>
 
-  <!-- Proposals -->
-  <div class="freelancer-proposals proposal-ongoing">
-    <div class="project-proposals align-items-center freelancer">
-      <div class="proposal-info">
-        <div class="proposals-details">
-          <h3 class="proposals-title">
-            WooCommerce Product Page Back Up Restoration
-          </h3>
-          <ul>
-            <li>
-              <div class="proposal-client-price">
-                <h4 class="title-info">Client Price</h4>
-                <h3 class="client-price">
-                  $140.00 <span class="price-type">( Fixed )</span>
-                </h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-job-type">
-                <h4 class="title-info">Project Deadline</h4>
-                <h3>17 Oct 2023</h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-img">
-                <div class="proposal-client d-flex align-items-center">
-                  <img
-                    src="assets/img/user/user-02.jpg"
-                    alt="Img"
-                    class="img-fluid me-2"
-                  />
-                  <div>
-                    <h4>Tony Ingle</h4>
-                    <span>26 Oct 2023<i class="fa-solid fa-star"></i>5.0</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="project-action text-center">
-                <a
-                  [routerLink]="routes.freelancerViewProjectDetail"
-                  class="projects-btn mb-0"
-                  >View Details</a
-                >
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Proposals -->
+  <!-- <div class="row">
+    <div class="col-md-12">
+      <ul class="paginations list-pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a
+            (click)="changePage(currentPage - 1)"
+            [class.disabled]="currentPage === 1"
+          >
+            <i class="feather icon-chevron-left"></i>
+          </a>
+        </li>
 
-  <!-- Proposals -->
-  <div class="freelancer-proposals proposal-ongoing">
-    <div class="project-proposals align-items-center freelancer">
-      <div class="proposal-info">
-        <div class="proposals-details">
-          <h3 class="proposals-title">
-            Full-stack Developer to help us to build our
-          </h3>
-          <ul>
-            <li>
-              <div class="proposal-client-price">
-                <h4 class="title-info">Client Price</h4>
-                <h3 class="client-price">
-                  $350.00 <span class="price-type">( Fixed )</span>
-                </h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-job-type">
-                <h4 class="title-info">Project Deadline</h4>
-                <h3>28 Oct 2023</h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-img">
-                <div class="proposal-client d-flex align-items-center">
-                  <img
-                    src="assets/img/user/table-avatar-05.jpg"
-                    alt="Img"
-                    class="img-fluid me-2"
-                  />
-                  <div>
-                    <h4>Sam Prendiville</h4>
-                    <span>03 Nov 2023<i class="fa-solid fa-star"></i>5.0</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="project-action text-center">
-                <a
-                  [routerLink]="routes.freelancerViewProjectDetail"
-                  class="projects-btn mb-0"
-                  >View Details</a
-                >
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Proposals -->
+        @for (page of getPageNumbers(); track page) {
+        <li class="page-item">
+          <a (click)="changePage(page)" [class.active]="currentPage === page">
+            {{ page }}
+          </a>
+        </li>
+        }
 
-  <!-- Proposals -->
-  <div class="freelancer-proposals proposal-ongoing">
-    <div class="project-proposals align-items-center freelancer">
-      <div class="proposal-info">
-        <div class="proposals-details">
-          <h3 class="proposals-title">
-            Video animator to bring some illustrations to life
-          </h3>
-          <ul>
-            <li>
-              <div class="proposal-client-price">
-                <h4 class="title-info">Client Price</h4>
-                <h3 class="client-price">
-                  $620.00<span class="price-type">( Fixed )</span>
-                </h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-job-type">
-                <h4 class="title-info">Project Deadline</h4>
-                <h3>11 Oct 2023</h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-img">
-                <div class="proposal-client d-flex align-items-center">
-                  <img
-                    src="assets/img/user/user-03.jpg"
-                    alt="Img"
-                    class="img-fluid me-2"
-                  />
-                  <div>
-                    <h4>Samantha Ogden</h4>
-                    <span>14 Nov 2023<i class="fa-solid fa-star"></i>5.0</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="project-action text-center">
-                <a
-                  [routerLink]="routes.freelancerViewProjectDetail"
-                  class="projects-btn mb-0"
-                  >View Details</a
-                >
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a
+            (click)="changePage(currentPage + 1)"
+            [class.disabled]="currentPage === totalPages"
+          >
+            <i class="feather icon-chevron-right"></i>
+          </a>
+        </li>
+      </ul>
     </div>
-  </div>
-  <!-- Proposals -->
-
-  <!-- Proposals -->
-  <div class="freelancer-proposals proposal-ongoing">
-    <div class="project-proposals align-items-center freelancer">
-      <div class="proposal-info">
-        <div class="proposals-details">
-          <h3 class="proposals-title">Food Delivery Mobile App</h3>
-          <ul>
-            <li>
-              <div class="proposal-client-price">
-                <h4 class="title-info">Client Price</h4>
-                <h3 class="client-price">
-                  $260.00 <span class="price-type">( Fixed )</span>
-                </h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-job-type">
-                <h4 class="title-info">Project Deadline</h4>
-                <h3>03 Oct 2023</h3>
-              </div>
-            </li>
-            <li>
-              <div class="proposal-img">
-                <div class="proposal-client d-flex align-items-center">
-                  <img
-                    src="assets/img/user/table-avatar-04.jpg"
-                    alt="Img"
-                    class="img-fluid me-2"
-                  />
-                  <div>
-                    <h4>Sam Facy</h4>
-                    <span>18 Nov 2023<i class="fa-solid fa-star"></i>5.0</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="project-action text-center">
-                <a
-                  [routerLink]="routes.freelancerViewProjectDetail"
-                  class="projects-btn mb-0"
-                  >View Details</a
-                >
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Proposals -->
+  </div> -->
 </div>
 <!-- /Proposals list -->
+
 <!-- /Page Content -->
+<!-- The Modal -->
+<div class="modal fade edit-proposal-modal" id="file">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">EDIT PROPOSAL</h4>
+        <span class="modal-close"
+          ><a
+            href="javascript:void(0);"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            ><i class="feather icon-x"></i></a
+        ></span>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <div class="modal-info">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-block">
+                  <label for="Your" class="form-label">Your Price</label>
+                  <input type="text" class="form-control" value="$90" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-block">
+                  <label for="Estimated" class="form-label"
+                    >Estimated Delivery</label
+                  >
+                  <input type="text" class="form-control" value="100" />
+                  <span class="input-group-text">Days</span>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="input-block">
+                  <label for="cover-letter" class="form-label"
+                    >Cover Letter</label
+                  >
+                  <textarea class="form-control summernote"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="modal-info">
+              <h4>Suggested Milestones</h4>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="input-block">
+                    <label for="Milestone " class="form-label"
+                      >Milestone name</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      value="Initial Setup"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="input-block">
+                    <label for="amount" class="form-label">Amount</label>
+                    <input type="text" class="form-control" value="100" />
+                    <span class="input-group-text">$</span>
+                    <div class="add-new text-end mt-2">
+                      <a href="javascript:void(0);"
+                        ><i class="feather icon-plus-circle me-1"></i>Add New</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="modal-check-item">
+                    <div>
+                      <label class="custom_check">
+                        <input type="checkbox" name="rem_password" />
+                        <span class="checkmark"></span>Stick this Proposal to
+                        the Top
+                      </label>
+                      <p>
+                        The sticky proposal will always be displayed on top of
+                        all the proposals.
+                      </p>
+                    </div>
+                    <div class="price">
+                      <span>$12.00</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="modal-check-item bg-light-blue">
+                    <div>
+                      <label class="custom_check">
+                        <input type="checkbox" name="rem_password" />
+                        <span class="checkmark"></span>$ Make Sealed Proposal
+                      </label>
+                      <p>
+                        The sealed proposal will be sent to the project author
+                        only it will not be visible publically.
+                      </p>
+                    </div>
+                    <div class="price">
+                      <span>$7.00</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <label class="custom_check">
+                    <input type="checkbox" name="rem_password" />
+                    <span class="checkmark"></span>I agree to the terms and
+                    privacy policy
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="submit-section text-end">
+            <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
+            <button type="submit" class="btn btn-primary submit-btn">
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /The Modal -->

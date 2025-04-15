@@ -10,6 +10,7 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { environment } from 'src/environments/environment';
 import { JobService } from 'src/app/core/services/job.service';
+import { IaService } from 'src/app/core/services/ia.service';
 
 interface Language {
   id: string;
@@ -78,6 +79,7 @@ export class ProfileSettingsComponent implements OnInit {
     private skillService: SkillService,
     private candidateService: CandidateService,
     private profileService: ProfileService,
+    private iaService: IaService,
     private jobService: JobService
   ) {
     this.form = this.fb.group({
@@ -138,6 +140,7 @@ export class ProfileSettingsComponent implements OnInit {
       .updateCandidateProfile(this.candidate?.id, formData)
       .subscribe({
         next: (res) => {
+          this.iaService.generateCandidateEmb(res?.data?.id)
           this.getCondidature(); // Refresh the candidate data
           showSuccessModal('data-changed');
           this.saveProfileChanges(res.data);

@@ -7,27 +7,37 @@ import { BehaviorSubject } from 'rxjs';
 export class ProfileService {
   private userProfileSource = new BehaviorSubject<any>(null);
   currentUserProfile$ = this.userProfileSource.asObservable();
+  userProfile: any;
+  constructor() {
+    // Load from localStorage on service initialization
+    const savedProfile = localStorage.getItem('userProfile');
+    if (savedProfile) {
+      this.userProfile = JSON.parse(savedProfile);
+      this.userProfileSource.next(this.userProfile);
+    }
+  }
 
-  // Private variable to hold the user profile
-  private userProfile: any = null;
-
-  // Getter for the user profile
   get profile(): any {
     return this.userProfile;
   }
 
-  // Setter for the user profile
   set profile(profile: any) {
     this.userProfile = profile;
-    this.userProfileSource.next(profile); // Update BehaviorSubject when profile is set
+    localStorage.setItem('userProfile', JSON.stringify(profile)); // Save to localStorage
+    this.userProfileSource.next(profile);
   }
 
-  // Getter for the user profile ID
   get profileId(): string | null {
-    return this.userProfile ? this.userProfile.id : null; // Assuming 'id' is a property of the profile
+    return this.userProfile?.id ?? null;
   }
 
   updateUserProfile(profile: any) {
-    this.userProfileSource.next(profile);
+    this.profile = profile; // Uses the setter which handles storage
+  }
+
+  clearProfile() {
+    this.userProfile = null;
+    localStorage.removeItem('userProfile');
+    this.userProfileSource.next(null);
   }
 }

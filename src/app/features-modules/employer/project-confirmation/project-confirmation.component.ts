@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, of } from 'rxjs';
+import { IaService } from 'src/app/core/services/ia.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { ProjectService } from 'src/app/core/services/project.service';
 
@@ -18,6 +18,7 @@ export class ProjectConfirmationComponent {
   constructor(
     private router: Router,
     private readonly projectService: ProjectService,
+    private iaService: IaService,
     private route: ActivatedRoute
   ) {}
 
@@ -70,7 +71,9 @@ export class ProjectConfirmationComponent {
 
   publishProject(id: string) {
     this.projectService.publishProject(id).subscribe({
-      next: (res) => {},
+      next: (res) => {
+        this.iaService.generateOfferEmb(res.id);
+      },
       error(err) {
         console.error(err);
       },

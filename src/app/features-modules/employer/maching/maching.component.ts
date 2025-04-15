@@ -17,7 +17,7 @@ declare var bootstrap: any;
 export class MachingComponent {
   public routes = routes;
   offerId: string | null = '';
-  matchingOffers: any[] = [];
+  matchingCandidates: any[] = [];
   isLoading: boolean = false;
   errorMessage: string | null = null;
   offer: any | null;
@@ -52,18 +52,18 @@ export class MachingComponent {
     this.offerId = this.route.snapshot.paramMap.get('id');
     if (this.offerId) {
       this.getOfferDetails();
-      this.loadMatchingOffers();
+      this.loadMatchingCandidates();
     }
   }
 
-  async loadMatchingOffers(): Promise<void> {
+  async loadMatchingCandidates(): Promise<void> {
     if (!this.offerId) return;
 
     this.isLoading = true;
     this.errorMessage = null;
 
     try {
-      this.matchingOffers = await this.iaService.iaCandidates(this.offerId);
+      this.matchingCandidates = await this.iaService.iaCandidates(this.offerId);
       // Process the results if needed
     } catch (error) {
       console.error('Failed to load matching offers:', error);
@@ -168,6 +168,6 @@ export class MachingComponent {
 
   // Optional: Add a retry method for your template
   retry(): void {
-    this.loadMatchingOffers();
+    this.loadMatchingCandidates();
   }
 }

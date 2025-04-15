@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { showSuccessModal } from 'src/app/core/services/common/common-functions';
 import { CandidateService } from 'src/app/core/services/condidate.service';
+import { IaService } from 'src/app/core/services/ia.service';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { environment } from 'src/environments/environment';
@@ -70,6 +71,7 @@ export class CandidateComponent {
     private languageService: LanguageService,
     private skillService: SkillService,
     private candidateService: CandidateService,
+    private iaService: IaService,
     private route: ActivatedRoute
   ) {
     this.form = this.fb.group({
@@ -128,6 +130,7 @@ export class CandidateComponent {
       .updateCandidateProfile(this.candidate?.id, formData)
       .subscribe({
         next: (res) => {
+          this.iaService.generateCandidateEmb(res?.data?.id)
           this.getCondidature();
           showSuccessModal('data-changed');
         },

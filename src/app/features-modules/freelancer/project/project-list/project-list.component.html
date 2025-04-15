@@ -305,14 +305,14 @@
           <div class="row">
             <div class="col-lg-12">
               <div
-                *ngFor="let offer of paginatedOffers"
+                *ngFor="let offer of paginatedOffers; let i = index"
                 class="project-list-card"
               >
                 <a
                   href="javascript:void(0);"
                   class="add-fav-list"
-                  [ngClass]="{ checked: like[1] }"
-                  (click)="toggleLike(1)"
+                  [ngClass]="{ checked: like[i] }"
+                  (click)="toggleLike(i)"
                   ><i class="fa-regular fa-heart"></i
                 ></a>
                 <div class="company-detail-image">

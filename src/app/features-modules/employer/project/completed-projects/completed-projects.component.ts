@@ -72,7 +72,6 @@ export class CompletedProjectsComponent implements OnInit, OnDestroy {
         )
         .subscribe({
           next: (res) => {
-            console.log(res);
             this.offers = res.offers;
             this.totalPages = Math.ceil(res.total / this.itemsPerPage);
             this.paginatedOffers = this.offers;
