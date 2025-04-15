@@ -50,30 +50,9 @@ export class CompanyComponent {
       lastName: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.pattern(/^\+?\d{10,15}$/)]],
       email: ['', [Validators.required, Validators.email]],
-      facebook: [
-        null,
-        [
-          Validators.pattern(
-            /^(https?:\/\/)?((www|m|web)\.)?facebook\.com\/(profile\.php\?id=\d+|[A-Za-z0-9_.-]+)(\/.*)?$/i
-          ),
-        ],
-      ],
-      instagram: [
-        null,
-        [
-          Validators.pattern(
-            /^(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9._]+(\/.*)?$/i
-          ),
-        ],
-      ],
-      linkedIn: [
-        null,
-        [
-          Validators.pattern(
-            /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|company|school|showcase)\/[A-Za-z0-9-]+(\/.*)?$/i
-          ),
-        ],
-      ],
+      facebook: [null],
+      instagram: [null],
+      linkedIn: [null],
       userId: [''],
       coverImage: [null],
       image: [null],
