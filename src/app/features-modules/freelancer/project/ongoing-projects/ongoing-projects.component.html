@@ -51,13 +51,7 @@
                   </div>
                 </div>
                 <div class="company-description">
-                  <p
-                    [innerHTML]="
-                      getSafeDescription(
-                        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates temporibus explicabo quaerat rem illo amet ratione, provident quidem illum ut eius architecto similique, quisquam blanditiis sint nihil laudantium omnis quo?'
-                      )
-                    "
-                  ></p>
+                  <p [innerHTML]="getSafeDescription(offer?.description)"></p>
                 </div>
               </div>
               <div class="company-split-price">
