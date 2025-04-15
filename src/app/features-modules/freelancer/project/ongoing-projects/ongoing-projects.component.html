@@ -20,18 +20,13 @@
           ></a>
           <div class="company-detail-image">
             <img
-              [src]="
-                offer?.company?.image !== null
-                  ? baseUrl + offer?.company?.image
-                  : ''
-              "
+              [src]="offer?.image !== null ? baseUrl + offer?.image : ''"
               class="img-fluid"
               alt="logo"
             />
           </div>
           <div>
             <div class="company-title">
-              <p>{{ offer?.job?.subActivity?.name }}</p>
               <h4>{{ offer?.name }}</h4>
             </div>
             <div class="company-splits">
@@ -43,13 +38,17 @@
                     {{ offer?.region_name }}
                   </div>
                   <div class="freelance-location ms-3">
-                    <i class="feather icon-calendar me-1"></i>Postuler le:
-                    15/15/15
+                    <i class="feather icon-calendar me-1"></i>Type de contrat
+                    le:
+                    {{ offer?.type_contrat }}
                   </div>
-                  <!-- <div class="freelance-location ms-3">
-                  <i class="feather icon-calendar me-1"></i>Postuler le:
-                  {{ offer?.publicationDate }}
-                </div> -->
+                  <div
+                    class="freelance-location ms-3"
+                    *ngIf="offer.publicationDate"
+                  >
+                    <i class="feather icon-calendar me-1"></i>Publier le:
+                    {{ offer?.publicationDate }}
+                  </div>
                 </div>
                 <div class="company-description">
                   <p
@@ -62,11 +61,10 @@
                 </div>
               </div>
               <div class="company-split-price">
-                <!-- <h6>
-                A partir de :{{ offer?.salaryType?.salary }} € |
-                {{ offer?.salaryType?.type }}
-              </h6> -->
-                <h6>A partir de :15000 € | Annuel</h6>
+                <h6>
+                  A partir de : {{ offer?.salaire }} € |
+                  {{ offer?.type_salaire }}
+                </h6>
                 <a
                   href="javascript:void(0);"
                   class="btn btn-submits"

@@ -643,7 +643,7 @@ export class OnboardScreenComponent implements OnInit {
 
     this.candidateService.createCandidate(candidateData).subscribe({
       next: (res) => {
-        this.iaService.generateCandidateEmb(res?.data?.id)
+        this.iaService.generateCandidateEmb(res?.data?.id);
         this.router.navigate(['/freelancer/dashboard']);
       },
       error: (error) => {
