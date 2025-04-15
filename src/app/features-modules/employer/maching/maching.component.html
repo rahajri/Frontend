@@ -67,7 +67,7 @@
       <div class="projects-card flex-fill">
         <div class="card-body p-2">
           <div class="prj-proposal-count text-center hired">
-            <h2>{{ matchingOffers.length }}</h2>
+            <h2>{{ matchingCandidates.length }}</h2>
             <h3 class="mb-0">Propositions</h3>
           </div>
         </div>
@@ -92,16 +92,16 @@
     aria-label="Close"
   ></button>
 </div>
-<ng-container *ngIf="matchingOffers.length === 0">
+<ng-container *ngIf="matchingCandidates.length === 0">
   <div class="h2 m-5">
     Aucun des meilleurs candidats identifiés par l'IA n'a été trouvé pour cette
     offre pour le moment.
   </div>
 </ng-container>
-<ng-container *ngIf="matchingOffers && matchingOffers.length">
+<ng-container *ngIf="matchingCandidates && matchingCandidates.length">
   <div
     class="my-projects-list ongoing-projects"
-    *ngFor="let candidate of matchingOffers; trackBy: trackOffer"
+    *ngFor="let candidate of matchingCandidates; trackBy: trackOffer"
   >
     <div class="pending-proposal-profile">
       <div class="d-flex justify-content-between align-items-center">
@@ -149,7 +149,7 @@
   </div>
 </ng-container>
 
-<div class="row" *ngIf="matchingOffers && matchingOffers.length">
+<div class="row" *ngIf="matchingCandidates && matchingCandidates.length">
   <div class="col-md-12">
     <ul class="paginations list-pagination justify-content-end">
       <li class="page-item" [class.disabled]="currentPage === 1">

@@ -18,6 +18,7 @@ import { CandidateService } from 'src/app/core/services/condidate.service';
 import { Router } from '@angular/router';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { SkillService } from 'src/app/core/services/skill.service';
+import { IaService } from 'src/app/core/services/ia.service';
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 interface data {
@@ -82,6 +83,7 @@ export class OnboardScreenComponent implements OnInit {
     private jobService: JobService,
     private candidateService: CandidateService,
     private languageService: LanguageService,
+    private iaService: IaService,
     private skillService: SkillService,
     private router: Router
   ) {
@@ -640,7 +642,8 @@ export class OnboardScreenComponent implements OnInit {
     }
 
     this.candidateService.createCandidate(candidateData).subscribe({
-      next: (response) => {
+      next: (res) => {
+        this.iaService.generateCandidateEmb(res?.data?.id)
         this.router.navigate(['/freelancer/dashboard']);
       },
       error: (error) => {

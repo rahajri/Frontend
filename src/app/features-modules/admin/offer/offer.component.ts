@@ -170,22 +170,22 @@ export class OfferComponent {
     this.projectService.getProjectDetails(this.offerId).subscribe({
       next: (res) => {
         this.initialFormValues = {
-          title: res.title || '',
+          title: res?.title || '',
           description: res?.description || '',
-          endDate: res.endDate,
-          seniority: res.seniority || '',
-          contractType: res.contractType.id || '',
+          endDate: res?.endDate,
+          seniority: res?.seniority || '',
+          contractType: res?.contractType?.id || '',
           startDate: res?.startDate,
           duration: res?.expectedDuration || 0,
           timeUnit: res?.timeUnit || '',
-          typologie: res.salaryType?.type || '',
-          salary: res.salaryType?.salary || '',
-          job: res.job?.name || '',
-          status: res.status?.name || '',
-          activity: res.job.subActivity.activity.name || '',
-          subActivity: res.job.subActivity.name || '',
-          city: res.city.name || '',
-          company: res.company.name || '',
+          typologie: res?.salaryType?.type || '',
+          salary: res?.salaryType?.salary || '',
+          job: res?.job?.name || '',
+          status: res?.status?.name || '',
+          activity: res?.job?.subActivity?.activity?.name || '',
+          subActivity: res?.job?.subActivity?.name || '',
+          city: res?.city?.name || '',
+          company: res?.company?.name || '',
         };
 
         this.isPatching = true;
@@ -194,7 +194,7 @@ export class OfferComponent {
         this.jobForm.patchValue(this.initialFormValues);
 
         this.isPatching = false;
-        this.filteredCities = [res.city]; // Assuming res.city is the full city object
+        this.filteredCities = [res?.city]; // Assuming res.city is the full city object
         this.cityIsSelected = true;
 
         // Trigger onContractTypeChange after patching contractType
@@ -558,6 +558,8 @@ export class OfferComponent {
     markFormGroupTouched(this.jobForm);
     this.globalErrorMessage = false;
     this.updateSkillsValidation();
+    const generateEmb =
+      this.jobForm.value.status === 'Published' ? true : false;
 
     if (this.jobForm.valid) {
       this.projectService
@@ -567,7 +569,10 @@ export class OfferComponent {
         })
         .subscribe({
           next: (response) => {
-            this.iaService.generateOfferEmb(response.id);
+            if (generateEmb) {
+              this.iaService.generateOfferEmb(response.id);
+            }
+
             showSuccessModal('data-changed');
             this.getOfferDetails();
           },

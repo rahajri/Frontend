@@ -21,7 +21,7 @@ import {
   markFormGroupTouched,
 } from 'src/app/core/services/common/common-functions';
 import { Location } from '@angular/common';
-import { IaService } from 'src/app/core/services/ia.service';
+
 interface data {
   value: string;
 }
@@ -96,7 +96,6 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     private contractService: ContractService,
     private projectService: ProjectService,
     private skillService: SkillService,
-    private iaService: IaService,
     private languageService: LanguageService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -496,8 +495,6 @@ export class PostprojectComponent implements OnInit, OnDestroy {
       this.projectService.createProject(formData).subscribe({
         next: (response) => {
           this.router.navigate([routes.getProjectConfirmation(response.id)]);
-
-          this.iaService.generateOfferEmb(response.id);
         },
         error: (error) => {
           console.error('Error creating project:', error);
