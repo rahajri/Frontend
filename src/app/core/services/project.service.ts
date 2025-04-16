@@ -187,4 +187,18 @@ export class ProjectService {
       formData
     );
   }
+
+  getCandidateCandidatures(
+    offset: number,
+    limit: number,
+    candidateId: string
+  ): Observable<any> {
+    let params = new HttpParams()
+      .set('page', offset.toString())
+      .set('limit', limit.toString());
+
+    return this.http.get<any>(`${this.baseUrl}/candidatures/${candidateId}`, {
+      params,
+    });
+  }
 }
