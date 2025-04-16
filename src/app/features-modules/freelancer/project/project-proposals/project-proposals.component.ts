@@ -115,8 +115,6 @@ export class ProjectProposalsComponent {
 
   getStatusClass = (status: string): string => {
     switch (status) {
-      case 'Applied':
-        return 'En Cours...';
       case 'Rejected':
         return 'Refusée';
       case 'Accepted':
@@ -125,5 +123,4 @@ export class ProjectProposalsComponent {
         return 'En Cours...';
     }
   };
-
 }
