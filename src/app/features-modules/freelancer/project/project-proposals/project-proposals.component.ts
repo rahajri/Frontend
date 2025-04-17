@@ -4,7 +4,6 @@ import { routes } from 'src/app/core/helpers/routes/routes';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { Subscription } from 'rxjs';
 import { ProfileService } from 'src/app/core/services/profile.service';
-import { JobOffer } from 'src/app/core/models/models';
 
 @Component({
   selector: 'app-project-proposals',
@@ -49,7 +48,8 @@ export class ProjectProposalsComponent {
       .getCandidateCandidatures(
         this.currentPage,
         this.itemsPerPage,
-        this.candidateId
+        this.candidateId,
+        null
       )
       .subscribe({
         next: (res) => {
