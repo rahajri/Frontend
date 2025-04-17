@@ -1809,25 +1809,25 @@ export class ShareDataService {
       page4: 'cancelled-projects',
       submenu: [
         {
+          title: 'Mes Matching',
+          routes: routes.freelancerOngoingProjects,
+          page: 'ongoing-projects',
+        },
+        {
           title: 'Mes candidatures',
           routes: routes.freelancer_projects_proposals,
           page: 'project-proposals',
         },
         {
-          title: 'Mes Matching',
-          routes: routes.freelancerOngoingProjects,
-          page: 'ongoing-projects',
+          title: 'Candidatures Acceptées',
+          routes: routes.completedProjects,
+          page: 'completed-projects',
         },
-        // {
-        //   title: 'Offres Terminées',
-        //   routes: routes.completedProjects,
-        //   page: 'completed-projects',
-        // },
-        // {
-        //   title: 'Offres Annulées',
-        //   routes: routes.cancelledProjects,
-        //   page: 'cancelled-projects',
-        // },
+        {
+          title: 'Candidatures Refusées',
+          routes: routes.cancelledProjects,
+          page: 'cancelled-projects',
+        },
       ],
     },
     {

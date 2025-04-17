@@ -191,11 +191,16 @@ export class ProjectService {
   getCandidateCandidatures(
     offset: number,
     limit: number,
-    candidateId: string
+    candidateId: string,
+    status: string | null = null
   ): Observable<any> {
     let params = new HttpParams()
       .set('page', offset.toString())
       .set('limit', limit.toString());
+
+    if (status) {
+      params = params.set('status', status);
+    }
 
     return this.http.get<any>(`${this.baseUrl}/candidatures/${candidateId}`, {
       params,
