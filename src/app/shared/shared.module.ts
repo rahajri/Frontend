@@ -53,7 +53,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { UploadWidgetModule } from '@bytescale/upload-widget-angular';
 
+import { CookieConsentBannerComponent } from './cookie-consent-banner.component';
+import { CookiePolicyPopupComponent } from './cookie-policy-popup.component';
+
 @NgModule({
+  declarations: [CookieConsentBannerComponent, CookiePolicyPopupComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -95,6 +99,8 @@ import { UploadWidgetModule } from '@bytescale/upload-widget-angular';
     TimepickerModule.forRoot(),
   ],
   exports: [
+    CookieConsentBannerComponent,
+    CookiePolicyPopupComponent,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
