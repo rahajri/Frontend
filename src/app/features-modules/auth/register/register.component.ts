@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CookieConsentService } from 'src/app/shared/cookie-consent.service';
 import {
   AbstractControl,
   FormBuilder,
@@ -40,6 +41,7 @@ export class RegisterComponent {
   location!: FormGroup;
   constructor(
     private translate: TranslateService,
+    private cookieConsent: CookieConsentService,
     public Router: Router,
     private fb: FormBuilder,
     private userService: UserService,
@@ -92,6 +94,12 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
+    if (this.cookieConsent.hasRefused()) {
+      window.alert(
+        'La création de compte est bloquée car vous avez refusé les cookies.'
+      );
+      return;
+    }
     if (this.signupForm.valid) {
       const formValues = this.signupForm.value;
       const randomSixDigitNumber = Math.floor(100000 + Math.random() * 900000); // Generates a random 6-digit number
