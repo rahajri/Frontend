@@ -331,20 +331,13 @@
                           <div class="col-3">
                             <div class="input-block">
                               <label for="position" class="focus-label"
-                                >Niveau</label
+                                >Titre de Post</label
                               >
-                              <select
-                                formControlName="level"
-                                placeholder="Select"
-                                class="form-control form-select"
-                              >
-                                <option
-                                  *ngFor="let level of skillLevels"
-                                  [value]="level"
-                                >
-                                  {{ level }}
-                                </option>
-                              </select>
+                              <input
+                                type="text"
+                                formControlName="postTitle"
+                                class="form-control"
+                              />
                             </div>
                           </div>
 
@@ -381,22 +374,32 @@
                                   [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
                                 />
                               </div>
-                              <div class="new-addd">
-                                <a
-                                  *ngIf="i === experiencesArray.length - 1"
-                                  class="add-new me-2"
-                                  (click)="addExperience()"
-                                  tabindex="0"
-                                  ><i class="feather icon-plus-circle me-1"></i>
-                                  Ajouter</a
-                                >
-                                <a
-                                  *ngIf="experiencesArray.length > 1"
-                                  class="remove_row"
-                                  (click)="removeExperience(i)"
-                                  >Supprimer</a
-                                >
-                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="col-md-12 input-block">
+                              <label class="form-label">Responsabilités</label>
+                              <textarea
+                                formControlName="description"
+                                class="form-control"
+                                rows="10"
+                              ></textarea>
+                            </div>
+                            <div class="new-addd">
+                              <a
+                                *ngIf="i === experiencesArray.length - 1"
+                                class="add-new me-2"
+                                (click)="addExperience()"
+                                tabindex="0"
+                                ><i class="feather icon-plus-circle me-1"></i>
+                                Ajouter</a
+                              >
+                              <a
+                                *ngIf="experiencesArray.length > 1"
+                                class="remove_row"
+                                (click)="removeExperience(i)"
+                                >Supprimer</a
+                              >
                             </div>
                           </div>
                         </div>

@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { Candidate } from 'src/app/core/models/models';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LocationService } from 'src/app/core/services/location.service';
 import { UserService } from '../../auth/service/user.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
@@ -25,24 +24,13 @@ declare var bootstrap: any;
 })
 export class FreelancersComponent {
   dataSource: MatTableDataSource<Candidate>;
-  displayedColumns: string[] = [
-    'ckeckbox',
-    'candidate',
-    'phone',
-    'profileTitle',
-    'emailVerifiedAt',
-    'createdAt',
-    'lastConnexion',
-    'status',
-    'action',
-  ];
+  public lstBoard: Candidate[] = [];
   public routes = routes;
   public lstProject!: Array<Candidate>;
   public searchDataValue = '';
   filterForm!: FormGroup;
   addCandidateForm!: FormGroup;
 
-  filter: boolean = false;
   candidatesData: any[] = [];
   filteredCandidates: any[] = [];
   selectedStatus: string | null = null;
@@ -55,12 +43,25 @@ export class FreelancersComponent {
   candidateToDelete: any;
   selectedHederTitle = 'Tous les';
 
+  // pagination variables
+  public lastIndex = 0;
+  public pageSize = 10;
+  public totalData = 0;
+  public skip = 0;
+  public limit: number = this.pageSize;
+  public pageIndex = 0;
+  public serialNumberArray: Array<any> = [];
+  public currentPage = 1;
+  public pageNumberArray: Array<any> = [];
+  public pageSelection: Array<pageSelection> = [];
+  public totalPages = 0;
+  public filter: boolean = false;
+
   //** / pagination variables
   constructor(
     public router: Router,
     private candidateService: CandidateService,
     private fb: FormBuilder,
-    private locationService: LocationService,
     private userService: UserService,
     private commonService: CommonService
   ) {
@@ -107,33 +108,47 @@ export class FreelancersComponent {
     if (!status) {
       // If no status is provided, return all companies
       this.filteredCandidates = this.candidatesData;
-      this.dataSource.data = this.filteredCandidates;
+      this.lstBoard = this.filteredCandidates;
     } else {
       // Filter companies based on the status name
       this.filteredCandidates = this.candidatesData.filter(
         (company: any) => company.status?.name === status
       );
-      this.dataSource.data = this.filteredCandidates;
+      this.lstBoard = this.filteredCandidates;
     }
     this.countCandidates = this.filteredCandidates.length;
   }
 
   private getTableData(): void {
-    this.candidateService.getallCandidates().subscribe({
-      next: (response) => {
-        this.candidatesData = response;
-        this.filteredCandidates = response;
-        this.dataSource = new MatTableDataSource(response);
-        this.countCandidates = response.length;
-      },
-      error: (error) => {
-        console.error('Error fetching companies:', error);
-      },
-      complete: () => {
-        this.dataSource.sort = this.sort; // Assign sort after view initialization
-        this.dataSource.paginator = this.paginator;
-      },
-    });
+    this.lstBoard = [];
+    this.serialNumberArray = [];
+
+    this.candidateService
+      .getallCandidates(this.currentPage, this.pageSize)
+      .subscribe({
+        next: (response) => {
+          this.candidatesData = response.data;
+          this.filteredCandidates = response.data;
+          this.totalData = response.total;
+          this.countCandidates = response.total;
+          response.data.forEach((candidate: any, index: number) => {
+            const serialNumber = index + 1;
+            if (index >= this.skip && serialNumber <= this.limit) {
+              this.lstBoard.push(candidate);
+              this.serialNumberArray.push(serialNumber);
+            }
+          });
+          this.dataSource = new MatTableDataSource<any>(this.lstBoard);
+          this.calculateTotalPages(this.totalData, this.pageSize);
+        },
+        error: (error) => {
+          console.error('Error fetching companies:', error);
+        },
+        complete: () => {
+          this.dataSource.sort = this.sort; // Assign sort after view initialization
+          this.dataSource.paginator = this.paginator;
+        },
+      });
   }
 
   onChange() {
@@ -144,7 +159,7 @@ export class FreelancersComponent {
     }
   }
 
-  getDate(isoDate: string) {
+  getDate(isoDate: any) {
     return this.commonService.formatDate(isoDate);
   }
 
@@ -157,22 +172,23 @@ export class FreelancersComponent {
     }
   }
 
-  searchData(target: any) {
-    const filterValue = target.value.trim().toLowerCase();
+  public searchData(value: string): void {
+    const filterValue = value.trim().toLowerCase();
 
-    this.dataSource.filterPredicate = (data: any, filter: string) => {
-      const contact = (data?.firstName || '') + ' ' + (data?.lastName || '');
-      const phone = data?.phone || '';
-      const profileTitle = data?.profileTitle || '';
+    this.lstBoard = this.dataSource.data.filter((candidate: Candidate) => {
+      // Helper function to safely handle phone number
+      const getCleanPhone = (phone: string | null): string => {
+        if (!phone) return '';
+        return phone.replace(/\s+/g, '').toLowerCase(); // Remove ALL whitespace
+      };
 
       return (
-        contact.toLowerCase().includes(filter) ||
-        phone.toLowerCase().includes(filter) ||
-        profileTitle.toLowerCase().includes(filter)
+        (candidate.firstName?.toLowerCase() || '').includes(filterValue) ||
+        (candidate.lastName?.toLowerCase() || '').includes(filterValue) ||
+        getCleanPhone(candidate.phone).includes(filterValue) ||
+        (candidate.profileTitle?.toLowerCase() || '').includes(filterValue)
       );
-    };
-
-    this.dataSource.filter = filterValue;
+    });
   }
 
   getTranslation(key: string | null): string {
@@ -200,11 +216,19 @@ export class FreelancersComponent {
     });
   }
 
+  getProfile(candidate: Candidate) {
+    candidate.status.name === 'Active'
+      ? this.router.navigate([routes.get_admin_candidate(candidate.id)])
+      : null;
+  }
+
   showDeleteCategoryModal(company: any) {
     this.candidateToDelete = company;
     const modalElement = document.getElementById('delete_client');
     if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
+      const modal = new bootstrap.Modal(modalElement, {
+        animation: false,
+      });
       modal.show();
       modalElement.focus();
     }
@@ -213,7 +237,9 @@ export class FreelancersComponent {
   hideModal(id: string) {
     const modalElement = document.getElementById(id);
     if (modalElement) {
-      const modal = bootstrap.Modal.getInstance(modalElement);
+      const modal = bootstrap.Modal.getInstance(modalElement, {
+        animation: false,
+      });
       if (modal) {
         modal.hide();
       }
@@ -224,7 +250,7 @@ export class FreelancersComponent {
     this.candidateService.candidatesFiler(data).subscribe({
       next: (response) => {
         this.filteredCandidates = response;
-        this.dataSource.data = response;
+        this.lstBoard = response;
       },
       error: (error) => {
         console.error(error);
@@ -340,4 +366,79 @@ export class FreelancersComponent {
       },
     });
   }
+
+  public getMoreData(event: string): void {
+    if (event === 'next' && this.currentPage < this.totalPages) {
+      this.currentPage++;
+    } else if (event === 'previous' && this.currentPage > 1) {
+      this.currentPage--;
+    }
+    this.getTableData(); // Fetch the data for the new page
+  }
+
+  private calculateTotalPages(totalData: number, pageSize: number): void {
+    this.pageNumberArray = [];
+    this.totalPages = totalData / pageSize;
+    if (this.totalPages % 1 != 0) {
+      this.totalPages = Math.trunc(this.totalPages + 1);
+    }
+    for (let i = 1; i <= this.totalPages; i++) {
+      const limit = pageSize * i;
+      const skip = limit - pageSize;
+      this.pageNumberArray.push(i);
+      this.pageSelection.push({ skip: skip, limit: limit });
+    }
+  }
+
+  public moveToPage(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.getTableData(); // Fetch the data for the selected page
+  }
+
+  public sortData(sort: Sort) {
+    const data = this.lstBoard.slice();
+
+    if (!sort.active || sort.direction === '') {
+      this.lstBoard = data;
+    } else {
+      this.lstBoard = data.sort((a, b) => {
+        const aValue = this.getValue(a, sort.active);
+        const bValue = this.getValue(b, sort.active);
+
+        // Handle null values
+        if (aValue == null && bValue == null) return 0;
+        if (aValue == null) return 1;
+        if (bValue == null) return -1;
+
+        return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
+      });
+    }
+  }
+  private getValue(item: any, key: string): any {
+    switch (key) {
+      case 'companyName':
+        return item.jobOffer?.company?.name;
+      case 'offerTitle':
+        return item.jobOffer?.title;
+      case 'contractType':
+        return item.jobOffer?.contractType?.description;
+      case 'candidate':
+        return `${item.candidate?.firstName} ${item.candidate?.lastName}`;
+      case 'status':
+        return item.status?.name;
+      default:
+        return null; // Handle any unknown keys
+    }
+  }
+  public changePageSize(): void {
+    this.pageSelection = [];
+    this.limit = this.pageSize;
+    this.skip = 0;
+    this.currentPage = 1;
+    this.getTableData();
+  }
+}
+export interface pageSelection {
+  skip: number;
+  limit: number;
 }
