@@ -260,9 +260,10 @@ export class CandidateComponent {
   createExperience(): FormGroup {
     return this.fb.group({
       companyName: ['', Validators.required],
-      level: ['', Validators.required],
+      postTitle: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
+      description: ['', Validators.required],
     });
   }
 
@@ -376,7 +377,7 @@ export class CandidateComponent {
         this.experiencesArray.push(
           this.fb.group({
             companyName: [experience['companyName'] || ''],
-            level: [experience['level'] || ''],
+            postTitle: [experience['postTitle'] || ''],
             startDate: experience['startDate'] || '',
             endDate: experience['endDate'] || '',
             description: [experience['description'] || ''],

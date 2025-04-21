@@ -184,227 +184,288 @@
           <div class="card-body pt-0">
             <div class="tab-content pt-0">
               <div role="tabpanel" id="tab-4" class="tab-pane fade active show">
+                
                 <div class="table-responsive">
-                  <div class="table-scroll">
-                    <mat-form-field class="filter">
-                      <input
-                        matInput
-                        (keyup)="searchData($event.target)"
-                        placeholder="Recherche"
-                        class="form-control form-control-sm search"
-                      />
-                    </mat-form-field>
-                    <mat-table
-                      [dataSource]="dataSource"
-                      matSort
-                      class="mat-elevation-z8"
-                    >
-                      <!-- Nom Column -->
-                      <ng-container matColumnDef="ckeckbox">
-                        <mat-header-cell
-                          *matHeaderCellDef
-                          style="flex: none; font-size: 16px"
-                        >
-                          <input
-                            type="checkbox"
-                            class="form-check-input"
-                            id="customCheck1"
-                            (click)="toggleCheckBoxes($event)"
-                          />
-                        </mat-header-cell>
-                        <mat-cell
-                          *matCellDef="let element"
-                          style="flex: none; font-size: 16px"
-                          [routerLink]="routes.get_admin_candidate(element?.id)"
-                        >
-                          <div class="form-check custom-checkbox">
-                            <input
-                              type="checkbox"
-                              class="form-check-input"
-                              id="customCheck1"
-                            />
-                            <label
-                              class="form-check-label"
-                              for="customCheck1"
-                            ></label>
-                          </div>
-                        </mat-cell>
-                      </ng-container>
-
-                      <!-- Date de création Column -->
-                      <ng-container matColumnDef="candidate">
-                        <mat-header-cell *matHeaderCellDef>
-                          Candidat
-                        </mat-header-cell>
-                        <mat-cell
-                          *matCellDef="let element"
-                          [routerLink]="routes.get_admin_candidate(element?.id)"
-                        >
-                          <span class="user-img">
-                            <img
-                              class="profile-initials"
-                              [src]="baseUrl + element.image"
-                              *ngIf="element.image !== null"
-                            />
-                            <div
-                              class="profile-initials"
-                              *ngIf="
-                                getInitials(element) && element.image === null
-                              "
-                            >
-                              {{ getInitials(element) }}
-                            </div>
-                          </span>
-                          {{ getContact(element) }}
-                        </mat-cell>
-                      </ng-container>
-
-                      <!-- Nom Column -->
-                      <ng-container matColumnDef="phone">
-                        <mat-header-cell mat-sort-header *matHeaderCellDef>
-                          Téléphone
-                        </mat-header-cell>
-                        <mat-cell
-                          *matCellDef="let element"
-                          [routerLink]="routes.get_admin_candidate(element?.id)"
-                        >
-                          {{ element.phone }}
-                        </mat-cell>
-                      </ng-container>
-
-                      <!-- Activité Column -->
-                      <ng-container matColumnDef="profileTitle">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>
-                          Métier
-                        </mat-header-cell>
-                        <mat-cell
-                          *matCellDef="let element"
-                          [routerLink]="routes.get_admin_candidate(element?.id)"
-                        >
-                          {{ element.profileTitle }}
-                        </mat-cell>
-                      </ng-container>
-
-                      <!-- Contact Column -->
-                      <ng-container matColumnDef="emailVerifiedAt">
-                        <mat-header-cell *matHeaderCellDef>
-                          Vérification
-                        </mat-header-cell>
-                        <mat-cell
-                          *matCellDef="let element"
-                          [routerLink]="routes.get_admin_candidate(element?.id)"
-                        >
-                          <i
-                            class="fa-regular fa-circle-check me-1"
-                            style="font-size: 16px"
-                            [ngClass]="{
-                              'text-success': element.emailVerifiedAt
-                            }"
-                          >
-                          </i>
-                          Email
-                        </mat-cell>
-                      </ng-container>
-
-                      <!-- Téléphone Column -->
-                      <ng-container matColumnDef="createdAt">
-                        <mat-header-cell mat-sort-header *matHeaderCellDef>
-                          Date d'inscription
-                        </mat-header-cell>
-                        <mat-cell
-                          *matCellDef="let element"
-                          [routerLink]="routes.get_admin_candidate(element?.id)"
-                        >
-                          {{ getDate(element?.createdAt) }}
-                        </mat-cell>
-                      </ng-container>
-
-                      <ng-container matColumnDef="lastConnexion">
-                        <mat-header-cell mat-sort-header *matHeaderCellDef>
-                          Dernière connexion
-                        </mat-header-cell>
-                        <mat-cell
-                          *matCellDef="let element"
-                          [routerLink]="routes.get_admin_candidate(element?.id)"
-                        >
-                          {{ getDate(element?.lastConnection) }}
-                        </mat-cell>
-                      </ng-container>
-
-                      <!-- Status Column -->
-                      <ng-container matColumnDef="status">
-                        <mat-header-cell *matHeaderCellDef>
-                          Status
-                        </mat-header-cell>
-                        <mat-cell
-                          *matCellDef="let element"
-                          [routerLink]="routes.get_admin_candidate(element?.id)"
-                        >
-                          <div
-                            [ngClass]="{
-                              'text-success': element.status?.name === 'Active',
-                              'text-danger':
-                                element.status?.name === 'Inactive',
-                              'text-warning': element.status?.name === 'Hired'
-                            }"
-                          >
-                            {{ element.status?.name }}
-                          </div>
-                        </mat-cell>
-                      </ng-container>
-                      <ng-container matColumnDef="action">
-                        <mat-header-cell
-                          *matHeaderCellDef
-                          style="flex: none"
-                        ></mat-header-cell
-                        ><mat-cell
-                          *matCellDef="let element"
-                          style="flex: none"
-                          data-bs-toggle="dropdown"
-                          ><div class="hide-shave">
-                            <a
-                              href="javascript:void(0)"
-                              class="dropdown-toggle nav-link"
-                              ><i class="fas fa-ellipsis-v"></i
-                            ></a>
-                            <div class="dropdown-menu user-menu-list">
-                              <a
-                                class="dropdown-item"
-                                data-dismiss="modal"
-                                [routerLink]="
-                                  routes.get_admin_candidate(element?.id)
-                                "
-                                ><i class="fa-solid fa-pen text-info"></i>
-                                Editer</a
-                              >
-                              <a
-                                class="dropdown-item"
-                                href="javascript:void(0)"
-                                (click)="this.showDeleteCategoryModal(element)"
-                                data-dismiss="modal"
-                                ><i class="feather icon-trash text-danger"></i>
-                                Supprimer</a
-                              >
-                            </div>
-                          </div></mat-cell
-                        ></ng-container
+                  <div class="table_header">
+                    <div class="dataTables_length mt-2">
+                      <label for="entries"> Afficher </label>
+                      <select
+                        [(ngModel)]="pageSize"
+                        (ngModelChange)="changePageSize()"
+                        class="form-control form-control-sm"
                       >
-
-                      <mat-header-row
-                        *matHeaderRowDef="displayedColumns"
-                      ></mat-header-row>
-                      <mat-row
-                        *matRowDef="let row; columns: displayedColumns"
-                      ></mat-row>
-                    </mat-table>
-                    <mat-paginator
-                      [pageSizeOptions]="[10, 25, 50, 75, 100]"
-                      showFirstLastButtons
-                      class="d-flex justify-content-center align-items-center"
-                      style="font-weight: bold; font-size: 14px"
-                    ></mat-paginator>
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select>
+                      <label entries-data for="data-entries">entrées</label>
+                    </div>
+                    <div class="dataTables_filter">
+                      <label for="search"> Rechercher: </label>
+                      <input
+                        [(ngModel)]="searchDataValue"
+                        (ngModelChange)="searchData(searchDataValue)"
+                        class="form-control form-control-sm"
+                      />
+                    </div>
+                  </div>
+                  <div class="table-scroll">
+                    <table
+                      matSort
+                      (matSortChange)="sortData($event)"
+                      class="table table-center table-hover mb-0 datatable"
+                    >
+                      <thead>
+                        <tr>
+                          <th>
+                            <input type="checkbox" name="" id="" />
+                          </th>
+                          <th mat-sort-header="name">Candidate</th>
+                          <th mat-sort-header="phone">Téléphone</th>
+                          <th mat-sort-header="job">Métier</th>
+                          <th mat-sort-header="verification">Vérification</th>
+                          <th mat-sort-header="insciption">
+                            Date d'inscription
+                          </th>
+                          <th mat-sort-header="lastConnexion">
+                            Derniére connexion
+                          </th>
+                          <th mat-sort-header="status">Status</th>
+                          <th class="text-end"></th>
+                        </tr>
+                        @if (lstBoard.length === 0) {
+                        <tr>
+                          <td colspan="9">
+                            <h5 style="text-align: center">
+                              Aucune donnée trouvée
+                            </h5>
+                          </td>
+                        </tr>
+                        }
+                      </thead>
+                      <tbody>
+                        @for (candidate of lstBoard; track candidate; let i =
+                        $index) {
+                        <tr>
+                          <td>
+                            <div class="form-check custom-checkbox">
+                              <input type="checkbox" class="form-check-input" />
+                            </div>
+                          </td>
+                          <td
+                            class="d-flex align-items-center"
+                            (click)="getProfile(candidate)"
+                          >
+                            <span class="user-img">
+                              <img
+                                class="profile-initials"
+                                [src]="baseUrl + candidate.image"
+                                *ngIf="candidate.image !== null"
+                              />
+                              <div
+                                class="profile-initials"
+                                *ngIf="
+                                  getInitials(candidate) &&
+                                  candidate.image === null
+                                "
+                              >
+                                {{ getInitials(candidate) }}
+                              </div>
+                            </span>
+                            {{ getContact(candidate) }}
+                          </td>
+                          <td (click)="getProfile(candidate)">
+                            {{ candidate?.phone }}
+                          </td>
+                          <td (click)="getProfile(candidate)">
+                            <div>
+                              {{ candidate?.profileTitle }}
+                            </div>
+                          </td>
+                          <td (click)="getProfile(candidate)">
+                            <i
+                              class="fa-regular fa-circle-check me-1"
+                              style="font-size: 16px"
+                              [ngClass]="{
+                                'text-success': candidate.emailVerifiedAt
+                              }"
+                            >
+                            </i>
+                            Email
+                          </td>
+                          <td (click)="getProfile(candidate)">
+                            {{ getDate(candidate.createdAt) }}
+                          </td>
+                          <td (click)="getProfile(candidate)">
+                            {{ getDate(candidate.lastConnection) }}
+                          </td>
+                          <td (click)="getProfile(candidate)">
+                            <div
+                              [ngClass]="{
+                                'text-success':
+                                  candidate.status.name === 'Active',
+                                'text-danger':
+                                  candidate.status.name === 'Inactive',
+                                'text-warning':
+                                  candidate.status.name === 'Hired'
+                              }"
+                            >
+                              {{ candidate.status.name }}
+                            </div>
+                          </td>
+                          <td class="text-end" data-bs-toggle="dropdown">
+                            <div class="hide-shave">
+                              <a
+                                href="javascript:void(0)"
+                                class="dropdown-toggle nav-link"
+                                ><i class="fas fa-ellipsis-v"></i
+                              ></a>
+                              <div class="dropdown-menu user-menu-list">
+                                <a
+                                  class="dropdown-item"
+                                  data-dismiss="modal"
+                                  [routerLink]="
+                                    candidate.status.name === 'Active'
+                                      ? routes.get_admin_candidate(candidate.id)
+                                      : null
+                                  "
+                                  [class.disabled]="
+                                    candidate.status.name !== 'Active'
+                                  "
+                                  [attr.disabled]="
+                                    candidate.status.name !== 'Active'
+                                      ? true
+                                      : null
+                                  "
+                                >
+                                  <i class="fa-solid fa-pen text-info"></i>
+                                  Editer
+                                </a>
+                                <a
+                                  class="dropdown-item"
+                                  href="javascript:void(0)"
+                                  (click)="
+                                    this.showDeleteCategoryModal(candidate)
+                                  "
+                                  data-dismiss="modal"
+                                  ><i
+                                    class="feather icon-trash text-danger"
+                                  ></i>
+                                  Supprimer</a
+                                >
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        }
+                      </tbody>
+                    </table>
                   </div>
                 </div>
+                <div class="table_footer">
+                  <div class="col-sm-12 col-md-5"></div>
+
+                  <div class="col-sm-12 col-md-7">
+                    <div class="pagination_section">
+                      <ul class="pagination">
+                        <li
+                          class="page-item"
+                          [ngClass]="{
+                            disabled: currentPage === 1
+                          }"
+                        >
+                          <a
+                            (click)="getMoreData('previous')"
+                            (keydown.enter)="getMoreData('previous')"
+                            class="page-link"
+                            href="javascript:void(0);"
+                            tabindex="-1"
+                            >Previous</a
+                          >
+                        </li>
+
+                        @for (item of pageNumberArray; track item; let i =
+                        $index) {
+                        <li
+                          class="page-item"
+                          [class.active]="item === currentPage"
+                          [ngClass]="
+                            (pageNumberArray[currentPage - 2] > item &&
+                              item !== 1 &&
+                              pageNumberArray.length > 6) ||
+                            (pageNumberArray[currentPage] < item &&
+                              item !== 1 &&
+                              pageNumberArray.length > 6 &&
+                              pageNumberArray.length !== item)
+                              ? 'hide-page-no'
+                              : 'show-page-no'
+                          "
+                        >
+                          <a
+                            (click)="moveToPage(item)"
+                            (keydown.enter)="moveToPage(item)"
+                            class="page-link"
+                            href="javascript:void(0);"
+                          >
+                            {{ item }}
+                          </a>
+                        </li>
+                        @if ( i === 0 && pageNumberArray.length > 6 &&
+                        currentPage > 2 ) {
+                        <li
+                          class="page-item"
+                          [hidden]="currentPage === 1"
+                          (click)="moveToPage(currentPage - 2)"
+                          (keydown.enter)="moveToPage(currentPage - 2)"
+                          tabindex="0"
+                        >
+                          <a class="page-link" href="javascript:void(0);">
+                            ...
+                          </a>
+                        </li>
+                        } @if ( i === pageNumberArray.length - 2 &&
+                        pageNumberArray.length > 6 ) {
+                        <li
+                          [hidden]="
+                            currentPage >=
+                              pageNumberArray[pageNumberArray.length - 2] ||
+                            totalData <
+                              serialNumberArray[serialNumberArray.length - 1]
+                          "
+                          class="page-item"
+                          (click)="moveToPage(currentPage + 2)"
+                          (keydown.enter)="moveToPage(currentPage + 2)"
+                          tabindex="0"
+                        >
+                          <a class="page-link" href="javascript:void(0);">
+                            ...
+                          </a>
+                        </li>
+                        } }
+
+                        <li
+                          class="page-item"
+                          [ngClass]="{
+                            disabled:
+                              currentPage ===
+                                pageNumberArray[pageNumberArray.length - 1] ||
+                              lstBoard.length === 0
+                          }"
+                        >
+                          <a
+                            (click)="getMoreData('next')"
+                            (keydown.enter)="getMoreData('next')"
+                            class="page-link"
+                            href="javascript:void(0);"
+                            >Next
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!--New one-->
               </div>
             </div>
           </div>

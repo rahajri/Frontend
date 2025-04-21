@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -23,8 +23,17 @@ export class CandidateService {
     return this.http.post(url, email);
   }
 
-  getallCandidates(): Observable<any> {
-    return this.http.get(this.baseUrl);
+  getallCandidates(
+    page: number = 1,
+    limit: number = 10
+  ): Observable<{
+    data: any[];
+    total: number;
+  }> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+    return this.http.get<any>(this.baseUrl, { params });
   }
 
   getCandidate(email: string): Observable<any> {
