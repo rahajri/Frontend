@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe(
         (response) => {
-          localStorage.clear();
           localStorage.setItem('token', response.token);
           localStorage.setItem('refreshToken', response.refreshToken);
           localStorage.setItem('email', response.email);
