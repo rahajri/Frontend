@@ -1,11 +1,13 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { header } from 'src/app/core/models/sidebar-model';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { NavbarService } from 'src/app/core/services/navbar.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-header',
@@ -33,12 +35,14 @@ export class HeaderComponent {
   navbar: Array<header> = [];
   public header_bg = false;
   isEmployer: boolean = false;
+  isMobile$: Observable<boolean>;
   constructor(
     private router: Router,
     private data: ShareDataService,
     private navservices: NavbarService,
     public authService: AuthService,
-    private common: CommonService
+    private common: CommonService,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.common.base.subscribe((res: string) => {
       this.base = res;
@@ -51,6 +55,10 @@ export class HeaderComponent {
       this.last = res;
     });
     this.navbar = this.data.sideBar;
+
+    this.isMobile$ = this.breakpointObserver
+      .observe([Breakpoints.Handset])
+      .pipe(map((result) => result.matches));
   }
 
   ngOnInit(): void {

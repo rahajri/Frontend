@@ -106,6 +106,22 @@
             </ul>
           </li>
           } }
+          <li *ngIf="isMobile$ | async">
+            <a [routerLink]="routes.register" class="reg-btn">
+              <img src="assets/img/icon/reg-icon.svg" class="me-1" alt="icon" />
+              S'inscrire
+            </a>
+          </li>
+          <li *ngIf="isMobile$ | async">
+            <a [routerLink]="routes.login" class="log-btn">
+              <img
+                src="assets/img/icon/lock-icon.svg"
+                class="me-1"
+                alt="icon"
+              />
+              Se connecter
+            </a>
+          </li>
         </ul>
       </div>
       <ul

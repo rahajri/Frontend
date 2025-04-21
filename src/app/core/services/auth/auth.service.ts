@@ -66,7 +66,6 @@ export class AuthService {
   }
 
   public logout(): void {
-    localStorage.clear();
     this.checkAuth.next(false);
     sessionStorage.clear();
     localStorage.removeItem('token');
