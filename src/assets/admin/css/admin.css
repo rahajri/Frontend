@@ -420,13 +420,13 @@ table .badge {
 }
 .bg-primary,
 .badge-primary {
-  background-color: #ff5b37 !important;
+  background-color: #179ab5 !important;
 }
 a.bg-primary:focus,
 a.bg-primary:hover,
 button.bg-primary:focus,
 button.bg-primary:hover {
-  background-color: #ff5b33 !important;
+  background-color: #179ab5 !important;
 }
 
 .bg-info,
@@ -502,14 +502,14 @@ button.bg-danger:hover {
 .open > .dropdown-toggle.btn-primary.focus,
 .open > .dropdown-toggle.btn-primary:focus,
 .open > .dropdown-toggle.btn-primary:hover {
-  background-color: #ff5b33;
-  border: 1px solid #ff5b33;
+  background-color: #179ab5;
+  border: 1px solid #179ab5;
 }
 .btn-primary.active:not(:disabled):not(.disabled),
 .btn-primary:active:not(:disabled):not(.disabled),
 .show > .btn-primary.dropdown-toggle {
-  background-color: #ff5b33;
-  border-color: #ff5b33;
+  background-color: #179ab5;
+  border-color: #179ab5;
   color: #fff;
 }
 .btn-primary.active:focus:not(:disabled):not(.disabled),
@@ -656,7 +656,7 @@ button.bg-danger:hover {
   color: #fff;
 }
 .badge-secondary {
-  background-color: #ff5b33 !important;
+  background-color: #179ab5 !important;
 }
 .btn-danger {
   background-color: #ef3737;
@@ -873,17 +873,17 @@ button.bg-danger:hover {
 }
 .pagination > li > a,
 .pagination > li > span {
-  color: #ff5b37;
+  color: #179ab5;
 }
 .page-link:hover {
-  color: #ff5b37;
+  color: #179ab5;
 }
 .page-link:focus {
   box-shadow: unset;
 }
 .page-item.active .page-link {
-  background-color: #ff5b37;
-  border-color: #ff5b37;
+  background-color: #179ab5;
+  border-color: #179ab5 7;
 }
 .dropdown-menu {
   border: 1px solid #eff2f7;
@@ -933,11 +933,11 @@ button.bg-danger:hover {
 }
 .bootstrap-datetimepicker-widget table td.active,
 .bootstrap-datetimepicker-widget table td.active:hover {
-  background-color: #ff5b37;
+  background-color: #179ab5;
   text-shadow: unset;
 }
 .bootstrap-datetimepicker-widget table td.today:before {
-  border-bottom-color: #ff5b37;
+  border-bottom-color: #179ab5;
 }
 .bg-info-light {
   background-color: rgba(2, 182, 179, 0.12) !important;
@@ -996,7 +996,7 @@ button.bg-danger:hover {
 .zone i {
   text-align: center;
   font-size: 3em;
-  color: #ff5b33;
+  color: #179ab5;
   margin-top: 50px;
 }
 .zone .selectFile {
@@ -1166,9 +1166,9 @@ button.bg-danger:hover {
 }
 .continue-btn {
   background-color: #fff;
-  border: 1px solid #ff5b33;
+  border: 1px solid #179ab5;
   border-radius: 50px;
-  color: #ff5b33;
+  color: #179ab5;
   display: block;
   font-size: 18px;
   font-weight: 600;
@@ -1178,15 +1178,15 @@ button.bg-danger:hover {
 .continue-btn:hover,
 .continue-btn:focus,
 .continue-btn:active {
-  background-color: #ff5b33;
-  border: 1px solid #ff5b33;
+  background-color: #179ab5;
+  border: 1px solid #179ab5;
   color: #fff;
 }
 .cancel-btn {
   background-color: #fff;
-  border: 1px solid #ff5b33;
+  border: 1px solid #179ab5;
   border-radius: 50px;
-  color: #ff5b33;
+  color: #179ab5;
   display: block;
   font-size: 18px;
   font-weight: 600;
@@ -1196,8 +1196,8 @@ button.bg-danger:hover {
 .cancel-btn:hover,
 .cancel-btn:focus,
 .cancel-btn:active {
-  background-color: #ff5b33;
-  border: 1px solid #ff5b33;
+  background-color: #179ab5;
+  border: 1px solid #179ab5;
   color: #fff;
 }
 
@@ -2652,7 +2652,7 @@ html.menu-opened body {
   line-height: 40px;
 }
 .sidebar-menu li.menu-title a {
-  color: #ff5b33;
+  color: #179ab5;
   display: inline-block;
   margin-left: auto;
   padding: 0;
