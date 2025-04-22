@@ -184,7 +184,6 @@
           <div class="card-body pt-0">
             <div class="tab-content pt-0">
               <div role="tabpanel" id="tab-4" class="tab-pane fade active show">
-                
                 <div class="table-responsive">
                   <div class="table_header">
                     <div class="dataTables_length mt-2">
@@ -325,17 +324,10 @@
                                 <a
                                   class="dropdown-item"
                                   data-dismiss="modal"
+                                  *ngIf="candidate.status.name === 'Active'"
                                   [routerLink]="
                                     candidate.status.name === 'Active'
                                       ? routes.get_admin_candidate(candidate.id)
-                                      : null
-                                  "
-                                  [class.disabled]="
-                                    candidate.status.name !== 'Active'
-                                  "
-                                  [attr.disabled]="
-                                    candidate.status.name !== 'Active'
-                                      ? true
                                       : null
                                   "
                                 >

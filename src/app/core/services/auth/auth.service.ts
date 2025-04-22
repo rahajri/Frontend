@@ -69,6 +69,9 @@ export class AuthService {
     this.checkAuth.next(false);
     sessionStorage.clear();
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('email');
+    localStorage.removeItem('userProfile');
     localStorage.removeItem('refreshToken');
     this.currentUserSubject.next(null);
     this.setIsLoggedIn(false);

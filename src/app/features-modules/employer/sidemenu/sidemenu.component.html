@@ -21,7 +21,7 @@
           <!-- Condition for Logout -->
           @if (menuItem.title === 'Se Déconnecter') {
           <li class="nav-item">
-            <a class="nav-link" (click)="logout()">
+            <a class="nav-link cursor-pointer" (click)="logout()" (touchstart)="logout()">
               <img [src]="menuItem.icon" alt="Img" /> {{ menuItem.title }}
             </a>
           </li>
