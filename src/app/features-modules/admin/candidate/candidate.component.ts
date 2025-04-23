@@ -130,12 +130,14 @@ export class CandidateComponent {
       .updateCandidateProfile(this.candidate?.id, formData)
       .subscribe({
         next: (res) => {
-          this.iaService.generateCandidateEmb(res?.data?.id)
           this.getCondidature();
           showSuccessModal('data-changed');
         },
         error: (err) => {
           console.error('Error updating profile:', err);
+        },
+        complete: () => {
+          this.iaService.generateCandidateEmb(this.candidate.id);
         },
       });
   }
