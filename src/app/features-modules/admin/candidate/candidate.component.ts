@@ -138,6 +138,7 @@ export class CandidateComponent {
         },
         complete: () => {
           this.iaService.generateCandidateEmb(this.candidate.id);
+          console.log(this.candidate.id);
         },
       });
   }
