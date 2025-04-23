@@ -13,6 +13,9 @@ import {
   ApexPlotOptions,
 } from 'ng-apexcharts';
 import { routes } from 'src/app/core/helpers/routes/routes';
+import { IaService } from 'src/app/core/services/ia.service';
+import { ProfileService } from 'src/app/core/services/profile.service';
+import { ProjectService } from 'src/app/core/services/project.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries | any;
@@ -44,12 +47,21 @@ export class DashboardComponent {
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   public radialchartOptions: Partial<ChartOptions> | any;
+  candidateId: string | null = null;
+  Candidatures: number = 0;
+  acceptedCandidature: number = 0;
+  rejectedCandidature: number = 0;
+  matching: number = 0;
 
-  constructor() {
+  constructor(
+    private projectService: ProjectService,
+    private profileService: ProfileService,
+    private iaService: IaService
+  ) {
     this.chartOptions = {
       series: [
         {
-          name: 'profile view',
+          name: 'visualisations de profil',
           data: [100, 150, 200, 250, 200, 250, 200, 200, 200, 200, 300, 350],
         },
       ],
@@ -92,18 +104,18 @@ export class DashboardComponent {
       },
       xaxis: {
         categories: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
+          'Janv',
+          'Févr',
+          'Mars',
+          'Avr',
+          'Mai',
+          'Juin',
+          'Juil',
+          'Août',
+          'Sept',
           'Oct',
           'Nov',
-          'Dec',
+          'Déc',
         ],
         lines: {
           show: false,
@@ -146,7 +158,7 @@ export class DashboardComponent {
           },
         },
       },
-      colors: ['#7B46BE', '#FA6CA4', '#FACD3A', '#24C0DC'],
+      colors: ['#FACD3A', '#7B46BE', '#FA6CA4', '#24C0DC'],
       labels: ['Applied Jobs', 'Messenger', 'Facebook', 'LinkedIn'],
       legend: {
         show: false,
@@ -176,5 +188,88 @@ export class DashboardComponent {
         },
       ],
     };
+  }
+  ngOnInit(): void {
+    this.initializeCandidateDashboard();
+  }
+
+  private initializeCandidateDashboard(): void {
+    this.candidateId = this.profileService.profileId;
+
+    if (!this.candidateId) {
+      console.warn('Candidate ID not available');
+      return;
+    }
+
+    this.loadDashboardData();
+  }
+
+  private loadDashboardData(): void {
+    this.loadMatchingOffers();
+    this.loadCounts();
+  }
+
+  private loadCounts(): void {
+    if (!this.candidateId) {
+      console.error('Cannot load counts: Candidate ID is null');
+      return;
+    }
+
+    this.projectService.candidateDashboardCharts(this.candidateId).subscribe({
+      next: (res) => this.updateCandidateCounts(res),
+      error: (err) => this.handleCountsError(err),
+    });
+  }
+
+  private updateCandidateCounts(response: any): void {
+    this.Candidatures = response.Candidatures;
+    this.acceptedCandidature = response.acceptedCandidature;
+    this.rejectedCandidature = response.rejectedCandidature;
+
+    this.updateChartData([
+      this.Candidatures, // Total candidatures
+      this.acceptedCandidature, // Accepted candidatures
+      this.rejectedCandidature, // Rejected candidatures
+      this.matching, // Matching offers count
+    ]);
+  }
+
+  private async loadMatchingOffers(): Promise<void> {
+    if (!this.candidateId) {
+      console.error('Cannot load matching offers: Candidate ID is null');
+      return;
+    }
+
+    try {
+      const offers = await this.iaService.iaOffers(this.candidateId);
+      this.updateMatchingOffersCount(offers);
+      // Trigger chart update since matching count changed
+      this.updateCandidateCounts({
+        Candidatures: this.Candidatures,
+        acceptedCandidature: this.acceptedCandidature,
+        rejectedCandidature: this.rejectedCandidature,
+      });
+    } catch (error) {
+      this.handleMatchingOffersError(error);
+    }
+  }
+
+  private updateMatchingOffersCount(offers: any[]): void {
+    this.matching = offers.length;
+  }
+
+  private updateChartData(seriesData: number[]): void {
+    this.radialchartOptions = {
+      ...this.radialchartOptions,
+      series: seriesData,
+    };
+  }
+
+  private handleCountsError(error: any): void {
+    console.error('Failed to load candidate counts:', error);
+  }
+
+  private handleMatchingOffersError(error: any): void {
+    console.error('Failed to load matching offers:', error);
   }
 }

@@ -68,6 +68,13 @@ export class ProjectService {
     return this.http.post<any>(`${this.baseUrl}/${id}/disable`, {});
   }
 
+  employerDashboardCharts(id: string) {
+    return this.http.get<any>(`${this.baseUrl}/employer/counts/${id}`);
+  }
+  candidateDashboardCharts(id: string) {
+    return this.http.get<any>(`${this.baseUrl}/candidate/counts/${id}`);
+  }
+
   getJobOffers(
     offset: number,
     limit: number,

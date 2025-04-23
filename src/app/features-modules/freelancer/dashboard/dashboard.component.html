@@ -17,8 +17,8 @@
         <div
           class="dash-widget-more d-flex align-items-center justify-content-between"
         >
-          <div class="dash-widget-count">30</div>
-          <a [routerLink]="routes.completedProjects" class="d-flex"
+          <div class="dash-widget-count">{{ matching }}</div>
+          <a [routerLink]="routes.freelancerOngoingProjects" class="d-flex"
             >Voir Détails</a
           >
         </div>
@@ -38,7 +38,7 @@
         <div
           class="dash-widget-more d-flex align-items-center justify-content-between"
         >
-          <div class="dash-widget-count">5</div>
+          <div class="dash-widget-count">{{ acceptedCandidature }}</div>
           <a [routerLink]="routes.completedProjects" class="d-flex"
             >Voir Détails</a
           >
@@ -54,13 +54,13 @@
               alt="Img"
             />
           </div>
-          <div class="dash-widget-info">Evaluations</div>
+          <div class="dash-widget-info">Candidatures</div>
         </div>
         <div
           class="dash-widget-more d-flex align-items-center justify-content-between"
         >
-          <div class="dash-widget-count">25</div>
-          <a [routerLink]="routes.completedProjects" class="d-flex"
+          <div class="dash-widget-count">{{ Candidatures }}</div>
+          <a [routerLink]="routes.freelancer_projects_proposals" class="d-flex"
             >Voir Détails</a
           >
         </div>
@@ -80,8 +80,8 @@
         <div
           class="dash-widget-more d-flex align-items-center justify-content-between"
         >
-          <div class="dash-widget-count">5962</div>
-          <a [routerLink]="routes.completedProjects" class="d-flex"
+          <div class="dash-widget-count">{{ rejectedCandidature }}</div>
+          <a [routerLink]="routes.cancelledProjects" class="d-flex"
             >Voir Détails</a
           >
         </div>
@@ -141,13 +141,13 @@
             <ul class="static-list">
               <li>
                 <span
-                  ><i class="fas fa-circle text-violet me-1"></i
+                  ><i class="fas fa-circle text-yellow me-1"></i
                   >Candidatures</span
                 >
               </li>
               <li>
                 <span
-                  ><i class="fas fa-circle text-yellow me-1"></i>Candidature
+                  ><i class="fas fa-circle text-violet me-1"></i>Candidature
                   Acceptées</span
                 >
               </li>
