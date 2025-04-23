@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { showSuccessModal } from 'src/app/core/services/common/common-functions';
 import { CandidateService } from 'src/app/core/services/condidate.service';
@@ -128,6 +129,12 @@ export class CandidateComponent {
     // Send the FormData to the backend
     this.candidateService
       .updateCandidateProfile(this.candidate?.id, formData)
+      .pipe(
+        // Wait for update to complete before generating embeddings
+        switchMap((updateResponse) =>
+          this.iaService.generateCandidateEmb(this.candidate.id)
+        )
+      )
       .subscribe({
         next: (res) => {
           this.getCondidature();
@@ -135,9 +142,6 @@ export class CandidateComponent {
         },
         error: (err) => {
           console.error('Error updating profile:', err);
-        },
-        complete: () => {
-          this.iaService.generateCandidateEmb(this.candidate.id);
         },
       });
   }
