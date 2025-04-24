@@ -74,8 +74,23 @@
               </p>
             </div>
             <div class="col-auto">
-              <a href="javascript:" class="btn export-btn me-1">
-                <img src="assets/admin/img/export.svg" alt="" /> Exporter
+              <a
+                href="javascript:"
+                class="btn export-btn me-1"
+                (click)="exportCandidateToCsv()"
+              >
+                <ng-container
+                  *ngIf="!exportSelection; else noCandidatesMessage"
+                >
+                  <img src="assets/admin/img/export.svg" alt="Export icon" />
+                  Exporter
+                </ng-container>
+
+                <ng-template #noCandidatesMessage>
+                  <small class="me-3 text-danger"
+                    >Aucun candidat sélectionné à exporter</small
+                  >
+                </ng-template>
               </a>
               <a
                 class="btn fil filter-btn"
@@ -218,7 +233,12 @@
                       <thead>
                         <tr>
                           <th>
-                            <input type="checkbox" name="" id="" />
+                            <input
+                              type="checkbox"
+                              name="customCheckAll"
+                              id="customCheckAll"
+                              (click)="toggleCheckBoxes($event)"
+                            />
                           </th>
                           <th mat-sort-header="name">Candidate</th>
                           <th mat-sort-header="phone">Téléphone</th>
@@ -249,11 +269,17 @@
                         <tr>
                           <td>
                             <div class="form-check custom-checkbox">
-                              <input type="checkbox" class="form-check-input" />
+                              <input
+                                type="checkbox"
+                                class="form-check-input"
+                                [value]="candidate?.id"
+                                [checked]="isSelected(candidate)"
+                                (change)="onCheckboxChange(candidate, $event)"
+                              />
                             </div>
                           </td>
                           <td
-                            class="d-flex align-items-center"
+                            class="d-flex align-items-center border border-0"
                             (click)="getProfile(candidate)"
                           >
                             <span class="user-img">

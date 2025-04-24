@@ -7,6 +7,103 @@ import {
 
 declare var bootstrap: any;
 
+// export function exportToCsv(filename: string, rows: any[]) {
+//   if (!rows || !rows.length) {
+//     return;
+//   }
+
+//   const separator = ','; // CSV separator
+
+//   // Function to convert HTML to plain text while preserving line breaks and basic styling
+//   const htmlToPlainText = (html: string) => {
+//     // Replace <br>, <p>, and <div> tags with line breaks
+//     html = html.replace(/<br\s*\/?>/gi, '\n').replace(/<\/p>|<\/div>/gi, '\n');
+//     // Remove other HTML tags but keep their content
+//     html = html.replace(/<[^>]+>/g, '');
+//     // Trim extra spaces and line breaks
+//     html = html.replace(/\s+/g, ' ').trim();
+//     return html;
+//   };
+
+//   // Function to format date as M/D/YYYY
+//   const formatDate = (dateString: string | Date): string => {
+//     const date = new Date(dateString);
+//     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+//   };
+
+//   const translateStatusToFrench = (status: string): string => {
+//     const statusTranslations: { [key: string]: string } = {
+//       Draft: 'Brouillon',
+//       Published: 'Publiée',
+//       Closed: 'Fermée',
+//     };
+
+//     return statusTranslations[status] || status; // Return the translated status or the original status if not found
+//   };
+
+//   // Flatten the data and map headers to French
+//   const flattenedRows = rows.map((row) => {
+//     return {
+//       ID: row.id,
+//       'Date de création': formatDate(row.createdAt),
+//       Titre: row.title,
+//       "Nom de l'entreprise": row.company?.name || '',
+//       Description: htmlToPlainText(row.description),
+//       Poste: row.job?.name || '',
+//       Ville: row.city?.name || '',
+//       'Date de publication': formatDate(row.publicationDate),
+//       'Type de contrat': row.contractType?.description || '',
+//       'Date de début': formatDate(row.startDate),
+//       'Date de fin': formatDate(row.endDate),
+//       'Durée prévue': row.expectedDuration,
+//       'Unité de temps': row.timeUnit,
+//       Statut: translateStatusToFrench(row.status?.name) || '',
+//     };
+//   });
+
+//   // Extract headers from the first row
+//   const headers = Object.keys(flattenedRows[0]);
+
+//   // Create CSV content
+//   const csvContent =
+//     '\uFEFF' + // Add UTF-8 BOM
+//     headers.join(separator) + // Add headers
+//     '\n' + // Add new line
+//     flattenedRows
+//       .map((row: any) => {
+//         return headers
+//           .map((header: any) => {
+//             // Escape double quotes and wrap fields with double quotes if they contain commas or newlines
+//             let field =
+//               row[header] === null || row[header] === undefined
+//                 ? ''
+//                 : row[header];
+//             field = String(field).replace(/"/g, '""');
+//             if (field.includes(separator) || field.includes('\n')) {
+//               field = `"${field}"`;
+//             }
+//             return field;
+//           })
+//           .join(separator);
+//       })
+//       .join('\n'); // Add new line between rows
+
+//   // Create a Blob with the CSV content
+//   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+//   // Create a link element to trigger the download
+//   const link = document.createElement('a');
+//   if (link.download !== undefined) {
+//     const url = URL.createObjectURL(blob);
+//     link.setAttribute('href', url);
+//     link.setAttribute('download', filename);
+//     link.style.visibility = 'hidden';
+//     document.body.appendChild(link);
+//     link.click();
+//     document.body.removeChild(link);
+//   }
+// }
+
 export function exportToCsv(filename: string, rows: any[]) {
   if (!rows || !rows.length) {
     return;
@@ -14,8 +111,11 @@ export function exportToCsv(filename: string, rows: any[]) {
 
   const separator = ','; // CSV separator
 
-  // Function to convert HTML to plain text while preserving line breaks and basic styling
-  const htmlToPlainText = (html: string) => {
+  // Updated htmlToPlainText to handle non-string inputs
+  const htmlToPlainText = (html: any) => {
+    if (typeof html !== 'string') {
+      return html !== null && html !== undefined ? String(html) : '';
+    }
     // Replace <br>, <p>, and <div> tags with line breaks
     html = html.replace(/<br\s*\/?>/gi, '\n').replace(/<\/p>|<\/div>/gi, '\n');
     // Remove other HTML tags but keep their content
@@ -26,59 +126,37 @@ export function exportToCsv(filename: string, rows: any[]) {
   };
 
   // Function to format date as M/D/YYYY
-  const formatDate = (dateString: string | Date): string => {
-    const date = new Date(dateString);
-    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  const formatDate = (dateString: string | Date | null): string => {
+    if (!dateString) return '';
+    try {
+      const date = new Date(dateString);
+      return isNaN(date.getTime())
+        ? ''
+        : `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    } catch {
+      return '';
+    }
   };
 
-  const translateStatusToFrench = (status: string): string => {
-    const statusTranslations: { [key: string]: string } = {
-      Draft: 'Brouillon',
-      Published: 'Publiée',
-      Closed: 'Fermée',
-    };
-
-    return statusTranslations[status] || status; // Return the translated status or the original status if not found
-  };
-
-  // Flatten the data and map headers to French
-  const flattenedRows = rows.map((row) => {
-    return {
-      ID: row.id,
-      'Date de création': formatDate(row.createdAt),
-      Titre: row.title,
-      "Nom de l'entreprise": row.company?.name || '',
-      Description: htmlToPlainText(row.description),
-      Poste: row.job?.name || '',
-      Ville: row.city?.name || '',
-      'Date de publication': formatDate(row.publicationDate),
-      'Type de contrat': row.contractType?.description || '',
-      'Date de début': formatDate(row.startDate),
-      'Date de fin': formatDate(row.endDate),
-      'Durée prévue': row.expectedDuration,
-      'Unité de temps': row.timeUnit,
-      Statut: translateStatusToFrench(row.status?.name) || '',
-    };
-  });
-
-  // Extract headers from the first row
-  const headers = Object.keys(flattenedRows[0]);
+  // No need for translateStatusToFrench in candidate export
 
   // Create CSV content
   const csvContent =
     '\uFEFF' + // Add UTF-8 BOM
-    headers.join(separator) + // Add headers
+    Object.keys(rows[0]).join(separator) + // Add headers
     '\n' + // Add new line
-    flattenedRows
+    rows
       .map((row: any) => {
-        return headers
+        return Object.keys(row)
           .map((header: any) => {
-            // Escape double quotes and wrap fields with double quotes if they contain commas or newlines
+            // Get the field value
             let field =
               row[header] === null || row[header] === undefined
                 ? ''
                 : row[header];
+            // Convert to string and escape double quotes
             field = String(field).replace(/"/g, '""');
+            // Wrap fields with double quotes if they contain commas or newlines
             if (field.includes(separator) || field.includes('\n')) {
               field = `"${field}"`;
             }

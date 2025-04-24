@@ -11,6 +11,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { CandidateService } from 'src/app/core/services/condidate.service';
 import {
+  exportToCsv,
   markFormGroupTouched,
   showSuccessModal,
   toggleAllCheckboxes,
@@ -39,9 +40,12 @@ export class FreelancersComponent {
   userEmail: string = '';
   baseUrl = environment.apiUrl;
   isSubmitting: boolean = false;
+  exportSelection: boolean = false;
 
   candidateToDelete: any;
   selectedHederTitle = 'Tous les';
+
+  selectedCandidatesIds: string[] = [];
 
   // pagination variables
   public lastIndex = 0;
@@ -181,12 +185,11 @@ export class FreelancersComponent {
         if (!phone) return '';
         return phone.replace(/\s+/g, '').toLowerCase(); // Remove ALL whitespace
       };
-
       return (
-        (candidate.firstName?.toLowerCase() || '').includes(filterValue) ||
-        (candidate.lastName?.toLowerCase() || '').includes(filterValue) ||
+        candidate.firstName?.toLowerCase().includes(filterValue) ||
+        candidate.lastName?.toLowerCase().includes(filterValue) ||
         getCleanPhone(candidate.phone).includes(filterValue) ||
-        (candidate.profileTitle?.toLowerCase() || '').includes(filterValue)
+        candidate.profileTitle?.toLowerCase().includes(filterValue)
       );
     });
   }
@@ -305,10 +308,6 @@ export class FreelancersComponent {
     return `${firstName} ${lastName}`;
   }
 
-  toggleCheckBoxes(event: Event) {
-    toggleAllCheckboxes(event);
-  }
-
   async copyToClipboard(text: string) {
     try {
       await navigator.clipboard.writeText(text);
@@ -415,15 +414,20 @@ export class FreelancersComponent {
     }
   }
   private getValue(item: any, key: string): any {
+    console.log(key);
     switch (key) {
-      case 'companyName':
-        return item.jobOffer?.company?.name;
-      case 'offerTitle':
-        return item.jobOffer?.title;
-      case 'contractType':
-        return item.jobOffer?.contractType?.description;
-      case 'candidate':
-        return `${item.candidate?.firstName} ${item.candidate?.lastName}`;
+      case 'name':
+        return `${item?.firstName} ${item?.lastName}`;
+      case 'phone':
+        return item?.phone;
+      case 'job':
+        return item?.profileTitle;
+      case 'verification':
+        return item?.emailVerifiedAt;
+      case 'insciption':
+        return item?.createdAt;
+      case 'lastConnexion':
+        return item?.lastConnection;
       case 'status':
         return item.status?.name;
       default:
@@ -436,6 +440,111 @@ export class FreelancersComponent {
     this.skip = 0;
     this.currentPage = 1;
     this.getTableData();
+  }
+
+  toggleCheckBoxes(event: Event) {
+    if (this.exportSelection) {
+      this.exportSelection = false;
+    }
+    const targetCheckbox = event.target as HTMLInputElement;
+    const isChecked = targetCheckbox.checked;
+
+    // Select all checkboxes in the table
+    const allCheckboxes = document.querySelectorAll(
+      'input[type="checkbox"]'
+    ) as NodeListOf<HTMLInputElement>;
+
+    allCheckboxes.forEach((checkbox) => {
+      checkbox.checked = isChecked;
+      const candidateId = checkbox.value;
+
+      // Make sure to ignore the "on" value (this happens if value is not set on the checkbox)
+      if (candidateId && candidateId !== 'on') {
+        if (isChecked) {
+          // Add the company ID to the selectedCandidatesIds array if it's checked
+          if (!this.selectedCandidatesIds.includes(candidateId)) {
+            this.selectedCandidatesIds.push(candidateId);
+          }
+        } else {
+          // Remove the company ID from the selectedCandidatesIds array if it's unchecked
+          const index = this.selectedCandidatesIds.indexOf(candidateId);
+          if (index !== -1) {
+            this.selectedCandidatesIds.splice(index, 1);
+          }
+        }
+      }
+    });
+  }
+  isSelected(element: any): boolean {
+    return this.selectedCandidatesIds.includes(element.id);
+  }
+
+  // This method will be triggered when a checkbox is clicked
+  onCheckboxChange(element: any, event: any) {
+    if (this.exportSelection) {
+      this.exportSelection = false;
+    }
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      // Add the company ID to the array if it's selected
+      this.selectedCandidatesIds.push(element.id);
+    } else {
+      // Remove the company ID from the array if it's deselected
+      this.selectedCandidatesIds = this.selectedCandidatesIds.filter(
+        (id) => id !== element.id
+      );
+    }
+  }
+
+  exportCandidateToCsv() {
+    if (
+      this.candidatesData.length === 0 ||
+      this.selectedCandidatesIds.length === 0
+    ) {
+      this.exportSelection = !this.exportSelection;
+      console.warn('No candidate data to export');
+      return;
+    }
+
+    // Filter candidates if specific IDs are selected
+    const candidatesToExport =
+      this.selectedCandidatesIds && this.selectedCandidatesIds.length
+        ? this.candidatesData.filter((candidate) =>
+            this.selectedCandidatesIds.includes(candidate.id)
+          )
+        : this.candidatesData;
+
+    // Format filename with current date
+    const now = new Date();
+    const dateString = `${now.getFullYear()}-${(now.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+    const filename = `Candidats_${dateString}.csv`;
+
+    // Flatten the data - no HTML fields to process here
+    const flattenedRows = candidatesToExport.map((candidate) => {
+      return {
+        ID: candidate.id,
+        Nom: candidate.lastName || '',
+        Prénom: candidate.firstName || '',
+        Email: candidate.email || '',
+        Téléphone: candidate.phone || '',
+        'Date de naissance': candidate.birthDate || '',
+        Âge: candidate.age || '',
+        // Rôle: candidate.role || '',
+        'Email vérifié': candidate.emailVerifiedAt ? 'Oui' : 'Non',
+        'Titre du profil': candidate.profileTitle || '',
+        'ID IA': candidate.aiId || '',
+        'Date de création': candidate.createdAt || '',
+        'Dernière mise à jour': candidate.updatedAt || '',
+        'Dernière connexion': candidate.lastConnection || '',
+        'Profil mis à jour le': candidate.profileUpdatedAt || '',
+        Statut: candidate.status?.name || '',
+      };
+    });
+
+    // Call the export function
+    exportToCsv(filename, flattenedRows);
   }
 }
 export interface pageSelection {
