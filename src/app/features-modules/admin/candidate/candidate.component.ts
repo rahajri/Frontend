@@ -2,11 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { showSuccessModal } from 'src/app/core/services/common/common-functions';
 import { CandidateService } from 'src/app/core/services/condidate.service';
 import { IaService } from 'src/app/core/services/ia.service';
+import { JobService } from 'src/app/core/services/job.service';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { SkillService } from 'src/app/core/services/skill.service';
 import { environment } from 'src/environments/environment';
@@ -35,6 +35,11 @@ export class CandidateComponent {
   public datas: boolean[] = [true];
   public isCheckboxChecked = true;
   baseUrl = environment.apiUrl;
+  jobNotExist = true;
+  filteredJobs: any[] = [];
+  jobs: any[] = [];
+  subActivities: any[] = [];
+
   skillLevels = ['Basique', 'Professionnel', 'Avancé'];
   candidate: any = {
     firstName: '',
@@ -73,7 +78,8 @@ export class CandidateComponent {
     private skillService: SkillService,
     private candidateService: CandidateService,
     private iaService: IaService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private jobService: JobService
   ) {
     this.form = this.fb.group({
       personalDetails: this.fb.group({
@@ -86,6 +92,7 @@ export class CandidateComponent {
       }),
 
       skills: this.fb.array([this.createSkill()]),
+      activities: this.fb.array([this.createActivity()]),
 
       experiences: this.fb.array([this.createExperience()]),
       education: this.fb.array([this.createEducation()]),
@@ -94,6 +101,8 @@ export class CandidateComponent {
   }
   ngOnInit(): void {
     this.candidateId = this.route.snapshot.paramMap.get('id');
+    this.getJobs();
+    this.getSubActivities();
     this.getCondidature();
     this.getLanguagesFromDb();
     this.getSSkillsFromDb();
@@ -129,15 +138,10 @@ export class CandidateComponent {
     // Send the FormData to the backend
     this.candidateService
       .updateCandidateProfile(this.candidate?.id, formData)
-      .pipe(
-        // Wait for update to complete before generating embeddings
-        switchMap((updateResponse) =>
-          this.iaService.generateCandidateEmb(this.candidate.id)
-        )
-      )
       .subscribe({
         next: (res) => {
           this.getCondidature();
+          this.iaService.generateCandidateEmb(this.candidate.id);
           showSuccessModal('data-changed');
         },
         error: (err) => {
@@ -394,6 +398,20 @@ export class CandidateComponent {
       // If no experience data, add one empty experience group
       this.addExperience();
     }
+
+    // ✅ Patch uniquement le premier élément (index 0) de `jobs`
+    const firstActivity = response['jobs']?.[0] || null;
+
+    if (firstActivity) {
+      this.jobNotExist = false;
+      this.form.get('activities')?.setValue([
+        {
+          job: firstActivity?.name || '',
+          sousActivite: firstActivity?.subActivity?.name || '',
+          activite: firstActivity?.subActivity?.activity?.name || '',
+        },
+      ]);
+    }
   }
 
   // Add a new experience to the array
@@ -416,6 +434,10 @@ export class CandidateComponent {
   }
   get languageArray(): FormArray {
     return this.form.get('languages') as FormArray;
+  }
+
+  get activities(): FormArray {
+    return this.form.get('activities') as FormArray;
   }
 
   addEducation() {
@@ -466,7 +488,119 @@ export class CandidateComponent {
       this.languagesArray.removeAt(index);
     }
   }
-  get activities(): FormArray {
-    return this.form.get('activities') as FormArray;
+
+  getJobs() {
+    // Fetch the list of jobs (Métier) on component initialization
+    this.jobService.getJobs().subscribe((data) => {
+      this.jobs = data;
+    });
+  }
+
+  getSubActivities() {
+    this.jobService.getSubActivities().subscribe({
+      next: (data) => {
+        this.subActivities = data;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+
+  filterJobs(e: any): void {
+    const query = e.value?.trim(); // Trim whitespace from the query
+    if (!query) {
+      this.filteredJobs = [...this.jobs];
+      this.jobNotExist = false;
+    } else {
+      this.filteredJobs = this.jobs.filter((job) =>
+        job.name.toLowerCase().includes(query.toLowerCase())
+      );
+      this.jobNotExist = this.filteredJobs.length === 0;
+    }
+  }
+
+  addJob(): void {
+    const jobName = this.form.get('job')?.value?.trim(); // Get and trim the job name
+    if (!jobName) {
+      return; // Do nothing if the job name is empty
+    }
+
+    // Check if the job already exists in the filtered list
+    const existingJob = this.filteredJobs.find(
+      (job) => job.name.toLowerCase() === jobName.toLowerCase()
+    );
+
+    if (existingJob) {
+      // Job already exists, no need to add
+      return;
+    }
+
+    // Add the new job to the filtered list
+    this.filteredJobs.push({ name: jobName });
+
+    // Update the activities form array
+    const activitiesArray = this.form.get('activities') as FormArray;
+    if (activitiesArray.length === 0) {
+      // If no activities exist, add one
+      activitiesArray.push(this.createActivity());
+    }
+
+    // Update the first activity with the new job
+    const firstActivityGroup = activitiesArray.at(0) as FormGroup;
+    firstActivityGroup.patchValue({
+      job: jobName,
+      sousActivite: '',
+      activite: '',
+    });
+
+    // Reset temporary fields
+    this.filteredJobs = [];
+    this.jobNotExist = true;
+  }
+  selectJob(job: any): void {
+    // Clear the filteredJobs array and reset jobNotExist flag
+    this.filteredJobs = [];
+    this.jobNotExist = false;
+
+    // Update the first activity in the activities form array with the selected job's details
+    const activitiesArray = this.form.get('activities') as FormArray;
+
+    if (activitiesArray.length > 0) {
+      const firstActivityGroup = activitiesArray.at(0) as FormGroup;
+      firstActivityGroup.patchValue({
+        job: job?.name || '',
+        sousActivite: job?.subActivity?.name || '',
+        activite: job?.subActivity?.activity?.name || '',
+      });
+    }
+  }
+
+  previous: string | null = null;
+
+  onSubActivityChange(event: any, index: number): void {
+    const subActivityName = event.target.value?.trim(); // Trim whitespace for consistency
+
+    // Check if the new sub-activity is different from the previous one
+    if (subActivityName && subActivityName !== this.previous) {
+      this.previous = subActivityName; // Update the previous value
+
+      // Fetch details for the new sub-activity
+      this.jobService.getSubActivitiesDetails(subActivityName).subscribe({
+        next: (data) => {
+          // Access the specific activity form group by index
+          const activitiesArray = this.form.get('activities') as FormArray;
+          const activityGroup = activitiesArray.at(index) as FormGroup;
+
+          // Patch the activite field in the selected activity group
+          activityGroup.patchValue({
+            activite: data?.activity?.name || '',
+          });
+        },
+        error: (error) => {
+          console.error('Error fetching sub-activity details:', error);
+        },
+      });
+    }
   }
 }

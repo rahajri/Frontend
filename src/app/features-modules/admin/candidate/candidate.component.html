@@ -104,6 +104,123 @@
               </div>
             </div>
           </div>
+          <div class="col-md-12">
+            <h4>Métier</h4>
+          </div>
+          <div formArrayName="activities">
+            <div
+              *ngFor="let activity of activities.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="input-block">
+                    <label for="job" class="focus-label">Métier</label>
+                    <input
+                      id="job"
+                      formControlName="job"
+                      class="form-control"
+                      type="text"
+                      placeholder="Saisir une métier"
+                      (input)="filterJobs($event.target)"
+                      (keydown.enter)="addJob()"
+                      [attr.autocomplete]="'off'"
+                      [ngClass]="{
+                        'is-invalid':
+                          activity.get('job')?.invalid &&
+                          activity.get('job')?.touched
+                      }"
+                    />
+                    <div
+                      *ngIf="
+                        activity.get('job')?.invalid &&
+                        activity.get('job')?.touched
+                      "
+                      class="text-danger"
+                    >
+                      Métier est requis.
+                    </div>
+                    <!-- Autocomplete suggestions -->
+                    <ul class="autocomplete-list" *ngIf="filteredJobs.length">
+                      <li
+                        *ngFor="let job of filteredJobs"
+                        (click)="selectJob(job)"
+                        class="autocomplete-item"
+                      >
+                        {{ job.name }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="input-block">
+                    <label for="sous-activite" class="focus-label"
+                      >Sous Activité</label
+                    >
+                    <select
+                      id="subActivity"
+                      formControlName="sousActivite"
+                      class="form-select"
+                      (change)="onSubActivityChange($event, i)"
+                      *ngIf="jobNotExist"
+                      [ngClass]="{
+                        'is-invalid':
+                          activity.get('sousActivite')?.invalid &&
+                          activity.get('sousActivite')?.touched
+                      }"
+                    >
+                      <option value="" disabled selected>
+                        Selectionner une Sous Activité
+                      </option>
+                      <option
+                        *ngFor="let subActivity of subActivities"
+                        [value]="subActivity.name"
+                      >
+                        {{ subActivity?.name }}
+                      </option>
+                    </select>
+                    <!-- show this if Job already in the database -->
+                    <input
+                      formControlName="sousActivite"
+                      type="text"
+                      class="form-control"
+                      placeholder="Sous Activité"
+                      *ngIf="!jobNotExist"
+                      readonly
+                      [ngClass]="{
+                        'is-invalid':
+                          activity.get('sousActivite')?.invalid &&
+                          activity.get('sousActivite')?.touched
+                      }"
+                    />
+                    <div
+                      *ngIf="
+                        activity.get('sousActivite')?.invalid &&
+                        activity.get('sousActivite')?.touched
+                      "
+                      class="text-danger"
+                    >
+                      Sous Activité est requise.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="input-block">
+                    <label for="activite" class="focus-label">Activité</label>
+                    <input
+                      formControlName="activite"
+                      type="text"
+                      class="form-control"
+                      placeholder="Activité"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="form-row">
             <div class="col-lg-12 w-100">
               <div class="card flex-fill mb-3">
