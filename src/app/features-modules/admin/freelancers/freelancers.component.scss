@@ -37,7 +37,6 @@
   text-transform: uppercase;
 }
 
-
 .compact-checkbox .mat-cell,
 .compact-checkbox .form-check,
 .compact-checkbox .form-check-input {
@@ -48,4 +47,14 @@
 /* Ensure the checkbox takes only its own size */
 .compact-checkbox .form-check {
   display: inline-block;
+}
+:host {
+  display: block;
+  position: relative;
+}
+
+.pdf-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
 }
