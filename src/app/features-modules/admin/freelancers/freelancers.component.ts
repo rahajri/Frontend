@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
-import { Candidate } from 'src/app/core/models/models';
+import { Candidate, PersonalDocument } from 'src/app/core/models/models';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../auth/service/user.service';
@@ -16,6 +16,7 @@ import {
   showSuccessModal,
   toggleAllCheckboxes,
 } from 'src/app/core/services/common/common-functions';
+import { DocumentInitParameters } from 'pdfjs-dist/types/src/display/api';
 declare var bootstrap: any;
 
 @Component({
@@ -41,6 +42,8 @@ export class FreelancersComponent {
   baseUrl = environment.apiUrl;
   isSubmitting: boolean = false;
   exportSelection: boolean = false;
+  showPdf: boolean = false;
+  pdfStrUrl: string = '';
 
   candidateToDelete: any;
   selectedHederTitle = 'Tous les';
@@ -60,6 +63,7 @@ export class FreelancersComponent {
   public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
   public filter: boolean = false;
+  cvUrl: string | Uint8Array | DocumentInitParameters | undefined;
 
   //** / pagination variables
   constructor(
@@ -130,7 +134,7 @@ export class FreelancersComponent {
     this.candidateService
       .getallCandidates(this.currentPage, this.pageSize)
       .subscribe({
-        next: (response) => {
+        next: (response: any) => {
           this.candidatesData = response.data;
           this.filteredCandidates = response.data;
           this.totalData = response.total;
@@ -145,7 +149,7 @@ export class FreelancersComponent {
           this.dataSource = new MatTableDataSource<any>(this.lstBoard);
           this.calculateTotalPages(this.totalData, this.pageSize);
         },
-        error: (error) => {
+        error: (error: any) => {
           console.error('Error fetching companies:', error);
         },
         complete: () => {
@@ -209,11 +213,11 @@ export class FreelancersComponent {
 
   deleteCandidate(candidate: any) {
     this.candidateService.deleteCandidate(candidate?.id).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         this.hideModal('delete_client');
         this.getTableData();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error(err);
       },
     });
@@ -251,11 +255,11 @@ export class FreelancersComponent {
 
   filterCandidates(data: any) {
     this.candidateService.candidatesFiler(data).subscribe({
-      next: (response) => {
+      next: (response: any) => {
         this.filteredCandidates = response;
         this.lstBoard = response;
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error(error);
       },
     });
@@ -276,14 +280,14 @@ export class FreelancersComponent {
       this.candidateService
         .adminCreateUser(this.addCandidateForm.value)
         .subscribe({
-          next: (response) => {
+          next: (response: any) => {
             this.hideModal('add-candidat');
             this.getTableData();
             this.addCandidateForm.reset();
             this.isSubmitting = false;
             showSuccessModal('success-added', false);
           },
-          error: (error) => {
+          error: (error: any) => {
             console.error('Error creating client:', error);
             this.isSubmitting = false;
           },
@@ -360,7 +364,7 @@ export class FreelancersComponent {
       next: (response) => {
         this.hideModal('success-added');
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error creating client:', error);
       },
     });
@@ -414,7 +418,6 @@ export class FreelancersComponent {
     }
   }
   private getValue(item: any, key: string): any {
-    console.log(key);
     switch (key) {
       case 'name':
         return `${item?.firstName} ${item?.lastName}`;
@@ -545,6 +548,73 @@ export class FreelancersComponent {
 
     // Call the export function
     exportToCsv(filename, flattenedRows);
+  }
+  getCvDocuments(documents: PersonalDocument[]): PersonalDocument[] {
+    return documents?.filter((doc) => doc.type === 'CV') || [];
+  }
+
+  showCVModal(url: string) {
+    this.showPdf = false;
+    // Check if URL exists and is valid
+    if (!url || typeof url !== 'string' || url.trim().length === 0) {
+      console.error('Invalid or empty CV URL provided');
+      return;
+    }
+
+    // Construct the full URL
+    const fullUrl = this.baseUrl + url;
+    this.pdfStrUrl = fullUrl;
+
+    // Verify the URL is properly formed
+    try {
+      new URL(fullUrl); // This will throw if URL is invalid
+      this.cvUrl = fullUrl;
+
+      // Show the modal
+      const modalElement = document.getElementById('cv-modal');
+      if (modalElement) {
+        const modal = new bootstrap.Modal(modalElement);
+        modal.show();
+      }
+      setTimeout(() => {
+        this.showPdf = true;
+      }, 3000);
+    } catch (e) {
+      console.error('Invalid CV URL:', e);
+      // Optionally show an error message to the user
+    }
+  }
+
+  onPdfError(error: any) {
+    console.error('PDF Error:', error);
+    // Handle error (show message, etc.)
+  }
+
+  downloadCV() {
+    if (this.pdfStrUrl) {
+      // Open in new tab
+      window.open(this.pdfStrUrl, '_blank');
+
+      // Optional: Fallback if window.open is blocked
+      const link = document.createElement('a');
+      link.href = this.pdfStrUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
+
+  openFullscreen() {
+    const pdfContainer = document.querySelector(
+      '.pdf-container'
+    ) as HTMLElement;
+    if (pdfContainer) {
+      if (pdfContainer.requestFullscreen) {
+        pdfContainer.requestFullscreen();
+      }
+    }
   }
 }
 export interface pageSelection {

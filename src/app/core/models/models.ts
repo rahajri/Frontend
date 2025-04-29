@@ -222,6 +222,16 @@ export interface Candidate {
     description: string;
     context: string;
   };
+  personalDocuments: PersonalDocument[];
+}
+
+export interface PersonalDocument {
+  id: string;
+  type: string;
+  issueDate: Date | null;
+  addedDate: Date;
+  description: string;
+  link: string;
 }
 
 export interface Profile {
