@@ -679,16 +679,32 @@
         <div class="form-group">
           <hr class="m-0 mt-2" />
           <h5 class="text-center">Message Client</h5>
-          <p
-            class="ms-2"
-            [innerHTML]="selectedCandidature?.employeeMessage"
-          ></p>
+          <ng-container
+            *ngIf="selectedCandidature?.employeeMessage; else noMessage"
+          >
+            <p
+              class="ms-2"
+              [innerHTML]="selectedCandidature.employeeMessage"
+            ></p>
+          </ng-container>
+
+          <ng-template #noMessage>
+            <p class="ms-2 text-muted">Aucun message disponible</p>
+          </ng-template>
         </div>
 
         <div class="form-group">
           <hr class="m-0 mt-2" />
           <h5 class="text-center">Message Candidat</h5>
-          <p class="ms-2" [innerHTML]="selectedCandidature?.message"></p>
+          <ng-container
+            *ngIf="selectedCandidature?.message; else noMessageCandidate"
+          >
+            <p class="ms-2" [innerHTML]="selectedCandidature?.message"></p>
+          </ng-container>
+
+          <ng-template #noMessageCandidate>
+            <p class="ms-2 text-muted">Aucun message disponible</p>
+          </ng-template>
         </div>
 
         <hr class="m-0 mt-2" />
@@ -698,41 +714,41 @@
             <tr>
               <td><i>Titre d'offre :</i></td>
               <td>
-                <strong class="ms-4">{{
+                <span class="ms-4">{{
                   selectedCandidature?.jobOffer?.title
-                }}</strong>
+                }}</span>
               </td>
             </tr>
             <tr>
               <td><i>Date de publication :</i></td>
               <td>
-                <strong class="ms-4">{{
+                <span class="ms-4">{{
                   getDate(selectedCandidature?.jobOffer?.publicationDate)
-                }}</strong>
+                }}</span>
               </td>
             </tr>
             <tr>
               <td><i>Entreprise :</i></td>
               <td>
-                <strong class="ms-4">{{
+                <span class="ms-4">{{
                   selectedCandidature?.jobOffer?.company?.name
-                }}</strong>
+                }}</span>
               </td>
             </tr>
             <tr>
               <td><i>Activité :</i></td>
               <td>
-                <strong class="ms-4">{{
+                <span class="ms-4">{{
                   selectedCandidature?.jobOffer?.company?.nafTitle
-                }}</strong>
+                }}</span>
               </td>
             </tr>
             <tr>
               <td><i>Catégorie :</i></td>
               <td>
-                <strong class="ms-4">{{
+                <span class="ms-4">{{
                   selectedCandidature?.jobOffer?.company?.category
-                }}</strong>
+                }}</span>
               </td>
             </tr>
           </table>
@@ -753,14 +769,6 @@
               </td>
             </tr>
             <tr>
-              <td><i>Date de Candidature :</i></td>
-              <td>
-                <strong class="ms-4">{{
-                  getDate(selectedCandidature?.appliedAt)
-                }}</strong>
-              </td>
-            </tr>
-            <tr>
               <td>E-mail :</td>
               <td>
                 <strong class="ms-4">{{
@@ -776,12 +784,36 @@
                 }}</strong>
               </td>
             </tr>
+            <tr>
+              <td><i>Date de Candidature :</i></td>
+              <td>
+                <span class="ms-4">{{
+                  getDate(selectedCandidature?.appliedAt)
+                }}</span>
+              </td>
+            </tr>
           </table>
         </div>
       </div>
       <div class="btn-group p-3 m-2 gap-3">
-        <button class="btn btn-success">Valider</button>
-        <button class="btn btn-danger">Rejeter</button>
+        <button
+          class="btn btn-success"
+          data-bs-dismiss="modal"
+          (click)="
+            showChangeCandidatureStatusModal(selectedCandidature, 'Accepted')
+          "
+        >
+          Valider
+        </button>
+        <button
+          data-bs-dismiss="modal"
+          class="btn btn-danger"
+          (click)="
+            showChangeCandidatureStatusModal(selectedCandidature, 'Rejected')
+          "
+        >
+          Rejeter
+        </button>
       </div>
     </div>
   </div>
