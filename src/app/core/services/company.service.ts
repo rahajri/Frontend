@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, of, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -95,8 +95,17 @@ export class CompanyService {
     return this.http.get<any>(`${this.baseUrl}`);
   }
 
-  getUnvirifiedCompanies(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/inactive`);
+  getUnvirifiedCompanies(
+    page: number = 1,
+    limit: number = 10
+  ): Observable<{
+    data: any[];
+    total: number;
+  }> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+    return this.http.get<any>(`${this.baseUrl}/inactive`, { params });
   }
   getAllActiveCompanies(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/active/all`);
