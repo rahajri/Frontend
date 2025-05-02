@@ -1,17 +1,25 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { Company } from 'src/app/core/models/models';
+import { City, Company, Department, Region } from 'src/app/core/models/models';
 import { CompanyService } from 'src/app/core/services/company.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InseeApiService } from 'src/app/core/services/insee-api.service';
 import { LocationService } from 'src/app/core/services/location.service';
 import { UserService } from '../../auth/service/user.service';
-import { AlertService } from 'src/app/core/services/alert/alert.service';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { CommonService } from 'src/app/core/services/common/common.service';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  of,
+  Observable,
+  startWith,
+  catchError,
+} from 'rxjs';
 declare var bootstrap: any;
 @Component({
   selector: 'app-projects',
@@ -51,9 +59,12 @@ export class ProjectsComponent implements OnInit {
   selectedStatus: string | null = null;
   countClient: number = 0;
   siretErrorMessage: string | null = null;
-
   companyToDelete: any;
   selectedHederTitle = 'Tous les';
+
+  filteredCityOptions: Observable<City[]> = of([]);
+  filteredDepartmentOptions: Observable<Department[]> = of([]);
+  filteredRegionOptions: Observable<Region[]> = of([]);
 
   //** / pagination variables
   constructor(
@@ -62,7 +73,6 @@ export class ProjectsComponent implements OnInit {
     private fb: FormBuilder,
     private inseeApiService: InseeApiService,
     private locationService: LocationService,
-    private alertService: AlertService,
     private userService: UserService,
     private commonService: CommonService
   ) {
@@ -110,6 +120,55 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTableData();
+    this.initializeAutocomplete('city', (query) =>
+      this.locationService.searchCities(query)
+    );
+    this.initializeAutocomplete('department', (query) =>
+      this.locationService.searchDepartments(query)
+    );
+    this.initializeAutocomplete('region', (query) =>
+      this.locationService.searchRegions(query)
+    );
+  }
+
+  initializeAutocomplete(
+    controlName: 'city' | 'department' | 'region',
+    searchFn: (query: string) => Observable<any[]>
+  ): void {
+    const control = this.filterForm.get(controlName);
+    const propertyName = `filtered${this.capitalizeFirstLetter(
+      controlName
+    )}Options` as
+      | 'filteredCityOptions'
+      | 'filteredDepartmentOptions'
+      | 'filteredRegionOptions';
+
+    if (!control) {
+      this[propertyName] = of([]);
+      return;
+    }
+
+    this[propertyName] = control.valueChanges.pipe(
+      startWith(''),
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((query) => {
+        const name = typeof query === 'string' ? query : query?.name;
+        if (name && name.length >= 2) {
+          return searchFn(name).pipe(catchError(() => of([])));
+        } else {
+          return of([]);
+        }
+      })
+    );
+  }
+
+  private capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  displayFn(item: any): string {
+    return item || '';
   }
 
   ngAfterViewInit(): void {
@@ -259,6 +318,7 @@ export class ProjectsComponent implements OnInit {
       next: (response) => {
         this.filteredCompanies = response;
         this.dataSource.data = response;
+        this.countClient = response.length;
       },
       error: (error) => {
         console.error(error);
