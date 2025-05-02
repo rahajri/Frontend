@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { MatTableModule } from '@angular/material/table';
 
@@ -65,6 +66,7 @@ import { CookiePolicyPopupComponent } from './cookie-policy-popup.component';
     MaterialModule,
     NgApexchartsModule,
     MatFormFieldModule,
+    MatAutocompleteModule,
     MatInputModule,
     MatNativeDateModule,
     MatToolbarModule,
@@ -108,6 +110,7 @@ import { CookiePolicyPopupComponent } from './cookie-policy-popup.component';
     NgApexchartsModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    MatAutocompleteModule,
     MatInputModule,
     MatNativeDateModule,
     MatToolbarModule,

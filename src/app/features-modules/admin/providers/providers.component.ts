@@ -3,15 +3,18 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { ShareDataService } from 'src/app/core/data/share-data.service';
 import { routes } from 'src/app/core/helpers/routes/routes';
-import { adminProviders, Offer } from 'src/app/core/models/models';
+import { City, Department, Offer, Region } from 'src/app/core/models/models';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { ProjectService } from 'src/app/core/services/project.service';
 import { MatPaginator } from '@angular/material/paginator';
 import {
+  catchError,
   debounceTime,
   distinctUntilChanged,
+  Observable,
   of,
+  startWith,
   Subscription,
   switchMap,
 } from 'rxjs';
@@ -118,6 +121,10 @@ export class ProvidersComponent implements OnInit {
     { value: 'JTM' },
   ];
 
+  filteredCityOptions: Observable<City[]> = of([]);
+  filteredDepartmentOptions: Observable<Department[]> = of([]);
+  filteredRegionOptions: Observable<Region[]> = of([]);
+
   constructor(
     private data: ShareDataService,
     private fb: FormBuilder,
@@ -202,6 +209,56 @@ export class ProvidersComponent implements OnInit {
       .subscribe((cities) => {
         if (!this.cityIsSelected) this.filteredCities = cities;
       });
+
+    this.initializeAutocomplete('city', (query) =>
+      this.locationService.searchCities(query)
+    );
+    this.initializeAutocomplete('department', (query) =>
+      this.locationService.searchDepartments(query)
+    );
+    this.initializeAutocomplete('region', (query) =>
+      this.locationService.searchRegions(query)
+    );
+  }
+
+  initializeAutocomplete(
+    controlName: 'city' | 'department' | 'region',
+    searchFn: (query: string) => Observable<any[]>
+  ): void {
+    const control = this.filterForm.get(controlName);
+    const propertyName = `filtered${this.capitalizeFirstLetter(
+      controlName
+    )}Options` as
+      | 'filteredCityOptions'
+      | 'filteredDepartmentOptions'
+      | 'filteredRegionOptions';
+
+    if (!control) {
+      this[propertyName] = of([]);
+      return;
+    }
+
+    this[propertyName] = control.valueChanges.pipe(
+      startWith(''),
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((query) => {
+        const name = typeof query === 'string' ? query : query?.name;
+        if (name && name.length >= 2) {
+          return searchFn(name).pipe(catchError(() => of([])));
+        } else {
+          return of([]);
+        }
+      })
+    );
+  }
+
+  private capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  displayFn(item: any): string {
+    return item || '';
   }
 
   ngOnDestroy(): void {
@@ -316,6 +373,7 @@ export class ProvidersComponent implements OnInit {
     this.projectService.projectsFiler(data).subscribe({
       next: (response) => {
         this.dataSource.data = response;
+        this.counter = response.length;
       },
       error: (error) => {
         console.error(error);

@@ -6,7 +6,6 @@ import { OcrService } from 'src/app/core/services/ocr.service';
 import {
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';

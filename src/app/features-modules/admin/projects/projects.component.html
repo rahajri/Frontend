@@ -131,10 +131,22 @@
                       formControlName="city"
                       class="form-control"
                       type="text"
-                      (change)="onChange()"
+                      matInput
+                      [matAutocomplete]="auto"
                     />
+                    <mat-autocomplete
+                      #auto="matAutocomplete"
+                      [displayWith]="displayFn"
+                    >
+                      @for (city of filteredCityOptions | async; track city) {
+                      <mat-option [value]="city.name">{{
+                        city.name
+                      }}</mat-option>
+                      }
+                    </mat-autocomplete>
                   </div>
                 </div>
+                <!-- Department -->
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
                     <label for="department">Département</label>
@@ -142,10 +154,23 @@
                       formControlName="department"
                       class="form-control"
                       type="text"
-                      (change)="onChange()"
+                      matInput
+                      [matAutocomplete]="deptAuto"
                     />
+                    <mat-autocomplete
+                      #deptAuto="matAutocomplete"
+                      [displayWith]="displayFn"
+                    >
+                      @for (department of filteredDepartmentOptions | async;
+                      track department) {
+                      <mat-option [value]="department.name">{{
+                        department.name
+                      }}</mat-option>
+                      }
+                    </mat-autocomplete>
                   </div>
                 </div>
+                <!-- Region -->
                 <div class="col-sm-6 col-md-3">
                   <div class="form-group">
                     <label for="region">Région</label>
@@ -153,8 +178,20 @@
                       formControlName="region"
                       class="form-control"
                       type="text"
-                      (change)="onChange()"
+                      matInput
+                      [matAutocomplete]="regionAuto"
                     />
+                    <mat-autocomplete
+                      #regionAuto="matAutocomplete"
+                      [displayWith]="displayFn"
+                    >
+                      @for (region of filteredRegionOptions | async; track
+                      region) {
+                      <mat-option [value]="region.name">{{
+                        region.name
+                      }}</mat-option>
+                      }
+                    </mat-autocomplete>
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
@@ -488,7 +525,7 @@
                 [class.disabled]="siretErrorMessage"
               >
                 <div class="col-md-12">
-                  <h4>Location</h4>
+                  <h4>Localisation</h4>
                 </div>
 
                 <div class="col-md-6">

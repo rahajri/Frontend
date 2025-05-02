@@ -1,22 +1,36 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
-import { Candidate, PersonalDocument } from 'src/app/core/models/models';
+import {
+  Candidate,
+  City,
+  Department,
+  PersonalDocument,
+  Region,
+} from 'src/app/core/models/models';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../auth/service/user.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { MatPaginator } from '@angular/material/paginator';
 import { CommonService } from 'src/app/core/services/common/common.service';
 import { CandidateService } from 'src/app/core/services/condidate.service';
 import {
   exportToCsv,
   markFormGroupTouched,
   showSuccessModal,
-  toggleAllCheckboxes,
 } from 'src/app/core/services/common/common-functions';
 import { DocumentInitParameters } from 'pdfjs-dist/types/src/display/api';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  Observable,
+  of,
+  startWith,
+  switchMap,
+} from 'rxjs';
+import { LocationService } from 'src/app/core/services/location.service';
 declare var bootstrap: any;
 
 @Component({
@@ -65,13 +79,17 @@ export class FreelancersComponent {
   public filter: boolean = false;
   cvUrl: string | Uint8Array | DocumentInitParameters | undefined;
 
-  //** / pagination variables
+  filteredCityOptions: Observable<City[]> = of([]);
+  filteredDepartmentOptions: Observable<Department[]> = of([]);
+  filteredRegionOptions: Observable<Region[]> = of([]);
+
   constructor(
     public router: Router,
     private candidateService: CandidateService,
     private fb: FormBuilder,
     private userService: UserService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private locationService: LocationService
   ) {
     this.dataSource = new MatTableDataSource<Candidate>([]);
     this.filterForm = this.fb.group({
@@ -89,20 +107,59 @@ export class FreelancersComponent {
       email: ['', [Validators.required, Validators.email]],
     });
   }
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.getTableData();
+
+    this.initializeAutocomplete('city', (query) =>
+      this.locationService.searchCities(query)
+    );
+    this.initializeAutocomplete('department', (query) =>
+      this.locationService.searchDepartments(query)
+    );
+    this.initializeAutocomplete('region', (query) =>
+      this.locationService.searchRegions(query)
+    );
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+  initializeAutocomplete(
+    controlName: 'city' | 'department' | 'region',
+    searchFn: (query: string) => Observable<any[]>
+  ): void {
+    const control = this.filterForm.get(controlName);
+    const propertyName = `filtered${this.capitalizeFirstLetter(
+      controlName
+    )}Options` as
+      | 'filteredCityOptions'
+      | 'filteredDepartmentOptions'
+      | 'filteredRegionOptions';
+
+    if (!control) {
+      this[propertyName] = of([]);
+      return;
+    }
+
+    this[propertyName] = control.valueChanges.pipe(
+      startWith(''),
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((query) => {
+        const name = typeof query === 'string' ? query : query?.name;
+        if (name && name.length >= 2) {
+          return searchFn(name).pipe(catchError(() => of([])));
+        } else {
+          return of([]);
+        }
+      })
+    );
   }
 
-  sortClicked() {
-    this.dataSource.sort = this.sort;
+  private capitalizeFirstLetter(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  displayFn(item: any): string {
+    return item || '';
   }
 
   //Filter toggle
@@ -151,10 +208,6 @@ export class FreelancersComponent {
         },
         error: (error: any) => {
           console.error('Error fetching companies:', error);
-        },
-        complete: () => {
-          this.dataSource.sort = this.sort; // Assign sort after view initialization
-          this.dataSource.paginator = this.paginator;
         },
       });
   }
@@ -258,6 +311,7 @@ export class FreelancersComponent {
       next: (response: any) => {
         this.filteredCandidates = response;
         this.lstBoard = response;
+        this.countCandidates = response.lenght;
       },
       error: (error: any) => {
         console.error(error);

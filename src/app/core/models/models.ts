@@ -94,6 +94,20 @@ export interface freelancer {
   last: '10 May 2022';
   availability: string;
 }
+export interface City {
+  id: number;
+  name: string;
+  department: Department;
+}
+export interface Department {
+  id: number;
+  name: string;
+  region: Region;
+}
+export interface Region {
+  id: number;
+  name: string;
+}
 export interface project {
   id: number;
   image: string;
