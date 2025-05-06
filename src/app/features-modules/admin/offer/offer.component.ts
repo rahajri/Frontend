@@ -87,7 +87,7 @@ export class OfferComponent {
     { value: 'Heure' },
     { value: 'Mensuel' },
     { value: 'Annuel' },
-    { value: 'JTM' },
+    { value: 'TJM/Jour' },
   ];
   minDate: string = '';
   private isPatching = false;

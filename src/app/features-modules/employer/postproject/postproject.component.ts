@@ -84,7 +84,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     { value: 'Heure' },
     { value: 'Mensuel' },
     { value: 'Annuel' },
-    { value: 'JTM' },
+    { value: 'TJM/Jour' },
   ];
   minDate: string = '';
   hasId: boolean = false;

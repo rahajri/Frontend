@@ -71,11 +71,13 @@
             <p>
               Interim-Online collecte des données en conformité avec le RGPD.
               Consultez notre
-              <a href="/pages/privacy-policy">Politique de confidentialité</a>.
+              <a href="/pages/privacy-policy" class="text-secondary"
+                >Politique de confidentialité</a
+              >.
             </p>
           </div>
           <div class="terms-text">
-            <h4 id="propriete">6. Propriété intellectuelle</h4>
+            <h4 id="deployment">6. Propriété intellectuelle</h4>
             <p>
               Le contenu du site est protégé par le droit de la propriété
               intellectuelle et appartient à
@@ -101,16 +103,36 @@
             <h4 id="droit">9. Droit applicable</h4>
             <p>
               Les présentes CGU sont soumises au droit français. Tout litige
-              relèvera des tribunaux compétents de Nantes.
+              relèvera des <strong>tribunaux de Paris</strong>.
             </p>
           </div>
           <div class="terms-text">
             <h4 id="contact">10. Contact</h4>
             <p>
               Pour toute question :
-              <a href="mailto:interim.online@gmail.com">{{
-                "interim.online@gmail.com"
-              }}</a>
+              <a
+                href="mailto:interim.online@gmail.com"
+                class="text-secondary"
+                >{{ "interim.online@gmail.com" }}</a
+              >
+            </p>
+          </div>
+          <div class="terms-text">
+            <h4 id="contact">11. Hébergeur du site</h4>
+            <p>
+              Le site est hébergé par
+              <strong>Hostinger International Ltd</strong>., dont le siège
+              social est situé au
+              <strong>61 Lordou Vironos Street, 6023 Larnaca, Chypre</strong>.
+            </p>
+            <p class="">
+              Site web :<a
+                href="https://www.hostinger.fr"
+                target="_blank"
+                class="text-secondary"
+              >
+                https://www.hostinger.fr</a
+              >
             </p>
           </div>
         </div>
@@ -161,6 +183,9 @@
                 </li>
                 <li class="list-group-item">
                   <a (click)="scrollTo('contact')">10. Contact</a>
+                </li>
+                <li class="list-group-item">
+                  <a (click)="scrollTo('deployment')">11. Hébergeur du site</a>
                 </li>
               </ul>
             </div>

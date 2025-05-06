@@ -118,7 +118,7 @@ export class ProvidersComponent implements OnInit {
     { value: 'Heure' },
     { value: 'Mensuel' },
     { value: 'Annuel' },
-    { value: 'JTM' },
+    { value: 'TJM/Jour' },
   ];
 
   filteredCityOptions: Observable<City[]> = of([]);

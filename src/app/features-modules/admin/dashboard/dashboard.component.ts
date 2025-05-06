@@ -21,6 +21,7 @@ import {
 } from 'ng-apexcharts';
 import { Candidature } from 'src/app/core/models/models';
 import { ProjectService } from 'src/app/core/services/project.service';
+import { routes } from 'src/app/core/helpers/routes/routes';
 export type ChartOptions = {
   series: ApexAxisChartSeries | any;
   chart: ApexChart | any;
@@ -46,6 +47,7 @@ declare var bootstrap: any;
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  public routes = routes;
   public searchDataValue = '';
   dataSource!: MatTableDataSource<any>;
 
@@ -71,6 +73,10 @@ export class DashboardComponent implements OnInit {
   newStatus: string = 'Accepted';
 
   public counter: number = 0;
+  public totalCandidates: number = 0;
+  public totalClients: number = 0;
+  public totalprojects: number = 0;
+  public totalCandidatures: number = 0;
   appliedCount: number = 0;
   recruitmentApprovedCount: number = 0;
 
@@ -131,6 +137,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTableData();
+    this.getAdminCharts();
   }
 
   private getTableData(): void {
@@ -345,6 +352,21 @@ export class DashboardComponent implements OnInit {
     }
   };
 
+  getAdminCharts() {
+    this.projectService.adminDashboardCharts().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.totalCandidatures = res.totalCandidatures;
+        this.totalprojects = res.totalprojects;
+        this.totalClients = res.totalClients;
+        this.totalCandidates = res.totalCandidates;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
   getDate(isoDate: any): string {
     const date = new Date(isoDate);
     return new Intl.DateTimeFormat('en-GB').format(date);
@@ -361,6 +383,13 @@ export class DashboardComponent implements OnInit {
 
     return statusTranslations[status] || status;
   };
+
+  ckrollToTable() {
+    const element = document.getElementById('candidatures-table');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }
 export interface pageSelection {
   skip: number;

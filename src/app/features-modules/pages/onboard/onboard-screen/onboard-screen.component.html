@@ -150,10 +150,25 @@
                           >Téléphone</label
                         >
                         <input
+                          id="phone-number"
                           type="text"
                           class="form-control"
                           formControlName="phoneNumber"
+                          [ngClass]="{
+                            'is-invalid':
+                              form.get('personalDetails.phoneNumber')
+                                ?.touched &&
+                              form.get('personalDetails.phoneNumber')?.invalid
+                          }"
                         />
+                        <div
+                          *ngIf="
+                            form.get('personalDetails.phoneNumber')?.touched
+                          "
+                          class="error"
+                        >
+                          Le téléphone est obligatoire.
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
@@ -337,7 +352,7 @@
                               formControlName="job"
                               class="form-control"
                               type="text"
-                              placeholder="Saisir une métier"
+                              placeholder="Saisir un métier"
                               (input)="filterJobs($event.target)"
                               (keydown.enter)="addJob()"
                               [attr.autocomplete]="'off'"
