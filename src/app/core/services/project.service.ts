@@ -71,8 +71,13 @@ export class ProjectService {
   employerDashboardCharts(id: string) {
     return this.http.get<any>(`${this.baseUrl}/employer/counts/${id}`);
   }
+
   candidateDashboardCharts(id: string) {
     return this.http.get<any>(`${this.baseUrl}/candidate/counts/${id}`);
+  }
+
+  adminDashboardCharts() {
+    return this.http.get<any>(`${this.baseUrl}/admin/counts`);
   }
 
   getJobOffers(

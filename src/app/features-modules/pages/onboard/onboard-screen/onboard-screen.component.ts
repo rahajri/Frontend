@@ -3,12 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { routes } from 'src/app/core/helpers/routes/routes';
 import * as pdfjsLib from 'pdfjs-dist';
 import { OcrService } from 'src/app/core/services/ocr.service';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { LocationService } from 'src/app/core/services/location.service';
@@ -100,7 +95,7 @@ export class OnboardScreenComponent implements OnInit {
         lastName: [''],
         firstName: [''],
         birthday: [''],
-        phoneNumber: [''],
+        phoneNumber: ['', Validators.required],
         emailAddress: [localStorage.getItem('email')],
       }),
       jobTitle: [''],
@@ -194,10 +189,12 @@ export class OnboardScreenComponent implements OnInit {
   onNextClick(): void {
     const postalCodeControl = this.locationForm.get('postalCode');
     const cityControl = this.locationForm.get('city');
+    const phoneControl = this.form.get('personalDetails.phoneNumber');
     postalCodeControl?.markAsTouched();
     cityControl?.markAsTouched();
+    phoneControl?.markAsTouched();
 
-    if (this.locationForm.invalid) {
+    if (this.locationForm.invalid || phoneControl?.invalid) {
       return; // Stop further execution
     }
 

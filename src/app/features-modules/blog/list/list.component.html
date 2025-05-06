@@ -7,7 +7,9 @@
           <h2>Blog List</h2>
           <nav aria-label="breadcrumb" class="page-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a [routerLink] = "routes.home"> Home</a></li>
+              <li class="breadcrumb-item">
+                <a [routerLink]="routes.home"> Accueil</a>
+              </li>
               <li class="breadcrumb-item" aria-current="page">Blog List</li>
             </ol>
           </nav>
@@ -27,7 +29,7 @@
           <!-- Blog Post -->
           <div class="blog-single-post pro-post widget-box">
             <div class="blog-image">
-              <a [routerLink] = "routes.blog_details"
+              <a [routerLink]="routes.blog_details"
                 ><img
                   alt="Img"
                   src="assets/img/blog/blog-01.jpg"
@@ -40,7 +42,7 @@
                 <ul>
                   <li>
                     <div class="post-author">
-                      <a [routerLink] = "routes.freelancer_developer_profile"
+                      <a [routerLink]="routes.freelancer_developer_profile"
                         ><img src="assets/img/img-02.jpg" alt="Post Author" />
                         <span>John Doe</span></a
                       >
@@ -61,7 +63,9 @@
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
               </p>
-              <a [routerLink] = "routes.blog_details" class="read-more">Read More</a>
+              <a [routerLink]="routes.blog_details" class="read-more"
+                >Read More</a
+              >
             </div>
           </div>
           <!-- /Blog Post -->
@@ -69,7 +73,7 @@
           <!-- Blog Post -->
           <div class="blog-single-post pro-post widget-box">
             <div class="blog-image">
-              <a [routerLink] = "routes.blog_details"
+              <a [routerLink]="routes.blog_details"
                 ><img
                   alt="Img"
                   src="assets/img/blog/blog-02.jpg"
@@ -84,7 +88,7 @@
                 <ul>
                   <li>
                     <div class="post-author">
-                      <a [routerLink] = "routes.freelancer_developer_profile"
+                      <a [routerLink]="routes.freelancer_developer_profile"
                         ><img src="assets/img/img-03.jpg" alt="Post Author" />
                         <span>Nick Joe</span></a
                       >
@@ -105,7 +109,9 @@
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
               </p>
-              <a [routerLink] = "routes.blog_details" class="read-more">Read More</a>
+              <a [routerLink]="routes.blog_details" class="read-more"
+                >Read More</a
+              >
             </div>
           </div>
           <!-- /Blog Post -->
@@ -126,7 +132,7 @@
                 <ul>
                   <li>
                     <div class="post-author">
-                      <a [routerLink] = "routes.freelancer_developer_profile"
+                      <a [routerLink]="routes.freelancer_developer_profile"
                         ><img src="assets/img/img-03.jpg" alt="Post Author" />
                         <span>Nick Joe</span></a
                       >
@@ -147,7 +153,9 @@
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
               </p>
-              <a [routerLink] = "routes.blog_details" class="read-more">Read More</a>
+              <a [routerLink]="routes.blog_details" class="read-more"
+                >Read More</a
+              >
             </div>
           </div>
           <!-- /Blog Post -->
@@ -188,7 +196,7 @@
               <ul class="latest-posts">
                 <li>
                   <div class="post-thumb">
-                    <a [routerLink] = "routes.blog_details">
+                    <a [routerLink]="routes.blog_details">
                       <img
                         class="img-fluid"
                         src="assets/img/blog/blog-thumb-03.jpg"
@@ -198,7 +206,7 @@
                   </div>
                   <div class="post-info">
                     <h4>
-                      <a [routerLink] = "routes.blog_details"
+                      <a [routerLink]="routes.blog_details"
                         >Kofejob - How to get job through online?</a
                       >
                     </h4>
@@ -209,7 +217,7 @@
                 </li>
                 <li>
                   <div class="post-thumb">
-                    <a [routerLink] = "routes.blog_details">
+                    <a [routerLink]="routes.blog_details">
                       <img
                         class="img-fluid"
                         src="assets/img/blog/blog-thumb-02.jpg"
@@ -219,7 +227,7 @@
                   </div>
                   <div class="post-info">
                     <h4>
-                      <a [routerLink] = "routes.blog_details"
+                      <a [routerLink]="routes.blog_details"
                         >People who completed NAND technology got job 90%
                       </a>
                     </h4>
@@ -230,7 +238,7 @@
                 </li>
                 <li>
                   <div class="post-thumb">
-                    <a [routerLink] = "routes.blog_details">
+                    <a [routerLink]="routes.blog_details">
                       <img
                         class="img-fluid"
                         src="assets/img/blog/blog-thumb-01.jpg"
@@ -240,7 +248,7 @@
                   </div>
                   <div class="post-info">
                     <h4>
-                      <a [routerLink] = "routes.blog_details"
+                      <a [routerLink]="routes.blog_details"
                         >There are many variations of passages</a
                       >
                     </h4>
