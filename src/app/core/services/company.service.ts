@@ -91,8 +91,17 @@ export class CompanyService {
     );
   }
 
-  getAllCompanies(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}`);
+  getAllCompanies(
+    page: number = 1,
+    limit: number = 10
+  ): Observable<{
+    data: any[];
+    total: number;
+  }> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+    return this.http.get<any>(`${this.baseUrl}`, { params });
   }
 
   getUnvirifiedCompanies(

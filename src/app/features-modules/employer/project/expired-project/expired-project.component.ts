@@ -59,7 +59,6 @@ export class ExpiredProjectComponent {
         next: (res) => {
           // Destructure the response
           const { data, total } = res;
-          // Assign job offers and total item count
           this.jobOffers = data;
           this.totalPages = Math.ceil(res.total / this.itemsPerPage);
         },

@@ -1830,25 +1830,25 @@ export class ShareDataService {
         },
       ],
     },
-    {
-      title: 'Favoris',
-      icon: 'assets/img/icon/sidebar-icon-03.svg',
-      hasSubRoute: true,
-      page1: 'favourites',
-      page2: 'invitations',
-      submenu: [
-        {
-          title: 'Bookmarked Projects',
-          routes: routes.freelancer_favourite,
-          page: 'favourites',
-        },
-        {
-          title: 'Invitations',
-          routes: routes.freelancer_invitations,
-          page: 'invitations',
-        },
-      ],
-    },
+    // {
+    //   title: 'Favoris',
+    //   icon: 'assets/img/icon/sidebar-icon-03.svg',
+    //   hasSubRoute: true,
+    //   page1: 'favourites',
+    //   page2: 'invitations',
+    //   submenu: [
+    //     {
+    //       title: 'Bookmarked Projects',
+    //       routes: routes.freelancer_favourite,
+    //       page: 'favourites',
+    //     },
+    //     {
+    //       title: 'Invitations',
+    //       routes: routes.freelancer_invitations,
+    //       page: 'invitations',
+    //     },
+    //   ],
+    // },
     {
       title: 'Evaluations',
       hasSubRoute: false,
