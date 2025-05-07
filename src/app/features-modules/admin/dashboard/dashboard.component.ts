@@ -355,7 +355,6 @@ export class DashboardComponent implements OnInit {
   getAdminCharts() {
     this.projectService.adminDashboardCharts().subscribe({
       next: (res) => {
-        console.log(res);
         this.totalCandidatures = res.totalCandidatures;
         this.totalprojects = res.totalprojects;
         this.totalClients = res.totalClients;

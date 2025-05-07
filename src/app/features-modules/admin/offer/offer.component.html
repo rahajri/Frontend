@@ -107,7 +107,7 @@
               formControlName="job"
               class="form-control"
               type="text"
-              placeholder="Saisir une métier"
+              placeholder="Saisir un métier"
               (input)="filterJobs($event.target)"
               (keydown.enter)="addJob()"
               [attr.autocomplete]="'off'"
@@ -721,7 +721,6 @@
               La description du poste doit contenir au moins 200 caractères.
             </div>
           </div>
-
         </div>
         <div
           *ngIf="globalErrorMessage"
