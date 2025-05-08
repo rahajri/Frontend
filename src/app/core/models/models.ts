@@ -733,3 +733,16 @@ export interface freelancerTask {
   description: string;
   status: string;
 }
+
+export interface Job {
+  id: string;
+  name: string;
+  subActivity: {
+    id: string;
+    name: string;
+    activity: {
+      id: string;
+      name: string;
+    };
+  };
+}
