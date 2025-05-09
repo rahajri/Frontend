@@ -1950,11 +1950,11 @@ export class ShareDataService {
       page6: 'cancelled-projects',
 
       submenu: [
-        {
-          title: 'Toutes les offres',
-          routes: routes.employee_all_projects,
-          page: 'all-projects',
-        },
+        // {
+        //   title: 'Toutes les offres',
+        //   routes: routes.employee_all_projects,
+        //   page: 'all-projects',
+        // },
         {
           title: 'Offres Actives',
           routes: routes.ongoingproject,

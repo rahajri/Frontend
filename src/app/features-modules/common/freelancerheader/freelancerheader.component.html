@@ -109,10 +109,15 @@
       @if (anotherMenu === false ) {
       <ul class="nav header-navbar-rht" *ngIf="isLogged">
         <li>
-          <a [routerLink]="routes.freelancer_message"
+          <a href="javascript:void(0)"
             ><img src="assets/img/icon/message-chat-icon.svg" alt="Img"
           /></a>
         </li>
+        <!-- <li>
+          <a [routerLink]="routes.freelancer_message"
+            ><img src="assets/img/icon/message-chat-icon.svg" alt="Img"
+          /></a>
+        </li> -->
         <li class="dropdown">
           <a data-bs-toggle="dropdown" href="javascript:void(0);"
             ><img src="assets/img/icon/notification-bell-icon.svg" alt="Img"
@@ -120,7 +125,8 @@
           <div class="dropdown-menu notifications">
             <div class="topnav-dropdown-header">
               <div class="notification-title">
-                Notifications<span class="msg-count-badge">2</span>
+                Notifications
+                <!-- <span class="msg-count-badge">2</span> -->
               </div>
               <a
                 href="javascript:void(0)"
@@ -129,7 +135,7 @@
               ></a>
             </div>
             <div class="noti-content">
-              <ul class="notification-list">
+              <!-- <ul class="notification-list">
                 <li class="notification-message">
                   <a [routerLink]="routes.notification">
                     <div class="d-flex">
@@ -232,7 +238,7 @@
                     </div>
                   </a>
                 </li>
-              </ul>
+              </ul> -->
             </div>
             <div class="topnav-dropdown-footer text-center">
               <a [routerLink]="routes.notification">View All Notification</a>
@@ -284,13 +290,13 @@
                 alt="Img"
               />My Statement</a
             > -->
-            <a class="dropdown-item" [routerLink]="routes.freelancer_message"
+            <!-- <a class="dropdown-item" [routerLink]="routes.freelancer_message"
               ><img
                 src="assets/img/icon/user-dropdown-icon--05.svg"
                 alt="Img"
               />
               Message</a
-            >
+            > -->
             <a
               class="dropdown-item"
               [routerLink]="routes.freelancer_profiles_settings"
