@@ -161,14 +161,14 @@
                               form.get('personalDetails.phoneNumber')?.invalid
                           }"
                         />
-                        <div
+                        <small
                           *ngIf="
                             form.get('personalDetails.phoneNumber')?.touched
                           "
-                          class="error"
+                          class="text-danger"
                         >
                           Le téléphone est obligatoire.
-                        </div>
+                        </small>
                       </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
@@ -229,15 +229,15 @@
                                     locationForm.get('postalCode')?.dirty)
                               }"
                             />
-                            <div
+                            <small
                               *ngIf="
                                 locationForm.get('postalCode')?.invalid &&
                                 locationForm.get('postalCode')?.touched
                               "
-                              class="error"
+                              class="text-danger"
                             >
                               Le code postal est obligatoire.
-                            </div>
+                            </small>
                           </div>
                         </div>
 
