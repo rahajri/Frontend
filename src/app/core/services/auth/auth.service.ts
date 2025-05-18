@@ -107,4 +107,18 @@ export class AuthService {
   forgotPassword(email: string) {
     return this.http.post<any>(`${this.baseUrl}/forgot-password`, { email });
   }
+
+  checkCurrentPassword(userEmail: string, password: string) {
+    return this.http.post<any>(`${this.baseUrl}/check-current-password`, {
+      userEmail,
+      password,
+    });
+  }
+
+  setNewPassword(email: string, password: string) {
+    return this.http.post<any>(`${this.baseUrl}/new-password`, {
+      email,
+      password,
+    });
+  }
 }

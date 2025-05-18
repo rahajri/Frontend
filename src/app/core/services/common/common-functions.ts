@@ -250,3 +250,19 @@ export const showSuccessModal = (id: string, hide: boolean = true) => {
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+
+export const showErrorModal = (id: string, hide: boolean = true) => {
+  const errorModalElement = document.getElementById('error');
+  if (errorModalElement) {
+    errorModalElement.setAttribute('aria-hidden', 'false');
+    errorModalElement.style.display = 'block';
+    const modal = new bootstrap.Modal(errorModalElement);
+    modal.show();
+    errorModalElement.focus();
+
+    setTimeout(() => {
+      modal.hide();
+      errorModalElement.style.display = 'none';
+    }, 3000);
+  }
+};
