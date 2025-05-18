@@ -2023,7 +2023,7 @@ export class ShareDataService {
         //   page: 'verify-identity',
         // },
         {
-          title: 'Changes Password',
+          title: 'Modifier le mot de passe',
           routes: routes.changepassword,
           page: 'change-password',
         },
