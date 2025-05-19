@@ -89,17 +89,17 @@ export class DashboardComponent implements OnInit {
     this.chartOptions = {
       series: [
         {
-          name: 'Freelance Developers',
+          name: 'Candidats Intérimaires',
           data: [31, 40, 28, 51, 42, 109, 100],
           color: '#ff5b37',
         },
         {
-          name: 'Developers Per Project',
+          name: 'Missions Attribuées',
           data: [11, 32, 45, 32, 34, 52, 41],
           color: '#ffb8a8',
         },
         {
-          name: 'Offres Terminées',
+          name: 'Missions Terminées',
           data: [12, 36, 42, 30, 39, 58, 40],
           color: '#feb019',
         },

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /auth/login
+Disallow: /auth/forgot-password
+Disallow: /reset-password
+Disallow: /*?*
+
+Sitemap: https://www.interim-online.fr/assets/sitemap.xml
