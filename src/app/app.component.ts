@@ -1,21 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './core/services/auth/auth.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavigationService } from './core/services/navigate.service';
 import { filter } from 'rxjs';
+import { SeoService } from './core/services/seo/seo.service';
+import { StructuredDataService } from './core/services/seo/structured-data.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'kofejob_angular';
   constructor(
     private authService: AuthService,
     private route: Router,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private seoService: SeoService,
+    private structuredDataService: StructuredDataService
   ) {
     this.route.events
       .pipe(
@@ -28,6 +32,12 @@ export class AppComponent {
       });
   }
   ngOnInit(): void {
+    // Initialiser le service SEO complet
+    this.seoService.initSeoService();
+    
+    // Ajouter les données structurées de l'organisation
+    this.structuredDataService.addOrganizationSchema();
+    
     const token = localStorage.getItem('token');
     if (token) {
       this.validateToken();
