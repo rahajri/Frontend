@@ -481,28 +481,43 @@
                       x
                     </button>
                   </span>
-                  <!-- Input Field -->
+                  <!-- Input Field with Material Autocomplete -->
                   <input
                     id="skills"
                     formControlName="skills"
                     type="text"
                     class="border-0"
-                    (input)="filterSkills($event.target)"
-                    (keydown.enter)="addSkill($event)"
                     placeholder="Ajoutez des compétences"
                     autocomplete="off"
+                    [matAutocomplete]="skillsAuto"
+                    (keydown.enter)="addSkill($event)"
+                    #skillsInput
                   />
                 </div>
-                <!-- Autocomplete Suggestions -->
-                <ul class="autocomplete-list" *ngIf="filteredSkills.length">
-                  <li
-                    *ngFor="let skill of filteredSkills"
+
+                <!-- Material Autocomplete -->
+                <mat-autocomplete #skillsAuto="matAutocomplete" [displayWith]="displaySkillFn">
+                  <mat-option 
+                    *ngFor="let skill of filteredSkills | async" 
+                    [value]="skill"
                     (click)="selectSkill(skill)"
+                    (touchstart)="handleSkillTap(skill)"
                     class="autocomplete-item"
                   >
-                    {{ skill.name }}
-                  </li>
-                </ul>
+                    {{skill.name}}
+                    <small *ngIf="!skill.id" class="text-muted">(Nouvelle compétence)</small>
+                  </mat-option>
+                  <mat-option 
+                    *ngIf="(filteredSkills | async)?.length === 0 && skillsInput.value"
+                    [value]="{name: skillsInput.value}"
+                    (click)="addCustomSkill(skillsInput.value)"
+                    (touchstart)="handleCustomSkillTap(skillsInput.value)"
+                    class="autocomplete-item custom-skill"
+                  >
+                    <em>"{{skillsInput.value}}"</em>
+                    <small class="text-muted">(Nouvelle compétence - taper deux fois pour ajouter)</small>
+                  </mat-option>
+                </mat-autocomplete>
                 <!-- Message d'erreur -->
                 <div
                   *ngIf="selectedSkills.length < 1 && skills?.touched"
