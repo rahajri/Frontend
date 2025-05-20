@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Editor, Toolbar } from 'ngx-editor';
@@ -8,9 +15,12 @@ import { LocationService } from 'src/app/core/services/location.service';
 import {
   debounceTime,
   of,
+  Observable,
   Subscription,
   switchMap,
   distinctUntilChanged,
+  startWith,
+  map,
 } from 'rxjs';
 import { ContractService } from 'src/app/core/services/contract.service';
 import { ProjectService } from 'src/app/core/services/project.service';
@@ -65,7 +75,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
   jobs: any[] = [];
   subActivities: any[] = [];
   savedSkills: any[] = [];
-  filteredSkills: any[] = [];
+  filteredSkills: Observable<any[]> = of([]);
   filteredJobs: any[] = [];
   contractTypes: any[] = [];
   contractTypeIns: any = null;
@@ -372,6 +382,7 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     this.skillService.getSkills().subscribe({
       next: (data) => {
         this.savedSkills = data;
+        this.filterSkills(); // Initialize filtered skills after getting data
       },
       error: (error) => {
         console.error(error);
@@ -380,52 +391,160 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     });
   }
 
-  filterSkills(e: any) {
-    let query = e.value;
-    if (!query) {
-      this.filteredSkills = this.savedSkills;
-    } else {
-      this.filteredSkills = this.savedSkills.filter((skill) =>
-        skill.name.toLowerCase().includes(query.toLowerCase())
-      );
+  @ViewChild(MatAutocompleteTrigger)
+  autocompleteTrigger!: MatAutocompleteTrigger;
+
+  filterSkills() {
+    // Initialize the filteredSkills observable
+    this.filteredSkills = this.jobForm.get('skills')!.valueChanges.pipe(
+      startWith(''),
+      debounceTime(300),
+      distinctUntilChanged(),
+      map((value) => {
+        const name = typeof value === 'string' ? value : value?.name;
+        return name ? this._filterSkills(name) : this.savedSkills.slice();
+      })
+    );
+  }
+
+  private _filterSkills(value: string): any[] {
+    const filterValue = value.toLowerCase();
+    return this.savedSkills.filter((skill) =>
+      skill.name.toLowerCase().includes(filterValue)
+    );
+  }
+
+  // Method to handle display of skill objects in the input field
+  displaySkillFn(skill: any): string {
+    return skill && skill.name ? skill.name : '';
+  }
+
+  // Double tap handler for mobile to add custom skills
+  private lastTapTime = 0;
+  private tapDelay = 300; // milliseconds
+
+  // Handle tap on skill option (for mobile double-tap)
+  handleSkillTap(skill: any) {
+    const now = new Date().getTime();
+    const timeSince = now - this.lastTapTime;
+
+    if (timeSince < this.tapDelay) {
+      // Double tap detected - add the skill
+      if (
+        !this.selectedSkills.some(
+          (s) =>
+            (s.id && s.id === skill.id) ||
+            (!s.id && !skill.id && s.name === skill.name)
+        )
+      ) {
+        this.selectSkill(skill);
+      }
+    }
+
+    this.lastTapTime = now;
+  }
+
+  // Specialized method for handling custom skills
+  addCustomSkill(skillName: string) {
+    if (!skillName || skillName.trim() === '') {
+      return; // Don't add empty skills
+    }
+
+    const trimmedName = skillName.trim();
+
+    // Check if the skill already exists in the selected skills
+    const exists = this.selectedSkills.some(
+      (skill) => skill.name.toLowerCase() === trimmedName.toLowerCase()
+    );
+
+    if (!exists) {
+      // Add as a new custom skill
+      this.selectedSkills.push({ name: trimmedName });
+
+      // Clear the input field
+      this.jobForm.get('skills')?.setValue('');
+
+      // Close the autocomplete panel
+      if (this.autocompleteTrigger) {
+        this.autocompleteTrigger.closePanel();
+      }
     }
   }
 
+  // Handle tap on custom skill option (for mobile double-tap)
+  handleCustomSkillTap(skillName: string) {
+    const now = new Date().getTime();
+    const timeSince = now - this.lastTapTime;
+
+    if (timeSince < this.tapDelay) {
+      // Double tap detected - add custom skill
+      this.addCustomSkill(skillName);
+    }
+
+    this.lastTapTime = now;
+  }
+
   selectSkill(skill: any) {
-    if (!this.selectedSkills.some((s) => s.id === skill.id)) {
+    if (
+      !this.selectedSkills.some(
+        (s) =>
+          (s.id && s.id === skill.id) ||
+          (!s.id && !skill.id && s.name === skill.name)
+      )
+    ) {
       this.selectedSkills.push(skill);
       this.jobForm.get('skills')?.setValue('');
+      // Close the autocomplete panel after selection
+      if (this.autocompleteTrigger) {
+        this.autocompleteTrigger.closePanel();
+      }
     }
-    this.filteredSkills = [];
   }
 
   addSkill(event: any): void {
     event.preventDefault(); // Prevent default form submission behavior
 
-    const skillName = this.jobForm.get('skills')?.value?.trim(); // Get and trim the skill name
+    // Handle two cases:
+    // 1. When a skill object is passed (from autocomplete selection)
+    // 2. When a string is entered manually
+    const skillValue = this.jobForm.get('skills')?.value;
+    let skillName: string;
+    let skillObject: any;
+
+    // If it's a skill object from autocomplete
+    if (typeof skillValue === 'object' && skillValue !== null) {
+      skillName = skillValue.name?.trim();
+      skillObject = skillValue;
+    } else {
+      // If it's a string (manual entry)
+      skillName = skillValue?.trim();
+    }
+
     if (!skillName) {
       return; // Do nothing if the skill name is empty
     }
-
-    // Check if the skill exists in the filteredSkills array
-    const existingSkillInFiltered = this.filteredSkills.find(
-      (skill) => skill.name.toLowerCase() === skillName.toLowerCase()
-    );
 
     // Check if the skill already exists in the selectedSkills array
     const existingSkillInSelected = this.selectedSkills.find(
       (skill) => skill.name.toLowerCase() === skillName.toLowerCase()
     );
 
-    if (existingSkillInFiltered) {
-      // If the skill exists in filteredSkills, add it to selectedSkills (if not already added)
-      if (!existingSkillInSelected) {
-        this.selectedSkills.push(existingSkillInFiltered);
-      }
-    } else {
-      // If the skill does not exist in filteredSkills, add it as a new skill to selectedSkills
-      if (!existingSkillInSelected) {
-        this.selectedSkills.push({ name: skillName });
+    if (!existingSkillInSelected) {
+      // If it's a skill object and not already selected, add it
+      if (skillObject) {
+        this.selectedSkills.push(skillObject);
+      } else {
+        // Check if it exists in saved skills
+        const existingSkill = this.savedSkills.find(
+          (skill) => skill.name.toLowerCase() === skillName.toLowerCase()
+        );
+
+        if (existingSkill) {
+          this.selectedSkills.push(existingSkill);
+        } else {
+          // If not found in saved skills, add as new custom skill
+          this.selectedSkills.push({ name: skillName });
+        }
       }
     }
 
@@ -433,11 +552,31 @@ export class PostprojectComponent implements OnInit, OnDestroy {
     this.jobForm.patchValue({
       skills: '',
     });
-    this.filteredSkills = [];
+
+    // Close the autocomplete panel after selection
+    if (this.autocompleteTrigger) {
+      this.autocompleteTrigger.closePanel();
+    }
   }
 
   removeSkill(skill: any) {
-    this.selectedSkills = this.selectedSkills.filter((s) => s.id !== skill.id);
+    // If skill has an id, filter by id
+    if (skill.id) {
+      this.selectedSkills = this.selectedSkills.filter(
+        (s) => s.id !== skill.id
+      );
+    } else {
+      // For skills without id (custom skills), filter by name
+      this.selectedSkills = this.selectedSkills.filter((s) => {
+        // If both have id, they're already handled by the case above
+        // If one has id and the other doesn't, they're different skills
+        // If neither has id, compare by name
+        if (!s.id && !skill.id) {
+          return s.name !== skill.name;
+        }
+        return true;
+      });
+    }
   }
 
   getContractTypes() {

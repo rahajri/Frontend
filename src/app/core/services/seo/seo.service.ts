@@ -69,8 +69,14 @@ export class SeoService {
    */
   updateDescription(description: string): void {
     this.metaService.updateTag({ name: 'description', content: description });
-    this.metaService.updateTag({ property: 'og:description', content: description });
-    this.metaService.updateTag({ name: 'twitter:description', content: description });
+    this.metaService.updateTag({
+      property: 'og:description',
+      content: description,
+    });
+    this.metaService.updateTag({
+      name: 'twitter:description',
+      content: description,
+    });
   }
 
   /**
@@ -78,7 +84,10 @@ export class SeoService {
    * @param keywords Liste de mots-clés
    */
   updateKeywords(keywords: string[]): void {
-    this.metaService.updateTag({ name: 'keywords', content: keywords.join(', ') });
+    this.metaService.updateTag({
+      name: 'keywords',
+      content: keywords.join(', '),
+    });
   }
 
   /**
@@ -87,12 +96,12 @@ export class SeoService {
   updateCanonicalUrl(): void {
     // Construire l'URL complète (domaine + chemin)
     const url = 'https://www.interim-online.fr' + this.router.url;
-    
+
     // Rechercher une balise canonique existante
     const existingLink = this.document.querySelector(
       'link[rel="canonical"]'
     ) as HTMLLinkElement | null;
-    
+
     let link: HTMLLinkElement;
 
     // Si la balise n'existe pas, la créer
@@ -115,32 +124,35 @@ export class SeoService {
   private normalizeUrl(url: string): string {
     // Supprimer les fragments (partie après #)
     let normalized = url.split('#')[0];
-    
+
     // Supprimer certains paramètres de requête non essentiels
     if (normalized.includes('?')) {
       const urlParts = normalized.split('?');
       const baseUrl = urlParts[0];
       const queryParams = urlParts[1].split('&');
-      
+
       // Filtrer les paramètres à conserver (exemple: page, id)
-      const essentialParams = queryParams.filter(param => {
+      const essentialParams = queryParams.filter((param) => {
         const paramName = param.split('=')[0];
         // Liste des paramètres à conserver
         return ['id', 'page'].includes(paramName);
       });
-      
+
       if (essentialParams.length > 0) {
         normalized = baseUrl + '?' + essentialParams.join('&');
       } else {
         normalized = baseUrl;
       }
     }
-    
+
     // Supprimer les slashes en fin d'URL sauf pour la page d'accueil
-    if (normalized !== 'https://www.interim-online.fr/' && normalized.endsWith('/')) {
+    if (
+      normalized !== 'https://www.interim-online.fr/' &&
+      normalized.endsWith('/')
+    ) {
       normalized = normalized.slice(0, -1);
     }
-    
+
     return normalized;
   }
 
@@ -149,9 +161,12 @@ export class SeoService {
    * @param image URL de l'image à utiliser pour le partage (optionnel)
    */
   updateOpenGraphTags(image?: string): void {
-    this.metaService.updateTag({ property: 'og:url', content: this.document.URL });
+    this.metaService.updateTag({
+      property: 'og:url',
+      content: this.document.URL,
+    });
     this.metaService.updateTag({ property: 'og:type', content: 'website' });
-    
+
     if (image) {
       this.metaService.updateTag({ property: 'og:image', content: image });
       this.metaService.updateTag({ name: 'twitter:image', content: image });
@@ -165,7 +180,9 @@ export class SeoService {
    * @param follow Autoriser le suivi des liens
    */
   setRobotsPolicy(index: boolean = true, follow: boolean = true): void {
-    const policy = `${index ? 'index' : 'noindex'}, ${follow ? 'follow' : 'nofollow'}`;
+    const policy = `${index ? 'index' : 'noindex'}, ${
+      follow ? 'follow' : 'nofollow'
+    }`;
     this.metaService.updateTag({ name: 'robots', content: policy });
   }
 }
